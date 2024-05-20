@@ -5,6 +5,7 @@ keyfiles/
 *./properties
 *.log
 pom.xml
+application.properties
 
 *.ctxt
 

@@ -3,8 +3,8 @@ bin/
 build/
 keyfiles/
 *./properties
-application.properties
 *.log
+pom.xml
 
 *.ctxt
 

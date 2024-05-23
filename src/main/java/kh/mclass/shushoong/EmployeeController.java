@@ -34,6 +34,6 @@ public class EmployeeController {
 		List<EmployeeEntity> employeelist = service.selectAll();
 		System.out.println(employeelist);
 		model.addAttribute("dtolist", employeelist);
-		return "employee/list2";
+		return "employee/list";
 	}
 }

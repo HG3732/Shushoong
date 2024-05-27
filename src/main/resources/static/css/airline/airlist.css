@@ -24,7 +24,7 @@
     background-color: beige;
 }
     
-body > div.wrap-main > div > div.flex-container > div.airline-list > div:nth-child(2){
+body > div.wrapper > div.wrap-main > div > div.flex-container > div.airline-list > div:nth-child(2){
     margin-top: 30px;
 }
 

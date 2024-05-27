@@ -4,13 +4,13 @@ footer .inner li {
     vertical-align: top;
 }
 
-footer .inner .tf {
-    font-family: "IM_Hyemin-Bold";
+footer .inner .tf p{
+    font-family: "SOYOMapleBoldTTF";
     font-size: var(--font3);
 }
 
-footer .inner .to {
-    font-family: "IM_Hyemin-Regular";
+footer .inner .to p{
+    font-family: "SOYOMapleRegularTTF";
     font-size: var(--font4);
 }
 

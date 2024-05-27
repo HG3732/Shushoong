@@ -1,0 +1,9 @@
+.wrap-main{
+    width: 100%;
+    min-width: 1100px;
+    min-height: 100%;
+}
+.container{
+    width: 960px;
+    margin: 0 auto;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>항공 목록 조회</title>
+<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<link th:href="@{/css/airline/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/airline/core.css}" rel="stylesheet" />
+<link th:href="@{/css/airline/airlist.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-">
+				<div class="wrap-main">
+					<div class="container">
+						<div class="top-nav">top-nav</div>
+						<div class="flex-container">
+							<div class="sidebar">
+								<div class="time-list">
+									출발<br> 도착
+								</div>
+								<div class="price-list">가격</div>
+								<div class="straight">직항/경유</div>
+								<div class="sidebar-searchbtn">
+									<button type="submit">검 색</button>
+								</div>
+							</div>
+							<div class="airline-list">
+
+								<div class="select-bar">
+									<form action="#">
+										<select name="selectlist" id="showlist">
+											<option value="price-cheap">가격 낮은 순</option>
+											<option value="price-expensive">가격 높은 순</option>
+											<option value="flytime-low">비행 짧은 순</option>
+											<option value="flytime-long">비행 긴 순</option>
+										</select>
+									</form>
+								</div>
+
+								<div class="airline-info"></div>
+								<div class="airline-info"></div>
+								<div class="airline-info"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+		<div th:replace="~{common/footer :: Footer}"></div>
+	</div>
+</body>
+</html>

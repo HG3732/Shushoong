@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.top-line {
+	background-color: var(--color_gray_2);
+	height: 100px;
+}
+
+.category {
+	width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.select{
+	margin-left: 800px;
+}
+
+.container {
+	width: 960px;
+    margin: 0 auto;
+    display: flex;
+}
+
+
+.section {
+    width: 30%;
+    background-color: blueviolet;
+    box-sizing: border-box;
+}
+
+aside {
+    width: 70%;
+    box-sizing: border-box;
+   
+}
+
+.hotel {
+	padding: 10px;
+}
+
+.hotel_list {
+	margin-bottom: 30px;
+}
+
+.hotel_pic {
+	 background-color: var(--color_gray_1);
+	 width: 300px;
+	 height:200px;
+	 border-radius: 20px;
+	 
+}
+
+footer {
+    clear: both;
+}

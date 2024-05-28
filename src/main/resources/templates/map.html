@@ -15,69 +15,45 @@
 </style>
 <title>지도</title>
 </head>
-<body>
+<body onload="initialize()">
 
 
 <h1>구글맵 시험</h1>
 	
-<div id="map"></div>	
+<div id="map" style="width: 900px; height: 800px;"></div>
+<div>
+  <input type="textbox" id="address" value="Sydney, NSW">
+  <input type="button" value="Encode" onclick="codeAddress()">
+</div>
 	
-<script>
-	  (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",
-		  m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
-	    key: "AIzaSyCoo40WSHtW0JekF2N6b0Tm1DHbifYiSOg",
-	    v: "weekly",
-	    // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.). - 지도 표시되는 종류
-	    // Add other bootstrap parameters as needed, using camel case.
-	  });
-	
-	  
-/* 	  let map;
-	
-	  async function initMap() {
-	    const { Map } = await google.maps.importLibrary("maps");
-	
-	    map = new Map(document.getElementById("map"), {
-	      center: { lat: 37.51175556, lng: 127.1079306 },
-	      zoom: 8,
-	    });
-	  }
-	
-	  initMap(); */
-		  
-	// Initialize and add the map
-	  let map;
-
-	  async function initMap() {
-	    // The location of Uluru
-	    const position = { lat: -25.344, lng: 131.031 };
-	    // Request needed libraries.
-	    //@ts-ignore
-	    const { Map } = await google.maps.importLibrary("maps");
-	    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-	    // The map, centered at Uluru
-	    map = new Map(document.getElementById("map"), {
-	      zoom: 4,
-	      center: position,
-	      mapId: "DEMO_MAP_ID",
-	    });
-
-	    // The marker, positioned at Uluru
-	    const marker = new AdvancedMarkerElement({
-	      map: map,
-	      position: position,
-	      title: "Uluru",
-	    });
-	  }
-
-	  initMap();
-	  
-
-	  
-	  
-	  
-	  
+	<script>
+		var geocoder;
+		var map;
+		function initialize() {
+		  geocoder = new google.maps.Geocoder();
+		  var latlng = new google.maps.LatLng(-34.397, 150.644);
+		  var mapOptions = {
+		    zoom: 8,
+		    center: latlng
+		  }
+		  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		}
+		
+		function codeAddress() {
+		  var address = document.getElementById('address').value;
+		  geocoder.geocode( { 'address': address}, function(results, status) {
+		    if (status == 'OK') {
+		      map.setCenter(results[0].geometry.location);
+		      var marker = new google.maps.Marker({
+		          map: map,
+		          position: results[0].geometry.location
+		      });
+		    } else {
+		      alert('Geocode was not successful for the following reason: ' + status);
+		    }
+		  });
+		}
+	   
 	</script> 
 </body>
 </html>

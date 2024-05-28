@@ -8,6 +8,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/airline/airline_main.css}" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
@@ -24,7 +26,82 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-">
-			<!-- 여기부터 작성 -->
+						<!-- 여기부터 작성 -->
+			<section class="airline_search_section">
+				<div class="airline_search">
+					<div class="tab">
+						<button class="tablinks" id="one_way_btn" onclick="ticketType(event,'one_way','one_way_btn')">편도</button>
+						<button class="tablinks" id="round_trip_btn" onclick="ticketType(event,'round_trip','round_trip_btn')">왕복</button>
+					</div>
+					
+					<div id="one_way" class="tabcontent">
+						<div>
+							<button id="airline_depart" class="airline_according_btn" onclick="accordingInfo(event,'airline_depart_accoding')">출발지</button>
+							<img class="airline_type" alt="one_way" th:src="@{/images/airline_one_way.png}">
+							<button id="airline_arrival" class="airline_according_btn" onclick="accordingInfo(event,'airline_arrival_accoding')">도착지</button>
+						</div>
+						
+						<div>
+							<button id="airline_depart_date" class="airline_according_btn" onclick="accordingInfo(event,'airline_depart_date_accoding')">날짜 선택</button>
+							<img alt="달력 사진" src="">
+						</div>
+						
+						<div>
+							<button id=airline_people_lineup class="airline_according_btn" onclick="accordingInfo(event,'airline_people_lineup_accoding')">일반석/성인1/소아0/유아0</button>
+						</div>
+						
+						<input type="submit" value="검색">
+					</div>
+					
+					<div id="round_trip" class="tabcontent">
+						<div>왕복 화면</div>
+						<div>왕복 화면</div>
+						<div>왕복 화면</div>
+						<input type="submit" value="검색">
+					</div>
+					
+				</div>
+			</section>
+			
+			
+			<section class="airline_according_section">
+				<div class="airline_one_way_accoding">
+					<div id="airline_depart_accoding" class="airline_according">
+						<div class="airline_depart_nation">
+							
+						</div>
+						<div></div>
+						이륙 어코딩
+					</div>
+					<div id="airline_arrival_accoding" class="airline_according">
+						착륙 어코딩
+					</div>
+					<div id="airline_depart_date_accoding" class="airline_according">
+						날짜 어코딩
+					</div>
+					<div id="airline_people_lineup_accoding" class="airline_according">
+						인원 어코딩
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="airline_round_trip_accoding">
+				
+				</div>
+			</section>
+			
+			
+			
+			
+			<section class="airline_recommend_section">
+				
+			</section>
+			
 			
 			</div>
 		</div>
@@ -32,6 +109,53 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<div class="wrap-footer">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
+	
+	
+			<!-- 자바스크립트 -->
+	<script>
+		
+		function ticketType(event,ticketType,ticketTypeBtn){
+			var i, tabcontent, tablinks;
+			tabcontent=document.getElementsByClassName("tabcontent");
+			tablinks = document.getElementsByClassName("tablinks");
+
+			
+			for(i = 0 ; i<tabcontent.length; i++){
+				tabcontent[i].style.display="none";
+			}
+		
+			for(i=0; i<tablinks.length; i++){
+				tablinks[i].style.border= "none";
+			}
+		
+			document.getElementById(ticketType).style.display="block";
+			document.getElementById(ticketTypeBtn).style.borderBottom = "3px solid  rgb(0,106,255)";
+			
+			event.currentTarget.className +=" active";
+		}
+		
+		
+		
+		function accordingInfo(event,accordingInfo){
+			var i, according;
+			according = document.getElementsByClassName("airline_according");
+			
+			
+			if(document.getElementById(accordingInfo).style.display==="block"){
+				for(i=0 ; i<according.length; i++){
+					according[i].style.display="none";
+				}
+			}else{
+				for(i=0 ; i<according.length; i++){
+					according[i].style.display="none";
+				}
+				document.getElementById(accordingInfo).style.display="block";
+			}
+		}
+		
+		
+	
+	</script>
 	
 </body>
 </html>

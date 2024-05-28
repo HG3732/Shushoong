@@ -29,41 +29,62 @@
 		<div class="wrap-body">
 			<div class="wrap-">
 			 -->
-				<div class="wrap-main">
-					<div class="container">
-						<div class="top-nav">top-nav</div>
-						<div class="flex-container">
-							<div class="sidebar">
-								<div class="time-list">
-									출발<br> 도착
-								</div>
-								<div class="price-list">가격</div>
-								<div class="straight">직항/경유</div>
-								<div class="sidebar-searchbtn">
-									<button type="submit">검 색</button>
-								</div>
-							</div>
-							<div class="airline-list">
-
-								<div class="select-bar">
-									<form action="#">
-										<select name="selectlist" id="showlist">
-											<option value="price-cheap">가격 낮은 순</option>
-											<option value="price-expensive">가격 높은 순</option>
-											<option value="flytime-low">비행 짧은 순</option>
-											<option value="flytime-long">비행 긴 순</option>
-										</select>
-									</form>
-								</div>
-
-								<div class="airline-info"></div>
-								<div class="airline-info"></div>
-								<div class="airline-info"></div>
+		<div class="wrap-main">
+			<div class="container">
+				<div class="top-nav">top-nav</div>
+				<div class="flex-container">
+					<div class="sidebar">
+						<div class="time-list">
+							<div class="slider">
+								<form class="time-box">
+									<input type="range" class="depttime left" id="depttime-left"
+										min="1" max="100" value="1" /> <input type="range"
+										class="depttime right" id="depttime-right" min="1" max="100"
+										value="100" />
+									<div class="track">
+										<div class="range"></div>
+										<div class="deptthumb left"></div>
+										<div class="deptthumb right"></div>
+										<div>시간대</div>
+										<div>출발 60:00 ~ 17:00</div>
+										<div></div>
+										<div>도착</div>
+										<div>o-------o</div>
+									</div>
+								</form>
 							</div>
 						</div>
+						<div class="price-list">
+							<div>가격</div>
+							<div>최소값---최대값</div>
+						</div>
+						<div></div>
+						<div class="straight">직항/경유</div>
+						<div class="sidebar-searchbtn">
+							<button type="submit">검 색</button>
+						</div>
+					</div>
+					<div class="airline-list">
+
+						<div class="select-bar">
+							<form action="#">
+								<select name="selectlist" id="showlist">
+									<option value="price-cheap">가격 낮은 순</option>
+									<option value="price-expensive">가격 높은 순</option>
+									<option value="flytime-low">비행 짧은 순</option>
+									<option value="flytime-long">비행 긴 순</option>
+								</select>
+							</form>
+						</div>
+
+						<div class="airline-info"></div>
+						<div class="airline-info"></div>
+						<div class="airline-info"></div>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
 	<!-- 		
 		</div>
 	</div>
@@ -71,5 +92,57 @@
 	<div class="wrap-footer">
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
+	<!-- --------------------JS-------------------- -->
+	<script type="text/javascript">
+	// 왼쪽과 오른쪽 슬라이더 입력 요소를 가져옴
+	const inputLeft = document.getElementById("depttime-left");
+	const inputRight = document.getElementById("depttime-right");
+
+	// 왼쪽과 오른쪽 슬라이더 손잡이 요소를 가져옴
+	const thumbLeft = document.querySelector(".deptthumb.left");
+	const thumbRight = document.querySelector(".deptthumb.right");
+
+	// 슬라이더 범위를 시각적으로 표시하는 요소를 가져옴
+	const range = document.querySelector(".range");
+
+	// 왼쪽 슬라이더 값이 변경될 때 호출되는 함수
+	const setLeftValue = e => {
+	    // 이벤트가 발생한 요소 (왼쪽 슬라이더) 참조
+	    const _this = e.target;
+	    const { value, min, max } = _this;
+
+	    // 왼쪽 슬라이더와 오른쪽 슬라이더의 값 차이가 10 미만이면
+	    if (+inputRight.value - +value < 10) {
+	        // 왼쪽 슬라이더의 값을 오른쪽 슬라이더의 값에서 10만큼 뺀 값으로 설정
+	        _this.value = +inputRight.value - 10;
+	    }
+
+	    // 백분율로 변환
+	    const percent = ((+_this.value - +min) / (+max - +min)) * 100;
+
+	    // 계산된 백분율 값을 왼쪽 슬라이더 손잡이와 범위 요소의 위치 설정
+	    thumbLeft.style.left = `${percent}%`;
+	    range.style.left = `${percent}%`;
+	};
+
+	const setRightValue = e => {
+	    const _this = e.target;
+	    const { value, min, max } = _this;
+
+	    if (+value - +inputLeft.value < 10) {
+	        _this.value = +inputLeft.value + 10;
+	    }
+
+	    const percent = ((+_this.value - +min) / (+max - +min)) * 100;
+
+	    thumbRight.style.right = `${100 - percent}%`;
+	    range.style.right = `${100 - percent}%`;
+	};
+
+	if (inputLeft && inputRight) {
+	    inputLeft.addEventListener("input", setLeftValue);
+	    inputRight.addEventListener("input", setRightValue);
+	}
+	</script>
 </body>
 </html>

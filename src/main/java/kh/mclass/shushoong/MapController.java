@@ -14,13 +14,9 @@ public class MapController {
 		return "map";
 	}
 	
-	@GetMapping("/maptest")
-	public String maptest() {
-		return "map2";
-	}
-	
 	@GetMapping("/layout")
 	public String layout() {
 		return "layout";
 	}
+
 }

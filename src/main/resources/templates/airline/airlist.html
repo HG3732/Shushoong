@@ -10,7 +10,7 @@
 <link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 
-<link th:href="@{/css/airline/reset.css}" rel="stylesheet" />
+<!-- <link th:href="@{/css/airline/reset.css}" rel="stylesheet" /> -->
 <link th:href="@{/css/airline/core.css}" rel="stylesheet" />
 <link th:href="@{/css/airline/airlist.css}" rel="stylesheet" />
 </head>
@@ -30,29 +30,60 @@
 			<div class="wrap-">
 			 -->
 		<div class="wrap-main">
+			<div class="top-nav">top-nav</div>
 			<div class="container">
-				<div class="top-nav">top-nav</div>
 				<div class="flex-container">
 					<div class="sidebar">
 						<div class="time-list">
-							<div class="slider">
-								<form class="time-box">
-									<input type="range" class="depttime left" id="depttime-left"
-										min="1" max="100" value="1" /> <input type="range"
-										class="depttime right" id="depttime-right" min="1" max="100"
-										value="100" />
-									<div class="track">
-										<div class="range"></div>
-										<div class="deptthumb left"></div>
-										<div class="deptthumb right"></div>
-										<div>시간대</div>
-										<div>출발 60:00 ~ 17:00</div>
+							<form class="box">
+								<div>
+									<p>시간대</p>
+								</div>
+								<div class="slider">
+									<!-- 출발 시간 -->
+									<div class="depart-movingtime">
 										<div></div>
-										<div>도착</div>
-										<div>o-------o</div>
+										<div></div>
 									</div>
-								</form>
-							</div>
+									<div class="depart-box">
+										<input type="range" class="input-left" id="depart-input-left"
+											min="1" max="100" value="1" /> <input type="range"
+											class="input-right" id="depart-input-right" min="1" max="100"
+											value="100" />
+										<div class="depart-track">
+											<div class="depart-range"></div>
+											<div class="departthumb left"></div>
+											<div class="departthumb right"></div>
+										</div>
+									</div>
+									<div class="depart-timeline">
+										<div>00:00</div>
+										<div>24:00</div>
+									</div>
+									<!-- 도착 시간 -->
+
+									<div class="arr-movingtime">
+										<div></div>
+										<div></div>
+									</div>
+									<div class="arr-box">
+										<input type="range" class="input-left" id="arr-input-left"
+											min="1" max="100" value="1" /> <input type="range"
+											class="input-right" id="arr-input-right" min="1" max="100"
+											value="100" />
+										<div class="arr-track">
+											<div class="arr-range"></div>
+											<div class="arrthumb left"></div>
+											<div class="arrthumb right"></div>
+										</div>
+									</div>
+									<div class="arr-timeline">
+										<div>00:00</div>
+										<div>24:00</div>
+
+									</div>
+								</div>
+							</form>
 						</div>
 						<div class="price-list">
 							<div>가격</div>
@@ -94,55 +125,160 @@
 	</div>
 	<!-- --------------------JS-------------------- -->
 	<script type="text/javascript">
+	
+	// 양항병 레인지 (출발 도착 시간 설정)
+	
+	// 출발 시간 설정
 	// 왼쪽과 오른쪽 슬라이더 입력 요소를 가져옴
-	const inputLeft = document.getElementById("depttime-left");
-	const inputRight = document.getElementById("depttime-right");
+	const departInputLeft = document.getElementById("depart-input-left");
+	const departInputRight = document.getElementById("depart-input-right");
 
 	// 왼쪽과 오른쪽 슬라이더 손잡이 요소를 가져옴
-	const thumbLeft = document.querySelector(".deptthumb.left");
-	const thumbRight = document.querySelector(".deptthumb.right");
+	const departThumbLeft = document.querySelector(".departthumb.left");
+	const departThumbRight = document.querySelector(".departthumb.right");
 
 	// 슬라이더 범위를 시각적으로 표시하는 요소를 가져옴
-	const range = document.querySelector(".range");
+	const departRange = document.querySelector(".depart-range");
 
 	// 왼쪽 슬라이더 값이 변경될 때 호출되는 함수
-	const setLeftValue = e => {
+	function setDepartLeftValue (e) {
 	    // 이벤트가 발생한 요소 (왼쪽 슬라이더) 참조
 	    const _this = e.target;
 	    const { value, min, max } = _this;
-
+	    
 	    // 왼쪽 슬라이더와 오른쪽 슬라이더의 값 차이가 10 미만이면
-	    if (+inputRight.value - +value < 10) {
+	    if (+departInputRight.value - +value < 25) {
 	        // 왼쪽 슬라이더의 값을 오른쪽 슬라이더의 값에서 10만큼 뺀 값으로 설정
-	        _this.value = +inputRight.value - 10;
+	        _this.value = +departInputRight.value - 25;
 	    }
 
 	    // 백분율로 변환
 	    const percent = ((+_this.value - +min) / (+max - +min)) * 100;
 
 	    // 계산된 백분율 값을 왼쪽 슬라이더 손잡이와 범위 요소의 위치 설정
-	    thumbLeft.style.left = `${percent}%`;
-	    range.style.left = `${percent}%`;
+	    departThumbLeft.style.left = `${percent}%`;
+	    departRange.style.left = `${percent}%`;
+	    
+        // 출발 시간을 나타내는 요소 가져오기
+        // departLeftTime
+        const departLeftTime = document.querySelector(".depart-movingtime > div:first-child");
+
+        // 출발 시간을 슬라이더 값으로 업데이트
+        departLeftTime.innerHTML = `출발 (${value})`;
+	    
+	    console.log(`출발 Left Value: ${_this.value}`);
 	};
 
-	const setRightValue = e => {
+	function setDepartRightValue (e) {
 	    const _this = e.target;
 	    const { value, min, max } = _this;
 
-	    if (+value - +inputLeft.value < 10) {
-	        _this.value = +inputLeft.value + 10;
+	    if (+value - +departInputLeft.value < 25) {
+	        _this.value = +departInputLeft.value + 25;
 	    }
 
 	    const percent = ((+_this.value - +min) / (+max - +min)) * 100;
 
-	    thumbRight.style.right = `${100 - percent}%`;
-	    range.style.right = `${100 - percent}%`;
+	    departThumbRight.style.right = `${100 - percent}%`;
+	    departRange.style.right = `${100 - percent}%`;
+	    
+	    const departRightTime = document.querySelector(".depart-movingtime > div:nth-child(2)");
+	    
+	    departRightTime.innerHTML = `(${value})`;
+	    
+	    console.log(`출발 Right Value : ${_this.value}`);
+	}; 
+	
+	// 초기 값을 설정하는 함수
+	function departSliderbarVal() {
+		setDepartLeftValue({ target: departInputLeft});
+		setDepartRightValue({ target: departInputRight});
+	}
+	// 슬라이더 입력 요소 존재하는지 확인 후, 이벤트 리스너를 추가
+	if (departInputLeft && departInputRight) {
+		document.addEventListener("DOMContentLoaded", function(){
+		// 슬라이더 값이 변경될 떄 함수 호출
+		    departInputLeft.addEventListener("input", setDepartLeftValue);
+		    departInputRight.addEventListener("input", setDepartRightValue);
+		    departSliderbarVal(); // 페이지 로드 시 초기 값 설정
+		});
+	}
+
+	// 도착 시간 설정
+	const arrInputLeft = document.getElementById("arr-input-left");
+	const arrInputRight = document.getElementById("arr-input-right");
+
+	// 왼쪽과 오른쪽 슬라이더 손잡이 요소를 가져옴
+	const arrThumbLeft = document.querySelector(".arrthumb.left");
+	const arrThumbRight = document.querySelector(".arrthumb.right");
+
+	// 슬라이더 범위를 시각적으로 표시하는 요소를 가져옴
+	const arrRange = document.querySelector(".arr-range");
+
+	// 왼쪽 슬라이더 값이 변경될 때 호출되는 함수
+	function setArrLeftValue (e) {
+	    // 이벤트가 발생한 요소 (왼쪽 슬라이더) 참조
+	    const _this = e.target;
+	    const { value, min, max } = _this;
+	    
+	    // 왼쪽 슬라이더와 오른쪽 슬라이더의 값 차이가 10 미만이면
+	    if (+arrInputRight.value - +value < 25) {
+	        // 왼쪽 슬라이더의 값을 오른쪽 슬라이더의 값에서 10만큼 뺀 값으로 설정
+	        _this.value = +arrInputRight.value - 25;
+	    }
+
+	    // 백분율로 변환
+	    const percent = ((+_this.value - +min) / (+max - +min)) * 100;
+
+	    // 계산된 백분율 값을 왼쪽 슬라이더 손잡이와 범위 요소의 위치 설정
+	    arrThumbLeft.style.left = `${percent}%`;
+	    arrRange.style.left = `${percent}%`;
+	    
+        // 도착 시간을 나타내는 요소 가져오기
+        const arrLeftTime = document.querySelector(".arr-movingtime > div:first-child");
+
+        // 도착 시간을 슬라이더 값으로 업데이트
+        arrLeftTime.innerHTML = `도착 (${value})`;
+	    
+	    console.log(`도착 Left Value: ${_this.value}`);
 	};
 
-	if (inputLeft && inputRight) {
-	    inputLeft.addEventListener("input", setLeftValue);
-	    inputRight.addEventListener("input", setRightValue);
+	function setArrRightValue (e) {
+	    const _this = e.target;
+	    const { value, min, max } = _this;
+
+	    if (+value - +arrInputLeft.value < 25) {
+	        _this.value = +arrInputLeft.value + 25;
+	    }
+
+	    const percent = ((+_this.value - +min) / (+max - +min)) * 100;
+
+	    arrThumbRight.style.right = `${100 - percent}%`;
+	    arrRange.style.right = `${100 - percent}%`;
+	    
+	    const arrRightTime = document.querySelector(".arr-movingtime > div:nth-child(2)");
+	    
+	    arrRightTime.innerHTML = `(${value})`;
+	    
+	    console.log(`도착 Right Value : ${_this.value}`);
+	}; 
+	
+	// 초기 값을 설정하는 함수
+	function arrSliderbarVal() {
+		setArrLeftValue({ target: arrInputLeft});
+		setArrRightValue({ target: arrInputRight});
 	}
+	// 슬라이더 입력 요소 존재하는지 확인 후, 이벤트 리스너를 추가
+	if (arrInputLeft && arrInputRight) {
+		document.addEventListener("DOMContentLoaded", function(){
+		// 슬라이더 값이 변경될 떄 함수 호출
+		    arrInputLeft.addEventListener("input", setArrLeftValue);
+		    arrInputRight.addEventListener("input", setArrRightValue);
+		    arrSliderbarVal(); // 페이지 로드 시 초기 값 설정
+		});
+	}
+
+	
 	</script>
 </body>
 </html>

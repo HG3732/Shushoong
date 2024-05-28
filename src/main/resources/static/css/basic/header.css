@@ -59,17 +59,17 @@ header .nav2-wrap li a.active {
     background-color: BCEFFF;
 }
 
-#frm-logout > ul > li:nth-child(1) > a {
+ul > li:nth-child(1) > a {
 	font-size: var(--font3);	
 	font-family: "SOYOMapleBoldTTF";
 }
 
-#frm-logout > ul > li:nth-child(2) > a {
+ ul > li:nth-child(2) > a {
 	font-size: var(--font3);
 	font-family: "SOYOMapleBoldTTF";	
 }
 
-#frm-logout > ul > li:nth-child(3) > a {
+ul > li:nth-child(3) > a {
 	font-size: var(--font3);	
 	font-family: "SOYOMapleBoldTTF";
 }

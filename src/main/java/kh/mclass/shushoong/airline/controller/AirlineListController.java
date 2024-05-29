@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class AirlistController {
+public class AirlineListController {
 	@GetMapping("/airline/list")
 	public String getAirList() {
-		return "airline/airlist";
+		return "airline/airline_list";
 	}
 	
 	

@@ -1,3 +1,5 @@
+
+
 .top-nav{
     width: 100%;
     height: 80px;
@@ -11,21 +13,34 @@
 }
 /* 사이드바 css */
 .flex-container .sidebar{
-    width: 200px;
+	flex: 1;
+    /* width: 200px; */
     background-color: aqua;
     height: auto;
+}
+
+.flex-container .sidebar .time-list{
+	margin-top: 100px;
+}
+
+.flex-container .sidebar .price-list{
+	margin-top: 70px;
+}
+
+.flex-container .sidebar .straight{
+	margin-top: 70px;
 }
 /* 양방형 레인지 슬라이드 
    출발
 */
-        .box {
+        .time-frm {
             width: 100%;
             height: auto;
             /* background-color: #ecf0f1; */
         }
 
         /* 후에 padding: 1.5rem 2rem 으로 수정합니다. 참고바랍니다. */
-        .slider {
+        .time-slider {
             width: 100%;
             height: 100%;
             /* padding: 1.5rem; */
@@ -123,7 +138,7 @@
         }
         
         /* appearance, background 지워도 됨 */
-        input::-webkit-slider-thumb{
+        input[type=range]::-webkit-slider-thumb{
             pointer-events: all;
             appearance: none;
             background-color: red;
@@ -163,14 +178,104 @@
             border-radius: 50%;
             border: 2px solid #006AFF;
         }
+/*         
         .left {
             left: 0;
         }
 
         .right {
             right: 0;
+        }
+         */ 
+/* 양방향 레인지 END */
+
+/* 가격 레인지 바 */
+
+        .price-frm {
+            width: 100%;
+            height: auto;
+            /* background-color: #ecf0f1; */
+        }
+
+        /* 후에 padding: 1.5rem 2rem 으로 수정합니다. 참고바랍니다. */
+        .price-slider {
+            width: 100%;
+            height: 100%;
+            /* padding: 1.5rem; */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+        }
+        .price-box {
+        width: 100%;
+        }
+
+        .price-box input[type="range"] {
+            width: 100%;
+            top: 20px;
+            /* left: 1rem; */
+            position: absolute;
+            border: none;
+            pointer-events: none;
+            z-index: 10;
+            appearance: none;
+            opacity: 0;
+        }
+
+        .price-box input[type="range"]:first-child {
+            top: 1rem;
+        }
+        
+        /* appearance, background 지워도 됨 */
+        input::-webkit-slider-thumb{
+            pointer-events: all;
+            appearance: none;
+            background-color: red;
+            width: 2.5rem;
+            height: 1.5rem;
         } 
-/* 양향병 레인지 END */
+
+        .price-track {
+        	top: 20px;
+        	margin-top: 10px;
+            /* position: relative; */
+            position: absolute;
+            width: 100%;
+            height: 0.5rem;
+            /* margin-top: 5rem; */
+            background-color: #9d9d9d;
+            border-radius: 0.5rem;
+        }
+
+        .price-range {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #006AFF;
+            border-radius: 0.5rem;
+        }
+
+        .pricethumb {
+            position: absolute;
+            top: 0;
+            transform: translateY(-0.25rem);
+            width: 1rem;
+            height: 1rem;
+            background-color: white;
+            border-radius: 50%;
+            border: 2px solid #006AFF;
+        }
+        .pricethumb.right{
+        	right: 0;
+        }
+        
+
+
+/* 가격 레인지 바 END */
 
 .flex-container .sidebar .time-list .depart-movingtime{
 	width: 100%;
@@ -200,6 +305,18 @@
 
 }
 
+.flex-container .sidebar .price-list .price-movingtime{
+	width: 100%;
+	padding-top: 15px;
+	display: flex;
+	margin-bottom: 10px;
+	justify-content: space-between;
+	font-size: 10px;
+
+}
+
+
+
 .flex-container .sidebar .time-list .arr-timeline{
 	width: 100%;
 	display: flex;
@@ -214,7 +331,8 @@
 }
 
 .flex-container .airline-list{
-    width: 100%;
+	flex: 5;
+    /* width: 100%; */
     background-color: beige;
 }
     

@@ -18,5 +18,13 @@ public class MapController {
 	public String layout() {
 		return "layout";
 	}
+	
+    
+	
+	@GetMapping("/payment")
+	public String payment() {
+		
+		return "payment";
+	}
 
 }

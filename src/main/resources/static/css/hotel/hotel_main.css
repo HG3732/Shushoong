@@ -1,0 +1,5 @@
+.main-back {
+	background-image: src("hotel_mainSection.jpg");
+	width: 100%;
+	height: 350px;
+}

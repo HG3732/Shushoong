@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/hotel/hotel_main.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="wrap-header">
+		<header>
+			<div th:replace="~{common/header :: Header}"></div>
+			<div class="hrline">
+				<hr>
+			</div>
+		</header>
+		<div class="wrap-main">
+			<div class="main-back">
+				<div class="wrap-hotel-search">
+					<button type="button" >도시명 또는 호텔명</button>
+					<button type="button" >숙박 일정</button>
+					<button type="button" >객실 1 - 성인 2, 아동 0</button>
+					<button type="button" >검색</button>
+				</div>			
+			</div>
+		</div>
+	</div>
+</body>
+</html>

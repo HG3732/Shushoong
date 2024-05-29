@@ -11,23 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 
-//@Controller
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
 public class PaymentController {
-    
-	//카카오 로그인/로그아웃
-	@Value("${portone.restapikey}")
-	private String portoneRestapikey;
-	@Value("${portone.restapisecretkey}")
-	private String portoneRestapisecretkey;
 	
 	private final IamportClient iamportClient;
-	
-	public PaymentController() {
-		System.out.println("=====1");
-		System.out.println(portoneRestapikey);
-		System.out.println(portoneRestapisecretkey);
-		this.iamportClient = new IamportClient(portoneRestapikey, portoneRestapisecretkey);
-	}
 	
     @ResponseBody
     @PostMapping("/payments/complete/{imp_uid}")

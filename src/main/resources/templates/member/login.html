@@ -31,11 +31,11 @@
 					<div class="login-section">
 						<form id="frm-post" th:action="@{/member/login}" method="post"> 
 							<div class="loginInfo">
-								<input type="text" name="userId" placeholder="아이디" required autofocus>
+								<input type="text" name="userId" placeholder="아이디" autofocus>
 								<input type="password" name="userPwd" placeholder="비밀번호">
 							</div>
 							<div class="login-check">
-								<input type="checkbox" id="idsaved">아이디 저장
+								<input type="checkbox" name="idsaved">아이디 저장
 							</div>
 							<div class="loginBtn">
 								<button type="submit" class="btn login">로그인</button>

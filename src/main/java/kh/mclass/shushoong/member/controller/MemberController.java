@@ -21,11 +21,4 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	// 회원가입 페이지로 이동
-	@GetMapping("join")
-	public String join() {
-		return "member/join";
-	}
-	
-	
 }

@@ -1,0 +1,20 @@
+footer .inner li {
+    display: inline-block;
+    margin: 0 80px 0 0;
+    vertical-align: top;
+}
+
+footer .inner .tf p{
+    font-family: "SOYOMapleBoldTTF";
+    font-size: var(--font3);
+}
+
+footer .inner .to p{
+    font-family: "SOYOMapleRegularTTF";
+    font-size: var(--font4);
+}
+
+footer .inner  p {
+    color: white;
+    margin: 10px 0 10px 0;
+}

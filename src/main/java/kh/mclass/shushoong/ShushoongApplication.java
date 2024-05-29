@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-//@PropertySource("classpath:/keyproperties/apikey.properties")
 public class ShushoongApplication {
 
 	public static void main(String[] args) {

@@ -33,7 +33,7 @@
 		<dependency>
 		  <groupId>com.github.iamport</groupId>
 		  <artifactId>iamport-rest-client-java</artifactId>
-		  <version>0.2.14</version>
+		  <version>0.2.23</version>
 		</dependency>
 		
 		<dependency>
@@ -89,25 +89,6 @@
 			<artifactId>mybatis-spring-boot-starter-test</artifactId>
 			<version>3.0.3</version>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- selenium-java -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>4.21.0</version>
-		</dependency>
-		<!-- selenium-server -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
-			<version>3.141.59</version>
-		</dependency>
-		<!-- selenium-chrome-driver -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-chrome-driver</artifactId>
-			<version>4.21.0</version>
 		</dependency>
 
 		<!-- Gson ver.2.10.1 -->

@@ -29,16 +29,16 @@
 						<img th:src="@{/images/logo.png}" alt="로고">
 					</div>
 					<div class="login-section">
-						<form th:action="@{/member/login}" method="post">
+						<form id="frm-post" th:action="@{/member/login}" method="post"> 
 							<div class="loginInfo">
-								<input type="text" name="id" placeholder="아이디" > 
-								<input type="password" name="password" placeholder="비밀번호">
+								<input type="text" name="userId" placeholder="아이디" autofocus>
+								<input type="password" name="userPwd" placeholder="비밀번호">
 							</div>
 							<div class="login-check">
-								<input type="checkbox" id="idsaved">아이디 저장
+								<input type="checkbox" name="idsaved">아이디 저장
 							</div>
 							<div class="loginBtn">
-								<button type="button">로그인</button>
+								<button type="submit" class="btn login">로그인</button>
 							</div>
 							<div class="login-function">
 								<div class="joinBtn">회원가입</div>
@@ -74,11 +74,5 @@
 	<div class="wrap-footer">
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
-	
-	<script>
-		function loginHandler() {
-			
-		}
-	</script>
 </body>
 </html>

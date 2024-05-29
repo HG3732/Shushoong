@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>슈슝</title>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-section">
+				<div class="userjoin-Header">
+					개인 회원가입
+				</div>
+				<div class="userjoin-section">
+					<form id="frm-post" method="post"> 
+						<div class="userJoinInfo">
+							<label for="userId">아이디</label>
+							<input type="text" name="userId" autofocus>
+							<label for="userName">이름</label>
+							<input type="text" name="userName">
+							<label for="userPwd">비밀번호</label>
+							<input type="password" name="userPwd">
+							<label for="pwdCheck">비밀번호 확인</label>
+							<input type="password" name="pwdCheck">
+							<label for="userEmail">이메일</label>
+							<input type="text" name="userEmail">
+							<label for="emailCheck">인증번호</label>
+							<input type="text" name="emailCheck">
+						</div>
+						<div class="receive-marketing">
+							<div class="marketing-title">서비스 이용약관 동의</div>
+							<hr class="marketingLine">
+							<div class="marketing-check">
+								<input type="checkbox" id="usingService">슈슝 이용약관 동의<div class="emphasis">(필수)</div>
+								<input type="checkbox" id="privacy">개인정보 수집 및 이용 동의<div class="emphasis">(필수)</div>
+								<input type="checkbox" id="receiveMarketing">슈슝 마케팅 수신 동의(선택)
+								<div class="choice">
+									<div class="smsMarketing">
+										<input type="checkbox" name="emailReceive">
+									</div>
+									<div class="emailMarketing">
+										<input type="checkbox" name="msgReceivce">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="userJoinBtn">
+							<button type="submit" class="btn userJoin">회원가입</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+</body>
+</html>

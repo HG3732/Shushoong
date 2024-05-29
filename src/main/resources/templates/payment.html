@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
 	 <!-- jQuery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -13,42 +13,155 @@
 
  <!-- 결제하기 버튼 생성 -->
     <button onclick="requestPay()">결제하기</button>
+    <!-- pay();  이거는 우리 데이터로 갈 함수 -->
 
 
-<script>
+<script th:inline="javascript"> 
+var contextRoot = /*[[@{/}]]*/ ''; 
+/* function pay(){
+	$.ajax({
+		
+	});
+}
+ */
+
 function requestPay() {
-	  IMP.init('iamport'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
-	  IMP.request_pay({
-		    pg: "inicis",
-		    pay_method: "kakaopay", //"card",
-		    merchant_uid : 'merchant_'+new Date().getTime(),
-		    name : '결제테스트',
-		    //string
-		    amount : 100,
-		    //int(number)
-		    buyer_email : 'iamport@siot.do',
-		    
-		    buyer_name : '구매자',
-		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울특별시 강남구 삼성동',
-		    buyer_postcode : '123-456'
-		  }, 
-		  function (rsp) {
-			    console.log(rsp);  // 
-			    if (rsp.success) {
-			      var msg = '결제가 완료되었습니다.';
-			      alert(msg);
-			      location.href = "url: `/payment/validation/${rsp.imp_uid}`"
-			    } else {
-			      var msg = '결제에 실패하였습니다.';
-			      msg += '에러내용 : ' + rsp.error_msg;
-			      alert(msg);
-			    }
-			}  //function (rsp)
-	  );  // request_pay()
-	}  // requestPay
-</script> 
 
+     IMP.init('iamport'); // 가맹점 식별코드로 Iamport 초기화
+     IMP.request_pay({ // 결제 요청
+         pg: "inicis",   // PG사 설정
+         pay_method : "card", // 결제 방법
+         //merchant_uid : "20230901ABDE", // 주문 번호
+         name : "상품1", // 상품 이름
+         amount: 1000, // 결제 가격
+         buyer_name : "홍길동", // 구매자 이름 (buyer_ 부분은 꼭 작성하지 않아도된다. (선택사항))
+         buyer_tel : "010-5555-1111", // 구매자 연락처
+         buyer_postcode : 52030, // 구매자 우편번호
+         buyer_addr : "경기도 판교" // 구매자 주소
+     }, function(res) {
+    	 console.log("====1");
+    	 console.log(res);
+    	 console.log(contextRoot);
+         if (res.success) {
+             $.ajax({
+                 method: "post",
+                 url: `${contextRoot}payment/validation/${res.imp_uid}`,
+                 //문자열 내부의 변수를 대입하려면 ` 사용 -> 사용 안하면 res.imp_uid 이거 자체로 나옴
+                 success:function(result){
+                	 console.log("====2");
+                	 console.log(result);
+                 }
+             });
+         	// 응답 데이터의 정보들
+             console.log("Payment success!");
+             console.log("Payment ID : " + res.imp_uid);
+             console.log("Order ID : " + res.merchant_uid);
+             console.log("Payment Amount : " + res.paid_amount);
+             apply_num
+             : 
+             ""
+             bank_name
+             : 
+             null
+             buyer_addr
+             : 
+             "경기도 판교"
+             buyer_email
+             : 
+             ""
+             buyer_name
+             : 
+             "홍길동"
+             buyer_postcode
+             : 
+             "52030"
+             buyer_tel
+             : 
+             "010-5555-1111"
+             card_name
+             : 
+             null
+             card_number
+             : 
+             "*********"
+             card_quota
+             : 
+             0
+             currency
+             : 
+             "KRW"
+             custom_data
+             : 
+             null
+             imp_uid
+             : 
+             "imp_339213742407"
+             merchant_uid
+             : 
+             "nobody_1716973213390"
+             name
+             : 
+             "상품1"
+             paid_amount
+             : 
+             1000
+             paid_at
+             : 
+             1716973243
+             pay_method
+             : 
+             "point"
+             pg_provider
+             : 
+             "html5_inicis"
+             pg_tid
+             : 
+             "StdpayCARDINIpayTest20240529180042471663"
+             pg_type
+             : 
+             "payment"
+             receipt_url
+             : 
+             "https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=StdpayCARDINIpayTest20240529180042471663&noMethod=1"
+             status
+             : 
+             "paid"
+             success
+             : 
+             true
+             if(status == "paid") {
+             $.ajax({
+                 method: "post",
+                 url: `${contextRoot}payment/${res.imp_uid}`,
+                 data: {key: vaud},
+                 success:function(result){
+                	 console.log("====2");
+                	 console.log(result);
+                 }
+             });
+             }
+         } else {
+             console.error(res.error_msg);
+         }
+     });
+ }
+
+	// 결제번호 생성 함수
+/*  	function createOrderNum() {
+	    const date = new Date();
+	    const year = date.getFullYear();
+	    const month = String(date.getMonth() + 1).padStart(2, "0");
+	    const day = String(date.getDate()).padStart(2, "0");
+	 
+	    let orderNum = year + month + day;
+	    for (let i = 0; i < 5; i++) {
+	        orderNum += Math.floor(Math.random() * 8);
+	    }
+	    return parseInt(orderNum);
+	}  */
+</script> 
+<!-- //success 시 추가적인 검증 과정을 위해 위에서 작성한 서버측에 해댕경로로 post요청
+               	// post로 갔다온 다음에 응답 데이터의 정보들 -->
 
 </body>
 </html>

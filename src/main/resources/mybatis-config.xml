@@ -9,10 +9,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-co
 	</settings>
 	
 	<typeAliases>
-<!-- 		<package name="kh.mclass.shushoong.member.model.domain"/> -->
+		<package name="kh.mclass.shushoong.member.model.domain"/>
 	</typeAliases>
-	
-	<mappers>
-<!-- 		<mapper resource="mappers/member-mapper.xml"/> -->
-	</mappers>
 </configuration>

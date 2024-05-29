@@ -35,9 +35,9 @@ public class MemberSecurityService implements UserDetailsService {
 		System.out.println(loginEntity);
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		switch(loginEntity.getUserGrade()) {
-		case "admin" : authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
-		case "user": authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
-		case "business":authorities.add(new SimpleGrantedAuthority(MemberRole.BUSINESS.getValue()));
+		case "00" : authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
+		case "01": authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
+		case "02":authorities.add(new SimpleGrantedAuthority(MemberRole.BUSINESS.getValue()));
 		}
 		
 		return new User(loginEntity.getUserId(), loginEntity.getUserPwd(), authorities);

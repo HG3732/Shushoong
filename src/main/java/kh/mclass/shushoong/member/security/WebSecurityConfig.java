@@ -27,13 +27,13 @@ public class WebSecurityConfig {
 				.addHeaderWriter(new XFrameOptionsHeaderWriter(
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 		.formLogin((formLogin) -> formLogin
-				.loginPage("/login")
+				.loginPage("/member/login")
 				.defaultSuccessUrl("/")
-				.failureUrl("/login?error=true")
+				.failureUrl("/member/login?error=true")
 				.usernameParameter("userId")
 				.passwordParameter("userPwd"))
 		.logout((logout) -> logout
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 				.logoutSuccessUrl("/")
 				.invalidateHttpSession(true));
 		

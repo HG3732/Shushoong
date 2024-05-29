@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import com.siot.IamportRestClient.IamportClient;
 
 @Configuration
-@PropertySource("classpath:/keyproperties/apikey.properties")
+@PropertySource("classpath:/keyfiles/apikey.properties")
 public class AppConfig {
 	//PortOne
 	@Value("${portone.rest.api.key}")

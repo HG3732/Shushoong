@@ -9,6 +9,6 @@ import kh.mclass.shushoong.member.model.domain.MemberEntity;
 
 @Mapper
 public interface MemberRepository {
-	public MemberEntity login(String userEmail);
+	public MemberEntity login(String userId);
 	public MemberEntity insert(HashMap<String, Object> map);
 }

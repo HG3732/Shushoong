@@ -18,8 +18,7 @@
 		<java.version>17</java.version>
 	</properties>
 	
-	
-		<!--결제API-->
+	<!--결제API-->
 	<repositories>
 	  <repository>
 	    <id>jitpack.io</id>
@@ -27,15 +26,15 @@
 	  </repository>
 	</repositories>
 	
+	
 	<dependencies>
 		
-	<!-- 결제 API-->
+		<!-- 결제 API-->
 		<dependency>
 		  <groupId>com.github.iamport</groupId>
 		  <artifactId>iamport-rest-client-java</artifactId>
 		  <version>0.2.14</version>
 		</dependency>
-		
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

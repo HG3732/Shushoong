@@ -30,252 +30,108 @@
 .flex-container .sidebar .straight{
 	margin-top: 70px;
 }
-/* 양방형 레인지 슬라이드 
-   출발
-*/
-        .time-frm {
-            width: 100%;
-            height: auto;
-            /* background-color: #ecf0f1; */
-        }
 
-        /* 후에 padding: 1.5rem 2rem 으로 수정합니다. 참고바랍니다. */
-        .time-slider {
-            width: 100%;
-            height: 100%;
-            /* padding: 1.5rem; */
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            position: relative;
-        }
-        .depart-box {
-        width: 100%;
-        }
+/* 양방향 레인지 바 */
 
-        .depart-box input[type="range"] {
-            width: 100%;
-            top: 20px;
-            /* left: 1rem; */
-            position: absolute;
-            border: none;
-            pointer-events: none;
-            z-index: 10;
-            appearance: none;
-            opacity: 0;
-        }
+.middle-range {
+	position: relative;
+	width: 100%;
+	margin-top: 10px;
+	/* max-width: 500px; */
+}
 
-        .depart-box input[type="range"]:first-child {
-            top: 1rem;
-        }
-        
-        /* appearance, background 지워도 됨 */
-        input::-webkit-slider-thumb{
-            pointer-events: all;
-            appearance: none;
-            background-color: red;
-            width: 2.5rem;
-            height: 1.5rem;
-        } 
+.slider {
+	position: relative;
+	z-index: 1;
+	height: 5px;
+	margin: 0 15px;
+}
 
-        .depart-track {
-        	top: 20px;
-        	margin-top: 10px;
-            /* position: relative; */
-            position: absolute;
-            width: 100%;
-            height: 0.5rem;
-            /* margin-top: 5rem; */
-            background-color: #9d9d9d;
-            border-radius: 0.5rem;
-        }
+.slider>.track {
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 5px;
+	background-color: #9d9d9d;
+}
 
-        .depart-range {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #006AFF;
-            border-radius: 0.5rem;
-        }
+.slider>.range {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 5px;
+	background-color: #006AFF;
+}
 
-        .departthumb {
-            position: absolute;
-            top: 0;
-            transform: translateY(-0.25rem);
-            width: 1rem;
-            height: 1rem;
-            background-color: white;
-            border-radius: 50%;
-            border: 2px solid #006AFF;
-        }
-        
-        /* 도착 양방형 레인지 */
-        
-        .arr-box {
-        margin-top: 20px;
-        position:absolute;
-        top: 35px;
-        width: 100%;
-        }
+.slider>.thumb {
+	position: absolute;
+	top: 3px; z-index : 3;
+	width: 20px;
+	height: 20px;
+	background-color: white;
+	border-radius: 50%;
+	border: 2px solid #006AFF;
+	z-index: 3;
+	/* border-color: #006AFF; */
+}
 
-        .arr-box input[type="range"] {
-            width: 100%;
-            top: 20px;
-            /* left: 1rem; */
-            position: absolute;
-            border: none;
-            pointer-events: none;
-            z-index: 10;
-            appearance: none;
-            opacity: 0;
-        }
+.slider>.thumb.left {
+	left: 0;
+	transform: translate(-15px, -10px);
+}
 
-        .arr-box input[type="range"]:first-child {
-            top: 1rem;
-        }
-        
-        /* appearance, background 지워도 됨 */
-        input[type=range]::-webkit-slider-thumb{
-            pointer-events: all;
-            appearance: none;
-            background-color: red;
-            width: 2.5rem;
-            height: 1.5rem;
-        } 
+.slider>.thumb.right {
+	right: 0;
+	transform: translate(15px, -10px);
+}
 
-        .arr-track {
-        	top: 20px;
-        	margin-top: 10px;
-            /* position: relative; */
-            position: absolute;
-            width: 100%;
-            height: 0.5rem;
-            /* margin-top: 5rem; */
-            background-color: #9d9d9d;
-            border-radius: 0.5rem;
-        }
+input[type="range"] {
+	position: absolute;
+	/* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
+	pointer-events: none;
+	-webkit-appearance: none;
+	z-index: 2;
+	height: 10px;
+	width: 100%;
+	opacity: 0;
+}
 
-        .arr-range {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #006AFF;
-            border-radius: 0.5rem;
-        }
+input[type="range"]::-webkit-slider-thumb {
+	/* 겹쳐진 두 thumb를 모두 활성화 */
+	pointer-events: all;
+	width: 30px;
+	height: 30px;
+	border-radius: 0;
+	border: 0 none;
+	background-color: red;
+	cursor: pointer;
+	/* appearance를 해야 위의 스타일들을 볼 수 있음 */
+	-webkit-appearance: none;
+}
 
-        .arrthumb {
-            position: absolute;
-            top: 0;
-            transform: translateY(-0.25rem);
-            width: 1rem;
-            height: 1rem;
-            background-color: white;
-            border-radius: 50%;
-            border: 2px solid #006AFF;
-        }
-/*         
-        .left {
-            left: 0;
-        }
+.middle-range .multi-range-slider {
+	margin-top: 10px;
+}
 
-        .right {
-            right: 0;
-        }
-         */ 
-/* 양방향 레인지 END */
+.multi-range-slider .resultval {
+	margin: 10px 10px;
+}
 
-/* 가격 레인지 바 */
+.div1 {
+	float: left;
+}
 
-        .price-frm {
-            width: 100%;
-            height: auto;
-            /* background-color: #ecf0f1; */
-        }
+.div2 {
+	float: right;
+}
 
-        /* 후에 padding: 1.5rem 2rem 으로 수정합니다. 참고바랍니다. */
-        .price-slider {
-            width: 100%;
-            height: 100%;
-            /* padding: 1.5rem; */
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            position: relative;
-        }
-        .price-box {
-        width: 100%;
-        }
-
-        .price-box input[type="range"] {
-            width: 100%;
-            top: 20px;
-            /* left: 1rem; */
-            position: absolute;
-            border: none;
-            pointer-events: none;
-            z-index: 10;
-            appearance: none;
-            opacity: 0;
-        }
-
-        .price-box input[type="range"]:first-child {
-            top: 1rem;
-        }
-        
-        /* appearance, background 지워도 됨 */
-        input::-webkit-slider-thumb{
-            pointer-events: all;
-            appearance: none;
-            background-color: red;
-            width: 2.5rem;
-            height: 1.5rem;
-        } 
-
-        .price-track {
-        	top: 20px;
-        	margin-top: 10px;
-            /* position: relative; */
-            position: absolute;
-            width: 100%;
-            height: 0.5rem;
-            /* margin-top: 5rem; */
-            background-color: #9d9d9d;
-            border-radius: 0.5rem;
-        }
-
-        .price-range {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #006AFF;
-            border-radius: 0.5rem;
-        }
-
-        .pricethumb {
-            position: absolute;
-            top: 0;
-            transform: translateY(-0.25rem);
-            width: 1rem;
-            height: 1rem;
-            background-color: white;
-            border-radius: 50%;
-            border: 2px solid #006AFF;
-        }
-        .pricethumb.right{
-        	right: 0;
-        }
-        
-
-
-/* 가격 레인지 바 END */
+/* 양방향 레인지 바 */
 
 .flex-container .sidebar .time-list .depart-movingtime{
 	width: 100%;
@@ -336,49 +192,73 @@
     background-color: beige;
 }
     
-body > div.wrapper > div.wrap-main > div > div.flex-container > div.airline-list > div:nth-child(2){
-    margin-top: 30px;
-}
-
 .flex-container .airline-list .airline-info{
     border: 1px solid black;
     width: 740px;
-    height: 120px;
+    height: 150px;
     margin: 0 auto;
-    margin-bottom: 30px;
-    background-color: violet;
+    /* margin-bottom: 30px; */
+    margin-top: 50px;
+    /* background-color: violet; */
+    border-radius: 10px;
 }
 
 .airline-info .seat-count{
     float: left;
-    border: 1px solid blue;
     width: 100%;
-
+    height: 100%;
 }
+.airline-info .seat-count .span-seat-div{
+    /* border: 1px solid blue; */
+    border-radius: 10px;
+    margin-top: 10px;
+    background-color: #006AFF;
+    width: 60px;
+    height: 22px;
+    
+}
+.airline-info .seat-count .span-seat{
+    font-size: 12px;
+    padding: 5px;
+    color: white;
+}
+
 .airline-info .airline-flex{
     /* 2 1 2 1 1 3 */
     display: flex;
-    height: 97px;
+    height: 100%;
 }
 .airline-flex .airline-logo{
-    flex: 1.5;
+    flex: 0.5;
     display: flex;
-    background-color: beige;
+    /* background-color: beige; */
     align-items: center;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+    flex-direction: column;
+    padding-left: 20px;
+    
 }
 .airline-flex .airline-logo img{
     width: 50px;
     height: 50px;
+    margin-top: 22px;
 }
+
+.airline-flex .airline-name{
+	flex: 0.7;
+	text-align: center;
+	align-content: center;
+	font-size: 12px;
+	font-weight: bold;
+	}
 
 .airline-flex .airinfo.depart-info{
     flex: 0.7;
     display: flex;
     flex-direction: column;
-    background-color: darkgreen;
+    /* background-color: darkgreen; */
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 .airline-flex .date{
     font-size: 12px;
@@ -396,7 +276,12 @@ body > div.wrapper > div.wrap-main > div > div.flex-container > div.airline-list
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* background-color: bisque; */
 }
+.airline-flex .arrow .via-count span{
+	font-size: 12px;
+
+	}
 .airline-flex .arrow img{
     width: 50px;
     height: 50px;
@@ -409,23 +294,51 @@ body > div.wrapper > div.wrap-main > div > div.flex-container > div.airline-list
     flex: 0.7;
     display: flex;
     flex-direction: column;
-    background-color: darkgreen;
+    /* background-color: darkgreen; */
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 /* 그리드로 해야하나..? */
 .airline-flex .nop{
     flex: 1.7;
-    background-color: gold;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 7fr;
+    
+     /* background-color: gold;  */
     
 }
 .airline-flex .nop .sero{
-    display: flex;
-    flex-direction: column;
+    text-align: center;
+    align-content: center;
+     /* background-color: white; */
+    
 }
-.airline-flex .nop .ticket-info-flex{
+.airline-flex .nop .ticket-adult{
+     /* background-color: tomato;  */
+    align-content: center;
+    font-size: 12px;
+    margin-left: 15px;
+}
+.airline-flex .nop .airticket{
     display: flex;
     flex-direction: column;
-
+    justify-content: center;
+    align-items: center;
+    
+}
+.airline-flex .nop .airticket .ticket-price{
+    margin-top: 45px;
+    color: #E12D2D;
+    font-weight: bolder;
+    font-size: 18px;
+}
+.airline-flex .nop .airticket .ticket-btn{
+    width: 60%;
+    margin-top: 20px;
+    text-align: center;
+    
+}
+.airline-flex .nop .airticket .ticket-btn button{
+	border-radius: 20px;
 }

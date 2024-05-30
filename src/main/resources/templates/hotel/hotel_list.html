@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html 
 xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
@@ -35,12 +36,12 @@ xmlns:th="http://www.thymeleaf.org">
 				</div>
 				<div class="category">
 					<div class="select">
-						<select name="search" id="hotel_search">
+						<select name="search" id="hotel_search" style="width:80px; height:30px; border-radius:10px;">
 							 <option value="price">가격</option>
 							 <option value="review">리뷰</option>
 							 <option value="grade">평점</option>
 						</select>
-						<select name="search" id="hotel_search_rate">
+						<select name="search" id="hotel_search_rate" style="width:100px; height:30px; border-radius:10px;">
 							 <option value="low">낮은 순</option>
 							 <option value="high">높은 순</option>
 						</select>
@@ -53,18 +54,43 @@ xmlns:th="http://www.thymeleaf.org">
 					</div>
 					<div class="hotel">
 						<div class="hotel_list">
-							<div class="hotel_pic">호텔사진</div>
-							<div class="hotel_attr">
+							<div class="hotel_pic">
+								<div class="hotel_like">
+									<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart">
+								</div>
+							</div>
+							<div class="hotel_attr" style="display: grid; justify-content:space-between;">
+								<div class="hotel_hot">HOT</div>
 								<div class="hotel_kr">호텔이름</div>
 								<div class="hotel_eng">호텔영어이름</div>
 								<div class="hotel_location">호텔위치</div>
-								<div class="hotel_review">3.5/5</div>
+								<div class="hotel_review">
+									<span><img th:src="@{/images/star.png}" alt="별" style="width:20px;" class="heart"></span>
+									<span>3.5/5</span>
+								</div>
 							</div>
 							<div class="hotel_price">190,000원~</div>
 						</div>
+						
 						<div class="hotel_list">
-							<div class="hotel_pic">호텔사진</div>
+							<div class="hotel_pic">
+								<div class="hotel_like">
+									<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart">
+								</div>
+							</div>
+							<div class="hotel_attr" style="display: grid; justify-content:space-between;">
+								<div class="hotel_kr">호텔이름</div>
+								<div class="hotel_eng">호텔영어이름</div>
+								<div class="hotel_location">호텔위치</div>
+								<div class="hotel_review">
+									<span><img th:src="@{/images/star.png}" alt="별" style="width:20px;" class="heart"></span>
+									<span>3.5/5</span>
+								</div>
+							</div>
+							<div class="hotel_price">190,000원~</div>
 						</div>
+						
+						
 					</div>
 				</div>
 			</div>
@@ -74,7 +100,24 @@ xmlns:th="http://www.thymeleaf.org">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
 	
-<script th:inline="javascript">
+<script>
+
+$(loadedHandler);
+
+function loadedHandler(){
+	
+	//좋아요 버튼
+	$(".hotel_like").on("click", likeHandler);
+};
+	
+//좋아요 누를 시 색깔 변함
+function likeHandler(){
+	console.log(this);
+	$(this).children().attr("src", "/shushoong/images/heart_color.png");
+	/* console 창에 결과나온거 보면 흰색  하트 img src 경로 보이는데 그 경로 토대로 작성 */
+	
+}
+
 
 </script>
 

@@ -19,15 +19,35 @@ xmlns:th="http://www.thymeleaf.org">
 				<hr>
 			</div>
 		</header>
-		<div class="wrap-main">
+		<div class="wrap-hotel-main">
 			<div class="main-back">
 				<div class="wrap-hotel-search">
-					<button type="button" >도시명 또는 호텔명</button>
-					<button type="button" >숙박 일정</button>
-					<button type="button" >객실 1 - 성인 2, 아동 0</button>
-					<button type="button" >검색</button>
-				</div>			
-			</div>
+					<div style="height: 220px;"></div>
+					<div class="hotel-search-bar">
+						<button type="button" class="input"><span>도시명 또는 호텔명</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
+						<button type="button" class="input"><span>숙박 일정</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
+						<button type="button" class="input"><span>객실 1 - 성인 2, 아동 0</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
+						<button type="button" class="search">검색</button>
+					</div>
+					<div class="wrap-loc-box">
+						<div class="country-box">
+							<div class="country korea">한국</div>
+							<div class="country china">중국</div>
+							<div class="country japan">일본</div>
+							<div class="country america">미국</div>
+						</div>
+						<div class="local-box korea">
+							<div class="local">제주</div>
+							<div class="local">강릉</div>
+							<div class="local">서울</div>
+							<div class="local">광주</div>
+							<div class="local">평창</div>
+							<div class="local">인천</div>
+							<div class="local">속초</div>
+							<div class="local">부산</div>
+						</div>
+					</div>
+				</div>
 		</div>
 	</div>
 </body>

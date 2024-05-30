@@ -1,3 +1,7 @@
+*{
+	box-sizing: border-box;
+}
+
 .wrap-hotel-main {
 	font-family: 'SOYOMapleRegularTTF';
 }
@@ -6,6 +10,7 @@
 	height: 350px;
 	position: relative;
 	background-color: rgba(0,0,0, .2);
+	
 }
 
 .main-back::before {
@@ -46,7 +51,7 @@
 .main-back .hotel-search-bar button {
 	flex-basis: auto;
 	flex-grow: 1;
-	font-size: 17px;
+	font-size: 15px;
 	padding: 12px 12px;
 	border: none;
 	border-radius: 10px;
@@ -70,40 +75,88 @@
 
 .main-back .hotel-search-bar button.search {
 	justify-content: center;
+	background-color: var(--color_blue_2);
+	color: black;
+}
+
+.main-back .hotel-search-bar button.search:hover {
+	background-color: var(--color_blue_1);
+	color: white;
 }
 
 .wrap-loc-box {
 	margin-top: 10px;
-	width: 200px;
-	height: 200px;
+	width: fit-content;
+	height: auto;
 	border: var(--color_blue_1), 2px, solid;
 	border-radius: 20px;
 	background-color: white;
-	padding : 15px;
-	display: flex;
-	flex-direction: row;
+	padding : 40px;
+	display: none;
+
 }
 
-.wrap-loc-box > .country-box {
-	border-right-width: 0px;
+.wrap-loc-box .loc-inner-box {
+	display: flex;
+	flex-direction: row;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
+
+.wrap-loc-box .country-box {
+	display: flex;
+	flex-direction: column;
+	font-size: 17px;
 }
 
 .wrap-loc-box .country-box .country {
-	border: 1px, solid, black;
-    font-size: 20px;
-    padding : 10px;
+	border-style: solid;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	border-color: black;
+    font-size: 17px;
+    padding : 15px;
     padding-right: 40px;
+    cursor: pointer;
 }
 
-.wrap-loc-box .country-box .country:not(:last-child){
+.wrap-loc-box .country-box > .country:last-child{
 	border-bottom-width: 0px;
 }
 
 .wrap-loc-box .local-box {
 	font-size: 17px;
-	border: 1px, solid, black;
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat();
+	grid-template-columns: repeat(5, 150px);
+	grid-auto-flow: row;
+	grid-auto-rows: 25%;
+	display: none;
+}
+
+.wrap-loc-box .local-box .local {
+	padding: 7px 10px;
+	cursor: pointer;
+	align-content:center;
+	
+}
+
+.wrap-loc-box .local-box .local:hover {
+	background-color: var(--color_gray_1);
+	border-bottom-width: 1px;
+	border-bottom-color: var(--color_gray_2);
+	border-bottom-style: solid;
+}
+
+.wrap-date-box {
+	margin-top: 10px;
+	width: fit-content;
+	height: auto;
+	border: var(--color_blue_1), 2px, solid;
+	border-radius: 20px;
+	background-color: white;
+	padding : 40px;
+	display: none;
+
 }
 

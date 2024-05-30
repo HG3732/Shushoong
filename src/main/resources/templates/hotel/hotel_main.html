@@ -8,8 +8,38 @@ xmlns:th="http://www.thymeleaf.org">
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/hotel/hotel_main.css}" rel="stylesheet" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+$(loadedHandler)
+	function loadedHandler() {
+		$('.input.location').on('click', locationClickHandler);
+		$('.country').on('click', localClickHandler);
+		$('.input.time').on('click', timeClickHandler);
+	}
+	
+	//국가 검색 클릭 시 국가 선택 창 표시
+	function locationClickHandler() {
+		$('.wrap-loc-box').toggle();
+	}
+	
+	//국가 클릭 시 해당 국가의 주요 지역 표시
+	function localClickHandler() {
+		var index = $(this).index();
+		$('.local-box').css('display', 'none');
+		$('.country').css('font-weight', '100');
+		$('.country').css('background-color', 'white');
+		$('.local-box').eq(index).css('display', 'grid');
+		$(this).css('background-color', 'var(--color_blue_2)');
+		$(this).css('font-weight', '900');
+	}
+	
+	//날짜 검색 클릭 시 달력 표시
+	function timeClickHandler() {
+		$('.wrap-date-box').toggle();
+	}
+</script>
 </head>
 <body>
 	<div class="wrap-header">
@@ -24,31 +54,81 @@ xmlns:th="http://www.thymeleaf.org">
 				<div class="wrap-hotel-search">
 					<div style="height: 220px;"></div>
 					<div class="hotel-search-bar">
-						<button type="button" class="input"><span>도시명 또는 호텔명</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
-						<button type="button" class="input"><span>숙박 일정</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
-						<button type="button" class="input"><span>객실 1 - 성인 2, 아동 0</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
+						<button type="button" class="input location"><span>도시명 또는 호텔명</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
+						<button type="button" class="input time"><span>숙박 일정</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
+						<button type="button" class="input room"><span>객실 1 - 성인 2, 아동 0</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
 						<button type="button" class="search">검색</button>
 					</div>
 					<div class="wrap-loc-box">
-						<div class="country-box">
-							<div class="country korea">한국</div>
-							<div class="country china">중국</div>
-							<div class="country japan">일본</div>
-							<div class="country america">미국</div>
-						</div>
-						<div class="local-box korea">
-							<div class="local">제주</div>
-							<div class="local">강릉</div>
-							<div class="local">서울</div>
-							<div class="local">광주</div>
-							<div class="local">평창</div>
-							<div class="local">인천</div>
-							<div class="local">속초</div>
-							<div class="local">부산</div>
+						<div class="loc-inner-box">
+							<div class="country-box">
+								<div class="country korea">한국</div>
+								<div class="country china">중국</div>
+								<div class="country japan">일본</div>
+								<div class="country america">미국</div>
+							</div>
+							<div class="local-box korea" style="display: grid;">
+								<div class="local">제주</div>
+								<div class="local">강릉</div>
+								<div class="local">서울</div>
+								<div class="local">광주</div>
+								<div class="local">평창</div>
+								<div class="local">인천</div>
+								<div class="local">속초</div>
+								<div class="local">부산</div>
+							</div>
+							<div class="local-box china">
+								<div class="local">상해</div>
+								<div class="local">북경</div>
+								<div class="local">청도</div>
+								<div class="local">위해</div>
+								<div class="local">광주</div>
+								<div class="local">대련</div>
+								<div class="local">서안</div>
+								<div class="local">연길</div>
+								<div class="local">성도</div>
+								<div class="local">중경</div>
+								<div class="local">하얼빈</div>
+								<div class="local">천진</div>
+								<div class="local">곤명</div>
+								<div class="local">남경</div>
+							</div>
+							<div class="local-box japan">
+								<div class="local">도쿄</div>
+								<div class="local">오사카</div>
+								<div class="local">교토</div>
+								<div class="local">후쿠오카</div>
+								<div class="local">오이타(유후인/벳부)</div>
+								<div class="local">오키나와</div>
+								<div class="local">삿포로</div>
+								<div class="local">나고야</div>
+							</div>
+							<div class="local-box america">
+								<div class="local">호놀룰루(하와이)</div>
+								<div class="local">LA</div>
+								<div class="local">뉴욕</div>
+								<div class="local">라스베가스</div>
+								<div class="local">샌프란시스코</div>
+								<div class="local">시애틀</div>
+								<div class="local">벤쿠버</div>
+								<div class="local">토론토</div>
+								<div class="local">워싱턴</div>
+								<div class="local">시카고</div>
+								<div class="local">보스톤</div>
+								<div class="local">멕시코시티</div>
+								<div class="local">올랜도</div>
+								<div class="local">코나</div>
+								<div class="local">카우아이</div>
+							</div>
 						</div>
 					</div>
+					<div class="wrap-date-box">
+						
+					</div>
 				</div>
+			</div>
 		</div>
 	</div>
 </body>
+
 </html>

@@ -15,4 +15,9 @@ public class HotelListController {
 	public String hotelList() {
 		return "hotel/hotel_list";
 	}
+	
+	@GetMapping("/hotel/ex")
+	public String hotelex() {
+		return "hotel/ex";
+	}
 }

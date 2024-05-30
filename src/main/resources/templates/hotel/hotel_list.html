@@ -8,6 +8,8 @@ xmlns:th="http://www.thymeleaf.org">
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/hotel/hotel_list.css}" rel="stylesheet" />
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
@@ -45,18 +47,25 @@ xmlns:th="http://www.thymeleaf.org">
 					</div>
 				</div>
 				<div class="container">
-					<div class="section">
-						<div>랄라</div>
-						
+					<div class="aside">
+
+							
 					</div>
-					<aside class="hotel">
+					<div class="hotel">
 						<div class="hotel_list">
 							<div class="hotel_pic">호텔사진</div>
+							<div class="hotel_attr">
+								<div class="hotel_kr">호텔이름</div>
+								<div class="hotel_eng">호텔영어이름</div>
+								<div class="hotel_location">호텔위치</div>
+								<div class="hotel_review">3.5/5</div>
+							</div>
+							<div class="hotel_price">190,000원~</div>
 						</div>
 						<div class="hotel_list">
 							<div class="hotel_pic">호텔사진</div>
 						</div>
-					</aside>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -65,5 +74,9 @@ xmlns:th="http://www.thymeleaf.org">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
 	
+<script th:inline="javascript">
+
+</script>
+
 </body>
 </html>

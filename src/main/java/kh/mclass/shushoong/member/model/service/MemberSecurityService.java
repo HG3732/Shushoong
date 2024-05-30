@@ -25,22 +25,22 @@ public class MemberSecurityService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 		System.out.println("Member Service 체크.");
-		Optional<MemberEntity> loginEntityOp = Optional.ofNullable(memberRepository.login(userId));
-		System.out.println(loginEntityOp);
-		if(loginEntityOp.isEmpty()) {
+		Optional<MemberEntity> loginDtoOp = Optional.ofNullable(memberRepository.login(userId));
+		System.out.println(loginDtoOp);
+		if(loginDtoOp.isEmpty()) {
 			throw new UsernameNotFoundException("존재하지 않는 아이디입니다.");
 		}
 		
-		MemberEntity loginEntity = loginEntityOp.get();
-		System.out.println(loginEntity);
+		MemberEntity loginDto = loginDtoOp.get();
+		System.out.println(loginDto);
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		switch(loginEntity.getUserGrade()) {
+		switch(loginDto.getUserGrade()) {
 		case "00" : authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
-		case "01": authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
+		case "01": authorities.add(new SimpleGrantedAuthority(MemberRole.CUSTOMER.getValue()));
 		case "02":authorities.add(new SimpleGrantedAuthority(MemberRole.BUSINESS.getValue()));
 		}
 		
-		return new User(loginEntity.getUserId(), loginEntity.getUserPwd(), authorities);
+		return new User(loginDto.getUserId(), loginDto.getUserPwd(), authorities);
 	}
 }
 

@@ -23,29 +23,58 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-section">
-				<div class="userContainer">
-					<a href="#">
-						<div class="userJoin">기업 회원 가입하기</div>
-					</a>
+				<div class="customerContainer">
+					<div class="customer-section">
+						<img th:src="@{/images/개인 아이콘.png}" alt="개인 회원" width="100px" height="100px">
+						<div class="customer">
+							개인 회원
+						</div>
+						<div class="customerCatchphrase">
+							여행을 가고 싶은 당신에게
+						</div>
+					</div>
+					<div class="customer btn">
+						<a th:href="@{/join/customer}">
+							<div class="userJoin">개인 회원 가입하기</div >
+						</a>
+					</div>
 				</div>
 				<div class="userJoinSns">
 					간편하게 SNS 가입하기
 					<div class="snsImg">
 						<div class="google">
-						
+							<a href=#>
+								<img th:src="@{/images/구글 아이콘 사각.png}" alt="카카오 로그인" width="50px" height="50px">
+							</a>
 						</div>
 						<div class="kakao">
-						
+							<a href=#>
+								<img th:src="@{/images/카카오톡 아이콘 사각.png}" alt="카카오 로그인" width="50px" height="50px">
+							</a>
 						</div>
 						<div class="naver">
-						
+							<a href=#>
+								<img th:src="@{/images/네이버 아이콘사각.png}" alt="네이버 로그인" width="50px" height="50px">
+							</a>
 						</div>
 					</div>
 				</div>
 				<div class="businessContainer">
-					<a href="#">
-						<div class="businessJoin">기업 회원 가입하기</div>
-					</a>
+					<div class="customer-section">
+						<img th:src="@{/images/회사 아이콘.png}" alt="사업자 회원" width="100px" height="100px">
+					</div>
+					<div class="business btn">
+						<div class="customer">
+								기업 회원
+							</div>
+							<div class="customerCatchphrase">
+								좋은 여행지를 소개하고 싶은 기업에게
+							</div>
+							<a th:href="@{/join/business}">
+								<div class="businessJoin">기업 회원 가입하기</div>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

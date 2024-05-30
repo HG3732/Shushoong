@@ -8,10 +8,9 @@ xmlns:th="http://www.thymeleaf.org">
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 <meta charset="UTF-8">
-<title>슈슝</title>
+<title>슈슝::개인회원가입</title>
 </head>
 <body>
-
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
@@ -29,32 +28,45 @@ xmlns:th="http://www.thymeleaf.org">
 				<div class="userjoin-section">
 					<form id="frm-post" method="post"> 
 						<div class="userJoinInfo">
-							<label for="userId">아이디</label>
-							<input type="text" name="userId" autofocus>
-							<label for="userName">이름</label>
-							<input type="text" name="userName">
+							<div class="id check">
+								<label for="userId">아이디</label>
+								<input type="text" name="userId" autofocus>
+								<button type="button" class="btn idCheck">중복확인</button>
+							</div>
+							<div class="checkId">
+								<label for="userName">이름</label>
+								<input type="text" name="userName">
+							</div>
 							<label for="userPwd">비밀번호</label>
 							<input type="password" name="userPwd">
 							<label for="pwdCheck">비밀번호 확인</label>
 							<input type="password" name="pwdCheck">
-							<label for="userEmail">이메일</label>
-							<input type="text" name="userEmail">
-							<label for="emailCheck">인증번호</label>
-							<input type="text" name="emailCheck">
+							<div class="send num">
+								<label for="userEmail">이메일</label>
+								<input type="text" name="userEmail">
+								<button type="button" class="btn emailCheck">중복확인</button>
+							</div>
+							<div class="answer email">
+								<label for="emailCheck">인증번호</label>
+								<input type="text" name="emailCheck">
+								<button type="button" class="btn emailCheck">인증확인</button>
+							</div>
 						</div>
 						<div class="receive-marketing">
 							<div class="marketing-title">서비스 이용약관 동의</div>
 							<hr class="marketingLine">
 							<div class="marketing-check">
-								<input type="checkbox" id="usingService">슈슝 이용약관 동의<div class="emphasis">(필수)</div>
-								<input type="checkbox" id="privacy">개인정보 수집 및 이용 동의<div class="emphasis">(필수)</div>
-								<input type="checkbox" id="receiveMarketing">슈슝 마케팅 수신 동의(선택)
+								<input type="checkbox" id="Allcheck">전체 선택
+								<hr class="marketingLine">
+								<input type="checkbox" id="usingService" class="usingService">슈슝 이용약관 동의<div class="emphasis">(필수)</div>
+								<input type="checkbox" id="privacy" class="privacy">개인정보 수집 및 이용 동의<div class="emphasis">(필수)</div>
+								<input type="checkbox" id="receiveMarketing" class="receiveMarketing">슈슝 마케팅 수신 동의(선택)
 								<div class="choice">
 									<div class="smsMarketing">
-										<input type="checkbox" name="emailReceive">
+										<input type="checkbox" name="msgReceivce"> SMS 수신
 									</div>
 									<div class="emailMarketing">
-										<input type="checkbox" name="msgReceivce">
+										<input type="checkbox" name="emailReceive"> 이메일 수신
 									</div>
 								</div>
 							</div>

@@ -1,5 +1,109 @@
-.main-back {
-	background-image: src("hotel_mainSection.jpg");
-	width: 100%;
-	height: 350px;
+.wrap-hotel-main {
+	font-family: 'SOYOMapleRegularTTF';
 }
+
+.main-back {
+	height: 350px;
+	position: relative;
+	background-color: rgba(0,0,0, .2);
+}
+
+.main-back::before {
+	content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../../images/hotel_mainSection.jpg");
+    background-size: cover;
+    background-size: 2000px;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(1px); /* 블러 효과 */
+    z-index: -1;
+    
+}
+
+.main-back .wrap-hotel-search {
+	margin: 0 auto;
+	width: 960px;
+}
+
+.main-back .hotel-search-bar {
+	width : 100%;
+	height: 80px;
+	margin: 0 auto;
+	border: var(--color_blue_1), 2px, solid;
+	border-radius: 20px;
+	background-color: rgba(255,255,255, .7);
+	display: flex;
+	gap: 15px;
+	align-items: center;
+	padding: 0 20px;
+}
+
+.main-back .hotel-search-bar button {
+	flex-basis: auto;
+	flex-grow: 1;
+	font-size: 17px;
+	padding: 12px 12px;
+	border: none;
+	border-radius: 10px;
+	background-color: var(--color_gray_2);
+	font-family: 'SOYOMapleBoldTTF';
+	text-align: left;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+}
+
+.main-back .hotel-search-bar button:nth-child(1){
+	flex-grow: 3;
+}
+.main-back .hotel-search-bar button:nth-child(2){
+	flex-grow: 7;
+}
+.main-back .hotel-search-bar button:nth-child(3){
+	flex-grow: 1;
+}
+
+.main-back .hotel-search-bar button.search {
+	justify-content: center;
+}
+
+.wrap-loc-box {
+	margin-top: 10px;
+	width: 200px;
+	height: 200px;
+	border: var(--color_blue_1), 2px, solid;
+	border-radius: 20px;
+	background-color: white;
+	padding : 15px;
+	display: flex;
+	flex-direction: row;
+}
+
+.wrap-loc-box > .country-box {
+	border-right-width: 0px;
+}
+
+.wrap-loc-box .country-box .country {
+	border: 1px, solid, black;
+    font-size: 20px;
+    padding : 10px;
+    padding-right: 40px;
+}
+
+.wrap-loc-box .country-box .country:not(:last-child){
+	border-bottom-width: 0px;
+}
+
+.wrap-loc-box .local-box {
+	font-size: 17px;
+	border: 1px, solid, black;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat();
+}
+

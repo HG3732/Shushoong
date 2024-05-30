@@ -19,145 +19,191 @@
 </style>
 <body>
 
-	<div class="wrapper">
-		<div class="wrap-header">
-			<header>
-				<div th:replace="~{common/header :: Header}"></div>
-				<div class="hrline">
-					<hr>
-				</div>
-			</header>
-		</div>
-		<!-- 
+    <div class="wrapper">
+        <div class="wrap-header">
+            <header>
+                <div th:replace="~{common/header :: Header}"></div>
+                <div class="hrline">
+                    <hr>
+                </div>
+            </header>
+        </div>
+        <!-- 
 		<div class="wrap-body">
 			<div class="wrap-">
 			 -->
-		<div class="wrap-main">
-			<div class="top-nav">top-nav</div>
-			<div class="container">
-				<div class="flex-container">
-					<div class="sidebar">
-						<div class="time-list">
-							<form class="time-frm">
-								<div>
-									<p>시간대</p>
-								</div>
-								<div class="time-slider">
-									<!-- 출발 시간 -->
-									<div class="depart-movingtime">
-										<div></div>
-										<div></div>
-									</div>
-									<div class="depart-box">
-										<input type="range" class="input-left" id="depart-input-left"
-											min="1" max="100" value="1" /> <input type="range"
-											class="input-right" id="depart-input-right" min="1" max="100"
-											value="100" />
-										<div class="depart-track">
-											<div class="depart-range"></div>
-											<div class="departthumb left"></div>
-											<div class="departthumb right"></div>
-										</div>
-									</div>
-									<div class="depart-timeline">
-										<div>00:00</div>
-										<div>24:00</div>
-									</div>
-									<!-- 도착 시간 -->
+        <div class="wrap-main">
+            <div class="top-nav">top-nav</div>
+            <div class="container">
+                <div class="flex-container">
+                    <div class="sidebar">
+                        <div class="time-list">
+                            <form class="time-frm">
+                                <div>
+                                    <p>시간대</p>
+                                </div>
+                                <div class="time-slider">
+                                    <!-- 출발 시간 -->
+                                    <div class="depart-movingtime">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="depart-box">
+                                        <input type="range" class="input-left" id="depart-input-left" min="1" max="100"
+                                            value="1" /> <input type="range" class="input-right" id="depart-input-right"
+                                            min="1" max="100" value="100" />
+                                        <div class="depart-track">
+                                            <div class="depart-range"></div>
+                                            <div class="departthumb left"></div>
+                                            <div class="departthumb right"></div>
+                                        </div>
+                                    </div>
+                                    <div class="depart-timeline">
+                                        <div>00:00</div>
+                                        <div>24:00</div>
+                                    </div>
+                                    <!-- 도착 시간 -->
 
-									<div class="arr-movingtime">
-										<div></div>
-										<div></div>
-									</div>
-									<div class="arr-box">
-										<input type="range" class="input-left" id="arr-input-left"
-											min="1" max="100" value="1" /> <input type="range"
-											class="input-right" id="arr-input-right" min="1" max="100"
-											value="100" />
-										<div class="arr-track">
-											<div class="arr-range"></div>
-											<div class="arrthumb left"></div>
-											<div class="arrthumb right"></div>
-										</div>
-									</div>
-									<div class="arr-timeline">
-										<div>00:00</div>
-										<div>24:00</div>
+                                    <div class="arr-movingtime">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="arr-box">
+                                        <input type="range" class="input-left" id="arr-input-left" min="1" max="100"
+                                            value="1" />
+                                        <input type="range" class="input-right" id="arr-input-right" min="1" max="100"
+                                            value="100" />
+                                        <div class="arr-track">
+                                            <div class="arr-range"></div>
+                                            <div class="arrthumb left"></div>
+                                            <div class="arrthumb right"></div>
+                                        </div>
+                                    </div>
+                                    <div class="arr-timeline">
+                                        <div>00:00</div>
+                                        <div>24:00</div>
 
-									</div>
-								</div>
-							</form>
-						</div>
-						<div class="price-list">
-							<form class="price-frm">
-								<div>
-									<p>가격대</p>
-								</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="price-list">
+                            <form class="price-frm">
+                                <div>
+                                    <p>가격대</p>
+                                </div>
 
-								<div class="price-slider">
-									<div class="price-movingtime">
-										<div></div>
-										<div></div>
-									</div>
-									<div class="price-box">
-										<input type="range" class="input-left" id="price-input-left" min="1" max="100" value="1" /> 
-										<input type="range" class="input-right" id="price-input-right" min="1" max="100" value="100" />
-										<div class="price-track">
-											<div class="price-range"></div>
-											<div class="pricethumb left"></div>
-											<div class="pricethumb right"></div>
-										</div>
-									</div>
-									
-								</div>
+                                <div class="price-slider">
+                                    <div class="price-movingtime">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="price-box">
+                                        <input type="range" class="input-left" id="price-input-left" min="1" max="100"
+                                            value="1" />
+                                        <input type="range" class="input-right" id="price-input-right" min="1" max="100"
+                                            value="100" />
+                                        <div class="price-track">
+                                            <div class="price-range"></div>
+                                            <div class="pricethumb left"></div>
+                                            <div class="pricethumb right"></div>
+                                        </div>
+                                    </div>
 
-							</form>
-						</div>
-						<div class="layover-list">
-							<form class="layover-frm">
-								<div>
-									<p>직항/경유</p>
-								</div>
-								<div class="layover-select">
-									<label>
-										<button type="button" class="direct-btn" id="direct-btn"><span>직항</span></button>
-									</label>
-									<label>
-										<button type="button" class="direct-btn" id="layover-btn"><span>경유</span></button>
-									</label>
-								</div>
-							</form>
-						
-						</div>
-					</div>
-					<div class="airline-list">
+                                </div>
 
-						<div class="select-bar">
-							<form action="#">
-								<select name="selectlist" id="showlist">
-									<option value="price-cheap">가격 낮은 순</option>
-									<option value="price-expensive">가격 높은 순</option>
-									<option value="flytime-low">비행 짧은 순</option>
-									<option value="flytime-long">비행 긴 순</option>
-								</select>
-							</form>
-						</div>
+                            </form>
+                        </div>
+                        <div class="layover-list">
+                            <form class="layover-frm">
+                                <div>
+                                    <p>직항/경유</p>
+                                </div>
+                                <div class="layover-select">
+                                    <label>
+                                        <button type="button" class="direct-btn"
+                                            id="direct-btn"><span>직항</span></button>
+                                    </label>
+                                    <label>
+                                        <button type="button" class="direct-btn"
+                                            id="layover-btn"><span>경유</span></button>
+                                    </label>
+                                </div>
+                            </form>
 
-						<div class="airline-info"></div>
-						<div class="airline-info"></div>
-						<div class="airline-info"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 		
+                        </div>
+                    </div>
+                    <div class="airline-list">
+
+                        <div class="select-bar">
+                            <form action="#">
+                                <select name="selectlist" id="showlist">
+                                    <option value="price-cheap">가격 낮은 순</option>
+                                    <option value="price-expensive">가격 높은 순</option>
+                                    <option value="flytime-low">비행 짧은 순</option>
+                                    <option value="flytime-long">비행 긴 순</option>
+                                </select>
+                            </form>
+                        </div>
+
+                        <div class="airline-info">
+                            <div class="seat-count">
+                                잔여 9석
+
+                                <div class="airline-flex">
+                                    <div class="airline-logo">
+                                        <img src="/final/img/twaypng.png" alt="">
+                                        <div class="airline-name">
+                                            <span>티웨이 항공</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="airinfo depart-info">
+                                        <div class="info date">출발 일자</div>
+                                        <div class="info time">이륙 시간</div>
+                                        <div class="info loc">출발 지역</div>
+                                    </div>
+                                    <div class="arrow">
+                                        <img src="/final/img/pngegg (2).png" alt="">
+                                        <div class="flytime">
+                                            비행 시간
+                                        </div>
+                                    </div>
+                                    <div class="airinfo arr-info">
+                                        <div class="info date">도착 일자</div>
+                                        <div class="info time">착륙 시간</div>
+                                        <div class="info loc">도착 지역</div>
+                                    </div>
+
+                                    <div class="nop">
+                                        <div class="sero">세로 이미지</div>
+                                        <div class="ticket-info-flex">성인 1
+
+                                            <div class="airticket">
+                                                <div class="ticket-price">
+                                                    <div>9999,999원</div>
+                                                </div>
+                                                <button type="button">선택하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="airline-info"></div>
+                        <div class="airline-info"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 		
 		</div>
 	</div>
 	 -->
-	<div class="wrap-footer">
-		<div th:replace="~{common/footer :: Footer}"></div>
-	</div>
+    <div class="wrap-footer">
+        <div th:replace="~{common/footer :: Footer}"></div>
+    </div>
 	<!-- --------------------JS-------------------- -->
 	<script type="text/javascript">
 	
@@ -199,7 +245,7 @@
         const departLeftTime = document.querySelector(".depart-movingtime > div:first-child");
 
         // 출발 시간을 슬라이더 값으로 업데이트
-        departLeftTime.innerHTML = `출발 (${value})`;
+        departLeftTime.innerHTML = `출발 ${value}:00`;
 	    
 	    console.log(`출발 Left Value: ${_this.value}`);
 	};
@@ -219,7 +265,7 @@
 	    
 	    const departRightTime = document.querySelector(".depart-movingtime > div:nth-child(2)");
 	    
-	    departRightTime.innerHTML = `(${value})`;
+	    departRightTime.innerHTML = `${value}:00`;
 	    
 	    console.log(`출발 Right Value : ${_this.value}`);
 	}; 
@@ -263,7 +309,7 @@
 	    
         const arrLeftTime = document.querySelector(".arr-movingtime > div:first-child");
 
-        arrLeftTime.innerHTML = `도착 (${value})`;
+        arrLeftTime.innerHTML = `도착 ${value}:00`;
 	    console.log(`도착 Left Value: ${_this.value}`);
 	};
 
@@ -282,7 +328,7 @@
 	    
 	    const arrRightTime = document.querySelector(".arr-movingtime > div:nth-child(2)");
 	    
-	    arrRightTime.innerHTML = `(${value})`;
+	    arrRightTime.innerHTML = `${value}:00`;
 	    
 	    console.log(`도착 Right Value : ${_this.value}`);
 	}; 
@@ -335,7 +381,7 @@
         const priceLeft = document.querySelector(".price-movingtime > div:first-child");
 
         // 출발 시간을 슬라이더 값으로 업데이트
-        priceLeft.innerHTML = `(${value})원 ~ `;
+        priceLeft.innerHTML = `${value}원 ~ `;
 	    
 	    console.log(`priceLeft: ${_this.value}`);
 	};
@@ -357,7 +403,7 @@
 	    
 	    const priceRight = document.querySelector(".price-movingtime > div:nth-child(2)");
 	    
-	    priceRight.innerHTML = `(${value})원`;
+	    priceRight.innerHTML = `${value}원`;
 	    
 	    console.log(`priceRight : ${_this.value}`);
 	}; 

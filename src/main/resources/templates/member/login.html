@@ -9,7 +9,7 @@
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 <link th:href="@{/css/member/login.css}" rel="stylesheet" />
 <meta charset="UTF-8">
-<title>슈슝</title>
+<title>슈슝::로그인</title>
 </head>
 <body>
 
@@ -29,7 +29,7 @@
 						<img th:src="@{/images/logo.png}" alt="로고">
 					</div>
 					<div class="login-section">
-						<form id="frm-post" th:action="@{/member/login}" method="post"> 
+						<form id="frm-post" th:action="@{/login}" method="post"> 
 							<div class="loginInfo">
 								<input type="text" name="userId" placeholder="아이디" autofocus>
 								<input type="password" name="userPwd" placeholder="비밀번호">
@@ -41,8 +41,8 @@
 								<button type="submit" class="btn login">로그인</button>
 							</div>
 							<div class="login-function">
-								<div class="joinBtn">회원가입</div>
-								<div class="findInfoBtn">아이디/비밀번호 찾기</div>
+								<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a>
+								<a th:href="@{/account/find}"><div class="findInfoBtn">아이디/비밀번호 찾기</div></a>
 							</div>
 						</form>
 

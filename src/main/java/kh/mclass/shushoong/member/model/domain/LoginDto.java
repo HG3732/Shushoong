@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Component
-public class LoginEntity {
+public class LoginDto {
 	private String userId;
 	private String userPwd;
 	private String userGrade;

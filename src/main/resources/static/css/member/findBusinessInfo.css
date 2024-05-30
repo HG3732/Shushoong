@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.main input[type=radio] {
+	display: none;
+}
+
+#tab-1:checked ~ .tab label:nth-child(1),
+#tab-2:checked ~ .tab label:nth-child(2) {
+	box-shadow: none;
+}
+
+.content > div {
+	display: none;
+}
+
+#tab-1:checked ~ .content div:nth-child(1),
+#tab-2:checked ~ .content div:nth-child(2) {
+	display: block;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>슈슝::아이디, 비밀번호 찾기</title>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-section">
+				<section>
+					<div class="findInfoContainer">
+						<div class="findInfo-header">
+							아이디/비밀번호 찾기
+						</div>
+						<div class="findInfo-section">
+							<a th:href="@{/find/customer}">
+								<div class="customerContainer">
+								<img th:src="@{/images/개인 아이콘.png}" alt="개인회원 정보찾기" width="150px" height="150px">
+								개인회원
+								</div>
+							</a>
+							<a th:href="@{/find/business}">
+								<div class="businessContainer">
+								<img th:src="@{/images/회사 아이콘.png}" alt="기업회원 정보찾기" width="150px" height="150px">
+								기업회원
+								</div>
+							</a>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+</body>
+</html>

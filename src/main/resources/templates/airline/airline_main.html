@@ -27,22 +27,23 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		<div class="wrap-body">
 			<div class="wrap-">
 						<!-- 여기부터 작성 -->
-			<section class="airline_search_section">
-				<div class="airline_search">
+			<section class="search_section">
+				
+				<div class="search">
 					<div class="tab">
 						<button class="tablinks" id="one_way_btn" onclick="ticketType(event,'one_way','one_way_btn')">편도</button>
 						<button class="tablinks" id="round_trip_btn" onclick="ticketType(event,'round_trip','round_trip_btn')">왕복</button>
 					</div>
 					
 					<div id="one_way" class="tabcontent">
-						<div class="airline_depart_arrival_flex">
-							<button id="airline_depart" class="airline_according_btn" onclick="accordingInfo(event,'airline_depart_accoding')">출발지</button>
-							<img class="airline_type" alt="one_way" th:src="@{/images/airline_one_way.png}">
-							<button id="airline_arrival" class="airline_according_btn" onclick="accordingInfo(event,'airline_arrival_accoding')">도착지</button>
+						<div class="depart_arrival_flex">
+							<button id="depart" class="according_btn" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
+							<img class="type" alt="one_way" th:src="@{/images/airline_one_way.png}">
+							<button id="arrival" class="according_btn" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
 						</div>
 						
 						<div>
-							<button id="airline_depart_date" class="airline_according_btn" onclick="accordingInfo(event,'airline_depart_date_accoding')">
+							<button id="depart_date" class="according_btn" onclick="accordingInfo(event,'depart_date_accoding')">
 								<div>날짜 선택</div>
 								<img alt="달력 사진" src="">
 							</button>
@@ -50,7 +51,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						</div>
 						
 						<div>
-							<button id=airline_people_lineup class="airline_according_btn" onclick="accordingInfo(event,'airline_people_lineup_accoding')">일반석/성인1/소아0/유아0</button>
+							<button id=people_lineup class="according_btn" onclick="accordingInfo(event,'people_lineup_sit_accoding')">일반석/성인1/소아0/유아0</button>
 						</div>
 						
 						<input type="submit" value="검색">
@@ -67,11 +68,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			</section>
 			
 			
-			<section class="airline_according_section">
-				<div class="airline_one_way_accoding">
-					<div id="airline_depart_accoding" class="airline_according">
+			<section class="according_section">
+				<div class="one_way_accoding">
+					<div id="depart_accoding" class="according">
 						<div class="accoding_title">출발지</div>
-						<div class="airline_depart_nation">
+						<div class="depart_nation">
 							<button id="btn_dep_korea" class="according_section_depart_tablinks" onclick="departNation(event,'depart_korea','btn_dep_korea')">한국</button>
 							<button id="btn_dep_japan" class="according_section_depart_tablinks" onclick="departNation(event,'depart_japan','btn_dep_japan')">일본</button>
 							<button id="btn_dep_china" class="according_section_depart_tablinks" onclick="departNation(event,'depart_china','btn_dep_china')">중국</button>
@@ -79,39 +80,45 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							<button id="btn_dep_canada" class="according_section_depart_tablinks" onclick="departNation(event,'depart_canada','btn_dep_canada')">캐나다</button>
 						</div>
 						<div id="depart_korea" class="according_section_depart_tabcontent">
-							<div>인천</div>
-							<div>김포</div>
-							<div>김해</div>
+							<button id="ICN" class="depart_accoding_value">인천</button>
+							<button id="GMP" class="depart_accoding_value">김포</button>
+							<button id="PUS" class="depart_accoding_value">김해</button>
+							
 						</div>
 						
 						<div id="depart_japan" class="according_section_depart_tabcontent">
-							<div>도쿄</div>
-							<div>오사카</div>
-							<div>후쿠오카</div>
+							<button id="TYO" class="depart_accoding_value">도쿄</button>
+							<button id="KIX" class="depart_accoding_value">오사카</button>
+							<button id="FUK" class="depart_accoding_value">후쿠오카</button>
+							<button id="NGO" class="depart_accoding_value">나고야</button>
+							<button id="CTS" class="depart_accoding_value">삿포로</button>
 						</div>
 						
 						<div id="depart_china" class="according_section_depart_tabcontent">
-							<div>광저우</div>
-							<div>베이징</div>
-							<div>몰랑</div>
+							<button id="CAN" class="depart_accoding_value">광저우</button>
+							<button id="PEK" class="depart_accoding_value">베이징</button>
+							<button id="SHA" class="depart_accoding_value">상하이</button>
 						</div>
 						
 						<div id="depart_USA" class="according_section_depart_tabcontent">
-							<div>미국</div>
-							<div>지도</div>
-							<div>잘몰랑</div>
+							<button id="LAX" class="depart_accoding_value">로스앤젤레스</button>
+							<button id="HNL" class="depart_accoding_value">호놀룰루</button>
+							<button id="JFK" class="depart_accoding_value">뉴욕</button>
 						</div>
 						
 						<div id="depart_canada" class="according_section_depart_tabcontent">
-							<div>캐나다도</div>
-							<div>잘</div>
-							<div>모름</div>
+							<button id="YYZ" class="depart_accoding_value">토론토</button>
+							<button id="YUL" class="depart_accoding_value">몬트리올</button>
+							<button id="YVR" class="depart_accoding_value">밴쿠버</button>
+							<button id="YYC" class="depart_accoding_value">캘거리</button>
+							<button id="YOW" class="depart_accoding_value">오타와</button>
 						</div>
 						
 					</div>
 					
-					<div id="airline_arrival_accoding" class="airline_according">
-						<div class="airline_arrival_nation">
+					<div id="arrival_accoding" class="according">
+						<div class="accoding_title">도착지</div>
+						<div class="arrival_nation">
 							<button id="btn_ari_korea" class="according_section_arrival_tablinks" onclick="arrivalNation(event,'arrival_korea','btn_ari_korea')">한국</button>
 							<button id="btn_ari_japan" class="according_section_arrival_tablinks" onclick="arrivalNation(event,'arrival_japan','btn_ari_japan')">일본</button>
 							<button id="btn_ari_china" class="according_section_arrival_tablinks" onclick="arrivalNation(event,'arrival_china','btn_ari_china')">중국</button>
@@ -119,88 +126,124 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							<button id="btn_ari_canada" class="according_section_arrival_tablinks" onclick="arrivalNation(event,'arrival_canada','btn_ari_canada')">캐나다</button>
 						</div>
 						<div id="arrival_korea" class="according_section_arrival_tabcontent">
-							<div>인천1</div>
-							<div>김포1</div>
-							<div>김해1</div>
+							<button id="ICN" class="arrival_accoding_value">인천</button>
+							<button id="GMP" class="arrival_accoding_value">김포</button>
+							<button id="PUS" class="arrival_accoding_value">김해</button>
 						</div>
 						
 						<div id="arrival_japan" class="according_section_arrival_tabcontent">
-							<div>도쿄1</div>
-							<div>오사카1</div>
-							<div>후쿠오카1</div>
+							<button id="TYO" class="arrival_accoding_value">도쿄</button>
+							<button id="KIX" class="arrival_accoding_value">오사카</button>
+							<button id="FUK" class="arrival_accoding_value">후쿠오카</button>
+							<button id="NGO" class="arrival_accoding_value">나고야</button>
+							<button id="CTS" class="arrival_accoding_value">삿포로</button>
 						</div>
 						
 						<div id="arrival_china" class="according_section_arrival_tabcontent">
-							<div>광저우1</div>
-							<div>베이징1</div>
-							<div>몰랑1</div>
+							<button id="CAN" class="arrival_accoding_value">광저우</button>
+							<button id="PEK" class="arrival_accoding_value">베이징</button>
+							<button id="SHA" class="arrival_accoding_value">상하이</button>
 						</div>
 						
 						<div id="arrival_USA" class="according_section_arrival_tabcontent">
-							<div>미국1</div>
-							<div>지도1</div>
-							<div>잘몰랑1</div>
+							<button id="LAX" class="arrival_accoding_value">로스앤젤레스</button>
+							<button id="HNL" class="arrival_accoding_value">호놀룰루</button>
+							<button id="JFK" class="arrival_accoding_value">뉴욕</button>
 						</div>
 						
 						<div id="arrival_canada" class="according_section_arrival_tabcontent">
-							<div>캐나다도1</div>
-							<div>잘1</div>
-							<div>모름1</div>
+							<button id="YYZ" class="arrival_accoding_value">토론토</button>
+							<button id="YUL" class="arrival_accoding_value">몬트리올</button>
+							<button id="YVR" class="arrival_accoding_value">밴쿠버</button>
+							<button id="YYC" class="arrival_accoding_value">캘거리</button>
+							<button id="YOW" class="arrival_accoding_value">오타와</button>
 						</div>
 					</div>
 					
 					
-					<div id="airline_depart_date_accoding" class="airline_according">
+					<div id="depart_date_accoding" class="according">
 						날짜 어코딩
 					</div>
 					
 					
-					<div id="airline_people_lineup_accoding" class="airline_according">
-						<div id="adult">
-							<button id="minus" >-</button>
-							<div>1</div>
-							<button id="plus" >+1</button>						
+					<div id="people_lineup_sit_accoding" class="according">
+						<div class="people_lineup">
+							<div id="adult">
+								<h1>어른 :</h1>
+								<button id="minus" >-</button>
+								<div id="adult_value">1</div>
+								<button id="plus" >+</button>						
+							</div>
+							<div id="child">
+								<h1>소아 :</h1>
+								<button id="minus" >-</button>
+								<div id="child_value">0</div>
+								<button id="plus" >+</button>						
+							</div>
+							<div id="baby">
+								<h1>유아 :</h1>
+								<button id="minus" >-</button>
+								<div id="baby_value">0</div>
+								<button id="plus" >+</button>						
+							</div>
 						</div>
-						<div id="child">
-							<button id="minus" >-</button>
-							<div>0</div>
-							<button id="plus" >+2</button>						
-						</div>
-						
-						<div id="baby">
-							<button id="minus" >-</button>
-							<div>0</div>
-							<button id="plus" >+3</button>						
-						</div>
-						
+						<div class="sit">
+							<button id="sit3" class="sit_kinds">이코노미석</button>
+							<button id="sit2" class="sit_kinds">비즈니스석</button>
+							<button id="sit1" class="sit_kinds">일등석</button>
+						</div>	
 					</div>
 				</div>
 				
 				
-				<div class="airline_round_trip_accoding">
+				<div class="round_trip_accoding">
 				
 				</div>
 			</section>
 			
 			
 			
-			<section>
+			<section class="input_values">
 				<div>
 					<form action="">
-						<input type="text" name="hidden_ticket_type" id="hidden_ticket_type" value="one_way">
-						<input type="text" name="hidden_depart_value" id="hidden_depart_value">
-						<input type="text" name="hidden_arrival_value" id="hidden_arrival_value">
-						<input type="text" name="hidden_depart_date" id="hidden_depart_date">
-						<input type="text" name="hidden_arrival_date" id="hidden_arrival_date">
-						<input type="text" name="hidden_adult" id="hidden_adult" value="1">
-						<input type="text" name="hidden_child" id="hidden_child">
-						<input type="text" name="hidden_baby" id="hidden_baby">
+						<input type="text" name="hidden_ticket_type" id="hidden_ticket_type" 	value="1" 	readonly="readonly" required="required">
+						<input type="text" name="hidden_depart_value" id="hidden_depart_value" 				readonly="readonly" required="required">
+						<input type="text" name="hidden_arrival_value" id="hidden_arrival_value"		 	readonly="readonly" required="required">
+						<input type="text" name="hidden_depart_date" id="hidden_depart_date" 				readonly="readonly" required="required">
+						<input type="text" name="hidden_arrival_date" id="hidden_arrival_date" 				readonly="readonly" required="required">
+						<input type="text" name="hidden_adult" id="hidden_adult" 				value="1" 	readonly="readonly" required="required">
+						<input type="text" name="hidden_child" id="hidden_child" 				value="0"	readonly="readonly" required="required">
+						<input type="text" name="hidden_baby" id="hidden_baby" 					value="0"	readonly="readonly" required="required">
+						<input type="text" name="hidden_sit_type" id="hidden_sit_type" 			value="sit3"	readonly="readonly" required="required">
 					</form>					
 				</div>
 			</section>
 			
 			
-			<section class="airline_recommend_section">
+			<section class="recommend_section">
+				<div class="recommend_cheap">
+					<div class="cheap_slides" >
+						<div class="cheap_slides_wrap">
+							<div class="cheap_slides_image">
+								사진
+							</div>
+							<div class="cheap_slides_name">
+								맑고 투명한 물~~ 괌으로 오세요~~
+							</div>
+							<div class="cheap_slides_price">
+								성인 1인 기준 : 10,000,000원
+							</div>
+							
+							
+						</div>
+						<div class="cheap_slides_wrap"></div>
+						<div class="cheap_slides_wrap"></div>
+					</div>
+					<div class="cheap_slides" >
+					
+					</div>
+				</div>
+				
 				
 			</section>
 			
@@ -215,7 +258,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	
 			<!-- 자바스크립트 -->
 	<script>
-			/* 편도 왕복 적용하는 펑션 */		
+				/* 편도 왕복 적용하는 펑션 */		
 		function ticketType(event,ticketType,ticketTypeBtn){
 			var i, tabcontent, tablinks;
 			tabcontent=document.getElementsByClassName("tabcontent");
@@ -234,13 +277,21 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			document.getElementById(ticketTypeBtn).style.borderBottom = "3px solid  rgb(0,106,255)";
 			
 			event.currentTarget.className +=" active";
-		}
-		
+		}	
+			
+				/* 편도 왕복 value input */
+		$("button.tablinks").on("click",function(){
+			if($(this).attr("id")=="one_way_btn"){
+				$("#hidden_ticket_type").val(1);
+			}else if($(this).attr("id")=="round_trip_btn"){
+				$("#hidden_ticket_type").val(2);
+			}
+		});
 		
 				/* 출입국 지역 날짜 인원 according 버튼 펑션 */		
 		function accordingInfo(event,accordingInfo){
 			var i, according;
-			according = document.getElementsByClassName("airline_according");
+			according = document.getElementsByClassName("according");
 			
 			
 			if(document.getElementById(accordingInfo).style.display==="block"){
@@ -261,7 +312,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			var i, tabcontent, tablinks;
 			tabcontent=document.getElementsByClassName("according_section_depart_tabcontent");
 			tablinks = document.getElementsByClassName("according_section_depart_tablinks");
-			console.log(tablinks);
 			
 			for(i = 0 ; i<tabcontent.length; i++){
 				tabcontent[i].style.display="none";
@@ -297,12 +347,29 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			
 			event.currentTarget.className +=" active";
 		}
+		
+				/* 출국 바 이름 변경 + value input + 입국 according open 펑션 */
+		$("button.depart_accoding_value").on("click",function(){
+			$("#depart").text($(this).text());										/*  바 이름 변경 */
+			$("#hidden_depart_value").val($(this).attr("id"));								/* value input */
+			document.getElementById("depart_accoding").style.display="none"; 		/* 출국 according close */
+			document.getElementById("arrival_accoding").style.display="block";		/* 입국 according open */
+		});
+				
+				/* 입국 value input 펑션 */
+		$("button.arrival_accoding_value").on("click",function(){
+			$("#arrival").text($(this).text());										/*  바 이름 변경 */
+			$("#hidden_arrival_value").val($(this).attr("id"));								/* value input */
+			document.getElementById("arrival_accoding").style.display="none";		/* 입국 according close */
+			document.getElementById("depart_date_accoding").style.display="block";	/* 날짜 according open */
+		});
+				
 				
 				/* TODO 날짜 설정하는 펑션  */
 				
 				
 				
-				/* 인원 설정하는 펑션  */
+				/* 인원 설정하는 펑션 - plus */
 		$("button#plus").on("click",function(){
 			if(Number($("div#adult").children("div").text()) == Number($("div#baby").children("div").text())){
 				if($(this).parent().attr("id")=="adult"||$(this).parent().attr("id")=="child"){
@@ -313,15 +380,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			}else if(Number($("div#adult").children("div").text()) <= Number($("div#baby").children("div").text())){
 				alert("유아는 좌석이 따로 배정되지 않으므로, \n성인보다 많이 탑승할 수 없습니다.");
 			}else{
-				console.log(
-					Number($("div#adult").children("div").text())	
-				);
 				$(this).prev().text(Number($(this).prev().text())+1);
 			}
 			
 		});
 			
-		
+			/* 인원 설정하는 펑션 - minus */
 		$("button#minus").on("click",function(){
 			if(Number($(this).next().text()) < 1){
 				alert("인원은 0명 이하로 입력하실 수 없습니다.");
@@ -337,10 +401,43 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			$(this).next().text(Number($(this).next().text())-1);
 			}
 		});
+			
+					/* 좌석 설정하는 펑션 */
+		$("button.sit_kinds").on("click",function(){
+			var kinds = document.getElementsByClassName("sit_kinds");
+			for(i = 0 ; i<kinds.length; i++){
+				kinds[i].style.background="none";
+				kinds[i].style.color="black";
+			}
+		document.getElementById($(this).attr("id")).style.backgroundColor="rgb(0,106,255)";
+		document.getElementById($(this).attr("id")).style.color="white";
+		}); 
+					
+					/* 인원 or 좌석 input value + 바에 띄우기  */
+		$("button#plus").on("click",lineupSitFunction);
+		$("button#minus").on("click",lineupSitFunction);
+		$("button.sit_kinds").on("click",lineupSitFunction);
+		function lineupSitFunction(){
+		 	if($(this).parent().attr("id")=="adult"){
+		 		$("#hidden_adult").val($("#adult_value").text());}
+			else if($(this).parent().attr("id")=="child"){
+				$("#hidden_child").val($("#child_value").text());			}
+			else if($(this).parent().attr("id")=="baby"){
+		 		$("#hidden_baby").val($("#baby_value").text());}
+			else if($(this).parent().attr("class")=="sit"){
+				$("#hidden_sit_type").val($(this).attr("id"));
+			} 
+		 	
+		 	console.log($("#people_lineup").text());
+		 	$("#people_lineup").text(
+		 		$("#"+$("#hidden_sit_type").val()).text() +"/"+
+				"성인"+$("#hidden_adult").val()+"/"+
+				"소아"+$("#hidden_child").val()+"/"+
+				"유아"+$("#hidden_baby").val()
+		 	);
+		 
+		}
 		
-		
-		
-				
 		
 	
 	</script>

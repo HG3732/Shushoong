@@ -56,17 +56,17 @@ xmlns:th="http://www.thymeleaf.org">
 							<div class="marketing-title">서비스 이용약관 동의</div>
 							<hr class="marketingLine">
 							<div class="marketing-check">
-								<input type="checkbox" id="Allcheck">전체 선택
+								<input type="checkbox" id="allCheckBox" onclick="allChecked()">전체 선택
 								<hr class="marketingLine">
-								<input type="checkbox" id="usingService" class="usingService">슈슝 이용약관 동의<div class="emphasis">(필수)</div>
-								<input type="checkbox" id="privacy" class="privacy">개인정보 수집 및 이용 동의<div class="emphasis">(필수)</div>
-								<input type="checkbox" id="receiveMarketing" class="receiveMarketing">슈슝 마케팅 수신 동의(선택)
+								<input type="checkbox" name="usingAgree" id="usingService" class="usingService">슈슝 이용약관 동의<div class="emphasis" onclick="checkClicked()" th:checked="true">(필수)</div>
+								<input type="checkbox" name="usingAgree" id="privacy" class="privacy">개인정보 수집 및 이용 동의<div class="emphasis" onclick="checkClicked()" th:checked="true">(필수)</div>
+								<input type="checkbox" id="receiveMarketing" class="receiveMarketing" onclick="checkClicked()">슈슝 마케팅 수신 동의(선택)
 								<div class="choice">
 									<div class="smsMarketing">
-										<input type="checkbox" name="msgReceivce"> SMS 수신
+										<input type="checkbox" name="usingAgree" value="1" onclick="checkClicked()" th:checked="false"> SMS 수신
 									</div>
 									<div class="emailMarketing">
-										<input type="checkbox" name="emailReceive"> 이메일 수신
+										<input type="checkbox" name="usingAgree" value="1" onclick="checkClicked()" th:checked="false"> 이메일 수신
 									</div>
 								</div>
 							</div>
@@ -83,5 +83,38 @@ xmlns:th="http://www.thymeleaf.org">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
 	
+	<script>
+		//체크박스 전체 선택 클릭 이벤트
+		function allChecked(target) {
+			// 전체 체크박스 버튼
+			const checkbox = document.getElementById('allCheckBox');
+			
+			// 전체 체크박스 체크 여부
+			const is_checked = checkbox.checked;
+			
+			// 전체 체크박스 제외한 모든 체크
+			if(is_checked) {
+				// 체크박스 전체 체크
+				checkAllChecked();
+			} else {
+				// 체크박스 전체 해제
+				checkAllUnchecked();
+			}
+		}
+		
+		// 체크박스 전체 체크 
+		function checkAllChecked() {
+			document.querySelectorAll(".chk").forEach(function(v, i) {
+				v.checked = true;
+			}); 
+		}
+		
+		// 체크박스 전체 체크 해제 
+		function checkAllUnchecked() {
+			document.querySelectorAll(".chk").forEach(function(v,i) {
+				v.checked = false;
+			});
+		}
+	</script>
 </body>
 </html>

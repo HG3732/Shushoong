@@ -15,107 +15,6 @@
 <link th:href="@{/css/airline/airline_list.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/core.css}" rel="stylesheet" />
 </head>
-<!-- 
-<style>
-.middle {
-	position: relative;
-	width: 100%;
-	margin-top: 10px;
-	/* max-width: 500px; */
-}
-
-.slider {
-	position: relative;
-	z-index: 1;
-	height: 5px;
-	margin: 0 15px;
-}
-
-.slider>.track {
-	position: absolute;
-	z-index: 1;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	border-radius: 5px;
-	background-color: #9d9d9d;
-}
-
-.slider>.range {
-	position: absolute;
-	z-index: 2;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	border-radius: 5px;
-	background-color: #006AFF;
-}
-
-.slider>.thumb {
-	position: absolute;
-	top: 3px; z-index : 3;
-	width: 15px;
-	height: 15px;
-	background-color: white;
-	border-radius: 50%;
-	border: 2px solid #006AFF;
-	z-index: 3;
-	/* border-color: #006AFF; */
-}
-
-.slider>.thumb.left {
-	left: 0;
-	transform: translate(-15px, -10px);
-}
-
-.slider>.thumb.right {
-	right: 0;
-	transform: translate(15px, -10px);
-}
-
-input[type="range"] {
-	position: absolute;
-	/* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
-	pointer-events: none;
-	-webkit-appearance: none;
-	z-index: 2;
-	/* height: 10px; */
-	width: 100%;
-	opacity: 0;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-	/* 겹쳐진 두 thumb를 모두 활성화 */
-	pointer-events: all;
-	width: 30px;
-	height: 30px;
-	border-radius: 0;
-	border: 0 none;
-	background-color: red;
-	cursor: pointer;
-	/* appearance를 해야 위의 스타일들을 볼 수 있음 */
-	-webkit-appearance: none;
-}
-
-.middle .multi-range-slider {
-	margin-top: 10px;
-}
-
-.multi-range-slider .resultval {
-	margin: 10px 10px;
-}
-
-.div1 {
-	float: left;
-}
-
-.div2 {
-	float: right;
-}
-</style>
- -->
 <body>
 	<div class="wrapper">
 		<div class="wrap-header">
@@ -145,15 +44,15 @@ input[type="range"]::-webkit-slider-thumb {
 									<div>출발</div>
 									<div class="multi-range-slider">
 										<!-- 진짜 슬라이더 -->
-										<input type="range" id="input-left" min="0" max="22" value="0" /> 
-										<input type="range" id="input-right" min="2" max="24" value="24" />
+										<input type="range" id="depart-input-left" min="0" max="22" value="0" /> 
+										<input type="range" id="depart-input-right" min="2" max="24" value="24" />
 
 										<!-- 커스텀 슬라이더 -->
-										<div class="slider">
+										<div class="slider depart">
 											<div class="track"></div>
 											<div class="range"></div>
-											<div class="thumb left"></div>
-											<div class="thumb right"></div>
+											<div class="thumb left depart"></div>
+											<div class="thumb right depart"></div>
 										</div>
 										<div class="resultval time">
 											<div class="div1"></div>
@@ -163,33 +62,50 @@ input[type="range"]::-webkit-slider-thumb {
 								</div>
 								<!-- 도착 -->
 								<div class="middle-range arr">
-<!-- 								
 									<div>도착</div>
 									<div class="multi-range-slider">
-										진짜 슬라이더
-										<input type="range" id="input-left" min="0" max="22" value="0" /> 
-										<input type="range" id="input-right" min="2" max="24" value="24" />
+										<!-- 진짜 슬라이더 -->
+										<input type="range" id="arr-input-left" min="0" max="22" value="0" /> 
+										<input type="range" id="arr-input-right" min="2" max="24" value="24" />
 
-										커스텀 슬라이더
-										<div class="slider">
+										<!-- 커스텀 슬라이더 -->
+										<div class="slider arr">
 											<div class="track"></div>
 											<div class="range"></div>
-											<div class="thumb left"></div>
-											<div class="thumb right"></div>
+											<div class="thumb left arr"></div>
+											<div class="thumb right arr"></div>
 										</div>
 										<div class="resultval time">
 											<div class="div1"></div>
 											<div class="div2"></div>
 										</div>
 									</div>
-									 -->
 								</div>
 							</form>
 						</div>
 						<div class="price-list">
 							<form class="price-frm">
 								<div>
-									<p>가격대</p>
+									<p>가격</p>
+								</div>
+								<div class="middle-range price">
+									<div class="multi-range-slider">
+										<!-- 진짜 슬라이더 -->
+										<input type="range" id="price-input-left" min="0" max="22" value="0" /> 
+										<input type="range" id="price-input-right" min="2" max="24" value="24" />
+
+										<!-- 커스텀 슬라이더 -->
+										<div class="slider price">
+											<div class="track"></div>
+											<div class="range"></div>
+											<div class="thumb left price"></div>
+											<div class="thumb right price"></div>
+										</div>
+										<div class="resultval time">
+											<div class="div1"></div>
+											<div class="div2"></div>
+										</div>
+									</div>
 								</div>
 
 							</form>
@@ -201,13 +117,16 @@ input[type="range"]::-webkit-slider-thumb {
 								</div>
 								<div class="layover-select">
 									<label>
-										<button type="button" class="direct-btn" id="direct-btn">
+										<button type="button" class="direct-btn zero" id="direct-btn" >
+											<img alt="" th:src="@{/images/bluecheck.png}" id="blue">
+										</button>
 											<span>직항</span>
+									</label> 
+									<label>
+										<button type="button" class="direct-btn one" id="layover-btn">
+											<img alt="" th:src="@{/images/skycheck.png}" id="sky">
 										</button>
-									</label> <label>
-										<button type="button" class="direct-btn" id="layover-btn">
 											<span>경유</span>
-										</button>
 									</label>
 								</div>
 							</form>
@@ -295,73 +214,201 @@ input[type="range"]::-webkit-slider-thumb {
 	<!-- --------------------JS-------------------- -->
 	<script type="text/javascript">
 	
+	$(document).ready(function(){
+	    setDepartInitialValues(); // 시간대 출발
+	    setArrInitialValues(); // 시간대 도착 
+	    setPriceInitialValues(); // 가격대
+	    btnClickHandler(); // 직항/경유
+	});
 	
-	const inputLeft = document.getElementById("input-left");
-	const inputRight = document.getElementById("input-right");
-	const thumbLeft = document.querySelector(".slider > .thumb.left");
-	const thumbRight = document.querySelector(".slider > .thumb.right");
-	const range = document.querySelector(".slider > .range");
+	// 사이드 바
+	
+	// 시간대---------------------------
+	// 출발 
+	const inputDepartLeft = document.getElementById("depart-input-left");
+	const inputDepartRight = document.getElementById("depart-input-right");
+	const thumbDepartLeft = document.querySelector(".slider.depart > .thumb.left.depart");
+	const thumbDepartRight = document.querySelector(".slider.depart > .thumb.right.depart");
+	const departRange = document.querySelector(".slider.depart > .range");
 
 	// 왼쪽 입력 값이 변경될 때 실행되는 함수
-	const setLeftValue = () => {
+	const setDepartLeftValue = () => {
 	    // 현재 입력 값(_this)과 입력 요소의 최소값과 최대값을 가져옴
-	    const _this = inputLeft;
+	    const _this = inputDepartLeft;
 	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
 
 	    // 입력 값이 최소값과 최대값 사이에 있는지 확인하고, 그렇지 않으면 값을 조정
-	    _this.value = Math.min(parseInt(_this.value), parseInt(inputRight.value) - 2);
+	    _this.value = Math.min(parseInt(_this.value), parseInt(inputDepartRight.value) - 3);
 
 	    // 왼쪽 thumb의 위치를 계산하여 슬라이더의 왼쪽 값을 표시
 	    const leftValue = parseInt(_this.value);
 	    
-	    const leftVal = document.querySelector(".div1");
+	    const leftVal = document.querySelector(".middle-range.depart .div1");
 	    leftVal.innerHTML = `${leftValue}:00`;
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
-	    thumbLeft.style.left = percent + "%";
-	    range.style.left = percent + "%";
+	    thumbDepartLeft.style.left = percent + "%";
+	    departRange.style.left = percent + "%";
 	};
 
 	// 오른쪽 입력 값이 변경될 때 실행되는 함수
-	const setRightValue = () => {
+	const setDepartRightValue = () => {
 	    // 현재 입력 값(_this)과 입력 요소의 최소값과 최대값을 가져옴
-	    const _this = inputRight;
+	    const _this = inputDepartRight;
 	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
 
 	    // 입력 값이 최소값과 최대값 사이에 있는지 확인하고, 그렇지 않으면 값을 조정
-	    _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft.value) + 2);
+	    _this.value = Math.max(parseInt(_this.value), parseInt(inputDepartLeft.value) + 3);
 
 	    // 오른쪽 thumb의 위치를 계산하여 슬라이더의 오른쪽 값을 표시
 	    const rightValue = parseInt(_this.value);
 	    
-	    const rightVal = document.querySelector(".div2");
+	    const rightVal = document.querySelector(".middle-range.depart .div2");
 	    rightVal.innerHTML = `${rightValue}:00`;
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
-	    thumbRight.style.right = 100 - percent + "%";
-	    range.style.right = 100 - percent + "%";
+	    thumbDepartRight.style.right = 100 - percent + "%";
+	    departRange.style.right = 100 - percent + "%";
 	};
 
 	// 왼쪽 입력 값이 변경될 때와 오른쪽 입력 값이 변경될 때 해당 함수들을 호출하도록
 	// 이벤트 리스너를 설정
-	inputLeft.addEventListener("input", setLeftValue);
-	inputRight.addEventListener("input", setRightValue);
+	inputDepartLeft.addEventListener("input", setDepartLeftValue);
+	inputDepartRight.addEventListener("input", setDepartRightValue);
 
 	// 페이지가 로드될 때 초기값을 설정하는 함수
-	const setInitialValues = () => {
+	const setDepartInitialValues = () => {
 	    // 초기 왼쪽 값과 오른쪽 값
-	    const initialLeftValue = 0;
-	    const initialRightValue = 24;
+	    const initialDepartLeftValue = 0;
+	    const initialDepartRightValue = 24;
 	    // 초기값을 입력 요소에 설정하고, 왼쪽과 오른쪽 thumb의 위치를 조정
-	    inputLeft.value = initialLeftValue;
-	    inputRight.value = initialRightValue;
-	    setLeftValue();
-	    setRightValue();
+	    inputDepartLeft.value = initialDepartLeftValue;
+	    inputDepartRight.value = initialDepartRightValue;
+	    setDepartLeftValue();
+	    setDepartRightValue();
 	};
 
-	// 페이지가 로드될 때 초기값 설정 함수(setInitialValues)를 호출
-	window.onload = setInitialValues;
+	// 도착
+	const inputArrLeft = document.getElementById("arr-input-left");
+	const inputArrRight = document.getElementById("arr-input-right");
+	const thumbArrLeft = document.querySelector(".slider.arr > .thumb.left.arr");
+	const thumbArrRight = document.querySelector(".slider.arr > .thumb.right.arr");
+	const arrRange = document.querySelector(".slider.arr > .range");
 
+	const setArrLeftValue = () => {
+	    const _this = inputArrLeft;
+	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+
+	    _this.value = Math.min(parseInt(_this.value), parseInt(inputArrRight.value) - 3);
+
+	    const leftValue = parseInt(_this.value);
+	    
+	    const leftVal = document.querySelector(".middle-range.arr .div1");
+	    leftVal.innerHTML = `${leftValue}:00`;
+	    
+	    const percent = ((_this.value - min) / (max - min)) * 100;
+	    thumbArrLeft.style.left = percent + "%";
+	    arrRange.style.left = percent + "%";
+	};
+
+	const setArrRightValue = () => {
+	    const _this = inputArrRight;
+	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+
+	    _this.value = Math.max(parseInt(_this.value), parseInt(inputArrLeft.value) + 3);
+
+	    const rightValue = parseInt(_this.value);
+	    
+	    const rightVal = document.querySelector(".middle-range.arr .div2");
+	    rightVal.innerHTML = `${rightValue}:00`;
+	    
+	    const percent = ((_this.value - min) / (max - min)) * 100;
+	    thumbArrRight.style.right = 100 - percent + "%";
+	    arrRange.style.right = 100 - percent + "%";
+	};
+
+	inputArrLeft.addEventListener("input", setArrLeftValue);
+	inputArrRight.addEventListener("input", setArrRightValue);
+
+	const setArrInitialValues = () => {
+	    const initialArrLeftValue = 0;
+	    const initialArrRightValue = 24;
+	    inputArrLeft.value = initialArrLeftValue;
+	    inputArrRight.value = initialArrRightValue;
+	    setArrLeftValue();
+	    setArrRightValue();
+	};
+
+	
+	// 가격 -------------------------------------------------------
+	const inputPriceLeft = document.getElementById("price-input-left");
+	const inputPriceRight = document.getElementById("price-input-right");
+	const thumbPriceLeft = document.querySelector(".slider.price > .thumb.left.price");
+	const thumbPriceRight = document.querySelector(".slider.price > .thumb.right.price");
+	const priceRange = document.querySelector(".slider.price > .range");
+
+	const setPriceLeftValue = () => {
+	    const _this = inputPriceLeft;
+	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+
+	    _this.value = Math.min(parseInt(_this.value), parseInt(inputPriceRight.value) - 3);
+
+	    const leftValue = parseInt(_this.value);
+	    
+	    const leftVal = document.querySelector(".middle-range.price .div1");
+	    leftVal.innerHTML = `${leftValue}원 ~`;
+	    
+	    const percent = ((_this.value - min) / (max - min)) * 100;
+	    thumbPriceLeft.style.left = percent + "%";
+	    priceRange.style.left = percent + "%";
+	};
+
+	const setPriceRightValue = () => {
+	    const _this = inputPriceRight;
+	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+
+	    _this.value = Math.max(parseInt(_this.value), parseInt(inputPriceLeft.value) + 3);
+
+	    const rightValue = parseInt(_this.value);
+	    
+	    const rightVal = document.querySelector(".middle-range.price .div2");
+	    rightVal.innerHTML = `${rightValue}원`;
+	    
+	    const percent = ((_this.value - min) / (max - min)) * 100;
+	    thumbPriceRight.style.right = 100 - percent + "%";
+	    priceRange.style.right = 100 - percent + "%";
+	};
+
+	inputPriceLeft.addEventListener("input", setPriceLeftValue);
+	inputPriceRight.addEventListener("input", setPriceRightValue);
+
+	const setPriceInitialValues = () => {
+	    const initialPriceLeftValue = 0;
+	    const initialPriceRightValue = 24;
+	    inputPriceLeft.value = initialPriceLeftValue;
+	    inputPriceRight.value = initialPriceRightValue;
+	    setPriceLeftValue();
+	    setPriceRightValue();
+	};
+	
+	// 직항/경유 ----------------------------------
+
+    function btnClickHandler() {
+
+        document.getElementById('direct-btn').addEventListener('click', function () {
+        	var blueimg = document.getElementById('blue');
+        	blueimg.src = '/Shushoong/src/main/resources/static/images/bluecheck.png';
+            // blueimg.src = '@{/images/bluecheck.png}';
+            console.log('직항 눌림');
+        });
+
+        document.getElementById('layover-btn').addEventListener('click', function () {
+            var blueimg = document.getElementById('sky');
+            blueimg.src = '/Shushoong/src/main/resources/static/images/skycheck.png';
+            // blueimg.src = '@{/images/sky.png}';
+            console.log('경유 눌림');
+        });
+    }
 	</script>
 </body>
 </html>

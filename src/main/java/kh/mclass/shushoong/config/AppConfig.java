@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import com.siot.IamportRestClient.IamportClient;
 
@@ -25,5 +26,11 @@ public class AppConfig {
 		System.out.println(portoneRestApiSecretKey);
 		return new IamportClient(portoneRestApiKey, portoneRestApiSecretKey);
 	}
-	
+//	
+//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		registry.addResourceHandler("/images/**")
+//				.addResourceLocations("classpath:/static/image");
+//			
+//	}
+//	
 }

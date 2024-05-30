@@ -57,24 +57,19 @@ function requestPay() {
              console.log("Payment ID : " + res.imp_uid);
              console.log("Order ID : " + res.merchant_uid);
              console.log("Payment Amount : " + res.paid_amount);
+             
              apply_num
              : 
              ""
              bank_name
              : 
              null
-             buyer_addr
-             : 
-             "경기도 판교"
              buyer_email
              : 
              ""
              buyer_name
              : 
              "홍길동"
-             buyer_postcode
-             : 
-             "52030"
              buyer_tel
              : 
              "010-5555-1111"
@@ -125,10 +120,11 @@ function requestPay() {
              "https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=StdpayCARDINIpayTest20240529180042471663&noMethod=1"
              status
              : 
-             "paid"
+             "paid" /* cancelled, failed */
              success
              : 
-             true
+             true 
+             
              if(status == "paid") {
              $.ajax({
                  method: "post",

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HotelListController {
+public class HotelController {
 
 	@GetMapping("/hotel/main")
 	public String hotelMain() {
@@ -16,8 +16,8 @@ public class HotelListController {
 		return "hotel/hotel_list";
 	}
 	
-	@GetMapping("/hotel/ex")
+	@GetMapping("/hotel/view")
 	public String hotelex() {
-		return "hotel/ex";
+		return "hotel/hotel_view";
 	}
 }

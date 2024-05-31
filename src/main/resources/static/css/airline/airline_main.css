@@ -267,7 +267,15 @@ button#sit3{
 .recommend_section{
 	margin-top: 30px;
 }
-		
+.recomend_section_cheap_background{
+	background-color: gray;
+	margin: 25px 0;
+}
+
+.recomend_section_fast_background{
+	background-color: gray;
+	margin: 25px 0;
+}
 
 .recommend_section > div > div{
 	width: 960px;
@@ -275,7 +283,6 @@ button#sit3{
 	height: 600px;
 	
 	
-	border: 1px solid black;
 }
 
 .recommend_section > div > div > div:nth-of-type(1){
@@ -288,7 +295,25 @@ button#sit3{
 	line-height : 50px;
 	border: 1px solid black;
 }
+.recommend_section > div > div > div:nth-of-type(2){
+	animation-name : left_in;
+	animation-duration: 1s;
+	position: relative;
+}
+.recommend_section > div > div > div:nth-of-type(3){
+	animation-name : right_in;
+	animation-duration: 1s;
+	position: relative;
+}
 
+@keyframes left_in{
+	0%{left : -960px; top : 0px}
+	100%{left : 0px; top : 0px}
+}
+@keyframes right_in{
+	0%{left : 960px; top : 0px}
+	100%{left : 0px; top : 0px}
+}
 .slides{
 	display: flex;
 }
@@ -296,6 +321,7 @@ button#sit3{
 	width: 270px;
 	height: 340px;
 	margin : 80px auto;
+	background-color : white;
 	border: 1px solid black;
 	
 }
@@ -347,6 +373,7 @@ button#sit3{
 
 .slide_prev{
 	margin-left: -115px;
+	
 	
 }
 

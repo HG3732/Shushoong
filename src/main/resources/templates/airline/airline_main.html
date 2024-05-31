@@ -58,9 +58,24 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 					</div>
 					
 					<div id="round_trip" class="tabcontent">
-						<div>왕복 화면</div>
-						<div>왕복 화면</div>
-						<div>왕복 화면</div>
+						<div class="depart_arrival_flex">
+							<button id="depart" class="according_btn" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
+							<img class="type" alt="one_way" th:src="@{/images/airline_one_way.png}">
+							<button id="arrival" class="according_btn" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
+						</div>
+						
+						<div>
+							<button id="depart_date" class="according_btn" onclick="accordingInfo(event,'depart_date_accoding')">
+								<div>날짜 선택</div>
+								<img alt="달력 사진" src="">
+							</button>
+							
+						</div>
+						
+						<div>
+							<button id=people_lineup class="according_btn" onclick="accordingInfo(event,'people_lineup_sit_accoding')">일반석/성인1/소아0/유아0</button>
+						</div>
+						
 						<input type="submit" value="검색">
 					</div>
 					
@@ -221,7 +236,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			
 			
 			<section class="recommend_section">
-				<div class="recomend_section_background">
+				<div class="recomend_section_cheap_background">
 					<div class="recommend_cheap">
 						<div> 저렴한곳 순서</div>
 						<div class="cheap_slides" id="cheap_slides" >
@@ -306,6 +321,99 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						
 						<button id="cheap_slide_prev" class="slide_prev" onclick="cheapSlidePlusSlides(-1)">❮</button>
 						<button id="cheap_slide_next" class="slide_next" onclick="cheapSlidePlusSlides(1)">❯</button>
+					</div>
+				</div>
+				
+				
+				<div class="recomend_section_fast_background">
+					<div class="recommend_fast">
+						<div> 저렴한곳 순서</div>
+						<div class="fast_slides" id="fast_slides" >
+							<div class="slides_wrap" id="fast_slides_wrap">
+								<div class="slides_image" id="fast_slides_image">
+									사진1
+								</div>
+								<div class="slides_name" id="fast_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~1
+								</div>
+								<div class="slides_price" id="fast_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원1</div>
+								</div>
+							</div>
+							<div class="slides_wrap" id="fast_slides_wrap">
+								<div class="slides_image" id="fast_slides_image">
+									사진1
+								</div>
+								<div class="slides_name" id="fast_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~1
+								</div>
+								<div class="slides_price" id="fast_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원1</div>
+								</div>
+							</div>
+							<div class="slides_wrap" id="fast_slides_wrap">
+								<div class="slides_image" id="fast_slides_image">
+									사진1
+								</div>
+								<div class="slides_name" id="fast_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~1
+								</div>
+								<div class="slides_price" id="fast_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원1</div>
+								</div>
+							</div>
+							
+						</div>
+						
+						<div class="fast_slides" id="fast_slides" >
+							<div class="slides_wrap" id="fast_slides_wrap">
+								<div class="slides_image" id="fast_slides_image">
+									사진1
+								</div>
+								<div class="slides_name" id="fast_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~1
+								</div>
+								<div class="slides_price" id="fast_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원1</div>
+								</div>
+							</div>
+							<div class="slides_wrap" id="fast_slides_wrap">
+								<div class="slides_image" id="fast_slides_image">
+									사진1
+								</div>
+								<div class="slides_name" id="fast_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~1
+								</div>
+								<div class="slides_price" id="fast_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원1</div>
+								</div>
+							</div>
+							<div class="slides_wrap" id="fast_slides_wrap">
+								<div class="slides_image" id="fast_slides_image">
+									사진1
+								</div>
+								<div class="slides_name" id="fast_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~1
+								</div>
+								<div class="slides_price" id="fast_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원1</div>
+								</div>
+							</div>
+							
+						</div>
+						
+						
+						
+						
+						
+						<button id="fast_slide_prev" class="slide_prev" onclick="fastSlidePlusSlides(-1)">❮</button>
+						<button id="fast_slide_next" class="slide_next" onclick="fastSlidePlusSlides(1)">❯</button>
 					</div>
 				</div>
 			</section>
@@ -535,6 +643,41 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	    slides[i].style.display = "none";  
 	  }
 	  slides[cheapSlideIndex-1].style.display = "flex";  
+	}
+	
+	
+	
+	
+	let fastSlideIndex = 1;
+	fastShowSlides(fastSlideIndex);		
+	
+	function fastSlidePlusSlides(n) {
+		fastShowSlides(fastSlideIndex += n);
+	}
+	
+	function fastSlideCurrentSlide(n) {
+		fastShowSlides(fastSlideIndex = n);
+	}
+
+	function fastShowSlides(n) {
+		
+	  let i;
+	  let slides = document.getElementsByClassName("fast_slides");
+	  console.log("n"+n);
+	  console.log("slides.length"+slides.length);
+	  
+	  if (n == slides.length) {
+		  document.getElementById("fast_slide_next").style.display="none";
+		  document.getElementById("fast_slide_prev").style.display="block";
+		  }    
+	  if (n == 1) {
+		  document.getElementById("fast_slide_prev").style.display="none";
+		  document.getElementById("fast_slide_next").style.display="block";
+		  }
+	  for (i = 0; i < slides.length; i++) {
+	  		slides[i].style.display = "none";  
+	  }
+	  slides[fastSlideIndex-1].style.display = "flex";  
 	}
 		
 	

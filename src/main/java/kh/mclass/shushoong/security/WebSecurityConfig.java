@@ -1,4 +1,4 @@
-package kh.mclass.shushoong.member.security;
+package kh.mclass.shushoong.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,13 +27,13 @@ public class WebSecurityConfig {
 				.addHeaderWriter(new XFrameOptionsHeaderWriter(
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 		.formLogin((formLogin) -> formLogin
-				.loginPage("/member/login")
+				.loginPage("/login")
 				.defaultSuccessUrl("/")
-				.failureUrl("/member/login?error=true")
+				.failureUrl("/login?error=true")
 				.usernameParameter("userId")
 				.passwordParameter("userPwd"))
 		.logout((logout) -> logout
-				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/")
 				.invalidateHttpSession(true));
 		

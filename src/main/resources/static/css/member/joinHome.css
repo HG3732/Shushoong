@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+.wrap-section {
+	/* 영역 조정 */
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+
+section .join-header {
+	margin: 80px 0 30px 0;
+}
+
+section .welcome {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+section .customerContainer {
+	/* 스타일 조정 */
+	width: 320px;
+	margin-top: 50px;
+	border: 1px solid #E2E2E2;
+	border-radius: 20px;
+	
+	display : flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-content: center;
+}
+
+section .customer-section > img {
+	margin-top: 30px;
+}
+
+section .customertitle {
+	/* 	내부 텍스트 서식 */
+	font-size: 17px;
+	font-weight: bold;
+	
+	margin: 10px 0 5px 0;
+}
+
+section .customerCatchphrase {
+	font-size: 12px;
+	margin: 10px 0 20px 0;
+}
+
+section .customer.btn {
+	background-color: #FFF230;
+	width: 320px;
+	height: 40px;
+	border-radius: 0 0 20px 20px;
+	
+	/* 스타일 조정 */
+	display : flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+}
+
+section .userJoinSns {
+	margin-top: 10px;
+}
+
+section .userJoin {
+	/* 	내부 텍스트 서식 */
+	font-size: 17px;
+	font-weight: bold;
+}
+
+section .userJoinSns {
+	display : flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-content: center;
+	
+	/* 	내부 텍스트 서식 */
+	font-size: 12px;
+	font-weight: bold;
+}
+
+section .snsImg {
+	display : flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	margin: 5px;
+	
+	border: 1px solid #E2E2E2;
+	border-radius: 20px;
+	width: 320px;
+}
+
+section .snsImg > div {
+	margin: 10px;
+}
+
+section .businessContainer {
+	/* 스타일 조정 */
+	width: 320px;
+	margin-top: 50px;
+	border: 1px solid #E2E2E2;
+	border-radius: 20px;
+	
+	display : flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-content: center;
+	margin-bottom: 90px;
+}
+
+section .business-section > img {
+	margin-top: 30px;
+}
+
+section .businesstitle {
+	/* 	내부 텍스트 서식 */
+	font-size: 17px;
+	font-weight: bold;
+	
+	margin: 10px 0 5px 0;
+}
+
+section .businessCatchphrase {
+	font-size: 12px;
+	margin: 10px 0 20px 0;
+}
+
+section .business.btn {
+	background-color: #006AFF;
+	width: 320px;
+	height: 40px;
+	border-radius: 0 0 20px 20px;
+	
+	/* 스타일 조정 */
+	display : flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+}
+
+section .businessJoin {
+	/* 	내부 텍스트 서식 */
+	font-size: 17px;
+	font-weight: bold;
+	color: white;
+}

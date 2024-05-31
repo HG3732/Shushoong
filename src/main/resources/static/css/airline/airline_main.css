@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.pointer {
+  cursor: pointer;
+}
+
 		/* search_section 구간 */
 section.search_section{
 	height: 340px;
@@ -59,6 +63,13 @@ div.tabcontent div:nth-child(3) {
 }
 
 div.tabcontent > input{
+	border : none;
+	color : black;
+	background-color: #BCEFFF;
+	width: 100px;
+}
+
+div.tabcontent > input:hover{
 	border : none;
 	color : white;
 	background-color: rgb(0,106,255);
@@ -291,8 +302,11 @@ button#sit3{
 	width : 500px;
 	margin: auto;
 	margin-top : 40px;
+	border-radius : 10px;
 	height : 50px;
 	line-height : 50px;
+	background-color : white;
+	
 	border: 1px solid black;
 }
 .recommend_section > div > div > div:nth-of-type(2){
@@ -323,7 +337,6 @@ button#sit3{
 	margin : 80px auto;
 	background-color : white;
 	border: 1px solid black;
-	
 }
 
 .slides_image{
@@ -348,7 +361,7 @@ button#sit3{
 .slides_price{
 	width: 250px;
 	text-align: right;
-	color: red;
+	color: #E12D2D;
 	font-size: 13px;
 	font-weight: bolder;
 }
@@ -358,30 +371,56 @@ button#sit3{
 }
 
 .slide_prev,.slide_next{
-	text-align: center;
 	display: block;
 	position: absolute;
 	width : 70px;
 	height : 70px;
-	font-size : 60px;
-	line-height : 70px;
 	margin-top:   -270px;
+	border : none;
 	border-radius : 50%;
+	background: none;
 	
-	border: 1px black solid;
+}
+
+.slide_prev:hover , .slide_next:hover{
+ 
+	
 }
 
 .slide_prev{
 	margin-left: -115px;
-	
-	
+	background-image: url("../../images/skyblue_left.png");
+	background-size: cover;
+}
+.slide_prev:hover{
+	margin-left: -115px;
+	animation-name: left_arrow;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	background-size: cover;
 }
 
 .slide_next{
 	margin-left:  1000px;
-	
+	background-image: url("../../images/skyblue_right.png");
+	background-size: cover;
+}
+.slide_next:hover{
+	margin-left:  1000px;
+	animation-name: right_arrow;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	background-size: cover;
 }
 
+@keyframes left_arrow{
+	0%{}
+	100%{background-image: url("../../images/blue_left.png")}
+}
+@keyframes right_arrow{
+	0%{}
+	100%{background-image: url("../../images/blue_right.png")}
+}
 
 				/* 임시 */
 .input_values{

@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.wrap-main{
+	width: 960px;
+    margin: 0 auto;
+}
+
+.hotel_name {
+	display: flex;
+	align-items: end;
+	margin-top: 40px;
+	margin-bottom: 15px;
+}
+
+.name_kr{
+	font-family: 'SOYOMapleBoldTTF';
+	font-size: var(--font1);
+	flex: 1;
+}
+
+.name_en{
+	font-size: var(--font5);
+	flex: 5;
+	color: var(--color_gray_2);
+}
+
+hr{
+	margin-bottom: 30px;
+}
+
+
+.hotel_pic{
+	display: flex;
+	align-items: center;
+}
+
+.pic_slide{
+	display: flex;
+	flex: 5;
+}
+
+.pic{
+	margin: auto;
+    width: 230px;
+    height: 200px;
+    border: 1px solid black;
+}
+
+.right_arrow{
+	width: 40px;
+    height: 40px;
+}
+
+.right_arrow:hover{
+	cursor: pointer;
+}

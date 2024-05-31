@@ -7,6 +7,9 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/hotel/hotel_view.css}" rel="stylesheet" />
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
@@ -22,8 +25,34 @@ xmlns:th="http://www.thymeleaf.org">
 			</header>
 		</div>
 		<div class="wrap-body">
-			<div class="wrap-">
-			<!-- 여기부터 작성 -->
+			<div class="wrap-main">
+				<div class="hotel_name">
+					<div class="name_kr">세인트존스 호텔</div>
+					<div class="name_en">St.Jones Hotel</div>					
+				</div>
+				<hr></hr>
+				<div class="hotel_pic">
+					<div class="pic_slide">
+						<div class="pic"></div>
+						<div class="pic"></div>
+						<div class="pic"></div>
+					</div>
+<!-- 
+					<div class="pic_slide">
+						<div class="pic"></div>
+						<div class="pic"></div>
+						<div class="pic"></div>
+					</div>
+					<div class="pic_slide">
+						<div class="pic"></div>
+						<div class="pic"></div>
+						<div class="pic"></div>
+					</div> 
+-->
+				<img th:src="@{/images/skyblue_right.png}" class="right_arrow" alt="오른쪽 화살표" style="width:40px;">
+
+				</div>
+
 			
 			</div>
 		</div>
@@ -31,6 +60,40 @@ xmlns:th="http://www.thymeleaf.org">
 	<div class="wrap-footer">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
+	
+	
+<script>
+$(loadedHandler);
+
+function loadedHandler(){
+	/* 오른쪽 arrow 마우스 올릴 시 사진변경되는 event */
+ $(".right_arrow").on("mouseover", btnOnHandler);
+	
+	/* 오른쪽 arrow 클릭시 호텔 사진 변하는 event */
+ $(".right_arrow").on("mouseleave", btnOffHandler);
+	
+/* $(".right_arrow").on("click", picMoveHandler); */
+
+
+
+}
+
+function btnOnHandler() {
+    var currentSrc = $(this).attr('src');
+    console.log(currentSrc);
+    
+    if (currentSrc === '/shushoong/images/skyblue_right.png') {
+        $(this).attr("src", "/shushoong/images/blue_right.png").css("width", "40px");
+    }
+}
+
+function btnOffHandler() {
+    $(this).attr("src", "/shushoong/images/skyblue_right.png").css("width", "40px");
+}
+
+
+
+</script>	
 	
 </body>
 </html>

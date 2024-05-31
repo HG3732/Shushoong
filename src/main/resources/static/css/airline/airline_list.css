@@ -16,7 +16,7 @@
 .flex-container .sidebar{
 	flex: 1;
     /* width: 200px; */
-    background-color: aqua;
+    /* background-color: aqua; */
     height: auto;
 }
 
@@ -220,16 +220,29 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 	margin-right: 20px;
 }
 
+.layover-list .layover-select #sky-direct{
+	display: none;
+}
+
+.layover-list .layover-select #blue-layover{
+	display : none;
+	}
+
 /* 사이드바 css END */
 
 .flex-container .airline-list .select-bar{
     float: right;
 }
+.flex-container .airline-list .select-bar select{
+	width: 100px;
+    height: 30px;
+    border-radius: 10px;
+	}
 
 .flex-container .airline-list{
 	flex: 5;
     /* width: 100%; */
-    background-color: beige;
+    /* background-color: beige; */
 }
     
 .flex-container .airline-list .airline-info{
@@ -384,3 +397,4 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 .airline-flex .nop .airticket .ticket-btn button{
 	border-radius: 20px;
 }
+

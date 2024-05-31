@@ -118,13 +118,15 @@
 								<div class="layover-select">
 									<label>
 										<button type="button" class="direct-btn zero" id="direct-btn" >
-											<img alt="" th:src="@{/images/bluecheck.png}" id="blue">
+											<img alt="" th:src="@{/images/bluecheck.png}" id="blue-direct">
+											<img alt="" th:src="@{/images/skycheck.png}" id="sky-direct">
 										</button>
 											<span>직항</span>
 									</label> 
 									<label>
 										<button type="button" class="direct-btn one" id="layover-btn">
-											<img alt="" th:src="@{/images/skycheck.png}" id="sky">
+											<img alt="" th:src="@{/images/skycheck.png}" id="sky-layover">
+											<img alt="" th:src="@{/images/bluecheck.png}" id="blue-layover">
 										</button>
 											<span>경유</span>
 									</label>
@@ -356,7 +358,7 @@
 	    const leftValue = parseInt(_this.value);
 	    
 	    const leftVal = document.querySelector(".middle-range.price .div1");
-	    leftVal.innerHTML = `${leftValue}원 ~`;
+	    leftVal.innerHTML = `${leftValue}(최솟값)원 ~`;
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
 	    thumbPriceLeft.style.left = percent + "%";
@@ -372,7 +374,7 @@
 	    const rightValue = parseInt(_this.value);
 	    
 	    const rightVal = document.querySelector(".middle-range.price .div2");
-	    rightVal.innerHTML = `${rightValue}원`;
+	    rightVal.innerHTML = `${rightValue}(최댓값)원`;
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
 	    thumbPriceRight.style.right = 100 - percent + "%";
@@ -392,23 +394,41 @@
 	};
 	
 	// 직항/경유 ----------------------------------
+	 
+ function btnClickHandler() {
+	    $('#direct-btn').on('click', function () {
+	        var $blueDirect = $(this).children("#blue-direct");
+	        var $skyDirect = $(this).children("#sky-direct");
+	        var $blueLayover = $(this).parent().parent().find(".direct-btn.one").children("#blue-layover");
+	        var $skyLayover = $(this).parent().parent().find(".direct-btn.one").children("#sky-layover");
 
-    function btnClickHandler() {
+	        // 직항 버튼 클릭 시
+	        $blueDirect.css("display", "block");
+	        $skyDirect.css("display", "none");
 
-        document.getElementById('direct-btn').addEventListener('click', function () {
-        	var blueimg = document.getElementById('blue');
-        	blueimg.src = '/Shushoong/src/main/resources/static/images/bluecheck.png';
-            // blueimg.src = '@{/images/bluecheck.png}';
-            console.log('직항 눌림');
-        });
+	        $blueLayover.css("display", "none");
+	        $skyLayover.css("display", "block");
+	        
+	        console.log('직항 눌림');
+	    });
 
-        document.getElementById('layover-btn').addEventListener('click', function () {
-            var blueimg = document.getElementById('sky');
-            blueimg.src = '/Shushoong/src/main/resources/static/images/skycheck.png';
-            // blueimg.src = '@{/images/sky.png}';
-            console.log('경유 눌림');
-        });
-    }
+	    $('#layover-btn').on('click', function () {
+	        var $blueDirect = $(this).parent().parent().find('.direct-btn.zero').children('#blue-direct');
+	        var $skyDirect = $(this).parent().parent().find('.direct-btn.zero').children('#sky-direct');
+	        var $blueLayover = $(this).children('#blue-layover');
+	        var $skyLayover = $(this).children('#sky-layover');
+
+	        // 경유 버튼 클릭 시
+	        $blueLayover.css("display", "block");
+	        $skyLayover.css("display", "none");
+
+	        $blueDirect.css("display", "none");
+	        $skyDirect.css("display", "block");
+
+	        console.log('경유 눌림');
+	    });
+	}
+
 	</script>
 </body>
 </html>

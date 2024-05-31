@@ -26,11 +26,10 @@ public class AppConfig {
 		System.out.println(portoneRestApiSecretKey);
 		return new IamportClient(portoneRestApiKey, portoneRestApiSecretKey);
 	}
-//	
-//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//		registry.addResourceHandler("/images/**")
-//				.addResourceLocations("classpath:/static/image");
-//			
-//	}
-//	
+	
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/images/**")
+				.addResourceLocations("classpath:/static/images/");
+	}
+	
 }

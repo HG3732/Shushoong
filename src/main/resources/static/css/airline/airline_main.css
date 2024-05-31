@@ -36,7 +36,7 @@ div#round_trip{
 
 div.tabcontent > *{
 	height: 40px;
-	margin: 20px 17px 20px 15px;
+	margin: 20px 15px 20px 15px;
 	border-radius: 10px;
 	font-size: 15px;
 	text-align: center;
@@ -111,6 +111,7 @@ button#people_lineup{
 	background: none;
 	border: none;
 }
+
 
 
 
@@ -262,19 +263,36 @@ button#sit3{
 
 
 		/* 추천 section */
+		
+.recommend_section{
+	margin-top: 30px;
+}
+		
 
-.recommend_cheap{
+.recommend_section > div > div{
 	width: 960px;
 	margin: auto;
-	height: 500px;
+	height: 600px;
 	
 	
 	border: 1px solid black;
 }
-.cheap_slides{
+
+.recommend_section > div > div > div:nth-of-type(1){
+	font-size : 20px;
+	text-align : center;
+	width : 500px;
+	margin: auto;
+	margin-top : 40px;
+	height : 50px;
+	line-height : 50px;
+	border: 1px solid black;
+}
+
+.slides{
 	display: flex;
 }
-.cheap_slides_wrap{
+.slides_wrap{
 	width: 270px;
 	height: 340px;
 	margin : 80px auto;
@@ -282,15 +300,60 @@ button#sit3{
 	
 }
 
-.cheap_slides_image{
+.slides_image{
 	margin: auto;
+	width: 230px;
+	height: 200px;
+	margin-top : 15px;
 	
+	
+	border: 1px solid black;
 }
 
 
+.slides_name{
+	width: 250px;
+	margin: auto;
+	margin-top: 15px;
+	height: 85px;
+	
+}
 
+.slides_price{
+	width: 250px;
+	text-align: right;
+	color: red;
+	font-size: 13px;
+	font-weight: bolder;
+}
 
+.slides_price > div{
+	float: right;
+}
 
+.slide_prev,.slide_next{
+	text-align: center;
+	display: block;
+	position: absolute;
+	width : 70px;
+	height : 70px;
+	font-size : 60px;
+	line-height : 70px;
+	margin-top:   -270px;
+	border-radius : 50%;
+	
+	border: 1px black solid;
+}
+
+.slide_prev{
+	margin-left: -115px;
+	
+}
+
+.slide_next{
+	margin-left:  1000px;
+	
+}
 
 
 				/* 임시 */

@@ -221,30 +221,93 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			
 			
 			<section class="recommend_section">
-				<div class="recommend_cheap">
-					<div class="cheap_slides" >
-						<div class="cheap_slides_wrap">
-							<div class="cheap_slides_image">
-								사진
+				<div class="recomend_section_background">
+					<div class="recommend_cheap">
+						<div> 저렴한곳 순서</div>
+						<div class="cheap_slides" id="cheap_slides" >
+							<div class="slides_wrap" id="cheap_slides_wrap">
+								<div class="slides_image" id="cheap_slides_image">
+									사진1
+								</div>
+								<div class="slides_name" id="cheap_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~1
+								</div>
+								<div class="slides_price" id="cheap_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원1</div>
+								</div>
 							</div>
-							<div class="cheap_slides_name">
-								맑고 투명한 물~~ 괌으로 오세요~~
+							<div class="slides_wrap" id="cheap_slides_wrap">
+								<div class="slides_image" id="cheap_slides_image">
+									사진2
+								</div>
+								<div class="slides_name" id="cheap_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~2
+								</div>
+								<div class="slides_price" id="cheap_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원2</div>
+								</div>
 							</div>
-							<div class="cheap_slides_price">
-								성인 1인 기준 : 10,000,000원
+							<div class="slides_wrap" id="cheap_slides_wrap">
+								<div class="slides_image" id="cheap_slides_image">
+									사진3
+								</div>
+								<div class="slides_name" id="cheap_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~3
+								</div>
+								<div class="slides_price" id="cheap_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원3</div>
+								</div>
 							</div>
-							
-							
 						</div>
-						<div class="cheap_slides_wrap"></div>
-						<div class="cheap_slides_wrap"></div>
-					</div>
-					<div class="cheap_slides" >
-					
+						
+						<div class="cheap_slides" id="cheap_slides" >
+							<div class="slides_wrap" id="cheap_slides_wrap">
+								<div class="slides_image" id="cheap_slides_image">
+									사진4
+								</div>
+								<div class="slides_name" id="cheap_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~4
+								</div>
+								<div class="slides_price" id="cheap_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원4</div>
+								</div>
+							</div>
+							<div class="slides_wrap" id="cheap_slides_wrap">
+								<div class="slides_image" id="cheap_slides_image">
+									사진5
+								</div>
+								<div class="slides_name" id="cheap_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~5
+								</div>
+								<div class="slides_price" id="cheap_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원5</div>
+								</div>
+							</div>
+							<div class="slides_wrap" id="cheap_slides_wrap">
+								<div class="slides_image" id="cheap_slides_image">
+									사진6
+								</div>
+								<div class="slides_name" id="cheap_slides_name">
+									맑고 투명한 물~~ 괌으로 오세요~~6
+								</div>
+								<div class="slides_price" id="cheap_slides_price">
+									성인 1인 기준 :  
+									<div>10,000,000원6</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						<button id="cheap_slide_prev" class="slide_prev" onclick="cheapSlidePlusSlides(-1)">❮</button>
+						<button id="cheap_slide_next" class="slide_next" onclick="cheapSlidePlusSlides(1)">❯</button>
 					</div>
 				</div>
-				
-				
 			</section>
 			
 			
@@ -438,6 +501,41 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		 
 		}
 		
+		
+		
+		
+				/*  Slide 기능 넣는 섹션 */
+	let cheapSlideIndex = 1;
+	cheapShowSlides(cheapSlideIndex);		
+	
+	function cheapSlidePlusSlides(n) {
+		cheapShowSlides(cheapSlideIndex += n);
+	}
+	
+	function cheapSlideCurrentSlide(n) {
+		cheapShowSlides(cheapSlideIndex = n);
+	}
+
+	function cheapShowSlides(n) {
+		
+	  let i;
+	  let slides = document.getElementsByClassName("cheap_slides");
+	  console.log("n"+n);
+	  console.log("slides.length"+slides.length);
+	  
+	  if (n == slides.length) {
+		  document.getElementById("cheap_slide_next").style.display="none";
+		  document.getElementById("cheap_slide_prev").style.display="block";
+		  }    
+	  if (n == 1) {
+		  document.getElementById("cheap_slide_prev").style.display="none";
+		  document.getElementById("cheap_slide_next").style.display="block";
+		  }
+	  for (i = 0; i < slides.length; i++) {
+	    slides[i].style.display = "none";  
+	  }
+	  slides[cheapSlideIndex-1].style.display = "flex";  
+	}
 		
 	
 	</script>

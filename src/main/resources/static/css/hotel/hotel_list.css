@@ -35,6 +35,7 @@
 .word_search{
 	font-size: var(--font2);
 	display: flex;
+	margin-bottom: 40px
 }
 
 .type_hotel:focus {

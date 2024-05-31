@@ -29,15 +29,14 @@
 						<img th:src="@{/images/logo.png}" alt="로고">
 					</div>
 					<div class="main">
-						<input type="radio" id="tab-1" name="show" checked/>
+						<input type="radio" id="tab-1" name="show" checked /> 
 						<input type="radio" id="tab-2" name="show" />
 						<div class="tab">
-							<label for="tab-1">개인회원</label>
-							<label for="tab-2">기업회원</label>
+							<label for="tab-1">개인회원</label> <label for="tab-2">기업회원</label>
 						</div>
 						<div class="content">
 							<div class="customerlogin-section">
-								<form id="frm-post" th:action="@{/login}" method="post"> 
+								<form id="frm-post" th:action="@{/login}" method="post">
 									<div class="loginInfo">
 										<input type="text" name="userId" placeholder="아이디" autofocus>
 										<input type="password" name="userPwd" placeholder="비밀번호">
@@ -49,46 +48,53 @@
 										<button type="submit" class="btn login">로그인</button>
 									</div>
 									<div class="login-function">
-										<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a>
+										<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a> 
 										<a th:href="@{/account/find}"><div class="findInfoBtn">아이디/비밀번호 찾기</div></a>
 									</div>
 								</form>
-							<div class="snsLogin">
-								------ 또는 -------
+								<div class="snsLogin">
+									<div class="snsLoginTitle">
+										<hr class="bar">
+										<span class="txt">또는</span>
+										<hr class="bar">
+									</div>
 									<div class="snsLoginBtn">
 										<div class="googleBtn">
-											<a href=#>
-												<img th:src="@{/images/구글 아이콘 사각.png}" alt="카카오 로그인" width="50px" height="50px">
+											<a href=#> <img th:src="@{/images/구글 아이콘 사각.png}"
+												alt="카카오 로그인" width="50px" height="50px">
 											</a>
-											</div>
+										</div>
 										<div class="kakaoBtn">
-											<a href=href="https://kauth.kakao.com/oauth/authorize"
-												th:href="@{https://kauth.kakao.com/oauth/authorize(client_id=${kakaoApiKey}, redirect_uri=${redirectUri}, response_type='code')}">
-												<img th:src="@{/images/카카오톡 아이콘 사각.png}" alt="카카오 로그인" width="50px" height="50px">
+											<a href=href=
+												"https://kauth.kakao.com/oauth/authorize"
+											th:href="@{https://kauth.kakao.com/oauth/authorize(client_id=${kakaoApiKey}, redirect_uri=${redirectUri}, response_type='code')}">
+												<img th:src="@{/images/카카오톡 아이콘 사각.png}" alt="카카오 로그인"
+												width="50px" height="50px">
 											</a>
 										</div>
 										<div class="naverBtn">
-											<a href=#>
-												<img th:src="@{/images/네이버 아이콘사각.png}" alt="네이버 로그인" width="50px" height="50px">
+											<a href=#> <img th:src="@{/images/네이버 아이콘사각.png}"
+												alt="네이버 로그인" width="50px" height="50px">
 											</a>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="businesslogin-section">
-								<form id="frm-post" th:action="@{/login}" method="post"> 
+								<form id="frm-post" th:action="@{/login}" method="post">
 									<div class="loginInfo">
 										<input type="text" name="userId" placeholder="아이디" autofocus>
 										<input type="password" name="userPwd" placeholder="비밀번호">
 									</div>
 									<div class="login-check">
-										<input type="checkbox" id="idsaved" name="idsaved">아이디 저장
+										<input type="checkbox" id="idsaved" name="idsaved">아이디
+										저장
 									</div>
 									<div class="loginBtn">
 										<button type="submit" class="btn login">로그인</button>
 									</div>
 									<div class="login-function">
-										<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a>
+										<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a> 
 										<a th:href="@{/account/find}"><div class="findInfoBtn">아이디/비밀번호 찾기</div></a>
 									</div>
 								</form>

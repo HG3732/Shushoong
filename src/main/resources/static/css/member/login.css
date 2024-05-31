@@ -107,12 +107,25 @@ section .loginInfo > input:focus {
 	border: 2px solid #006AFF;
 }
 
+section .btn.login {
+	/* 스타일서식 */
+	width: 300px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	background-color: #006AFF;
+	color: white;
+	font-size: 17px;
+	font-family: SOYOMapleRegularTTF;
+	font-weight: bold;
+}
+
 section .login-check {
 	display : flex;
 	flex-direction: row;
-	flex-wrap: wrap;
-	align-content: center;
+	align-items: center;
 	margin: 5px 0 30px 10px;
+	font-size: 15px;
 }
 
 section .login-check > input[type="checkbox"] {
@@ -147,8 +160,49 @@ section .login-function {
 	align-content: center;
 	margin: 10px;
 	padding: 10px;
+	
+	font-weight: bold;
 }
 
-section .snsLoginBtn {
+section .joinBtn {
+	padding: 0px 35px 0 0 ;
+	border-right:2px solid #707070;
+}
+
+.text {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
 	
+	
+}
+
+.text::before {
+	content: '';
+	flex-grow: 1;
+	background: #fff;
+	height: 1px;
+	margin-right: 10px;
+}
+
+.text::after {
+	content: '';
+	flex-grow: 1; 
+	background: #fff; 
+	height: 1px; 
+	margin-right: 10px; 
+}
+
+section .snsLoginTitle > .bar{
+flex: auto;
+border: none;
+height: 1px;
+background-color: #707070;
+}
+
+section .snsLoginTitle >.txt {
+	padding: 0 10px;
+	
+	font-size: 13px;
+	font-weight: bold;
 }

@@ -41,18 +41,47 @@ xmlns:th="http://www.thymeleaf.org">
 				</div>
 				<div class="hotel_info_all">
 					<div class="info_list">
-						<div class="hotel_room">객실선택</div>
+						<div class="room_choose">객실선택</div>
 						<div class="hotel_info">숙소상세정보</div>
 						<div class="hotel_review">숙소후기</div>
 						<div class="calendar">
 							<img th:src="@{/images/calendar.png}" alt="오른쪽 화살표" class="cal_pic" style="width:30px;">
 							<button type="button" class="cal_btn" style="vertical-align: middle;">2024.06.05(수) ~ 2024.06.07(금)</button>
 						</div>
-						<div class="headdcount">
+						<div class="headcount">
 							<button type="button" class="count_btn">객실 1 ⦁ 성인 2명</button>
 						</div>
 					</div>
 					<hr style="border: 1px solid #c5c5c5;"></hr>
+					<div class="hotel_room_list">
+						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">객실 선택</p>
+						<hr style="border: 0.1em solid black;"></hr>
+						<div class="wrap-room">
+							<div class="room">
+								<div class="room_cat">Superior Double, No Ocean View</div>
+								<div class="amount_num">
+									<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+									원
+								</div>
+								<button type="button" class="btn_reserve">예약하기</button>
+							</div>
+							<hr style="border: 1px solid #F1F1F1;"></hr>
+						</div>
+						<div class="wrap-room">
+							<div class="room">
+								<div class="room_cat">Superior Double, No Ocean View</div>
+								<div class="amount_num">
+									<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+									원
+								</div>
+								<button type="button" class="btn_reserve">예약하기</button>
+							</div>
+							<hr style="border: 1px solid #F1F1F1;"></hr>
+						</div>
+						<p style="font-size: var(--font5); font-color: var(--color_gray_1); margin-top: 20px;">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
+					</div>
+					<div class="room_detail">
+					</div>
 				</div>	
 			</div>
 		</div>

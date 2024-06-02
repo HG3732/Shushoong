@@ -80,7 +80,7 @@
 	background-color: white;
 }
 
-.headdcount{
+.headcount{
 	text-align: end;
 }
 
@@ -90,6 +90,43 @@
 	background-color: white;
 	border: 1px solid #006AFF;
 	border-radius: 10px;
-	padding: 5px;
+	padding: 7px;
 	
+}
+
+.hotel_room_list{
+	margin-top: 50px;
+}
+
+.room{
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	align-items: center;
+}
+
+.room_cat{
+	grid-column: 1/ 4;
+}
+
+.amount_num{
+	grid-column: 6/ 8;
+	
+	font-size: var(--font4);
+	color: var(--color_red_1); 
+	text-align: center;
+}
+
+.btn_reserve{
+	font-family: 'SOYOMapleRegularTTF';
+	border: none;
+	background-color: var(--color_blue_2);
+	border-radius: 10px;
+	padding: 7px;
+}
+
+.btn_reserve:hover{
+	cursor:pointer;
+	font-family: 'SOYOMapleBoldTTF';
+	background-color: var(--color_blue_1);
+	color: white;
 }

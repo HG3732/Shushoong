@@ -50,3 +50,46 @@
 .right_arrow:hover{
 	cursor: pointer;
 }
+
+.hotel_info_all{
+	margin-top: 50px;
+}
+
+.info_list {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	align-items: center;
+}
+
+.calendar{
+	grid-column: 5/ 7;
+	border: 1px solid #006AFF;
+	border-radius: 10px;
+	vertical-align: middle;
+	
+	display: flex;
+	padding: 5px;
+}
+.cal_pic{
+	padding-left: 8px;
+}
+
+.cal_btn{
+	font-family: 'SOYOMapleRegularTTF';
+	border: none;
+	background-color: white;
+}
+
+.headdcount{
+	text-align: end;
+}
+
+.count_btn{
+	font-family: 'SOYOMapleRegularTTF';
+	border: none;
+	background-color: white;
+	border: 1px solid #006AFF;
+	border-radius: 10px;
+	padding: 5px;
+	
+}

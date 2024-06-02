@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+input,
+input:focus,
+textarea,
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* input[type="checkbox"]{ */
+/*         display: none; */
+/* } */
+
+/* section .main input[type=radio] { */
+/* 	display: none; */
+/* } */
+
+.wrap-section {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+
+section .userjoin-header {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 70px 0 50px 0;
+}
+
+section .userJoinInfo {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: left;
+	align-items: flex-start;
+}
+
+section .userJoinInfo > div > input {
+	/* 	글상자서식 */
+	border: 1px solid #BCEFFF;
+	border-radius: 20px;
+	width: 300px;
+	height: 40px;
+	
+	
+	/* 	글자서식 */
+	font-family: SOYOMapleRegularTTF;
+	text-indent: 10px;
+	font-size:15px;
+	
+	/* 	배치서식 */
+	display: flex;
+	flex-direction: column;
+	margin: 10px 10px 0 10px;
+}
+
+section .userJoinInfo > div > input:focus {
+	/* 	글상자서식 */
+	border: 2px solid #006AFF;
+}

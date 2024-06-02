@@ -37,23 +37,8 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="pic"></div>
 						<div class="pic"></div>
 					</div>
-<!-- 
-					<div class="pic_slide">
-						<div class="pic"></div>
-						<div class="pic"></div>
-						<div class="pic"></div>
-					</div>
-					<div class="pic_slide">
-						<div class="pic"></div>
-						<div class="pic"></div>
-						<div class="pic"></div>
-					</div> 
--->
-				<img th:src="@{/images/skyblue_right.png}" class="right_arrow" alt="오른쪽 화살표" style="width:40px;">
-
-				</div>
-
-			
+					<img th:src="@{/images/skyblue_right.png}" class="right_arrow" alt="오른쪽 화살표" style="width:40px;">
+				</div>	
 			</div>
 		</div>
 	</div>
@@ -72,9 +57,8 @@ function loadedHandler(){
 	/* 오른쪽 arrow 클릭시 호텔 사진 변하는 event */
  $(".right_arrow").on("mouseleave", btnOffHandler);
 	
-/* $(".right_arrow").on("click", picMoveHandler); */
-
-
+	/* 첫 이미지 모여있는 곳에서 > 사진 눌렀을 때 그 다음 사진묶음으로 이동 */
+ $(".right_arrow").on("click", nextPicHandler);
 
 }
 
@@ -91,6 +75,27 @@ function btnOffHandler() {
     $(this).attr("src", "/shushoong/images/skyblue_right.png").css("width", "40px");
 }
 
+
+function nextPicHandler() {
+	console.log(this);
+	console.log($(this).parent().siblings('hr'));
+	
+	var htmlVal = '';
+		htmlVal += `
+			 	<div class="hotel_pic">
+					<img src="/shushoong/images/skyblue_left.png" class="left_arrow" alt="오른쪽 화살표" style="width:40px;">
+					<div class="pic_slide">
+						<div class="pic"></div>
+						<div class="pic"></div>
+						<div class="pic"></div>
+					</div>
+					<img src="/shushoong/images/skyblue_right.png" class="right_arrow" alt="오른쪽 화살표" style="width:40px;">
+				</div>
+		`;
+			
+	$(this).parent().siblings('hr').after(htmlVal);
+	$(this).parent().hide();
+}
 
 
 </script>	

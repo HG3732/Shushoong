@@ -24,14 +24,10 @@
 	color: var(--color_gray_2);
 }
 
-hr{
-	margin-bottom: 30px;
-}
-
-
 .hotel_pic{
 	display: flex;
 	align-items: center;
+	margin-top: 30px;
 }
 
 .pic_slide{

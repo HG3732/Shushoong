@@ -39,6 +39,8 @@ xmlns:th="http://www.thymeleaf.org">
 					</div>
 					<img th:src="@{/images/skyblue_right.png}" class="right_arrow" alt="오른쪽 화살표" style="width:40px;">
 				</div>
+				
+				<!-- 객실정보 -->
 				<div class="hotel_info_all">
 					<div class="info_list">
 						<div class="room_choose">객실선택</div>
@@ -80,6 +82,8 @@ xmlns:th="http://www.thymeleaf.org">
 						</div>
 						<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
 					</div>
+					
+					<!-- 숙소상세정보 -->
 					<div class="wrap_hotel_info">
 						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">숙소상세정보</p>
 						<hr style="border: 0.1em solid black;"></hr>
@@ -168,9 +172,58 @@ xmlns:th="http://www.thymeleaf.org">
 							<hr></hr>
 						</div><!-- wrap_info -->
 					</div><!-- wrap hotel info -->
+					
+					<!-- 호텔리뷰 -->
 					<div class="wrap_hotel_review">
 						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">호텔후기</p>
 						<hr style="border: 0.1em solid black;"></hr>
+						<!-- 리뷰 차트 -->
+						<div class="review_detail">
+							<div class="review_rate_avg"><strong style="font-family: 'SOYOMapleBoldTTF';font-size: 28px; color: var(--color_blue_1)">4.3</strong> / 5</div>
+							<div class="review_count" style="margin-left: 15px;" >(1436개)</div>
+							<div class="vertical_line"></div>
+							<div class="grid-item">
+								<canvas id="myChart3" ></canvas>
+							</div>
+						</div>
+						<hr style="border: 1px solid #c5c5c5;"></hr>
+						<div class="review_info_wrap">
+							<div class="review_grade">
+								<p class="review_rate">4.3</p>
+								<div class="review_id">
+									<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+									<p>gyrua34</p>
+								</div>
+								<div class="review_tripper">
+									<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:15px;">										
+									<p>출장여행객</p>
+								</div>
+							</div>
+							<div class="review_content">
+								<p>"깔끔하고 마음에 들어요!"</p>
+								<p>호텔 급에 비해 시설은 그냥 그런 듯. 세면대 물이 잘 내려가지 않았고 화장실에 쓰레기통도 없었음. 직원분들은 너무너무 친절해서 좋았습니다. 특히 우버탈 때 직접 짐도 실어주신 분 감사했어요:)</p>
+								<p>2024년 5월 24일</p>
+							</div>
+						</div>
+						<hr style="border: 1px solid #c5c5c5;"></hr>
+						<div class="review_info_wrap">
+							<div class="review_grade">
+								<p class="review_rate">4.3</p>
+								<div class="review_id">
+									<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+									<p>gyrua34</p>
+								</div>
+								<div class="review_tripper">
+									<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:15px;">										
+									<p>출장여행객</p>
+								</div>
+							</div>
+							<div class="review_content">
+								<p>"깔끔하고 마음에 들어요!"</p>
+								<p>호텔 급에 비해 시설은 그냥 그런 듯. 세면대 물이 잘 내려가지 않았고 화장실에 쓰레기통도 없었음. 직원분들은 너무너무 친절해서 좋았습니다. 특히 우버탈 때 직접 짐도 실어주신 분 감사했어요:)</p>
+								<p>2024년 5월 24일</p>
+							</div>
+						</div>
 					</div>
 				</div>	
 			</div>
@@ -194,7 +247,7 @@ function loadedHandler(){
 	/* 첫 이미지 모여있는 곳에서 > 사진 눌렀을 때 그 다음 사진묶음으로 이동 */
  $(".right_arrow").on("click", nextPicHandler);
 
-	displayReviewChart();
+	/* displayReviewChart(); */
 	
 }
 

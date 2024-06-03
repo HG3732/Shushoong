@@ -53,12 +53,13 @@ xmlns:th="http://www.thymeleaf.org">
 					<div class="sidebar">
 						<div class="search">
 							<div class="word_search">
-								<input type="text" class="type_hotel" name="hotel_name" style="border: none; border-radius: 20px; width: 110px;"/>
-								<span><button type="button" class="btn_search">검색</button></span>
+								<p style="margin-bottom: 10px; font-size: var(--font2); font-family: 'SOYOMapleRegularTTF';">검색</p>
+								<input type="text" class="type_hotel" name="hotel_name" style="border: 1px solid #006AFF; border-radius: 10px; width: 160px; height: 25px;"/>
 							</div>
 						</div>
 						
 						<!-- 슬라이드 바 -->
+						 <p style="font-size: var(--font2); margin-bottom: 20px; font-family: 'SOYOMapleRegularTTF';">가격</p>
 						 <div class="price-slider">
 						     <div class="multi-range-slider">
 						         <!-- 진짜 슬라이더 -->
@@ -73,14 +74,14 @@ xmlns:th="http://www.thymeleaf.org">
 						             <div class="circle right"></div>
 						         </div>
 						         <div class="circle price">
-						          <div class="price1"></div>
-						          <div class="price2"></div>
+						          <div class="price1">가격1</div>
+						          <div class="price2">가격2</div>
 						         </div>
 						     </div>
 						 </div>
-
-			
+					<button type="button" class="btn_search">검색하기</button>
 					</div>
+					
 					
 					<!-- section 부분 -->
 					<div class="hotel">

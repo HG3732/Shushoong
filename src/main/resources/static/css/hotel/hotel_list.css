@@ -34,18 +34,38 @@
 
 .word_search{
 	font-size: var(--font2);
-	display: flex;
 	margin-bottom: 40px
 }
 
 .type_hotel:focus {
-	border-color: #006AFF;
+	border: 2px solid #006AFF;
 	outline: none;
+	
 }
 
 
+.btn_search{
+	background-color: var(--color_blue_2);
+	border-radius: 23px;
+	border: none;
+	width:160px;
+	height: 25px;
+	
+	margin-top: 20px;
+}
 
-
+.btn_search:hover{
+	background-color: var(--color_blue_1);
+	border-radius: 23px;
+	border: none;
+	color: white;
+	cursor: pointer;
+	width:160px;
+	height: 25px;
+	font-family: 'SOYOMapleBoldTTF';
+	
+	margin-top: 20px;
+}
 
 
 /* 양방향 레인지 바 */

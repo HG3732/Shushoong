@@ -7,6 +7,7 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/member/userJoin.css}" rel="stylesheet" />
 <meta charset="UTF-8">
 <title>슈슝::개인회원가입</title>
 </head>
@@ -22,60 +23,66 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-section">
-				<div class="userjoin-Header">
-					개인 회원가입
-				</div>
-				<div class="userjoin-section">
-					<form id="frm-post" method="post"> 
-						<div class="userJoinInfo">
-							<div class="id check">
-								<label for="userId">아이디</label>
-								<input type="text" name="userId" autofocus>
-								<button type="button" class="btn idCheck">중복확인</button>
+				<section>
+					<div class="userjoin-header">
+						개인 회원가입
+					</div>
+					<div class="userjoin-section">
+						<form id="frm-post" method="post"> 
+							<div class="userJoinInfo">
+								<div class="idwrite">
+									<label for="userId">아이디</label>
+									<input type="text" name="userId" autofocus>
+									<button type="button" class="btn idCheck">중복확인</button>
+								</div>
+								<div class="namewrite">
+									<label for="userName">이름</label>
+									<input type="text" name="userName">
+								</div>
+								<div class="passwordwrite">
+									<label for="userPwd">비밀번호</label>
+									<input type="password" name="userPwd">
+								</div>
+								<div class="check password">
+									<label for="pwdCheck">비밀번호 확인</label>
+									<input type="password" name="pwdCheck">
+								</div>
+								<div class="send num">
+									<label for="userEmail">이메일</label>
+									<input type="text" name="userEmail">
+									<button type="button" class="btn emailCheck">중복확인</button>
+								</div>
+								<div class="answer email">
+									<label for="emailCheck">인증번호</label>
+									<input type="text" name="emailCheck">
+									<button type="button" class="btn emailCheck">인증확인</button>
+								</div>
 							</div>
-							<div class="checkId">
-								<label for="userName">이름</label>
-								<input type="text" name="userName">
-							</div>
-							<label for="userPwd">비밀번호</label>
-							<input type="password" name="userPwd">
-							<label for="pwdCheck">비밀번호 확인</label>
-							<input type="password" name="pwdCheck">
-							<div class="send num">
-								<label for="userEmail">이메일</label>
-								<input type="text" name="userEmail">
-								<button type="button" class="btn emailCheck">중복확인</button>
-							</div>
-							<div class="answer email">
-								<label for="emailCheck">인증번호</label>
-								<input type="text" name="emailCheck">
-								<button type="button" class="btn emailCheck">인증확인</button>
-							</div>
-						</div>
-						<div class="receive-marketing">
-							<div class="marketing-title">서비스 이용약관 동의</div>
-							<hr class="marketingLine">
-							<div class="marketing-check">
-								<input type="checkbox" id="allCheckBox" onclick="allChecked()">전체 선택
+							<div class="receive-marketing">
+								<div class="marketing-title">서비스 이용약관 동의</div>
 								<hr class="marketingLine">
-								<input type="checkbox" name="usingAgree" id="usingService" class="usingService">슈슝 이용약관 동의<div class="emphasis" onclick="checkClicked()" th:checked="true">(필수)</div>
-								<input type="checkbox" name="usingAgree" id="privacy" class="privacy">개인정보 수집 및 이용 동의<div class="emphasis" onclick="checkClicked()" th:checked="true">(필수)</div>
-								<input type="checkbox" id="receiveMarketing" class="receiveMarketing" onclick="checkClicked()">슈슝 마케팅 수신 동의(선택)
-								<div class="choice">
-									<div class="smsMarketing">
-										<input type="checkbox" name="usingAgree" value="1" onclick="checkClicked()" th:checked="false"> SMS 수신
-									</div>
-									<div class="emailMarketing">
-										<input type="checkbox" name="usingAgree" value="1" onclick="checkClicked()" th:checked="false"> 이메일 수신
+								<div class="marketing-check">
+									<input type="checkbox" id="allCheckBox" onclick="allChecked()">전체 선택
+									<hr class="marketingLine">
+									<input type="checkbox" name="usingAgree" id="usingService" class="usingService">슈슝 이용약관 동의<div class="emphasis" onclick="checkClicked()" th:checked="true">(필수)</div>
+									<input type="checkbox" name="usingAgree" id="privacy" class="privacy">개인정보 수집 및 이용 동의<div class="emphasis" onclick="checkClicked()" th:checked="true">(필수)</div>
+									<input type="checkbox" id="receiveMarketing" class="receiveMarketing" onclick="checkClicked()">슈슝 마케팅 수신 동의(선택)
+									<div class="choice">
+										<div class="smsMarketing">
+											<input type="checkbox" name="usingAgree" value="1" onclick="checkClicked()" th:checked="false"> SMS 수신
+										</div>
+										<div class="emailMarketing">
+											<input type="checkbox" name="usingAgree" value="1" onclick="checkClicked()" th:checked="false"> 이메일 수신
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="userJoinBtn">
-							<button type="submit" class="btn userJoin">회원가입</button>
-						</div>
-					</form>
-				</div>
+							<div class="userJoinBtn">
+								<button type="submit" class="btn userJoin">회원가입</button>
+							</div>
+						</form>
+					</div>
+				</section>
 			</div>
 		</div>
 	</div>

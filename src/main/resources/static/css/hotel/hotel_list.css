@@ -22,11 +22,135 @@
 }
 
 
-.aside {
+.sidebar {
     flex: 1;
-    background-color: blueviolet;
+    background-color: pink;
     box-sizing: border-box;
 }
+
+.search{
+	margin-top: 100px;
+}
+
+.word_search{
+	font-size: var(--font2);
+	display: flex;
+	margin-bottom: 40px
+}
+
+.type_hotel:focus {
+	border-color: #006AFF;
+	outline: none;
+}
+
+
+
+
+
+
+/* 양방향 레인지 바 */
+
+.price-slider-range {
+	position: relative;
+	width: 100%;
+	margin-top: 10px;
+	/* max-width: 500px; */
+}
+
+.slider {
+	position: relative;
+	z-index: 1;
+	height: 5px;
+	margin: 0 15px;
+}
+
+.slider>.track {
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 5px;
+	background-color: #9d9d9d;
+}
+
+.slider>.range {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 5px;
+	background-color: #006AFF;
+}
+
+.slider>.circle {
+	position: absolute;
+	top: 3px; z-index : 3;
+	width: 20px;
+	height: 20px;
+	background-color: white;
+	border-radius: 50%;
+	border: 2px solid #006AFF;
+	z-index: 3;
+	/* border-color: #006AFF; */
+}
+
+.slider>.circle.left {
+	left: 0;
+	transform: translate(-15px, -10px);
+}
+
+.slider>.circle.right {
+	right: 0;
+	transform: translate(15px, -10px);
+}
+
+input[type="range"] {
+	position: absolute;
+	/* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
+	pointer-events: none;
+	-webkit-appearance: none;
+	z-index: 2;
+	height: 10px;
+	width: 160px;
+	opacity: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	/* 겹쳐진 두 thumb를 모두 활성화 */
+	pointer-events: all;
+	width: 30px;
+	height: 30px;
+	border-radius: 0;
+	border: 0 none;
+	background-color: red;
+	cursor: pointer;
+	/* appearance를 해야 위의 스타일들을 볼 수 있음 */
+	-webkit-appearance: none;
+}
+
+.middle-range .multi-range-slider {
+	margin-top: 10px;
+}
+
+.multi-range-slider .circle.price {
+	margin: 10px 10px;
+}
+
+.price1 {
+	float: left;
+}
+
+.price2 {
+	float: right;
+}
+
+/* 양방향 레인지 바 */
+
+
 
 .hotel {
 	flex: 5;

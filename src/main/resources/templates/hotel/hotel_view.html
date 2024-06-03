@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/hotel/hotel_view.css}" rel="stylesheet" />
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>슈슝</title>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-main">
+				<div class="hotel_name">
+					<div class="name_kr">세인트존스 호텔</div>
+					<div class="name_en">St.Jones Hotel</div>					
+				</div>
+				<hr></hr>
+				<div class="hotel_pic">
+					<div class="pic_slide">
+						<div class="pic"></div>
+						<div class="pic"></div>
+						<div class="pic"></div>
+					</div>
+					<img th:src="@{/images/skyblue_right.png}" class="right_arrow" alt="오른쪽 화살표" style="width:40px;">
+				</div>
+				<div class="hotel_info_all">
+					<div class="info_list">
+						<div class="room_choose">객실선택</div>
+						<div class="hotel_info">숙소상세정보</div>
+						<div class="hotel_review">숙소후기</div>
+						<div class="calendar">
+							<img th:src="@{/images/calendar.png}" alt="오른쪽 화살표" class="cal_pic" style="width:30px;">
+							<button type="button" class="cal_btn" style="vertical-align: middle;">2024.06.05(수) ~ 2024.06.07(금)</button>
+						</div>
+						<div class="headcount">
+							<button type="button" class="count_btn">객실 1 ⦁ 성인 2명</button>
+						</div>
+					</div>
+					<hr style="border: 1px solid #c5c5c5;"></hr>
+					<div class="hotel_room_list">
+						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">객실 선택</p>
+						<hr style="border: 0.1em solid black;"></hr>
+						<div class="wrap-room">
+							<div class="room">
+								<div class="room_cat">Superior Double, No Ocean View</div>
+								<div class="amount_num">
+									<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+									원
+								</div>
+								<button type="button" class="btn_reserve">예약하기</button>
+							</div>
+							<hr style="border: 1px solid #F1F1F1;"></hr>
+						</div>
+						<div class="wrap-room">
+							<div class="room">
+								<div class="room_cat">Superior Double, No Ocean View</div>
+								<div class="amount_num">
+									<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+									원
+								</div>
+								<button type="button" class="btn_reserve">예약하기</button>
+							</div>
+							<hr style="border: 1px solid #F1F1F1;"></hr>
+						</div>
+						<p style="font-size: var(--font5); font-color: var(--color_gray_1); margin-top: 20px;">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
+					</div>
+					<div class="room_detail">
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+	
+<script>
+$(loadedHandler);
+
+function loadedHandler(){
+	/* 오른쪽 arrow 마우스 올릴 시 사진변경되는 event */
+ $(".right_arrow").on("mouseover", btnOnHandler);
+	
+	/* 오른쪽 arrow 클릭시 호텔 사진 변하는 event */
+ $(".right_arrow").on("mouseleave", btnOffHandler);
+	
+	/* 첫 이미지 모여있는 곳에서 > 사진 눌렀을 때 그 다음 사진묶음으로 이동 */
+ $(".right_arrow").on("click", nextPicHandler);
+
+}
+
+function btnOnHandler() {
+    var currentSrc = $(this).attr('src');
+    console.log(currentSrc);
+    
+    if (currentSrc === '/shushoong/images/skyblue_right.png') {
+        $(this).attr("src", "/shushoong/images/blue_right.png").css("width", "40px");
+    }
+}
+
+function btnOffHandler() {
+    $(this).attr("src", "/shushoong/images/skyblue_right.png").css("width", "40px");
+}
+
+
+function nextPicHandler() {
+	console.log(this);
+	console.log($(this).parent().siblings('hr'));
+	
+	var htmlVal = '';
+		htmlVal += `
+			 	<div class="hotel_pic">
+					<img src="/shushoong/images/skyblue_left.png" class="left_arrow" alt="오른쪽 화살표" style="width:40px;">
+					<div class="pic_slide">
+						<div class="pic"></div>
+						<div class="pic"></div>
+						<div class="pic"></div>
+					</div>
+					<img src="/shushoong/images/skyblue_right.png" class="right_arrow" alt="오른쪽 화살표" style="width:40px;">
+				</div>
+		`;
+			
+	$(this).parent().siblings('hr').after(htmlVal);
+	$(this).parent().hide();
+}
+
+
+</script>	
+	
+</body>
+</html>

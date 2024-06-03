@@ -12,7 +12,7 @@ xmlns:th="http://www.thymeleaf.org">
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
-<title>슈슝</title>
+<title>호텔 목록</title>
 </head>
 <body>
 
@@ -36,22 +36,53 @@ xmlns:th="http://www.thymeleaf.org">
 				</div>
 				<div class="category">
 					<div class="select">
-						<select name="search" id="hotel_search" style="width:80px; height:30px; border-radius:10px;">
+						<select name="search" id="hotel_select" style="width:80px; height:30px; border-radius:10px;">
 							 <option value="price">가격</option>
 							 <option value="review">리뷰</option>
 							 <option value="grade">평점</option>
 						</select>
-						<select name="search" id="hotel_search_rate" style="width:100px; height:30px; border-radius:10px;">
+						<select name="search" id="hotel_select_rate" style="width:100px; height:30px; border-radius:10px;">
 							 <option value="low">낮은 순</option>
 							 <option value="high">높은 순</option>
 						</select>
 					</div>
 				</div>
 				<div class="container">
-					<div class="aside">
+				
+					<!-- aside 부분 -->
+					<div class="sidebar">
+						<div class="search">
+							<div class="word_search">
+								<input type="text" class="type_hotel" name="hotel_name" style="border: none; border-radius: 20px; width: 110px;"/>
+								<span><button type="button" class="btn_search">검색</button></span>
+							</div>
+						</div>
+						
+						<!-- 슬라이드 바 -->
+						 <div class="price-slider">
+						     <div class="multi-range-slider">
+						         <!-- 진짜 슬라이더 -->
+						         <input type="range" id="input-left" min="0" max="100" value="1" />
+						         <input type="range" id="input-right" min="0" max="100" value="100" />
+						
+						         <!-- 커스텀 슬라이더 -->
+						         <div class="slider">
+						             <div class="track"></div>
+						             <div class="range"></div>
+						             <div class="circle left"></div>
+						             <div class="circle right"></div>
+						         </div>
+						         <div class="circle price">
+						          <div class="price1"></div>
+						          <div class="price2"></div>
+						         </div>
+						     </div>
+						 </div>
 
-							
+			
 					</div>
+					
+					<!-- section 부분 -->
 					<div class="hotel">
 						<div class="hotel_list">
 							<div class="hotel_pic">
@@ -108,16 +139,93 @@ function loadedHandler(){
 	
 	//좋아요 버튼
 	$(".hotel_like").on("click", likeHandler);
+	
+
 };
 	
 //좋아요 누를 시 색깔 변함
 function likeHandler(){
-	console.log(this);
-	$(this).children().attr("src", "/shushoong/images/heart_color.png");
-	/* console 창에 결과나온거 보면 흰색  하트 img src 경로 보이는데 그 경로 토대로 작성 */
 	
-}
 
+	console.log(this);
+		var currentSrc = $('.heart').attr('src');
+		
+		console.log(currentSrc);
+		/* 이 경로를 토대로 이미지 바뀌는 경우의 수 적어주기 */
+		
+		if( currentSrc === '/shushoong/images/heart.png'){
+			$(this).children().attr("src", "/shushoong/images/heart_color.png");
+			/* console 창에 결과나온거 보면 흰색  하트 img src 경로 보이는데 그 경로 토대로 작성 */
+		} else {
+			$(this).children().attr("src", "/shushoong/images/heart.png");
+		}
+	}
+	
+
+const inputLeft = document.getElementById("input-left");
+const inputRight = document.getElementById("input-right");
+const circleLeft = document.querySelector(".slider > .circle.left");
+const circleRight = document.querySelector(".slider > .circle.right");
+const range = document.querySelector(".slider > .range");
+
+// 왼쪽이 움직일떼(= 왼쪽 값이 변할 때) 변경될 때 실행되는 함수
+const setLeftValue = () => {
+    // 현재 입력 값(_this)과 입력 요소의 최소값과 최대값을 가져옴
+    const _this = inputLeft;
+    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+    
+    //왼쪽값을 기준으로 으론쪽은 왼쪽에게 최대 20까지 차이날 수 있게끔함 (이 이상 오지 못함)
+    // -> 겹치지 않게 이렇게 설정
+    _this.value = Math.min(parseInt(_this.value), parseInt(inputRight.value) - 20);
+
+    // 왼쪽 thumb의 위치를 계산하여 슬라이더의 왼쪽 값을 표시
+    const leftValue = parseInt(_this.value);
+    const leftVal = document.querySelector(".price1");
+    leftVal.innerHTML = `${leftValue}`;
+    const percent = ((_this.value - min) / (max - min)) * 100;
+    circleLeft.style.left = percent + "%";
+    range.style.left = percent + "%";
+};
+
+// 오른쪽이 움직일떼(= 오른쪽 값이 변할 때) 변경될 때 실행되는 함수
+const setRightValue = () => {
+    // 현재 입력 값(_this)과 입력 요소의 최소값과 최대값을 가져옴
+    const _this = inputRight;
+    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+
+  	//오른쪽값을 기준으로 왼쪽은 오른쪽에게 최대 20까지 차이날 수 있게끔함 (이 이상 오지 못함)
+    // -> 겹치지 않게 이렇게 설정
+    _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft.value) + 20);
+
+    // 오른쪽 thumb의 위치를 계산하여 슬라이더의 오른쪽 값을 표시
+    const rightValue = parseInt(_this.value);
+    const rightVal = document.querySelector(".price2");
+    rightVal.innerHTML = `${rightValue}`;
+    const percent = ((_this.value - min) / (max - min)) * 100;
+    circleRight.style.right = 100 - percent + "%";
+    range.style.right = 100 - percent + "%";
+};
+
+
+//왼쪽 입력 값이 변경될 때와 오른쪽 입력 값이 변경될 때 해당 함수들을 호출하도록 이벤트 리스너를 설정
+inputLeft.addEventListener("input", setLeftValue);
+inputRight.addEventListener("input", setRightValue);
+
+
+// 페이지가 로드될 때 초기값을 설정하는 함수
+const setInitialValues = () => {
+    // 초기 왼쪽 값과 오른쪽 값
+    const initialLeftValue = 0;
+    const initialRightValue = 100;
+    // 초기값을 입력 요소에 설정하고, 왼쪽과 오른쪽 thumb의 위치를 조정
+    inputLeft.value = initialLeftValue;
+    inputRight.value = initialRightValue;
+    setLeftValue();
+    setRightValue();
+};
+
+// 페이지가 로드될 때 초기값 설정 함수(setInitialValues)를 호출
+window.onload = setInitialValues;
 
 </script>
 

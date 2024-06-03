@@ -130,3 +130,32 @@
 	background-color: var(--color_blue_1);
 	color: white;
 }
+
+.wrap_hotel_info{
+	margin-top: 50px;
+}
+
+.wrap_info{
+	display: grid;
+	gap : 5px;
+}
+
+.wrap_info > .section {
+	display: flex;
+}
+
+.wrap_info > hr {
+	width: 960px;
+}
+
+.wrap_info > .section > div:nth-child(1) {
+	flex-basis: 200px;
+}
+
+.wrap_info > .section > div:nth-child(2) {
+	flex-basis: 760px;
+}
+
+.wrap_hotel_review{
+	margin-top: 50px;
+}

@@ -176,12 +176,21 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						</div>
 					</div>
 					
-					
+					<!-- checkpoint -->
 					<div id="depart_date_accoding" class="according">
-						
-						<div id='calendar'></div>
+						<div id="abcv">편도</div>
+						<div id="ascv">왕복</div>
+						<div>
+							<div id='calendar'></div>
+						</div>
   
 					</div>
+					
+				<!-- 	<div id="arrival_date_accoding" class="according">
+						 <div>왕복</div>
+						<div id='calendar'></div>
+  
+					</div> -->
 					
 					
 					<div id="people_lineup_sit_accoding" class="according">
@@ -686,16 +695,55 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	
 	
     
-
+			/* 달력 api */
+		
+			
+	
     document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth'
-      });
-      calendar.render();
+    		/* 편도 일때 */
+    var ij = 0;		
+	var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+   		initialView: 'dayGridMonth',
+       	dateClick: function(info) {
+			if($("#hidden_ticket_type").val()==1){
+			   	$("#hidden_depart_date").val(info.dateStr);
+			   	document.getElementById("depart_date_accoding").style.display="none";
+			   	document.getElementById("people_lineup_sit_accoding").style.display="block";
+			}else if($("#hidden_ticket_type").val()==2){
+				console.log(ij);
+				
+				if(ij==0){
+					console.log("active i=0");
+					$("#hidden_depart_date").val(info.dateStr);
+					ij=1;
+				}else if(ij==1){
+					console.log("active i=1");
+					$("#hidden_arrival_date").val(info.dateStr);
+				   	document.getElementById("depart_date_accoding").style.display="none";
+				   	document.getElementById("people_lineup_sit_accoding").style.display="block";
+					ij=0;
+				}
+				
+			}
+       	}
     });
+    calendar.render();
+    		/* 왕복 일때 */
+    
+    });
+    
+    
 
-
+/* 	<input type="text" name="hidden_ticket_type" id="hidden_ticket_type" 	value="1" 	readonly="readonly" required="required">
+	<input type="text" name="hidden_depart_value" id="hidden_depart_value" 				readonly="readonly" required="required">
+	<input type="text" name="hidden_arrival_value" id="hidden_arrival_value"		 	readonly="readonly" required="required">
+	<input type="text" name="hidden_depart_date" id="hidden_depart_date" 				readonly="readonly" required="required">
+	<input type="text" name="hidden_arrival_date" id="hidden_arrival_date" 				readonly="readonly" required="required">
+	<input type="text" name="hidden_adult" id="hidden_adult" 				value="1" 	readonly="readonly" required="required">
+	<input type="text" name="hidden_child" id="hidden_child" 				value="0"	readonly="readonly" required="required">
+	<input type="text" name="hidden_baby" id="hidden_baby" 					value="0"	readonly="readonly" required="required">
+	<input type="text" name="hidden_sit_type" id="hidden_sit_type" 	 */
 	
 	</script>
 	

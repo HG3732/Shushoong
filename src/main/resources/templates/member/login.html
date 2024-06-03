@@ -54,9 +54,7 @@
 								</form>
 								<div class="snsLogin">
 									<div class="snsLoginTitle">
-										<hr class="bar">
-										<span class="txt">또는</span>
-										<hr class="bar">
+										또는
 									</div>
 									<div class="snsLoginBtn">
 										<div class="googleBtn">
@@ -73,7 +71,7 @@
 											</a>
 										</div>
 										<div class="naverBtn">
-											<a href=#> <img th:src="@{/images/네이버 아이콘사각.png}"
+											<a href="https://nid.naver.com/oauth2.0/authorize" th:href="@{https://nid.naver.com/oauth2.0/authorize(client_id=${naverClientId}, redirect_uri=${naverRedirectUri}, response_type='code', state=${state})}"> <img th:src="@{/images/네이버 아이콘사각.png}"
 												alt="네이버 로그인" width="50px" height="50px">
 											</a>
 										</div>

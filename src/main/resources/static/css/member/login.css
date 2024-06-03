@@ -125,6 +125,7 @@ section .login-check {
 	align-items: center;
 	margin: 5px 0 30px 10px;
 	font-size: 15px;
+	text-indent: 5px;
 }
 
 section .login-check>input[type="checkbox"] {

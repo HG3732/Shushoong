@@ -16,6 +16,4 @@ public class MemberEntity {
 	private String joinDate;
 	private Integer emailReceive;
 	private Integer msgReceivce;
-	private String provider;
-	private String providerId;
 }

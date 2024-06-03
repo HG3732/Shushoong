@@ -43,7 +43,7 @@ section .userJoinInfo > div > input {
 	/* 	글상자서식 */
 	border: 1px solid #BCEFFF;
 	border-radius: 20px;
-	width: 300px;
+	width: 400px;
 	height: 40px;
 	
 	
@@ -55,10 +55,42 @@ section .userJoinInfo > div > input {
 	/* 	배치서식 */
 	display: flex;
 	flex-direction: column;
-	margin: 10px 10px 0 10px;
+	margin: 10px 10px 20px 10px;
 }
 
 section .userJoinInfo > div > input:focus {
 	/* 	글상자서식 */
 	border: 2px solid #006AFF;
+}
+
+section .userJoinInfo > div > label {
+    font-weight: bold;
+}
+
+section .btn.idCheck, .btn.emailSend, .btn.emailCheck {
+	/* 	버튼서식 */
+	border : none;
+	border-radius: 20px;
+	width: 110px;
+	height : 40px;
+	background-color: #BCEFFF;
+	
+	/* 	글자서식 */
+	font-family: SOYOMapleRegularTTF;
+	font-size:15px;
+	font-weight: bold;
+	
+	margin: 10px 10px 20px 10px;
+}
+
+
+section .answer.email { 
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: left;
+}
+
+section .answer.email > input { 
+	width: 300px;
 }

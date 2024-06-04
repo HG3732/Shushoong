@@ -50,37 +50,39 @@ xmlns:th="http://www.thymeleaf.org">
 				<div class="container">
 				
 					<!-- aside 부분 -->
-					<div class="sidebar">
-						<div class="search">
-							<div class="word_search">
-								<p style="margin-bottom: 10px; font-size: var(--font2); font-family: 'SOYOMapleRegularTTF';">검색</p>
-								<input type="text" class="type_hotel" name="hotel_name" style="border: 1px solid #006AFF; border-radius: 10px; width: 160px; height: 25px;"/>
+					<form>
+						<div class="sidebar">
+							<div class="search">
+								<div class="word_search">
+									<p style="margin-bottom: 10px; font-size: var(--font2); font-family: 'SOYOMapleRegularTTF';">검색</p>
+									<input type="text" class="type_hotel" name="hotel_name" style="border: 1px solid #006AFF; border-radius: 10px; width: 160px; height: 25px;"/>
+								</div>
 							</div>
+							
+							<!-- 슬라이드 바 -->
+							 <p style="font-size: var(--font2); margin-bottom: 20px; font-family: 'SOYOMapleRegularTTF';">가격</p>
+							 <div class="price-slider">
+							     <div class="multi-range-slider">
+							         <!-- 진짜 슬라이더 -->
+							         <input type="range" id="input-left" min="0" max="100" value="1" />
+							         <input type="range" id="input-right" min="0" max="100" value="100" />
+							
+							         <!-- 커스텀 슬라이더 -->
+							         <div class="slider">
+							             <div class="track"></div>
+							             <div class="range"></div>
+							             <div class="circle left"></div>
+							             <div class="circle right"></div>
+							         </div>
+							         <div class="circle price">
+							          <div class="price1">가격1</div>
+							          <div class="price2">가격2</div>
+							         </div>
+							     </div>
+							 </div>
+						<button type="button" class="btn_search">검색하기</button>
 						</div>
-						
-						<!-- 슬라이드 바 -->
-						 <p style="font-size: var(--font2); margin-bottom: 20px; font-family: 'SOYOMapleRegularTTF';">가격</p>
-						 <div class="price-slider">
-						     <div class="multi-range-slider">
-						         <!-- 진짜 슬라이더 -->
-						         <input type="range" id="input-left" min="0" max="100" value="1" />
-						         <input type="range" id="input-right" min="0" max="100" value="100" />
-						
-						         <!-- 커스텀 슬라이더 -->
-						         <div class="slider">
-						             <div class="track"></div>
-						             <div class="range"></div>
-						             <div class="circle left"></div>
-						             <div class="circle right"></div>
-						         </div>
-						         <div class="circle price">
-						          <div class="price1">가격1</div>
-						          <div class="price2">가격2</div>
-						         </div>
-						     </div>
-						 </div>
-					<button type="button" class="btn_search">검색하기</button>
-					</div>
+					</form>
 					
 					
 					<!-- section 부분 -->
@@ -97,7 +99,7 @@ xmlns:th="http://www.thymeleaf.org">
 								<div class="hotel_eng">호텔영어이름</div>
 								<div class="hotel_location">호텔위치</div>
 								<div class="hotel_review">
-									<span><img th:src="@{/images/star.png}" alt="별" style="width:20px;" class="heart"></span>
+									<span><img th:src="@{/images/star_line.png}" alt="별" style="width:20px;" class="heart"></span>
 									<span>3.5/5</span>
 								</div>
 							</div>
@@ -115,7 +117,7 @@ xmlns:th="http://www.thymeleaf.org">
 								<div class="hotel_eng">호텔영어이름</div>
 								<div class="hotel_location">호텔위치</div>
 								<div class="hotel_review">
-									<span><img th:src="@{/images/star.png}" alt="별" style="width:20px;" class="heart"></span>
+									<span><img th:src="@{/images/star_line.png}" alt="별" style="width:20px;" class="heart"></span>
 									<span>3.5/5</span>
 								</div>
 							</div>
@@ -149,9 +151,9 @@ function likeHandler(){
 	
 
 	console.log(this);
-		var currentSrc = $('.heart').attr('src');
+		var currentSrc = $(this).children().attr('src');
 		
-		console.log(currentSrc);
+		console.log("현재 소스값" + currentSrc);
 		/* 이 경로를 토대로 이미지 바뀌는 경우의 수 적어주기 */
 		
 		if( currentSrc === '/shushoong/images/heart.png'){

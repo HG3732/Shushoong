@@ -55,34 +55,78 @@ xmlns:th="http://www.thymeleaf.org">
 						</div>
 					</div>
 					<hr style="border: 1px solid #c5c5c5;"></hr>
+					
 					<div class="hotel_room_list">
 						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">객실 선택</p>
-						<hr style="border: 0.1em solid black;"></hr>
-						<div class="wrap-room">
-							<div class="room">
-								<div class="room_cat">Superior Double, No Ocean View</div>
-								<div class="amount_num">
-									<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
-									원
+						<hr style="border: 0.1em solid black;"></hr>	
+							<form>
+								<div class="wrap_room">
+									<div class="room">
+										<div class="room_cat">Superior Double, No Ocean View</div>
+										<div class="amount_num">
+											<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+											원
+										</div>
+										<button type="button" class="btn_reserve">예약하기</button>
+									</div>
+									<hr style="border: 1px solid #F1F1F1;"></hr>
 								</div>
-								<button type="button" class="btn_reserve">예약하기</button>
-							</div>
-							<hr style="border: 1px solid #F1F1F1;"></hr>
-						</div>
-						<div class="wrap-room">
-							<div class="room">
-								<div class="room_cat">Superior Double, No Ocean View</div>
-								<div class="amount_num">
-									<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
-									원
+							</form>
+							<form>
+								<div class="wrap-room">
+									<div class="room">
+										<div class="room_cat">Superior Double, No Ocean View</div>
+										<div class="amount_num">
+											<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+											원
+										</div>
+										<button type="button" class="btn_reserve">예약하기</button>
+									</div>
+									<hr style="border: 1px solid #F1F1F1;"></hr>
 								</div>
-								<button type="button" class="btn_reserve">예약하기</button>
-							</div>
-							<hr style="border: 1px solid #F1F1F1;"></hr>
-						</div>
+							</form>
+							<form>
+								<div class="wrap-room">
+									<div class="room">
+										<div class="room_cat">Superior Double, No Ocean View</div>
+										<div class="amount_num">
+											<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+											원
+										</div>
+										<button type="button" class="btn_reserve">예약하기</button>
+									</div>
+									<hr style="border: 1px solid #F1F1F1;"></hr>
+								</div>
+							</form>
+							<form>
+								<div class="wrap-room">
+									<div class="room">
+										<div class="room_cat">Superior Double, No Ocean View</div>
+										<div class="amount_num">
+											<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+											원
+										</div>
+										<button type="button" class="btn_reserve">예약하기</button>
+									</div>
+									<hr style="border: 1px solid #F1F1F1;"></hr>
+								</div>
+							</form>
+							<form>
+								<div class="wrap-room">
+									<div class="room">
+										<div class="room_cat">Superior Double, No Ocean View</div>
+										<div class="amount_num">
+											<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+											원
+										</div>
+										<button type="button" class="btn_reserve">예약하기</button>
+									</div>
+									<hr style="border: 1px solid #F1F1F1;"></hr>
+								</div>
+							</form>
+							<button type="button" class="more_room_btn" style="margin-left: 450px;">전체보기</button>						
 						<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
 					</div>
-					
 					<!-- 숙소상세정보 -->
 					<div class="wrap_hotel_info">
 						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">숙소상세정보</p>
@@ -132,8 +176,33 @@ xmlns:th="http://www.thymeleaf.org">
 							<hr></hr>
 							
 							<div class="section">
-								<div class="hotel_facility">편의시설	</div>
-								<div class="hotel_facility_write">asd</div>
+								<div class="hotel_facility">편의시설</div>
+								<div class="hotel_facility_write">
+									<div class="wifi">
+										<img th:src="@{/images/wifi.png}" class="wifi_img" alt="무선인터넷" style="width:15px;">
+										<p style="margin-left: 10px;">와이파이</p>
+									</div>
+									<div class="parking">
+										<img th:src="@{/images/parking.png}" class="parking_img" alt="주차장" style="width:15px;">
+										<p style="margin-left: 10px;">주차</p>
+									</div>
+									<div class="restaurant">
+										<img th:src="@{/images/restaurant.png}" class="restaurant_img" alt="레스토랑" style="width:15px;">
+										<p style="margin-left: 10px;">레스토랑</p>
+									</div>
+									<div class="pool">
+										<img th:src="@{/images/pool.png}" class="pool_img" alt="수영장" style="width:15px;">
+										<p style="margin-left: 10px;">수영장</p>
+									</div>
+									<div class="fitness">
+										<img th:src="@{/images/fitness.png}" class="fitness_img" alt="피트니스센터" style="width:15px;">
+										<p style="margin-left: 10px;">피트니스 센터</p>
+									</div>
+									<div class="air_con">
+										<img th:src="@{/images/air_con.png}" class="air_con_img" alt="에어컨" style="width:15px;">
+										<p style="margin-left: 10px;">에어컨</p>
+									</div>	
+								</div>
 							</div>
 							<hr></hr>
 							
@@ -239,14 +308,17 @@ $(loadedHandler);
 
 function loadedHandler(){
 	/* 오른쪽 arrow 마우스 올릴 시 사진변경되는 event */
- $(".right_arrow").on("mouseover", btnOnHandler);
-	
+	$(".right_arrow").on("mouseover", btnOnHandler);
+		
 	/* 오른쪽 arrow 클릭시 호텔 사진 변하는 event */
- $(".right_arrow").on("mouseleave", btnOffHandler);
-	
+	$(".right_arrow").on("mouseleave", btnOffHandler);
+		
 	/* 첫 이미지 모여있는 곳에서 > 사진 눌렀을 때 그 다음 사진묶음으로 이동 */
- $(".right_arrow").on("click", nextPicHandler);
-
+	$(".right_arrow").on("click", nextPicHandler);
+	
+	/* 객실 전체보기 */
+	$(".more_room_btn").on("click", showAllRoomHandler);
+	
 	/* displayReviewChart(); */
 	
 }
@@ -290,6 +362,46 @@ function nextPicHandler() {
 	
 }
  */
+ 
+function showAllRoomHandler(){
+	console.log(this);
+	console.log($(this).siblings());
+	 
+	htmlVal = "";
+	htmlVal += `
+				<form>
+					<div class="wrap-room">
+						<div class="room">
+							<div class="room_cat">Superior Double, No Ocean View</div>
+							<div class="amount_num">
+								<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+								원
+							</div>
+							<button type="button" class="btn_reserve">예약하기</button>
+						</div>
+						<hr style="border: 1px solid #F1F1F1;"></hr>
+					</div>
+				</form>
+				<form>
+					<div class="wrap-room">
+						<div class="room">
+							<div class="room_cat">Superior Double, No Ocean View</div>
+							<div class="amount_num">
+								<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+								원
+							</div>
+							<button type="button" class="btn_reserve">예약하기</button>
+						</div>
+						<hr style="border: 1px solid #F1F1F1;"></hr>
+					</div>
+				</form>
+			`;
+			
+			$(this).before(htmlVal);
+			$(this).hide();
+}
+
+ 
 </script>	
 	
 </body>

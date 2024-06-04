@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import kh.mclass.shushoong.member.model.domain.MemberEntity;
+import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.member.model.service.MemberSecurityService;
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +15,7 @@ public class LoginController {
 	private final MemberSecurityService memberService;
 
 	@Autowired
-	private MemberEntity memberEntity;
+	private MemberDto memberDto;
 
 	// 로그인 페이지로 이동
 	@GetMapping("login")

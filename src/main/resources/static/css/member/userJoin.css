@@ -1,20 +1,22 @@
 @charset "UTF-8";
 
-input,
-input:focus,
-textarea,
-textarea:focus {
-  outline: none !important;
-  box-shadow: none !important;
+small {
+    visibility: hidden;
+    padding: 0px 0px 2px 10px;
+    margin-bottom: 10px;
+    font-size: 10px;
 }
 
-/* input[type="checkbox"]{ */
-/*         display: none; */
-/* } */
+.error small {
+    font-size: 10px;
+    color: red;
+    visibility: visible;
+}
 
-/* section .main input[type=radio] { */
-/* 	display: none; */
-/* } */
+input, input:focus, textarea, textarea:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
 
 .wrap-section {
 	display: flex;
@@ -39,78 +41,152 @@ section .userJoinInfo {
 	align-items: flex-start;
 }
 
-section .userJoinInfo > div > input {
+section .longinput {
 	/* 	글상자서식 */
 	border: 1px solid #BCEFFF;
 	border-radius: 20px;
 	width: 400px;
 	height: 40px;
-	
-	
 	/* 	글자서식 */
 	font-family: SOYOMapleRegularTTF;
 	text-indent: 10px;
-	font-size:15px;
-	
+	font-size: 15px;
 	/* 	배치서식 */
 	display: flex;
 	flex-direction: column;
-	margin: 10px 10px 20px 10px;
+	margin: 10px 10px 5px 10px;
 }
 
-section .userJoinInfo > div > input:focus {
+section .shortinput {
 	/* 	글상자서식 */
-	border: 2px solid #006AFF;
+	border: 1px solid #BCEFFF;
+	border-radius: 20px;
+	width: 285px;
+	height: 40px;
+	/* 	글자서식 */
+	font-family: SOYOMapleRegularTTF;
+	text-indent: 10px;
+	font-size: 15px;
+	/* 	배치서식 */
+	margin: 10px 0 5px 10px;
 }
 
-section .userJoinInfo > div > label {
-    font-weight: bold;
+section .userJoinInfo>div>input:focus {
+	/* 	글상자서식 */
+	border: 3px solid #006AFF;
+}
+
+section .userJoinInfo>div>label {
+	display: flex;
+	justify-content: left;
+	text-indent: 20px;
+	font-weight: bold;
 }
 
 section .btn.idCheck, .btn.emailSend, .btn.emailCheck {
 	/* 	버튼서식 */
-	border : none;
+	border: none;
 	border-radius: 20px;
 	width: 110px;
-	height : 40px;
-	background-color: #BCEFFF;
-	cursor:pointer;
-	
-	/* 	글자서식 */
-	font-family: SOYOMapleRegularTTF;
-	font-size:15px;
-	font-weight: bold;
-	
-	margin: 10px 10px 20px 10px;
-}
-
-section .answer.email, .idlayout, .userEmaillayout > input {
-	/* 	글상자서식 */
-	border: 1px solid #BCEFFF;
-	border-radius: 20px;
-	width: 300px;
 	height: 40px;
-	
-	
+	background-color: #BCEFFF;
+	cursor: pointer;
 	/* 	글자서식 */
 	font-family: SOYOMapleRegularTTF;
-	text-indent: 10px;
-	font-size:15px;
-	
-	/* 	배치서식 */
-	display: flex;
-	flex-direction: column;
-	margin: 10px 10px 20px 10px;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 10px 10px 5px 10px;
 }
 
+section .btn.idCheck, .btn.emailSend, .btn.emailCheck {
+	margin: auto;
+}
 
-section .emailChecklayout { 
+section .receive-marketing {
+	margin: 40px 0 60px 0;
+	text-align: left;
+}
+
+section .marketing-title {
+	font-weight: bold;
+	font-size: 17px;
+	margin-bottom: 30px;
+}
+
+input[type="checkbox"] {
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	border: none;
+	appearance: none;
+	cursor: pointer;
+	transition: background 0.2s;
+	background-color: #BCEFFF;
+}
+
+input[type="checkbox"]:checked {
+	background: #006AFF;
+	border: none;
+}
+
+section .checkSelection {
 	display: flex;
 	flex-wrap: wrap;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: left;
 }
 
-section .answer.email, .idlayout, .userEmaillayout > input { 
+section .on {
+	text-indent: 5px;
+}
+
+section .allchk {
+	font-weight: bold;
+}
+
+section .allchk, .serviceCheck, .privacyCheck {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+section .marketingsend {
+	display: flex;
+	justify-content: left;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+section .choice {
+	display: flex;
+	flex-direction: row;
+}
+
+section .smsMarketing, .emailMarketing {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	margin : 0 0 10px 50px;
+}
+
+section .text {
+	margin-left: 53px;
+	font-size: 13px;
+}
+
+section .btn.userJoin {
+	/* 스타일서식 */
 	width: 300px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	background-color: #006AFF;
+	color: white;
+	font-size: 17px;
+	font-family: SOYOMapleRegularTTF;
+	font-weight: bold;
+	
+	margin-bottom: 80px;
 }

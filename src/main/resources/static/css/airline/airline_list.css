@@ -216,6 +216,10 @@ input[type="range"]::-webkit-slider-thumb {
     appearance: none;         /* 브라우저 기본 스타일 제거 (기타) */
 }
 
+.layover-list .layover-select .direct-btn img{
+	width: 20px;
+}
+
 body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.layover-list > form > div.layover-select > label:nth-child(2){
 	margin-right: 20px;
 }

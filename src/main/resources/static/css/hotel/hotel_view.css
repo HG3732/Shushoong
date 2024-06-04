@@ -130,3 +130,75 @@
 	background-color: var(--color_blue_1);
 	color: white;
 }
+
+.wrap_hotel_info{
+	margin-top: 50px;
+}
+
+.wrap_info{
+	display: grid;
+	gap : 5px;
+}
+
+.wrap_info > .section {
+	display: flex;
+}
+
+.wrap_info > hr {
+	width: 960px;
+}
+
+.wrap_info > .section > div:nth-child(1) {
+	flex-basis: 200px;
+}
+
+.wrap_info > .section > div:nth-child(2) {
+	flex-basis: 760px;
+}
+
+.wrap_hotel_review{
+	margin-top: 50px;
+}
+
+.review_detail{
+	display: flex;
+	align-items: center;
+}
+
+
+.vertical_line{
+	border-left : 3px solid #c5c5c5;
+    height : 200px;
+}
+
+.review_info_wrap{
+	display: flex;
+	align-items: center;
+	margin: 20px 0;
+}
+
+.review_info_wrap > div:nth-child(1) {
+	flex-basis: 350px;
+}
+
+.review_rate{
+	font-size: var(--font1); margin-left: 20px; 
+	color: var(--color_blue_1); 
+	font-family: 'SOYOMapleBoldTTF';
+}
+
+.review_id{
+	margin-top: 20px;
+	display: flex;
+}
+
+.review_tripper{
+	margin-top: 10px;
+	display: flex;
+}
+
+.review_content{
+	background-color: var(--color_gray_3); 
+	border-radius: 20px;
+	padding: 20px;
+}

@@ -190,7 +190,12 @@ div#depart_accoding , div#arrival_accoding{
 
 
 							/* according_section 섹션 -- 날짜 */
-
+#abcv{
+	display: block;
+}
+#ascv{
+	display: none;
+}
 
 
 

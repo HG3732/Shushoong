@@ -39,6 +39,8 @@ xmlns:th="http://www.thymeleaf.org">
 					</div>
 					<img th:src="@{/images/skyblue_right.png}" class="right_arrow" alt="오른쪽 화살표" style="width:40px;">
 				</div>
+				
+				<!-- 객실정보 -->
 				<div class="hotel_info_all">
 					<div class="info_list">
 						<div class="room_choose">객실선택</div>
@@ -78,9 +80,150 @@ xmlns:th="http://www.thymeleaf.org">
 							</div>
 							<hr style="border: 1px solid #F1F1F1;"></hr>
 						</div>
-						<p style="font-size: var(--font5); font-color: var(--color_gray_1); margin-top: 20px;">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
+						<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
 					</div>
-					<div class="room_detail">
+					
+					<!-- 숙소상세정보 -->
+					<div class="wrap_hotel_info">
+						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">숙소상세정보</p>
+						<hr style="border: 0.1em solid black;"></hr>
+						<div class="wrap_info">
+							<div class="section">
+								<div class="basic_info">기본정보</div>
+								<div class="hotel_about_write">
+									<p>호텔명 : 인터컨티넨탈 로스앤젤레스 다운타운, IHG 호텔</p>
+									<p>주소 : 900 Wilshire Blvd United States</p>
+									<p>전화 : 1-213-6887777</p>
+									<p>팩스 :</p>
+								</div>
+							</div>
+							<hr></hr>
+							
+							<div class="section">
+								<div class="hotel_intro">호텔소개</div>
+								<div class="hotel_intro_write">
+									인터컨티넨탈 로스앤젤레스 다운타운, IHG 호텔의 경우 로스앤젤레스 중심에 있으며 걸어서 4분 거리에는 
+									메이시스 플라자, 9분 거리에는 퍼싱 스퀘어(공원) 등이 있습니다. 이 럭셔리 호텔에서 L.A. 라이브까지는 
+									1.1km 떨어져 있으며, 1.1km 거리에는 그래미 박물관도 있습니다.
+								</div>
+							</div>
+							<hr></hr>
+							
+							<div class="section">
+								<div class="hotel_check">체크인/아웃</div>
+								<div class="hotel_check_write">
+									<p>체크인 : 4:00 PM ~ midnight</p>
+									<p>체크아웃 : 11:00 AM</p>
+									<br>
+ 									<p style="font-size: var(--font4);">* 대표 체크인/아웃 시간은 객실별, 요일별로 상이할 수 있습니다. 자세한 정책은 해당 호텔측에 확인 해 주세요.</p>
+								</div>
+							</div>
+							<hr></hr>
+							
+							<div class="section">
+								<div class="room_explain">객실</div>
+								<div class="room_explain_write">
+									에어컨이 설치된 889개의 객실에는 미니바 및 평면 TV도 갖추어져 있어 편하게 머무실 수 있습니다. 유선 및 무선 
+									인터넷이 무료로 제공되며 위성 채널 프로그램도 구비되어 있어 지루하지 않게 시간을 보내실 수 있습니다. 
+									별도의 욕조 및 샤워 시설을 갖춘 전용 욕실에는 고급 세면용품 및 헤어드라이어도 마련되어 있습니다. 
+									편의 시설/서비스로는 전화 외에 금고 및 책상도 있습니다.
+								</div>
+							</div>
+							<hr></hr>
+							
+							<div class="section">
+								<div class="hotel_facility">편의시설	</div>
+								<div class="hotel_facility_write">asd</div>
+							</div>
+							<hr></hr>
+							
+							<div class="section">
+								<div class="hotel_policy">유의사항	 </div>
+								<div class="hotel_policy_write">
+									<p>뷔페식아침 식사 요금: 성인 USD 51, 어린이 USD 30(대략적인 금액)</p>
+									<p>주차 대행 요금: 1일 기준, USD 68.2(자유롭게 출입 가능)</p>
+									<p>반려동물 동반 시 요금: 숙박 기간 내 1회, 숙소당 USD 125</p>
+									<p>장애인 안내 동물의 경우 요금 면제</p>
+									<p>유아용 침대: 숙박 기간 내 1회, USD 50.0</p>
+									<p>간이 침대 이용 요금: 숙박 기간 내 1회, USD 50</p>
+									<p>위 목록에 명시되지 않은 다른 항목이 있을 수 있습니다. 요금 및 보증금은 세전 금액일 수 있으며 변경될 수 있습니다.</p>
+								</div>
+							</div>
+							<hr></hr>
+							
+							<div class="section">
+								<div class="hotel_sanitary">위생 및 안전조치</div>
+								<div class="hotel_sanitary_write">
+									<p>법인 호스트/관리자</p>
+									<p>주요 접촉 구역에 고객과 직원 간 가림막 있음</p>
+									<p>성소수자 환영</p>
+									<p>고객 체온 검사 실시 가능</p>
+									<p>사회적 거리두기 시행 중</p>
+									<p>지원 대상 체온 검사를 정기적으로 실시함</p>
+									<p>고객에게 무료 손 소독제 제공</p>
+									<p>숙박 시설을 소독제로 청소함</p>
+									<p>무현금 거래 이용 가능</p>
+									<p>직원이 개인 보호 장비 착용함</p>
+									<p>안전 조치 강화를 위한 음식 서비스 변경 있음</p>
+									<p>침구 및 타월을 60°C 이상의 고온으로 세탁함</p>
+									<p>고객에게 마스크 제공 가능</p>							
+								</div>
+							</div>
+							<hr></hr>
+						</div><!-- wrap_info -->
+					</div><!-- wrap hotel info -->
+					
+					<!-- 호텔리뷰 -->
+					<div class="wrap_hotel_review">
+						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">호텔후기</p>
+						<hr style="border: 0.1em solid black;"></hr>
+						<!-- 리뷰 차트 -->
+						<div class="review_detail">
+							<div class="review_rate_avg"><strong style="font-family: 'SOYOMapleBoldTTF';font-size: 28px; color: var(--color_blue_1)">4.3</strong> / 5</div>
+							<div class="review_count" style="margin-left: 15px;" >(1436개)</div>
+							<div class="vertical_line"></div>
+							<div class="grid-item">
+								<canvas id="myChart3" ></canvas>
+							</div>
+						</div>
+						<hr style="border: 1px solid #c5c5c5;"></hr>
+						<div class="review_info_wrap">
+							<div class="review_grade">
+								<p class="review_rate">4.3</p>
+								<div class="review_id">
+									<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+									<p>gyrua34</p>
+								</div>
+								<div class="review_tripper">
+									<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:15px;">										
+									<p>출장여행객</p>
+								</div>
+							</div>
+							<div class="review_content">
+								<p>"깔끔하고 마음에 들어요!"</p>
+								<p>호텔 급에 비해 시설은 그냥 그런 듯. 세면대 물이 잘 내려가지 않았고 화장실에 쓰레기통도 없었음. 직원분들은 너무너무 친절해서 좋았습니다. 특히 우버탈 때 직접 짐도 실어주신 분 감사했어요:)</p>
+								<p>2024년 5월 24일</p>
+							</div>
+						</div>
+						<hr style="border: 1px solid #c5c5c5;"></hr>
+						<div class="review_info_wrap">
+							<div class="review_grade">
+								<p class="review_rate">4.3</p>
+								<div class="review_id">
+									<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+									<p>gyrua34</p>
+								</div>
+								<div class="review_tripper">
+									<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:15px;">										
+									<p>출장여행객</p>
+								</div>
+							</div>
+							<div class="review_content">
+								<p>"깔끔하고 마음에 들어요!"</p>
+								<p>호텔 급에 비해 시설은 그냥 그런 듯. 세면대 물이 잘 내려가지 않았고 화장실에 쓰레기통도 없었음. 직원분들은 너무너무 친절해서 좋았습니다. 특히 우버탈 때 직접 짐도 실어주신 분 감사했어요:)</p>
+								<p>2024년 5월 24일</p>
+							</div>
+						</div>
 					</div>
 				</div>	
 			</div>
@@ -104,6 +247,8 @@ function loadedHandler(){
 	/* 첫 이미지 모여있는 곳에서 > 사진 눌렀을 때 그 다음 사진묶음으로 이동 */
  $(".right_arrow").on("click", nextPicHandler);
 
+	/* displayReviewChart(); */
+	
 }
 
 function btnOnHandler() {
@@ -141,7 +286,10 @@ function nextPicHandler() {
 	$(this).parent().hide();
 }
 
-
+/* function displayReviewChart(){
+	
+}
+ */
 </script>	
 	
 </body>

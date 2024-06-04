@@ -32,30 +32,37 @@ xmlns:th="http://www.thymeleaf.org">
 							<div class="userJoinInfo">
 								<div class="idwrite">
 									<label for="userId">아이디</label>
-									<input type="text" name="userId" autofocus>
-									<button type="button" class="btn idCheck">중복확인</button>
+									<div class="idlayout">
+										<input type="text" name="userId" placeholder="4-15자 영문, 숫자" autofocus>
+										<button type="button" class="btn idCheck">중복확인</button>
+									</div>
 								</div>
 								<div class="namewrite">
 									<label for="userName">이름</label>
-									<input type="text" name="userName">
+									<input type="text" name="userName" placeholder="이름">
 								</div>
 								<div class="passwordwrite">
 									<label for="userPwd">비밀번호</label>
-									<input type="password" name="userPwd">
+									<input type="password" name="userPwd" placeholder="8-20자의 영문, 숫자, 특수문자">
 								</div>
 								<div class="check password">
 									<label for="pwdCheck">비밀번호 확인</label>
-									<input type="password" name="pwdCheck">
+									<input type="password" name="pwdCheck" placeholder="비밀번호 재입력">
 								</div>
 								<div class="send num">
 									<label for="userEmail">이메일</label>
-									<input type="text" name="userEmail">
-									<button type="button" class="btn emailCheck">중복확인</button>
+									<div class="userEmaillayout">
+										<input type="text" name="userEmail" placeholder="이메일 입력">
+										<button type="button" class="btn emailSend" >인증번호 전송</button>
+									</div>
 								</div>
+								
 								<div class="answer email">
 									<label for="emailCheck">인증번호</label>
-									<input type="text" name="emailCheck">
-									<button type="button" class="btn emailCheck">인증확인</button>
+									<div class="emailChecklayout">
+										<input type="text" name="emailCheck" placeholder="인증번호 입력">
+										<button type="button" class="btn emailCheck">인증확인</button>
+									</div>
 								</div>
 							</div>
 							<div class="receive-marketing">
@@ -91,37 +98,7 @@ xmlns:th="http://www.thymeleaf.org">
 	</div>
 	
 	<script>
-		//체크박스 전체 선택 클릭 이벤트
-		function allChecked(target) {
-			// 전체 체크박스 버튼
-			const checkbox = document.getElementById('allCheckBox');
-			
-			// 전체 체크박스 체크 여부
-			const is_checked = checkbox.checked;
-			
-			// 전체 체크박스 제외한 모든 체크
-			if(is_checked) {
-				// 체크박스 전체 체크
-				checkAllChecked();
-			} else {
-				// 체크박스 전체 해제
-				checkAllUnchecked();
-			}
-		}
-		
-		// 체크박스 전체 체크 
-		function checkAllChecked() {
-			document.querySelectorAll(".chk").forEach(function(v, i) {
-				v.checked = true;
-			}); 
-		}
-		
-		// 체크박스 전체 체크 해제 
-		function checkAllUnchecked() {
-			document.querySelectorAll(".chk").forEach(function(v,i) {
-				v.checked = false;
-			});
-		}
+
 	</script>
 </body>
 </html>

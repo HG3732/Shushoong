@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/airline/airline_info.css}" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>슈슝</title>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-">
+			<!-- 여기부터 작성 -->
+				<form action="" method="post">
+					<section class="reserve_process">
+						<div>
+							<div>1</div>
+							<div>2</div>
+							<div>3</div>
+						</div>
+					</section>
+					<section class="reserver_info">
+						<div>
+							<div>이름</div>
+							<div><input type="text" name="reserver_name" placeholder="이름을 입력해 주세요"></div>
+						</div>
+						<div>
+							<div>휴대전화번호</div>
+							<div>
+								<select name="local_num">
+									<option selected value="0">선택하기</option>
+						            <option value="010">010</option>
+						            <option value="02">02</option>
+						            <option value="051">051</option>
+						            <option value="052">052</option>
+								</select>
+								<input type="text" name="reserver_phone_number">
+							</div>
+						</div>
+						<div>
+							<div>이메일 주소</div>
+							<div><input type="text" name="reserver_email"></div>
+						</div>
+					</section>
+					
+					<section class="passenger_info">
+						<div>
+							<div>성별</div>
+							<div>
+								<input type="radio" id="passenger_gender" value="M">
+								<input type="radio" id="passenger_gender" value="F">
+							</div>
+						</div>
+						<div>
+							<div>영문 이름 \n (First Name)</div>
+							<div><input type="text" placeholder="여권에 적힌 이름을 영어로 입력해 주세요" name="passenger_firstName"></div>
+							<div>영문 성 \n (Last Name)</div>
+							<div><input type="text" placeholder="여권에 적힌 성씨를 영어로 입력해 주세요" name="passenger_lastName"></div>
+						</div>
+						<div>
+							<div>생년월일</div>
+							<div><button name="passenger_birth">생년-월-일 <img alt="달력 이미지" src=""></button></div>
+							<div>국적</div>
+							<div>
+								<select name="passenger_nation">
+									<option selected value="0">선택하기</option>
+						            <option value="한국">korean</option>
+						            <option value="미국">american</option>
+						            <option value="중국">chinese</option>
+						            <option value="일본">japanese</option>
+								</select>
+							</div>
+						</div>
+						<div>
+							<div>여권 번호 (TODO : ko-ko일경우 display : none)</div>
+							<div><input type="text"></div>
+							<div>여권 만료일(TODO : ko-ko일경우 display : none)</div>
+							<div><button>연도-월-일 <img alt="달력 이미지" src=""></button></div>
+						</div>
+					</section>
+					
+					<section class="select_baggage">
+						<div>~10kg</div>
+						<div>~20kg</div>
+						<div>~30kg</div>
+						<div>~40kg</div>
+						<div>
+							<img alt="수하물~10" src="">
+							<div><div>KRW</div><div>0</div></div>
+							<input type="radio" id="baggage_size" value="1">
+						</div>
+						<div>
+							<img alt="수하물~20" src="">
+							<div><div>KRW</div><div>0</div></div>
+							<input type="radio" id="baggage_size" value="2">
+						</div>
+						<div>
+							<img alt="수하물~30" src="">
+							<div><div>KRW</div><div>0</div></div>
+							<input type="radio" id="baggage_size" value="3">
+						</div>
+						<div>
+							<img alt="수하물~40" src="">
+							<div><div>KRW</div><div>0</div></div>
+							<input type="radio" id="baggage_size" value="4">
+						</div>
+						
+					</section>
+					
+					<input type="submit" value="결제 페이지로 이동">
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+</body>
+</html>

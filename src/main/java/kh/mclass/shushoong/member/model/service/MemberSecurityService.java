@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import kh.mclass.shushoong.member.model.domain.MemberEntity;
+import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.member.model.domain.MemberRole;
 import kh.mclass.shushoong.member.model.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,13 +25,13 @@ public class MemberSecurityService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 		System.out.println("Member Service 체크.");
-		Optional<MemberEntity> loginDtoOp = Optional.ofNullable(memberRepository.login(userId));
+		Optional<MemberDto> loginDtoOp = Optional.ofNullable(memberRepository.login(userId));
 		System.out.println(loginDtoOp);
 		if(loginDtoOp.isEmpty()) {
 			throw new UsernameNotFoundException("존재하지 않는 아이디입니다.");
 		}
 		
-		MemberEntity loginDto = loginDtoOp.get();
+		MemberDto loginDto = loginDtoOp.get();
 		System.out.println(loginDto);
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		switch(loginDto.getUserGrade()) {

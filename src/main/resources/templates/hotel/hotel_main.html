@@ -9,10 +9,35 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/hotel/hotel_main.css}" rel="stylesheet" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
 <meta charset="UTF-8">
+	<style>
+		#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button {
+			background-color: #BCEFFF;
+		}
+		#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button > span {
+			color: black;
+		}
+		#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button:hover {
+			background-color: #006AFF;
+		}
+		#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button:hover * {
+			color: white;
+		}
+	</style>
 <title>Insert title here</title>
 <script>
+var select_status = 0;
+let today = new Date();
+let today_year = today.getFullYear(); // 년도
+let today_month = today.getMonth() + 1;  // 월
+let today_day = today.getDate();  // 날짜
+console.log(today_year);
+console.log(today_month);
+console.log(today_day);
+
 $(loadedHandler)
+	
 	function loadedHandler() {
 		$('.input.location').on('click', locationClickHandler);
 		$('.country').on('click', localClickHandler);
@@ -55,7 +80,7 @@ $(loadedHandler)
 					<div style="height: 220px;"></div>
 					<div class="hotel-search-bar">
 						<button type="button" class="input location"><span>도시명 또는 호텔명</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
-						<button type="button" class="input time"><span>숙박 일정</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
+						<button type="button" class="input time"><span>숙박 일정</span><span class="check-in-date"></span> - <span class="check-out-date"></span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
 						<button type="button" class="input room"><span>객실 1 - 성인 2, 아동 0</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
 						<button type="button" class="search">검색</button>
 					</div>
@@ -123,12 +148,56 @@ $(loadedHandler)
 						</div>
 					</div>
 					<div class="wrap-date-box">
-						
+						<div id='calendar'></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
-
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+       var calendarEl = document.getElementById('calendar');
+       var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale:'ko',
+        headerToolbar:{
+			left:'prevYear prev',
+			center:'title' ,
+			right:'next nextYear' 				
+		},
+		selectable : true,
+		droppable : true,
+		editable : true,
+		dateClick : function (info) {
+			//클릭한 날짜 == info.dateStr
+			console.log(info.dateStr);
+			
+			var year = info.dateStr.substr(0, 4);
+			var month = info.dateStr.substr(5, 2);
+			var day = info.dateStr.substr(8, 2);
+			if(today_year > year || today_month > month || today_day > day) {	//현재 날짜 이전의 시간을 선택한다면
+				alert("현재 날짜 이전은 선택하실 수 없습니다.");
+			} else {
+				if(select_status == 0){	//체크인 날짜 선택
+					var startdate = $('.check-in-date').text(year + "년" + month + "월" + day + "일");
+					date1 = new Date(info.dateStr); 
+					select_status = 1;
+				} else {
+					date2 = new Date(info.dateStr); 
+					console.log(date1 < date2);
+					if(date1 <= date2) {
+						$('.check-out-date').text(year + "년" + month + "월" + day + "일");
+						select_status = 0;
+					} else {
+						$('.check-in-date').text(year + "년" + month + "월" + day + "일");
+						$('.check-out-date').text("");
+					}
+				}
+			}
+		}
+       });
+       calendar.render();
+     });
+</script>
 </html>

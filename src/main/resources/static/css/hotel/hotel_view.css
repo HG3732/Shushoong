@@ -96,6 +96,7 @@
 
 .hotel_room_list{
 	margin-top: 50px;
+	
 }
 
 .room{
@@ -129,4 +130,132 @@
 	font-family: 'SOYOMapleBoldTTF';
 	background-color: var(--color_blue_1);
 	color: white;
+}
+
+.more_room_btn{
+	background-color: var(--color_blue_2);
+	border: none;
+	padding: 15px;
+	border-radius: 10px;
+	font-family: 'SOYOMapleRegularTTF';
+}
+
+.more_room_btn:hover{
+	cursor: pointer;
+	background-color: var(--color_blue_1);
+	border: none;
+	padding: 15px;
+	color: white;
+	border-radius: 10px;
+	font-family: 'SOYOMapleBoldTTF';
+
+}
+
+.wrap_hotel_info{
+	margin-top: 50px;
+}
+
+.wrap_info{
+	display: grid;
+	gap : 5px;
+}
+
+.wrap_info > .section {
+	display: flex;
+}
+
+.wrap_info > hr {
+	width: 960px;
+}
+
+.wrap_info > .section > div:nth-child(1) {
+	flex-basis: 200px;
+}
+
+.wrap_info > .section > div:nth-child(2) {
+	flex-basis: 760px;
+}
+
+.wifi{
+	display: flex;
+	align-items: center;	
+}
+
+.parking{
+	display: flex;
+	align-items: center;	
+	margin-top: 15px;
+}
+
+
+.restaurant{
+	display: flex;
+	align-items: center;
+	margin-top: 15px;	
+}
+
+.pool{
+	display: flex;
+	align-items: center;
+	margin-top: 15px;	
+}
+
+.fitness{
+	display: flex;
+	align-items: center;
+	margin-top: 15px;	
+}
+
+.air_con{
+	display: flex;
+	align-items: center;
+	margin-top: 15px;	
+}
+
+
+.wrap_hotel_review{
+	margin-top: 50px;
+}
+
+.review_detail{
+	display: flex;
+	align-items: center;
+}
+
+
+.vertical_line{
+	border-left : 3px solid #c5c5c5;
+    height : 200px;
+}
+
+.review_info_wrap{
+	display: flex;
+	align-items: center;
+	margin: 20px 0;
+}
+
+.review_info_wrap > div:nth-child(1) {
+	flex-basis: 350px;
+}
+
+.review_rate{
+	font-size: var(--font1); margin-left: 20px; 
+	color: var(--color_blue_1); 
+	font-family: 'SOYOMapleBoldTTF';
+}
+
+.review_id{
+	margin-top: 20px;
+	display: flex;
+}
+
+.review_tripper{
+	margin-top: 10px;
+	display: flex;
+}
+
+.review_content{
+	background-color: var(--color_gray_3); 
+	border-radius: 20px;
+	padding: 20px;
 }

@@ -99,7 +99,7 @@ button#arrival{
 	height: 40px;
 }
 
-button#depart_date{
+button#one_way_date , button#round_trip_date{
 	display : flex;
 	width: 150px;
 	height: 40px;
@@ -107,12 +107,12 @@ button#depart_date{
 	background: none;
 }
 
-button#depart_date > div{
+button#one_way_date > div , button#round_trip_date > div{
 	width: 130px;
 	line-height: 40px;
 }
 
-button#depart_date > img{
+button#one_way_date > img , button#round_trip_date > img{
 	width: 20px;
 	height: 40px;
 }
@@ -190,8 +190,21 @@ div#depart_accoding , div#arrival_accoding{
 
 
 							/* according_section 섹션 -- 날짜 */
+#date_accoding{
+	display: block;
+}
 
+button#depart_date{
+	display: block;
+}
+button#arrival_date{
+	display: none;
+}
 
+#btn_return_depart_date{
+	margin-left : 50px;
+	display: none;
+}
 
 
 							/* according_section 섹션 -- 인원 + 좌석 */
@@ -226,8 +239,6 @@ div.people_lineup > div > * {
 }
 
 div.people_lineup > div > h1{
-	
-	
 	
 }	
 

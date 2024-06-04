@@ -32,8 +32,10 @@ xmlns:th="http://www.thymeleaf.org">
 							<div class="userJoinInfo">
 								<div class="idwrite">
 									<label for="userId">아이디</label>
-									<input type="text" name="userId" placeholder="4-15자 영문, 숫자" autofocus>
-									<button type="button" class="btn idCheck">중복확인</button>
+									<div class="idlayout">
+										<input type="text" name="userId" placeholder="4-15자 영문, 숫자" autofocus>
+										<button type="button" class="btn idCheck">중복확인</button>
+									</div>
 								</div>
 								<div class="namewrite">
 									<label for="userName">이름</label>
@@ -49,14 +51,18 @@ xmlns:th="http://www.thymeleaf.org">
 								</div>
 								<div class="send num">
 									<label for="userEmail">이메일</label>
-									<input type="text" name="userEmail" placeholder="이메일 입력">
-									<button type="button" class="btn emailSend" >인증번호 전송</button>
+									<div class="userEmaillayout">
+										<input type="text" name="userEmail" placeholder="이메일 입력">
+										<button type="button" class="btn emailSend" >인증번호 전송</button>
+									</div>
 								</div>
 								
 								<div class="answer email">
 									<label for="emailCheck">인증번호</label>
-									<input type="text" name="emailCheck" placeholder="인증번호 입력">
-									<button type="button" class="btn emailCheck">인증확인</button>
+									<div class="emailChecklayout">
+										<input type="text" name="emailCheck" placeholder="인증번호 입력">
+										<button type="button" class="btn emailCheck">인증확인</button>
+									</div>
 								</div>
 							</div>
 							<div class="receive-marketing">

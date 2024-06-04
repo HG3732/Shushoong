@@ -42,9 +42,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							<img class="type" alt="one_way" th:src="@{/images/airline_one_way.png}">
 							<button id="arrival" class="according_btn pointer" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
 						</div>
-						
+						<!-- checkpoint -->
 						<div>
-							<button id="depart_date" class="according_btn pointer" onclick="accordingInfo(event,'depart_date_accoding')">
+							<button id="one_way_date" class="according_btn pointer" onclick="accordingInfo(event,'date_accoding')">
 								<div>날짜 선택</div>
 								<img alt="달력 사진" src="">
 							</button>
@@ -66,7 +66,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						</div>
 						
 						<div>
-							<button id="depart_date" class="according_btn pointer" onclick="accordingInfo(event,'depart_date_accoding')">
+							<button id="round_trip_date" class="according_btn pointer" onclick="accordingInfo(event,'date_accoding')">
 								<div>날짜 선택</div>
 								<img alt="달력 사진" src="">
 							</button>
@@ -176,13 +176,17 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						</div>
 					</div>
 					
-					
-					<div id="depart_date_accoding" class="according">
+					<!-- checkpoint -->
+					<div id="date_accoding" class="according">
+						<button id="depart_date">가는날</button>
+						<button id="arrival_date">오는날</button>
+						<button id="btn_return_depart_date">가는날 설정 변경</button>
 						
-						<div id='calendar'></div>
+						<div>
+							<div id='calendar'></div>
+						</div>
   
 					</div>
-					
 					
 					<div id="people_lineup_sit_accoding" class="according">
 						<div class="people_lineup">
@@ -467,7 +471,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			var i, according;
 			according = document.getElementsByClassName("according");
 			
-			
 			if(document.getElementById(accordingInfo).style.display==="block"){
 				for(i=0 ; i<according.length; i++){
 					according[i].style.display="none";
@@ -525,7 +528,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				/* 출국 바 이름 변경 + value input + 입국 according open 펑션 */
 		$("button.depart_accoding_value").on("click",function(){
 			$("#depart").text($(this).text());										/*  바 이름 변경 */
-			$("#hidden_depart_value").val($(this).attr("id"));								/* value input */
+	$("#hidden_depart_value").val($(this).attr("id"));								/* value input */
 			document.getElementById("depart_accoding").style.display="none"; 		/* 출국 according close */
 			document.getElementById("arrival_accoding").style.display="block";		/* 입국 according open */
 		});
@@ -533,15 +536,74 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				/* 입국 value input 펑션 */
 		$("button.arrival_accoding_value").on("click",function(){
 			$("#arrival").text($(this).text());										/*  바 이름 변경 */
-			$("#hidden_arrival_value").val($(this).attr("id"));								/* value input */
+	$("#hidden_arrival_value").val($(this).attr("id"));								/* value input */
 			document.getElementById("arrival_accoding").style.display="none";		/* 입국 according close */
-			document.getElementById("depart_date_accoding").style.display="block";	/* 날짜 according open */
+			document.getElementById("date_accoding").style.display="block";			/* 날짜 according open */
 		});
 				
 				
 				/* TODO 날짜 설정하는 펑션  */
 				
-				
+														/* 달력 api */
+	    document.addEventListener('DOMContentLoaded', function() {
+	    	 var date = new Date();
+	    	    var year = date.getFullYear();
+	    	    var month = ("0" + (1 + date.getMonth())).slice(-2);
+	    	    var day = ("0" + date.getDate()).slice(-2);
+	    	
+	    	const departdate = new Date($("#hidden_depart_date").val());
+	    	const arrivaldate = new Date($("#hidden_arrival_date").val());
+		    var ij = 0;		
+			var calendarEl = document.getElementById('calendar');
+		    var calendar = new FullCalendar.Calendar(calendarEl, {
+		   		initialView: 'dayGridMonth',
+		       	dateClick: function(info) {
+		       		
+					if($("#hidden_ticket_type").val()==1){
+					   	$("#hidden_depart_date").val(info.dateStr);
+					   	$("#one_way_date").children(1).text($("#hidden_depart_date").val());
+					   	document.getElementById("date_accoding").style.display="none";
+					   	document.getElementById("people_lineup_sit_accoding").style.display="block";
+					}else if($("#hidden_ticket_type").val()==2){
+						if($("#depart_date").css("display")=="block"){
+							if(year + "-" + month + "-" + day > info.dateStr){
+								alert("금일보다 과거의 날짜를 선택하실 수 없습니다. \n다시 입력해 주시길 바랍니다.");
+								$("#round_trip_date").children(1).text("날짜 선택");
+							}else if(year + "-" + month + "-" + day <= info.dateStr){
+								$("#hidden_depart_date").val(info.dateStr);
+								$("#round_trip_date").children(1).text($("#hidden_depart_date").val()+"/");
+								document.getElementById("btn_return_depart_date").style.display="block";
+								document.getElementById("depart_date").style.display="none";
+								document.getElementById("arrival_date").style.display="block";
+							}
+						}
+						else if($("#arrival_date").css("display")=="block"){
+							$("#hidden_arrival_date").val(info.dateStr);
+							if($("#hidden_depart_date").val() > $("#hidden_arrival_date").val()){
+								alert("출발일보다 과거의 날짜를 선택하실 수 없습니다. \n다시 입력해 주시길 바랍니다.");
+								$("#round_trip_date").children(1).text("날짜 선택");
+							}
+							else if($("#hidden_depart_date").val() <= $("#hidden_arrival_date").val()){
+								$("#round_trip_date").children(1).text($("#hidden_depart_date").val()+"/ \n"+$("#hidden_arrival_date").val());
+								document.getElementById("btn_return_depart_date").style.display="none";
+								document.getElementById("arrival_date").style.display="none";
+								document.getElementById("depart_date").style.display="block";
+								document.getElementById("date_accoding").style.display="none";
+								document.getElementById("people_lineup_sit_accoding").style.display="block";
+							}
+						}
+					}
+		       	}
+		    });
+		    calendar.render();
+	    });
+	    
+													/* 오는날에서 가는날로 전환 */
+		$("#btn_return_depart_date").on("click",function(){
+			document.getElementById("arrival_date").style.display="none";
+			document.getElementById("btn_return_depart_date").style.display="none";
+			document.getElementById("depart_date").style.display="block";
+		});		
 				
 				/* 인원 설정하는 펑션 - plus */
 		$("button#plus").on("click",function(){
@@ -602,7 +664,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				$("#hidden_sit_type").val($(this).attr("id"));
 			} 
 		 	
-		 	console.log($("#people_lineup").text());
 		 	$("#people_lineup").text(
 		 		$("#"+$("#hidden_sit_type").val()).text() +"/"+
 				"성인"+$("#hidden_adult").val()+"/"+
@@ -631,9 +692,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		
 	  let i;
 	  let slides = document.getElementsByClassName("cheap_slides");
-	  console.log("n"+n);
-	  console.log("slides.length"+slides.length);
-	  
 	  if (n == slides.length) {
 		  document.getElementById("cheap_slide_next").style.display="none";
 		  document.getElementById("cheap_slide_prev").style.display="block";
@@ -666,8 +724,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		
 	  let i;
 	  let slides = document.getElementsByClassName("fast_slides");
-	  console.log("n"+n);
-	  console.log("slides.length"+slides.length);
 	  
 	  if (n == slides.length) {
 		  document.getElementById("fast_slide_next").style.display="none";
@@ -686,16 +742,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	
 	
     
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth'
-      });
-      calendar.render();
-    });
-
-
+	
 	
 	</script>
 	

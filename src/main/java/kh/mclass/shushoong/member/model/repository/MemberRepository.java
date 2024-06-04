@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import kh.mclass.shushoong.member.model.domain.MemberEntity;
+import kh.mclass.shushoong.member.model.domain.MemberDto;
 
 
 @Mapper
 public interface MemberRepository {
-	public MemberEntity login(String userId);
-	public MemberEntity insert(HashMap<String, Object> map);
+	public MemberDto login(String userId);
+	public MemberDto insert(HashMap<String, Object> map);
 }

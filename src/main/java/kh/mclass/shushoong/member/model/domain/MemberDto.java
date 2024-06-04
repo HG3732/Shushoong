@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Component
-public class MemberEntity {
+public class MemberDto {
 	private String userId;
 	private String userName;
 	private String userPwd;

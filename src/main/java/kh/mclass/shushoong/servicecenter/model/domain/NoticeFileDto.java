@@ -6,10 +6,9 @@ import lombok.Data;
 
 @Data
 @Component
-public class NoticeDto {
+public class NoticeFileDto {
+	private String fileId;
 	private String noticeId;
-	private String noticeTitle;
-	private String noticeContent;
-	private String noticeTime;
-	private String userId;
+	private String originalFilename;
+	private String savedFilePathName;
 }

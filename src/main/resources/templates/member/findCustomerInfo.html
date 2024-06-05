@@ -38,17 +38,21 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="content">
 							<div class="findId-section">
 								<form id="frm-post" th:action="@{/find/customer}" method="post">
-									<label for="userName">이름</label>
-									<input type="text" name="userName" autofocus>
-									<div class="send num">
-										<label for="userEmail">이메일</label>
-										<input type="text" name="userEmail">
-										<button type="button" class="btn emailCheck">인증번호 전송</button>
-									</div>
-									<div class="answer email">
-										<label for="emailCheck">인증번호</label>
-										<input type="text" name="emailCheck">
-										<button type="button" class="btn emailCheck">인증확인</button>
+									<div class="searchInfo">
+										<div class="write-name">
+											<label for="userName">이름</label>
+											<input type="text" name="userName" class="longinput" autofocus>
+										</div>
+										<div class="send num">
+											<label for="userEmail">이메일</label>
+											<input type="text" name="userEmail" class="shortinput">
+											<button type="button" class="btn emailSend">인증번호 전송</button>
+										</div>
+										<div class="answer email">
+											<label for="emailCheck">인증번호</label>
+											<input type="text" name="emailCheck" class="shortinput">
+											<button type="button" class="btn emailCheck">인증확인</button>
+										</div>
 									</div>
 									<div class="searchIdCustomer">
 										<button type="submit" class="btn findId">아이디 찾기</button>
@@ -57,20 +61,24 @@ xmlns:th="http://www.thymeleaf.org">
 							</div>
 							<div class="findpassword-section">
 								<form id="frm-post" th:action="@{/find/customer}" method="post">
-									<label for="userId">아이디</label>
-									<input type="text" name="userId" autofocus>
-									<div class="send num">
-										<label for="userEmail">이메일</label>
-										<input type="text" name="userEmail">
-										<button type="button" class="btn emailCheck">인증번호 전송</button>
-									</div>
-									<div class="answer email">
-										<label for="emailCheck">인증번호</label>
-										<input type="text" name="emailCheck">
-										<button type="button" class="btn emailCheck">인증확인</button>
-									</div>
-									<div class="searchPwdCustomer">
-										<button type="submit" class="btn findPwd">비밀번호 찾기</button>
+									<div class="searchInfo">
+										<div class="write-id">
+											<label for="userId">아이디</label>
+											<input type="text" name="userId" class="longinput" autofocus>
+										</div>
+										<div class="send num">
+											<label for="userEmail">이메일</label>
+											<input type="text" name="userEmail" class="shortinput">
+											<button type="button" class="btn emailCheck">인증번호 전송</button>
+										</div>
+										<div class="answer email">
+											<label for="emailCheck">인증번호</label>
+											<input type="text" name="emailCheck" class="shortinput">
+											<button type="button" class="btn emailCheck">인증확인</button>
+										</div>
+										<div class="searchPwdCustomer">
+											<button type="submit" class="btn findPwd">비밀번호 찾기</button>
+										</div>
 									</div>
 								</form>
 							</div>

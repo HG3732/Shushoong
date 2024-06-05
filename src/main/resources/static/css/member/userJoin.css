@@ -125,7 +125,8 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-	background: #006AFF;
+	background-image:url("../../images/bluecheck.png");
+	background-size: 100%;
 	border: none;
 }
 

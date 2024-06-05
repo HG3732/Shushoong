@@ -23,22 +23,4 @@ public class LoginController {
 		return "member/login";
 	}
 
-	// 아이디/비밀번호 찾기 메인 페이지로 이동
-	@GetMapping("find/account")
-	public String findAccount() {
-		return "member/findHome";
-	}
-
-	// 일반사용자 아이디/ 비밀번호 찾기 이동
-	@GetMapping("find/account/customer")
-	public String findAccountCustomer() {
-		return "member/findCustomerInfo";
-	}
-
-	// 일반사용자 아이디/ 비밀번호 찾기 이동
-	@GetMapping("find/account/business")
-	public String findAccountBusiness() {
-		return "member/findBusinessInfo";
-	}
-
 }

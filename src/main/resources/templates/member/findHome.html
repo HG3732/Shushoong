@@ -7,6 +7,7 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/member/findHome.css}" rel="stylesheet" />
 <meta charset="UTF-8">
 <title>슈슝::아이디, 비밀번호 찾기</title>
 </head>
@@ -24,6 +25,9 @@ xmlns:th="http://www.thymeleaf.org">
 		<div class="wrap-body">
 			<div class="wrap-section">
 				<section>
+					<div class="infoHome-header">
+						<img th:src="@{/images/logo.png}" alt="로고">
+					</div>
 					<div class="findInfoContainer">
 						<div class="findInfo-header">
 							아이디/비밀번호 찾기
@@ -31,14 +35,14 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="findInfo-section">
 							<a th:href="@{/find/customer}">
 								<div class="customerContainer">
-								<img th:src="@{/images/개인 아이콘.png}" alt="개인회원 정보찾기" width="150px" height="150px">
-								개인회원
+									<img th:src="@{/images/개인 아이콘.png}" alt="개인회원 정보찾기" width="50px" height="50px">
+									<div class="customertitle">개인회원</div>
 								</div>
 							</a>
 							<a th:href="@{/find/business}">
 								<div class="businessContainer">
-								<img th:src="@{/images/회사 아이콘.png}" alt="기업회원 정보찾기" width="150px" height="150px">
-								기업회원
+									<img th:src="@{/images/회사 아이콘.png}" alt="기업회원 정보찾기" width="50px" height="50px">
+									<div class="businesstitle">기업회원</div>
 								</div>
 							</a>
 						</div>

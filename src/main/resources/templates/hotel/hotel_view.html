@@ -510,6 +510,8 @@ function showAllRoomHandler(){
 }
 
 
+
+/*=================== 리뷰 막대그래프 관련 =================== */
 let reviewRate = [2, 4, 3, 4.6];
 let reviewDataList = ["청결 상태", "편의시설/서비스", "직원 및 서비스", "숙박시설 상태 및 시설"];
 
@@ -526,6 +528,11 @@ var myChart3 = new Chart(ctx, {
         }]
     },
     options: {
+        responsive: true, // 차트 크기를 반응형으로 조절
+        maintainAspectRatio: false, // 차트 비율 유지하지 않음
+        layout: {
+            padding: 20
+        },
         scales: {
             x: {
                 grid: {
@@ -558,7 +565,7 @@ var myChart3 = new Chart(ctx, {
 
             xAxis.ticks.forEach((tick, index) => {
                 let x = xAxis.getPixelForTick(index);
-                let y = chart.chartArea.bottom + 20; // 레이블의 아래쪽에 위치
+                let y = chart.chartArea.bottom + 30; /* 레이블의 아래쪽에 위치 */
 
                 // "4.5/5" 추가
                 let additionalLabel = '4.5/5';
@@ -571,7 +578,7 @@ var myChart3 = new Chart(ctx, {
         }
     }]
 });
-/*=================== 리뷰 막대그래프 관련 =================== */
+
 
 /*===================== 모달창 관련 ==========================  */
 function checkScoreHandler() {

@@ -22,7 +22,7 @@ public class AirlineListController {
 	
 	//항공 메인 페이지
 	@GetMapping("/airline/customer/reserve/info")
-	public String customerInfo() {
+	public String customerPay() {
 		return "airline/airline_pay";
 	}
 	

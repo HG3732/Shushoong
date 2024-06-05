@@ -1,9 +1,3 @@
-	$(document).ready(function(){
-	    setDepartInitialValues(); // 시간대 출발
-	    setArrInitialValues(); // 시간대 도착 
-	    setPriceInitialValues(); // 가격대
-	    btnClickHandler(); // 직항/경유
-	});
 	// 사이드 바
 	
 	// 시간대---------------------------
@@ -25,6 +19,7 @@
 
 	    // 왼쪽 thumb의 위치를 계산하여 슬라이더의 왼쪽 값을 표시
 	    const leftValue = parseInt(_this.value);
+	    console.log("출발 시간 left.val : " + _this.value);
 	    
 	    const leftVal = document.querySelector(".middle-range.depart .div1");
 	    leftVal.innerHTML = `${leftValue}:00`;
@@ -45,6 +40,7 @@
 
 	    // 오른쪽 thumb의 위치를 계산하여 슬라이더의 오른쪽 값을 표시
 	    const rightValue = parseInt(_this.value);
+	    console.log("출발 시간 right.val : " + _this.value);
 	    
 	    const rightVal = document.querySelector(".middle-range.depart .div2");
 	    rightVal.innerHTML = `${rightValue}:00`;
@@ -88,6 +84,7 @@
 	    
 	    const leftVal = document.querySelector(".middle-range.arr .div1");
 	    leftVal.innerHTML = `${leftValue}:00`;
+	    console.log("도착 시간 left.val : " + _this.value);
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
 	    thumbArrLeft.style.left = percent + "%";
@@ -104,6 +101,7 @@
 	    
 	    const rightVal = document.querySelector(".middle-range.arr .div2");
 	    rightVal.innerHTML = `${rightValue}:00`;
+	    console.log("도착 시간 right.val : " + _this.value);
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
 	    thumbArrRight.style.right = 100 - percent + "%";
@@ -140,6 +138,7 @@
 	    
 	    const leftVal = document.querySelector(".middle-range.price .div1");
 	    leftVal.innerHTML = `${leftValue}(최솟값)원 ~`;
+	    console.log("최솟값 : " + _this.value);
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
 	    thumbPriceLeft.style.left = percent + "%";
@@ -156,6 +155,7 @@
 	    
 	    const rightVal = document.querySelector(".middle-range.price .div2");
 	    rightVal.innerHTML = `${rightValue}(최댓값)원`;
+	    console.log("최댓값 : " + _this.value);
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
 	    thumbPriceRight.style.right = 100 - percent + "%";

@@ -9,9 +9,6 @@ import lombok.Getter;
 @Component
 public class AirlineInfoDto {
 	private int ticketType; //편도=1 왕복=2
-	private String depart; // 출발지
-	private String arrival; //도착지
-	private int adult;//어른 인수
 	private int child;//소아 인수
 	private int baby;//유아 인수
 	private int sitType;//좌석 등급 1=일등급 2=비즈니스 3=이코노미
@@ -31,5 +28,10 @@ public class AirlineInfoDto {
 	private String spareSeat; // 잔여 좌석
 	private String ticketPrice; // 티켓 값
 	private String flightTime; // 비행 시간
+	
+	private String reserveCode;//예약코드 (PK 탑승자 정보와 연결 경로)
 
+	
+	
+	
 }

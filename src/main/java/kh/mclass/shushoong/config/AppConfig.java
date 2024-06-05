@@ -30,6 +30,12 @@ public class AppConfig {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/images/**")
 				.addResourceLocations("classpath:/static/images/");
+		 registry.addResourceHandler("/css/**")
+		 		 .addResourceLocations("classpath:/static/css/");
+		 registry.addResourceHandler("/js/**")
+		 		  .addResourceLocations("classpath:/static/js/");
+		 registry.addResourceHandler("/html/**")
+         		  .addResourceLocations("classpath:/static/html/");
 	}
 	
 }

@@ -44,8 +44,9 @@
 									<div>출발</div>
 									<div class="multi-range-slider">
 										<!-- 진짜 슬라이더 -->
-										<input type="range" id="depart-input-left" min="0" max="22" value="0" /> 
-										<input type="range" id="depart-input-right" min="2" max="24" value="24" />
+										<input type="range" id="depart-input-left" min="0" max="22"
+											value="0" /> <input type="range" id="depart-input-right"
+											min="2" max="24" value="24" />
 
 										<!-- 커스텀 슬라이더 -->
 										<div class="slider depart">
@@ -65,8 +66,9 @@
 									<div>도착</div>
 									<div class="multi-range-slider">
 										<!-- 진짜 슬라이더 -->
-										<input type="range" id="arr-input-left" min="0" max="22" value="0" /> 
-										<input type="range" id="arr-input-right" min="2" max="24" value="24" />
+										<input type="range" id="arr-input-left" min="0" max="22"
+											value="0" /> <input type="range" id="arr-input-right"
+											min="2" max="24" value="24" />
 
 										<!-- 커스텀 슬라이더 -->
 										<div class="slider arr">
@@ -91,14 +93,14 @@
 								<div class="middle-range price">
 									<div class="multi-range-slider">
 										<!-- 진짜 슬라이더 -->
-										<input type="range" id="price-input-left" min="0" max="22" value="0" /> 
+										<!-- <input type="range" id="price-input-left" min="0" max="22" value="0" /> --> 
 										<input type="range" id="price-input-right" min="2" max="24" value="24" />
 
 										<!-- 커스텀 슬라이더 -->
 										<div class="slider price">
 											<div class="track"></div>
 											<div class="range"></div>
-											<div class="thumb left price"></div>
+											<!-- <div class="thumb left price"></div> -->
 											<div class="thumb right price"></div>
 										</div>
 										<div class="resultval time">
@@ -117,18 +119,17 @@
 								</div>
 								<div class="layover-select">
 									<label>
-										<button type="button" class="direct-btn zero" id="direct-btn" >
-											<img alt="" th:src="@{/images/bluecheck.png}" id="blue-direct">
-											<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-direct">
-										</button>
-											<span>직항</span>
-									</label> 
-									<label>
+										<button type="button" class="direct-btn zero" id="direct-btn">
+											<img alt="" th:src="@{/images/bluecheck.png}"
+												id="blue-direct"> <img alt=""
+												th:src="@{/images/skybluecheck.png}" id="sky-direct">
+										</button> <span>직항</span>
+									</label> <label>
 										<button type="button" class="direct-btn one" id="layover-btn">
-											<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-layover">
-											<img alt="" th:src="@{/images/bluecheck.png}" id="blue-layover">
-										</button>
-											<span>경유</span>
+											<img alt="" th:src="@{/images/skybluecheck.png}"
+												id="sky-layover"> <img alt=""
+												th:src="@{/images/bluecheck.png}" id="blue-layover">
+										</button> <span>경유</span>
 									</label>
 								</div>
 							</form>
@@ -147,7 +148,7 @@
 								</select>
 							</form>
 						</div>
-
+						
 						<div class="airline-info">
 							<div class="seat-count">
 								<div class="airline-flex">
@@ -155,11 +156,11 @@
 										<div class="span-seat-div">
 											<span class="span-seat">잔여 9석</span>
 										</div>
-										<img th:src="@{/images/airline_logo.png}" alt="">
+										<img alt="">
 
 									</div>
 									<div class="airline-name">
-										<span>티웨이 항공</span>
+										<span></span>
 									</div>
 									<div class="airinfo depart-info">
 										<div class="info date">출발 일자</div>
@@ -170,7 +171,7 @@
 										<div class="via-count">
 											<span>직항</span>
 										</div>
-										<img th:src="@{/images/airline_via.png}" alt="">
+										<img alt="">
 										<div class="flytime">비행 시간</div>
 									</div>
 									<div class="airinfo arr-info">
@@ -190,7 +191,7 @@
 												<div>9999,999원</div>
 											</div>
 											<div class="ticket-btn">
-												<button type="button">선택하기</button>
+												<button class="ticketinfo-btn" type="button">선택하기</button>
 											</div>
 										</div>
 									</div>
@@ -199,15 +200,23 @@
 									<div class="flex-select-info">
 										<div class="date-select-info">
 											<div>
-												<div><span>07월18일</span></div>
-												<div><span>14:40</span></div>
+												<div>
+													<span>07월18일</span>
+												</div>
+												<div>
+													<span>14:40</span>
+												</div>
 											</div>
 											<div>
 												<span>비행 시간</span>
 											</div>
 											<div>
-												<div><span>07월18일</span></div>
-												<div><span>10:20</span></div>
+												<div>
+													<span>07월18일</span>
+												</div>
+												<div>
+													<span>10:20</span>
+												</div>
 											</div>
 										</div>
 										<div class="loc-select-info">
@@ -227,6 +236,104 @@
 								</div>
 							</div>
 						</div>
+						
+<!-- 						
+						
+					    <h1>Airlines Information</h1>
+					    <form action="/shushoong/airline/list" method="get">
+					        Departure Location: <input type="text" name="departLoc"><br>
+					        Arrival City: <input type="text" name="arrivalCity"><br>
+					        <input type="submit" value="Search">
+					    </form>
+						<div th:each="air : ${airlineData}" class="airline-info">
+							<div class="seat-count">
+								<div class="airline-flex">
+									<div class="airline-logo">
+										<div class="span-seat-div">
+											<span class="span-seat">잔여 9석</span>
+										</div>
+										<img th:src="${air.airlineImg}" alt="">
+
+									</div>
+									<div class="airline-name">
+										<span th:text="${air.airlineName}"></span>
+									</div>
+									<div class="airinfo depart-info">
+										<div th:text="${air.departDate}" class="info date"></div>
+										<div th:text="${air.departTime}" class="info time">이륙 시간</div>
+										<div th:text="${air.departLoc}" class="info loc">출발 지역</div>
+									</div>
+									<div class="arrow">
+										<div class="via-count">
+											<span th:text="${air.viaCount}">직항</span>
+										</div>
+										<img th:src="@{/images/airline_via.png}" alt="">
+										<div th:text="${air.flightTime}" class="flytime">비행 시간</div>
+									</div>
+									<div class="airinfo arr-info">
+										<div th:text="${air.arrivalDate}" class="info date">도착 일자</div>
+										<div th:text="${air.arrivalTime}" class="info time">착륙 시간</div>
+										<div th:text="${air.arrivalLoc}" class="info loc">도착 지역</div>
+									</div>
+
+									<div class="nop">
+										<div class="sero">
+											<img th:src="@{/images/airline_line.png}" alt="">
+										</div>
+										<div class="ticket-adult">성인 1</div>
+
+										<div class="airticket">
+											<div class="ticket-price">
+												<div th:text="${air.ticketPrice}">9999,999원</div>
+											</div>
+											<div class="ticket-btn">
+												<button class="ticketinfo-btn" type="button">선택하기</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div hidden="" class="contain-select-info">
+									<div class="flex-select-info">
+										<div class="date-select-info">
+											<div>
+												<div>
+													<span>07월18일</span>
+												</div>
+												<div>
+													<span>14:40</span>
+												</div>
+											</div>
+											<div>
+												<span>비행 시간</span>
+											</div>
+											<div>
+												<div>
+													<span>07월18일</span>
+												</div>
+												<div>
+													<span>10:20</span>
+												</div>
+											</div>
+										</div>
+										<div class="loc-select-info">
+											<span>출발지</span>
+											<div>
+												<span>항공사 명</span>
+											</div>
+											<div>
+												<span>좌석등급 항공편명</span>
+											</div>
+											<span>도착지</span>
+										</div>
+										<div class="btn-select-info">
+											<button type="button">선택하기</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						 -->
+						
 						<!-- <div class="airline-info"></div>
                         <div class="airline-info"></div> -->
 					</div>
@@ -244,58 +351,27 @@
 
 	<!-- --------------------JS-------------------- -->
 	<script type="text/javascript">
-	
-	$(loadedHandler);
-	function loadedHandler() {
-		setDepartLeftValue();
-		setDepartRightValue();
-	    setDepartInitialValues(); // 시간대 출발
-	    setArrInitialValues(); // 시간대 도착 
-	    setPriceInitialValues(); // 가격대
-	    btnClickHandler(); // 직항/경유
-	};
-	
+		$(loadedHandler);
+		function loadedHandler() {
+			setDepartLeftValue();
+			setDepartRightValue();
+			setDepartInitialValues(); // 시간대 출발
+			setArrInitialValues(); // 시간대 도착 
+			setPriceInitialValues(); // 가격대
+			btnClickHandler(); // 직항/경유
+			clickedTicketInfo(); // 티켓 상세 정보
+		};
 	</script>
-		<script th:src="@{/js/airline/list-arrangebar.js}" type="text/javascript"></script>
-		<script th:src="@{/js/airline/list-layoverbtn.js}" type="text/javascript"></script>
+	<!-- 양방향 레인지 바 -->
+	<script th:src="@{/js/airline/list-arrangebar.js}"
+		type="text/javascript"></script>
+	<!-- 직항/경유 버튼 -->
+	<script th:src="@{/js/airline/list-layover.js}" type="text/javascript"></script>
+	<!-- 티켓 상세 정보 버튼 -->
+	<script th:src="@{/js/airline/list-detailinfo.js}"
+		type="text/javascript"></script>
 	<script>
-	
- // 직항/경유 ----------------------------------
-/* 	 
- function btnClickHandler() {
-	    $('#direct-btn').on('click', function () {
-	        var $blueDirect = $(this).children("#blue-direct");
-	        var $skyDirect = $(this).children("#sky-direct");
-	        var $blueLayover = $(this).parent().parent().find(".direct-btn.one").children("#blue-layover");
-	        var $skyLayover = $(this).parent().parent().find(".direct-btn.one").children("#sky-layover");
-
-	        // 직항 버튼 클릭 시
-	        $blueDirect.css("display", "block");
-	        $skyDirect.css("display", "none");
-
-	        $blueLayover.css("display", "none");
-	        $skyLayover.css("display", "block");
-	        
-	        console.log('직항 눌림');
-	    });
-
-	    $('#layover-btn').on('click', function () {
-	        var $blueDirect = $(this).parent().parent().find('.direct-btn.zero').children('#blue-direct');
-	        var $skyDirect = $(this).parent().parent().find('.direct-btn.zero').children('#sky-direct');
-	        var $blueLayover = $(this).children('#blue-layover');
-	        var $skyLayover = $(this).children('#sky-layover');
-
-	        // 경유 버튼 클릭 시
-	        $blueLayover.css("display", "block");
-	        $skyLayover.css("display", "none");
-
-	        $blueDirect.css("display", "none");
-	        $skyDirect.css("display", "block");
-
-	        console.log('경유 눌림');
-	    });
-	}
- */
+		
 	</script>
 
 </body>

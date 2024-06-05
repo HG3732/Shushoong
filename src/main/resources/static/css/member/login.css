@@ -19,7 +19,7 @@ section .main input[type=radio] {
 }
 
 section .login-header {
-	margin: 80px 0 80px 0;
+	margin: 100px 0 80px 0;
 }
 
 section .tab {
@@ -169,6 +169,7 @@ section .snsLoginBtn {
 	flex-wrap: wrap;
 	justify-content: center;
 	margin-top: 10px;
+	margin-bottom: 200px;
 }
 
 section .snsLoginBtn>div {

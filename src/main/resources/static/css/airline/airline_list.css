@@ -241,6 +241,7 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 	width: 100px;
     height: 30px;
     border-radius: 10px;
+    margin-right: 32px;
 	}
 
 .flex-container .airline-list{
@@ -250,7 +251,7 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 }
     
 .flex-container .airline-list .airline-info{
-    border: 1px solid black;
+    border: 2px solid #006AFF;
     width: 740px;
     height: 150px;
     margin: 0 auto;
@@ -259,6 +260,7 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
     /* background-color: violet; */
     border-radius: 10px;
     position: relative;
+    z-index: 3;
 }
 
 .airline-info .seat-count{
@@ -404,12 +406,15 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 }
 
 .airline-info .contain-select-info{
-	width: 100%;
-	border-width: 0 1px 1px 1px;
+	width: 85%;
+	border-width: 0 2px 2px 2px;
 	border-style: solid;
 	border-radius: 0 0 10px 10px;
-	position: absolute;
-	top: 127px;
+	border-color: #006AFF;
+	/* position: absolute; */
+	margin: 0 auto;
+	/* top: 127px; */
+	z-index: 3;
 	
 	
 	
@@ -425,6 +430,12 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 	flex-direction: column;
 	justify-content: space-between;
 	padding: 20px;
+}
+body > div.wrapper > div.wrap-main > div.container > div > div.airline-list > div.airline-info > div > div.contain-select-info > div > div.date-select-info > div:nth-child(1) > div:nth-child(2){
+	margin-top: 10px
+}
+body > div.wrapper > div.wrap-main > div.container > div > div.airline-list > div.airline-info > div > div.contain-select-info > div > div.date-select-info > div:nth-child(3) > div:nth-child(2){
+	margin-top: 10px;
 }
 .contain-select-info .flex-select-info .loc-select-info{
 	display: flex;

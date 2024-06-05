@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>슈슝::마이페이지</title>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-section">
+				<section>
+					<div class="section-header">
+						안녕하세요, 홍길동님!
+					</div>
+					<div class="section-image">
+						<a href="">
+							<div class="editInfo">
+								
+								<div class="tail">개인정보 수정</div>
+							</div>
+						</a>
+						<a href="">
+							<div class="reservationHotel">
+								<img th:src="@{/images/비행기.png}" alt="호텔 확인하기">
+								<div class="tail">내가 찜한 숙소 보러가기</div>
+							</div>
+						</a>
+					</div>
+					<div class="payList">
+						<div class="pay">
+						
+						</div>
+						<div class="viewAllList">
+							<button type="button" class="viewList">전체보기</button>
+						</div>
+					</div>
+					<div class="onlineQnAList">
+					
+					</div>
+				</section>
+			
+			</div>
+		</div>
+		<div class="wrap-aside">
+		
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+</body>
+</html>

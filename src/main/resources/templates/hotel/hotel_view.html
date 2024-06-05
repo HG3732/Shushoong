@@ -10,6 +10,10 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/hotel/hotel_view.css}" rel="stylesheet" />
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	
+	<!--chart.js CDN  -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" rel="stylesheet">
+	<script src="https://fastly.jsdelivr.net/npm/chart.js"></script>
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
@@ -256,8 +260,11 @@ xmlns:th="http://www.thymeleaf.org">
 							<div class="review_rate_avg"><strong style="font-family: 'SOYOMapleBoldTTF';font-size: 28px; color: var(--color_blue_1)">4.3</strong> / 5</div>
 							<div class="review_count" style="margin-left: 15px;" >(1436개)</div>
 							<div class="vertical_line"></div>
-							<div class="grid-item">
-								<canvas id="myChart3" ></canvas>
+							<!-- 막대그래프 -->
+							<div class="chart_wrap">
+								<div class="grid-item">
+									<canvas id="myChart" style="width: 500px;"></canvas>
+								</div>
 							</div>
 						</div>
 						<hr style="border: 1px solid #c5c5c5;"></hr>
@@ -446,14 +453,6 @@ xmlns:th="http://www.thymeleaf.org">
 $(loadedHandler)
 
 function loadedHandler(){
-	/* 오른쪽 arrow 마우스 올릴 시 사진변경되는 event */
-/* 	$(".right_arrow").on("mouseover", btnOnHandler); */
-		
-	/* 오른쪽 arrow 클릭시 호텔 사진 변하는 event */
-/* 	$(".right_arrow").on("mouseleave", btnOffHandler); */
-		
-	/* 첫 이미지 모여있는 곳에서 > 사진 눌렀을 때 그 다음 사진묶음으로 이동 */
-/* 	$(".right_arrow").on("click", nextPicHandler); */
 	
 	/* 객실 전체보기 */
 	$(".more_room_btn").on("click", showAllRoomHandler);
@@ -471,45 +470,6 @@ function loadedHandler(){
 	$('.score').on('click', checkScoreHandler);
 }
 
-/* function btnOnHandler() {
-    var currentSrc = $(this).attr('src');
-    console.log(currentSrc);
-    
-    if (currentSrc === '/shushoong/images/skyblue_right.png') {
-        $(this).attr("src", "/shushoong/images/blue_right.png").css("width", "40px");
-    }
-}
-
-function btnOffHandler() {
-    $(this).attr("src", "/shushoong/images/skyblue_right.png").css("width", "40px");
-}
- */
-
-/* function nextPicHandler() {
-	console.log(this);
-	console.log($(this).parent().siblings('hr'));
-	
-	var htmlVal = '';
-		htmlVal += `
-			 	<div class="hotel_pic">
-					<img src="/shushoong/images/skyblue_left.png" class="left_arrow" alt="오른쪽 화살표" style="width:40px;">
-					<div class="pic_slide">
-						<div class="pic"></div>
-						<div class="pic"></div>
-						<div class="pic"></div>
-					</div>
-					<img src="/shushoong/images/skyblue_right.png" class="right_arrow" alt="오른쪽 화살표" style="width:40px;">
-				</div>
-		`;
-			
-	$(this).parent().siblings('hr').after(htmlVal);
-	$(this).parent().hide();
-} */
-
-/* function displayReviewChart(){
-	
-}
- */
  
 function showAllRoomHandler(){
 	console.log(this);
@@ -549,7 +509,76 @@ function showAllRoomHandler(){
 			$(this).hide();
 }
 
- 
+
+/*=================== 리뷰 막대그래프 관련 =================== */
+let reviewRate =[2, 4, 3, 4.6];
+let reviewDataList=["청결 상태", "편의시설/서비스", "직원 및 서비스", "숙박시설 상태 및 시설"];
+/* function displayReviewChart(result){
+	//db에서 가져온 값 list에 넣기
+	for (var i = 0; i < result.length; i++) {
+		var resultItem =  result[i];
+		thiryDifftimeList[i]=resultItem.difftime
+		thirtyRecordDateList[i]=resultItem.onlyDate;
+	} */
+	
+	//그래프 생성
+	// 여기
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart3 = new Chart(ctx, {
+							type : 'bar',
+								data:{
+									//라벨에 별점 점수 넣기
+								    labels: reviewDataList,
+								    datasets: [{
+									    data:reviewRate ,
+									    backgroundColor:'#D9D9D9',   
+									    hoverOffset: 4,
+										barThickness: 30
+									  }]
+								},
+								options:{
+									scales:{
+										//배경에 x,y축 선 안보이게 설정
+										x:{
+											grid:{
+												display:false
+											}
+										},
+										y:{
+											grid:{
+												display:false
+											},
+											axis:'y',
+											display:false
+										}
+									},
+									plugins:{
+										//차트 위에 해당그래프가 뭔지 뜨는 것 display none
+									  	legend: {
+										    display: false,
+										  },
+										tooltip:{
+											callbacks:{//함수가 끝나고 난 뒤 실행되는 함수
+												label: function(context){
+													var chartLabel=context.dataset.label || '';
+													
+/* 													if (chartLabel) {
+														chartLabel +='';
+													} */
+								                   /*  var charthours = parseInt(context.parsed.y/(60*60)); */
+/* 								                    var chartminutes = parseInt(context.parsed.y/60-charthours*60);
+								                    var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60); */
+								                    chartLabel += reviewRate;// 시간 값을 시:분:초 형식으로 표시
+													return chartLabel
+												}
+											}
+										}
+									}
+								}
+});
+
+
+/*===================== 모달창 관련 ==========================  */
 function checkScoreHandler() {
 	
 	console.log(this);

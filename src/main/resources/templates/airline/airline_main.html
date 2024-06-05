@@ -42,7 +42,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							<img class="type" alt="one_way" th:src="@{/images/airline_one_way.png}">
 							<button id="arrival" class="according_btn pointer" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
 						</div>
-						<!-- checkpoint -->
 						<div>
 							<button id="one_way_date" class="according_btn pointer" onclick="accordingInfo(event,'date_accoding')">
 								<div>날짜 선택</div>
@@ -83,7 +82,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				</div>
 			</section>
 			
-			
+			<!-- checkpoint -->
 			<section class="according_section">
 				<div class="one_way_accoding">
 					<div id="depart_accoding" class="according">
@@ -95,7 +94,16 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							<button id="btn_dep_USA" class="according_section_depart_tablinks pointer" onclick="departNation(event,'depart_USA','btn_dep_USA')">미국</button>
 							<button id="btn_dep_canada" class="according_section_depart_tablinks pointer" onclick="departNation(event,'depart_canada','btn_dep_canada')">캐나다</button>
 						</div>
+						
 						<div id="depart_korea" class="according_section_depart_tabcontent">
+							<button id="ICN" class="depart_accoding_value pointer">인천</button>
+							<button id="ICN" class="depart_accoding_value pointer">인천</button>
+							<button id="ICN" class="depart_accoding_value pointer">인천</button>
+							<button id="ICN" class="depart_accoding_value pointer">인천</button>
+							<button id="ICN" class="depart_accoding_value pointer">인천</button>
+							<button id="ICN" class="depart_accoding_value pointer">인천</button>
+							<button id="ICN" class="depart_accoding_value pointer">인천</button>
+							<button id="ICN" class="depart_accoding_value pointer">인천</button>
 							<button id="ICN" class="depart_accoding_value pointer">인천</button>
 							<button id="GMP" class="depart_accoding_value pointer">김포</button>
 							<button id="PUS" class="depart_accoding_value pointer">김해</button>
@@ -176,7 +184,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						</div>
 					</div>
 					
-					<!-- checkpoint -->
 					<div id="date_accoding" class="according">
 						<button id="depart_date">가는날</button>
 						<button id="arrival_date">오는날</button>
@@ -441,7 +448,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	
 	$(loadedHandler)
 	function loadedHandler(){
-		$("#date_accoding").css("display","none");
+		$(".according").css("display","none");
 	}
 	
 				/* 편도 왕복 적용하는 펑션 */		
@@ -460,7 +467,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			}
 		
 			document.getElementById(ticketType).style.display="block";
-			document.getElementById(ticketTypeBtn).style.borderBottom = "3px solid  rgb(0,106,255)";
+			document.getElementById(ticketTypeBtn).style.borderBottom = "2px solid  rgb(0,106,255)";
 			
 			event.currentTarget.className +=" active";
 		}	
@@ -487,11 +494,15 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				for(i=0 ; i<according.length; i++){
 					according[i].style.display="none";
 				}
-				document.getElementById(accordingInfo).style.display="block";
+				if(accordingInfo == "depart_accoding" || accordingInfo == "arrival_accoding"){
+					document.getElementById(accordingInfo).style.display="flex";
+				}else{
+					document.getElementById(accordingInfo).style.display="block";
+				}
 			}
 		}
 		
-				
+				/* checkpoint */
 				/* 출국 설정하는 vertical Tabs 적용하는 펑션 */
 		function departNation(event,nation,nationId){
 			var i, tabcontent, tablinks;
@@ -503,14 +514,14 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			}
 		
 			for(i=0; i<tablinks.length; i++){
-				tablinks[i].style.border= "none";
+				tablinks[i].style.fontWeight ="0";
+				tablinks[i].style.backgroundColor = "white";
 			}
 		
 			document.getElementById(nation).style.display="block";
-			document.getElementById(nationId).style.borderBottom = "3px solid  rgb(0,106,255)";
-			
-			event.currentTarget.className +=" active";
-		}
+			document.getElementById(nationId).style.fontWeight ="900" ;
+			document.getElementById(nationId).style.backgroundColor = "var(--color_blue_2)";
+			}
 				
 				/* 입국 설정하는 vertical Tabs 적용하는 펑션 */
 		function arrivalNation(event,nation,nationId){
@@ -524,11 +535,13 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			}
 		
 			for(i=0; i<tablinks.length; i++){
-				tablinks[i].style.border= "none";
+				tablinks[i].style.fontWeight ="0";
+				tablinks[i].style.backgroundColor = "white";
 			}
 		
 			document.getElementById(nation).style.display="block";
-			document.getElementById(nationId).style.borderBottom = "3px solid  rgb(0,106,255)";
+			document.getElementById(nationId).style.fontWeight ="900" ;
+			document.getElementById(nationId).style.backgroundColor = "var(--color_blue_2)";
 			
 			event.currentTarget.className +=" active";
 		}
@@ -550,7 +563,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		});
 				
 				
-				/* TODO 날짜 설정하는 펑션  */
+				/* 날짜 설정하는 펑션  */
 				
 														/* 달력 api */
 	    document.addEventListener('DOMContentLoaded', function() {
@@ -589,7 +602,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							$("#hidden_arrival_date").val(info.dateStr);
 							if($("#hidden_depart_date").val() > $("#hidden_arrival_date").val()){
 								alert("출발일보다 과거의 날짜를 선택하실 수 없습니다. \n다시 입력해 주시길 바랍니다.");
-								$("#round_trip_date").children(1).text($("#hidden_depart_date").val());
+								$("#round_trip_date").children(1).text("날짜 선택");
 							}
 							else if($("#hidden_depart_date").val() <= $("#hidden_arrival_date").val()){
 								$("#round_trip_date").children(1).text($("#hidden_depart_date").val()+"/ \n"+$("#hidden_arrival_date").val());
@@ -653,8 +666,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				kinds[i].style.background="none";
 				kinds[i].style.color="black";
 			}
-		document.getElementById($(this).attr("id")).style.backgroundColor="rgb(0,106,255)";
-		document.getElementById($(this).attr("id")).style.color="white";
+		document.getElementById($(this).attr("id")).style.backgroundColor="var(--color_blue_2)";
+		document.getElementById($(this).attr("id")).style.color="black";
 		}); 
 					
 					/* 인원 or 좌석 input value + 바에 띄우기  */

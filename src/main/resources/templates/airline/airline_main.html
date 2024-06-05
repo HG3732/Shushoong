@@ -39,19 +39,20 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 					<div id="one_way" class="tabcontent">
 						<div class="depart_arrival_flex">
 							<button id="depart" class="according_btn pointer"  onclick="accordingInfo(event,'depart_accoding')">출발지</button>
-							<img class="type" alt="one_way" th:src="@{/images/airline_one_way.png}">
+							<img class="type" alt="one_way" th:src="@{/images/one_way.png}">
 							<button id="arrival" class="according_btn pointer" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
 						</div>
 						<div>
 							<button id="one_way_date" class="according_btn pointer" onclick="accordingInfo(event,'date_accoding')">
 								<div>날짜 선택</div>
-								<img alt="달력 사진" src="">
+								<img alt="달력 사진" th:src="@{/images/calendar.png}">
 							</button>
 							
 						</div>
 						
 						<div>
-							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">일반석/성인1/소아0/유아0</button>
+							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">일반석/성인1/소아0/유아0<img alt="사람" th:src="@{/images/person.png}"></button>
+							
 						</div>
 						
 						<input type="submit" value="검색">
@@ -60,20 +61,20 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 					<div id="round_trip" class="tabcontent">
 						<div class="depart_arrival_flex">
 							<button id="depart" class="according_btn pointer" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
-							<img class="type" alt="one_way" th:src="@{/images/airline_one_way.png}">
+							<img class="type" alt="double_way" th:src="@{/images/double_way.png}">
 							<button id="arrival" class="according_btn pointer" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
 						</div>
 						
 						<div>
 							<button id="round_trip_date" class="according_btn pointer" onclick="accordingInfo(event,'date_accoding')">
 								<div>날짜 선택</div>
-								<img alt="달력 사진" src="">
+								<img alt="달력 사진" th:src="@{/images/calendar.png}">
 							</button>
 							
 						</div>
 						
 						<div>
-							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">일반석/성인1/소아0/유아0</button>
+							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">일반석/성인1/소아0/유아0<img alt="사람" th:src="@{/images/person.png}"></button>
 						</div>
 						
 						<input type="submit" value="검색">

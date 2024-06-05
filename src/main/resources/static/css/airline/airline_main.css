@@ -96,8 +96,7 @@ button#depart{
 }
 img.type {
 	width: 40px;
-	height: 20px;
-	margin: 10px 0;
+	height: 40px;
 }
 button#arrival{
 	width: 230px;
@@ -132,6 +131,12 @@ button#people_lineup{
 	height: 40px;
 	background: none;
 	border: none;
+}
+button#people_lineup >img{
+	width : 40px;
+	height: 40px;
+	float : right;
+	margin-top: -10px;
 }
 
 

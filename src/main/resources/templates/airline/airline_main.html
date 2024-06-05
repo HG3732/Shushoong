@@ -435,7 +435,15 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	
 	
 			<!-- 자바스크립트 -->
+			
+			
 	<script>
+	
+	$(loadedHandler)
+	function loadedHandler(){
+		$("#date_accoding").css("display","none");
+	}
+	
 				/* 편도 왕복 적용하는 펑션 */		
 		function ticketType(event,ticketType,ticketTypeBtn){
 			var i, tabcontent, tablinks;
@@ -581,7 +589,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							$("#hidden_arrival_date").val(info.dateStr);
 							if($("#hidden_depart_date").val() > $("#hidden_arrival_date").val()){
 								alert("출발일보다 과거의 날짜를 선택하실 수 없습니다. \n다시 입력해 주시길 바랍니다.");
-								$("#round_trip_date").children(1).text("날짜 선택");
+								$("#round_trip_date").children(1).text($("#hidden_depart_date").val());
 							}
 							else if($("#hidden_depart_date").val() <= $("#hidden_arrival_date").val()){
 								$("#round_trip_date").children(1).text($("#hidden_depart_date").val()+"/ \n"+$("#hidden_arrival_date").val());

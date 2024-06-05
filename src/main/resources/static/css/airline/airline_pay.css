@@ -34,37 +34,149 @@ section {
 .reserver_info{
 	margin-top : 30px;
 }
-.reserver_info > div {
+.reserver_info_flex > div {
 	display: flex;
 	
 }
-.reserver_info > div > div{
+.reserver_info_flex > div > div{
 	height: 70px;
 	line-height : 70px;
 	border: 1px solid black;
 }
 
-.reserver_info > div > div:nth-child(1){
-	width: 300px;
+.reserver_info_flex > div > div:nth-child(1){
+	width: 150px;
 	text-align: center;
 }
-.reserver_info > div > div:nth-child(2){
-	width: 660px;
+.reserver_info_flex > div > div:nth-child(2){
+	width: 810px;
 	
 }
 
-.reserver_info > div > div:nth-child(2) > *{
+.reserver_info_flex > div > div:nth-child(2) > *{
 	margin-left: 30px;
 	
 	height: 30px;
 }
-.reserver_info > div > div:nth-child(2) > input{
+.reserver_info_flex > div > div:nth-child(2) > input{
 	width: 350px;
 }
 	/* passenger_info 섹션 */
 .passenger_info{
 	margin-top: 30px;
 }
+.passenger_info_flex > div{
+	display: flex;
+}
+.passenger_info_flex > div > div{
+	height: 70px;
+	line-height : 70px;
+	border: 1px solid black;
+}
+.passenger_info_flex > div:nth-child(1) > div:nth-child(1){
+	width: 150px;
+	text-align: center;
+}
+.passenger_info_flex > div:nth-child(1) > div:nth-child(2){
+	width: 810px;
+}
+
+
 	
+.passenger_info_flex > div > div:nth-child(1) {
+	font-size : 15px;
+	width: 150px;
+}
+.passenger_info_flex > div > div:nth-child(2) {
+	width: 330px;
+}
+.passenger_info_flex > div > div:nth-child(2) >input[type=text],.passenger_info_flex > div > div:nth-child(2) >button{
+	width: 260px;
+	height: 30px;
+	margin-left: 35px; 
+}
+.passenger_info_flex > div > div:nth-child(3) {
+	width: 150px;
+}
+.passenger_info_flex > div > div:nth-child(4) {
+	width: 330px;
+}
+.passenger_info_flex > div > div:nth-child(4) >*{
+	width: 260px;
+	height: 30px;
+	margin-left: 35px; 
+}
+
+		/* select_baggage 섹션 */
+.select_baggage{
+	margin-top : 30px;
+}	
+.select_baggage_flex > div{
+	display: flex;
+}
+.select_baggage_flex > div > div{
+	width: 240px;
 	
+	border: 1px solid black;
 	
+}
+.select_baggage_flex > div > div:nth-child(1){
+	border-radius: 20px 0 0 20px;
+}
+.select_baggage_flex > div > div:nth-child(4){
+	border-radius: 0 20px 20px 0;
+}
+.select_baggage_flex > div:nth-child(1) > div{
+	height: 40px;
+	line-height:40px;
+	text-align: center; 
+}
+.select_baggage_flex > div:nth-child(2) > div{
+	height: 340px;
+	margin-top: -40px;
+}
+div.select_baggage_flex > div:nth-child(2) > div > img{
+	width : 200px;
+	height: 200px;
+	margin-top: 50px;
+	margin-left: 20px;
+	
+}
+.select_baggage_flex > div:nth-child(2) > div > div{
+	color: red;
+}
+.select_baggage_flex > div:nth-child(2) > div > div>div:nth-child(1){
+	margin-top: 20px;
+	margin-left : 20px;
+	float: left;
+	width: 50px;
+	
+}
+.select_baggage_flex > div:nth-child(2) > div > div>div:nth-child(2){
+	margin-top: 20px;
+	float: right;
+	width : 140px;
+	margin-right: 20px;
+	text-align: right;
+	
+}
+.select_baggage_flex > div:nth-child(2) > div > input[type=radio]{
+	margin-top: 20px;
+	width: 240px;
+
+}
+.info_submit{
+	width: 960px;
+}
+.info_submit_btn{
+	margin: 40px auto;
+	display : block;
+	
+	width: 300px;
+	height: 40px;
+	
+	border: 1px solid black;
+	border-radius: 10px;
+	
+}
+

@@ -64,6 +64,103 @@ xmlns:th="http://www.thymeleaf.org">
 						</div>
 					</section>
 					
+					
+					<div class="list_wrap">
+						<div class="list_wrap_num">
+							<section class="passenger_info">
+								<div>탑승자 정보</div>
+								<div class="passenger_info_flex">
+									<div>
+										<div>성별</div>
+										<div>
+											<input type="radio" name="passenger_gender" value="M">남성
+											<input type="radio" name="passenger_gender" value="F">여성
+										</div>
+									</div>
+									<div>
+										<div>영문 이름  (First Name)</div>
+										<div><input type="text" placeholder="여권에 적힌 이름을 영어로 입력해 주세요" name="passenger_firstName"></div>
+										<div>영문 성  (Last Name)</div>
+										<div><input type="text" placeholder="여권에 적힌 성씨를 영어로 입력해 주세요" name="passenger_lastName"></div>
+									</div>
+									<div>
+										<div>생년월일</div>
+										<div><button name="passenger_birth">생년-월-일 <img alt="달력 이미지" src=""></button></div>
+										<div>국적</div>
+										<div>
+											<select name="passenger_nation">
+												<option selected value="0">선택하기</option>
+									            <option value="한국">korean</option>
+									            <option value="미국">american</option>
+									            <option value="중국">chinese</option>
+									            <option value="일본">japanese</option>
+											</select>
+										</div>
+									</div>
+									<div>
+										<div>여권 번호 (TODO : ko-ko일경우 display : none)</div>
+										<div><input type="text"></div>
+										<div>여권 만료일(TODO : ko-ko일경우 display : none)</div>
+										<div><button>연도-월-일 <img alt="달력 이미지" src=""></button></div>
+									</div>
+								</div>
+							</section>
+							
+							<section class="select_baggage">
+								<div>수하물 선택하기</div>
+								<div class="select_baggage_flex">
+									<div>
+										<div>~10kg</div>
+										<div>~20kg</div>
+										<div>~30kg</div>
+										<div>~40kg</div>
+									</div>
+									<div>
+										<div>
+											<img alt="수하물~10" th:src="@{/images/calendar.png}">
+											<div><div>KRW :</div><div>0</div></div>
+											<input type="radio" name="baggage_size" value="1" checked="checked">
+										</div>
+										<div>
+											<img alt="수하물~20" th:src="@{/images/calendar.png}">
+											<div><div>KRW :</div><div>48,000</div></div>
+											<input type="radio" name="baggage_size" value="2">
+										</div>
+										<div>
+											<img alt="수하물~30" th:src="@{/images/calendar.png}">
+											<div><div>KRW :</div><div>64,000</div></div>
+											<input type="radio" name="baggage_size" value="3">
+										</div>
+										<div>
+											<img alt="수하물~40" th:src="@{/images/calendar.png}">
+											<div><div>KRW :</div><div>90,000</div></div>
+											<input type="radio" name="baggage_size" value="4">
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+					<input type="button" id="add">
+					<section class="into_submit">
+						<input class="info_submit_btn" type="submit" value="결제 페이지로 이동">
+					</section>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+	<script>
+			var htmlVal , i;
+			i=0
+		$("#add").on("click",function(){
+			console.log(i)
+			i = i+1;
+			htmlVal+=`
+				<div class="list_wrap_num_"+i>
 					<section class="passenger_info">
 						<div>탑승자 정보</div>
 						<div class="passenger_info_flex">
@@ -136,16 +233,12 @@ xmlns:th="http://www.thymeleaf.org">
 							</div>
 						</div>
 					</section>
-					<section class="into_submit">
-						<input class="info_submit_btn" type="submit" value="결제 페이지로 이동">
-					</section>
-				</form>
-			</div>
-		</div>
-	</div>
-	<div class="wrap-footer">
-  		<div th:replace="~{common/footer :: Footer}"></div> 
-	</div>
+				</div>
+			`;
+			
+			$(".list_wrap").html(htmlVal)
+		})
+	</script>
 	
 </body>
 </html>

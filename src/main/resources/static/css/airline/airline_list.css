@@ -258,6 +258,7 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
     margin-top: 50px;
     /* background-color: violet; */
     border-radius: 10px;
+    position: relative;
 }
 
 .airline-info .seat-count{
@@ -402,3 +403,42 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 	border-radius: 20px;
 }
 
+.airline-info .contain-select-info{
+	width: 100%;
+	border-width: 0 1px 1px 1px;
+	border-style: solid;
+	border-radius: 0 0 10px 10px;
+	position: absolute;
+	top: 127px;
+	
+	
+	
+}
+.airline-info .contain-select-info .flex-select-info {
+	display: flex;
+	width: 100%;
+	height: 170px;
+}
+.contain-select-info .flex-select-info .date-select-info{
+	display: flex;
+	flex: 2;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 20px;
+}
+.contain-select-info .flex-select-info .loc-select-info{
+	display: flex;
+	flex: 6;
+	flex-direction: column;
+	justify-content:space-between;
+	padding: 20px;
+	
+
+}
+.contain-select-info .flex-select-info .btn-select-info{
+	flex: 1.5;
+	text-align: center;
+	padding: 20px;
+	align-content:end;
+
+}

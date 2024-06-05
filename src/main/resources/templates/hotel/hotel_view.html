@@ -36,16 +36,20 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="pic"></div>
 						<div class="pic"></div>
 						<div class="pic"></div>
+						<div class="pic"></div>
+						<div class="pic"></div>
+						<div class="pic"></div>
+						<div class="pic"></div>
+						<div class="pic"></div>
 					</div>
-					<img th:src="@{/images/skyblue_right.png}" class="right_arrow" alt="오른쪽 화살표" style="width:40px;">
 				</div>
 				
 				<!-- 객실정보 -->
 				<div class="hotel_info_all">
 					<div class="info_list">
-						<div class="room_choose">객실선택</div>
-						<div class="hotel_info">숙소상세정보</div>
-						<div class="hotel_review">숙소후기</div>
+						<div class="room_choose"><a href="#hotel_room_list">객실선택</a></div>
+						<div class="hotel_info"><a href="#wrap_hotel_info">호텔상세정보</a></div>
+						<div class="hotel_review"><a href="#wrap_hotel_review">호텔후기</a></div>
 						<div class="calendar">
 							<img th:src="@{/images/calendar.png}" alt="오른쪽 화살표" class="cal_pic" style="width:30px;">
 							<button type="button" class="cal_btn" style="vertical-align: middle;">2024.06.05(수) ~ 2024.06.07(금)</button>
@@ -55,8 +59,8 @@ xmlns:th="http://www.thymeleaf.org">
 						</div>
 					</div>
 					<hr style="border: 1px solid #c5c5c5;"></hr>
-					
-					<div class="hotel_room_list">
+
+					<div id="hotel_room_list">
 						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">객실 선택</p>
 						<hr style="border: 0.1em solid black;"></hr>	
 							<form>
@@ -127,9 +131,10 @@ xmlns:th="http://www.thymeleaf.org">
 							<button type="button" class="more_room_btn" style="margin-left: 450px;">전체보기</button>						
 						<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
 					</div>
-					<!-- 숙소상세정보 -->
-					<div class="wrap_hotel_info">
-						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">숙소상세정보</p>
+					
+					<!-- 호텔상세정보 -->
+					<div id="wrap_hotel_info">
+						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">호텔상세정보</p>
 						<hr style="border: 0.1em solid black;"></hr>
 						<div class="wrap_info">
 							<div class="section">
@@ -243,7 +248,7 @@ xmlns:th="http://www.thymeleaf.org">
 					</div><!-- wrap hotel info -->
 					
 					<!-- 호텔리뷰 -->
-					<div class="wrap_hotel_review">
+					<div id="wrap_hotel_review">
 						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">호텔후기</p>
 						<hr style="border: 0.1em solid black;"></hr>
 						<!-- 리뷰 차트 -->
@@ -442,13 +447,13 @@ $(loadedHandler)
 
 function loadedHandler(){
 	/* 오른쪽 arrow 마우스 올릴 시 사진변경되는 event */
-	$(".right_arrow").on("mouseover", btnOnHandler);
+/* 	$(".right_arrow").on("mouseover", btnOnHandler); */
 		
 	/* 오른쪽 arrow 클릭시 호텔 사진 변하는 event */
-	$(".right_arrow").on("mouseleave", btnOffHandler);
+/* 	$(".right_arrow").on("mouseleave", btnOffHandler); */
 		
 	/* 첫 이미지 모여있는 곳에서 > 사진 눌렀을 때 그 다음 사진묶음으로 이동 */
-	$(".right_arrow").on("click", nextPicHandler);
+/* 	$(".right_arrow").on("click", nextPicHandler); */
 	
 	/* 객실 전체보기 */
 	$(".more_room_btn").on("click", showAllRoomHandler);
@@ -466,7 +471,7 @@ function loadedHandler(){
 	$('.score').on('click', checkScoreHandler);
 }
 
-function btnOnHandler() {
+/* function btnOnHandler() {
     var currentSrc = $(this).attr('src');
     console.log(currentSrc);
     
@@ -478,9 +483,9 @@ function btnOnHandler() {
 function btnOffHandler() {
     $(this).attr("src", "/shushoong/images/skyblue_right.png").css("width", "40px");
 }
+ */
 
-
-function nextPicHandler() {
+/* function nextPicHandler() {
 	console.log(this);
 	console.log($(this).parent().siblings('hr'));
 	
@@ -499,7 +504,7 @@ function nextPicHandler() {
 			
 	$(this).parent().siblings('hr').after(htmlVal);
 	$(this).parent().hide();
-}
+} */
 
 /* function displayReviewChart(){
 	

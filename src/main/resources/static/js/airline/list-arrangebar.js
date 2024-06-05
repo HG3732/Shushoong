@@ -122,12 +122,13 @@
 
 	
 	// 가격 -------------------------------------------------------
-	const inputPriceLeft = document.getElementById("price-input-left");
+	// const inputPriceLeft = document.getElementById("price-input-left");
 	const inputPriceRight = document.getElementById("price-input-right");
-	const thumbPriceLeft = document.querySelector(".slider.price > .thumb.left.price");
+	// const thumbPriceLeft = document.querySelector(".slider.price > .thumb.left.price");
 	const thumbPriceRight = document.querySelector(".slider.price > .thumb.right.price");
 	const priceRange = document.querySelector(".slider.price > .range");
 
+/*
 	function setPriceLeftValue() {
 	    const _this = inputPriceLeft;
 	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
@@ -144,12 +145,13 @@
 	    thumbPriceLeft.style.left = percent + "%";
 	    priceRange.style.left = percent + "%";
 	};
+	*/
 
 	function setPriceRightValue() {
 	    const _this = inputPriceRight;
 	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
 
-	    _this.value = Math.max(parseInt(_this.value), parseInt(inputPriceLeft.value) + 3);
+	    // _this.value = Math.max(parseInt(_this.value), parseInt(inputPriceLeft.value) + 3);
 
 	    const rightValue = parseInt(_this.value);
 	    
@@ -162,15 +164,15 @@
 	    priceRange.style.right = 100 - percent + "%";
 	};
 
-	inputPriceLeft.addEventListener("input", setPriceLeftValue);
+	// inputPriceLeft.addEventListener("input", setPriceLeftValue);
 	inputPriceRight.addEventListener("input", setPriceRightValue);
 
 	function setPriceInitialValues() {
-	    const initialPriceLeftValue = 0;
+	    // const initialPriceLeftValue = 0;
 	    const initialPriceRightValue = 24;
-	    inputPriceLeft.value = initialPriceLeftValue;
+	    // inputPriceLeft.value = initialPriceLeftValue;
 	    inputPriceRight.value = initialPriceRightValue;
-	    setPriceLeftValue();
+	    // setPriceLeftValue();
 	    setPriceRightValue();
 	};
 	

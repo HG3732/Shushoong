@@ -17,42 +17,42 @@ public class NaverController {
 	
 	private final NaverApi naverApi;
 	
-	@GetMapping("/login/oauth2/code/naver")
-	public String naverLogin(String code, HttpSession session) {
-		// 1. 인가코드 받기
-		
-		//2. 토큰 받기
-		String accessToken = naverApi.getAccessToken(code);
-		session.setAttribute("naverToken", accessToken);
-				
-		//3. 사용자 정보 받기
-		Map<String, Object> userInfo = naverApi.getUserInfo(accessToken);
-				
-		Object userId = userInfo.get("userId");
-		String email = (String) userInfo.get("email");
-		String nickname = (String) userInfo.get("nickname");
-				
-		System.out.println("userId = "+userId.toString());
-		System.out.println("email = "+email);
-		System.out.println("nickname = "+nickname);
-		System.out.println("accessToken = "+accessToken);
-				
-		return "redirect:/login";
-	}
-	
-	// 카카오 로그아웃 
-	@GetMapping("/logout/kako") 
-	public String logout(HttpSession session) {
-		String naverToken = (String) session.getAttribute("naverToken");
-		System.out.println("[naverToken] = "+naverToken);
-		if(naverToken != null) {
-			naverApi.unlink(naverToken);
-			session.invalidate();
-			return "redirect:/main";
-		}else {
-			return "redirect:/login";
-		}
-	}
+//	@GetMapping("/login/oauth2/code/naver")
+//	public String naverLogin(String code, HttpSession session) {
+//		// 1. 인가코드 받기
+//		
+//		//2. 토큰 받기
+//		String accessToken = naverApi.getAccessToken(code);
+//		session.setAttribute("naverToken", accessToken);
+//				
+//		//3. 사용자 정보 받기
+//		Map<String, Object> userInfo = naverApi.getUserInfo(accessToken);
+//				
+//		Object userId = userInfo.get("userId");
+//		String email = (String) userInfo.get("email");
+//		String nickname = (String) userInfo.get("nickname");
+//				
+//		System.out.println("userId = "+userId.toString());
+//		System.out.println("email = "+email);
+//		System.out.println("nickname = "+nickname);
+//		System.out.println("accessToken = "+accessToken);
+//				
+//		return "redirect:/login";
+//	}
+//	
+//	// 카카오 로그아웃 
+//	@GetMapping("/logout/kako") 
+//	public String logout(HttpSession session) {
+//		String naverToken = (String) session.getAttribute("naverToken");
+//		System.out.println("[naverToken] = "+naverToken);
+//		if(naverToken != null) {
+//			naverApi.unlink(naverToken);
+//			session.invalidate();
+//			return "redirect:/main";
+//		}else {
+//			return "redirect:/login";
+//		}
+//	}
 	
 //	//카카오 나한테 링크 보내기
 //		@GetMapping("/sendmsg/me")

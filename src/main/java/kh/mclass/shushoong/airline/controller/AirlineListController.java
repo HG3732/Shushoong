@@ -15,7 +15,7 @@ public class AirlineListController {
 	
 	
 	//항공 메인 페이지
-	@GetMapping("/airline/default")
+	@GetMapping("/airline/main")
 	public String airlineHome() {
 		return "airline/airline_main";
 	}

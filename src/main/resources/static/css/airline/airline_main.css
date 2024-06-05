@@ -321,24 +321,12 @@ button#sit3{
 	border: 1px solid black;
 }
 .recommend_section > div > div > div:nth-of-type(2){
-	animation-name : left_in;
-	animation-duration: 1s;
 	position: relative;
 }
 .recommend_section > div > div > div:nth-of-type(3){
-	animation-name : right_in;
-	animation-duration: 1s;
 	position: relative;
 }
 
-@keyframes left_in{
-	0%{left : -960px; top : 0px}
-	100%{left : 0px; top : 0px}
-}
-@keyframes right_in{
-	0%{left : 960px; top : 0px}
-	100%{left : 0px; top : 0px}
-}
 .slides{
 	display: flex;
 }
@@ -405,9 +393,7 @@ button#sit3{
 }
 .slide_prev:hover{
 	margin-left: -115px;
-	animation-name: left_arrow;
-	animation-duration: 0.5s;
-	animation-fill-mode: forwards;
+	background-image: url("../../images/blue_left.png");
 	background-size: cover;
 }
 
@@ -418,20 +404,10 @@ button#sit3{
 }
 .slide_next:hover{
 	margin-left:  1000px;
-	animation-name: right_arrow;
-	animation-duration: 0.5s;
-	animation-fill-mode: forwards;
+	background-image: url("../../images/blue_right.png");
 	background-size: cover;
 }
 
-@keyframes left_arrow{
-	0%{}
-	100%{background-image: url("../../images/blue_left.png")}
-}
-@keyframes right_arrow{
-	0%{}
-	100%{background-image: url("../../images/blue_right.png")}
-}
 
 				/* 임시 */
 .input_values{

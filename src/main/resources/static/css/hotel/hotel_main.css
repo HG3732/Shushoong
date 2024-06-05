@@ -79,6 +79,8 @@
 	color: black;
 }
 
+
+
 .main-back .hotel-search-bar button.search:hover {
 	background-color: var(--color_blue_1);
 	color: white;
@@ -156,8 +158,77 @@
 	border-radius: 20px;
 	background-color: white;
 	padding : 40px;
-	display: none;
+	display: block;
 }
 
+.wrap-room-box {
+	display: none;
+	margin-top: 10px;
+	margin-left: 500px;
+	width: 400px;
+	height: auto;
+	border: var(--color_blue_1), 2px, solid;
+	border-radius: 20px;
+	background-color: white;
+	padding : 40px;
+}
 
+.wrap-room-box .select-people-head {
+	font-size: 17px;
+	font-weight: 900;
+	margin-left: 15px;
+	margin-bottom: 15px;
+}
 
+.amount{
+	display: flex;
+	justify-content: space-between;
+	font-size: 15px;
+	margin: 20px auto;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.amount .cat {
+	color: #5E5E5E;
+	margin-left: 15px;
+}
+
+.btn-area {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+}
+
+.btn-area .cat {
+	font-size: 20px;
+}
+
+.btn-area .btn {
+	text-align: center;
+	background-color: var(--color_blue_2);
+	color: black;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	font-size: 20px;
+	padding: 10px 15px;
+}
+
+.btn-area .btn:hover {
+	background-color: var(--color_blue_1);
+	color: white;
+}
+
+.cat p {
+	margin: 7px 0;
+}
+
+.cat p:nth-child(2) {
+	font-size: 10px;
+}
+
+.wrap-people {
+	margin: 20px auto;
+}

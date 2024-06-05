@@ -39,13 +39,19 @@ console.log(today_day);
 $(loadedHandler)
 	
 	function loadedHandler() {
+		$('.wrap-date-box').css('display', 'none');	//처음 화면에서 달력 안보이게
 		$('.input.location').on('click', locationClickHandler);
 		$('.country').on('click', localClickHandler);
 		$('.input.time').on('click', timeClickHandler);
+		$('.input.room').on('click', roomClickHandler);
+		$('.plus').on('click', plusClickHandler);
+		$('.minus').on('click', minusClickHandler);
 	}
 	
 	//국가 검색 클릭 시 국가 선택 창 표시
 	function locationClickHandler() {
+		$('.wrap-date-box').css('display', 'none');
+		$('.wrap-room-box').css('display', 'none');
 		$('.wrap-loc-box').toggle();
 	}
 	
@@ -62,7 +68,34 @@ $(loadedHandler)
 	
 	//날짜 검색 클릭 시 달력 표시
 	function timeClickHandler() {
+		$('.wrap-loc-box').css('display', 'none');
+		$('.wrap-room-box').css('display', 'none');
 		$('.wrap-date-box').toggle();
+	}
+	
+	//객실 수 클릭 시 객실, 인원 수 선택 표시
+	function roomClickHandler() {
+		$('.wrap-loc-box').css('display', 'none');
+		$('.wrap-date-box').css('display', 'none');
+		$('.wrap-room-box').toggle();
+	}
+	
+	//방, 인원 수량 증감
+	function plusClickHandler() {
+		var numStr = $(this).prev().text();
+		var num = Number(numStr);
+		if($(this).parent().prev().text() != "객실" || num < 8){	//객실은 8개까지만 예약 가능
+			$(this).prev().text(num+1);
+		}
+	}
+	
+	//방, 인원 수량 증감
+	function minusClickHandler() {
+		var num = $(this).next().text();
+		if(($(this).parent().prev().children().eq(0).text() == "성인" && num > 1)
+			|| ($(this).parent().prev().children().eq(0).text() == "아동" && num > 0)){		//성인은 최소 한명 이상, 아동은 0명 선택 가능
+			$(this).next().text(num-1);
+		}
 	}
 </script>
 </head>
@@ -82,7 +115,7 @@ $(loadedHandler)
 						<button type="button" class="input location"><span>도시명 또는 호텔명</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
 						<button type="button" class="input time"><span>숙박 일정</span><span class="check-in-date"></span> - <span class="check-out-date"></span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
 						<button type="button" class="input room"><span>객실 1 - 성인 2, 아동 0</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
-						<button type="button" class="search">검색</button>
+						<button type="button" class="search btn">검색</button>
 					</div>
 					<div class="wrap-loc-box">
 						<div class="loc-inner-box">
@@ -150,6 +183,38 @@ $(loadedHandler)
 					<div class="wrap-date-box">
 						<div id='calendar'></div>
 					</div>
+					<div class="wrap-room-box">
+						<div class="select-people-head">객실 선택</div>
+						<hr></hr>
+						<div class="room amount">
+							<div class="cat room">객실</div>
+							<div class="btn-area">
+								<button type="button" class="btn btn2 minus">−</button>
+								<div class="num">1</div>
+								<button type="button" class="btn btn2 plus">+</button>
+							</div>
+						</div>
+						<div class="select-people-head">인원</div>
+						<hr></hr>
+						<div class="wrap-people-num">
+							<div class="wrap-people amount">
+								<div class="cat adult"><p>성인</p><p>만 12세 이상</p></div>
+								<div class="btn-area">
+									<button type="button" class="btn btn2 minus">−</button>
+									<div class="num">1</div>
+									<button type="button" class="btn btn2 plus">+</button>
+								</div>
+							</div>
+							<div class="wrap-people amount">
+								<div class="cat child"><p>아동</p><p>만 12세 미만</p></div>
+								<div class="btn-area">
+									<button type="button" class="btn btn2 minus">−</button>
+									<div class="num">0</div>
+									<button type="button" class="btn btn2 plus">+</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -160,6 +225,7 @@ $(loadedHandler)
        var calendarEl = document.getElementById('calendar');
        var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
+        height: 'auto',
         locale:'ko',
         headerToolbar:{
 			left:'prevYear prev',
@@ -197,7 +263,9 @@ $(loadedHandler)
 			}
 		}
        });
-       calendar.render();
+       if(calendar){
+       	calendar.render();
+       }
      });
 </script>
 </html>

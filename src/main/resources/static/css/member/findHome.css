@@ -7,10 +7,11 @@
 	justify-content: center;
 	align-content: center;
 	text-align: center;
+	
 }
 
 section .infoHome-header {
-	margin: 80px 0 30px 0;
+	margin: 200px 0 30px 0;
 }
 
 
@@ -28,7 +29,7 @@ section .findInfo-section {
 	
 	border: 3px solid #E2E2E2;
 	border-radius: 20px;
-	margin: 20px;
+	margin: 20px 20px 260px 20px;
 }
 
 section .customerContainer {
@@ -44,7 +45,7 @@ section .customerContainer {
 	flex-direction: column;
 	align-content: center;
 	justify-content: center;
-	margin:10px;
+	margin:10px ;
 }
 
 section .customerContainer > img {

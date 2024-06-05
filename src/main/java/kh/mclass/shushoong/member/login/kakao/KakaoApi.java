@@ -218,7 +218,7 @@ public class KakaoApi {
 				conn.setRequestMethod("POST");
 				//파라미터 입력
 				conn.setRequestProperty("Authorization", "Bearer "+accessToken);
-				conn.setRequestProperty("request_url", "http://tripant.store/login");
+				conn.setRequestProperty("request_url", "http://shushoong/login");
 				conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;utf-8");
 				
 				int responseCode = conn.getResponseCode();

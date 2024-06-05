@@ -18,7 +18,6 @@ public class KakaoController {
 	
 	private final KakaoApi kakaoApi;
 	
-	
 	@GetMapping("/login/oauth2/code/kakao")
 	public String kakaoLogin(String code, HttpSession session) {
 		// 1. 인가코드 받기

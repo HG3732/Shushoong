@@ -17,3 +17,84 @@
 #tab-2:checked ~ .content div:nth-child(2) {
 	display: block;
 }
+
+section .tab {
+	overflow: hidden;
+	/* 	크기설정  */
+	width: 320px;
+	height: 50px;
+	/* 	영역설정  */
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: center;
+	margin-bottom: 50px;
+}
+
+section .tab label {
+	/* 영역 설정 */
+	border-bottom: 3px solid #006AFF;
+	cursor: pointer;
+	float: left;
+	width: 50%;
+	text-align: center;
+	padding: 15px 0;
+	/* 폰트 설정 */
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+#tab-1:checked ~ .tab label:nth-child(1), #tab-2:checked ~ .tab label:nth-child(2)
+	{
+	border: 3px solid #006AFF;
+	border-bottom: none;
+	box-shadow: none;
+}
+
+section .content>div {
+	display: none;
+}
+
+#tab-1:checked ~ .content div:nth-child(1) {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+
+#tab-2:checked ~ .content div:nth-child(2) {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	text-align: center;
+}
+
+section .loginInfo {
+	margin-bottom: 20px;
+}
+
+section .loginInfo>input {
+	/* 	글상자서식 */
+	border: 1px solid #BCEFFF;
+	border-radius: 20px;
+	width: 300px;
+	height: 40px;
+	/* 	글자서식 */
+	font-family: SOYOMapleRegularTTF;
+	text-indent: 10px;
+	font-size: 15px;
+	/* 	배치서식 */
+	display: flex;
+	flex-direction: column;
+	margin: 10px 10px 0 10px;
+}
+
+section .loginInfo>input:focus {
+	/* 	글상자서식 */
+	border: 2px solid #006AFF;
+}

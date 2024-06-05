@@ -8,6 +8,14 @@ import lombok.Getter;
 @Data
 @Component
 public class AirlineInfoDto {
+	private int ticketType; //편도=1 왕복=2
+	private String depart; // 출발지
+	private String arrival; //도착지
+	private int adult;//어른 인수
+	private int child;//소아 인수
+	private int baby;//유아 인수
+	private int sitType;//좌석 등급 1=일등급 2=비즈니스 3=이코노미
+	
 	private String airlineCode; // 운항 코드
 	private String flightNo; // 항공편명
 	private String departLoc;  // 출발 지역
@@ -23,4 +31,5 @@ public class AirlineInfoDto {
 	private String spareSeat; // 잔여 좌석
 	private String ticketPrice; // 티켓 값
 	private String flightTime; // 비행 시간
+
 }

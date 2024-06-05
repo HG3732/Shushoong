@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+.wrap-section {
+	/* 영역 조정 */
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+
+section .infoHome-header {
+	margin: 80px 0 30px 0;
+}
+
+
+section .findInfo-header {
+	font-size: 20px;
+	font-weight: bold;
+	
+	margin: 70px 0 40px 0;
+}
+
+section .findInfo-section {
+	display : flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	
+	border: 3px solid #E2E2E2;
+	border-radius: 20px;
+	margin: 20px;
+}
+
+section .customerContainer {
+	/* 스타일 조정 */
+	width: 150px;
+	height: 200px;
+	margin-top: 50px;
+	border: 3px solid #FFF230;
+	border-radius: 20px;
+	
+	display : flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	margin:10px;
+}
+
+section .customerContainer > img {
+	margin: auto;
+}
+
+section .customertitle {
+	margin-bottom: 30px;
+	font-weight: bold;
+}
+
+section .businessContainer {
+	/* 스타일 조정 */
+	width: 150px;
+	height: 200px;
+	border: 3px solid #006AFF;
+	border-radius: 20px;
+	
+	display : flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	margin:10px;
+}
+
+section .businesstitle {
+	margin-bottom: 30px;
+	font-weight: bold;
+}
+
+section .businessContainer > img {
+	margin: auto;
+}

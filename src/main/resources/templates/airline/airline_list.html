@@ -93,8 +93,9 @@
 								<div class="middle-range price">
 									<div class="multi-range-slider">
 										<!-- 진짜 슬라이더 -->
-										<!-- <input type="range" id="price-input-left" min="0" max="22" value="0" /> --> 
-										<input type="range" id="price-input-right" min="2" max="24" value="24" />
+										<!-- <input type="range" id="price-input-left" min="0" max="22" value="0" /> -->
+										<input type="range" id="price-input-right" min="2" max="24"
+											value="24" />
 
 										<!-- 커스텀 슬라이더 -->
 										<div class="slider price">
@@ -148,194 +149,112 @@
 								</select>
 							</form>
 						</div>
-						
-						<!-- 
-						<div class="airline-info">
-							<div class="seat-count">
-								<div class="airline-flex">
-									<div class="airline-logo">
-										<div class="span-seat-div">
-											<span class="span-seat">잔여 9석</span>
-										</div>
-										<img alt="">
 
-									</div>
-									<div class="airline-name">
-										<span></span>
-									</div>
-									<div class="airinfo depart-info">
-										<div class="info date">출발 일자</div>
-										<div class="info time">이륙 시간</div>
-										<div class="info loc">출발 지역</div>
-									</div>
-									<div class="arrow">
-										<div class="via-count">
-											<span>직항</span>
-										</div>
-										<img alt="">
-										<div class="flytime">비행 시간</div>
-									</div>
-									<div class="airinfo arr-info">
-										<div class="info date">도착 일자</div>
-										<div class="info time">착륙 시간</div>
-										<div class="info loc">도착 지역</div>
-									</div>
+						<h1>Airlines Information</h1>
+						<form action="/shushoong/airline/list" method="get">
+							Departure Location: <input type="text" name="departLoc"><br>
+							Arrival City: <input type="text" name="arrivalLoc"><br>
+							<input type="submit" value="Search">
+						</form>
+						<div class="airline-info-container">
+							<div th:each="air : ${airlineData}" class="airline-info">
+								<div class="seat-count">
+									<div class="airline-flex">
+										<div class="airline-logo">
+											<div class="span-seat-div">
+												<span class="span-seat">잔여 9석</span>
+											</div>
+											<img th:src="${air.airlineImg}" alt="">
 
-									<div class="nop">
-										<div class="sero">
-											<img th:src="@{/images/airline_line.png}" alt="">
 										</div>
-										<div class="ticket-adult">성인 1</div>
+										<div class="airline-name">
+											<span th:text="${air.airlineName}"></span>
+										</div>
+										<div class="airinfo depart-info">
+											<div th:text="${air.departDate}" class="info date"></div>
+											<div th:text="${air.departTime}" class="info time">이륙
+												시간</div>
+											<div th:text="${air.departLoc}" class="info loc">출발 지역</div>
+										</div>
+										<div class="arrow">
+											<div class="via-count">
+												<span th:text="${air.viaCount}">직항</span>
+											</div>
+											<img th:src="@{/images/airline_via.png}" alt="">
+											<div th:text="${air.flightTime}" class="flytime">비행 시간</div>
+										</div>
+										<div class="airinfo arr-info">
+											<div th:text="${air.arrivalDate}" class="info date">도착
+												일자</div>
+											<div th:text="${air.arrivalTime}" class="info time">착륙
+												시간</div>
+											<div th:text="${air.arrivalLoc}" class="info loc">도착 지역</div>
+										</div>
 
-										<div class="airticket">
-											<div class="ticket-price">
-												<div>9999,999원</div>
+										<div class="nop">
+											<div class="sero">
+												<img th:src="@{/images/airline_line.png}" alt="">
 											</div>
-											<div class="ticket-btn">
-												<button class="ticketinfo-btn" type="button">선택하기</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div hidden="" class="contain-select-info">
-									<div class="flex-select-info">
-										<div class="date-select-info">
-											<div>
-												<div>
-													<span>07월18일</span>
-												</div>
-												<div>
-													<span>14:40</span>
-												</div>
-											</div>
-											<div>
-												<span>비행 시간</span>
-											</div>
-											<div>
-												<div>
-													<span>07월18일</span>
-												</div>
-												<div>
-													<span>10:20</span>
-												</div>
-											</div>
-										</div>
-										<div class="loc-select-info">
-											<span>출발지</span>
-											<div>
-												<span>항공사 명</span>
-											</div>
-											<div>
-												<span>좌석등급 항공편명</span>
-											</div>
-											<span>도착지</span>
-										</div>
-										<div class="btn-select-info">
-											<button type="button">선택하기</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						 -->
-						
-						
-					    <h1>Airlines Information</h1>
-					    <form action="/shushoong/airline/list" method="get">
-					        Departure Location: <input type="text" name="departLoc"><br>
-					        Arrival City: <input type="text" name="arrivalLoc"><br>
-					        <input type="submit" value="Search">
-					    </form>
-						<div th:each="air : ${airlineData}" class="airline-info">
-							<div class="seat-count">
-								<div class="airline-flex">
-									<div class="airline-logo">
-										<div class="span-seat-div">
-											<span class="span-seat">잔여 9석</span>
-										</div>
-										<img th:src="${air.airlineImg}" alt="">
+											<div class="ticket-adult">성인 1</div>
 
-									</div>
-									<div class="airline-name">
-										<span th:text="${air.airlineName}"></span>
-									</div>
-									<div class="airinfo depart-info">
-										<div th:text="${air.departDate}" class="info date"></div>
-										<div th:text="${air.departTime}" class="info time">이륙 시간</div>
-										<div th:text="${air.departLoc}" class="info loc">출발 지역</div>
-									</div>
-									<div class="arrow">
-										<div class="via-count">
-											<span th:text="${air.viaCount}">직항</span>
-										</div>
-										<img th:src="@{/images/airline_via.png}" alt="">
-										<div th:text="${air.flightTime}" class="flytime">비행 시간</div>
-									</div>
-									<div class="airinfo arr-info">
-										<div th:text="${air.arrivalDate}" class="info date">도착 일자</div>
-										<div th:text="${air.arrivalTime}" class="info time">착륙 시간</div>
-										<div th:text="${air.arrivalLoc}" class="info loc">도착 지역</div>
-									</div>
-
-									<div class="nop">
-										<div class="sero">
-											<img th:src="@{/images/airline_line.png}" alt="">
-										</div>
-										<div class="ticket-adult">성인 1</div>
-
-										<div class="airticket">
-											<div class="ticket-price">
-												<div th:text="${air.ticketPrice}">9999,999원</div>
-											</div>
-											<div class="ticket-btn">
-												<button class="ticketinfo-btn" type="button">선택하기</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div hidden="" class="contain-select-info">
-									<div class="flex-select-info">
-										<div class="date-select-info">
-											<div>
-												<div>
-													<span>07월18일</span>
+											<div class="airticket">
+												<div class="ticket-price">
+													<div th:text="${air.ticketPrice}"></div>
 												</div>
-												<div>
-													<span>14:40</span>
-												</div>
-											</div>
-											<div>
-												<span>비행 시간</span>
-											</div>
-											<div>
-												<div>
-													<span>07월18일</span>
-												</div>
-												<div>
-													<span>10:20</span>
+												<div class="ticket-btn">
+													<button class="ticketinfo-btn" type="button">
+														<img class="price-img-btn" alt="" 
+														th:src='@{/images/skyblue_right.png}'>
+													</button>
 												</div>
 											</div>
 										</div>
-										<div class="loc-select-info">
-											<span>출발지</span>
-											<div>
-												<span>항공사 명</span>
+									</div>
+									<div hidden="" class="contain-select-info">
+										<div class="flex-select-info">
+											<div class="date-select-info">
+												<div>
+													<div>
+														<span th:text="${air.departDate}">07월18일</span>
+													</div>
+													<div>
+														<span th:text="${air.departTime}">14:40</span>
+													</div>
+												</div>
+												<div>
+													<span th:text="${air.flightTime}">비행 시간</span>
+												</div>
+												<div>
+													<div>
+														<span th:text="${air.arrivalDate}">07월18일</span>
+													</div>
+													<div>
+														<span th:text="${air.departTime}">10:20</span>
+													</div>
+												</div>
 											</div>
-											<div>
-												<span>좌석등급 항공편명</span>
+											<div class="loc-select-info">
+												<span th:text="${air.departLoc}">출발지</span>
+												<div>
+													<span th:text="${air.airlineName}">항공사 명</span>
+												</div>
+												<div>
+													<span>좌석등급 항공편명</span>
+												</div>
+												<span th:text="${air.arrivalLoc}">도착지</span>
 											</div>
-											<span>도착지</span>
-										</div>
-										<div class="btn-select-info">
-											<button type="button">선택하기</button>
+											<div class="btn-select-info">
+												<button type="button">
+												선택하기
+													<!-- <span>선택하기</span> -->
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						
-						<!-- <div class="airline-info"></div>
-                        <div class="airline-info"></div> -->
+
 					</div>
 				</div>
 			</div>

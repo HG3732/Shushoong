@@ -253,7 +253,8 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 .flex-container .airline-list .airline-info{
     border: 2px solid #006AFF;
     width: 740px;
-    height: 150px;
+    /* height: 150px; */
+    overflow: auto;
     margin: 0 auto;
     /* margin-bottom: 30px; */
     margin-top: 50px;
@@ -266,7 +267,8 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 .airline-info .seat-count{
     float: left;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    overflow: auto;
 }
 .airline-info .seat-count .span-seat-div{
     /* border: 1px solid blue; */
@@ -288,7 +290,7 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 .airline-info .airline-flex{
     /* 2 1 2 1 1 3 */
     display: flex;
-    height: 100%;
+    height: 150px;
 }
 .airline-flex .airline-logo{
     flex: 0.5;
@@ -301,8 +303,8 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
     
 }
 .airline-flex .airline-logo img{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 45px;
     margin-top: 22px;
 }
 
@@ -402,12 +404,34 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
     
 }
 .airline-flex .nop .airticket .ticket-btn button{
-	border-radius: 20px;
+	float: right;
+	background: none;         /* 배경색 제거 */
+    border: none;             /* 테두리 제거 */
+    box-shadow: none;         /* 그림자 제거 */
+    padding: 0;               /* 내부 여백 제거 */
+    margin: 0;                /* 외부 여백 제거 */
+    font: inherit;            /* 부모 요소의 글꼴 상속 */
+    color: inherit;           /* 부모 요소의 글자 색상 상속 */
+    cursor: pointer;          /* 커서를 포인터로 변경 (선택 사항) */
+    outline: none;            /* 포커스 시 외곽선 제거 */
+    -webkit-appearance: none; /* 브라우저 기본 스타일 제거 (특히 iOS) */
+    -moz-appearance: none;    /* 브라우저 기본 스타일 제거 (특히 Firefox) */
+    appearance: none;         /* 브라우저 기본 스타일 제거 (기타) */
+    transform: rotate(90deg);
+}
+.airline-flex .nop .airticket .ticket-btn button:hover .price-img-btn{
+	/* content: url('@{/images/blue_right.png}'); */
+	content: url("../../images/blue_right.png");
+	
+}
+
+.airline-flex .nop .airticket .ticket-btn img{
+	width: 20px;
 }
 
 .airline-info .contain-select-info{
-	width: 85%;
-	border-width: 0 2px 2px 2px;
+	width: 100%;
+	/* border-width: 0 2px 2px 2px; */
 	border-style: solid;
 	border-radius: 0 0 10px 10px;
 	border-color: #006AFF;
@@ -419,7 +443,7 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 	
 	
 }
-.airline-info .contain-select-info .flex-select-info {
+.contain-select-info .flex-select-info {
 	display: flex;
 	width: 100%;
 	height: 170px;
@@ -431,10 +455,16 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 	justify-content: space-between;
 	padding: 20px;
 }
-body > div.wrapper > div.wrap-main > div.container > div > div.airline-list > div.airline-info > div > div.contain-select-info > div > div.date-select-info > div:nth-child(1) > div:nth-child(2){
+
+.contain-select-info.open {
+    display: block;
+    margin-top: 10px; /* 적절한 간격을 설정 */
+}
+
+.contain-select-info > div > div.date-select-info > div:nth-child(1) > div:nth-child(2){
 	margin-top: 10px
 }
-body > div.wrapper > div.wrap-main > div.container > div > div.airline-list > div.airline-info > div > div.contain-select-info > div > div.date-select-info > div:nth-child(3) > div:nth-child(2){
+.contain-select-info > div > div.date-select-info > div:nth-child(3) > div:nth-child(2){
 	margin-top: 10px;
 }
 .contain-select-info .flex-select-info .loc-select-info{
@@ -452,4 +482,21 @@ body > div.wrapper > div.wrap-main > div.container > div > div.airline-list > di
 	padding: 20px;
 	align-content:end;
 
+}
+
+.contain-select-info .flex-select-info .btn-select-info button{
+    border: none;             /* 테두리 제거 */
+    cursor: pointer;          /* 커서를 포인터로 변경 (선택 사항) */
+    outline: none;            /* 포커스 시 외곽선 제거 */
+    border-radius: 10px;
+    background-color: #BCEFFF;
+    width: 90px;
+    height: 30px;
+    color: black;
+}
+.contain-select-info .flex-select-info .btn-select-info button:hover {
+	background-color: #006AFF;
+	color: white;
+
+	}
 }

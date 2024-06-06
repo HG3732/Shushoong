@@ -19,13 +19,13 @@ section .main input[type=radio] {
 }
 
 section .login-header {
-	margin: 80px 0 80px 0;
+	margin: 100px 0 80px 0;
 }
 
 section .tab {
 	overflow: hidden;
 	/* 	크기설정  */
-	width: 320px;
+	width: 350px;
 	height: 50px;
 	/* 	영역설정  */
 	display: flex;
@@ -62,7 +62,8 @@ section .content>div {
 	display: none;
 }
 
-#tab-1:checked ~ .content div:nth-child(1) {
+#tab-1:checked ~ .content > div:nth-child(1),
+#tab-2:checked ~ .content > div:nth-child(2) {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
@@ -71,12 +72,6 @@ section .content>div {
 	text-align: center;
 }
 
-#tab-2:checked ~ .content div:nth-child(2) {
-	display: flex;
-	flex-wrap: wrap;
-	align-content: center;
-	text-align: center;
-}
 
 section .loginInfo {
 	margin-bottom: 20px;
@@ -86,7 +81,7 @@ section .loginInfo>input {
 	/* 	글상자서식 */
 	border: 1px solid #BCEFFF;
 	border-radius: 20px;
-	width: 300px;
+	width: 320px;
 	height: 40px;
 	/* 	글자서식 */
 	font-family: SOYOMapleRegularTTF;
@@ -120,6 +115,7 @@ section .btn.login {
 section .login-check {
 	display: flex;
 	flex-direction: row;
+	justify-content: left;
 	align-items: center;
 	margin: 5px 0 30px 10px;
 	font-size: 15px;
@@ -148,7 +144,7 @@ section .login-function {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-content: center;
 	margin: 10px;
 	padding: 10px;
@@ -173,6 +169,7 @@ section .snsLoginBtn {
 	flex-wrap: wrap;
 	justify-content: center;
 	margin-top: 10px;
+	margin-bottom: 200px;
 }
 
 section .snsLoginBtn>div {

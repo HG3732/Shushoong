@@ -1,4 +1,4 @@
-package kh.mclass.shushoong.member.findaccount.controller;
+package kh.mclass.shushoong.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

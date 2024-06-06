@@ -1,27 +1,41 @@
 @charset "UTF-8";
 
-.main input[type=radio] {
+input, input:focus, textarea, textarea:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+
+section .main input[type=radio] {
 	display: none;
 }
 
-#tab-1:checked ~ .tab label:nth-child(1),
-#tab-2:checked ~ .tab label:nth-child(2) {
-	box-shadow: none;
+.wrap-section {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
 }
 
-.content > div {
-	display: none;
+section .findInfo-header {
+
+	margin: 100px 0 80px 0;
 }
 
-#tab-1:checked ~ .content div:nth-child(1),
-#tab-2:checked ~ .content div:nth-child(2) {
-	display: block;
+section .findInfo-header > img {
+	margin-bottom: 20px;
+}
+
+section .header-title {
+	font-size:20px; 
+	font-weight: bold;
 }
 
 section .tab {
 	overflow: hidden;
 	/* 	크기설정  */
-	width: 320px;
+	width: 350px;
 	height: 50px;
 	/* 	영역설정  */
 	display: flex;
@@ -58,43 +72,82 @@ section .content>div {
 	display: none;
 }
 
-#tab-1:checked ~ .content div:nth-child(1) {
+#tab-1:checked ~ .content > div:nth-child(1),
+#tab-2:checked ~ .content > div:nth-child(2) {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
-	text-align: center;
 }
 
-#tab-2:checked ~ .content div:nth-child(2) {
-	display: flex;
-	flex-wrap: wrap;
-	align-content: center;
-	text-align: center;
-}
-
-section .loginInfo {
-	margin-bottom: 20px;
-}
-
-section .loginInfo>input {
+section .longinput {
 	/* 	글상자서식 */
 	border: 1px solid #BCEFFF;
 	border-radius: 20px;
-	width: 300px;
+	width: 325px;
 	height: 40px;
 	/* 	글자서식 */
 	font-family: SOYOMapleRegularTTF;
 	text-indent: 10px;
 	font-size: 15px;
 	/* 	배치서식 */
-	display: flex;
-	flex-direction: column;
-	margin: 10px 10px 0 10px;
+	margin: 10px 10px 20px 10px;
 }
 
-section .loginInfo>input:focus {
+section .shortinput {
 	/* 	글상자서식 */
-	border: 2px solid #006AFF;
+	border: 1px solid #BCEFFF;
+	border-radius: 20px;
+	width: 215px;
+	height: 40px;
+	/* 	글자서식 */
+	font-family: SOYOMapleRegularTTF;
+	text-indent: 10px;
+	font-size: 15px;
+	/* 	배치서식 */
+	margin: 10px 0 20px 10px;
+}
+
+section .btn.findId, .btn.findPwd {
+	/* 스타일서식 */
+	width: 300px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	background-color: #006AFF;
+	color: white;
+	font-size: 17px;
+	font-family: SOYOMapleRegularTTF;
+	font-weight: bold;
+	cursor: pointer;
+	
+	margin: 50px 0 145px 0;
+}
+
+section .findInfo>input:focus {
+	/* 	글상자서식 */
+	border: 3px solid #006AFF;
+}
+
+section .findInfo>label {
+	display: flex;
+	justify-content: left;
+	text-indent: 20px;
+	font-weight: bold;
+}
+
+section .btn.emailSend, .btn.emailCheck {
+	/* 	버튼서식 */
+	border: none;
+	border-radius: 20px;
+	width: 110px;
+	height: 40px;
+	background-color: #BCEFFF;
+	cursor: pointer;
+	/* 	글자서식 */
+	font-family: SOYOMapleRegularTTF;
+	font-size: 15px;
+	font-weight: bold;
+	margin: auto;
 }

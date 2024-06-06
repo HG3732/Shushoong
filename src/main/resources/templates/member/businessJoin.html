@@ -7,8 +7,9 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/member/businessJoin.css}" rel="stylesheet" />
 <meta charset="UTF-8">
-<title>슈슝</title>
+<title>슈슝::사업자 회원가입</title>
 </head>
 <body>
 	<div class="wrapper">
@@ -23,50 +24,68 @@ xmlns:th="http://www.thymeleaf.org">
 		<div class="wrap-body">
 			<div class="wrap-section">
 				<section>
-					<div class="userjoin-Header">
-					기업 회원가입
+					<div class="businessjoin-header">
+						기업 회원가입
 					</div>
-					<div class="userjoin-section">
-						<form id="frm-post" th:action="@{/join/business}" method="post"> 
-							<div class="userJoinInfo">
-								<div class="id check">
+					<div class="businessjoin-section">
+						<form id="frm-post" method="post"> 
+							<div class="businessJoinInfo">
+								<div class="idwrite">
 									<label for="userId">아이디</label>
-									<input type="text" name="userId" autofocus>
+									<input type="text" id="userId" name="userId" placeholder="4-15자 영문, 숫자" class="shortinput" autofocus>
 									<button type="button" class="btn idCheck">중복확인</button>
 								</div>
-								<label for="userPwd">비밀번호</label>
-								<input type="password" name="userPwd">
-								<label for="pwdCheck">비밀번호 확인</label>
-								<input type="password" name="pwdCheck">
-								<label for="businessNum">사업자 번호</label>
-								<input type="text" name="businessNum">
-								<label for="userName">대표자명</label>
-								<input type="text" name="userName">
-								<label for="userName">상호명</label>
-								<input type="text" name="hotelName">
+								<small>Error message</small>
+								<div class="namewrite">
+									<label for="userName">담당자명</label>
+									<input type="text" id="userName" name="userName" placeholder="이름" class="longinput" >
+								</div>
+								<small>Error message</small>
+								<div class="companywrite">
+									<label for="userName">회사명</label>
+									<input type="text" id="companyname" name="companyname" placeholder="회사명" class="longinput" >
+								</div>
+								<small>Error message</small>
+								<div class="passwordwrite">
+									<label for="userPwd">비밀번호</label>
+									<input type="password" id="userPwd" name="userPwd" placeholder="8-20자의 영문, 숫자, 특수문자" class="longinput">
+								</div>
+								<small>Error message</small>
+								<div class="check password">
+									<label for="pwdCheck">비밀번호 확인</label>
+									<input type="password" id="pwdCheck" name="pwdCheck" placeholder="비밀번호 재입력" class="longinput">
+								</div>
+								<small>Error message</small>
 								<div class="send num">
 									<label for="userEmail">이메일</label>
-									<input type="text" name="userEmail">
-									<button type="button" class="btn emailCheck">중복확인</button>
+									<input type="text" id="userEmail" name="userEmail" placeholder="이메일 입력" class="shortinput" >
+									<button type="button" class="btn emailSend" >인증번호 전송</button>
 								</div>
+								<small>Error message</small>						
 								<div class="answer email">
 									<label for="emailCheck">인증번호</label>
-									<input type="text" name="emailCheck">
+									<input type="text" id="emailCheck" name="emailCheck" placeholder="인증번호 입력" class="shortinput" >
 									<button type="button" class="btn emailCheck">인증확인</button>
 								</div>
+								<small>Error message</small>
 							</div>
-							<div class="receive-marketing">
+							<div class="agreement-items">
 								<div class="marketing-title">서비스 이용약관 동의</div>
-								<hr class="marketingLine">
-								<div class="marketing-check">
-									<input type="checkbox" id="Allcheck">전체 선택
-									<hr class="marketingLine">
-									<input type="checkbox" id="usingService" class="usingService">슈슝 이용약관 동의<div class="emphasis">(필수)</div>
-									<input type="checkbox" id="privacy" class="privacy">개인정보 수집 및 이용 동의<div class="emphasis">(필수)</div>
+								<div class="allchk">
+									<input type="checkbox" id="allCheckBox"><span class="on">전체 선택</span>
+								</div>
+								<hr class="marketingLine" />
+								<div class="checkSelection">
+									<div class="serviceCheck">
+										<input type="checkbox" name="usingAgree" id="usingService" class="usingService"><span class="on">슈슝 이용약관 동의<font color="#ff0000">(필수)</font></span>
+									</div>
+									<div class="privacyCheck">
+										<input type="checkbox" name="usingAgree" id="privacy" class="privacy"><span class="on">개인정보 수집 및 이용 동의<font color="#ff0000">(필수)</font></span>
+									</div>
 								</div>
 							</div>
-							<div class="userJoinBtn">
-								<button type="submit" class="btn userJoin">회원가입</button>
+							<div class="businessJoinBtn">
+								<button type="submit" class="btn businessJoin">회원가입</button>
 							</div>
 						</form>
 					</div>
@@ -78,5 +97,8 @@ xmlns:th="http://www.thymeleaf.org">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
 	
+	<script>
+		
+	</script>
 </body>
 </html>

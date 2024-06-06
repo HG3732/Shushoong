@@ -3,22 +3,340 @@
 .pointer {
   cursor: pointer;
 }
-
-		/* search_section 구간 */
 section.search_section{
-	height: 340px;
-	background-color: gray;
+	height: 350px;
+    position: relative;
+    background-color: green;
 }
-
 div.search{
 	width: 960px;
 	height : 145px;
-	border: 5px solid rgb(0,106,255);
+	border: var(--color_blue_1), 2px, solid;
 	border-radius : 20px;
 	margin: auto;
 	position : relative;
 	top: 135px;
+	background-color: rgba(255, 255, 255, .7);
+}	
+
+button.tablinks{
+	background: none;
+    border: none;
+    font-size: 17px;
+}
+
+button#one_way_btn{
+	margin-left : 30px;
+	margin-top : 20px;
+	border-bottom: 3px solid  rgb(0,106,255);
+}
+
+div#round_trip{
+	display: none;
+}
+
+div.tabcontent > *{
+	height: 40px;
+	margin: 30px 15px 20px 15px;
+	border-radius: 10px;
+	font-size: 15px;
+	text-align: center;
+	line-height: 40px;
+	float: left;
+}
+
+div.tabcontent > div{
+	margin-top : 30px;
+	background-color: #D9D9D9;
+}
+
+div.tabcontent div:nth-child(1) {
+	position : absolute;
+	margin-top:-25px;
+	margin-left: 425px;
+	width : 500px;
+}
+
+div.tabcontent div:nth-child(2) {
+	width : 450px;
+}
+div.tabcontent div:nth-child(3) {
+	width : 300px;
+}
+
+div.tabcontent > input{
+	
+	border : none;
+	color : black;
+	background-color: #BCEFFF;
+	width: 100px;
+}
+
+div.tabcontent > input:hover{
+	border : none;
+	color : white;
+	background-color: rgb(0,106,255);
+	width: 100px;
+}
+
+
+
+										
+.depart_arrival_flex{
+	display: flex;
+	margin: auto;
+	
+}
+
+button#depart{
+	width: 230px;
+	border : none;
+	background : none;
+	height: 40px;
+}
+img.type {
+	width: 40px;
+	height: 40px;
+}
+button#arrival{
+	width: 230px;
+	border : none;
+	background : none;
+	height: 40px;
+}
+
+button#one_way_date , button#round_trip_date{
+	
+	width: 450px;
+	height: 40px;
+	border: none;
+	background: none;
+}
+
+button#one_way_date > div , button#round_trip_date > div{
+	margin-left :0;
+	margin-top : 0;
+	
+	width: 410px;
+	line-height: 40px;
+}
+
+button#one_way_date > img , button#round_trip_date > img{
+	float : right;
+	width: 40px;
+	height: 40px;
+}
+button#people_lineup{
+	width : 300px;
+	height: 40px;
+	background: none;
+	border: none;
+}
+button#people_lineup >img{
+	width : 40px;
+	height: 40px;
+	float : right;
+	margin-top: -10px;
+}
+
+
+section.according_section{
+	width: 960px;
+	margin: auto;
+}
+
+
+div.according{
+	max-width:960px;
+	position : absolute;
+	margin-top : -60px;
+	width:fit-content;
+	border : var(--color_blue_1), 2px, solid;
+	border-radius : 20px;
+	padding : 40px;
 	background-color: white;
+	z-index: 999;
+}
+					/* 이/착륙 국가 */
+.one_way_accoding .according{
+	display: flex;
+	
+}
+
+.depart_nation,.arrival_nation{
+	width : 90px;
+	font-size: 17px;
+	
+}
+
+.according_section_depart_tablinks , .according_section_arrival_tablinks {
+    width : 90px;
+    border-style: solid;
+    border-left:none;
+    border-bottom:none;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+    border-color: black;
+    font-size: 16px;
+    padding: 15px;
+    padding-right : 40px;
+    height : 50px;
+    background: none;
+}
+.according_section_depart_tablinks:first-child, .according_section_arrival_tablinks:first-child{
+	background-color: var(--color_blue_2);
+	font-weight: 900;
+}
+.according_section_depart_tablinks:last-child, .according_section_arrival_tablinks:last-child{
+	border-bottom : 1px solid black;
+}
+.according_section_depart_tabcontent,.according_section_arrival_tabcontent{
+	border-bottom : 1px solid black;
+	border-top : 1px solid black;
+	font-size: 17px;
+	display : grid;
+    grid-template-columns: repeat(5, 150px);
+    grid-auto-flow: row;
+    grid-auto-rows: 25%;
+	display: none;    
+}
+.according_section_depart_tabcontent#depart_korea ,.according_section_arrival_tabcontent#arrival_korea{
+	 display: block;
+}
+.according_section_depart_tabcontent > button,.according_section_arrival_tabcontent > button{
+    width:150px;
+    height:50px;
+    padding: 7px 10px;
+    cursor: pointer;
+    align-content: center;
+    background: none;
+    border: none;
+}
+
+ 							/* 날짜 */
+#date_accoding{
+	margin-top: -60px;
+    width: 960px;
+    height: auto;
+    border: var(--color_blue_1), 2px, solid;
+    border-radius: 20px;
+    background-color: white;
+    padding: 40px;
+    display: block;
+    
+}
+
+button#depart_date{
+	display: block;
+}
+button#arrival_date{
+	display: none;
+}
+
+#btn_return_depart_date{
+	margin-left : 50px;
+	display: none;
+}
+
+							/* 인원 + 좌석 */
+div#people_lineup_sit_accoding{
+	margin-left:450px;
+	width: 400px;
+}
+							
+div.people_lineup{
+	
+}
+
+div.people_lineup > div{
+	display : flex;
+	margin : 20px;
+	
+}
+
+div.people_lineup > div > * {
+	padding: 10px 15px;
+	background: none;
+	text-align: center;
+	margin: auto;
+	font-size: 15px;
+}
+
+div.people_lineup > div > h1{
+	    color: #5E5E5E;
+	    float : left;
+	
+}	
+
+div.people_lineup > div > button:nth-child(2){
+	width : 42px;
+	height : 42px;
+	text-align: center;
+    background-color: var(--color_blue_2);
+    color: black;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px 15px;
+	
+}	
+
+div.people_lineup > div > div:nth-child(3){
+    color: #5E5E5E;
+	
+}
+
+div.people_lineup > div > button:nth-child(4){
+	width : 42px;
+	height : 42px;
+	text-align: center;
+    background-color: var(--color_blue_2);
+    color: black;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px 15px;
+}	
+
+div.people_lineup > div > button:hover{
+	background-color : rgb(0,106,255);
+}
+div.sit{
+	border-top: 1px solid black;
+
+}
+
+div.sit > button {
+	display: block;
+	margin : 20px auto;
+	width : 300px;
+	height: 60px;
+	background: none;
+	border-radius: 15px;
+}
+
+button#sit3{
+	background-color: var(--color_blue_2);
+}
+
+
+/* 		search_section 구간
+section.search_section{
+	height: 340px;
+	background-color: gray;
+}
+	                                      
+div.search{
+	width: 100%;
+	height : 145px;
+	border: var(--color_blue_1), 2px, soli;
+	border-radius : 20px;
+	margin: auto;
+	position : relative;
+	top: 135px;
+	background-color: rgba(255, 255, 255, .7);
 }	
 div.tab{
 	  margin: 20px 5px 5px 45px;
@@ -128,10 +446,10 @@ button#people_lineup{
 
 
 
+					 						!!!!checkpoint!!!
 
 
-
-			/* according_section 섹션 */
+			according_section 섹션
 section.according_section{
 	width: 960px;
 	margin: auto;
@@ -144,7 +462,7 @@ div.according{
 
 
 
-							/* according_section 섹션 -- 입출국 */
+							according_section 섹션 -- 입출국
 div#depart_accoding , div#arrival_accoding{
 	height: 400px;
 }
@@ -189,7 +507,7 @@ div#depart_accoding , div#arrival_accoding{
 
 
 
-							/* according_section 섹션 -- 날짜 */
+							according_section 섹션 -- 날짜
 #date_accoding{
 	display: block;
 }
@@ -207,7 +525,7 @@ button#arrival_date{
 }
 
 
-							/* according_section 섹션 -- 인원 + 좌석 */
+							according_section 섹션 -- 인원 + 좌석
 div#people_lineup_sit_accoding{
 	height: 300px;
 }
@@ -250,8 +568,8 @@ div.people_lineup > div > button:nth-child(2){
 }	
 
 div.people_lineup > div > div:nth-child(3){
-	/* border: 1px solid black;
-	border-radius: 35px; */
+	border: 1px solid black;
+	border-radius: 35px;
 }
 
 div.people_lineup > div > button:nth-child(4){
@@ -280,7 +598,7 @@ button#sit3{
 	background-color: rgb(0,106,255);
 	color : white;
 }
-
+ */
 
 
 
@@ -321,24 +639,12 @@ button#sit3{
 	border: 1px solid black;
 }
 .recommend_section > div > div > div:nth-of-type(2){
-	animation-name : left_in;
-	animation-duration: 1s;
 	position: relative;
 }
 .recommend_section > div > div > div:nth-of-type(3){
-	animation-name : right_in;
-	animation-duration: 1s;
 	position: relative;
 }
 
-@keyframes left_in{
-	0%{left : -960px; top : 0px}
-	100%{left : 0px; top : 0px}
-}
-@keyframes right_in{
-	0%{left : 960px; top : 0px}
-	100%{left : 0px; top : 0px}
-}
 .slides{
 	display: flex;
 }
@@ -348,6 +654,7 @@ button#sit3{
 	margin : 80px auto;
 	background-color : white;
 	border: 1px solid black;
+	
 }
 
 .slides_image{
@@ -393,11 +700,6 @@ button#sit3{
 	
 }
 
-.slide_prev:hover , .slide_next:hover{
- 
-	
-}
-
 .slide_prev{
 	margin-left: -115px;
 	background-image: url("../../images/skyblue_left.png");
@@ -405,9 +707,7 @@ button#sit3{
 }
 .slide_prev:hover{
 	margin-left: -115px;
-	animation-name: left_arrow;
-	animation-duration: 0.5s;
-	animation-fill-mode: forwards;
+	background-image: url("../../images/blue_left.png");
 	background-size: cover;
 }
 
@@ -418,20 +718,10 @@ button#sit3{
 }
 .slide_next:hover{
 	margin-left:  1000px;
-	animation-name: right_arrow;
-	animation-duration: 0.5s;
-	animation-fill-mode: forwards;
+	background-image: url("../../images/blue_right.png");
 	background-size: cover;
 }
 
-@keyframes left_arrow{
-	0%{}
-	100%{background-image: url("../../images/blue_left.png")}
-}
-@keyframes right_arrow{
-	0%{}
-	100%{background-image: url("../../images/blue_right.png")}
-}
 
 				/* 임시 */
 .input_values{

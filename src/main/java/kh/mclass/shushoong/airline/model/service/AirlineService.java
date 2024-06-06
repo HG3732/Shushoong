@@ -15,6 +15,11 @@ public class AirlineService {
 	private AirlineRepository airlineRepository;
 	
 	public List<AirlineInfoDto> getAirlineInfo(String departLoc, String arrivalLoc){
+		System.out.println("Service - departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc);
+		
+//		List<AirlineInfoDto> airlineData = airlineRepository.selectAllList(departLoc, arrivalLoc);
+//		System.out.println("Fetched airline data: " + airlineData);
+		
 		return airlineRepository.selectAllList(departLoc, arrivalLoc);
 	}
 }

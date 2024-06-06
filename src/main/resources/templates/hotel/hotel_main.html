@@ -36,6 +36,8 @@ console.log(today_year);
 console.log(today_month);
 console.log(today_day);
 
+let currentIndex = 0;	//캐러셀 index
+
 $(loadedHandler)
 	
 	function loadedHandler() {
@@ -46,6 +48,8 @@ $(loadedHandler)
 		$('.input.room').on('click', roomClickHandler);
 		$('.plus').on('click', plusClickHandler);
 		$('.minus').on('click', minusClickHandler);
+		$('.btn2.left').on('click', leftClickHandler);
+		$('.btn2.right').on('click', rightClickHandler);
 	}
 	
 	//국가 검색 클릭 시 국가 선택 창 표시
@@ -93,9 +97,15 @@ $(loadedHandler)
 	function minusClickHandler() {
 		var num = $(this).next().text();
 		if(($(this).parent().prev().children().eq(0).text() == "성인" && num > 1)
-			|| ($(this).parent().prev().children().eq(0).text() == "아동" && num > 0)){		//성인은 최소 한명 이상, 아동은 0명 선택 가능
+			|| ($(this).parent().prev().children().eq(0).text() == "아동" && num > 0)		//성인은 최소 한명 이상, 아동은 0명 선택 가능
+			|| $(this).parent().prev().text() == "객실" && num > 1){	//객실도 1개 이상...
 			$(this).next().text(num-1);
 		}
+	}
+	
+	//캐러셀 왼쪽 클릭
+	function leftClickHandler() {
+		currentIndex = (currendIndex === 0);
 	}
 </script>
 </head>
@@ -189,9 +199,9 @@ $(loadedHandler)
 						<div class="room amount">
 							<div class="cat room">객실</div>
 							<div class="btn-area">
-								<button type="button" class="btn btn2 minus">−</button>
+								<button type="button" class="btn minus">−</button>
 								<div class="num">1</div>
-								<button type="button" class="btn btn2 plus">+</button>
+								<button type="button" class="btn plus">+</button>
 							</div>
 						</div>
 						<div class="select-people-head">인원</div>
@@ -200,22 +210,36 @@ $(loadedHandler)
 							<div class="wrap-people amount">
 								<div class="cat adult"><p>성인</p><p>만 12세 이상</p></div>
 								<div class="btn-area">
-									<button type="button" class="btn btn2 minus">−</button>
+									<button type="button" class="btn minus">−</button>
 									<div class="num">1</div>
-									<button type="button" class="btn btn2 plus">+</button>
+									<button type="button" class="btn plus">+</button>
 								</div>
 							</div>
 							<div class="wrap-people amount">
 								<div class="cat child"><p>아동</p><p>만 12세 미만</p></div>
 								<div class="btn-area">
-									<button type="button" class="btn btn2 minus">−</button>
+									<button type="button" class="btn minus">−</button>
 									<div class="num">0</div>
-									<button type="button" class="btn btn2 plus">+</button>
+									<button type="button" class="btn plus">+</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+			
+			<div class="wrap-hot-hotel-list">
+				<div class="hot-hotel-title">가장 많이 찾은 숙소</div>
+				<div class="hot-hotel-list">
+					<div class="list-wrapper">
+						<div class="hot-hotel"><img th:src="@{images/instancefolder/1696570529586.jpg}" alt="a"></div>
+		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20230713_201311.jpg}" alt="a"></div>
+		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20231010_171349.jpg}" alt="a"></div>
+		                <div class="hot-hotel"><img th:src="@{images/instancefolder/hu_1431618317_6832524860.jpg}" alt="a"></div>
+					</div>
+				</div>
+				<div><button type="button" class="left btn2">&lt;</button></div>
+				<div><button type="button" class="right btn2">&gt;</button></div>
 			</div>
 		</div>
 	</div>

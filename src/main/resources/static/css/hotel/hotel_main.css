@@ -68,6 +68,7 @@
 }
 .main-back .hotel-search-bar button:nth-child(2){
 	flex-grow: 7;
+	min-width: 430px;
 }
 .main-back .hotel-search-bar button:nth-child(3){
 	flex-grow: 1;
@@ -231,4 +232,55 @@
 
 .wrap-people {
 	margin: 20px auto;
+}
+
+.wrap-hot-hotel-list {
+	width: 960px;
+	margin: 0 auto;
+	margin-top: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	gap: 40px;
+	position:relative;
+}
+
+.wrap-hot-hotel-list .hot-hotel-title {
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.wrap-hot-hotel-list .hot-hotel-list {
+	width: 100%;
+	height: 300px;
+	
+	
+}
+
+.wrap-hot-hotel-list .hot-hotel-list .list-wrapper {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	overflow: hidden;
+}
+
+.list-wrapper .hot-hotel {
+	width: 250px;
+	height: 250px;
+	background-color: green;
+}
+
+.wrap-hot-hotel-list .btn2 {
+	position: absolute;
+}
+
+.wrap-hot-hotel-list .btn2.left {
+	left:-65px;
+	top: 180px;
+}
+
+.wrap-hot-hotel-list .btn2.right {
+	right:-65px;
+	top: 180px;
 }

@@ -11,6 +11,11 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/hotel/hotel_list.css}" rel="stylesheet" />
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	
+	<!-- 구글맵스 API -->
+	<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoo40WSHtW0JekF2N6b0Tm1DHbifYiSOg&loading=async&callback=initMap"></script>
+	
 <meta charset="UTF-8">
 <title>호텔 목록</title>
 </head>
@@ -64,18 +69,18 @@ xmlns:th="http://www.thymeleaf.org">
 							 <div class="price-slider">
 							     <div class="multi-range-slider">
 							         <!-- 진짜 슬라이더 -->
-							         <input type="range" id="input-left" min="0" max="100" value="1" />
+							         <!-- <input type="range" id="input-left" min="0" max="100" value="1" /> -->
 							         <input type="range" id="input-right" min="0" max="100" value="100" />
 							
 							         <!-- 커스텀 슬라이더 -->
 							         <div class="slider">
 							             <div class="track"></div>
 							             <div class="range"></div>
-							             <div class="circle left"></div>
+							             <!-- <div class="circle left"></div> -->
 							             <div class="circle right"></div>
 							         </div>
 							         <div class="circle price">
-							          <div class="price1">가격1</div>
+							          <div class="price1">0</div>
 							          <div class="price2">가격2</div>
 							         </div>
 							     </div>
@@ -165,14 +170,14 @@ function likeHandler(){
 	}
 	
 
-const inputLeft = document.getElementById("input-left");
+/* const inputLeft = document.getElementById("input-left"); */
 const inputRight = document.getElementById("input-right");
-const circleLeft = document.querySelector(".slider > .circle.left");
+/* const circleLeft = document.querySelector(".slider > .circle.left"); */
 const circleRight = document.querySelector(".slider > .circle.right");
 const range = document.querySelector(".slider > .range");
 
 // 왼쪽이 움직일떼(= 왼쪽 값이 변할 때) 변경될 때 실행되는 함수
-const setLeftValue = () => {
+/* const setLeftValue = () => {
     // 현재 입력 값(_this)과 입력 요소의 최소값과 최대값을 가져옴
     const _this = inputLeft;
     const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
@@ -189,7 +194,7 @@ const setLeftValue = () => {
     circleLeft.style.left = percent + "%";
     range.style.left = percent + "%";
 };
-
+ */
 // 오른쪽이 움직일떼(= 오른쪽 값이 변할 때) 변경될 때 실행되는 함수
 const setRightValue = () => {
     // 현재 입력 값(_this)과 입력 요소의 최소값과 최대값을 가져옴
@@ -198,7 +203,7 @@ const setRightValue = () => {
 
   	//오른쪽값을 기준으로 왼쪽은 오른쪽에게 최대 20까지 차이날 수 있게끔함 (이 이상 오지 못함)
     // -> 겹치지 않게 이렇게 설정
-    _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft.value) + 20);
+/*     _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft.value) + 20); */
 
     // 오른쪽 thumb의 위치를 계산하여 슬라이더의 오른쪽 값을 표시
     const rightValue = parseInt(_this.value);
@@ -211,19 +216,19 @@ const setRightValue = () => {
 
 
 //왼쪽 입력 값이 변경될 때와 오른쪽 입력 값이 변경될 때 해당 함수들을 호출하도록 이벤트 리스너를 설정
-inputLeft.addEventListener("input", setLeftValue);
+/* inputLeft.addEventListener("input", setLeftValue); */
 inputRight.addEventListener("input", setRightValue);
 
 
 // 페이지가 로드될 때 초기값을 설정하는 함수
 const setInitialValues = () => {
     // 초기 왼쪽 값과 오른쪽 값
-    const initialLeftValue = 0;
+/*     const initialLeftValue = 0; */
     const initialRightValue = 100;
     // 초기값을 입력 요소에 설정하고, 왼쪽과 오른쪽 thumb의 위치를 조정
-    inputLeft.value = initialLeftValue;
+/*     inputLeft.value = initialLeftValue; */
     inputRight.value = initialRightValue;
-    setLeftValue();
+/*     setLeftValue(); */
     setRightValue();
 };
 

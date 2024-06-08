@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kh.mclass.shushoong.hotel.model.repository.HotelRepository">
-	<select id="selectAllHotelList" parameterType="string" resultType="HotelDtoRes">
+	<select id="selectAllHotelList" parameterType="String" resultType="HotelDtoRes">
+		select hotel_Name, hotel_Eng, hotel_Address from hotel where hotel_code = #{hotelCode}
+	</select>
+	
+	<select id="selectHotelPicList" parameterType="String" resultType="HotelPic">
+		select hotel_picture from hotel_pic where hotel_code = #{hotelCode}
+	</select>
+	
+	<select id="selectRoomList" parameterType="String" resultType="HotelRoomDto">
+		select room_cat, hotel_price from hotel_room where hotel_code = #{hotelCode}		
 	</select>
 </mapper>

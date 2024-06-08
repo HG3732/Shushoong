@@ -17,7 +17,7 @@ xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
-<body>
+<body onload="initialize()">
 
 	<div class="wrapper">
 		<div class="wrap-header">
@@ -30,21 +30,14 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-main">
-				<div class="hotel_name">
-					<div class="name_kr">세인트존스 호텔</div>
-					<div class="name_en">St.Jones Hotel</div>					
+				<div th:each="hotel : ${dtolist}" class="hotel_name">
+ 					<div th:text="${hotel.hotelName}" class="name_kr">세인트존스 호텔</div>
+					<div th:text="${hotel.hotelEng}" class="name_en">St.Jones Hotel</div>				
 				</div>
 				<hr></hr>
 				<div class="hotel_pic">
-					<div class="pic_slide">
-						<div class="pic"></div>
-						<div class="pic"></div>
-						<div class="pic"></div>
-						<div class="pic"></div>
-						<div class="pic"></div>
-						<div class="pic"></div>
-						<div class="pic"></div>
-						<div class="pic"></div>
+					<div th:each="hotelpic : ${piclist}"class="pic_slide">
+						<img th:src="${hotelpic.hotelPicture}"class="pic"/>
 					</div>
 				</div>
 				
@@ -52,7 +45,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<div class="hotel_info_all">
 					<div class="info_list">
 						<div class="room_choose"><a href="#hotel_room_list">객실선택</a></div>
-						<div class="hotel_info"><a href="#wrap_hotel_info">호텔상세정보</a></div>
+						<div class="hotel_info"><a href="#wrap_hotel_info">호텔정보</a></div>
 						<div class="hotel_review"><a href="#wrap_hotel_review">호텔후기</a></div>
 						<div class="calendar">
 							<img th:src="@{/images/calendar.png}" alt="오른쪽 화살표" class="cal_pic" style="width:30px;">
@@ -69,15 +62,17 @@ xmlns:th="http://www.thymeleaf.org">
 						<hr style="border: 0.1em solid black;"></hr>	
 							<form>
 								<div class="wrap_room">
-									<div class="room">
-										<div class="room_cat">Superior Double, No Ocean View</div>
+									<div th:each="roomlist: ${roomlist}" class="room">
+										<div th:text="${roomlist.roomCat}" class="room_cat">Superior Double, No Ocean View</div>
 										<div class="amount_num">
-											<strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+											<strong th:text="${roomlist.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
 											원
 										</div>
 										<button type="button" class="btn_reserve">예약하기</button>
+										<div style="grid-column: 1/9">
+											<hr style="border: 1px solid #F1F1F1;" >
+										</div>
 									</div>
-									<hr style="border: 1px solid #F1F1F1;"></hr>
 								</div>
 							</form>
 							<form>
@@ -136,10 +131,28 @@ xmlns:th="http://www.thymeleaf.org">
 						<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
 					</div>
 					
-					<!-- 호텔상세정보 -->
+					<!-- 호텔정보 -->
 					<div id="wrap_hotel_info">
-						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">호텔상세정보</p>
+						<div class="hotel_info_head">
+							<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">호텔정보</p>
+							<div class="map_wrap">
+								<button type="button" class="btn_map">
+									<img th:src="@{/images/icon_pin.png}" alt="지도" class="map_pic" style="width:15px; height:20px; margin-right: 5px;">
+									지도에서 보기
+								</button>
+							</div>
+						</div>
 						<hr style="border: 0.1em solid black;"></hr>
+						
+						<!-- 지도모달창 -->
+
+			            		<div id="map" style="width: 900px; height: 800px;"></div>
+								<div>
+								  <input type="text" id="address">
+								  <input type="button" value="Encode" onclick="codeAddress()">
+								</div>
+
+						
 						<div class="wrap_info">
 							<div class="section">
 								<div class="basic_info">기본정보</div>
@@ -517,6 +530,35 @@ function showAllRoomHandler(){
 			$(this).hide();
 }
 
+/* ============================지도 모달창================================ */
+var geocoder;
+var map;
+function initialize() {
+  geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(-34.397, 150.644);
+  var mapOptions = {
+    zoom: 8,
+    center: latlng
+  }
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+}
+
+function codeAddress() {
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+
 
 
 /*=================== 리뷰 막대그래프 관련 =================== */
@@ -588,7 +630,7 @@ var myChart3 = new Chart(ctx, {
 });
 
 
-/*===================== 모달창 관련 ==========================  */
+/*===================== 리뷰 모달창 관련 ==========================  */
 function checkScoreHandler() {
 	
 	console.log(this);

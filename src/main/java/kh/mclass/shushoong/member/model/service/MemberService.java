@@ -28,8 +28,8 @@ public class MemberService {
 		return memberRepository.join(memberDto);
 	}
 
-	// 닉네임 중복 여부
-	public Integer existNick(String userId) {
+	// 아이디 중복 여부
+	public Integer Idcheck(String userId) {
 		return memberRepository.Idcheck(userId);
 	} 
 	

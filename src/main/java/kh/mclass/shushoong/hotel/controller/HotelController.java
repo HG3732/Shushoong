@@ -31,6 +31,7 @@ public class HotelController {
 		
 		List<HotelRoomDto> result = service.selectRoomList("2OS001");
 		
+		//방 종류 경우의 수 나누기
 		for(int i = 0; i < result.size(); i++) {
 			if(result.get(i).getRoomCat().equals("0")) {
 				result.get(i).setRoomCat("스탠다드 룸");
@@ -45,6 +46,7 @@ public class HotelController {
 			}
 		}
 		
+		//방 속성 경우의 수 나누기
 		for(int i = 0; i < result.size(); i++) {
 			if(result.get(i).getRoomAtt().equals("0")) {
 				result.get(i).setRoomAtt("뷰 없음");
@@ -60,6 +62,7 @@ public class HotelController {
 		
 		model.addAttribute("piclist", service.selectPicList("2OS001"));
 		model.addAttribute("dtolist", service.selectAllHotelList("2OS001")); 
+		model.addAttribute("hotelSearchlist", service.selectHotelSearchList("2OS001")); 
 		
 		return "hotel/hotel_view";
 	}

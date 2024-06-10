@@ -52,10 +52,5 @@ public class LoginController {
 		public String login() {
 			return "member/login";
 		}
-		
-		@GetMapping("mailtest")
-		public String mail() {
-			return "member/mail/mailTemplate";
-		}
 
 }

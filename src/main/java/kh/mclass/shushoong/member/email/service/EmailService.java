@@ -20,7 +20,7 @@ import jakarta.mail.internet.MimeMessage;
 import kh.mclass.shushoong.api_payload.status_code.ErrorStatus;
 import kh.mclass.shushoong.exception.GeneralException;
 import kh.mclass.shushoong.member.email.dto.VerificationCode;
-import kh.mclass.shushoong.member.login.kakao.VerificationCodeRepository;
+import kh.mclass.shushoong.member.email.repository.VerificationCodeRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -73,8 +73,7 @@ public class EmailService {
 		String subject = String.format(VERIFICATION_CODE_MAIL_SUBJECT, to);
 		Context thymeleafContext = new Context();
 		thymeleafContext.setVariables(templateModel);
-		String htmlBody = templateEngine.process("mailTemplate.html", thymeleafContext);
-		
+		String htmlBody = templateEngine.process("/member/mail/mailTemplates.html", thymeleafContext);
 		
 	}
 	

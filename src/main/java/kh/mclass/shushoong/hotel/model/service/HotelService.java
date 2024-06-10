@@ -29,5 +29,10 @@ public class HotelService {
 	public List<HotelRoomDto> selectRoomList(String hotelCode) {
 		return hotelRepository.selectRoomList(hotelCode);
 	}
+	
+	public List<HotelSearchDtoRes> selectHotelSearchList(String hotelCode) {
+		return hotelRepository.selectHotelSearchList(hotelCode);
+	}
+
 
 }

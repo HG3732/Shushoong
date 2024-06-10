@@ -17,4 +17,6 @@ public interface HotelRepository {
 	public List<HotelPic> selectHotelPicList(String hotelCode);
 	
 	public List<HotelRoomDto> selectRoomList(String hotelCode);
+	
+	public List<HotelSearchDtoRes> selectHotelSearchList(String hotelCode);
 }

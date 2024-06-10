@@ -33,6 +33,8 @@
 .main-back .wrap-hotel-search {
 	margin: 0 auto;
 	width: 960px;
+	position: relative;
+	z-index: 1;
 }
 
 .main-back .hotel-search-bar {
@@ -254,33 +256,50 @@
 .wrap-hot-hotel-list .hot-hotel-list {
 	width: 100%;
 	height: 300px;
-	
-	
+	overflow: hidden;
 }
 
 .wrap-hot-hotel-list .hot-hotel-list .list-wrapper {
 	display: flex;
 	flex-direction: row;
-	gap: 20px;
-	overflow: hidden;
+	gap: 30px;
+	transition: transform 1s;
+	width: auto;
 }
 
 .list-wrapper .hot-hotel {
 	width: 250px;
 	height: 250px;
 	background-color: green;
+	flex: 0 0 300px;
+}
+
+.list-wrapper .hot-hotel > img {
+	display: block;
+	object-fit: cover;
 }
 
 .wrap-hot-hotel-list .btn2 {
 	position: absolute;
+	width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color_blue_2);
+    cursor: pointer;
+}
+
+.wrap-hot-hotel-list .btn2:hover {
+	background-color: var(--color_blue_1);
+	color: white;
 }
 
 .wrap-hot-hotel-list .btn2.left {
 	left:-65px;
-	top: 180px;
+	top: 165px;
 }
 
 .wrap-hot-hotel-list .btn2.right {
 	right:-65px;
-	top: 180px;
+	top: 165px;
 }

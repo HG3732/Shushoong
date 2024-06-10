@@ -24,13 +24,13 @@ public class MemberService {
 	}
 
 	// 회원가입
-	public String join(MemberDto memberDto) {
+	public int join(MemberDto memberDto) {
 		return memberRepository.join(memberDto);
 	}
 
 	// 아이디 중복 여부
-	public String Idcheck(String userId) {
-		return memberRepository.Idcheck(userId);
+	public int idCheck(String userId) {
+		return memberRepository.idCheck(userId);
 	} 
 	
 	// 비밀번호 재설정

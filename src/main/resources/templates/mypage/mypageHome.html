@@ -30,7 +30,7 @@ xmlns:th="http://www.thymeleaf.org">
 					<div class="section-image">
 						<a href="">
 							<div class="editInfo">
-								
+								<img th:src="@{/images/비행기.png}" alt="개인정보 수정">
 								<div class="tail">개인정보 수정</div>
 							</div>
 						</a>
@@ -42,15 +42,22 @@ xmlns:th="http://www.thymeleaf.org">
 						</a>
 					</div>
 					<div class="payList">
-						<div class="pay">
-						
+						<div class="pay-grid">
+							<div>예약날짜</div>
+							<div>예약코드</div>
+							<div>상품명</div>
+							<div>인원</div>
+							<div>출국일/귀국일</div>
 						</div>
 						<div class="viewAllList">
 							<button type="button" class="viewList">전체보기</button>
 						</div>
 					</div>
 					<div class="onlineQnAList">
-					
+						<div class="QnA-grid">
+							<div>문의내용</div>
+							<div>문의날짜</div>
+						</div>
 					</div>
 				</section>
 			

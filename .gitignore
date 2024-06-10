@@ -2,7 +2,7 @@
 bin/
 build/
 keyfiles/
-*./properties
+
 *.log
 
 *.ctxt

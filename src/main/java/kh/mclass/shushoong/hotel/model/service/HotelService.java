@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class HotelService {
 
-	@Autowired
 	private final HotelRepository hotelRepository;
 	
 	public List<HotelDtoRes> selectAllHotelList(String loc) {

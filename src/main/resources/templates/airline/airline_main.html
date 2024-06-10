@@ -11,6 +11,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<link th:href="@{/css/airline/airline_main.css}" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
+	
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
@@ -55,7 +56,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							
 						</div>
 						
-						<input type="submit" value="검색">
+						<label for="hidden_submit" >검색</label>
 					</div>
 					
 					<div id="round_trip" class="tabcontent">
@@ -76,8 +77,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<div>
 							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">일반석/성인1/소아0/유아0<img alt="사람" th:src="@{/images/person.png}"></button>
 						</div>
-						
-						<input type="submit" value="검색">
+						<!-- checkpoint -->
+						<label for="hidden_submit" >검색</label>
 					</div>
 					
 				</div>
@@ -235,16 +236,18 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			
 			<section class="input_values">
 				<div>
-					<form action="">
-						<input type="text" name="hidden_ticket_type" id="hidden_ticket_type" 	value="1" 	readonly="readonly" required="required">
-						<input type="text" name="hidden_depart_value" id="hidden_depart_value" 				readonly="readonly" required="required">
-						<input type="text" name="hidden_arrival_value" id="hidden_arrival_value"		 	readonly="readonly" required="required">
-						<input type="text" name="hidden_depart_date" id="hidden_depart_date" 				readonly="readonly" required="required">
-						<input type="text" name="hidden_arrival_date" id="hidden_arrival_date" 				readonly="readonly" required="required">
-						<input type="text" name="hidden_adult" id="hidden_adult" 				value="1" 	readonly="readonly" required="required">
-						<input type="text" name="hidden_child" id="hidden_child" 				value="0"	readonly="readonly" required="required">
-						<input type="text" name="hidden_baby" id="hidden_baby" 					value="0"	readonly="readonly" required="required">
-						<input type="text" name="hidden_sit_type" id="hidden_sit_type" 			value="sit3"	readonly="readonly" required="required">
+					<form action="/shushoong/airline/list" method="get">
+						<input type="text" name="ticketType" id="hidden_ticket_type" 	value="1" 	readonly="readonly" required="required">
+						<input type="text" name="departLoc" id="hidden_depart_value" 				readonly="readonly" required="required">
+						<input type="text" name="arrivalLoc" id="hidden_arrival_value"		 	readonly="readonly" required="required">
+						<input type="text" name="departDate" id="hidden_depart_date" 				readonly="readonly" required="required">
+						<input type="text" name="arrivalDate" id="hidden_arrival_date" 				readonly="readonly" required="required">
+						<input type="text" name="adult" id="hidden_adult" 				value="1" 	readonly="readonly" required="required">
+						<input type="text" name="child" id="hidden_child" 				value="0"	readonly="readonly" required="required">
+						<input type="text" name="baby" id="hidden_baby" 					value="0"	readonly="readonly" required="required">
+						<input type="text" name="sitType" id="hidden_sit_type" 			value="sit3"	readonly="readonly" required="required">
+						<input type="submit" id="hidden_submit">
+						<!-- checkpoint -->
 					</form>					
 				</div>
 			</section>
@@ -503,7 +506,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			}
 		}
 		
-				/* checkpoint */
 				/* 출국 설정하는 vertical Tabs 적용하는 펑션 */
 		function departNation(event,nation,nationId){
 			var i, tabcontent, tablinks;

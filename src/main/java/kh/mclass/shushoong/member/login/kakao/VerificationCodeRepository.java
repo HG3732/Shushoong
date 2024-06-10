@@ -1,10 +1,12 @@
-package kh.mclass.shushoong.member.email;
+package kh.mclass.shushoong.member.login.kakao;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Repository;
+
+import kh.mclass.shushoong.member.email.dto.VerificationCode;
 
 @Repository
 public class VerificationCodeRepository {

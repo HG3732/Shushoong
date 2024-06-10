@@ -53,7 +53,7 @@ public class KakaoApi {
 	        bw.flush();
 
 	        int responseCode = conn.getResponseCode();
-	        System.out.println("[KakaoApi.getAccessToken] responseCode = "+responseCode);
+//	        System.out.println("[KakaoApi.getAccessToken] responseCode = "+responseCode);
 
 	        BufferedReader br;
 	        if (responseCode >= 200 && responseCode <= 300) {
@@ -96,7 +96,7 @@ public class KakaoApi {
 	        conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 	        
 	        int responseConde = conn.getResponseCode();
-	        System.out.println("[KakaoApi.getAccessToken] responseCode = "+ responseConde);
+//	        System.out.println("[KakaoApi.getAccessToken] responseCode = "+ responseConde);
 	        
 	        BufferedReader br;
 	        if(responseConde >= 200 && responseConde <= 300) {
@@ -119,7 +119,7 @@ public class KakaoApi {
 	        
 	        Object userId = resultMap.get("id");
 	        String propertiesStr = gson.toJson(resultMap.get("properties"));
-			System.out.println(propertiesStr);
+//			System.out.println(propertiesStr);
 			String kakaoAccountStr = gson.toJson(resultMap.get("kakao_account"));
 			
 			HashMap<String, Object> properties = gson.fromJson(propertiesStr, HashMap.class);
@@ -222,7 +222,7 @@ public class KakaoApi {
 				conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;utf-8");
 				
 				int responseCode = conn.getResponseCode();
-				System.out.println("[KakaoApi.getUserInfo] responseCode : "+responseCode);
+//				System.out.println("[KakaoApi.getUserInfo] responseCode : "+responseCode);
 				
 				BufferedReader br;
 				if (responseCode >= 200 && responseCode <= 300) {

@@ -1,36 +1,40 @@
 <!DOCTYPE html>
-<html 
-xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
-	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
-	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
- 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
-	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 <meta charset="UTF-8">
-<title>슈슝</title>
 </head>
-<body>
-
-	<div class="wrapper">
-		<div class="wrap-header">
-			<header>
- 				<div th:replace="~{common/header :: Header}"></div>
-				<div class="hrline">
-					<hr>
-				</div>
-			</header>
+<body style="display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;">
+	<div class="mail-header" style="text-align: center;
+	margin-bottom: 50px;">
+		<img th:src="@{/images/logo.png}" alt="&#47196;&#44256;">
+	</div>
+	<div class="mail-section">
+		<div class="information-title" style="text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 30px;">
+			&#51060;&#47700;&#51068; &#51064;&#51613; &#53076;&#46300;
 		</div>
-		<div class="wrap-body">
-			<div class="wrap-">
-			<!-- 여기부터 작성 -->
-			
-			</div>
+		<div class="code-section" style="background-color: #BCEFFF;
+	width:700px; 
+	height: 70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;">
+			<div style="font-size: 17px; font-weight: bold;" th:text="${verificationCode}"></div>
+		</div>
+		<br>
+		<div class="information-section" style="text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	margin-bottom: 30px;">
+			&#48376; &#47700;&#51068;&#51008; &#48376;&#51064;&#51064;&#51613;&#51012; &#50948;&#54644; &#48156;&#49569;&#46104;&#50632;&#49845;&#45768;&#45796;. &#54644;&#45817; &#54868;&#47732;&#50640; &#48372;&#50668;&#51648;&#45716; &#53076;&#46300;&#47484; &#51077;&#47141;&#46976;&#50640; &#51077;&#47141;&#54644; &#51452;&#49464;&#50836;. 
 		</div>
 	</div>
-	<div class="wrap-footer">
-  		<div th:replace="~{common/footer :: Footer}"></div> 
-	</div>
-	
 </body>
 </html>

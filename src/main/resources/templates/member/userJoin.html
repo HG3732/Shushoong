@@ -105,7 +105,20 @@ xmlns:th="http://www.thymeleaf.org">
 	</div>
 	
 	<script>
-
+		$(loadedHanlder);
+		function loadedHanlder() {
+			// 버튼 이벤트 
+			$("#frm-post .btn.emailSend").on("click", mailSendHandler);
+			$("#frm-post .btn.emailCheck").on("click", mailCheckHandler);
+		}
+		
+		function mailSendHandler() {
+			
+		}
+		
+		function mailCheckHandler() {
+			
+		}
 	</script>
 </body>
 </html>

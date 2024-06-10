@@ -53,7 +53,7 @@ public class NaverApi {
 				bw.flush();
 				
 				int responseCode = conn.getResponseCode();
-				System.out.println("[NaverApi.getAccessToken] responseCode = "+responseCode);
+//				System.out.println("[NaverApi.getAccessToken] responseCode = "+responseCode);
 				
 				BufferedReader br;
 				if (responseCode >= 200 && responseCode <= 300) {
@@ -68,7 +68,7 @@ public class NaverApi {
 					responseSb.append(line);
 				}
 				String result = responseSb.toString();
-				System.out.println("responseBody = "+result);
+//				System.out.println("responseBody = "+result);
 				
 				Map<?, ?> resultMap = new Gson().fromJson(result, Map.class);
 				accessToken = (String) resultMap.get("access_token");
@@ -95,7 +95,7 @@ public class NaverApi {
 				conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;utf-8");
 				
 				int responseCode = conn.getResponseCode();
-				System.out.println("[NaverApi.getUserInfo] responseCode = "+responseCode);
+//				System.out.println("[NaverApi.getUserInfo] responseCode = "+responseCode);
 				
 				BufferedReader br;
 				if (responseCode >= 200 && responseCode <= 300) {
@@ -110,7 +110,7 @@ public class NaverApi {
 					responseSb.append(line);
 				}
 				String result = responseSb.toString();
-				System.out.println("responseBody = "+result);
+//				System.out.println("responseBody = "+result);
 				
 				Gson gson = new Gson();
 				
@@ -168,7 +168,7 @@ public class NaverApi {
 				bw.flush();
 				
 				int responseCode = conn.getResponseCode();
-				System.out.println("[NaverApi.getAccessToken] responseCode = "+responseCode);
+//				System.out.println("[NaverApi.getAccessToken] responseCode = "+responseCode);
 				
 				BufferedReader br;
 				if (responseCode >= 200 && responseCode <= 300) {
@@ -183,7 +183,7 @@ public class NaverApi {
 					responseSb.append(line);
 				}
 				String result = responseSb.toString();
-				System.out.println("responseBody = "+result);
+//				System.out.println("responseBody = "+result);
 				
 				br.close();
 				bw.close();

@@ -33,10 +33,10 @@ public class KakaoController {
 		String email = (String) userInfo.get("email");
 		String nickname = (String) userInfo.get("nickname");
 				
-		System.out.println("userId = "+userId.toString());
-		System.out.println("email = "+email);
-		System.out.println("nickname = "+nickname);
-		System.out.println("accessToken = "+accessToken);
+//		System.out.println("userId = "+userId.toString());
+//		System.out.println("email = "+email);
+//		System.out.println("nickname = "+nickname);
+//		System.out.println("accessToken = "+accessToken);
 				
 		return "redirect:/login";
 	}

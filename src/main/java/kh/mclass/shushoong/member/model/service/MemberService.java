@@ -27,6 +27,11 @@ public class MemberService {
 	public int join(MemberDto memberDto) {
 		return memberRepository.join(memberDto);
 	}
+	
+	// 아이디 찾기
+	public String findId(Map<String, Object> map) {
+		return memberRepository.findId(map);
+	}
 
 	// 아이디 중복 여부
 	public int idCheck(String userId) {

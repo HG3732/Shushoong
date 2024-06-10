@@ -7,12 +7,10 @@
 	</Properties>
 	<Appenders>
 		<Console name="ConsoleLogAspect" target="SYSTEM_OUT">
-			<PatternLayout disableAnsi="false"
-				pattern="%d${LOG_DATEFORMAT_PATTERN}%highlight${LOG_LEVEL_PATTERN_ASPECT}" />
+			<PatternLayout disableAnsi="false"	pattern="%d${LOG_DATEFORMAT_PATTERN}%highlight${LOG_LEVEL_PATTERN_ASPECT}" />
 		</Console>
 		<Console name="ConsoleLog" target="SYSTEM_OUT">
-			<PatternLayout disableAnsi="false"
-				pattern="%d${LOG_DATEFORMAT_PATTERN}%highlight${LOG_LEVEL_PATTERN}" />
+			<PatternLayout disableAnsi="false"	pattern="%d${LOG_DATEFORMAT_PATTERN}%highlight${LOG_LEVEL_PATTERN}" />
 		</Console>
 	</Appenders>
 	<Loggers>
@@ -20,14 +18,36 @@
 			<AppenderRef ref="ConsoleLog" />
 		</Root>
 		<Logger name="kh.mclass.shushoong.config" level="debug"	additivity="false">
-			<AppenderRef ref="ConsoleLog" />
+			<AppenderRef ref="ConsoleLogAspect" />
 		</Logger>
-		<Logger name="kh.mclass.shushoong.member" level="debug"	additivity="false">
+		<Logger name="kh.mclass.shushoong.member" level="info"	additivity="false">
 			<AppenderRef ref="ConsoleLog" />
 		</Logger>
 		<Logger name="kh.mclass.shushoong.airline" level="info" additivity="false">
 			<AppenderRef ref="ConsoleLog" />
 		</Logger>
-		
+		<!-- JDBC -->
+		<Logger name="jdbc.sql" level="info" additivity="false">
+			<AppenderRef ref="ConsoleLogAspect" />
+		</Logger>
+		<Logger name="jdbc.sqlonly"  level="info" additivity="false">
+			<AppenderRef ref="ConsoleLogAspect" />
+		</Logger>
+		<Logger name="jdbc.sqltiming"  level="debug" additivity="false">
+			<AppenderRef ref="ConsoleLogAspect" />
+		</Logger>
+		<Logger name="jdbc.audit"   level="debug" additivity="false">
+			<AppenderRef ref="ConsoleLogAspect" />
+		</Logger>
+		<Logger name="jdbc.resultset"   level="debug" additivity="false">
+			<AppenderRef ref="ConsoleLogAspect" />
+		</Logger>
+		<Logger name="jdbc.resultsettable"  level="debug" additivity="false">
+			<AppenderRef ref="ConsoleLogAspect" />
+		</Logger>
+		<Logger name="jdbc.connection"  level="off" additivity="false">
+			<AppenderRef ref="ConsoleLogAspect" />
+		</Logger>
 	</Loggers>
 </Configuration>
+

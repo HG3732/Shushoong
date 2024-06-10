@@ -25,14 +25,19 @@
 			<url>https://jitpack.io</url>
 		</repository>
 	</repositories>
+	
 	<dependencies>
-		<!-- 결제 API-->
 		<dependency>
-			<groupId>com.github.iamport</groupId>
-			<artifactId>iamport-rest-client-java</artifactId>
-			<version>0.2.23</version>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter</artifactId>
+		    <!-- spring boot 기본 logback 제외 -->
+		    <exclusions>
+		        <exclusion>
+		            <groupId>org.springframework.boot</groupId>
+		            <artifactId>spring-boot-starter-logging</artifactId>
+		        </exclusion>
+		    </exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
@@ -44,6 +49,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- spring boot 기본 logback 제외 -->
 		    <exclusions>
 		        <exclusion>
 		            <groupId>org.springframework.boot</groupId>
@@ -111,13 +117,30 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-		<!-- logging -->
+		<!-- logging log4j2 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-log4j2</artifactId>
-			
 		</dependency>
-
+		<!-- logging jdbc -->
+		<dependency>
+			<groupId>org.bgee.log4jdbc-log4j2</groupId>
+			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+			<version>1.16</version>
+		</dependency>
+		<!-- logging Aspect -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		
+		
+		<!-- 결제 API-->
+		<dependency>
+			<groupId>com.github.iamport</groupId>
+			<artifactId>iamport-rest-client-java</artifactId>
+			<version>0.2.23</version>
+		</dependency>
 		
 	</dependencies>
 

@@ -16,9 +16,10 @@ import jakarta.activation.DataSource;
 @PropertySource("classpath:/keyfiles/apikey.properties")
 public class DatabaseConfig {
 	
-//	@Value("${spring.datasource.driver-class-name}")
-//	private String driverClassName;
-	@Value("${spring.datasource.hikari.jdbc-url}")
+	@Value("${spring.datasource.hikari.jdbc-log4j2-driver}")
+	private String driverClassName;
+	
+	@Value("${spring.datasource.hikari.jdbc-log4j2-url}")
 	private String dataSourceUrl;
 	
 	@Value("${spring.datasource.hikari.username}")
@@ -30,6 +31,7 @@ public class DatabaseConfig {
 	@Bean 
 	HikariDataSource dataSource() {
 		HikariConfig hikariConfig = new HikariConfig();
+		hikariConfig.setDriverClassName(driverClassName);
 		hikariConfig.setJdbcUrl(dataSourceUrl);
 		hikariConfig.setUsername(dataSourceUserName);
 		hikariConfig.setPassword(dataSourcePassword);

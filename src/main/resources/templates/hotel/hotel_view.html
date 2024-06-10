@@ -14,6 +14,10 @@ xmlns:th="http://www.thymeleaf.org">
 	<!--chart.js CDN  -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" rel="stylesheet">
 	<script src="https://fastly.jsdelivr.net/npm/chart.js"></script>
+	
+	<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoo40WSHtW0JekF2N6b0Tm1DHbifYiSOg&loading=async&callback=initMap"></script>
+	
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
@@ -63,7 +67,7 @@ xmlns:th="http://www.thymeleaf.org">
 							<form>
 								<div class="wrap_room">
 									<div th:each="roomlist: ${roomlist}" class="room">
-										<div th:text="${roomlist.roomCat}" class="room_cat">Superior Double, No Ocean View</div>
+										<div th:utext="${roomlist.roomCat} + ', ' + ${roomlist.roomAtt}" class="room_cat"></div>
 										<div class="amount_num">
 											<strong th:text="${roomlist.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
 											원
@@ -535,7 +539,9 @@ var geocoder;
 var map;
 function initialize() {
   geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(-34.397, 150.644);
+  
+  /* 서울을 기준으로 잡기 */
+  var latlng = new google.maps.LatLng(37.566535, 126.9779692);
   var mapOptions = {
     zoom: 8,
     center: latlng

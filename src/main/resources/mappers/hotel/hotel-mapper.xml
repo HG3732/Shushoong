@@ -10,6 +10,6 @@
 	</select>
 	
 	<select id="selectRoomList" parameterType="String" resultType="HotelRoomDto">
-		select room_cat, hotel_price from hotel_room where hotel_code = #{hotelCode}		
+		select room_cat, hotel_price, room_att from hotel_room where hotel_code = #{hotelCode}		
 	</select>
 </mapper>

@@ -44,11 +44,23 @@ public class HotelController {
 				result.get(i).setRoomCat("기타");
 			}
 		}
-		model.addAttribute("roomlist", result);
 		
+		for(int i = 0; i < result.size(); i++) {
+			if(result.get(i).getRoomAtt().equals("0")) {
+				result.get(i).setRoomAtt("뷰 없음");
+			} else if(result.get(i).getRoomAtt().equals("1")) {
+				result.get(i).setRoomAtt("오션뷰");
+			} else if(result.get(i).getRoomAtt().equals("2")) {
+				result.get(i).setRoomAtt("마운틴뷰"); 
+			} else {
+				result.get(i).setRoomAtt("시티뷰");
+			}
+		}
+		model.addAttribute("roomlist", result);
 		
 		model.addAttribute("piclist", service.selectPicList("2OS001"));
 		model.addAttribute("dtolist", service.selectAllHotelList("2OS001")); 
+		
 		return "hotel/hotel_view";
 	}
 	

@@ -5,7 +5,7 @@ import lombok.Getter;
 public class EmailRequestDto {
 	@Getter
 	public static class EmailForVerificationRequest {
-		private String email;
+		private String userEmail;
 	}
 	
 	@Getter

@@ -23,7 +23,7 @@ public class EmailController {
     public CommonResponseDto<Void>
     getEmailForVerification(@RequestBody EmailForVerificationRequest request) {
         LocalDateTime requestedAt = LocalDateTime.now();
-        emailService.sendSimpleVerificationMail(request.getEmail(), requestedAt);
+        emailService.sendSimpleVerificationMail(request.getUserEmail(), requestedAt);
         return CommonResponseDto.of(SuccessStatus._ACCEPTED, null);
     }
 	
@@ -32,7 +32,7 @@ public class EmailController {
     getEmailForVerificationV2(@RequestBody EmailForVerificationRequest request)
             throws MessagingException {
         LocalDateTime sentAt = LocalDateTime.now();
-        emailService.sendVerificationMailWithTemplate(request.getEmail(), sentAt);
+        emailService.sendVerificationMailWithTemplate(request.getUserEmail(), sentAt);
         return CommonResponseDto.of(SuccessStatus._ACCEPTED, null);
     }
 	

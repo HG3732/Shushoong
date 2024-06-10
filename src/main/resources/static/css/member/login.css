@@ -18,6 +18,10 @@ section .main input[type=radio] {
 	text-align: center;
 }
 
+.wrap-footer {
+	margin-top: 100px;
+}
+
 section .login-header {
 	margin: 100px 0 80px 0;
 }
@@ -169,7 +173,6 @@ section .snsLoginBtn {
 	flex-wrap: wrap;
 	justify-content: center;
 	margin-top: 10px;
-	margin-bottom: 200px;
 }
 
 section .snsLoginBtn>div {

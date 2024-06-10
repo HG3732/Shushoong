@@ -39,7 +39,7 @@ public class EmailService {
 	
 	// 인증번호 유효시간 5분 
 	private final Integer EXPIRATION_TIME_IN_MINUTES = 5;
-	private final String VERIFICATION_CODE_MAIL_SUBJECT="Email Verification For %s";
+	private final String VERIFICATION_CODE_MAIL_SUBJECT="%s 로 발송된 인증번호 안내 메일입니다.";
 	
 	private final JavaMailSender mailSender;
 	private final VerificationCodeRepository verificationCodeRepository;

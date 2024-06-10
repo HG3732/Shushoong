@@ -17,10 +17,10 @@ public interface MemberRepository {
 	public int log(Map<String, Object> map);
 	
 	// 회원가입
-	public String join(MemberDto memberDto);
+	public int join(MemberDto memberDto);
 	
 	// 아이디 중복 확인
-	public String Idcheck(String userId);
+	public int idCheck(String userId);
 	
 	// 비밀번호 재설정 
 	public String resetPwd(Map<String, Object> map);

@@ -48,8 +48,9 @@ $(loadedHandler)
 		$('.input.room').on('click', roomClickHandler);
 		$('.plus').on('click', plusClickHandler);
 		$('.minus').on('click', minusClickHandler);
-		$('.btn2.left').on('click', leftClickHandler);
-		$('.btn2.right').on('click', rightClickHandler);
+		$('.left.btn2').on('click', leftClickHandler);
+		$('.right.btn2').on('click', rightClickHandler);
+		slide(0);
 	}
 	
 	//국가 검색 클릭 시 국가 선택 창 표시
@@ -103,9 +104,25 @@ $(loadedHandler)
 		}
 	}
 	
-	//캐러셀 왼쪽 클릭
+	//캐러셀
+	function slide(index) {
+		document.querySelector('.list-wrapper').style.transform = `translateX(-${index * 330}px)`;
+		currentindex = index;
+	}
+	
+	//캐러셀 버튼 클릭
 	function leftClickHandler() {
-		currentIndex = (currendIndex === 0);
+		if(currentindex > 0) {
+			currentindex = currentindex-1;
+			slide(currentindex);
+		};
+	}
+	
+	function rightClickHandler() {
+		if(currentindex < $('.list-wrapper').children().length-3) {
+			currentindex = currentindex+1;
+			slide(currentindex);
+		}
 	}
 </script>
 </head>
@@ -232,17 +249,17 @@ $(loadedHandler)
 				<div class="hot-hotel-title">가장 많이 찾은 숙소</div>
 				<div class="hot-hotel-list">
 					<div class="list-wrapper">
-						<div class="hot-hotel"><img th:src="@{images/instancefolder/1696570529586.jpg}" alt="a"></div>
-		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20230713_201311.jpg}" alt="a"></div>
-		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20231010_171349.jpg}" alt="a"></div>
-		                <div class="hot-hotel"><img th:src="@{images/instancefolder/hu_1431618317_6832524860.jpg}" alt="a"></div>
-						<div class="hot-hotel"><img th:src="@{images/instancefolder/1696570529586.jpg}" alt="a"></div>
-		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20230713_201311.jpg}" alt="a"></div>
-		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20231010_171349.jpg}" alt="a"></div>
+						<div class="hot-hotel"><img th:src="@{images/instancefolder/1696570529586.jpg}" alt="a"/></div>
+		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20230713_201311.jpg}" alt="a"/></div>
+		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20231010_171349.jpg}" alt="a"/></div>
+		                <div class="hot-hotel"><img th:src="@{images/instancefolder/hu_1431618317_6832524860.jpg}" alt="a"/></div>
+						<div class="hot-hotel"><img th:src="@{images/instancefolder/ej-chen-WUI6pTbPLdM-unsplash.jpg}" alt="a"/></div>
+		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20230713_201311.jpg}" alt="a"/></div>
+		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20231010_171349.jpg}" alt="a"/></div>
 					</div>
 				</div>
-				<div><button type="button" class="left btn2">&lt;</button></div>
-				<div><button type="button" class="right btn2">&gt;</button></div>
+				<button type="button" class="left btn2">&lt;</button>
+				<button type="button" class="right btn2">&gt;</button>
 			</div>
 		</div>
 	</div>

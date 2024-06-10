@@ -13,45 +13,30 @@ import org.springframework.web.servlet.ModelAndView;
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.service.AirlineService;
 import lombok.extern.slf4j.Slf4j;
-@Slf4j
+
 @Controller
+@Slf4j
 public class AirlineListController {
 
-//	private Logger logger = LoggerFactory.getLogger(AirlineListController.class);
-	
 	@Autowired
 	private AirlineService service;
 
 	@GetMapping("/airline/list")
-	public ModelAndView getAirlineInfo(
+	public String getAirlineInfo(
 			String departLoc,
 			String arrivalLoc,
-			ModelAndView mv) {
-		System.out.println("==========");
-		log.info("!!!!Received departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc);
+			Model md) {
+		System.out.println("=========");
+		log.info("!!!Received departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc);
 
 		if (departLoc != null && arrivalLoc != null) {
 			List<AirlineInfoDto> airlineData = service.getAirlineInfo(departLoc, arrivalLoc);
 			System.out.println("컨트롤러 airline data: " + airlineData);
-			mv.addObject("airlineData", airlineData);
-			mv.setViewName("airline/airline_list");
+			md.addAttribute("airlineData", airlineData);
 		}else {
 			System.out.println("출발지 도착지 일치하는 데이터 없음");
-			mv.setViewName("airline/airline_list");
 		}
-		return mv;
-	}
-	@GetMapping("/airline/list_return/ajax")
-	@ResponseBody
-	public List<AirlineInfoDto> getAirlineInfoReturn(
-			@RequestParam String departLoc,
-			@RequestParam String arrivalLoc,
-			Model md) {
-		System.out.println("Received departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc);
-		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc);
-		System.out.println("return 컨트롤러 왕복편 data : " + airlineReturnData);
-		md.addAttribute("airlineReturnData", airlineReturnData);
-		return airlineReturnData;
+		return "airline/airline_list";
 	}
 
 //	@GetMapping("/airline/list")

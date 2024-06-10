@@ -4,6 +4,8 @@ build/
 keyfiles/
 *.log
 
+.factorypath
+
 *.ctxt
 
 .mtj.tmp/

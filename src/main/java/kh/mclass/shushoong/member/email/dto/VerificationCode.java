@@ -33,11 +33,9 @@ public class VerificationCode {
 		
 		return String.format(
                 """
-                        [Verification Code] 
                         %s
-                        Expired At : %s
                                 """,
-                code, formattedExpiredAt
+                code
         );
 	}
 }

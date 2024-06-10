@@ -1,5 +1,8 @@
 package kh.mclass.shushoong.member.email.service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.UUID;
@@ -48,7 +51,7 @@ public class EmailService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(serviceEmail);
         mailMessage.setTo(to);
-        mailMessage.setSubject(String.format("Email Verification For %s", to));
+        mailMessage.setSubject(String.format("%s 로 발송된 인증번호 안내 메일입니다.", to));
 
         VerificationCode verificationCode = generateVerificationCode(sentAt);
         verificationCodeRepository.save(verificationCode);
@@ -59,6 +62,45 @@ public class EmailService {
         mailSender.send(mailMessage);
     }
 	
+	public void verifyCode(String code, LocalDateTime verifiedAt) {
+        VerificationCode verificationCode = verificationCodeRepository.findByCode(code)
+                .orElseThrow(() -> new GeneralException(ErrorStatus._VERIFICATION_CODE_NOT_FOUND));
+
+        if (verificationCode.isExpired(verifiedAt)) {
+            throw new GeneralException(ErrorStatus._VERIFICATION_CODE_EXPIRED);
+        }
+
+        verificationCodeRepository.remove(verificationCode);
+    }
+	
+	// 이메일 인증 코드 생성
+	// 변환한 uuid를 해시 함수를 이용하여 바이트로 변환
+	// 변환한 바이트에 대해 앞 4글자의 각 바이트를 2자리의 16진수 문자열로 저장
+	private VerificationCode generateVerificationCode(LocalDateTime sendAt) {
+//		String code = UUID.randomUUID().toString();
+		String uuidString = UUID.randomUUID().toString();
+		byte[] uuidStringBytes = uuidString.getBytes(StandardCharsets.UTF_8);
+		byte[] hashBytes;
+		
+		try {
+			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+			hashBytes = messageDigest.digest(uuidStringBytes);
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+		
+		StringBuilder codeBuilder = new StringBuilder();
+		for (int i=0; i<4; i++) {
+			codeBuilder.append(String.format("%02x", hashBytes[i]));
+		}
+		
+		String code = codeBuilder.toString();
+		return VerificationCode.builder()
+				.code(code)
+				.createAt(sendAt)
+				.expirationTimeInMinutes(EXPIRATION_TIME_IN_MINUTES)
+				.build();
+	}
 	
 	// HTML 템플릿 발송
 	public void sendVerificationMailWithTemplate(String to, LocalDateTime sendAt) 
@@ -73,29 +115,9 @@ public class EmailService {
 		String subject = String.format(VERIFICATION_CODE_MAIL_SUBJECT, to);
 		Context thymeleafContext = new Context();
 		thymeleafContext.setVariables(templateModel);
-		String htmlBody = templateEngine.process("/member/mail/mailTemplates.html", thymeleafContext);
+		String htmlBody = templateEngine.process("/member/mail/mailTemplate.html", thymeleafContext);
 		
-	}
-	
-	public void verifyCode(String code, LocalDateTime verifiedAt) {
-        VerificationCode verificationCode = verificationCodeRepository.findByCode(code)
-                .orElseThrow(() -> new GeneralException(ErrorStatus._VERIFICATION_CODE_NOT_FOUND));
-
-        if (verificationCode.isExpired(verifiedAt)) {
-            throw new GeneralException(ErrorStatus._VERIFICATION_CODE_EXPIRED);
-        }
-
-        verificationCodeRepository.remove(verificationCode);
-    }
-	
-	// 이메일 인증 코드 생성
-	private VerificationCode generateVerificationCode(LocalDateTime sendAt) {
-		String code = UUID.randomUUID().toString();
-		return VerificationCode.builder()
-				.code(code)
-				.createAt(sendAt)
-				.expirationTimeInMinutes(EXPIRATION_TIME_IN_MINUTES)
-				.build();
+		sendHtmlMessage(to, subject, htmlBody);
 	}
 	
 	// HTML 메일 발송

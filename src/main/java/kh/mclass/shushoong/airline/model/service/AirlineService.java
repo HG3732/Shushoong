@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.repository.AirlineRepository;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 public class AirlineService {

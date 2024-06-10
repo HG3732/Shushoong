@@ -249,6 +249,16 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
     /* width: 100%; */
     /* background-color: beige; */
 }
+
+.select-airplane{
+	font-size: 20px;
+	margin-left: 30px;
+}
+
+.select-airplane span{
+	font-weight: bold;	
+}
+
     
 .flex-container .airline-list .airline-info{
     border: 2px solid #006AFF;
@@ -425,6 +435,10 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 	
 }
 
+.airline-flex .nop .airticket .ticket-btn .ticketinfo-btn{
+	height: 20px;
+}
+
 .airline-flex .nop .airticket .ticket-btn img{
 	width: 20px;
 }
@@ -499,4 +513,4 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 	color: white;
 
 	}
-}
+

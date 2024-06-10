@@ -24,17 +24,17 @@ public class MemberService {
 	}
 
 	// 회원가입
-	public Integer join(MemberDto memberDto) {
+	public String join(MemberDto memberDto) {
 		return memberRepository.join(memberDto);
 	}
 
 	// 아이디 중복 여부
-	public Integer Idcheck(String userId) {
+	public String Idcheck(String userId) {
 		return memberRepository.Idcheck(userId);
 	} 
 	
 	// 비밀번호 재설정
-	public int setPwd(Map<String, Object> map) {
+	public String setPwd(Map<String, Object> map) {
 		return memberRepository.resetPwd(map);
 	}
 }

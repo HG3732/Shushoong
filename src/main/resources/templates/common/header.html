@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html 
-xmlns:th="http://www.thymeleaf.org"
-th:fragment="Header"
+xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-<head>
+<head >
 </head>
 <body>
-<div class="tn">
+<div class="tn" th:fragment="Header">
 	<!-- 최상단 네비(로고 및 회원가입, 로그인) -->
 	<div class="nav1-wrap">
 		<div class="logo-side">
@@ -19,24 +19,14 @@ th:fragment="Header"
 				<li><a th:href="@{/airline/main}">항공</a></li>
 				<li><a th:href="@{/hotel/main}">숙소</a></li>
 				<li><a>특가</a></li>
-				<li><a th:href="@{/login}">로그인</a></li>
-				<li><a th:href="@{/join}">회원가입</a></li>
+				<li><a th:href="@{/login}" sec:authorize="isAnonymous()" >로그인</a></li>
+				<li><a th:href="@{/join}" sec:authorize="isAuthenticated()" >회원가입</a></li>
 				<li><a>마이페이지</a></li>
-				<li><a>로그아웃</a></li>			
+				<li><a th:href="@{/logout}" sec:authorize="isAuthenticated()">로그아웃</a></li>			
 			</ul>
 		</div>
 	</div>
 </div>
 
-<script>
-function btnLogoutClickHandler(){
-	alert("로그아웃되었습니다.");
-	
-	var frmlogout = document.getElementById("frm-logout");
-	frmlogout.action = "${pageContext.request.contextPath}/logout";
-	frmlogout.method = "post";
-	frmlogout.submit();
-}
-</script>
 </body>
 </html>

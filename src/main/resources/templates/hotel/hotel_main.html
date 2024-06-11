@@ -44,6 +44,7 @@ $(loadedHandler)
 		$('.wrap-date-box').css('display', 'none');	//처음 화면에서 달력 안보이게
 		$('.input.location').on('click', locationClickHandler);
 		$('.country').on('click', localClickHandler);
+		$('.local').on('click', selectLocHandler);
 		$('.input.time').on('click', timeClickHandler);
 		$('.input.room').on('click', roomClickHandler);
 		$('.plus').on('click', plusClickHandler);
@@ -71,6 +72,16 @@ $(loadedHandler)
 		$(this).css('font-weight', '900');
 	}
 	
+	//지역 클릭 시 검색란에 자동 입력
+	function selectLocHandler() {
+		var loc = $(this).text();
+		var loc_nation = $(this).data('nation');
+		var loc_code = $(this).data('loccode');
+		console.log(loc_code);
+		$('.selected-loc').val(loc);
+		$('input[name=loc]').val(loc_nation + loc_code);
+	}
+	
 	//날짜 검색 클릭 시 달력 표시
 	function timeClickHandler() {
 		$('.wrap-loc-box').css('display', 'none');
@@ -89,18 +100,41 @@ $(loadedHandler)
 	function plusClickHandler() {
 		var numStr = $(this).prev().text();
 		var num = Number(numStr);
-		if($(this).parent().prev().text() != "객실" || num < 8){	//객실은 8개까지만 예약 가능
-			$(this).prev().text(num+1);
+		if($(this).parent().prev().children().text() != "객실" || num < 8){	//객실은 8개까지만 예약 가능
+			$(this).prev().text(++num);
+		}
+		var cat = $(this).parent().prev().children().eq(0).text();
+		if(cat == '객실'){
+			$('input[name=room]').val(num);
+			$('.room-num').text(num);
+		} else if (cat == '성인 '){
+			$('input[name=adult]').val(num);
+			$('.adult-num').text(num);
+		} else if (cat == '아동 '){
+			$('input[name=child]').val(num);
+			$('.child-num').text(num);
 		}
 	}
 	
 	//방, 인원 수량 증감
 	function minusClickHandler() {
 		var num = $(this).next().text();
-		if(($(this).parent().prev().children().eq(0).text() == "성인" && num > 1)
-			|| ($(this).parent().prev().children().eq(0).text() == "아동" && num > 0)		//성인은 최소 한명 이상, 아동은 0명 선택 가능
+		if(($(this).parent().prev().children().eq(0).text() == "성인 " && num > 1)
+			|| ($(this).parent().prev().children().eq(0).text() == "아동 " && num > 0)		//성인은 최소 한명 이상, 아동은 0명 선택 가능
 			|| $(this).parent().prev().text() == "객실" && num > 1){	//객실도 1개 이상...
-			$(this).next().text(num-1);
+			$(this).next().text(--num);
+		}
+		
+		var cat = $(this).parent().prev().children().eq(0).text();
+		if(cat == '객실'){
+			$('input[name=room]').val(num);
+			$('.room-num').text(num);
+		} else if (cat == '성인 '){
+			$('input[name=adult]').val(num);
+			$('.adult-num').text(num);
+		} else if (cat == '아동 '){
+			$('input[name=child]').val(num);
+			$('.child-num').text(num);
 		}
 	}
 	
@@ -138,12 +172,12 @@ $(loadedHandler)
 			<div class="main-back">
 				<div class="wrap-hotel-search">
 					<div style="height: 220px;"></div>
-					<div class="hotel-search-bar">
-						<button type="button" class="input location"><span>도시명 또는 호텔명</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
+					<form class="hotel-search-bar" method="get" action="/shushoong/hotel/list">
+						<button type="button" class="input location"><input type="text" class="selected-loc" value="지역 명" style="width: 136px;" readonly ><input type="hidden" name="loc" value=""><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
 						<button type="button" class="input time"><span>숙박 일정</span><span class="check-in-date"></span> - <span class="check-out-date"></span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
-						<button type="button" class="input room"><span>객실 1 - 성인 2, 아동 0</span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
-						<button type="button" class="search btn">검색</button>
-					</div>
+						<button type="button" class="input room"><span class="num-of-people">객실 <span class="room-num">1</span> - 성인 <span class="adult-num">2</span>, 아동 <span class="child-num">0</span></span><input type="hidden" name="room" value=""><input type="hidden" name="adult" value=""><input type="hidden" name="child" value=""><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
+						<button type="submit" class="search btn">검색</button>
+					</form>
 					<div class="wrap-loc-box">
 						<div class="loc-inner-box">
 							<div class="country-box">
@@ -153,57 +187,55 @@ $(loadedHandler)
 								<div class="country america">미국</div>
 							</div>
 							<div class="local-box korea" style="display: grid;">
-								<div class="local">제주</div>
-								<div class="local">강릉</div>
-								<div class="local">서울</div>
-								<div class="local">광주</div>
-								<div class="local">평창</div>
-								<div class="local">인천</div>
-								<div class="local">속초</div>
-								<div class="local">부산</div>
+								<div class="local" data-nation="0" data-loccode="JJ">제주</div>
+								<div class="local" data-nation="0" data-loccode="GN">강릉</div>
+								<div class="local" data-nation="0" data-loccode="SE">서울</div>
+								<div class="local" data-nation="0" data-loccode="GJ">광주</div>
+								<div class="local" data-nation="0" data-loccode="PC">평창</div>
+								<div class="local" data-nation="0" data-loccode="IC">인천</div>
+								<div class="local" data-nation="0" data-loccode="SC">속초</div>
+								<div class="local" data-nation="0" data-loccode="BS">부산</div>
 							</div>
 							<div class="local-box china">
-								<div class="local">상해</div>
-								<div class="local">북경</div>
-								<div class="local">청도</div>
-								<div class="local">위해</div>
-								<div class="local">광주</div>
-								<div class="local">대련</div>
-								<div class="local">서안</div>
-								<div class="local">연길</div>
-								<div class="local">성도</div>
-								<div class="local">중경</div>
-								<div class="local">하얼빈</div>
-								<div class="local">천진</div>
-								<div class="local">곤명</div>
-								<div class="local">남경</div>
+								<div class="local" data-nation="1" data-loccode="SH">상해</div>
+								<div class="local" data-nation="1" data-loccode="BJ">북경</div>
+								<div class="local" data-nation="1" data-loccode="CD">청도</div>
+								<div class="local" data-nation="1" data-loccode="WH">위해</div>
+								<div class="local" data-nation="1" data-loccode="GJ">광주</div>
+								<div class="local" data-nation="1" data-loccode="DR">대련</div>
+								<div class="local" data-nation="1" data-loccode="SA">서안</div>
+								<div class="local" data-nation="1" data-loccode="YG">연길</div>
+								<div class="local" data-nation="1" data-loccode="SD">성도</div>
+								<div class="local" data-nation="1" data-loccode="JK">중경</div>
+								<div class="local" data-nation="1" data-loccode="HB">하얼빈</div>
+								<div class="local" data-nation="1" data-loccode="CJ">천진</div>
+								<div class="local" data-nation="1" data-loccode="GM">곤명</div>
+								<div class="local" data-nation="1" data-loccode="NK">남경</div>
 							</div>
 							<div class="local-box japan">
-								<div class="local">도쿄</div>
-								<div class="local">오사카</div>
-								<div class="local">교토</div>
-								<div class="local">후쿠오카</div>
-								<div class="local">오이타(유후인/벳부)</div>
-								<div class="local">오키나와</div>
-								<div class="local">삿포로</div>
-								<div class="local">나고야</div>
+								<div class="local" data-nation="2" data-loccode="TK">도쿄</div>
+								<div class="local" data-nation="2" data-loccode="OS">오사카</div>
+								<div class="local" data-nation="2" data-loccode="KT">교토</div>
+								<div class="local" data-nation="2" data-loccode="HO">후쿠오카</div>
+								<div class="local" data-nation="2" data-loccode="OI">오이타(유후인/벳부)</div>
+								<div class="local" data-nation="2" data-loccode="OK">오키나와</div>
+								<div class="local" data-nation="2" data-loccode="SP">삿포로</div>
+								<div class="local" data-nation="2" data-loccode="NG">나고야</div>
 							</div>
 							<div class="local-box america">
-								<div class="local">호놀룰루(하와이)</div>
-								<div class="local">LA</div>
-								<div class="local">뉴욕</div>
-								<div class="local">라스베가스</div>
-								<div class="local">샌프란시스코</div>
-								<div class="local">시애틀</div>
-								<div class="local">벤쿠버</div>
-								<div class="local">토론토</div>
-								<div class="local">워싱턴</div>
-								<div class="local">시카고</div>
-								<div class="local">보스톤</div>
-								<div class="local">멕시코시티</div>
-								<div class="local">올랜도</div>
-								<div class="local">코나</div>
-								<div class="local">카우아이</div>
+								<div class="local" data-nation="3" data-loccode="HN">호놀룰루(하와이)</div>
+								<div class="local" data-nation="3" data-loccode="LA">LA</div>
+								<div class="local" data-nation="3" data-loccode="NY">뉴욕</div>
+								<div class="local" data-nation="3" data-loccode="LV">라스베가스</div>
+								<div class="local" data-nation="3" data-loccode="SF">샌프란시스코</div>
+								<div class="local" data-nation="3" data-loccode="SE">시애틀</div>
+								<div class="local" data-nation="3" data-loccode="DC">워싱턴</div>
+								<div class="local" data-nation="3" data-loccode="CH">시카고</div>
+								<div class="local" data-nation="3" data-loccode="BO">보스톤</div>
+								<div class="local" data-nation="3" data-loccode="MC">멕시코시티</div>
+								<div class="local" data-nation="3" data-loccode="OR">올랜도</div>
+								<div class="local" data-nation="3" data-loccode="CN">코나</div>
+								<div class="local" data-nation="3" data-loccode="CE">카우아이</div>
 							</div>
 						</div>
 					</div>
@@ -214,7 +246,7 @@ $(loadedHandler)
 						<div class="select-people-head">객실 선택</div>
 						<hr></hr>
 						<div class="room amount">
-							<div class="cat room">객실</div>
+							<div class="cat room"><p>객실<p></div>
 							<div class="btn-area">
 								<button type="button" class="btn minus">−</button>
 								<div class="num">1</div>
@@ -225,7 +257,7 @@ $(loadedHandler)
 						<hr></hr>
 						<div class="wrap-people-num">
 							<div class="wrap-people amount">
-								<div class="cat adult"><p>성인</p><p>만 12세 이상</p></div>
+								<div class="cat adult"><p>성인 </p><p>만 12세 이상</p></div>
 								<div class="btn-area">
 									<button type="button" class="btn minus">−</button>
 									<div class="num">1</div>
@@ -233,7 +265,7 @@ $(loadedHandler)
 								</div>
 							</div>
 							<div class="wrap-people amount">
-								<div class="cat child"><p>아동</p><p>만 12세 미만</p></div>
+								<div class="cat child"><p>아동 </p><p>만 12세 미만</p></div>
 								<div class="btn-area">
 									<button type="button" class="btn minus">−</button>
 									<div class="num">0</div>

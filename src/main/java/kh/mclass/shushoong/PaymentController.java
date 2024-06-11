@@ -14,6 +14,7 @@ import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
+import kh.mclass.shushoong.config.AppConfig;
 import lombok.RequiredArgsConstructor;
 
 @Controller

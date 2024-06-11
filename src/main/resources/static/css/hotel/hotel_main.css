@@ -66,7 +66,7 @@
 }
 
 .main-back .hotel-search-bar button:nth-child(1){
-	flex-grow: 3;
+	flex-grow: 2;
 }
 .main-back .hotel-search-bar button:nth-child(2){
 	flex-grow: 7;
@@ -79,6 +79,24 @@
 .main-back .hotel-search-bar button.search {
 	justify-content: center;
 	background-color: var(--color_blue_2);
+	color: black;
+}
+
+.location .selected-loc {
+	border: none;
+    background-color: transparent;
+    font-style: inherit;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    font-family: 'SOYOMapleBoldTTF';
+}
+
+.location .selected-loc:focus {
+	outline: none;
+}
+.location .selected-loc:disabled {
+	outline: none;
 	color: black;
 }
 

@@ -38,18 +38,18 @@ public class AirlineController {
 		return "airline/airline_list";
 	}
 	
-	@GetMapping("airline/list_return/ajax")
-    @ResponseBody
-    public List<AirlineInfoDto> airlineInfoReturn(
-            @RequestParam String departLoc,
-            @RequestParam String arrivalLoc) {
-        log.info("Received departLoc: {}, arrivalLoc: {}", departLoc, arrivalLoc);
-        List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc);
-        System.out.println("컨트롤렁ㅔ이이작스");
-        log.debug("Return controller 왕복편 data : {}", airlineReturnData);
-        return airlineReturnData;
-    }
-	
+//	@GetMapping("airline/list_return/ajax")
+//    @ResponseBody
+//    public List<AirlineInfoDto> airlineInfoReturn(
+//            @RequestParam String departLoc,
+//            @RequestParam String arrivalLoc) {
+//        log.info("Received departLoc: {}, arrivalLoc: {}", departLoc, arrivalLoc);
+//        List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc);
+//        System.out.println("컨트롤렁ㅔ이이작스");
+//        log.debug("Return controller 왕복편 data : {}", airlineReturnData);
+//        return airlineReturnData;
+//    }
+//	
 	
 	@GetMapping("airline/list_return")
 	public String airlineInfoReturn(

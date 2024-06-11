@@ -6,4 +6,9 @@
 		WHERE DEPART_LOC LIKE #{departLoc} 
 		AND ARRIVAL_LOC LIKE #{arrivalLoc}
 	</select>
+	
+	<select id="selectOne" parameterType="String" resultType="AirlineInfoDto">
+		SELECT * FROM AIRLINE_INFO 
+		WHERE AIRLINE_CODE LIKE #{airlineCode}
+	</select>
 </mapper>

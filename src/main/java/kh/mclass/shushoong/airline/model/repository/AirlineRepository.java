@@ -9,4 +9,5 @@ import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 @Mapper
 public interface AirlineRepository {
 	List<AirlineInfoDto> selectAllList(String departLoc, String arrivalLoc);
+	List<AirlineInfoDto> selectOne(String airlineCode);
 }

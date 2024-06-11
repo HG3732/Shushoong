@@ -32,12 +32,13 @@ function requestPay() {
          pg: "inicis",   // PG사 설정
          pay_method : "card", // 결제 방법
          //merchant_uid : "20230901ABDE", // 주문 번호
-         name : "상품1", // 상품 이름
-         amount: 1000, // 결제 가격
+         name : "상품1", // 호텔 이름
+         amount: 1000, // 호텔 결제 가격
          buyer_name : "홍길동", // 구매자 이름 (buyer_ 부분은 꼭 작성하지 않아도된다. (선택사항))
          buyer_tel : "010-5555-1111", // 구매자 연락처
          buyer_postcode : 52030, // 구매자 우편번호
          buyer_addr : "경기도 판교" // 구매자 주소
+         
      }, function(res) {
     	 console.log("====1");
     	 console.log(res);
@@ -50,6 +51,8 @@ function requestPay() {
                  success:function(result){
                 	 console.log("====2");
                 	 console.log(result);
+                	 
+                	 //여기에 이메일로 영수증 보내기
                  }
              });
          	// 응답 데이터의 정보들
@@ -129,7 +132,7 @@ function requestPay() {
              $.ajax({
                  method: "post",
                  url: `${contextRoot}payment/${res.imp_uid}`,
-                 data: {key: vaud},
+                 data: {key: value},
                  success:function(result){
                 	 console.log("====2");
                 	 console.log(result);

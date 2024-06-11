@@ -40,14 +40,39 @@ public class AirlineController {
 	
 	@GetMapping("airline/list_return/ajax")
     @ResponseBody
-    public List<AirlineInfoDto> getAirlineInfoReturn(
+    public List<AirlineInfoDto> airlineInfoReturn(
             @RequestParam String departLoc,
             @RequestParam String arrivalLoc) {
         log.info("Received departLoc: {}, arrivalLoc: {}", departLoc, arrivalLoc);
         List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc);
+        System.out.println("컨트롤렁ㅔ이이작스");
         log.debug("Return controller 왕복편 data : {}", airlineReturnData);
         return airlineReturnData;
     }
+	
+	
+	@GetMapping("airline/list_return")
+	public String airlineInfoReturn(
+			String departLoc,
+			String arrivalLoc,
+			String airlineCode,
+			Model md) {
+		
+		System.out.println("에어 오는편 컨트롤러");
+		log.info("선택된 항공 코드 : ", airlineCode);
+		log.info("항공 오는 편 departLoc: {}, arrivalLoc: {}", departLoc, arrivalLoc);
+
+		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc);
+		
+		// 선택한 항공
+		List<AirlineInfoDto> selectOneAirline = service.getSelectOne(airlineCode);
+				
+		md.addAttribute("selectOneAirline", selectOneAirline);
+		md.addAttribute("airlineReturnData", airlineReturnData);
+		log.debug("Return controller 왕복편 data : {}", airlineReturnData);
+		
+		return "airline/airline_list_return";
+	}
 
 	// 항공 메인 페이지
 	@GetMapping("/airline/main")

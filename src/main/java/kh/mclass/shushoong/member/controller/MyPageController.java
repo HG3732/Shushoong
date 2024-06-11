@@ -10,8 +10,8 @@ import lombok.RequiredArgsConstructor;
 public class MyPageController {
 	
 	// 회원가입 메인 페이지로 이동
-	@GetMapping("mypage")
+	@GetMapping("mypage/customer")
 	public String join() {
-		return "mypage/mypageHome";
+		return "mypage/customer/mypageCustomerHome";
 	}
 }

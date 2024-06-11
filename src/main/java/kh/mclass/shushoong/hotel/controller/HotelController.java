@@ -67,4 +67,9 @@ public class HotelController {
 		return "hotel/hotel_view";
 	}
 	
+	@GetMapping("/hotel/customer/reserve/pay")
+	public String hotelPay() {
+		return "hotel/hotel_pay";
+	}
+	
 }

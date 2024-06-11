@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/hotel/hotel_pay.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>숙소 결제</title>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-main">
+				<div class="top_order">
+					<div class="hotel_reserve_count">
+						<div class="no_1">1</div>
+						<div class="no_2">2</div>
+						<div class="no_3">3</div>
+					</div>
+					<div class="hotel_reserve_write">
+						<div class="first">예약하기</div>
+						<div class="second">결제</div>
+						<div class="third">에약완료</div>
+					</div>
+				</div>
+				
+				<!-- 호텔 정보 -->
+				<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">호텔이름</p>
+				<table class="reserve_info">
+					<thead>
+						<tr class="tr_first" style="border-top: 3px solid #006AFF;">
+							<th >도시</th>
+							<td style="width: 760px;">
+								<input type="text" readonly value="도쿄" onfocus="this.blur()" style="width: 400px; border: none;">
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="tr_second"  style="border-top: 1px solid #006AFF;">
+							<th>체크인/체크아웃</th>
+							<td>
+								<input type="text" readonly value="2024.06.11. ~ 20204.06.15." onfocus="this.blur()" style="width: 400px; border: none;">
+							</td>
+						</tr>
+						<tr class="tr_third" style="border-top: 1px solid #006AFF; border-bottom: 3px solid #006AFF; ">
+							<th>객실정보</th>
+							<td>
+								<input type="text" readonly value="Double Room, Non-Smoking" onfocus="this.blur()" style="width: 400px; border: none;">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<!-- 예약자 정보 -->
+				<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">예약자 정보</p>
+				<p style="margin-top: 10px; font-size: var(--font4); font-family: 'SOYOMapleRegularTTF';">객실 1 ⦁ 성인1</p>
+					<table class="customer_info">
+						<thead>
+							<tr class="c_first" style="border-top: 3px solid #006AFF;">
+								<th>성명</th>
+								<td>
+									<input type="text" class="reserve_text" style="width: 300px; border:none;" readonly value="송채원" onfocus="this.blur()">
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="c_second"  style="border-top: 1px solid #006AFF;">
+								<th>생년월일</th>
+								<td>
+									<input type="text" class="reserve_text" style="width: 300px;">
+								</td>
+								<th>성별</th>
+								<td>
+									<input type="radio">
+									<input type="radio">
+								</td>
+							</tr>
+							<tr class="c_third" style="border-top: 1px solid #006AFF; ">
+								<th>영문 성</th>
+								<td>
+									<input type="text" class="reserve_text" style="width: 300px;">
+								</td>
+								<th>영문 이름</th>
+								<td>
+									<input type="text" class="reserve_text" style="width: 300px;">
+								</td>
+							</tr>
+							<tr class="c_fourth" style="border-top: 1px solid #006AFF; border-bottom: 3px solid #006AFF;">
+								<th>휴대폰 번호</th>
+								<td>
+									<input type="text" class="reserve_text" style="width: 300px;">
+								</td>
+								<th>이메일</th>
+								<td>
+									<input type="text" class="reserve_text" style="width: 300px;">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				<!-- 요청사항 -->
+				<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">요청사항</p>
+				<hr style="border: 2px solid #006AFF; margin-top: 5px;"></hr>
+				<div class="require_check">
+					<div class="single">
+						<input type="checkbox" id="box1"><label for="box1"></label>
+						<div class="img_next_word">싱글</div>
+					</div>
+					<div class="twin">
+						<input type="checkbox" id="box2"><label for="box2"></label>
+						<div class="img_next_word">트윈</div>
+					</div>
+					<div class="double">
+						<input type="checkbox" id="box3"><label for="box3"></label>
+						<div class="img_next_word">더블</div>
+					</div>
+					<div class="non_smoking">
+						<input type="checkbox" id="box4"><label for="box4"></label>
+						<div class="img_next_word">금연실</div>
+					</div>
+					<div class="smoking">
+						<input type="checkbox" id="box5"><label for="box5"></label>
+						<div class="img_next_word">흡연실</div>
+					</div>
+					<div class="skyview">
+						<input type="checkbox" id="box6"><label for="box6"></label>
+						<div class="img_next_word">고층</div>
+					</div>
+				</div>
+				<hr style="border: 0; height: 1px; background: #006AFF;"></hr>
+				<p style="margin-top: 10px; font-size: var(--font4); font-family: 'SOYOMapleRegularTTF'; color: var(--color_gray_2);">
+					체크인 당일 호텔 사정에 따라 적용 여부 확인 가능하며, 선택하신 조건에 따라 요청 불가할 수 있습니다.
+				</p>
+				
+				<!-- 약관동의 -->
+				<div class="agreement">
+					<p style="font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">약관동의</p>
+					<input type="checkbox" id="check1"><label for="check1" style="margin-left: 690px;"></label>
+					<div class="all_agree">모든 약관에 동의합니다</div>
+				</div>
+				<hr style="border: 2px solid #006AFF; margin-top: 5px;"></hr>
+				<div class="policy_check">
+					<div class="refund">
+						<p>예약 취소 및 환불 정책 안내</p>
+						<p>필수</p>
+						<div class="radio_wrap">
+							<input type="radio">동의합니다
+							<input type="radio">동의하지 않습니다
+						</div>
+					</div>
+					<div class="caution">
+						<p>호텔 예약 주의 사항</p>
+						<p>필수</p>
+						<div class="radio_wrap">
+							<input type="radio">동의합니다
+							<input type="radio">동의하지 않습니다
+						</div>
+					</div>
+					<div class="personal_info">
+						<p>개인정보 수집 및 이용</p>
+						<p>필수</p>
+						<div class="radio_wrap">
+							<input type="radio">동의합니다
+							<input type="radio">동의하지 않습니다
+						</div>
+					</div>
+					<div class="third_party">
+						<p>개인정보 제3자 제공 동의</p>
+						<p>필수</p>
+						<div class="radio_wrap">
+							<input type="radio">동의합니다
+							<input type="radio">동의하지 않습니다
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				
+				
+<!-- 				<div class="reserve_info">
+					<div class="hotel_city">
+						<div class="city">도시</div>
+						<div class="city_name">일본(도쿄)</div>
+					</div>
+					<hr style="height: 1px; border: 0; background: #006AFF;"></hr>
+					<div class="reserve_time">
+						<div class="check_in_out">체크인/체크아웃</div>
+						<div class="check_date">2024.05.28 ~ 2024.05.31</div>
+					</div>
+					<hr style="height: 1px; border: 0; background: #006AFF;"></hr>
+					<div class="room">
+						<div class="room_info">객실정보</div>
+						<div class="room_cat">Double Room, Non-Smoking</div>
+					</div>
+					<hr style="border: 1px solid #006AFF;"></hr>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+</body>
+</html>

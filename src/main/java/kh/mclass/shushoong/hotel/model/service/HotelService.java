@@ -18,8 +18,8 @@ public class HotelService {
 
 	private final HotelRepository hotelRepository;
 	
-	public List<HotelDtoRes> selectAllHotelList(String loc) {
-		return hotelRepository.selectAllHotelList(loc);
+	public List<HotelDtoRes> selectAllHotelList(String loc, String people) {
+		return hotelRepository.selectAllHotelList(loc, people);
 	}
 	
 	public List<HotelPic> selectPicList(String hotelCode) {

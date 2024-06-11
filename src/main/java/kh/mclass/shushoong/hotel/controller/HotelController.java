@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
 
@@ -15,6 +19,7 @@ public class HotelController {
 
 	@Autowired
 	private HotelService service;
+	private HotelDtoRes hotelDtoRes;
 	
 	@GetMapping("/hotel/main")
 	public String hotelMain() {
@@ -22,7 +27,15 @@ public class HotelController {
 	}
 	
 	@GetMapping("/hotel/list")
-	public String hotelList() {
+	public String hotelList(Model model, String loc, String room, String adult, String child) {
+		Integer child1 = Integer.parseInt(child)/2;
+		Integer adult1 = Integer.parseInt(adult);
+		String people = String.valueOf(child1+adult1);
+		List<HotelDtoRes> result = service.selectAllHotelList(loc, people);
+//		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
+//		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
+//		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
+		model.addAttribute("hotelList", hotelDtoRes);
 		return "hotel/hotel_list";
 	}
 	
@@ -33,16 +46,22 @@ public class HotelController {
 		
 		//방 종류 경우의 수 나누기
 		for(int i = 0; i < result.size(); i++) {
-			if(result.get(i).getRoomCat().equals("0")) {
+			switch (result.get(i).getRoomCat()) {
+			case "0":
 				result.get(i).setRoomCat("스탠다드 룸");
-			} else if(result.get(i).getRoomCat().equals("1")) {
+				break;
+			case "1":
 				result.get(i).setRoomCat("디럭스 룸");
-			} else if(result.get(i).getRoomCat().equals("2")) {
+				break;
+			case "2":
 				result.get(i).setRoomCat("슈페리어 룸");
-			} else if(result.get(i).getRoomCat().equals("3")) {
+				break;
+			case "3":
 				result.get(i).setRoomCat("스위트 룸");
-			} else {
+				break;
+			default:
 				result.get(i).setRoomCat("기타");
+				break;
 			}
 		}
 		
@@ -61,7 +80,7 @@ public class HotelController {
 		model.addAttribute("roomlist", result);
 		
 		model.addAttribute("piclist", service.selectPicList("2OS001"));
-		model.addAttribute("dtolist", service.selectAllHotelList("2OS001")); 
+		//model.addAttribute("dtolist", service.selectAllHotelList("2OS001")); 
 		model.addAttribute("hotelSearchlist", service.selectHotelSearchList("2OS001")); 
 		
 		return "hotel/hotel_view";

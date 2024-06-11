@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kh.mclass.shushoong.hotel.model.repository.HotelRepository">
-	<select id="selectAllHotelList" parameterType="String" resultType="HotelDtoRes">
-		select hotel_Name, hotel_Eng, hotel_Address, hotel_call from hotel where hotel_code = #{hotelCode}
+
+<!-- 검색한 호텔 리스트 띄우기 위한 SQL  -->
+	<!-- 호텔 이름, 영어이름, 주소, 최저가 -->
+	<select id="selectAllHotelList" parameterType="hashmap" resultType="HotelDtoRes">
+		select hotel_name, hotel_eng, hotel_address, min_price 
+		from hotel join (select hotel_code, min(hotel_price) min_price from hotel_room join hotel using(hotel_code)
+		where hotel_loc_cat = #{code} and room_count > 0 and room_cap = #{people} group by hotel_code) using(hotel_code)
 	</select>
 	
 	<select id="selectHotelPicList" parameterType="String" resultType="HotelPic">

@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+.wrap-body {
+    /* 중앙 배치 */
+    width: 1440px; margin: 0 auto;
+
+    /* float - 부모 height를 위해  */
+    overflow: hidden;
+}
+
+.wrap-body > .wrap-section{
+    /* float 왼쪽 배치 */
+	width : 960px; 
+    float: left;
+    box-sizing: border-box;
+    padding: 20px;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+section .section-header {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 30px 0 20px 0;
+}
+
+section .header-content {
+	text-align: center;
+	font-size: 15px;
+	margin-bottom: 40px;
+}
+
+section .section-image {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin-bottom: 100px;
+}
+
+section .editInfo, .reservationHotel {
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+section .tail {
+	margin-top: 10px;
+}
+
+section .payList-title, .onlineQnAList-title {
+	font-size: 17px;
+	font-weight: bold;
+	
+	margin-bottom: 20px;
+}
+
+section .pay-grid {
+	height: 40px;
+	font-size: 13px;
+	font-weight: bold;
+	border-top: 2px solid #006AFF;
+	border-bottom: 2px solid #006AFF;
+	background-color:#BCEFFF;
+	
+	display: grid;
+	grid-template-columns: 2fr 2fr 4fr 1fr 4fr;
+    align-items: center;
+    text-align: center;
+}
+
+section .pay-content {
+	height: 40px;
+	font-size: 11px;
+	font-weight: bold;
+	border-bottom: 1px solid #006AFF;
+	margin-bottom: 10px;
+	
+	display: grid;
+	grid-template-columns: 2fr 2fr 4fr 1fr 4fr;
+    align-items: center;
+    text-align: center;
+}
+
+section .warning {
+	font-size:10px;
+	font-weight: bold;
+	color:#979797;
+	
+	margin-bottom: 10px;
+}
+
+section .viewAllList {
+	display: flex;
+	justify-content: right;
+	
+	margin-bottom: 100px;
+}
+
+section .onlineQnAList{ 
+	margin-bottom: 100px;
+}
+
+section .viewList {
+	border: none;
+	border-radius: 20px;
+	width: 90px;
+	height: 40px;
+	background-color: #006AFF;
+	cursor: pointer;
+	
+	color:white;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: SOYOMapleRegularTTF;
+}
+
+section .QnA-grid {
+	height: 40px;
+	font-size: 13px;
+	font-weight: bold;
+	border-top: 2px solid #006AFF;
+	border-bottom: 2px solid #006AFF;
+	background-color:#BCEFFF;
+	
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+    align-items: center;
+    text-align: center;
+}
+
+section .QnA-content {
+	height: 40px;
+	font-size: 11px;
+	font-weight: bold;
+	border-bottom: 1px solid #006AFF;
+	margin-bottom: 20px;
+	
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+    align-items: center;
+    text-align: center;
+}

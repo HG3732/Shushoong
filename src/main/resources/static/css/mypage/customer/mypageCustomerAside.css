@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+.wrap-body {
+	/* 중앙 배치 */
+	width: 1440px;
+	margin: 0 auto;
+	/* float - 부모 height를 위해  */
+	overflow: hidden;
+}
+
+.wrap-aside {
+	/* float 왼쪽 배치 */
+	width: 200px;
+	float: left;
+	box-sizing: border-box;
+	padding: 20px;
+	margin-right: 20px;
+}
+
+aside .inner {
+	width: 180px;
+	
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin-top: 30px;
+}
+
+aside .aside-title {
+	font-size: 17px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+aside .dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+aside .dropbtn1 {
+	border: none;
+	border-top: 3px solid #006AFF;
+	border-bottom: 1px solid #006AFF;
+	background-color: white;
+	padding: 13px;
+	width: 180px;
+	cursor: pointer;
+	font-family: SOYOMapleRegularTTF; font-size : 13px;
+	font-weight: bold;
+	font-size: 13px
+}
+
+aside .dropbtn1:hover {
+	background-color: #BCEFFF
+}
+
+aside .dropbtn2 {
+	border: none;
+	border-bottom: 3px solid #006AFF;
+	background-color: white;
+	padding: 13px;
+	width: 180px;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: SOYOMapleRegularTTF;
+}
+
+aside .dropbtn2:hover {
+	background-color: #BCEFFF;
+}
+
+aside .dropdown-content {
+	display: none;
+	position: absolute;
+	z-index: 1; /*다른 요소들보다 앞에 배치*/
+	background-color: #006AFF;
+	color:white;
+	min-width: 180px;
+}
+
+aside .dropdown-content a {
+	display: block;
+	font-size: 13px;
+	padding: 10px;
+	font-weight: bold;
+	color:white;
+}
+
+aside .dropdown-content a:hover {
+	background-color: #BCEFFF;
+	color:black;
+}
+
+aside .dropdown:hover .dropdown-content {
+	display: block;
+}
+
+aside .correctionInfo, .reviewHotel, .likeHotel {
+	font-size: 13px;
+	font-weight: bold;
+	
+	border: none;
+	border-bottom: 1px solid #006AFF;
+	padding: 13px;
+}
+
+aside .correctionInfo:hover, .reviewHotel:hover, .likeHotel:hover {
+	background-color: #BCEFFF
+}

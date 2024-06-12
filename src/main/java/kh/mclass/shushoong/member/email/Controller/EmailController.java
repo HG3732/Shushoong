@@ -19,13 +19,13 @@ import lombok.RequiredArgsConstructor;
 public class EmailController {
 	private final EmailService emailService;
 	
-	@PostMapping("/verify-email")
-    public CommonResponseDto<Void>
-    getEmailForVerification(@RequestBody EmailForVerificationRequest request) {
-        LocalDateTime requestedAt = LocalDateTime.now();
-        emailService.sendSimpleVerificationMail(request.getUserEmail(), requestedAt);
-        return CommonResponseDto.of(SuccessStatus._ACCEPTED, null);
-    }
+//	@PostMapping("/verify-email")
+//    public CommonResponseDto<Void>
+//    getEmailForVerification(@RequestBody EmailForVerificationRequest request) {
+//        LocalDateTime requestedAt = LocalDateTime.now();
+//        emailService.sendSimpleVerificationMail(request.getUserEmail(), requestedAt);
+//        return CommonResponseDto.of(SuccessStatus._ACCEPTED, null);
+//    }
 	
 	@PostMapping("/v2/verify-email")
     public CommonResponseDto<Void>

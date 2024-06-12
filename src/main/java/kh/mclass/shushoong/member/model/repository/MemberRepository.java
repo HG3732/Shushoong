@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.member.model.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -9,6 +10,10 @@ import kh.mclass.shushoong.member.model.domain.MemberDto;
 
 @Mapper
 public interface MemberRepository {
+	
+	List<MemberDto> selectAllList();
+	
+	List<MemberDto> selectOne(String userId);
 	
 	// 로그인 
 	public MemberDto login(String userId);

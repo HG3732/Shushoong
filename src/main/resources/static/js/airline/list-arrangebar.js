@@ -31,19 +31,17 @@
 
 	// 오른쪽 입력 값이 변경될 때 실행되는 함수
 	function setDepartRightValue() {
-	    // 현재 입력 값(_this)과 입력 요소의 최소값과 최대값을 가져옴
 	    const _this = inputDepartRight;
 	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
 
 	    // 왼쪽과 오른쪽의 최소 거리 결정
 	    _this.value = Math.max(parseInt(_this.value), parseInt(inputDepartLeft.value) + 3);
 
-	    // 오른쪽 thumb의 위치를 계산하여 슬라이더의 오른쪽 값을 표시
 	    const rightValue = parseInt(_this.value);
 	    console.log("출발 시간 right.val : " + _this.value);
 	    
 	    const rightVal = document.querySelector(".middle-range.depart .div2");
-	    rightVal.innerHTML = `${rightValue}:00`;
+	    rightVal.innerHTML = `${rightValue}:59`;
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
 	    thumbDepartRight.style.right = 100 - percent + "%";
@@ -100,7 +98,7 @@
 	    const rightValue = parseInt(_this.value);
 	    
 	    const rightVal = document.querySelector(".middle-range.arr .div2");
-	    rightVal.innerHTML = `${rightValue}:00`;
+	    rightVal.innerHTML = `${rightValue}:59`;
 	    console.log("도착 시간 right.val : " + _this.value);
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
@@ -122,36 +120,13 @@
 
 	
 	// 가격 -------------------------------------------------------
-	// const inputPriceLeft = document.getElementById("price-input-left");
 	const inputPriceRight = document.getElementById("price-input-right");
-	// const thumbPriceLeft = document.querySelector(".slider.price > .thumb.left.price");
 	const thumbPriceRight = document.querySelector(".slider.price > .thumb.right.price");
 	const priceRange = document.querySelector(".slider.price > .range");
-
-/*
-	function setPriceLeftValue() {
-	    const _this = inputPriceLeft;
-	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
-
-	    _this.value = Math.min(parseInt(_this.value), parseInt(inputPriceRight.value) - 3);
-
-	    const leftValue = parseInt(_this.value);
-	    
-	    const leftVal = document.querySelector(".middle-range.price .div1");
-	    leftVal.innerHTML = `${leftValue}(최솟값)원 ~`;
-	    console.log("최솟값 : " + _this.value);
-	    
-	    const percent = ((_this.value - min) / (max - min)) * 100;
-	    thumbPriceLeft.style.left = percent + "%";
-	    priceRange.style.left = percent + "%";
-	};
-	*/
 
 	function setPriceRightValue() {
 	    const _this = inputPriceRight;
 	    const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
-
-	    // _this.value = Math.max(parseInt(_this.value), parseInt(inputPriceLeft.value) + 3);
 
 	    const rightValue = parseInt(_this.value);
 	    
@@ -164,15 +139,11 @@
 	    priceRange.style.right = 100 - percent + "%";
 	};
 
-	// inputPriceLeft.addEventListener("input", setPriceLeftValue);
 	inputPriceRight.addEventListener("input", setPriceRightValue);
 
 	function setPriceInitialValues() {
-	    // const initialPriceLeftValue = 0;
 	    const initialPriceRightValue = 24;
-	    // inputPriceLeft.value = initialPriceLeftValue;
 	    inputPriceRight.value = initialPriceRightValue;
-	    // setPriceLeftValue();
 	    setPriceRightValue();
 	};
 	

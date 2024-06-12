@@ -28,6 +28,11 @@ public class AirlineInfoDto {
 	private String spareSeat; // 잔여 좌석
 	private String ticketPrice; // 티켓 값
 	private String flightTime; // 비행 시간
+	// 항공 목록 사이드 바 
+	private String departTimeLeft;
+	private String departTimeRight;
+	private String arrivalTimeLeft;
+	private String arrivalTimeRight;
 	
 	private String reserveCode;//예약코드 (PK 탑승자 정보와 연결 경로)
 

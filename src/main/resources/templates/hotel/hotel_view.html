@@ -21,7 +21,7 @@ xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
-<body onload="initialize()">
+<body  onload="initialize()">
 
 	<div class="wrapper">
 		<div class="wrap-header">
@@ -87,8 +87,9 @@ xmlns:th="http://www.thymeleaf.org">
 					<div id="wrap_hotel_info">
 						<div class="hotel_info_head">
 							<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">호텔정보</p>
-							<div class="map_wrap">
-								<button type="button" class="btn_map">
+							<div class="map_wrap" th:each="searchlist : ${hotelSearchlist}">
+								<button type="button" class="btn_map" th:attr="data-address=${searchlist.hotelAddress}">
+								<!-- 속성 이름이 data-로 시작하는 모든 속성은 사용자 정의 데이터를 저장하는 데 사용 -->
 									<img th:src="@{/images/icon_pin.png}" alt="지도" class="map_pic" style="width:15px; height:20px; margin-right: 5px;">
 									지도에서 보기
 								</button>
@@ -98,11 +99,23 @@ xmlns:th="http://www.thymeleaf.org">
 						
 						<!-- 지도모달창 -->
 
-			            		<div id="map" style="width: 900px; height: 800px;"></div>
-								<div>
-								  <input type="text" id="address">
-								  <input type="button" value="Encode" onclick="codeAddress()">
-								</div>
+<!-- 			            	<div id="map" style="width: 900px; height: 800px;"></div>
+
+							<div>
+							  <input type="text" id="address">
+							  <input type="button" value="Encode" onclick="codeAddress()">
+							</div>
+ -->
+						<div class="mapModal">
+					        <div class="modal-content">
+					            <div id="map"></div>
+					            <div>
+					                <input type="text" id="address" hidden/>
+					                <input type="button" value="Encode" onclick="codeAddress()" hidden/>
+					            </div>
+					        </div>
+						</div>
+
 
 						
 						<div class="wrap_info">
@@ -432,6 +445,9 @@ function loadedHandler(){
 	} else {
 		$(".more_room_btn").show();
 	}
+	
+	//지도 띄우기
+ 	$('.btn_map').on('click', showMapHandler);
 	
 	/* displayReviewChart(); */
 	

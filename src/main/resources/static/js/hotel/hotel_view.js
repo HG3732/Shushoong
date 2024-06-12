@@ -1,3 +1,4 @@
+/*===========방 전체부기 눌렀을 때 나머지 방들 출력하는 함수============*/
 function showAllRoomHandler(){
 	console.log(this);
 	console.log($(this).siblings());
@@ -26,16 +27,49 @@ function showAllRoomHandler(){
 }
 
 /* ============================지도 모달창================================ */
+
+function showMapHandler() {
+    var modal = $('.mapModal');
+    var address = $(this).data('address'); // 버튼에 설정된 데이터 속성(주소)
+    //클릭된 버튼의 data-address 속성에서 주소 값을 가져와 address 변수에 할당
+    console.log("주소값 받기========" + $(this).data('address'));
+    
+    $('#address').val(address); // input type=text에 주소 입력
+    modal.show();
+    initialize(); //Google 지도를 초기화하는 initialize 함수를 호출
+    setTimeout(() => {
+		//1밀리초 후에 실행
+        google.maps.event.trigger(map, "resize");
+        //Google 지도의 크기가 변경되었음을 API에 알려주고 모달 창이 뜨기 전에 이 작업을 수행해야 함
+        codeAddress(); // 자동으로 encode라고 써있는 button 누르기
+    }, 1);
+}
+
+//window를 눌렀을 때 함수 설정
+$(window).on('click', function(event) {	
+    var modal = $('.mapModal');
+    console.log("모달창========" + $(event.target).is(modal));
+    console.log("window===============" + $(window));
+    
+    if ($(event.target).is(modal)) {
+		//window를 click 했을 때 modal창이니? 라고 물었을 때 false 라면 모달창을 숨겨줘
+		// --> 모달창 외 다른 곳을 눌렀을 떄 모달창 닫히는 것
+		//$(event.target).is(modal) 이거 console창에 찍어보면 false 나옴
+        modal.hide();
+    }
+});
+
+
 var geocoder;
 var map;
 function initialize() {
   geocoder = new google.maps.Geocoder();
-  
+
   /* 서울을 기준으로 잡기 */
-  var latlng = new google.maps.LatLng(37.566535, 126.9779692);
+/*var latlng = new google.maps.LatLng(37.566535, 126.9779692);*/
   var mapOptions = {
-    zoom: 8,
-    center: latlng
+    zoom: 12,
+/*    center: latlng*/
   }
   map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }
@@ -54,8 +88,6 @@ function codeAddress() {
     }
   });
 }
-
-
 
 
 /*=================== 리뷰 막대그래프 관련 =================== */
@@ -138,8 +170,6 @@ function checkScoreHandler() {
  	
  	$(this).prevAll().children().attr("src", "/shushoong/images/star_line.png").css('width', '15px;');
   	$(this).next().children().attr("src", "/shushoong/images/star_line.png").css('width', '15px;');
-
-	
 
  }
 

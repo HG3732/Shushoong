@@ -33,6 +33,8 @@ public class AirlineInfoDto {
 	private String departTimeRight;
 	private String arrivalTimeLeft;
 	private String arrivalTimeRight;
+	// 셀렉트 바 
+	private String selectType;
 	
 	private String reserveCode;//예약코드 (PK 탑승자 정보와 연결 경로)
 

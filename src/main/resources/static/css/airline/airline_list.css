@@ -219,6 +219,18 @@ input[type="range"]::-webkit-slider-thumb {
 .layover-list .layover-select .direct-btn img{
 	width: 20px;
 }
+.layover-list .layover-select .direct-btn.zero #blue-direct:hover{
+	content: url("../../images/bluecheck.png");
+}
+.layover-list .layover-select .direct-btn.zero #sky-direct:hover{
+	content: url("../../images/bluecheck.png");
+}
+.layover-list .layover-select .direct-btn.one #sky-layover:hover{
+	content: url("../../images/bluecheck.png");
+}
+.layover-list .layover-select .direct-btn.one #blue-layover:hover{
+	content: url("../../images/bluecheck.png");
+}
 
 body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.layover-list > form > div.layover-select > label:nth-child(2){
 	margin-right: 20px;
@@ -513,5 +525,12 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 	background-color: #006AFF;
 	color: white;
 
-	}
+}
+
+.empty-list{
+	text-align: center;
+    margin-top: 60px;
+    font-size: 30px;
+    font-weight: bold;
+}
 

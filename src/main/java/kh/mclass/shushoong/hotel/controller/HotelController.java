@@ -35,7 +35,7 @@ public class HotelController {
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
-		model.addAttribute("hotelList", hotelDtoRes);
+		model.addAttribute("hotelList", result);
 		return "hotel/hotel_list";
 	}
 	

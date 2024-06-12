@@ -175,7 +175,10 @@ $(loadedHandler)
 					<form class="hotel-search-bar" method="post" action="/shushoong/hotel/list">
 						<button type="button" class="input location"><input type="text" class="selected-loc" value="지역 명" style="width: 136px;" readonly ><input type="hidden" name="loc" value=""><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
 						<button type="button" class="input time"><span>숙박 일정</span><span class="check-in-date"></span> - <span class="check-out-date"></span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
-						<button type="button" class="input room"><span class="num-of-people">객실 <span class="room-num">1</span> - 성인 <span class="adult-num">2</span>, 아동 <span class="child-num">0</span></span><input type="hidden" name="room" value="1"><input type="hidden" name="adult" value="2"><input type="hidden" name="child" value="0"><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
+						<button type="button" class="input room">
+							<span class="num-of-people">객실 <span class="room-num">1</span> - 성인 <span class="adult-num">2</span>, 아동 <span class="child-num">0</span></span>
+							<input type="hidden" name="room" value="1"><input type="hidden" name="adult" value="2"><input type="hidden" name="child" value="0"><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/>
+						</button>
 						<button type="submit" class="search btn">검색</button>
 					</form>
 					<div class="wrap-loc-box">

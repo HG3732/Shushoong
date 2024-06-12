@@ -8,6 +8,8 @@ xmlns:th="http://www.thymeleaf.org">
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/hotel/hotel_pay.css}" rel="stylesheet" />
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>숙소 결제</title>
 </head>
@@ -153,41 +155,100 @@ xmlns:th="http://www.thymeleaf.org">
 				<hr style="border: 2px solid #006AFF; margin-top: 5px;"></hr>
 				<div class="policy_check">
 					<div class="refund">
-						<p>예약 취소 및 환불 정책 안내</p>
-						<p>필수</p>
+						<p class="class_info">예약 취소 및 환불 정책 안내</p>
+						<p class="required" style="color: red;">(필수)</p>
 						<div class="radio_wrap">
-							<input type="radio">동의합니다
-							<input type="radio">동의하지 않습니다
+							<input type="radio" name="policy_1" value="agree" id="radio_agree1">
+							<label for="radio_agree1"></label>
+								<div style="margin-right: 20px;">동의합니다</div>
+							<input type="radio" name="policy_1" value="disagree" id="radio_disagree1">
+								<label for="radio_disagree1"></label>
+								<div>동의하지 않습니다</div>
+							<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">
 						</div>
+					</div>
+					<div class="policy_detail" hidden>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+						when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+						It has survived not only five centuries, but also the leap into electronic typesetting, 
+						remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+						sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+						Aldus PageMaker including versions of Lorem Ipsum.
 					</div>
 					<div class="caution">
-						<p>호텔 예약 주의 사항</p>
-						<p>필수</p>
+						<p class="class_info">호텔 예약 주의 사항</p>
+						<p class="required" style="color: red;">(필수)</p>
 						<div class="radio_wrap">
-							<input type="radio">동의합니다
-							<input type="radio">동의하지 않습니다
+							<input type="radio" name="policy_2" value="agree" id="radio_agree2" >
+								<label for="radio_agree2"></label>
+								<div style="margin-right: 20px;">동의합니다</div>
+							<input type="radio" name="policy_2" value="disagree" id="radio_disagree2">
+								<label for="radio_disagree2"></label>
+								<div>동의하지 않습니다</div>
+							<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">
 						</div>
 					</div>
+					<div class="policy_detail" hidden>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+						when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+						It has survived not only five centuries, but also the leap into electronic typesetting, 
+						remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+						sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+						Aldus PageMaker including versions of Lorem Ipsum.
+					</div>
+
+					
 					<div class="personal_info">
-						<p>개인정보 수집 및 이용</p>
-						<p>필수</p>
+						<p class="class_info">개인정보 수집 및 이용</p>
+						<p class="required" style="color: red;">(필수)</p>
 						<div class="radio_wrap">
-							<input type="radio">동의합니다
-							<input type="radio">동의하지 않습니다
+							<input type="radio" name="policy_3" value="agree" id="radio_agree3" >
+								<label for="radio_agree3"></label>
+								<div style="margin-right: 20px;">동의합니다</div>
+							<input type="radio" name="policy_3" value="disagree" id="radio_disagree3">
+								<label for="radio_disagree3"></label>
+								<div>동의하지 않습니다</div>
+							<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">
 						</div>
 					</div>
+					<div class="policy_detail" hidden>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+						when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+						It has survived not only five centuries, but also the leap into electronic typesetting, 
+						remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+						sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+						Aldus PageMaker including versions of Lorem Ipsum.
+					</div>
+
+					
 					<div class="third_party">
-						<p>개인정보 제3자 제공 동의</p>
-						<p>필수</p>
+						<p class="class_info">개인정보 제3자 제공 동의</p>
+						<p class="required" style="color: red;">(필수)</p>
 						<div class="radio_wrap">
-							<input type="radio">동의합니다
-							<input type="radio">동의하지 않습니다
+							<input type="radio" name="policy_4" value="agree" id="radio_agree4">
+								<label for="radio_agree4" style="display: inline-block;"></label>
+								<div style="margin-right: 20px;">동의합니다</div>
+							<input type="radio" name="policy_4" value="disagree" id="radio_disagree4">
+								<label for="radio_disagree4"></label>
+								<div>동의하지 않습니다</div>
+							<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">	
 						</div>
+					</div>
+					<div class="policy_detail" hidden>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+						when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+						It has survived not only five centuries, but also the leap into electronic typesetting, 
+						remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+						sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+						Aldus PageMaker including versions of Lorem Ipsum.
 					</div>
 				</div>
-				
-				
-				
+
+
 				
 				
 <!-- 				<div class="reserve_info">
@@ -213,6 +274,23 @@ xmlns:th="http://www.thymeleaf.org">
 	<div class="wrap-footer">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
+	
+<script>
+
+$(loadedHandler);
+
+function loadedHandler(){
+	
+	$('.arrow').on("click", arrowDownClickHandler);
+
+}
+
+
+
+</script>
+<script th:src="@{/js/hotel/hotel_pay.js}"
+		type="text/javascript">
+</script>
 	
 </body>
 </html>

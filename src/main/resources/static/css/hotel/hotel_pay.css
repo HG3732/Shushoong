@@ -181,10 +181,77 @@ input[type=checkbox]:checked + label {
 }
 
 .refund{
+ 	display: flex;
+/* 	align-items: center; */
+	margin-bottom: 10px;
+}
+
+.class_info{
+	flex-grow: 1;
+}
+
+.required{
+	flex-grow: 40;
+}
+
+.radio_wrap{
 	display: flex;
+} 
+
+.caution{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
 }
 
 
+.policy_check > div.caution > p.required{
+	flex-grow: 45;
+}
+
+.personal_info{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.policy_check > div.personal_info > p.required {
+	flex-grow: 45;
+}
+
+.third_party{
+	display: flex;
+	align-items: center;
+}
+
+.policy_check > div.third_party > p.required {
+	flex-grow: 45;
+}
+
+.yes{
+	margin-left: 100px;
+}
+
+
+input[type=radio] {
+  display:none;
+}
+
+input[type=radio] + label{
+    cursor: pointer;
+    width: 20px;
+	height: 20px;
+    background-repeat: no-repeat;
+    background-image: url("../../images/skybluecheck.png");
+	background-size: 100%;
+
+}
+
+input[type="radio"]:checked + label{
+	background-image: url("../../images/bluecheck.png");
+	border: none;
+  
+}
 
 
 /* .hotel_city{

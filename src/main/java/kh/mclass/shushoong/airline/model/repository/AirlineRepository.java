@@ -18,4 +18,5 @@ public interface AirlineRepository {
 			String departTimeLeft, String departTimeRight,
 			String arrivalTimeLeft, String arrivalTimeRight
 			);
+	List<AirlineInfoDto> selectType(String departLoc, String arrivalLoc, String seletType, String ticketPrice);
 }

@@ -32,7 +32,13 @@ function getSideTime() {
 			dataType: 'json',
 			success: function(response) {
 				console.log('Ajax Success', response);
+				if(response.length == 0){
+					// alert('해당 조건을 일치하는 항공권이 없습니다.')
+					// location.reload(true); 새로고침
+					noAirlineList(response);
+				}else{
 				updateAirlineList(response);
+				}
 			},
 			error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
@@ -47,10 +53,18 @@ function getSideTime() {
 	$('#arr-input-right').on('click', updateTimeRange);
 }
 
+function noAirlineList() {
+	$('.airline-info-container').empty(); // 기존 목록 초기화
+	var airlineEmpty = `
+	<div class="empty-list">해당 조건에 일치하는 항공권이 없습니다.</div>
+	`;
+	$('.airline-info-container').html(airlineEmpty);
+}
+
 function updateAirlineList(data) {
 	// 항공 목록을 업데이트
 	$('.airline-info-container').empty(); // 기존 목록 초기화
-
+	
 	data.forEach(function(air) {
 		var airlineInfo = `
             <div class="airline-info">
@@ -108,6 +122,6 @@ function updateAirlineList(data) {
                 </div>
             </div>
         `;
-		$('.airline-info-container').append(airlineInfo);
+		$('.airline-info-container').html(airlineInfo);
 	});
 }

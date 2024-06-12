@@ -222,10 +222,25 @@ input[type=checkbox]:checked + label {
 .third_party{
 	display: flex;
 	align-items: center;
+	margin-bottom: 10px;
 }
 
 .policy_check > div.third_party > p.required {
 	flex-grow: 45;
+}
+
+.marketing{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.marketing_info{
+	flex-grow: 1;	
+}
+
+.policy_check > div.marketing > p.option {
+	flex-grow: 40;
 }
 
 .yes{

@@ -158,10 +158,10 @@ xmlns:th="http://www.thymeleaf.org">
 						<p class="class_info">예약 취소 및 환불 정책 안내</p>
 						<p class="required" style="color: red;">(필수)</p>
 						<div class="radio_wrap">
-							<input type="radio" name="policy_1" value="agree" id="radio_agree1">
+							<input type="radio" name="policy_1" value="agree" id="radio_agree1" class="agree_radio">
 							<label for="radio_agree1"></label>
 								<div style="margin-right: 20px;">동의합니다</div>
-							<input type="radio" name="policy_1" value="disagree" id="radio_disagree1">
+							<input type="radio" name="policy_1" value="disagree" id="radio_disagree1" class="disagree_radio">
 								<label for="radio_disagree1"></label>
 								<div>동의하지 않습니다</div>
 							<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">
@@ -180,10 +180,10 @@ xmlns:th="http://www.thymeleaf.org">
 						<p class="class_info">호텔 예약 주의 사항</p>
 						<p class="required" style="color: red;">(필수)</p>
 						<div class="radio_wrap">
-							<input type="radio" name="policy_2" value="agree" id="radio_agree2" >
+							<input type="radio" name="policy_2" value="agree" id="radio_agree2" class="agree_radio">
 								<label for="radio_agree2"></label>
 								<div style="margin-right: 20px;">동의합니다</div>
-							<input type="radio" name="policy_2" value="disagree" id="radio_disagree2">
+							<input type="radio" name="policy_2" value="disagree" id="radio_disagree2" class="disagree_radio">
 								<label for="radio_disagree2"></label>
 								<div>동의하지 않습니다</div>
 							<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">
@@ -204,10 +204,10 @@ xmlns:th="http://www.thymeleaf.org">
 						<p class="class_info">개인정보 수집 및 이용</p>
 						<p class="required" style="color: red;">(필수)</p>
 						<div class="radio_wrap">
-							<input type="radio" name="policy_3" value="agree" id="radio_agree3" >
+							<input type="radio" name="policy_3" value="agree" id="radio_agree3" class="agree_radio">
 								<label for="radio_agree3"></label>
 								<div style="margin-right: 20px;">동의합니다</div>
-							<input type="radio" name="policy_3" value="disagree" id="radio_disagree3">
+							<input type="radio" name="policy_3" value="disagree" id="radio_disagree3" class="disagree_radio">
 								<label for="radio_disagree3"></label>
 								<div>동의하지 않습니다</div>
 							<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">
@@ -228,10 +228,10 @@ xmlns:th="http://www.thymeleaf.org">
 						<p class="class_info">개인정보 제3자 제공 동의</p>
 						<p class="required" style="color: red;">(필수)</p>
 						<div class="radio_wrap">
-							<input type="radio" name="policy_4" value="agree" id="radio_agree4">
+							<input type="radio" name="policy_4" value="agree" id="radio_agree4" class="agree_radio">
 								<label for="radio_agree4" style="display: inline-block;"></label>
 								<div style="margin-right: 20px;">동의합니다</div>
-							<input type="radio" name="policy_4" value="disagree" id="radio_disagree4">
+							<input type="radio" name="policy_4" value="disagree" id="radio_disagree4"  class="disagree_radio">
 								<label for="radio_disagree4"></label>
 								<div>동의하지 않습니다</div>
 							<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">	
@@ -246,6 +246,31 @@ xmlns:th="http://www.thymeleaf.org">
 						sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
 						Aldus PageMaker including versions of Lorem Ipsum.
 					</div>
+					
+					<div class="marketing">
+						<p class="marketing_info">마케팅 수신동의</p>
+						<p class="option" style="color: blue;">(선택)</p>
+						<div class="radio_wrap">
+							<input type="radio" name="policy_5" value="agree" id="radio_agree5" class="agree_radio">
+								<label for="radio_agree5" style="display: inline-block;"></label>
+								<div style="margin-right: 20px;">동의합니다</div>
+							<input type="radio" name="policy_5" value="disagree" id="radio_disagree5"  class="disagree_radio">
+								<label for="radio_disagree5"></label>
+								<div>동의하지 않습니다</div>
+							<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">	
+						</div>
+					</div>
+					<div class="policy_detail" hidden>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+						when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+						It has survived not only five centuries, but also the leap into electronic typesetting, 
+						remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+						sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+						Aldus PageMaker including versions of Lorem Ipsum.
+					</div>
+					
+					
 				</div>
 
 
@@ -281,8 +306,9 @@ $(loadedHandler);
 
 function loadedHandler(){
 	
+	$('#check1').on("click", allAgreeCheckHandler);
 	$('.arrow').on("click", arrowDownClickHandler);
-
+	$('.agree_radio')
 }
 
 

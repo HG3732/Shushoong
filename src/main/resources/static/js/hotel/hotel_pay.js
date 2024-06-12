@@ -1,3 +1,4 @@
+/*약관 상세보기*/
 function arrowDownClickHandler(){
 	console.log($(this).parents().eq(1).next());
 	
@@ -15,3 +16,14 @@ function arrowDownClickHandler(){
 
 }
 
+/*전체동의*/
+function allAgreeCheckHandler(){
+	console.log($(this).parent().siblings().eq(12).children('div:even').children());
+
+	if(this.checked) {
+			$('.agree_radio').prop('checked', true);
+		} else {
+			$('.agree_radio').prop('checked', false);
+		}
+	
+}

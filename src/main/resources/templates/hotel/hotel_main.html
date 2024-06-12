@@ -172,7 +172,7 @@ $(loadedHandler)
 			<div class="main-back">
 				<div class="wrap-hotel-search">
 					<div style="height: 220px;"></div>
-					<form class="hotel-search-bar" method="post" action="/shushoong/hotel/list">
+					<form class="hotel-search-bar" method="get" action="/shushoong/hotel/list">
 						<button type="button" class="input location"><input type="text" class="selected-loc" value="지역 명" style="width: 136px;" readonly ><input type="hidden" name="loc" value=""><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
 						<button type="button" class="input time"><span>숙박 일정</span><span class="check-in-date"></span> - <span class="check-out-date"></span><img th:src="@{/images/icon_pin.png}" alt="핀" width="16px"/></button>
 						<button type="button" class="input room">

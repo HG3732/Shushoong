@@ -188,7 +188,7 @@ input[type="range"]::-webkit-slider-thumb {
 	 background-color: var(--color_gray_2);
 	 width: 250px;
 	 height: 180px;
-	 border-radius: 20px;	 
+	 border-radius: 20px;	
 }
 
 .hotel_like{
@@ -210,6 +210,8 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .hotel_attr{
+	display: grid;
+	justify-content:space-between;
 	margin-left: 20px;
 
 }

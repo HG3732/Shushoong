@@ -19,7 +19,8 @@ public class AirlineController {
 
 	@Autowired
 	private AirlineService service;
-
+	
+	// 항공 목록 
 	@GetMapping("/airline/list")
 	public String airlineInfo(
 			String departLoc,
@@ -38,6 +39,30 @@ public class AirlineController {
 		return "airline/airline_list";
 	}
 	
+	// 왕복 오는 항공편
+	@GetMapping("airline/list_return")
+	public String airlineInfoReturn(
+			String departLoc,
+			String arrivalLoc,
+			String airlineCode,
+			Model md) {
+		
+		System.out.println("에어 오는편 컨트롤러");
+		log.info("선택된 항공 코드 : ", airlineCode);
+		log.info("항공 오는 편 departLoc: {}, arrivalLoc: {}", departLoc, arrivalLoc);
+		
+		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc);
+		
+		// 선택한 항공
+		List<AirlineInfoDto> selectOneAirline = service.getSelectOne(airlineCode);
+		
+		md.addAttribute("selectOneAirline", selectOneAirline);
+		md.addAttribute("airlineReturnData", airlineReturnData);
+		log.debug("Return controller 왕복편 data : {}", airlineReturnData);
+		
+		return "airline/airline_list_return";
+	}
+	
 //	@GetMapping("airline/list_return/ajax")
 //    @ResponseBody
 //    public List<AirlineInfoDto> airlineInfoReturn(
@@ -51,27 +76,23 @@ public class AirlineController {
 //    }
 //	
 	
-	@GetMapping("airline/list_return")
-	public String airlineInfoReturn(
+	// 항공 목록 사이드 바
+	@GetMapping("airline/list_side_time/ajax")
+	@ResponseBody
+	public List<AirlineInfoDto> airlineSideDepartTime(
 			String departLoc,
 			String arrivalLoc,
-			String airlineCode,
-			Model md) {
+			String departTimeLeft,
+			String deaprtTimeRight,
+			String arrivalTimeLeft,
+			String arrivalTimeRight
+			){
+		System.out.println("컨트롤러 사이드 시간대");
 		
-		System.out.println("에어 오는편 컨트롤러");
-		log.info("선택된 항공 코드 : ", airlineCode);
-		log.info("항공 오는 편 departLoc: {}, arrivalLoc: {}", departLoc, arrivalLoc);
-
-		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc);
+		List<AirlineInfoDto> SideDepartTimeData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight);
+		log.debug("컨트롤러 디버깅 : " + SideDepartTimeData);
+		return SideDepartTimeData;
 		
-		// 선택한 항공
-		List<AirlineInfoDto> selectOneAirline = service.getSelectOne(airlineCode);
-				
-		md.addAttribute("selectOneAirline", selectOneAirline);
-		md.addAttribute("airlineReturnData", airlineReturnData);
-		log.debug("Return controller 왕복편 data : {}", airlineReturnData);
-		
-		return "airline/airline_list_return";
 	}
 
 	// 항공 메인 페이지

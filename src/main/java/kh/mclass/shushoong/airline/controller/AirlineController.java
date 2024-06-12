@@ -63,19 +63,6 @@ public class AirlineController {
 		return "airline/airline_list_return";
 	}
 	
-//	@GetMapping("airline/list_return/ajax")
-//    @ResponseBody
-//    public List<AirlineInfoDto> airlineInfoReturn(
-//            @RequestParam String departLoc,
-//            @RequestParam String arrivalLoc) {
-//        log.info("Received departLoc: {}, arrivalLoc: {}", departLoc, arrivalLoc);
-//        List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc);
-//        System.out.println("컨트롤렁ㅔ이이작스");
-//        log.debug("Return controller 왕복편 data : {}", airlineReturnData);
-//        return airlineReturnData;
-//    }
-//	
-	
 	// 항공 목록 사이드 바
 	@GetMapping("airline/list_side_time/ajax")
 	@ResponseBody
@@ -91,8 +78,21 @@ public class AirlineController {
 		
 		List<AirlineInfoDto> SideDepartTimeData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight);
 		log.debug("컨트롤러 디버깅 : " + SideDepartTimeData);
-		return SideDepartTimeData;
 		
+		return SideDepartTimeData;
+	}
+	@GetMapping("airline/list_select_options")
+	@ResponseBody
+	public List<AirlineInfoDto> airlineSelectType(
+			String departLoc,
+			String arrivalLoc,
+			String selectType,
+			String ticketPrice,
+			String flightTime
+			) {
+		
+		List<AirlineInfoDto> selectTypeDto = service.getSelectTypeList(departLoc, arrivalLoc, selectType, ticketPrice, flightTime);
+		return selectTypeDto;
 	}
 
 	// 항공 메인 페이지

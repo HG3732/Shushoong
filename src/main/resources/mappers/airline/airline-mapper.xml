@@ -23,4 +23,22 @@
         AND DEPART_LOC LIKE #{departLoc}
         AND ARRIVAL_LOC LIKE #{arrivalLoc}
     </select>
+    <select id="getSelectTypeList" parameterType="map" resultType="AirlineInfoDto">
+    	SELECT * FROM AIRLINE_INFO
+    	WHERE DEPART_LOC LIKE '#{departLoc} AND ARRIVAL_LOC LIKE '#{arrivalLoc}
+    	<choose>
+    		<when test="selectType != null and selectType.equals('price-cheap')">
+    			ORDER BY #{ticketPrice} 
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-expensive')">
+    			ORDER BY #{ticketPrice} DESC
+    		</when>
+    		 <when test="selectType != null and selectType.equals('flytime-low')">
+    			ORDER BY REGEXP_REPLACE(#{flightTime},'(\d+)시간 (\d+)분', '\1\2') as FLIGHT_TIME) 
+    		</when>
+    		 <when test="selectType != null and selectType.equals('flytime-long')">
+    			ORDER BY REGEXP_REPLACE(#{flightTime},'(\d+)시간 (\d+)분', '\1\2') as FLIGHT_TIME)  DESC
+    		</when>
+    	</choose>
+    </select>
 </mapper>

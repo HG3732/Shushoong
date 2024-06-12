@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
+import lombok.extern.log4j.Log4j2;
 @Mapper
 public interface AirlineRepository {
 	// 항공 리스트
@@ -18,5 +19,7 @@ public interface AirlineRepository {
 			String departTimeLeft, String departTimeRight,
 			String arrivalTimeLeft, String arrivalTimeRight
 			);
-	List<AirlineInfoDto> selectType(String departLoc, String arrivalLoc, String seletType, String ticketPrice);
+	List<AirlineInfoDto> selectType(String departLoc, String arrivalLoc, String selectType);
+
+	
 }

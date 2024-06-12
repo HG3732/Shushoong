@@ -35,8 +35,8 @@ public class AirlineService {
 	}
 	// 항공 목록 셀렉트 바
 	public List<AirlineInfoDto> getSelectTypeList(
-			String departLoc, String arrivalLoc, String flightTime, String ticketPrice, String selectType){
-		return airlineRepository.selectType(departLoc, arrivalLoc, selectType, ticketPrice);
+			String departLoc, String arrivalLoc, String selectType){
+		return airlineRepository.selectType(departLoc, arrivalLoc, selectType);
 		
 	}
 }

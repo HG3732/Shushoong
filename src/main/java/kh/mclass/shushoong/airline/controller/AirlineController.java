@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.airline.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,6 @@ public class AirlineController {
 			System.out.println("컨트롤러 airline data: " + airlineData);
 			md.addAttribute("airlineData", airlineData);
 		}else {
-			System.out.println("출발지 도착지 일치하는 데이터 없음");
 		}
 		return "airline/airline_list";
 	}
@@ -81,17 +81,23 @@ public class AirlineController {
 		
 		return SideDepartTimeData;
 	}
+	// 목록 셀렉트 바
 	@GetMapping("airline/list_select_options")
 	@ResponseBody
 	public List<AirlineInfoDto> airlineSelectType(
 			String departLoc,
 			String arrivalLoc,
 			String selectType,
-			String ticketPrice,
 			String flightTime
 			) {
 		
-		List<AirlineInfoDto> selectTypeDto = service.getSelectTypeList(departLoc, arrivalLoc, selectType, ticketPrice, flightTime);
+	    System.out.println("DepartLoc: " + departLoc);
+	    System.out.println("ArrivalLoc: " + arrivalLoc);
+	    System.out.println("SelectType: " + selectType);
+//	    System.out.println("TicketPrice: " + ticketPrice);
+//	    System.out.println("FlightTime: " + flightTime);
+		
+		List<AirlineInfoDto> selectTypeDto = service.getSelectTypeList(departLoc, arrivalLoc, selectType);
 		return selectTypeDto;
 	}
 

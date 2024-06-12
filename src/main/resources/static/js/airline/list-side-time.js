@@ -32,12 +32,12 @@ function getSideTime() {
 			dataType: 'json',
 			success: function(response) {
 				console.log('Ajax Success', response);
-				if(response.length == 0){
+				if (response.length == 0) {
 					// alert('해당 조건을 일치하는 항공권이 없습니다.')
 					// location.reload(true); 새로고침
 					noAirlineList(response);
-				}else{
-				updateAirlineList(response);
+				} else {
+					updateAirlineList(response);
 				}
 			},
 			error: function(xhr, status, error) {
@@ -64,9 +64,10 @@ function noAirlineList() {
 function updateAirlineList(data) {
 	// 항공 목록을 업데이트
 	$('.airline-info-container').empty(); // 기존 목록 초기화
-	
+
+	let airlineInfo = '';
 	data.forEach(function(air) {
-		var airlineInfo = `
+		airlineInfo += `
             <div class="airline-info">
                 <div hidden="">
                     <span class="select-info-departLoc" name="departLoc">${air.departLoc}</span>
@@ -119,9 +120,51 @@ function updateAirlineList(data) {
                             </div>
                         </div>
                     </div>
+                 <div hidden="" class="contain-select-info">
+										<div class="flex-select-info">
+											<div class="date-select-info">
+												<div>
+													<div>
+														<span>${air.departDate}</span>
+													</div>
+													<div>
+														<span>${air.departTime}</span>
+													</div>
+												</div>
+												<div>
+													<span${air.flightTime}>비행 시간</span>
+												</div>
+												<div>
+													<div>
+														<span>${air.arrivalDate}</span>
+													</div>
+													<div>
+														<span>${air.departTime}10:20</span>
+													</div>
+												</div>
+											</div>
+											<div class="loc-select-info">
+												<span>${air.departLoc}</span>
+												<div>
+													<span>${air.airlineName}항공사 명</span>
+												</div>
+												<div>
+													<span>좌석등급 항공편명</span>
+												</div>
+												<span>${air.arrivalLoc}도착지</span>
+											</div>
+											<div class="btn-select-info">
+												<button id="show-comeback-btn" type="button">선택하기</button>
+											</div>
+										</div>
+									</div>
                 </div>
             </div>
+            </div>
         `;
-		$('.airline-info-container').html(airlineInfo);
 	});
+	$('.airline-info-container').html(airlineInfo);
+	// $('.airline-info-container').append(airlineInfo);
+	// $(".ticketinfo-btn").on("click", clickedTicketInfo());
+	clickedTicketInfo();
 }

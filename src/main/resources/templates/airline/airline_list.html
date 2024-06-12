@@ -138,8 +138,10 @@
 						<div class="select-bar">
 							<form action="#" id="frm-select">
 								<select name="selectlist" id="showlist">
+								<!-- 
 									<option value="price-cheap">가격 낮은 순</option>
 									<option value="price-expensive">가격 높은 순</option>
+									 -->
 									<option value="flytime-low">비행 짧은 순</option>
 									<option value="flytime-long">비행 긴 순</option>
 								</select>
@@ -155,7 +157,7 @@
 
 						<div class="select-airplane">
 							<p>
-								<span th:text="${airlineData[0].arrivalLoc}"></span>행 항공편을 선택하세요
+								<!-- <span th:text="${airlineData[0].arrivalLoc}"></span>행 항공편을 선택하세요 -->
 							</p>
 						</div>
 
@@ -302,7 +304,7 @@
 			clickedTicketInfo(); // 티켓 상세 정보
 			clickedShowReturnBtn(); // 왕복 항공편
 			getSideTime(); // 사이드바 시간 에이작스
-			getSelectList(); // 셀렉트 리스트
+			// getSelectList(); // 셀렉트 리스트
 			 
 		};
 	</script>
@@ -320,7 +322,7 @@
 	<!-- 사이드바 시간 -->
 	<script th:src="@{/js/airline/list-side-time.js}" type="text/javascript"></script>
 	<!-- 셀렉트 리스트 --> 
-	<script th:src="@{/js/airline/list-select.js}" type="text/javascript"></script> 
+	<!-- <script th:src="@{/js/airline/list-select.js}" type="text/javascript"></script>  -->
 	<script>
 		
 	</script>

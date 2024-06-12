@@ -19,6 +19,8 @@
 	background-color: var(--color_blue_1);
 	color: white;
 	text-align: center;
+	margin-left: 8px;
+	font-family: 'SOYOMapleBoldTTF';
 }
 
 .no_2{
@@ -37,11 +39,13 @@
 	border-radius: 50px;
 	background-color: var(--color_blue_2);
 	text-align: center;
+	margin-right: 8px;
 }
 
 .hotel_reserve_write{
-	display: inline-flex;
+	display: flex;
 	margin-top: 10px;
+	justify-content: space-around;
 }
 
 table{
@@ -177,14 +181,215 @@ input[type=checkbox]:checked + label {
 	margin-top: 50px;
 	display: flex;
 	justify-content: space-between;
-	align-items: middle;
+	margin-bottom: 10px;
 }
 
 .refund{
+ 	display: flex;
+/* 	align-items: center; */
+	margin-bottom: 10px;
+}
+
+.class_info{
+	flex-grow: 1;
+}
+
+.required{
+	flex-grow: 40;
+}
+
+.radio_wrap{
 	display: flex;
+} 
+
+.caution{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
 }
 
 
+.policy_check > div.caution > p.required{
+	flex-grow: 45;
+}
+
+.personal_info{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.policy_check > div.personal_info > p.required {
+	flex-grow: 45;
+}
+
+.third_party{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.policy_check > div.third_party > p.required {
+	flex-grow: 45;
+}
+
+.marketing{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.policy_check > div.marketing > p.option {
+	flex-grow: 40;
+}
+
+.yes{
+	margin-left: 100px;
+}
+
+
+input[type=radio] {
+  display:none;
+}
+
+input[type=radio] + label{
+    cursor: pointer;
+    width: 20px;
+	height: 20px;
+    background-repeat: no-repeat;
+    background-image: url("../../images/skybluecheck.png");
+	background-size: 100%;
+
+}
+
+input[type="radio"]:checked + label{
+	background-image: url("../../images/bluecheck.png");
+	border: none;
+  
+}
+
+.paycheck{
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+.paycheck_wrap{
+	background-color: var(--color_blue_2); 
+	padding: 10px 0;
+}
+
+.paycheck_info{
+	width: 860px;
+	margin: 0 auto;
+}
+
+.total_cost{
+	display:flex;
+	justify-content: space-between;
+}
+.how_much{
+	font-family: 'SOYOMapleBoldTTF';
+	font-size: var(--font2);
+}
+
+.total_num{
+	color: red;
+	font-size: var(--font4);
+}
+
+.headcount_exchange{
+	display: flex;
+	justify-content: space-between;
+	font-size: var(--font4);
+	margin-top: 10px;
+}
+
+.mileage_wrap{
+ 	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-top: 30px;
+	
+}
+
+.mileage_wrap > input[type=text] {
+	border: none; 
+	background-color: var(--color_gray_3); 
+	border-radius: 20px;
+	width: 120px;
+	font-size: var(--font4);
+	padding:5px;
+	margin-left: 20px;
+}
+
+.mileage_wrap > input[type=text]:focus{
+	outline: none;
+	font-size: var(--font4);
+}
+
+
+.use_all{
+	border-radius: 20px;
+	border: none;
+	font-size: var(--font4);
+	background-color: var(--color_gray_3);
+	padding: 5px;
+	margin-left: 5px;
+}
+
+.use_all:hover{
+	cursor:pointer;
+	padding: 5px;
+	border-radius: 20px;
+	border: none;
+	font-size: var(--font4);
+	margin-left: 5px;
+}
+
+.left{
+	margin-top: 5px;
+	text-align: end;
+	font-size: var(--font4);
+}
+
+.exchange_info{
+	margin-top: 30px;
+	text-align: end;
+	font-size: var(--font4);
+	color: #7C7C7C;
+}
+
+.apply_exchange{
+	margin-bottom: 5px;
+}
+
+.mileage_save{
+	margin-bottom: 5px;
+}
+
+.pay_button{
+	margin: 30px 0;
+	width: 100%;
+}
+
+.final_pay{
+	font-family: 'SOYOMapleRegularTTF';
+	width: 100%;
+	border-radius: 20px;
+	padding: 10px;
+	background-color: white;
+	border: 2px solid #006AFF;
+	font-size: var(--font2);
+}
+
+.final_pay:hover{
+	cursor:pointer;
+	padding: 10px;
+	background-color: var(--color_blue_1);
+	color: white;
+	font-family: 'SOYOMapleBoldTTF';
+	font-size: var(--font2);
+}
 
 
 /* .hotel_city{

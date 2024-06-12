@@ -1,11 +1,17 @@
 package kh.mclass.shushoong.member.controller;
 
+import java.util.List;
+
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.member.model.service.MemberSecurityService;
@@ -30,30 +36,12 @@ public class JoinController {
 	public String joinCustomer() {
 		return "member/userJoin";
 	}
+	
 
 	// 사업자회원 가입 페이지로 이동
 	@GetMapping("join/business")
 	public String joinBusiness() {
 		return "member/businessJoin";
 	}
-	
-//	@PostMapping("join/customer")
-//	@ResponseBody
-//	public int customerJoin(MemberDto memberdto) {
-//		try {
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	@PostMapping("join/business")
-//	@ResponseBody
-//	public int businessJoin(MemberDto memberdto) {
-//		try {
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+
 }

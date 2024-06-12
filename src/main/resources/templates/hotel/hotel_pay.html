@@ -248,7 +248,7 @@ xmlns:th="http://www.thymeleaf.org">
 					</div>
 					
 					<div class="marketing">
-						<p class="marketing_info">마케팅 수신동의</p>
+						<p class="class_info">마케팅 수신동의</p>
 						<p class="option" style="color: blue;">(선택)</p>
 						<div class="radio_wrap">
 							<input type="radio" name="policy_5" value="agree" id="radio_agree5" class="agree_radio">
@@ -308,10 +308,8 @@ function loadedHandler(){
 	
 	$('#check1').on("click", allAgreeCheckHandler);
 	$('.arrow').on("click", arrowDownClickHandler);
-	$('.agree_radio')
+	$('input[type=radio]').on("click", checkAllEscHandler);
 }
-
-
 
 </script>
 <script th:src="@{/js/hotel/hotel_pay.js}"

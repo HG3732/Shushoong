@@ -235,10 +235,6 @@ input[type=checkbox]:checked + label {
 	margin-bottom: 10px;
 }
 
-.marketing_info{
-	flex-grow: 1;	
-}
-
 .policy_check > div.marketing > p.option {
 	flex-grow: 40;
 }

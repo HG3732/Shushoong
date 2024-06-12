@@ -92,13 +92,31 @@ xmlns:th="http://www.thymeleaf.org">
 					
 					<!-- section 부분 -->
 					<div class="hotel">
+						<div class="hotel_list" th:each="hotellist : ${hotelList}">
+							<div class="hotel_pic" th:style="'background-image: url(' + ${hotellist.hotelPic} + '); background-size: cover;'">
+								<div class="hotel_like">
+									<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart">
+								</div>
+							</div>
+							<div class="hotel_attr">
+								<div class="hotel_kr" th:text="${hotellist.hotelName}"></div>
+								<div class="hotel_eng" th:text="${hotellist.hotelEng}"></div>
+								<div class="hotel_location" th:text="${hotellist.hotelAddress}"></div>
+								<div class="hotel_review">
+									<span><img th:src="@{/images/star_line.png}" alt="별" style="width:20px;" class="heart"></span>
+									<span th:text="${hotellist.hotelScore} + '/5'"></span>
+								</div>
+							</div>
+							<div class="hotel_price" th:text="${hotellist.hotelPrice} + '원'"></div>
+						</div>
+						
 						<div class="hotel_list">
 							<div class="hotel_pic">
 								<div class="hotel_like">
 									<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart">
 								</div>
 							</div>
-							<div class="hotel_attr" style="display: grid; justify-content:space-between;">
+							<div class="hotel_attr">
 								<div class="hotel_hot">HOT</div>
 								<div class="hotel_kr">호텔이름</div>
 								<div class="hotel_eng">호텔영어이름</div>
@@ -117,7 +135,7 @@ xmlns:th="http://www.thymeleaf.org">
 									<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart">
 								</div>
 							</div>
-							<div class="hotel_attr" style="display: grid; justify-content:space-between;">
+							<div class="hotel_attr">
 								<div class="hotel_kr">호텔이름</div>
 								<div class="hotel_eng">호텔영어이름</div>
 								<div class="hotel_location">호텔위치</div>

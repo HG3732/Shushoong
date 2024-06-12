@@ -11,10 +11,10 @@ public class MemberDto {
 	private String userName;
 	private String userPwd;
 	private String userEmail;
-//	private String userGrade;
+	private String userGrade;
 	private String userStatus;
 	private String joinDate;
 	private Integer emailReceive;
-	private Integer msgReceivce;
+	private Integer msgReceive;
 	private String latestLogin;
 }

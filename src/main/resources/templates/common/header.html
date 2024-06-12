@@ -19,9 +19,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 				<li><a th:href="@{/airline/main}">항공</a></li>
 				<li><a th:href="@{/hotel/main}">숙소</a></li>
 				<li><a>특가</a></li>
-				<li><a th:href="@{/member/login}" sec:authorize="isAnonymous()" >로그인</a></li>
-				<li><a th:href="@{/join}" sec:authorize="isAuthenticated()" >회원가입</a></li>
-				<li><a>마이페이지</a></li>
+			</ul>
+			<ul>
+				<li><a th:href="@{/login}" sec:authorize="isAnonymous()" >로그인</a></li>
+				<li><a th:href="@{/join}" sec:authorize="isAnonymous()" >회원가입</a></li>
+				<li><a th:href="#" sec:authorize="isAuthenticated()">마이페이지</a></li>
 				<li><a th:href="@{/logout}" sec:authorize="isAuthenticated()">로그아웃</a></li>			
 			</ul>
 		</div>

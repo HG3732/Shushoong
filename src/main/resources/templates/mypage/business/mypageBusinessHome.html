@@ -1,10 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html 
+xmlns:th="http://www.thymeleaf.org">
 <head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageBusinessAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageBusinessHome.css}" rel="stylesheet" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>슈슝::마이페이지</title>
 </head>
 <body>
-
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-aside">
+				<aside>
+					<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+				</aside>
+			</div>
+			<div class="wrap-section">
+				<section>
+					<div class="section-header">
+						안녕하세요, 홍길동님!
+					</div>
+					<div class="header-content">
+						어떤 도움이 필요하신가요?
+					</div>
+					<div class="section-image">
+						<a href="#">
+							<div class="editInfo">
+								<img th:src="@{/images/정보수정.png}" alt="개인정보 수정" width="200px" height="200px">
+								<div class="tail">개인정보 수정</div>
+							</div>
+						</a>
+						<a href="#">
+							<div class="reservationHotel">
+								<img th:src="@{/images/비행기.png}" alt="호텔 확인하기" width="200px" height="200px">
+								<div class="tail">내가 찜한 숙소 보러가기</div>
+							</div>
+						</a>
+					</div>
+					<div class="payList">
+						<div class="payList-title">예약 내역</div>
+						<div class="pay-grid">
+							<div>예약날짜</div>
+							<div>예약코드</div>
+							<div>상품명</div>
+							<div>인원</div>
+							<div>출국일/귀국일</div>
+						</div>
+						<div class="pay-content">
+							<div>2020-02-02</div>
+							<div>123245798732</div>
+							<div>어디든 가요 테스트임</div>
+							<div>20명</div>
+							<div>2020-02-18 / 2020-02-08</div>
+						</div>
+						<div class="warning">※[항공] 지마켓, 11번가, 티몬, 위메프, SSG등 제휴사에서 예약하신 예약내역은 제휴사 홈페이지에서 확인 바랍니다. </div>
+						<div class="viewAllList">
+							<button type="button" class="viewList">전체보기</button>
+						</div>
+					</div>
+					<div class="onlineQnAList">
+						<div class="onlineQnAList-title">문의 내역</div>
+						<div class="QnA-grid">
+							<div>문의내용</div>
+							<div>문의날짜</div>
+						</div>
+						<div class="QnA-content">
+							<div>결제가 이상하게 되다못해 100만원 받았어요</div>
+							<div>2020-08-09</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
 </body>
 </html>

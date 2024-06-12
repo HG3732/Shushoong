@@ -31,13 +31,12 @@ public class MemberSecurityService implements UserDetailsService {
 		}
 		
 		MemberDto loginDto = loginDtoOp.get();
-		System.out.println(loginDto);
 		List<GrantedAuthority> authorities = new ArrayList<>();
-//		switch(loginDto.getUserGrade()) {
-//		case "00" : authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
-//		case "01": authorities.add(new SimpleGrantedAuthority(MemberRole.CUSTOMER.getValue()));
-//		case "1":authorities.add(new SimpleGrantedAuthority(MemberRole.BUSINESS.getValue()));
-//		}
+		switch(loginDto.getUserGrade()) {
+		case "admin" : authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
+		case "customer": authorities.add(new SimpleGrantedAuthority(MemberRole.CUSTOMER.getValue()));
+		case "business":authorities.add(new SimpleGrantedAuthority(MemberRole.BUSINESS.getValue()));
+		}
 		
 		return new User(loginDto.getUserId(), loginDto.getUserPwd(), authorities);
 	}

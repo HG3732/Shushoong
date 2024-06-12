@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,9 +13,19 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import kh.mclass.shushoong.config.AuthSuccessHandler;
+import kh.mclass.shushoong.config.AuthenticationFailureHandler;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+	
+	@Autowired
+	AuthSuccessHandler authSuccessHandler;
+	
+	@Autowired
+	AuthenticationFailureHandler authFailureHandler;
+	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
@@ -29,11 +40,12 @@ public class WebSecurityConfig {
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
 				.defaultSuccessUrl("/")
-				.failureUrl("/login?error=true")
+				.successHandler(authSuccessHandler)
+				.failureHandler(authFailureHandler)
 				.usernameParameter("userId")
 				.passwordParameter("userPwd"))
 		.logout((logout) -> logout
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 				.logoutSuccessUrl("/")
 				.invalidateHttpSession(true));
 		

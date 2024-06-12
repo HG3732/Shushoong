@@ -43,21 +43,4 @@ public class MailConfig {
         properties.put("mail.smtp.starttls.enable", "true");
     	return mailSender;
     }
-    
-//    @Bean
-//    public ITemplateResolver thymeleafTemplateResolver() {
-//    	ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-//    	templateResolver.setPrefix(mailTemplatesPath);
-//    	templateResolver.setSuffix(".html");
-//        templateResolver.setTemplateMode("HTML");
-//        templateResolver.setCharacterEncoding("UTF-8");
-//        return templateResolver;
-//    }
-//    
-//    @Bean
-//    public SpringTemplateEngine thymeleafTemplateEngine()  {
-//    	SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-//    	templateEngine.setTemplateResolver(thymeleafTemplateResolver());
-//    	return templateEngine;
-//    }
 }

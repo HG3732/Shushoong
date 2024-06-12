@@ -43,10 +43,9 @@ public class EmailService {
 	
 	private final JavaMailSender mailSender;
 	private final VerificationCodeRepository verificationCodeRepository;
-//	TODO [yrkim] private final SpringTemplateEngine templateEngine;
+	private final SpringTemplateEngine templateEngine;
 	
 	
-	// 인증고유시간 설정
 	public void sendSimpleVerificationMail(String to, LocalDateTime sentAt) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(serviceEmail);
@@ -115,8 +114,8 @@ public class EmailService {
 		String subject = String.format(VERIFICATION_CODE_MAIL_SUBJECT, to);
 		Context thymeleafContext = new Context();
 		thymeleafContext.setVariables(templateModel);
-// TODO [yrkim]		String htmlBody = templateEngine.process("/member/mail/mailTemplate.html", thymeleafContext);
-		String htmlBody = "/member/mail/mailTemplate.html";
+		String htmlBody = templateEngine.process("/member/mail/mailTemplate.html", thymeleafContext);
+//		String htmlBody = "/member/mail/mailTemplate.html";
 		
 		sendHtmlMessage(to, subject, htmlBody);
 	}

@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AspectLogConfig {
 
 	@Pointcut("execution(public * kh.mclass..*Repository.*(..))")
+	//proxy 걸고 싶은 것을 pointcut 으로 설정 --> repository 를 잠깐 납치해서 밑에서 repository 에 있는 정보(메소드나 다른것들..)를 보여줌
 	public void daoPointcut() {}
 	
 	@Pointcut("execution(public * kh.mclass..*Service.*(..))")
@@ -42,10 +43,14 @@ public class AspectLogConfig {
 		stopwatch.start();
 		// pjp.proceed() : 타겟메소드 호출함
 		returnObj = pjp.proceed();
+		//원래 하려던 메소드 진행해라 --> 메소드 실행하라고 허가하는 것
 		stopwatch.stop();
 		log.debug("▷▷▷[Dao ▷ "+stopwatch.getTotalTimeMillis()+"ms]"+returnObj);
 		return returnObj;
+		//return 된 값은 pointcut 에 걸려있는 내용물 그 자체이며 그 안에 있는 메소드가 실행되거나 그런것은 아님. 말 그대로 정보 그 자체.
+		//return을 통해 다시 본 제자리로 돌아가서 실행됨. 납치한 얘를 다시 그 자리에 돌려놓아서 원래 있던 자리에서 다시 실행되도록 함
 	}
+	
 	@Around("servicePointcut()")
 	public Object aroundServiceLog(ProceedingJoinPoint pjp) throws Throwable {
 		Object returnObj = null;

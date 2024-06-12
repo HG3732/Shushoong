@@ -113,7 +113,7 @@ xmlns:th="http://www.thymeleaf.org">
 					</table>
 
 				<!-- 요청사항 -->
-				<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">요청사항</p>
+				<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF'; margin-bottom: 10px;">요청사항</p>
 				<hr style="border: 2px solid #006AFF; margin-top: 5px;"></hr>
 				<div class="require_check">
 					<div class="single">
@@ -248,7 +248,7 @@ xmlns:th="http://www.thymeleaf.org">
 					</div>
 					
 					<div class="marketing">
-						<p class="marketing_info">마케팅 수신동의</p>
+						<p class="class_info">마케팅 수신동의</p>
 						<p class="option" style="color: blue;">(선택)</p>
 						<div class="radio_wrap">
 							<input type="radio" name="policy_5" value="agree" id="radio_agree5" class="agree_radio">
@@ -269,11 +269,43 @@ xmlns:th="http://www.thymeleaf.org">
 						sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
 						Aldus PageMaker including versions of Lorem Ipsum.
 					</div>
-					
-					
 				</div>
-
-
+				
+				<div class="paycheck">
+					<p style="font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">결제 상세 내역</p>
+				</div>
+				<hr style="border: 2px solid #006AFF; margin-top: 5px; margin-bottom: 0;"></hr>
+				<div class="paycheck_wrap">
+					<div class="paycheck_info">
+						<div class="total_cost">
+							<div class="how_much">총 상품 금액</div>
+							<div class="total_num"><strong style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">734,100</strong>원</div>
+						</div>
+						<div class="headcount_exchange">
+							<div class="headcount">성인 2, 아동 0</div>
+							<div class="exchange">JPY(83,953)</div>
+						</div>
+						<div class="mileage_wrap">
+							<p style="font-size: var(--font4);">마일리지</p>
+							<button type="button" class="use_all">전액사용</button>
+							<input type="text">
+							<p style="font-size: var(--font4);">원</p>
+						</div>
+						<div class="left">
+							<p>잔액: 1000원</p>
+						</div>
+						<div class="exchange_info">
+							<div class="apply_exchange">* 적용 환율 JPY=8.8301(2024.05.23) 기준</div>
+							<div class="mileage_save">슈슝투어 마일리지 741 적립</div>
+							<div class="mileage_guide">호텔은 대표 투숙객1인 에게 마일리지 적립이 됩니다.</div>
+						</div>						
+					</div>
+				</div>
+				
+				<!-- 결제하기 버튼 -->
+				<div class="pay_button">
+					<button type="button" class="final_pay">734,100 결제하기</button>
+				</div>
 				
 				
 <!-- 				<div class="reserve_info">
@@ -308,10 +340,8 @@ function loadedHandler(){
 	
 	$('#check1').on("click", allAgreeCheckHandler);
 	$('.arrow').on("click", arrowDownClickHandler);
-	$('.agree_radio')
+	$('input[type=radio]').on("click", checkAllEscHandler);
 }
-
-
 
 </script>
 <script th:src="@{/js/hotel/hotel_pay.js}"

@@ -23,7 +23,27 @@ function allAgreeCheckHandler(){
 	if(this.checked) {
 			$('.agree_radio').prop('checked', true);
 		} else {
-			$('.agree_radio').prop('checked', false);
+			$('.disagree_radio').prop('checked', true);
 		}
-	
+
 }
+
+/*동의합니다 개별 체크 다 누를 시 전체동의 선택되게 하기*/
+function checkAllEscHandler(){
+	console.log(this);
+	
+	if(this.checked){
+		$('#check1').prop('checked', false);
+	}
+	
+	var checkEsc = document.querySelectorAll('.agree_radio:checked');
+	console.log(checkEsc.length);
+	
+	if(checkEsc.length == 5) {
+		$('#check1').prop('checked', true);
+	} else {
+		$('#check1').prop('checked', false);
+	}
+}
+
+

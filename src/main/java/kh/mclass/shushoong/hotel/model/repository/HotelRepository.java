@@ -12,7 +12,7 @@ import kh.mclass.shushoong.hotel.model.domain.HotelSearchDtoRes;
 @Mapper
 public interface HotelRepository {
 	
-	public List<HotelDtoRes> selectAllHotelList(String code, String people);
+	public List<HotelDtoRes> selectAllHotelList(String code, String people, String keyword, String maxPrice, String sortBy, String sortTo);
 	
 	public List<HotelPic> selectHotelPicList(String hotelCode);
 	

@@ -26,17 +26,34 @@ public class HotelController {
 		return "hotel/hotel_main";
 	}
 	
+	//main에서 지역, 인원 검색 시 호텔 리스트 표시
 	@GetMapping("/hotel/list")
 	public String hotelList(Model model, String loc, String room, String adult, String child) {
 		Integer child1 = Integer.parseInt(child)/2;
 		Integer adult1 = Integer.parseInt(adult);
 		String people = String.valueOf(child1+adult1);
-		List<HotelDtoRes> result = service.selectAllHotelList(loc, people);
+		List<HotelDtoRes> result = service.selectAllHotelList(loc, people, null, null, "price", "asc");
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 		model.addAttribute("hotelList", result);
 		return "hotel/hotel_list";
+	}
+	
+	//list에서 세부 조건, 정렬 조건 선택 시 조건에 맞게 리스트 정렬
+	@GetMapping("/hotel/list/sort.ajax")
+	@ResponseBody
+	public List<HotelDtoRes> hotelListSort(
+			String loccode,
+			String people,
+			String keyword,
+			String maxPrice,
+			String sortBy,
+			String sortTo
+			) {
+		
+		List<HotelDtoRes> result = service.selectAllHotelList(loccode, people, keyword, maxPrice, sortBy, sortTo);
+		return null;
 	}
 	
 	@GetMapping("/hotel/view")

@@ -1,4 +1,4 @@
-package kh.mclass.shushoong.hotel.model.service;
+ package kh.mclass.shushoong.hotel.model.service;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ public class HotelService {
 
 	private final HotelRepository hotelRepository;
 	
-	public List<HotelDtoRes> selectAllHotelList(String loc, String people) {
-		return hotelRepository.selectAllHotelList(loc, people);
+	public List<HotelDtoRes> selectAllHotelList(String loc, String people, String keyword, String maxPrice, String sortBy, String sortTo) {
+		return hotelRepository.selectAllHotelList(loc, people, keyword, maxPrice, sortBy, sortTo);
 	}
 	
 	public List<HotelPic> selectPicList(String hotelCode) {
@@ -33,6 +33,5 @@ public class HotelService {
 	public List<HotelSearchDtoRes> selectHotelSearchList(String hotelCode) {
 		return hotelRepository.selectHotelSearchList(hotelCode);
 	}
-
 
 }

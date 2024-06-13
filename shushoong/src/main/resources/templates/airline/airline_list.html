@@ -44,8 +44,9 @@
 									<div>출발</div>
 									<div class="multi-range-slider">
 										<!-- 진짜 슬라이더 -->
-										<input type="range" id="depart-input-left" min="0" max="22" value="0" /> 
-										<input type="range" id="depart-input-right" min="2" max="23" value="23" />
+										<input type="range" id="depart-input-left" min="0" max="22"
+											value="0" /> <input type="range" id="depart-input-right"
+											min="2" max="23" value="23" />
 
 										<!-- 커스텀 슬라이더 -->
 										<div class="slider depart">
@@ -65,8 +66,9 @@
 									<div>도착</div>
 									<div class="multi-range-slider">
 										<!-- 진짜 슬라이더 -->
-										<input type="range" id="arr-input-left" min="0" max="22" value="0" /> 
-										<input type="range" id="arr-input-right" min="2" max="23" value="23" />
+										<input type="range" id="arr-input-left" min="0" max="22"
+											value="0" /> <input type="range" id="arr-input-right"
+											min="2" max="23" value="23" />
 
 										<!-- 커스텀 슬라이더 -->
 										<div class="slider arr">
@@ -112,23 +114,25 @@
 							</form>
 						</div>
 						<div class="layover-list">
-							<form class="layover-frm">
 								<div>
 									<p>직항/경유</p>
 								</div>
 								<div class="layover-select">
 									<label>
-										<button type="button" class="direct-btn zero" id="direct-btn">
+										<button type="button" class="direct-btn zero" id="direct-btn" value="direct">
 											<img alt="" th:src="@{/images/bluecheck.png}" id="blue-direct"> 
 											<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-direct">
 										</button> <span>직항</span>
-									</label> <label>
-										<button type="button" class="direct-btn one" id="layover-btn">
-											<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-layover">
+									</label> 
+									<label>
+										<button type="button" class="direct-btn one" id="layover-btn" value="layover">
+											<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-layover"> 
 											<img alt="" th:src="@{/images/bluecheck.png}" id="blue-layover">
 										</button> <span>경유</span>
 									</label>
 								</div>
+							<form class="layover-frm" hidden>
+								<input type="hidden" id="viaType" name="viaType">
 							</form>
 
 						</div>
@@ -138,7 +142,7 @@
 						<div class="select-bar">
 							<form action="#" id="frm-select">
 								<select name="selectlist" id="showlist">
-								<!-- 
+									<!-- 
 									<option value="price-cheap">가격 낮은 순</option>
 									<option value="price-expensive">가격 높은 순</option>
 									 -->
@@ -161,10 +165,18 @@
 							</p>
 						</div>
 
+							<div hidden th:each="air : ${airlineData}" >
+								<div hidden="">
+									<span th:text="${air.departLoc}" id="select-info-departLoc-out" name="departLoc-out"></span> 
+									<span th:text="${air.arrivalLoc}" id="select-info-arrivalLoc-out" name="arrivalLoc-out"></span> 
+									<span th:text="${air.airlineCode}" id="select-info-airlineCode-out" name="airlineCode-out"></span>
+								</div>
+							</div>
+								
 						<div class="airline-info-container">
 							<form id="frm-return" hidden>
-								<input type="hidden" id="departLoc" name="departLoc">
-								<input type="hidden" id="arrivalLoc" name="arrivalLoc">
+								<input type="hidden" id="departLoc" name="departLoc"> 
+								<input type="hidden" id="arrivalLoc" name="arrivalLoc"> 
 								<input type="hidden" id="airlineCode" name="airlineCode">
 							</form>
 							<div th:each="air : ${airlineData}" class="airline-info">
@@ -270,18 +282,8 @@
 									</div>
 
 								</div>
-								<!-- <div class="airlineReturn-container"></div> -->
 							</div>
-
-							<!-- <div class="select-airplane return" hidden>
-								<p>
-									<span th:text="${airlineData[0].departLoc}"></span>행 항공편을
-									선택하세요
-								</p>
-							 -->
 						</div>
-
-
 					</div>
 				</div>
 			</div>
@@ -303,8 +305,7 @@
 			btnClickHandler(); // 직항/경유
 			clickedTicketInfo(); // 티켓 상세 정보
 			clickedShowReturnBtn(); // 왕복 항공편
-			getSideTime(); // 사이드바 시간 에이작스
-			// getSelectList(); // 셀렉트 리스트
+			getSelectOptions(); // 목록 정렬 
 			 
 		};
 	</script>
@@ -319,13 +320,7 @@
 	<!-- 왕복 항공편 -->
 	<!-- <script th:src="@{/js/airline/list-return-ajax.js}" type="text/javascript"></script> -->
 	<script th:src="@{/js/airline/list-return.js}" type="text/javascript"></script>
-	<!-- 사이드바 시간 -->
-	<script th:src="@{/js/airline/list-side-time.js}" type="text/javascript"></script>
-	<!-- 셀렉트 리스트 --> 
-	<!-- <script th:src="@{/js/airline/list-select.js}" type="text/javascript"></script>  -->
-	<script>
-		
-	</script>
-
+	<!-- 목록 정렬 -->
+	<script th:src="@{/js/airline/list-select-options.js}" type="text/javascript"></script>
 </body>
 </html>

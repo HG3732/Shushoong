@@ -12,10 +12,6 @@ xmlns:th="http://www.thymeleaf.org">
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	
-	<!-- 구글맵스 API -->
-	<script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoo40WSHtW0JekF2N6b0Tm1DHbifYiSOg&loading=async&callback=initMap"></script>
-	
 <meta charset="UTF-8">
 <title>호텔 목록</title>
 </head>
@@ -40,6 +36,10 @@ xmlns:th="http://www.thymeleaf.org">
 					</div>
 				</div>
 				<div class="category">
+					<div class="word_search">
+						<input type="text" class="type_hotel" name="hotel_name"/>
+						<button type="button" class="btn_search">검색</button>
+					</div>
 					<div class="select">
 						<select name="search" class="sort sort-by" id="hotel_select" style="width:80px; height:30px; border-radius:10px;">
 							 <option value="price" selected>가격</option>
@@ -52,42 +52,34 @@ xmlns:th="http://www.thymeleaf.org">
 						</select>
 					</div>
 				</div>
-				<div class="container">
+
 				
-					<!-- aside 부분 -->
-					<form>
+				<div class="container">
+					<!-- aside 부분 - 슬라이드바 -->
 						<div class="sidebar">
-							<div class="search">
-								<div class="word_search">
-									<p style="margin-bottom: 10px; font-size: var(--font2); font-family: 'SOYOMapleRegularTTF';">검색</p>
-									<input type="text" class="type_hotel" name="hotel_name" style="border: 1px solid #006AFF; border-radius: 10px; width: 160px; height: 25px;"/>
-								</div>
-							</div>
-							
-							<!-- 슬라이드 바 -->
 							 <p style="font-size: var(--font2); margin-bottom: 20px; font-family: 'SOYOMapleRegularTTF';">가격</p>
-							 <div class="price-slider">
-							     <div class="multi-range-slider">
-							         <!-- 진짜 슬라이더 -->
-							         <!-- <input type="range" id="input-left" min="0" max="100" value="1" /> -->
-							         <input type="range" id="input-right" min="0" max="100" value="100" />
-							
-							         <!-- 커스텀 슬라이더 -->
-							         <div class="slider">
-							             <div class="track"></div>
-							             <div class="range"></div>
-							             <!-- <div class="circle left"></div> -->
-							             <div class="circle right"></div>
-							         </div>
-							         <div class="circle price">
-							          <div class="price1">0</div>
-							          <div class="price2">가격2</div>
-							         </div>
-							     </div>
-							 </div>
-						<button type="button" class="btn_search">검색하기</button>
+							 <form>
+								 <div class="price-slider">
+								     <div class="multi-range-slider">
+								         <!-- 진짜 슬라이더 -->
+								         <!-- <input type="range" id="input-left" min="0" max="100" value="1" /> -->
+								         <input type="range" id="input-right" min="0" max="100" value="100" />
+								
+								         <!-- 커스텀 슬라이더 -->
+								         <div class="slider">
+								             <div class="track"></div>
+								             <div class="range"></div>
+								             <!-- <div class="circle left"></div> -->
+								             <div class="circle right"></div>
+								         </div>
+								         <div class="circle price">
+								          <div class="price1">0</div>
+								          <div class="price2">가격2</div>
+								         </div>
+								     </div>
+								 </div>
+							</form>
 						</div>
-					</form>
 					
 					
 					<!-- section 부분 -->

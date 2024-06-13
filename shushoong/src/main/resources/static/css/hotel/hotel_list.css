@@ -9,65 +9,67 @@
 	width: 960px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    
+    margin-top: 20px;
 }
 
-.select{
-	margin-left: 700px;
+.word_search{
+	font-size: var(--font2);
+	margin-right: 50px;
 }
+
+.type_hotel{
+	border: 1px solid #006AFF; 
+	border-radius: 10px; 
+	width: 160px;
+	height: 25px;
+}
+
+.type_hotel:focus {
+	border: 3px solid #006AFF;
+	outline: none;
+	
+}
+
+.btn_search{
+	background-color: var(--color_blue_2);
+	border-radius: 20px;
+	border: none;
+	width: 50px;
+	height: 25px;
+
+}
+
+.btn_search:hover{
+	background-color: var(--color_blue_1);
+	border-radius: 20px;
+	border: none;
+	color: white;
+	cursor: pointer;
+	width: 5s0px;
+	height: 25px;
+ 	font-family: 'SOYOMapleBoldTTF';
+}
+
 
 .container {
 	width: 960px;
     margin: 0 auto;
     display: flex;
+    
+    margin-top: 50px;
 }
 
+/* 양방향 레인지 바 */
 
 .sidebar {
     flex: 1;
     box-sizing: border-box;
+    margin-top: 50px;
 }
-
-.search{
-	margin-top: 100px;
-}
-
-.word_search{
-	font-size: var(--font2);
-	margin-bottom: 40px
-}
-
-.type_hotel:focus {
-	border: 2px solid #006AFF;
-	outline: none;
-	
-}
-
-
-.btn_search{
-	background-color: var(--color_blue_2);
-	border-radius: 23px;
-	border: none;
-	width:160px;
-	height: 25px;
-	
-	margin-top: 20px;
-}
-
-.btn_search:hover{
-	background-color: var(--color_blue_1);
-	border-radius: 23px;
-	border: none;
-	color: white;
-	cursor: pointer;
-	width:160px;
-	height: 25px;
-	font-family: 'SOYOMapleBoldTTF';
-	
-	margin-top: 20px;
-}
-
-
-/* 양방향 레인지 바 */
 
 .price-slider-range {
 	position: relative;

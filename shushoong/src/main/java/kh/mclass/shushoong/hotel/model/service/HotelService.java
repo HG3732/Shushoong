@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelPic;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelSearchDtoRes;
 import kh.mclass.shushoong.hotel.model.repository.HotelRepository;
@@ -32,6 +33,10 @@ public class HotelService {
 	
 	public List<HotelSearchDtoRes> selectHotelSearchList(String hotelCode) {
 		return hotelRepository.selectHotelSearchList(hotelCode);
+	}
+	
+	public List<HotelFacilityDtoRes> selectHotelFacility(String hotelCode) {
+		return hotelRepository.selectHotelFacility(hotelCode);
 	}
 
 }

@@ -19,7 +19,7 @@ xmlns:th="http://www.thymeleaf.org">
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoo40WSHtW0JekF2N6b0Tm1DHbifYiSOg&loading=async&callback=initMap"></script>
 	
 <meta charset="UTF-8">
-<title>슈슝</title>
+<title>호텔 상세페이지</title>
 </head>
 <body  onload="initialize()">
 
@@ -165,9 +165,9 @@ xmlns:th="http://www.thymeleaf.org">
 							<div class="section">
 								<div class="hotel_facility">편의시설</div>
 								<div class="hotel_facility_write">
-									<div class="wifi">
+									<div class="wifi" th:each="facility : ${facilitylist}">
 										<img th:src="@{/images/wifi.png}" class="wifi_img" alt="무선인터넷" style="width:15px;">
-										<p style="margin-left: 10px;">와이파이</p>
+										<p style="margin-left: 10px;" th:text="${facility.hotelFacCat}">와이파이</p>
 									</div>
 									<div class="parking">
 										<img th:src="@{/images/parking.png}" class="parking_img" alt="주차장" style="width:15px;">

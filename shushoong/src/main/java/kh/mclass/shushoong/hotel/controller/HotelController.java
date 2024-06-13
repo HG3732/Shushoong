@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
 
@@ -19,7 +20,6 @@ public class HotelController {
 
 	@Autowired
 	private HotelService service;
-	private HotelDtoRes hotelDtoRes;
 	
 	@GetMapping("/hotel/main")
 	public String hotelMain() {
@@ -81,6 +81,7 @@ public class HotelController {
 				break;
 			}
 		}
+
 		
 		//방 속성 경우의 수 나누기
 		for(int i = 0; i < result.size(); i++) {
@@ -104,6 +105,10 @@ public class HotelController {
 		model.addAttribute("piclist", service.selectPicList("2OS001"));
 		//model.addAttribute("dtolist", service.selectAllHotelList("2OS001")); 
 		model.addAttribute("hotelSearchlist", service.selectHotelSearchList("2OS001")); 
+		
+		//편의시설
+		List<HotelFacilityDtoRes> fcresult = service.selectHotelFacility("2OS001");
+		model.addAttribute("facilitylist", fcresult);
 		
 		return "hotel/hotel_view";
 	}

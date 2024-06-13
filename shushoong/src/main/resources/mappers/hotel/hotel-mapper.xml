@@ -55,4 +55,10 @@
 	<select id="selectHotelSearchList" parameterType="String" resultType="HotelSearchDtoRes">
 		select hotel_name, hotel_eng, hotel_address, hotel_call, hotel_check_in, hotel_check_out, hotel_policy, hotel_intro from hotel where hotel_code = #{hotelCode}
 	</select>
+	
+	<!-- 편의시설 -->
+	<select id="selectHotelFacility" parameterType="String" resultType="HotelFacilityDtoRes">
+		select * from hotel_facility where hotel_code = #{hotelCode}
+	</select>
+	
 </mapper>

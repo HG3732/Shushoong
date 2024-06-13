@@ -84,14 +84,19 @@ public class HotelController {
 		
 		//방 속성 경우의 수 나누기
 		for(int i = 0; i < result.size(); i++) {
-			if(result.get(i).getRoomAtt().equals("0")) {
+			switch(result.get(i).getRoomAtt()) {
+			case "0":
 				result.get(i).setRoomAtt("뷰 없음");
-			} else if(result.get(i).getRoomAtt().equals("1")) {
+				break;
+			case "1":
 				result.get(i).setRoomAtt("오션뷰");
-			} else if(result.get(i).getRoomAtt().equals("2")) {
-				result.get(i).setRoomAtt("마운틴뷰"); 
-			} else {
+				break;
+			case "2":
+				result.get(i).setRoomAtt("마운틴뷰");
+				break;
+			default:
 				result.get(i).setRoomAtt("시티뷰");
+				break;			
 			}
 		}
 		model.addAttribute("roomlist", result);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -168,5 +169,10 @@ public class HotelController {
 	public String hotelPay() {
 		return "hotel/hotel_pay";
 	}
-	
+
+	//지역, 인원수 선택 안한채로 hotel_list를 url에 직접 입력하여 진입할 경우 예외처리  
+	@ExceptionHandler(Exception.class)
+	public String ExceptionHandler() {
+		return "hotel/hotel_main";
+	}
 }

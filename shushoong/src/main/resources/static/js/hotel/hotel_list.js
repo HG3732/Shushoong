@@ -106,7 +106,6 @@ function sortHandler() {
 	})
 	//success함수 대체
 	.done(function(response){
-		console.log('Ajax Success');
 		$("#hotellistsection").replaceWith(response);
 		//updateHotelList(response);
 	});
@@ -115,33 +114,7 @@ function sortHandler() {
 //호텔 이름 키워드 검색
 function searchHandler() {
 	prekeyword = $('.type_hotel').val();
-	$.ajax({
-		url: "/shushoong/hotel/list/search.ajax",
-		method: "get",
-		data: {
-			loccode : preloccode,
-			people : prepeople,
-			keyword : prekeyword,
-			maxPrice : maxPrice,
-			sortBy : presortBy,
-			sortTo : presortTo
-		},
-		dataType: 'json',
-		success: function(response) {
-				console.log('Ajax Success');
-				updateHotelList(response);
-				},
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
-		
-	});
-}
-
-// 호텔 가격(슬라이드바) 검색
-function priceHandler() {
-	maxPrice = $('#input-right').val();
-	console.log(maxPrice);
+	console.log(prekeyword);
 	$.ajax({
 		url: "/shushoong/hotel/list/sort.ajax",
 		method: "get",
@@ -153,48 +126,40 @@ function priceHandler() {
 			sortBy : presortBy,
 			sortTo : presortTo
 		},
-		dataType: 'json',
-		success: function(response) {
-				console.log('Ajax Success');
-				updateHotelList(response);
-				},
 		error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
 			}
-		
+	}).done(function(response){
+		$("#hotellistsection").replaceWith(response);
+	});;
+}
+//엔터키 눌렀을 때 키워드 검색버튼 클릭
+function enterkey() {
+        if(window.event.keyCode == 13) {
+ 
+             $(".btn_search").click();
+        }
+}
+
+// 호텔 가격(슬라이드바) 검색
+function priceHandler() {
+	maxPrice = $('#input-right').val();
+	$.ajax({
+		url: "/shushoong/hotel/list/sort.ajax",
+		method: "get",
+		data: {
+			loccode : preloccode,
+			people : prepeople,
+			keyword : prekeyword,
+			maxPrice : maxPrice,
+			sortBy : presortBy,
+			sortTo : presortTo
+		},
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	}).done(function(response){
+		$("#hotellistsection").replaceWith(response);
 	});
 }
 
-function updateHotelList(data) {
-	//기존 리스트 제거
-	$('.hotel').empty();
-	
-	let newList = '';
-	console.log(data);
-	if(data == ''){
-		newList += `<div class="isEmpty">
-				조건에 맞는 호텔이 없습니다.
-			</div>`
-	} else {
-	data.forEach(function(list){
-		newList += `<div class="hotel_list">
-							<div class="hotel_pic" style="background-image: url('${list.hotelPic}'); background-size: cover;'">
-								<div class="hotel_like">
-									<img src="/shushoong/images/heart.png" alt="좋아요" style="width:40px;" class="heart">
-								</div>
-							</div>
-							<div class="hotel_attr">
-								<div class="hotel_kr">${list.hotelName}</div>
-								<div class="hotel_eng">${list.hotelEng}</div>
-								<div class="hotel_location">${list.hotelAddress}</div>
-								<div class="hotel_review">
-									<span><img src="/shushoong/images/star_line.png" alt="별" style="width:20px;" class="heart"></span>
-									<span>${list.hotelScore}/5</span>
-								</div>
-							</div>
-							<div class="hotel_price">${list.hotelPrice}원</div>
-						</div>`
-		});
-	}
-	$('.hotel').html(newList);
-}

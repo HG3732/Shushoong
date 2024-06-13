@@ -113,10 +113,9 @@ section .on {
 }
 
 section .textline {
-	width: 250px;
+	width: 200px;
 	height: 30px;
 	border : none;
-	border-bottom: 1px solid #BCEFFF;
 	font-family: SOYOMapleRegularTTF;
 	font-size: 15px;
 	text-indent: 10px;

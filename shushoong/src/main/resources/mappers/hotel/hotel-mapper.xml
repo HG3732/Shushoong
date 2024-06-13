@@ -5,7 +5,7 @@
 <!-- 검색한 호텔 리스트 띄우기 위한 SQL  -->
 	<!-- 호텔 이름, 영어이름, 주소, 최저가(인원수 고려), 사진 1장 -->
 	<select id="selectAllHotelList" parameterType="hashmap" resultType="HotelDtoRes">
-        select hotel_name, hotel_eng, hotel_address, min_price as hotel_price, room_discount, hotel_pic, NVL(score, 0) as hotel_score
+        select hotel_code, hotel_name, hotel_eng, hotel_address, min_price as hotel_price, room_discount, hotel_pic, NVL(score, 0) as hotel_score
 			from hotel join (select hotel_code, max(hotel_discount) room_discount, MIN(hotel_price) min_price from hotel_room 
         	join hotel using(hotel_code) where SUBSTR(hotel_code, 1, 3) = #{code} and room_count > 0 and room_cap = #{people} group by hotel_code) using(hotel_code)
         	join (select distinct hotel_code, first_value(hotel_picture) over (partition by hotel_code) as hotel_pic from hotel_pic) using(hotel_code)
@@ -18,7 +18,7 @@
 	        	hotel_name LIKE #{keyword2},
 	        </if>
 	        <if test="maxPrice != null and maxPrice !=''">
-	        	<!-- min_price &lt; ${maxPrice}, -->
+	        	min_price &lt; ${maxPrice},
 	        </if>
         </trim>
         <if test="sortBy != null and sortBy !='' ">
@@ -42,6 +42,21 @@
 				</when>
 			</choose>
 		</if>
+	</select>
+	
+	<!-- 호텔 최고가(슬라이드바 표시용) -->
+	<select id="selectMaxRoomlPrice" parameterType="hashmap" resultType="Integer">
+	        select max(min_price) as hotel_price
+			from hotel join (select hotel_code, max(hotel_discount) room_discount, MIN(hotel_price) min_price from hotel_room 
+        	join hotel using(hotel_code) where SUBSTR(hotel_code, 1, 3) = #{code} and room_count > 0 and room_cap = #{people} group by hotel_code) using(hotel_code)
+        	join (select distinct hotel_code, first_value(hotel_picture) over (partition by hotel_code) as hotel_pic from hotel_pic) using(hotel_code)
+        	left join (select hotel_code, ROUND((f + c + co + k)/4, 1) as score from (
+            	select hotel_code, avg(hotel_facility) f, avg(hotel_clean) c, avg(hotel_conven) co, avg(hotel_kind) k 
+            	from hotel_review join hotel h using(hotel_code) where h.hotel_loc_cat= 'OS' group by hotel_code)) using(hotel_code)
+            <if test="keyword != null and keyword !='' ">
+	        	<bind name="keyword2" value="'%' + keyword + '%'"/>
+	        	where hotel_name LIKE #{keyword2}
+	        </if>
 	</select>
 	
 	<select id="selectHotelPicList" parameterType="String" resultType="HotelPic">

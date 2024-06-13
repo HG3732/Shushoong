@@ -56,71 +56,33 @@ xmlns:th="http://www.thymeleaf.org">
 				
 				<div class="container">
 					<!-- aside 부분 - 슬라이드바 -->
-						<div class="sidebar">
-							 <p style="font-size: var(--font2); margin-bottom: 20px; font-family: 'SOYOMapleRegularTTF';">가격</p>
-							 <form>
-								 <div class="price-slider">
-								     <div class="multi-range-slider">
-								         <!-- 진짜 슬라이더 -->
-								         <!-- <input type="range" id="input-left" min="0" max="100" value="1" /> -->
-								         <input type="range" id="input-right" min="0" max="100" value="100" />
-								
-								         <!-- 커스텀 슬라이더 -->
-								         <div class="slider">
-								             <div class="track"></div>
-								             <div class="range"></div>
-								             <!-- <div class="circle left"></div> -->
-								             <div class="circle right"></div>
-								         </div>
-								         <div class="circle price">
-								          <div class="price1">0</div>
-								          <div class="price2">가격2</div>
-								         </div>
-								     </div>
-								 </div>
-							</form>
-						</div>
-					
+					<div class="sidebar">
+						 <p style="font-size: var(--font2); margin-bottom: 20px; font-family: 'SOYOMapleRegularTTF';">가격</p>
+						 <form>
+							 <div class="price-slider">
+							     <div class="multi-range-slider">
+							         <!-- 진짜 슬라이더 -->
+							         <!-- <input type="range" id="input-left" min="0" max="100" value="1" /> -->
+							         <input type="range" id="input-right" min="0" max="100" value="100" />
+							
+							         <!-- 커스텀 슬라이더 -->
+							         <div class="slider">
+							             <div class="track"></div>
+							             <div class="range"></div>
+							             <!-- <div class="circle left"></div> -->
+							             <div class="circle right"></div>
+							         </div>
+							         <div class="circle price">
+							          <div class="price1">0</div>
+							          <div class="price2">가격2</div>
+							         </div>
+							     </div>
+							 </div>
+						</form>
+					</div>
 					
 					<!-- section 부분 -->
-					<div class="hotel">
-						<div class="hotel_list" th:each="hotellist : ${hotelList}">
-							<div class="hotel_pic" th:style="'background-image: url(' + ${hotellist.hotelPic} + '); background-size: cover;'">
-								<div class="hotel_like">
-									<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart">
-								</div>
-							</div>
-							<div class="hotel_attr">
-								<div class="hotel_kr" th:text="${hotellist.hotelName}"></div>
-								<div class="hotel_eng" th:text="${hotellist.hotelEng}"></div>
-								<div class="hotel_location" th:text="${hotellist.hotelAddress}"></div>
-								<div class="hotel_review">
-									<span><img th:src="@{/images/star_line.png}" alt="별" style="width:20px;" class="heart"></span>
-									<span th:text="${hotellist.hotelScore} + '/5'"></span>
-								</div>
-							</div>
-							<div class="hotel_price" th:text="${hotellist.hotelPrice} + '원'"></div>
-						</div>
-						
-<!-- 						<div class="hotel_list">
-							<div class="hotel_pic">
-								<div class="hotel_like">
-									<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart">
-								</div>
-							</div>
-							<div class="hotel_attr">
-								<div class="hotel_hot">HOT</div>
-								<div class="hotel_kr">호텔이름</div>
-								<div class="hotel_eng">호텔영어이름</div>
-								<div class="hotel_location">호텔위치</div>
-								<div class="hotel_review">
-									<span><img th:src="@{/images/star_line.png}" alt="별" style="width:20px;" class="heart"></span>
-									<span>3.5/5</span>
-								</div>
-							</div>
-							<div class="hotel_price">190,000원~</div>
-						</div> -->
-					</div>
+					<div th:replace="~{hotel/hotel_list_section :: hotellistsection}"></div>
 				</div>
 			</div>
 		</div>
@@ -143,9 +105,15 @@ var presortTo = null;
 $(loadedHandler);
 
 function loadedHandler(){
-	//좋아요 버튼
-	$(".hotel_like").on("click", likeHandler);
+	//좋아요 버튼 -- inline html onclick 
+	//$(".hotel_like").on("click", likeHandler);
+	
+	//리스트 정렬
 	$('.sort').on('change', sortHandler);
+	//리스트 내 키워드 검색
+	$('.btn_search').on('click', searchHandler);
+	//가격(슬라이드바)으로 조회
+	$('#input-right').on('click', priceHandler);
 };
 </script>
 <script th:src="@{/js/hotel/hotel_list.js}"

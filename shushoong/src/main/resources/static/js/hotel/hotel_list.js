@@ -1,20 +1,20 @@
 //좋아요 누를 시 색깔 변함
-function likeHandler(){
+function likeHandler(thisElement){
+	console.log(thisElement);	//이벤트 함수가 걸린 태그
+	console.log(event.target);	//마우스 클릭 시 제일 가까운 요소 (하트 사진 누르면 하트 사진 뜨는....)
 	
-
-	console.log(this);
-		var currentSrc = $(this).children().attr('src');
-		
-		console.log("현재 소스값" + currentSrc);
-		/* 이 경로를 토대로 이미지 바뀌는 경우의 수 적어주기 */
-		
-		if( currentSrc === '/shushoong/images/heart.png'){
-			$(this).children().attr("src", "/shushoong/images/heart_color.png");
-			/* console 창에 결과나온거 보면 흰색  하트 img src 경로 보이는데 그 경로 토대로 작성 */
-		} else {
-			$(this).children().attr("src", "/shushoong/images/heart.png");
-		}
+	var currentSrc = $(thisElement).children().attr('src');
+	
+	console.log("현재 소스값" + currentSrc);
+	/* 이 경로를 토대로 이미지 바뀌는 경우의 수 적어주기 */
+	
+	if( currentSrc === '/shushoong/images/heart.png'){
+		$(thisElement).children().attr("src", "/shushoong/images/heart_color.png");
+		/* console 창에 결과나온거 보면 흰색  하트 img src 경로 보이는데 그 경로 토대로 작성 */
+	} else {
+		$(thisElement).children().attr("src", "/shushoong/images/heart.png");
 	}
+}
 	
 
 /* const inputLeft = document.getElementById("input-left"); */
@@ -82,10 +82,8 @@ const setInitialValues = () => {
 // 페이지가 로드될 때 초기값 설정 함수(setInitialValues)를 호출
 window.onload = setInitialValues;
 
-//조건에 맞게 정렬
+//정렬 기준에 맞게 정렬
 function sortHandler() {
-	prekeyword = $('.type_hotel').val();
-	maxPrice = $('#input-right').val();
 	presortBy = $('.sort-by option:selected').val();
 	presortTo = $('.sort-to option:selected').val();
 	
@@ -100,9 +98,38 @@ function sortHandler() {
 			sortBy : presortBy,
 			sortTo : presortTo
 		},
+//		dataType: 'json', <-- 받아오는 데이터타입
+//		success: function () {},
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	})
+	//success함수 대체
+	.done(function(response){
+		console.log('Ajax Success');
+		$("#hotellistsection").replaceWith(response);
+		//updateHotelList(response);
+	});
+}
+
+//호텔 이름 키워드 검색
+function searchHandler() {
+	prekeyword = $('.type_hotel').val();
+	$.ajax({
+		url: "/shushoong/hotel/list/search.ajax",
+		method: "get",
+		data: {
+			loccode : preloccode,
+			people : prepeople,
+			keyword : prekeyword,
+			maxPrice : maxPrice,
+			sortBy : presortBy,
+			sortTo : presortTo
+		},
 		dataType: 'json',
 		success: function(response) {
 				console.log('Ajax Success');
+				updateHotelList(response);
 				},
 		error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
@@ -111,3 +138,63 @@ function sortHandler() {
 	});
 }
 
+// 호텔 가격(슬라이드바) 검색
+function priceHandler() {
+	maxPrice = $('#input-right').val();
+	console.log(maxPrice);
+	$.ajax({
+		url: "/shushoong/hotel/list/sort.ajax",
+		method: "get",
+		data: {
+			loccode : preloccode,
+			people : prepeople,
+			keyword : prekeyword,
+			maxPrice : maxPrice,
+			sortBy : presortBy,
+			sortTo : presortTo
+		},
+		dataType: 'json',
+		success: function(response) {
+				console.log('Ajax Success');
+				updateHotelList(response);
+				},
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+		
+	});
+}
+
+function updateHotelList(data) {
+	//기존 리스트 제거
+	$('.hotel').empty();
+	
+	let newList = '';
+	console.log(data);
+	if(data == ''){
+		newList += `<div class="isEmpty">
+				조건에 맞는 호텔이 없습니다.
+			</div>`
+	} else {
+	data.forEach(function(list){
+		newList += `<div class="hotel_list">
+							<div class="hotel_pic" style="background-image: url('${list.hotelPic}'); background-size: cover;'">
+								<div class="hotel_like">
+									<img src="/shushoong/images/heart.png" alt="좋아요" style="width:40px;" class="heart">
+								</div>
+							</div>
+							<div class="hotel_attr">
+								<div class="hotel_kr">${list.hotelName}</div>
+								<div class="hotel_eng">${list.hotelEng}</div>
+								<div class="hotel_location">${list.hotelAddress}</div>
+								<div class="hotel_review">
+									<span><img src="/shushoong/images/star_line.png" alt="별" style="width:20px;" class="heart"></span>
+									<span>${list.hotelScore}/5</span>
+								</div>
+							</div>
+							<div class="hotel_price">${list.hotelPrice}원</div>
+						</div>`
+		});
+	}
+	$('.hotel').html(newList);
+}

@@ -37,10 +37,8 @@ xmlns:th="http://www.thymeleaf.org">
 				</div>
 				<div class="category">
 					<div class="word_search">
-						<form>
-							<input type="text" class="type_hotel" name="hotel_name"/>
-							<button type="button" class="btn_search" onkeypress="enterkey();">검색</button>
-						</form>
+						<input type="text" class="type_hotel" name="hotel_name" onkeypress="return enterkey();"/>
+						<button type="button" class="btn_search" >검색</button>
 					</div>
 					<div class="select">
 						<select name="search" class="sort sort-by" id="hotel_select" style="width:80px; height:30px; border-radius:10px;">

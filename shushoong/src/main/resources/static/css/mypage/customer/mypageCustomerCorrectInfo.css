@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+input, input:focus, textarea, textarea:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
 .wrap-body {
     /* 중앙 배치 */
     width: 1440px; margin: 0 auto;
@@ -17,4 +22,152 @@
     
     display: flex;
     flex-direction: column;
+}
+
+section .section-header {
+	text-align: left;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 30px 0 20px 0;
+}
+
+section .hrline > hr {
+	border: 1px solid  #006AFF;
+}
+
+section .information-grid {
+	display: grid;
+	grid-template-columns: 3fr 5fr 3fr 5fr;
+	grid-template-rows: repeat(3,70px);
+	gap:5px;
+	
+	border:none;
+	border-top:1px solid  #006AFF;
+	border-bottom:1px solid  #006AFF;
+	text-align: center;
+	
+	margin: 20px 0 30px 0;	
+}
+
+section .information-grid > div {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	
+	&:nth-child(1),
+	&:nth-child(3),
+	&:nth-child(5),
+	&:nth-child(7),
+	&:nth-child(9),
+	&:nth-child(11) {
+		background-color:#BCEFFF;
+	}
+}
+
+section .menu {
+	font-weight: bold;
+}
+
+section .marketingsend {
+	display: flex;
+	justify-content: left;
+	flex-direction: row;
+	margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	border: none;
+	appearance: none;
+	cursor: pointer;
+	transition: background 0.2s;
+	background-color: #BCEFFF;
+}
+
+input[type="checkbox"]:checked {
+	background-image:url("../../../images/bluecheck.png");
+	background-size: 100%;
+	border: none;
+}
+
+section .smsMarketing, .emailMarketing {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+
+section .smsMarketing{
+	margin-right: 20px;
+}
+
+section .choice {
+	display: flex;
+	flex-direction: row;
+}
+
+section .on {
+	text-indent: 5px;
+}
+
+section .textline {
+	width: 250px;
+	height: 30px;
+	border : none;
+	border-bottom: 1px solid #BCEFFF;
+	font-family: SOYOMapleRegularTTF;
+	font-size: 15px;
+	text-indent: 10px;
+}
+
+section .save, .secession {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
+section .btn.save {
+	/* 스타일서식 */
+	width: 200px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	background-color: #006AFF;
+	color: white;
+	cursor:pointer;
+	font-size: 17px;
+	font-family: SOYOMapleRegularTTF;
+	font-weight: bold;
+	
+	margin-bottom: 80px;
+}
+
+section .warning.content1 {
+	color : red;
+	font-size: 13px;
+	font-weight: bold;
+	margin-bottom: 50px;
+}
+
+section .warning.content2 {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+section .btn.secession {
+	width: 200px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	background-color: red;
+	color: white;
+	cursor:pointer;
+	font-size: 17px;
+	font-family: SOYOMapleRegularTTF;
+	font-weight: bold;
+	
+	margin-bottom: 80px;
 }

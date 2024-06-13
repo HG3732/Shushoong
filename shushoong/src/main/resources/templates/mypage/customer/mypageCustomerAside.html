@@ -10,6 +10,9 @@ xmlns:th="http://www.thymeleaf.org"
 			마이페이지
 		</div>
 		<div class="aside-content">
+			<a th:href="@{/customer/my/information}">
+				<div class="correctionInfo">개인 정보 수정</div>
+			</a>
 			<div class="dropdown">
 				<button class="dropbtn1">
 					예약 내역
@@ -19,9 +22,6 @@ xmlns:th="http://www.thymeleaf.org"
 					<a href=#>숙소</a>
 				</div>
 			</div>
-			<a href=>
-				<div class="correctionInfo">개인 정보 수정</div>
-			</a>
 			<a href=>
 				<div class="likeHotel">내가 찜한 숙소</div>
 			</a>

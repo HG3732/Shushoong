@@ -39,7 +39,6 @@ aside .dropdown {
 
 aside .dropbtn1 {
 	border: none;
-	border-top: 3px solid #006AFF;
 	border-bottom: 1px solid #006AFF;
 	background-color: white;
 	padding: 13px;
@@ -96,11 +95,20 @@ aside .dropdown:hover .dropdown-content {
 	display: block;
 }
 
-aside .correctionInfo, .reviewHotel, .likeHotel {
+aside .reviewHotel, .likeHotel {
 	font-size: 13px;
 	font-weight: bold;
 	
 	border: none;
+	border-bottom: 1px solid #006AFF;
+	padding: 13px;
+}
+
+aside .correctionInfo {
+	font-size: 13px;
+	font-weight: bold;
+	
+	border-top: 3px solid #006AFF;
 	border-bottom: 1px solid #006AFF;
 	padding: 13px;
 }

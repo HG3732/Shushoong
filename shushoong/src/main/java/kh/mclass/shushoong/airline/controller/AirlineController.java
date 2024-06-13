@@ -63,44 +63,50 @@ public class AirlineController {
 		return "airline/airline_list_return";
 	}
 	
-	// 항공 목록 사이드 바
-	@GetMapping("airline/list_side_time/ajax")
+	// 항공 목록 정렬 옵션
+	@GetMapping("airline/list_select_options/ajax")
 	@ResponseBody
-	public List<AirlineInfoDto> airlineSideDepartTime(
+	public List<AirlineInfoDto> airlineSelectOptions(
 			String departLoc,
 			String arrivalLoc,
 			String departTimeLeft,
 			String deaprtTimeRight,
 			String arrivalTimeLeft,
-			String arrivalTimeRight
+			String arrivalTimeRight,
+			String selectType,
+			String viaType
 			){
-		System.out.println("컨트롤러 사이드 시간대");
+		System.out.println("컨트롤러 목록 정렬");
+		System.out.println("출발지 : " + departLoc);
+		System.out.println("도착지 : " + arrivalLoc);
+		System.out.println("정렬 타입 : " + selectType);
+		System.out.println("경유 타입 : " + viaType);
 		
-		List<AirlineInfoDto> SideDepartTimeData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight);
+		List<AirlineInfoDto> SideDepartTimeData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType);
 		log.debug("컨트롤러 디버깅 : " + SideDepartTimeData);
 		
 		return SideDepartTimeData;
 	}
-	// 목록 셀렉트 바
-	@GetMapping("airline/list_select_options")
-	@ResponseBody
-	public List<AirlineInfoDto> airlineSelectType(
-			String departLoc,
-			String arrivalLoc,
-			String selectType,
-			String flightTime
-			) {
-		
-	    System.out.println("DepartLoc: " + departLoc);
-	    System.out.println("ArrivalLoc: " + arrivalLoc);
-	    System.out.println("SelectType: " + selectType);
-//	    System.out.println("TicketPrice: " + ticketPrice);
-//	    System.out.println("FlightTime: " + flightTime);
-		
-		List<AirlineInfoDto> selectTypeDto = service.getSelectTypeList(departLoc, arrivalLoc, selectType);
-		return selectTypeDto;
-	}
-
+//	
+//	// 목록 셀렉트 바
+//	@GetMapping("airline/list_select_options")
+//	@ResponseBody
+//	public List<AirlineInfoDto> airlineSelectType(
+//			String departLoc,
+//			String arrivalLoc,
+//			String selectType
+//			) {
+//		
+//	    System.out.println("DepartLoc: " + departLoc);
+//	    System.out.println("ArrivalLoc: " + arrivalLoc);
+//	    System.out.println("SelectType: " + selectType);
+////	    System.out.println("TicketPrice: " + ticketPrice);
+////	    System.out.println("FlightTime: " + flightTime);
+//		
+//		List<AirlineInfoDto> selectTypeDto = service.getSelectTypeList(departLoc, arrivalLoc, selectType);
+//		return selectTypeDto;
+//	}
+//
 	// 항공 메인 페이지
 	@GetMapping("/airline/main")
 	public String airlineMain() {

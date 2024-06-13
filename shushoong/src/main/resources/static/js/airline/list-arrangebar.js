@@ -19,7 +19,7 @@
 
 	    // 왼쪽 thumb의 위치를 계산하여 슬라이더의 왼쪽 값을 표시
 	    const leftValue = parseInt(_this.value);
-	    console.log("출발 시간 left.val : " + _this.value);
+	    // console.log("출발 시간 left.val : " + _this.value);
 	    
 	    const leftVal = document.querySelector(".middle-range.depart .div1");
 	    leftVal.innerHTML = `${leftValue}:00`;
@@ -38,7 +38,7 @@
 	    _this.value = Math.max(parseInt(_this.value), parseInt(inputDepartLeft.value) + 3);
 
 	    const rightValue = parseInt(_this.value);
-	    console.log("출발 시간 right.val : " + _this.value);
+	    // console.log("출발 시간 right.val : " + _this.value);
 	    
 	    const rightVal = document.querySelector(".middle-range.depart .div2");
 	    rightVal.innerHTML = `${rightValue}:59`;
@@ -82,7 +82,7 @@
 	    
 	    const leftVal = document.querySelector(".middle-range.arr .div1");
 	    leftVal.innerHTML = `${leftValue}:00`;
-	    console.log("도착 시간 left.val : " + _this.value);
+	    // console.log("도착 시간 left.val : " + _this.value);
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
 	    thumbArrLeft.style.left = percent + "%";
@@ -99,7 +99,7 @@
 	    
 	    const rightVal = document.querySelector(".middle-range.arr .div2");
 	    rightVal.innerHTML = `${rightValue}:59`;
-	    console.log("도착 시간 right.val : " + _this.value);
+	    // console.log("도착 시간 right.val : " + _this.value);
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
 	    thumbArrRight.style.right = 100 - percent + "%";
@@ -132,7 +132,7 @@
 	    
 	    const rightVal = document.querySelector(".middle-range.price .div2");
 	    rightVal.innerHTML = `${rightValue}(최댓값)원`;
-	    console.log("최댓값 : " + _this.value);
+	    // console.log("최댓값 : " + _this.value);
 	    
 	    const percent = ((_this.value - min) / (max - min)) * 100;
 	    thumbPriceRight.style.right = 100 - percent + "%";

@@ -41,9 +41,23 @@ public class HotelController {
 	}
 	
 	//list에서 세부 조건, 정렬 조건 선택 시 조건에 맞게 리스트 정렬
+//	@GetMapping("/hotel/list/sort.ajax")
+//	@ResponseBody
+//	public List<HotelDtoRes> hotelListSort(
+//			String loccode,
+//			String people,
+//			String keyword,
+//			String maxPrice,
+//			String sortBy,
+//			String sortTo
+//			) {
+//		
+//		List<HotelDtoRes> result = service.selectAllHotelList(loccode, people, keyword, maxPrice, sortBy, sortTo);
+//		return result;
+//	}
 	@GetMapping("/hotel/list/sort.ajax")
-	@ResponseBody
-	public List<HotelDtoRes> hotelListSort(
+	public String hotelListSort(
+			Model model,
 			String loccode,
 			String people,
 			String keyword,
@@ -51,9 +65,10 @@ public class HotelController {
 			String sortBy,
 			String sortTo
 			) {
-		
 		List<HotelDtoRes> result = service.selectAllHotelList(loccode, people, keyword, maxPrice, sortBy, sortTo);
-		return null;
+		//session의 이름이 39행에 있는 List와 같아야 덮어쓰기됨, 다를 경우 기존 List + 새 List 출력
+		model.addAttribute("hotelList", result);
+		return "hotel/hotel_list_section";
 	}
 	
 	@GetMapping("/hotel/view")

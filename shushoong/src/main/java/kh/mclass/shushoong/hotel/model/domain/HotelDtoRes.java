@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @Component
 public class HotelDtoRes {
+	private String hotelCode;
 	private String hotelName;
 	private String hotelEng;
 	private String hotelAddress;

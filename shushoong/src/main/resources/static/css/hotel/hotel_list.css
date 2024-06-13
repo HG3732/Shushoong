@@ -172,12 +172,12 @@ input[type="range"]::-webkit-slider-thumb {
 
 
 
-.hotel {
+.hotel_list {
 	flex: 5;
     box-sizing: border-box;
 }
 
-.hotel_list {
+.hotel {
 	width: 740px;
 	margin: 0 auto;
 	margin-bottom: 30px;

@@ -33,10 +33,12 @@ public class HotelController {
 		Integer adult1 = Integer.parseInt(adult);
 		String people = String.valueOf(child1+adult1);
 		List<HotelDtoRes> result = service.selectAllHotelList(loc, people, null, null, "price", "asc");
+		Integer maxPrice = service.selectMaxRoomlPrice(loc, people, null);
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 		model.addAttribute("hotelList", result);
+		model.addAttribute("maxPrice", maxPrice);
 		return "hotel/hotel_list";
 	}
 	
@@ -66,8 +68,10 @@ public class HotelController {
 			String sortTo
 			) {
 		List<HotelDtoRes> result = service.selectAllHotelList(loccode, people, keyword, maxPrice, sortBy, sortTo);
+		Integer maxPrice2 = service.selectMaxRoomlPrice(loccode, people, keyword);
 		//session의 이름이 39행에 있는 List와 같아야 덮어쓰기됨, 다를 경우 기존 List + 새 List 출력
 		model.addAttribute("hotelList", result);
+		model.addAttribute("maxPrice", maxPrice2);
 		return "hotel/hotel_list_section";
 	}
 	

@@ -53,12 +53,12 @@ const setRightValue = () => {
 /*     _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft.value) + 20); */
 
     // 오른쪽 thumb의 위치를 계산하여 슬라이더의 오른쪽 값을 표시
-    const rightValue = parseInt(_this.value);
-    const rightVal = document.querySelector(".price2");
-    rightVal.innerHTML = `${rightValue}`;
+    const rightValue = parseInt(_this.value);	//현재 바가 있는 곳의 위치 값
+    const rightVal = document.querySelector(".price2");	//우측 숫자 변수지정
+    rightVal.innerHTML = `${rightValue}`;	//지정한 우측 숫자를 현재 바가 있는 곳의 값으로 갱신
     const percent = ((_this.value - min) / (max - min)) * 100;
-    circleRight.style.right = 100 - percent + "%";
-    range.style.right = 100 - percent + "%";
+    circleRight.style.right = 100 - percent + "%";	// 바의 위치값
+    range.style.right = 100 - percent + "%";	//바의 길이값
 };
 
 
@@ -71,7 +71,7 @@ inputRight.addEventListener("input", setRightValue);
 const setInitialValues = () => {
     // 초기 왼쪽 값과 오른쪽 값
 /*     const initialLeftValue = 0; */
-    const initialRightValue = 100;
+    const initialRightValue = rightVal;
     // 초기값을 입력 요소에 설정하고, 왼쪽과 오른쪽 thumb의 위치를 조정
 /*     inputLeft.value = initialLeftValue; */
     inputRight.value = initialRightValue;

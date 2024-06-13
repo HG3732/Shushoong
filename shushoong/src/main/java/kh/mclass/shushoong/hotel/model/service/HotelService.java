@@ -23,6 +23,10 @@ public class HotelService {
 		return hotelRepository.selectAllHotelList(loc, people, keyword, maxPrice, sortBy, sortTo);
 	}
 	
+	public Integer selectMaxRoomlPrice(String loc, String people, String keyword) {
+		return hotelRepository.selectMaxRoomlPrice(loc, people, keyword);
+	}
+	
 	public List<HotelPic> selectPicList(String hotelCode) {
 		return hotelRepository.selectHotelPicList(hotelCode);
 	}

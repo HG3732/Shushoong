@@ -65,7 +65,7 @@ xmlns:th="http://www.thymeleaf.org">
 							     <div class="multi-range-slider">
 							         <!-- 진짜 슬라이더 -->
 							         <!-- <input type="range" id="input-left" min="0" max="100" value="1" /> -->
-							         <input type="range" id="input-right" min="0" max="100" value="100" />
+							         <input type="range" id="input-right" min="0" th:max="${maxPrice}" th:value="${maxPrice}" />
 							
 							         <!-- 커스텀 슬라이더 -->
 							         <div class="slider">
@@ -76,7 +76,7 @@ xmlns:th="http://www.thymeleaf.org">
 							         </div>
 							         <div class="circle price">
 							          <div class="price1">0</div>
-							          <div class="price2">가격2</div>
+							          <div class="price2" th:text="${maxPrice}"></div>
 							         </div>
 							     </div>
 							 </div>

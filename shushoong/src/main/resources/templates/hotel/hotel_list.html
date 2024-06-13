@@ -37,8 +37,10 @@ xmlns:th="http://www.thymeleaf.org">
 				</div>
 				<div class="category">
 					<div class="word_search">
-						<input type="text" class="type_hotel" name="hotel_name"/>
-						<button type="button" class="btn_search">검색</button>
+						<form>
+							<input type="text" class="type_hotel" name="hotel_name"/>
+							<button type="button" class="btn_search">검색</button>
+						</form>
 					</div>
 					<div class="select">
 						<select name="search" class="sort sort-by" id="hotel_select" style="width:80px; height:30px; border-radius:10px;">
@@ -145,8 +147,9 @@ $(loadedHandler);
 function loadedHandler(){
 	//좋아요 버튼
 	$(".hotel_like").on("click", likeHandler);
+	
 	$('.sort').on('change', sortHandler);
-};
+}
 </script>
 <script th:src="@{/js/hotel/hotel_list.js}"
 		type="text/javascript">

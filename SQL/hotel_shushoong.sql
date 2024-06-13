@@ -12,3 +12,9 @@ join hotel_room using(hotel_code);
 select * from hotel_facility where hotel_code='2OS001';
 
 select hotel_code, hotel_comment  from hotel_review;
+
+--호텔이름으로 검색
+select * from hotel where hotel_name like '%${hotelName}%'; --mybatis용
+select * from hotel where hotel_name like '%호텔%';
+
+select * from hotel where hotel_name like '%호텔%';

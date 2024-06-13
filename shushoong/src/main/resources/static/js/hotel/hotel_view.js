@@ -1,29 +1,9 @@
 /*===========방 전체부기 눌렀을 때 나머지 방들 출력하는 함수============*/
 function showAllRoomHandler(){
-	console.log(this);
-	console.log($(this).siblings());
-
-	htmlVal = "";
-	htmlVal += `
-				 <form>
-			        <div class="wrap_room">
-			            <div th:each="roomlist: \${roomlist}" class="room">
-			                <div th:utext="\${roomlist.roomCat} + ', ' + \${roomlist.roomAtt}" class="room_cat"></div>
-			                <div class="amount_num">
-			                    <strong th:text="${roomlist.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
-			                    원
-			                </div>
-			                <button type="button" class="btn_reserve">예약하기</button>
-			                <div style="grid-column: 1/9">
-			                    <hr style="border: 1px solid #F1F1F1;">
-			                </div>
-			            </div>
-			        </div>
-		    	</form>
-			`;
-			
-			$(this).before(htmlVal);
-			$(this).hide();
+	$(".wrap_room .room:gt(2)").show();
+	$(".more_room_btn").hide();
+	$('.price_explain').css('margin-top', '10px')
+	
 }
 
 /* ============================지도 모달창================================ */

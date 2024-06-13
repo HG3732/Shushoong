@@ -18,7 +18,7 @@
 	        	hotel_name LIKE #{keyword2},
 	        </if>
 	        <if test="maxPrice != null and maxPrice !=''">
-	        	min_price &lt; ${maxPrice},
+	        	min_price &lt;= ${maxPrice},
 	        </if>
         </trim>
         <if test="sortBy != null and sortBy !='' ">

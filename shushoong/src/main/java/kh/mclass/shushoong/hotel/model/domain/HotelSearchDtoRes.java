@@ -13,11 +13,12 @@ public class HotelSearchDtoRes {
 	private String hotelName;
 	private String hotelEng;
 	private String hotelAddress;
+	private List<HotelRoomDto> hotelRooms;
 	private String hotelPrice;
 	private String hotelCall;
 	private String hotelCheckIn;
 	private String hotelCheckOut;
-	private String hotelPolicy;
 	private String hotelIntro;
-	private List<HotelRoomDto> hotelRooms;
+	private String hotelPolicy;
+	private String hotelSafety;
 }

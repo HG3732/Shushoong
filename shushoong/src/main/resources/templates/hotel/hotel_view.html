@@ -69,7 +69,7 @@ xmlns:th="http://www.thymeleaf.org">
 									<div th:each="roomlist: ${roomlist}" class="room">
 										<div th:utext="${roomlist.roomCat} + ', ' + ${roomlist.roomAtt}" class="room_cat"></div>
 										<div class="amount_num">
-											<strong th:text="${roomlist.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+											<strong th:text="${roomlist.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);"></strong>
 											원
 										</div>
 										<button type="button" class="btn_reserve">예약하기</button>
@@ -80,7 +80,7 @@ xmlns:th="http://www.thymeleaf.org">
 								</div>
 							</form>
 							<button type="button" class="more_room_btn" style="margin-left: 450px;">전체보기</button>						
-						<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
+						<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;" class="price_explain">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
 					</div>
 					
 					<!-- 호텔정보 -->
@@ -462,9 +462,9 @@ function loadedHandler(){
 	
 	// 방의 개수가 3개 이상이면 "전체보기" 버튼을 보이게 하기
 	var roomCount = $(".wrap_room .room").length;
-	if (roomCount >= 3) {
+	if (roomCount > 3) {
 		$(".wrap_room .room:gt(2)").hide();
-	} else {
+		//gt(index) 선택자는 지정된 인덱스보다 큰 인덱스를 가진 요소들 모두 선택
 		$(".more_room_btn").show();
 	}
 	

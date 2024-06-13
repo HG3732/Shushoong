@@ -14,12 +14,13 @@ public interface AirlineRepository {
 	// 왕복 오는 항공편
 	List<AirlineInfoDto> selectOne(String airlineCode);
 	// 사이드 바 시간대 
-	List<AirlineInfoDto> selectSideTime(
+	List<AirlineInfoDto> selectOptions(
 			String departLoc, String arrivalLoc, 
 			String departTimeLeft, String departTimeRight,
-			String arrivalTimeLeft, String arrivalTimeRight
+			String arrivalTimeLeft, String arrivalTimeRight, 
+			String selectType, String viaType
 			);
-	List<AirlineInfoDto> selectType(String departLoc, String arrivalLoc, String selectType);
+//	List<AirlineInfoDto> selectType(String departLoc, String arrivalLoc, String selectType);
 
 	
 }

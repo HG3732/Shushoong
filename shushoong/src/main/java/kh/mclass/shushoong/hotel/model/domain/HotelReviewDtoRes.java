@@ -8,7 +8,8 @@ import lombok.Data;
 @Component
 public class HotelReviewDtoRes {
 	private String roomCat;
-	private String hotelComment;
+	private String reviewTitle;
+	private String reviewComment;
 	private String hotelFacility;
 	private String hotelClean;
 	private String hotelConven;

@@ -12,7 +12,7 @@
 		WHERE AIRLINE_CODE LIKE #{airlineCode}
 	</select>
 	
-    <select id="selectSideTime" parameterType="map" resultType="AirlineInfoDto">
+    <select id="selectOptions" parameterType="map" resultType="AirlineInfoDto">
         SELECT * FROM AIRLINE_INFO 
         WHERE TO_DATE(DEPART_TIME, 'HH24:MI') 
         BETWEEN TO_DATE(#{departTimeLeft}, 'HH24:MI') 
@@ -22,20 +22,38 @@
       	AND TO_DATE(#{arrivalTimeRight}, 'HH24:MI')
         AND DEPART_LOC LIKE #{departLoc}
         AND ARRIVAL_LOC LIKE #{arrivalLoc}
+    	<choose>
+    		<when test="selectType != null and selectType.equals('flytime-low')">
+    			ORDER BY FLIGHT_TIME
+    		</when>
+    		 <when test="selectType != null and selectType.equals('flytime-long')">
+    			ORDER BY FLIGHT_TIME DESC
+    		</when>
+        </choose>
     </select>
+    <!-- 
     <select id="selectType" resultType="AirlineInfoDto">
     	SELECT * FROM AIRLINE_INFO
-    	WHERE DEPART_LOC LIKE 'ICN' AND ARRIVAL_LOC LIKE 'LAX'
+    	WHERE DEPART_LOC LIKE #{departLoc} AND ARRIVAL_LOC LIKE #{arrivalLoc}
     	<choose>
     		 <when test="selectType != null and selectType.equals('flytime-low')">
-    			ORDER BY REGEXP_REPLACE(#{flight_time}, '(\d+)시간 (\d+)분', '\1')
+    			ORDER BY FLIGHT_TIME
+    		</when>
+    		 <when test="selectType != null and selectType.equals('flytime-long')">
+    			ORDER BY FLIGHT_TIME DESC
+    		</when>
+    		 -->
+    	<!-- 
+    		 <when test="selectType != null and selectType.equals('flytime-low')">
+    			ORDER BY REGEXP_REPLACE(#{flightTime}, '(\d+)시간 (\d+)분', '\1')
          		+ REGEXP_REPLACE(#{flight_time}, '(\d+)시간 (\d+)분', '\2') 
     		</when>
     		 <when test="selectType != null and selectType.equals('flytime-long')">
     			
-    			ORDER BY REGEXP_REPLACE(#{flight_time}, '(\d+)시간 (\d+)분', '\1')
-         		+ REGEXP_REPLACE(#{flight_time}, '(\d+)시간 (\d+)분', '\2') DESC
+    			ORDER BY REGEXP_REPLACE(#{flightTime}, '(\d+)시간 (\d+)분', '\1')
+         		+ REGEXP_REPLACE(#{flightTime}, '(\d+)시간 (\d+)분', '\2') DESC
     		</when>
     	</choose>
     </select>
+    		 -->
 </mapper>

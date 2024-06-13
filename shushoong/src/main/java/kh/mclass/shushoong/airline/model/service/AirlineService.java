@@ -28,15 +28,17 @@ public class AirlineService {
 	// 사이드바 시간대 
 	public List<AirlineInfoDto> getAirlineSideTime(
 			String departLoc, String arrivalLoc, 
-			String departTimeLeft, String departTimeRight, String arrivalTimeLeft, String arrivalTimeRight){
+			String departTimeLeft, String departTimeRight, 
+			String arrivalTimeLeft, String arrivalTimeRight, 
+			String selectType, String viaType){
 		System.out.println("서비스 사이드바 출발");
 		
-		return airlineRepository.selectSideTime(departLoc, arrivalLoc, departTimeLeft, departTimeRight, arrivalTimeLeft, arrivalTimeRight);
+		return airlineRepository.selectOptions(departLoc, arrivalLoc, departTimeLeft, departTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType);
 	}
-	// 항공 목록 셀렉트 바
-	public List<AirlineInfoDto> getSelectTypeList(
-			String departLoc, String arrivalLoc, String selectType){
-		return airlineRepository.selectType(departLoc, arrivalLoc, selectType);
-		
-	}
+//	// 항공 목록 셀렉트 바
+//	public List<AirlineInfoDto> getSelectTypeList(
+//			String departLoc, String arrivalLoc, String selectType){
+//		return airlineRepository.selectType(departLoc, arrivalLoc, selectType);
+//		
+//	}
 }

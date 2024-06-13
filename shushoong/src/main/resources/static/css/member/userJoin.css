@@ -185,6 +185,7 @@ section .btn.userJoin {
 	border-radius: 20px;
 	background-color: #006AFF;
 	color: white;
+	cursor:pointer;
 	font-size: 17px;
 	font-family: SOYOMapleRegularTTF;
 	font-weight: bold;

@@ -19,7 +19,7 @@ xmlns:th="http://www.thymeleaf.org">
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoo40WSHtW0JekF2N6b0Tm1DHbifYiSOg&loading=async&callback=initMap"></script>
 	
 <meta charset="UTF-8">
-<title>슈슝</title>
+<title>호텔 상세페이지</title>
 </head>
 <body  onload="initialize()">
 
@@ -34,7 +34,7 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-main">
-				<div th:each="hotel : ${dtolist}" class="hotel_name">
+				<div th:each="hotel : ${hotelSearchlist}" class="hotel_name">
  					<div th:text="${hotel.hotelName}" class="name_kr">세인트존스 호텔</div>
 					<div th:text="${hotel.hotelEng}" class="name_en">St.Jones Hotel</div>				
 				</div>
@@ -69,7 +69,7 @@ xmlns:th="http://www.thymeleaf.org">
 									<div th:each="roomlist: ${roomlist}" class="room">
 										<div th:utext="${roomlist.roomCat} + ', ' + ${roomlist.roomAtt}" class="room_cat"></div>
 										<div class="amount_num">
-											<strong th:text="${roomlist.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);">1,834,119</strong>
+											<strong th:text="${roomlist.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);"></strong>
 											원
 										</div>
 										<button type="button" class="btn_reserve">예약하기</button>
@@ -80,7 +80,7 @@ xmlns:th="http://www.thymeleaf.org">
 								</div>
 							</form>
 							<button type="button" class="more_room_btn" style="margin-left: 450px;">전체보기</button>						
-						<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
+						<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;" class="price_explain">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
 					</div>
 					
 					<!-- 호텔정보 -->
@@ -122,7 +122,7 @@ xmlns:th="http://www.thymeleaf.org">
 							<div class="section">
 								<div class="basic_info">기본정보</div>
 								<div th:each="searchlist : ${hotelSearchlist}" class="hotel_about_write">
-									<p>호텔명 : 인터컨티넨탈 로스앤젤레스 다운타운, IHG 호텔</p>
+									<p th:text="'호텔명 : ' + ${searchlist.hotelName}"></p>
 									<p th:text="'주소: ' + ${searchlist.hotelAddress}"></p>
 									<p th:text="'전화: ' + ${searchlist.hotelCall}">전화 : 1-213-6887777</p>
 									<p>팩스 :</p>
@@ -133,9 +133,7 @@ xmlns:th="http://www.thymeleaf.org">
 							<div class="section">
 								<div  class="hotel_intro">호텔소개</div>
 								<div th:each="searchlist : ${hotelSearchlist}" class="hotel_intro_write">
-									<p th:text="${searchlist.hotelIntro}">인터컨티넨탈 로스앤젤레스 다운타운, IHG 호텔의 경우 로스앤젤레스 중심에 있으며 걸어서 4분 거리에는 
-									메이시스 플라자, 9분 거리에는 퍼싱 스퀘어(공원) 등이 있습니다. 이 럭셔리 호텔에서 L.A. 라이브까지는 
-									1.1km 떨어져 있으며, 1.1km 거리에는 그래미 박물관도 있습니다.</p>
+									<p th:text="${searchlist.hotelIntro}"></p>
 								</div>
 							</div>
 							<hr></hr>
@@ -161,34 +159,57 @@ xmlns:th="http://www.thymeleaf.org">
 								</div>
 							</div>
 							<hr></hr>
-							
 							<div class="section">
 								<div class="hotel_facility">편의시설</div>
 								<div class="hotel_facility_write">
-									<div class="wifi">
-										<img th:src="@{/images/wifi.png}" class="wifi_img" alt="무선인터넷" style="width:15px;">
-										<p style="margin-left: 10px;">와이파이</p>
+									<div th:each="facility: ${facilitylist}">
+										<div class="facility-item-wifi" th:if="${facility.hotelFacCat == '무선인터넷'}">
+											<img th:src="@{/images/wifi.png}" class="wifi_img" alt="무선인터넷" style="width:15px;">
+											<p style="margin-left: 10px;">무선인터넷</p>
+										</div>
 									</div>
-									<div class="parking">
-										<img th:src="@{/images/parking.png}" class="parking_img" alt="주차장" style="width:15px;">
-										<p style="margin-left: 10px;">주차</p>
+									<div th:each="facility: ${facilitylist}">
+										<div class="facility-item-parking" th:if="${facility.hotelFacCat == '주차'}">
+											<img th:src="@{/images/parking.png}" class="parking_img" alt="주차" style="width:15px;">
+											<p style="margin-left: 10px;">주차</p>
+										</div>
 									</div>
-									<div class="restaurant">
-										<img th:src="@{/images/restaurant.png}" class="restaurant_img" alt="레스토랑" style="width:15px;">
-										<p style="margin-left: 10px;">레스토랑</p>
+									<div th:each="facility: ${facilitylist}">
+										<div class="facility-item-restaurant" th:if="${facility.hotelFacCat == '레스토랑'}">
+											<img th:src="@{/images/restaurant.png}" class="restaurant_img" alt="레스토랑" style="width:15px;">
+											<p style="margin-left: 10px;">레스토랑</p>
+										</div>
 									</div>
-									<div class="pool">
-										<img th:src="@{/images/pool.png}" class="pool_img" alt="수영장" style="width:15px;">
-										<p style="margin-left: 10px;">수영장</p>
+									<div th:each="facility: ${facilitylist}">
+										<div class="facility-item-pool" th:if="${facility.hotelFacCat == '수영장'}">
+											<img th:src="@{/images/pool.png}" class="pool_img" alt="수영장" style="width:15px;">
+											<p style="margin-left: 10px;">수영장</p>
+										</div>
+									</div>									
+									<div  th:each="facility: ${facilitylist}">
+										<div class="facility-item-fitness" th:if="${facility.hotelFacCat == '피트니스센터'}">
+											<img th:src="@{/images/fitness.png}" class="fitness_img" alt="피트니스센터" style="width:15px;">
+											<p style="margin-left: 10px;">피트니스센터</p>
+										</div>
+									</div>									
+									<div th:each="facility: ${facilitylist}">
+										<div class="facility-item-air_con" th:if="${facility.hotelFacCat == '에어컨'}">
+											<img th:src="@{/images/air_con.png}" class="air_con_img" alt="무선인터넷" style="width:15px;">
+											<p style="margin-left: 10px;">에어컨</p>
+										</div>
 									</div>
-									<div class="fitness">
-										<img th:src="@{/images/fitness.png}" class="fitness_img" alt="피트니스센터" style="width:15px;">
-										<p style="margin-left: 10px;">피트니스 센터</p>
-									</div>
-									<div class="air_con">
-										<img th:src="@{/images/air_con.png}" class="air_con_img" alt="에어컨" style="width:15px;">
-										<p style="margin-left: 10px;">에어컨</p>
-									</div>	
+									<div th:each="facility: ${facilitylist}">
+										<div  class="facility-item-bar" th:if="${facility.hotelFacCat == '바'}">
+											<img th:src="@{/images/bar.png}" class="bar_img" alt="무선인터넷" style="width:15px;">
+											<p style="margin-left: 10px;">바</p>
+										</div>
+									</div>									
+									<div  th:each="facility: ${facilitylist}">
+										<div class="facility-item-casino" th:if="${facility.hotelFacCat == '카지노'}">
+											<img th:src="@{/images/casino.png}" class="casino_img" alt="무선인터넷" style="width:15px;">
+											<p style="margin-left: 10px;">카지노</p>
+										</div>
+									</div>									
 								</div>
 							</div>
 							<hr></hr>
@@ -437,18 +458,17 @@ function loadedHandler(){
 	/* 객실 전체보기 */
 	$(".more_room_btn").on("click", showAllRoomHandler);
 	
-	var roomCount = $(".wrap_room .room").length;
-
 	// 방의 개수가 3개 이상이면 "전체보기" 버튼을 보이게 하기
-	if (roomCount >= 3) {
+	var roomCount = $(".wrap_room .room").length;
+	if (roomCount > 3) {
 		$(".wrap_room .room:gt(2)").hide();
-	} else {
+		//gt(index) 선택자는 지정된 인덱스보다 큰 인덱스를 가진 요소들 모두 선택
 		$(".more_room_btn").show();
 	}
 	
 	//지도 띄우기
  	$('.btn_map').on('click', showMapHandler);
-	
+
 	/* displayReviewChart(); */
 	
 	/* 리뷰 작성 모달 띄우기 */

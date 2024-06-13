@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/customer/mypageCustomerCorrectInfo.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>슈슝::개인정보 수정</title>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-aside">
+				<aside>
+					<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+				</aside>
+			</div>
+			<div class="wrap-section">
+				<section>
+					<div class="section-header">개인정보 수정</div>
+					<div class="hrline">
+						<hr>
+					</div>
+					<div class="customer Information">
+						<div class="information-grid">
+							<div class="menu">
+								이름
+							</div>
+							<div class="namebox">
+								예시
+							</div>
+							<div class="menu">
+								아이디
+							</div>
+							<div class="idbox">
+								예시
+							</div>
+							<div class="menu">
+								비밀번호
+							</div>
+							<div class="password write">
+								<input type="password" id="userPwd" class="textline" placeholder="비밀번호">
+							</div>
+							<div class="menu">
+								비밀번호 확인
+							</div>
+							<div class="password check">
+								<input type="password" id="passwordChk" class="textline" placeholder="비밀번호 확인">
+							</div>
+							<div class="menu">
+								마케팅 수신 동의
+							</div>
+							<div class="checkSelection">
+								<div class="choice">
+									<div class="smsMarketing">
+										<input type="checkbox" name="usingAgree" id="snsagree" value="1"><span class="on">SMS 수신</span>
+									</div>
+									<div class="emailMarketing">
+										<input type="checkbox" name="usingAgree" id="emailagree" value="1"><span class="on">이메일 수신</span>
+									</div>
+								</div>
+							</div>
+							<div class="menu">
+								이메일
+							</div>
+							<div class="emailbox">
+								aaa@aaa
+							</div>
+						</div>
+						<div class="save">
+							<button class="btn save">변경사항 저장</button>
+						</div>
+					</div>
+					<div>
+						<div class="section-header">회원 탈퇴</div>
+						<div class="hrline">
+							<hr>
+						</div>
+						<div class="warning content1">
+							※ [주의] 개인정보 취급 방침에 의해 탈퇴 이후의 결제, 환불 건은 도움을 드릴 수 없는 점 양해해주시기를 바랍니다  
+						</div>
+						<div class="warning content2">
+							위에 동의하신다면 하단의 버튼을 눌러 진행해 주세요.
+						</div>
+						<div class="secession">
+							<button class="btn secession">회원탈퇴</button>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+		<div th:replace="~{common/footer :: Footer}"></div>
+	</div>
+
+</body>
+</html>

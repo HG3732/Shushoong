@@ -6,8 +6,8 @@
 <link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
-<link th:href="@{/css/mypage/business/mypageCustomerAside.css}" rel="stylesheet" />
-<link th:href="@{/css/mypage/business/mypageCustomerCorrectInfo.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/business/mypageBusinessAside.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/business/mypageBusinessCorrectInfo.css}" rel="stylesheet" />
 <meta charset="UTF-8">
 <title>슈슝::개인정보 수정</title>
 </head>
@@ -25,7 +25,7 @@
 		<div class="wrap-body">
 			<div class="wrap-aside">
 				<aside>
-					<div th:replace="~{mypage/business/mypageBusinessAside :: Aside}"></div>
+					<div th:replace="~{mypage/Business/mypageBusinessAside :: Aside}"></div>
 				</aside>
 			</div>
 			<div class="wrap-section">
@@ -61,17 +61,10 @@
 								<input type="password" id="passwordChk" class="textline" placeholder="비밀번호 확인">
 							</div>
 							<div class="menu">
-								마케팅 수신 동의
+								총 등록한 사업체 
 							</div>
-							<div class="checkSelection">
-								<div class="choice">
-									<div class="smsMarketing">
-										<input type="checkbox" name="usingAgree" id="snsagree" value="1"><span class="on">SMS 수신</span>
-									</div>
-									<div class="emailMarketing">
-										<input type="checkbox" name="usingAgree" id="emailagree" value="1"><span class="on">이메일 수신</span>
-									</div>
-								</div>
+							<div class="allBusiness">
+								예시
 							</div>
 							<div class="menu">
 								이메일

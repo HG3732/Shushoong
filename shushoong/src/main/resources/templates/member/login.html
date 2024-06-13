@@ -48,6 +48,9 @@
 									<div class="loginBtn">
 										<button type="submit" class="btn login">로그인</button>
 									</div>
+									<div th:if="${error}">
+		           						<p style="color:red; font-size: 10px" th:text="${exception}"></p>
+		        					</div>
 									<div class="login-function">
 										<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a> 
 										<a th:href="@{/account/find}"><div class="findInfoBtn">아이디/비밀번호 찾기</div></a>
@@ -84,6 +87,7 @@
 										<input type="text" name="userId" placeholder="아이디" autofocus>
 										<input type="password" name="userPwd" placeholder="비밀번호">
 									</div>
+									<small th:text="${exception}"></small>
 									<div class="login-check">
 										<input type="checkbox" id="idsaved" name="idsaved">아이디
 										저장

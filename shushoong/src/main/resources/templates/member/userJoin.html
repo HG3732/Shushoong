@@ -58,8 +58,8 @@ xmlns:th="http://www.thymeleaf.org">
 								</div>
 								<small>Error message</small>						
 								<div class="answer email">
-									<label for="emailCheck">인증번호</label>
-									<input type="text" id="emailCheck" name="emailCheck" placeholder="인증번호 입력" class="shortinput" >
+									<label for="code">인증번호</label>
+									<input type="text" id="code" name="code" placeholder="인증번호 입력" class="shortinput" >
 									<button type="submit" class="btn emailCheck">인증확인</button>
 								</div>
 								<small>Error message</small>
@@ -103,5 +103,27 @@ xmlns:th="http://www.thymeleaf.org">
 	<div class="wrap-footer">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
+	
+	<script>
+		$(loadedHandler);
+		function loadedHandler() {
+			$(".btn.emailSend").on("click", btnEmailSendHandler);
+		} 
+		
+		function btnEmailSendHandler() {
+			const userEmail = $('#userEmail').val();
+			const code = $('#code').val();
+			
+			const data = {
+				"userEmail" : userEmail
+			}
+			
+			$.ajax({
+				type: "post",
+				url: "/v2/verify-email",
+				data: data
+			})
+		}
+	</script>
 </body>
 </html>

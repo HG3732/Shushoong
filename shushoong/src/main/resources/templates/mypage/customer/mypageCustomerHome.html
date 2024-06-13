@@ -10,7 +10,6 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
 	<link th:href="@{/css/mypage/customer/mypageCustomerHome.css}" rel="stylesheet" />
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>슈슝::마이페이지</title>
 </head>
 <body>
@@ -38,7 +37,7 @@ xmlns:th="http://www.thymeleaf.org">
 						어떤 도움이 필요하신가요?
 					</div>
 					<div class="section-image">
-						<a href="#">
+						<a th:href="@{/customer/my/information}">
 							<div class="editInfo">
 								<img th:src="@{/images/정보수정.png}" alt="개인정보 수정" width="200px" height="200px">
 								<div class="tail">개인정보 수정</div>
@@ -85,7 +84,6 @@ xmlns:th="http://www.thymeleaf.org">
 					</div>
 				</section>
 			</div>
-			
 		</div>
 	</div>
 	<div class="wrap-footer">

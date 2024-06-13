@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerCorrectInfo.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>슈슝</title>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-aside">
+				<aside>
+					<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+				</aside>
+			</div>
+			<div class="wrap-section">
+				<section>
+					<div>
+						개인정보 수정
+					</div>
+					<div>
+						<table>
+							<tr>
+								<td>이름</td>
+								<td>d</td>
+								<td>아이디</td>
+								<td>d</td>
+							</tr>
+							<tr>
+								<td>비밀번호</td>
+								<td>d</td>
+								<td>비밀번호 확인</td>
+								<td>d</td>
+							</tr>
+							<tr>
+								<td>마케팅 수신 동의</td>
+								<td>d</td>
+								<td>이메일</td>
+								<td>d</td>
+							</tr>
+						</table>
+						<button>변경사항 저장</button>
+					</div>
+					<div>
+						<div>
+							회원 탈퇴
+						</div>
+						<div>
+							<button>회원탈퇴</button>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+</body>
+</html>

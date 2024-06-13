@@ -55,5 +55,23 @@ public class NaverApi {
 		    return asJsonObject.get("access_token").getAsString();
 		}
 		
-	
+		public NaverProfile getUserInfo(String accessToken) {
+			String reqUrl = "https://nid.naver.com/oauth2.0/token";
+			
+			RestTemplate restTemplate = new RestTemplate();
+			
+			// HttpHeader 오브젝트 
+			HttpHeaders headers = new HttpHeaders(); 
+			headers.add("Authorization", "Bearer " + accessToken);
+			
+			HttpEntity<MultiValueMap<String, String>> naverProfileRequest = new HttpEntity<>(headers);
+			
+			ResponseEntity<String> response = restTemplate.exchange(reqUrl, 
+																	HttpMethod.POST,
+																	naverProfileRequest,
+																	String.class);
+			NaverProfile naverProfile = new NaverProfile(response.getBody());
+			
+			return naverProfile;
+		}
 }

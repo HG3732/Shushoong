@@ -144,7 +144,7 @@ function updateAirlineList(data) {
                             <div class="ticket-adult">성인 1</div>
                             <div class="airticket">
                                 <div class="ticket-price">
-                                    <div>${air.ticketPrice}</div>
+                                    <div>${air.seatPrice}</div>
                                 </div>
                                 <div class="ticket-btn">
                                     <button class="ticketinfo-btn" type="button">

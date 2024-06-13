@@ -142,10 +142,8 @@
 						<div class="select-bar">
 							<form action="#" id="frm-select">
 								<select name="selectlist" id="showlist">
-									<!-- 
 									<option value="price-cheap">가격 낮은 순</option>
 									<option value="price-expensive">가격 높은 순</option>
-									 -->
 									<option value="flytime-low">비행 짧은 순</option>
 									<option value="flytime-long">비행 긴 순</option>
 								</select>
@@ -230,7 +228,7 @@
 
 											<div class="airticket">
 												<div class="ticket-price">
-													<div th:text="${air.ticketPrice}"></div>
+													<div th:text="${air.seatPrice}"></div>
 												</div>
 												<div class="ticket-btn">
 													<button class="ticketinfo-btn" type="button">

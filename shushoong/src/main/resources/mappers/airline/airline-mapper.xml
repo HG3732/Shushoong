@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kh.mclass.shushoong.airline.model.repository.AirlineRepository">
 	<select id="selectAllList" parameterType="String" resultType="AirlineInfoDto">
-		SELECT * FROM AIRLINE_INFO 
+		SELECT * FROM AIRLINE_INFO a 
+		JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
 		WHERE DEPART_LOC LIKE #{departLoc} 
 		AND ARRIVAL_LOC LIKE #{arrivalLoc}
 	</select>
@@ -13,7 +14,8 @@
 	</select>
 	
     <select id="selectOptions" parameterType="map" resultType="AirlineInfoDto">
-        SELECT * FROM AIRLINE_INFO 
+        SELECT * FROM AIRLINE_INFO a
+        JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE  
         WHERE TO_DATE(DEPART_TIME, 'HH24:MI') 
         BETWEEN TO_DATE(#{departTimeLeft}, 'HH24:MI') 
         AND TO_DATE(#{departTimeRight}, 'HH24:MI')

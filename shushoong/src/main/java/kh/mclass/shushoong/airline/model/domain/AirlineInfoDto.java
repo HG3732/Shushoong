@@ -26,7 +26,7 @@ public class AirlineInfoDto {
 	private String domesticFlights; // 국내선 = D /국제선 = I
 	private Integer viaCount; // 경로 횟수
 	private String spareSeat; // 잔여 좌석
-	private String ticketPrice; // 티켓 값
+	private String seatPrice; // 티켓 값
 	private String flightTime; // 비행 시간
 	// 항공 목록 정렬
 	private String departTimeLeft;

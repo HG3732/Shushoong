@@ -20,7 +20,5 @@ public interface AirlineRepository {
 			String arrivalTimeLeft, String arrivalTimeRight, 
 			String selectType, String viaType
 			);
-//	List<AirlineInfoDto> selectType(String departLoc, String arrivalLoc, String selectType);
-
 	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReviewDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
 
@@ -130,29 +131,29 @@ public class HotelController {
 		model.addAttribute("hotelSearchlist", service.selectHotelSearchList("2OS001")); 
 		
 		//편의시설
-		List<HotelFacilityDtoRes> facilityResult = service.selectHotelFacility("2OS001");
-		for(int i = 0; i<facilityResult.size(); i++) {
-			switch(facilityResult.get(i).getHotelFacCat()){
+		List<HotelFacilityDtoRes> facilitylist = service.selectHotelFacility("2OS001");
+		for(int i = 0; i<facilitylist.size(); i++) {
+			switch(facilitylist.get(i).getHotelFacCat()){
 				case "0":
-					facilityResult.get(i).setHotelFacCat("무선인터넷");
+					facilitylist.get(i).setHotelFacCat("무선인터넷");
 					break;
 				case "1":
-					facilityResult.get(i).setHotelFacCat("주차");
+					facilitylist.get(i).setHotelFacCat("주차");
 					break;
 				case "2":
-					facilityResult.get(i).setHotelFacCat("레스토랑");
+					facilitylist.get(i).setHotelFacCat("레스토랑");
 					break;
 				case "3":
-					facilityResult.get(i).setHotelFacCat("수영장");
+					facilitylist.get(i).setHotelFacCat("수영장");
 					break;
 				case "4":
-					facilityResult.get(i).setHotelFacCat("피트니스센터");
+					facilitylist.get(i).setHotelFacCat("피트니스센터");
 					break;
 				case "5":
-					facilityResult.get(i).setHotelFacCat("에어컨");
+					facilitylist.get(i).setHotelFacCat("에어컨");
 					break;
 				case "6":
-					facilityResult.get(i).setHotelFacCat("바");
+					facilitylist.get(i).setHotelFacCat("바");
 					break;
 				default:
 					result.get(i).setRoomAtt("카지노");
@@ -160,7 +161,9 @@ public class HotelController {
 			}
 			
 		}
-		model.addAttribute("facilitylist", facilityResult);
+		model.addAttribute("facilitylist", facilitylist);
+		
+
 		
 		return "hotel/hotel_view";
 	}

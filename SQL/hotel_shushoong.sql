@@ -42,16 +42,12 @@ set hotel_fac_cat ='1'
 where hotel_fac_cat ='주차';
 
 
-
-
-
-
-
-
-
-
-
-
+--리뷰 
+----dto 에 추가할 때 reviewDate, rateAvg 로 필드명 추가
+select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
+hotel_facility, hotel_clean, hotel_conven, hotel_kind, (hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4 as rate_avg
+from hotel_review 
+join hotel_reserve using (hotel_reserve_code);
 
 
 

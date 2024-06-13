@@ -42,6 +42,7 @@ const range = document.querySelector(".slider > .range");
     range.style.left = percent + "%";
 };
  */
+
 // 오른쪽이 움직일떼(= 오른쪽 값이 변할 때) 변경될 때 실행되는 함수
 const setRightValue = () => {
     // 현재 입력 값(_this)과 입력 요소의 최소값과 최대값을 가져옴
@@ -54,8 +55,7 @@ const setRightValue = () => {
 
     // 오른쪽 thumb의 위치를 계산하여 슬라이더의 오른쪽 값을 표시
     const rightValue = parseInt(_this.value);	//현재 바가 있는 곳의 위치 값
-    const rightVal = document.querySelector(".price2");	//우측 숫자 변수지정
-    rightVal.innerHTML = `${rightValue}`;	//지정한 우측 숫자를 현재 바가 있는 곳의 값으로 갱신
+    document.querySelector(".price2").innerText = rightValue;	//지정한 우측 숫자를 현재 바가 있는 곳의 값으로 갱신
     const percent = ((_this.value - min) / (max - min)) * 100;
     circleRight.style.right = 100 - percent + "%";	// 바의 위치값
     range.style.right = 100 - percent + "%";	//바의 길이값
@@ -71,7 +71,8 @@ inputRight.addEventListener("input", setRightValue);
 const setInitialValues = () => {
     // 초기 왼쪽 값과 오른쪽 값
 /*     const initialLeftValue = 0; */
-    const initialRightValue = rightVal;
+	//우측 숫자 변수 =  max 최초값
+	const initialRightValue = document.querySelector(".price2").innerText; //우측 숫자 변수지정
     // 초기값을 입력 요소에 설정하고, 왼쪽과 오른쪽 thumb의 위치를 조정
 /*     inputLeft.value = initialLeftValue; */
     inputRight.value = initialRightValue;
@@ -131,13 +132,12 @@ function searchHandler() {
 			}
 	}).done(function(response){
 		$("#hotellistsection").replaceWith(response);
-	});;
+	});
 }
 //엔터키 눌렀을 때 키워드 검색버튼 클릭
 function enterkey() {
-        if(window.event.keyCode == 13) {
- 
-             $(".btn_search").click();
+        if(event.keyCode == 13) {
+             searchHandler();
         }
 }
 

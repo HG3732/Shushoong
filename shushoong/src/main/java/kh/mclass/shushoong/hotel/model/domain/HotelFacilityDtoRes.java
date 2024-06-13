@@ -9,5 +9,5 @@ import lombok.Data;
 @Data
 @Component
 public class HotelFacilityDtoRes {
-	private List<String> hotelFacCat;
+	private String hotelFacCat;
 }

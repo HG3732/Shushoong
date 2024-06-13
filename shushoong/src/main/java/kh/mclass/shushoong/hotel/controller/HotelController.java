@@ -101,14 +101,46 @@ public class HotelController {
 			}
 		}
 		model.addAttribute("roomlist", result);
-		
+
+		//호텔 사진들 다 출력
 		model.addAttribute("piclist", service.selectPicList("2OS001"));
 		//model.addAttribute("dtolist", service.selectAllHotelList("2OS001")); 
+		
+		//호텔 상세정보들 출력
 		model.addAttribute("hotelSearchlist", service.selectHotelSearchList("2OS001")); 
 		
 		//편의시설
-		List<HotelFacilityDtoRes> fcresult = service.selectHotelFacility("2OS001");
-		model.addAttribute("facilitylist", fcresult);
+		List<HotelFacilityDtoRes> facilityResult = service.selectHotelFacility("2OS001");
+		for(int i = 0; i<facilityResult.size(); i++) {
+			switch(facilityResult.get(i).getHotelFacCat()){
+				case "0":
+					facilityResult.get(i).setHotelFacCat("무선인터넷");
+					break;
+				case "1":
+					facilityResult.get(i).setHotelFacCat("주차");
+					break;
+				case "2":
+					facilityResult.get(i).setHotelFacCat("레스토랑");
+					break;
+				case "3":
+					facilityResult.get(i).setHotelFacCat("수영장");
+					break;
+				case "4":
+					facilityResult.get(i).setHotelFacCat("피트니스센터");
+					break;
+				case "5":
+					facilityResult.get(i).setHotelFacCat("에어컨");
+					break;
+				case "6":
+					facilityResult.get(i).setHotelFacCat("바");
+					break;
+				default:
+					result.get(i).setRoomAtt("카지노");
+					break;		
+			}
+			
+		}
+		model.addAttribute("facilitylist", facilityResult);
 		
 		return "hotel/hotel_view";
 	}

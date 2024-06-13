@@ -259,40 +259,52 @@ p{
 	flex-basis: 760px;
 }
 
-.wifi{
+.facility-item-wifi{
 	display: flex;
 	align-items: center;	
 }
 
-.parking{
+.facility-item-parking{
 	display: flex;
 	align-items: center;	
 	margin-top: 15px;
 }
 
 
-.restaurant{
+.facility-item-restaurant{
 	display: flex;
 	align-items: center;
 	margin-top: 15px;	
 }
 
-.pool{
+.facility-item-pool{
 	display: flex;
 	align-items: center;
 	margin-top: 15px;	
 }
 
-.fitness{
+.facility-item-fitness{
 	display: flex;
 	align-items: center;
 	margin-top: 15px;	
 }
 
-.air_con{
+.facility-item-air_con{
 	display: flex;
 	align-items: center;
 	margin-top: 15px;	
+}
+
+.facility-item-bar{
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
+}
+
+.facility-item-casino{
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
 }
 
 

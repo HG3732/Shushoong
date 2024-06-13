@@ -161,34 +161,57 @@ xmlns:th="http://www.thymeleaf.org">
 								</div>
 							</div>
 							<hr></hr>
-							
 							<div class="section">
 								<div class="hotel_facility">편의시설</div>
 								<div class="hotel_facility_write">
-									<div class="wifi" th:each="facility : ${facilitylist}">
-										<img th:src="@{/images/wifi.png}" class="wifi_img" alt="무선인터넷" style="width:15px;">
-										<p style="margin-left: 10px;" th:text="${facility.hotelFacCat}">와이파이</p>
+									<div th:each="facility: ${facilitylist}">
+										<div class="facility-item-wifi" th:if="${facility.hotelFacCat == '무선인터넷'}">
+											<img th:src="@{/images/wifi.png}" class="wifi_img" alt="무선인터넷" style="width:15px;">
+											<p style="margin-left: 10px;">무선인터넷</p>
+										</div>
 									</div>
-									<div class="parking">
-										<img th:src="@{/images/parking.png}" class="parking_img" alt="주차장" style="width:15px;">
-										<p style="margin-left: 10px;">주차</p>
+									<div th:each="facility: ${facilitylist}">
+										<div class="facility-item-parking" th:if="${facility.hotelFacCat == '주차'}">
+											<img th:src="@{/images/parking.png}" class="parking_img" alt="주차" style="width:15px;">
+											<p style="margin-left: 10px;">주차</p>
+										</div>
 									</div>
-									<div class="restaurant">
-										<img th:src="@{/images/restaurant.png}" class="restaurant_img" alt="레스토랑" style="width:15px;">
-										<p style="margin-left: 10px;">레스토랑</p>
+									<div th:each="facility: ${facilitylist}">
+										<div class="facility-item-restaurant" th:if="${facility.hotelFacCat == '레스토랑'}">
+											<img th:src="@{/images/restaurant.png}" class="restaurant_img" alt="레스토랑" style="width:15px;">
+											<p style="margin-left: 10px;">레스토랑</p>
+										</div>
 									</div>
-									<div class="pool">
-										<img th:src="@{/images/pool.png}" class="pool_img" alt="수영장" style="width:15px;">
-										<p style="margin-left: 10px;">수영장</p>
+									<div th:each="facility: ${facilitylist}">
+										<div class="facility-item-pool" th:if="${facility.hotelFacCat == '수영장'}">
+											<img th:src="@{/images/pool.png}" class="pool_img" alt="수영장" style="width:15px;">
+											<p style="margin-left: 10px;">수영장</p>
+										</div>
+									</div>									
+									<div  th:each="facility: ${facilitylist}">
+										<div class="facility-item-fitness" th:if="${facility.hotelFacCat == '피트니스센터'}">
+											<img th:src="@{/images/fitness.png}" class="fitness_img" alt="피트니스센터" style="width:15px;">
+											<p style="margin-left: 10px;">피트니스센터</p>
+										</div>
+									</div>									
+									<div th:each="facility: ${facilitylist}">
+										<div class="facility-item-air_con" th:if="${facility.hotelFacCat == '에어컨'}">
+											<img th:src="@{/images/air_con.png}" class="air_con_img" alt="무선인터넷" style="width:15px;">
+											<p style="margin-left: 10px;">에어컨</p>
+										</div>
 									</div>
-									<div class="fitness">
-										<img th:src="@{/images/fitness.png}" class="fitness_img" alt="피트니스센터" style="width:15px;">
-										<p style="margin-left: 10px;">피트니스 센터</p>
-									</div>
-									<div class="air_con">
-										<img th:src="@{/images/air_con.png}" class="air_con_img" alt="에어컨" style="width:15px;">
-										<p style="margin-left: 10px;">에어컨</p>
-									</div>	
+									<div th:each="facility: ${facilitylist}">
+										<div  class="facility-item-bar" th:if="${facility.hotelFacCat == '바'}">
+											<img th:src="@{/images/bar.png}" class="bar_img" alt="무선인터넷" style="width:15px;">
+											<p style="margin-left: 10px;">바</p>
+										</div>
+									</div>									
+									<div  th:each="facility: ${facilitylist}">
+										<div class="facility-item-casino" th:if="${facility.hotelFacCat == '카지노'}">
+											<img th:src="@{/images/casino.png}" class="casino_img" alt="무선인터넷" style="width:15px;">
+											<p style="margin-left: 10px;">카지노</p>
+										</div>
+									</div>									
 								</div>
 							</div>
 							<hr></hr>
@@ -437,9 +460,8 @@ function loadedHandler(){
 	/* 객실 전체보기 */
 	$(".more_room_btn").on("click", showAllRoomHandler);
 	
-	var roomCount = $(".wrap_room .room").length;
-
 	// 방의 개수가 3개 이상이면 "전체보기" 버튼을 보이게 하기
+	var roomCount = $(".wrap_room .room").length;
 	if (roomCount >= 3) {
 		$(".wrap_room .room:gt(2)").hide();
 	} else {
@@ -448,7 +470,7 @@ function loadedHandler(){
 	
 	//지도 띄우기
  	$('.btn_map').on('click', showMapHandler);
-	
+
 	/* displayReviewChart(); */
 	
 	/* 리뷰 작성 모달 띄우기 */

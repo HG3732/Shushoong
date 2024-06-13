@@ -22,6 +22,16 @@ select * from hotel_facility where hotel_code='2OS001';
 
 select * from hotel_facility;
 
+select * from hotel_room where hotel_code='2OS001';
+
+desc hotel_room;
+
+insert into hotel_room values (
+    '2', '3', '3', '2OS001', '171259', 0,  5
+);
+
+commit;
+
 -- 0:무선인터넷 1:주차 2:레스토랑 3:수영장 4:피트니스센터 5:에어컨 6:바 7:카지노
 -- 무선인터넷은 냉장고를 바꾼 것
 --크롤링했을때 위에 자료들 들고 들어와지면 그때 밑에 구문 사용해서 번호 메기면 됨

@@ -47,13 +47,11 @@ where hotel_fac_cat ='주차';
 select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
 hotel_facility, hotel_clean, hotel_conven, hotel_kind, (hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4 as rate_avg
 from hotel_review 
-join hotel_reserve using (hotel_reserve_code);
+join hotel_reserve hr using (hotel_reserve_code)
+    where hr.hotel_code = '2OS001';
 
 
-
-
-
-
+select * from hotel_reserve;
 
 
 

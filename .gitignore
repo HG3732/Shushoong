@@ -5,6 +5,7 @@ keyfiles/
 *.log
 
 .factorypath
+.classpath
 
 *.ctxt
 

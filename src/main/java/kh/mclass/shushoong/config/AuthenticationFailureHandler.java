@@ -19,8 +19,6 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler{
-
-	private final MemberService memberService;
 	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
@@ -39,8 +37,6 @@ public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailure
 		}
 		error = URLEncoder.encode(error, "UTF-8");
 		setDefaultFailureUrl("/login?error=true&exception="+error);
-		
-		String userId = request.getParameter("userId");
 		
 		super.onAuthenticationFailure(request, response, exception);
 	}

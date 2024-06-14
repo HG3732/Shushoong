@@ -18,10 +18,10 @@ function likeHandler(thisElement){
 	
 
 /* const inputLeft = document.getElementById("input-left"); */
-const inputRight = document.getElementById("input-right");
+let inputRight = document.getElementById("input-right");
 /* const circleLeft = document.querySelector(".slider > .circle.left"); */
-const circleRight = document.querySelector(".slider > .circle.right");
-const range = document.querySelector(".slider > .range");
+let circleRight = document.querySelector(".slider > .circle.right");
+let range = document.querySelector(".slider > .range");
 
 // 왼쪽이 움직일떼(= 왼쪽 값이 변할 때) 변경될 때 실행되는 함수
 /* const setLeftValue = () => {
@@ -46,7 +46,7 @@ const range = document.querySelector(".slider > .range");
 // 오른쪽이 움직일떼(= 오른쪽 값이 변할 때) 변경될 때 실행되는 함수
 const setRightValue = () => {
     // 현재 입력 값(_this)과 입력 요소의 최소값과 최대값을 가져옴
-    const _this = inputRight;
+    const _this = $("#input-right").get(0);
     const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
 
   	//오른쪽값을 기준으로 왼쪽은 오른쪽에게 최대 20까지 차이날 수 있게끔함 (이 이상 오지 못함)
@@ -57,7 +57,7 @@ const setRightValue = () => {
     const rightValue = parseInt(_this.value);	//현재 바가 있는 곳의 위치 값
     document.querySelector(".price2").innerText = rightValue;	//지정한 우측 숫자를 현재 바가 있는 곳의 값으로 갱신
     const percent = ((_this.value - min) / (max - min)) * 100;
-    circleRight.style.right = 100 - percent + "%";	// 바의 위치값
+    document.querySelector(".slider > .circle.right").style.right = 100 - percent + "%";	// 바의 위치값
     range.style.right = 100 - percent + "%";	//바의 길이값
 };
 
@@ -107,7 +107,7 @@ function sortHandler() {
 	})
 	//success함수 대체
 	.done(function(response){
-		$("#hotellistsection").replaceWith(response);
+		$("#realHotelList").replaceWith(response);
 		//updateHotelList(response);
 	});
 }
@@ -134,7 +134,31 @@ function searchHandler() {
 				console.log('AJAX 실패:', error);
 			}
 	}).done(function(response){
-		$("#hotellistsection").replaceWith(response);
+//		$("#hotellistsection").replaceWith(response);
+		$("#realHotelList").replaceWith(response);
+	
+		$.ajax({
+		url: "/shushoong/hotel/list/price.ajax",
+		method: "get",
+		data: {
+			loccode : preloccode,
+			people : prepeople,
+			keyword : prekeyword,
+			maxPrice : maxPrice,
+			sortBy : presortBy,
+			sortTo : presortTo
+		},
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+		}).done(function(resp){
+			$(".sidebar").replaceWith(resp);
+			console.log("############");
+			console.log(inputRight);
+			//inputRight = document.getElementById("input-right");
+			//inputRight.addEventListener("input", setRightValue);
+			$("#input-right").on("input",setRightValue);
+		});
 	});
 }
 //엔터키 눌렀을 때 키워드 검색버튼 클릭
@@ -162,25 +186,7 @@ function priceHandler() {
 				console.log('AJAX 실패:', error);
 			}
 	}).done(function(response){
-		$("#hotellistsection").replaceWith(response);
-	});
-}
-
-//슬라이드 바 우측 최고가 갱신
-function updateSlideHandler() {
-	$.ajax({
-		url: "/shushoong/hotel/list/sort.ajax",
-		method: "get",
-		data: {
-			loccode : preloccode,
-			people : prepeople,
-			keyword : prekeyword
-		},
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
-	}).done(function(response){
-		$(".sidebar").replaceWith(response);
+		$("#realHotelList").replaceWith(response);
 	});
 }
 

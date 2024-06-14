@@ -213,3 +213,9 @@ where hp.hotel_code = h.hotel_code and hp.hotel_code = hotel_review2.hotel_code 
 ;
 
 drop view V_hotel_list;
+
+desc V_hotel_list;
+
+select hotel_code, hotel_name, hotel_eng, hotel_address, hotel_price, room_discount, hotel_pic, 
+hotel_score, hotel_review_num from V_hotel_list where SUBSTR(hotel_code, 1, 3) = '2OS' and 
+room_cap = '2' and hotel_name LIKE '%스%' and hotel_price <= 357315 ;

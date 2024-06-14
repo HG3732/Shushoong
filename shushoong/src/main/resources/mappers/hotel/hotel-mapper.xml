@@ -8,15 +8,13 @@
 		select hotel_code, hotel_name, hotel_eng, hotel_address, hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num
 		from V_hotel_list 
 		where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap = #{people}
-        <trim prefix="and">
-	        <if test="keyword != null and keyword !='' ">
-	        	<bind name="keyword2" value="'%' + keyword + '%'"/>
-	        	hotel_name LIKE #{keyword2}
-	        </if>
-	        <if test="maxPrice != null and maxPrice !=''">
-	        	hotel_price &lt;= ${maxPrice}
-	        </if>
-        </trim>
+        <if test="keyword != null and keyword !='' ">
+        	<bind name="keyword2" value="'%' + keyword + '%'"/>
+        	and hotel_name LIKE #{keyword2}
+        </if>
+        <if test="maxPrice != null and maxPrice !=''">
+        	and hotel_price &lt;= ${maxPrice}
+        </if>
         <if test="sortBy != null and sortBy !='' ">
 	       	<choose>
 	       		<when test="sortBy.equals('price')">

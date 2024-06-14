@@ -164,28 +164,28 @@ public class HotelController {
 		model.addAttribute("facilitylist", facilitylist);
 		
 		//작성된 리뷰 불러오기
-		List<HotelReviewDtoRes> reviewList = service.selectReviewAll("2OS001");
+		List<HotelReviewDtoRes> reviewListDto = service.selectReviewAll("2OS001");
 			//여행객 종류
-			for(int i = 0; i<reviewList.size(); i++) {
-				switch(reviewList.get(i).getTripperCat()){
+			for(int i = 0; i<reviewListDto.size(); i++) {
+				switch(reviewListDto.get(i).getTripperCat()){
 					case "0":
-						reviewList.get(i).setTripperCat("혼자");
+						reviewListDto.get(i).setTripperCat("혼자");
 						break;
 					case "1":
-						reviewList.get(i).setTripperCat("커플/부부");
+						reviewListDto.get(i).setTripperCat("커플/부부");
 						break;
 					case "2":
-						reviewList.get(i).setTripperCat("가족");
+						reviewListDto.get(i).setTripperCat("가족");
 						break;
 					case "3":
-						reviewList.get(i).setTripperCat("단체");
+						reviewListDto.get(i).setTripperCat("단체");
 						break;
 					default:
-						reviewList.get(i).setTripperCat("출장");
+						reviewListDto.get(i).setTripperCat("출장");
 						break;		
 				}
 			}
-		model.addAttribute("reviewList", reviewList);		
+		model.addAttribute("reviewListDto", reviewListDto);		
 		
 		
 		return "hotel/hotel_view";

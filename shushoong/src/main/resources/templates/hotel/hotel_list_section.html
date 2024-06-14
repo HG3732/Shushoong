@@ -2,6 +2,8 @@
 <html 
 xmlns:th="http://www.thymeleaf.org">
 
+
+
 <!-- section 부분 -->
 <div class="hotel_list" th:fragment="hotellistsection" id="hotellistsection" >
 	<div class="hotel" th:each="hotel : ${hotelList}" th:data-hotelcode="${hotel.hotelCode}">

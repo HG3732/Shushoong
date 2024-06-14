@@ -336,13 +336,16 @@ p{
 }
 
 .review_info_wrap{
-	display: flex;
-	align-items: center;
-	margin: 20px 0;
+	margin: 10px 0;
 }
 
-.review_info_wrap > div:nth-child(1) {
-	flex-basis: 260px;
+.review_flex {
+	display: flex;	
+	align-items: center;
+}
+
+.review_flex > div:nth-child(1) {
+	flex-basis: 200px;
 }
 
 .review_rate{
@@ -363,6 +366,7 @@ p{
 }
 
 .review_content_wrap{
+	flex-basis: 820px;
 	background-color: var(--color_gray_3); 
 	border-radius: 20px;
 	padding: 20px;

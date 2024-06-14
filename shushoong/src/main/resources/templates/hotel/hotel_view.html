@@ -261,13 +261,13 @@ xmlns:th="http://www.thymeleaf.org">
 							</div>
 						</div>
 						<hr style="border: 1px solid #c5c5c5;"></hr>
-						<div class="review_info_wrap"  th:each="reviewlist : ${reviewListDto}">
+						<div class="review_info_wrap"  th:each="reviewDetail: ${reviewDetailDto}">
 							<div class="review_flex">
 								<div class="review_grade">
-									<p class="review_rate" th:text="${reviewlist.rateAvg}"></p>
+									<p class="review_rate" th:text="${reviewDetail.rateAvg}"></p>
 									<div class="review_id">
 										<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:20px;">
-										<p style="font-size: var(--font3);" th:text="${reviewlist.userId}"></p>
+										<p style="font-size: var(--font3);" th:text="${reviewDetail.userId}"></p>
 									</div>
 									<div class="review_tripper">
 										<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:20px;">										
@@ -276,10 +276,10 @@ xmlns:th="http://www.thymeleaf.org">
 								</div>
 								<div class="review_content_wrap">
 									<div class="review_content_title">
-										<p th:text=" ${reviewlist.reviewTitle}"></p>
+										<p th:text=" ${reviewDetail.reviewTitle}"></p>
 									</div>
 									<div class="review_content">
-										<p th:text=" ${reviewlist.reviewComment}"></p>
+										<p th:text=" ${reviewDetail.reviewComment}"></p>
 									</div>
 									<div class="review_content_date"></div>
 								</div>

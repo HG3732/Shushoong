@@ -28,7 +28,7 @@ public interface HotelRepository {
 	
 	public List<HotelFacilityDtoRes> selectHotelFacility(String hotelCode);
 	
-	public List<HotelReviewDtoRes> selectReviewAll(String hotelCode);
+	public List<HotelReviewDtoRes> selectReviewDetailList(String hotelCode);
 	
 	public List<HotelReviewOverallDtoRes> selectReviewOverall(String hotelCode);
 	

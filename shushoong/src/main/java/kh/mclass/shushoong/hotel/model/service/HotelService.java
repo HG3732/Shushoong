@@ -48,8 +48,8 @@ public class HotelService {
 	}
 
 	//해당 호텔 리뷰 작성된거 불러오기
-	public List<HotelReviewDtoRes> selectReviewAll(String hotelCode) {
-		return hotelRepository.selectReviewAll(hotelCode);
+	public List<HotelReviewDtoRes> selectReviewDetailList(String hotelCode) {
+		return hotelRepository.selectReviewDetailList(hotelCode);
 	}
 	
 	//해당 호텔 리뷰 작성된거 불러오기

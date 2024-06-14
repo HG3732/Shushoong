@@ -1,8 +1,5 @@
 
-	$(loadedHandler)
-	function loadedHandler(){
-		$(".according").css("display","none");
-	}
+	
 	
 				/* 편도 왕복 적용하는 펑션 */		
 		function ticketType(event,ticketType,ticketTypeBtn){
@@ -245,11 +242,11 @@
 			else if($(this).parent().attr("id")=="baby"){
 		 		$("#hidden_baby").val($("#baby_value").text());}
 			else if($(this).parent().attr("class")=="sit"){
-				$("#hidden_sit_type").val($(this).attr("id"));
+				$("#hidden_seat_grade").val($(this).attr("id"));
 			} 
 			$("div#people_lineup_text").each(function(){
 				$(this).text(
-				$("#"+$("#hidden_sit_type").val()).text() +"/"+
+				$("#"+$("#hidden_seat_grade").val()).text() +"/"+
 				"성인"+$("#hidden_adult").val()+"/"+
 				"소아"+$("#hidden_child").val()+"/"+
 				"유아"+$("#hidden_baby").val()

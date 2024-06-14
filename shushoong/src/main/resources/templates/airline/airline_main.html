@@ -225,9 +225,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							</div>
 						</div>
 						<div class="sit">
-							<button id="sit3" class="sit_kinds pointer">이코노미석</button>
-							<button id="sit2" class="sit_kinds pointer">비즈니스석</button>
-							<button id="sit1" class="sit_kinds pointer">일등석</button>
+							<button id="3" class="sit_kinds pointer">이코노미석</button>
+							<button id="2" class="sit_kinds pointer">비즈니스석</button>
+							<button id="1" class="sit_kinds pointer">일등석</button>
 						</div>	
 					</div>
 				</div>
@@ -251,7 +251,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<input type="text" name="adult" id="hidden_adult" 				value="1" 	readonly="readonly" required="required">
 						<input type="text" name="child" id="hidden_child" 				value="0"	readonly="readonly" required="required">
 						<input type="text" name="baby" id="hidden_baby" 					value="0"	readonly="readonly" required="required">
-						<input type="text" name="sitType" id="hidden_sit_type" 			value="sit3"	readonly="readonly" required="required">
+						<input type="text" name="seatGrade" id="hidden_seat_grade" 			value="3"	readonly="readonly" required="required">
 						<input type="submit" id="hidden_submit">
 						<!-- checkpoint -->
 					</form>					
@@ -338,8 +338,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						
 						
 						
-						<button id="cheap_slide_prev" class="slide_prev pointer" onclick="cheapSlidePlusSlides(-1)"></button>
-						<button id="cheap_slide_next" class="slide_next pointer" onclick="cheapSlidePlusSlides(1)"></button>
+						<button id="cheap_slide_prev" class="slide_prev pointer" ></button>
+						<button id="cheap_slide_next" class="slide_next pointer" ></button>
 					</div>
 				</div>
 				
@@ -450,6 +450,15 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			
 	<script>
 	
+	let currentIndex = 0;					//캐러셀 index
+	
+	$(loadedHandler)
+	function loadedHandler(){
+		$(".according").css("display","none");
+		$(".cheap_slide_prev").on("click",leftClickHandler);
+		$(".cheap_slide_prev").on("click",rightClickHandler);
+		slide(0);
+	}
 	//캐러셀
 	function slide(index) {
 		document.querySelector('.slides_wrap').style.transform = `translateX(-${index * 330}px)`;

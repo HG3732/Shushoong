@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelPic;
-import kh.mclass.shushoong.hotel.model.domain.HotelReviewDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
@@ -48,7 +48,7 @@ public class HotelService {
 	}
 
 	//해당 호텔 리뷰 작성된거 불러오기
-	public List<HotelReviewDtoRes> selectReviewDetailList(String hotelCode) {
+	public List<HotelReviewDto> selectReviewDetailList(String hotelCode) {
 		return hotelRepository.selectReviewDetailList(hotelCode);
 	}
 	

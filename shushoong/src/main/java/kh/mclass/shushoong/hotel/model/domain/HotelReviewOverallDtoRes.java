@@ -9,7 +9,7 @@ import lombok.Data;
 public class HotelReviewOverallDtoRes {
 
 	private String reviewCount;
-	private String avgFacility;
+	private String avgHotelFacility;
 	private String avgHotelClean;
 	private String avgHotelConven;
 	private String avgHotelKind;

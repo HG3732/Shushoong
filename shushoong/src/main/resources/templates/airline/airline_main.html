@@ -52,7 +52,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						</div>
 						
 						<div>
-							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">일반석/성인1/소아0/유아0<img alt="사람" th:src="@{/images/person.png}"></button>
+							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">
+								<div id="people_lineup_text">이코노미석/성인1/소아0/유아0</div>
+								<img alt="사람" th:src="@{/images/person.png}">
+							</button>
 							
 						</div>
 						
@@ -75,7 +78,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						</div>
 						
 						<div>
-							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">일반석/성인1/소아0/유아0<img alt="사람" th:src="@{/images/person.png}"></button>
+							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">
+								<div id="people_lineup_text">이코노미석/성인1/소아0/유아0</div>
+								<img alt="사람" th:src="@{/images/person.png}">
+							</button>
 						</div>
 						<!-- checkpoint -->
 						<label for="hidden_submit" >검색</label>
@@ -255,83 +261,78 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			
 			<section class="recommend_section">
 				<div class="recomend_section_cheap_background">
-					<div class="recommend_cheap">
-						<div> 저렴한곳 순서</div>
-						<div class="cheap_slides" id="cheap_slides" >
-							<div class="slides_wrap" id="cheap_slides_wrap">
-								<div class="slides_image" id="cheap_slides_image">
-									사진1
-								</div>
-								<div class="slides_name" id="cheap_slides_name">
-									맑고 투명한 물~~ 괌으로 오세요~~1
-								</div>
-								<div class="slides_price" id="cheap_slides_price">
-									성인 1인 기준 :  
-									<div>10,000,000원1</div>
-								</div>
+					<div class="recommend_cheap" >
+						<div class="slides_wrap" id="cheap_slides_wrap">
+							<div class="slides_image" id="cheap_slides_image">
+								사진1
 							</div>
-							<div class="slides_wrap" id="cheap_slides_wrap">
-								<div class="slides_image" id="cheap_slides_image">
-									사진2
-								</div>
-								<div class="slides_name" id="cheap_slides_name">
-									맑고 투명한 물~~ 괌으로 오세요~~2
-								</div>
-								<div class="slides_price" id="cheap_slides_price">
-									성인 1인 기준 :  
-									<div>10,000,000원2</div>
-								</div>
+							<div class="slides_name" id="cheap_slides_name">
+								맑고 투명한 물~~ 괌으로 오세요~~1
 							</div>
-							<div class="slides_wrap" id="cheap_slides_wrap">
-								<div class="slides_image" id="cheap_slides_image">
-									사진3
-								</div>
-								<div class="slides_name" id="cheap_slides_name">
-									맑고 투명한 물~~ 괌으로 오세요~~3
-								</div>
-								<div class="slides_price" id="cheap_slides_price">
-									성인 1인 기준 :  
-									<div>10,000,000원3</div>
-								</div>
+							<div class="slides_price" id="cheap_slides_price">
+								성인 1인 기준 :  
+								<div>10,000,000원1</div>
 							</div>
 						</div>
-						
-						<div class="cheap_slides" id="cheap_slides" >
-							<div class="slides_wrap" id="cheap_slides_wrap">
-								<div class="slides_image" id="cheap_slides_image">
-									사진4
-								</div>
-								<div class="slides_name" id="cheap_slides_name">
-									맑고 투명한 물~~ 괌으로 오세요~~4
-								</div>
-								<div class="slides_price" id="cheap_slides_price">
-									성인 1인 기준 :  
-									<div>10,000,000원4</div>
-								</div>
+						<div class="slides_wrap" id="cheap_slides_wrap">
+							<div class="slides_image" id="cheap_slides_image">
+								사진2
 							</div>
-							<div class="slides_wrap" id="cheap_slides_wrap">
-								<div class="slides_image" id="cheap_slides_image">
-									사진5
-								</div>
-								<div class="slides_name" id="cheap_slides_name">
-									맑고 투명한 물~~ 괌으로 오세요~~5
-								</div>
-								<div class="slides_price" id="cheap_slides_price">
-									성인 1인 기준 :  
-									<div>10,000,000원5</div>
-								</div>
+							<div class="slides_name" id="cheap_slides_name">
+								맑고 투명한 물~~ 괌으로 오세요~~2
 							</div>
-							<div class="slides_wrap" id="cheap_slides_wrap">
-								<div class="slides_image" id="cheap_slides_image">
-									사진6
-								</div>
-								<div class="slides_name" id="cheap_slides_name">
-									맑고 투명한 물~~ 괌으로 오세요~~6
-								</div>
-								<div class="slides_price" id="cheap_slides_price">
-									성인 1인 기준 :  
-									<div>10,000,000원6</div>
-								</div>
+							<div class="slides_price" id="cheap_slides_price">
+								성인 1인 기준 :  
+								<div>10,000,000원2</div>
+							</div>
+						</div>
+						<div class="slides_wrap" id="cheap_slides_wrap">
+							<div class="slides_image" id="cheap_slides_image">
+								사진3
+							</div>
+							<div class="slides_name" id="cheap_slides_name">
+								맑고 투명한 물~~ 괌으로 오세요~~3
+							</div>
+							<div class="slides_price" id="cheap_slides_price">
+								성인 1인 기준 :  
+								<div>10,000,000원3</div>
+							</div>
+						</div>
+					
+						<div class="slides_wrap" id="cheap_slides_wrap">
+							<div class="slides_image" id="cheap_slides_image">
+								사진4
+							</div>
+							<div class="slides_name" id="cheap_slides_name">
+								맑고 투명한 물~~ 괌으로 오세요~~4
+							</div>
+							<div class="slides_price" id="cheap_slides_price">
+								성인 1인 기준 :  
+								<div>10,000,000원4</div>
+							</div>
+						</div>
+						<div class="slides_wrap" id="cheap_slides_wrap">
+							<div class="slides_image" id="cheap_slides_image">
+								사진5
+							</div>
+							<div class="slides_name" id="cheap_slides_name">
+								맑고 투명한 물~~ 괌으로 오세요~~5
+							</div>
+							<div class="slides_price" id="cheap_slides_price">
+								성인 1인 기준 :  
+								<div>10,000,000원5</div>
+							</div>
+						</div>
+						<div class="slides_wrap" id="cheap_slides_wrap">
+							<div class="slides_image" id="cheap_slides_image">
+								사진6
+							</div>
+							<div class="slides_name" id="cheap_slides_name">
+								맑고 투명한 물~~ 괌으로 오세요~~6
+							</div>
+							<div class="slides_price" id="cheap_slides_price">
+								성인 1인 기준 :  
+								<div>10,000,000원6</div>
 							</div>
 						</div>
 						
@@ -346,7 +347,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				<div class="recomend_section_fast_background">
 					<div class="recommend_fast">
 						<div> 저렴한곳 순서</div>
-						<div class="fast_slides" id="fast_slides" >
 							<div class="slides_wrap" id="fast_slides_wrap">
 								<div class="slides_image" id="fast_slides_image">
 									사진1
@@ -384,9 +384,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 								</div>
 							</div>
 							
-						</div>
 						
-						<div class="fast_slides" id="fast_slides" >
 							<div class="slides_wrap" id="fast_slides_wrap">
 								<div class="slides_image" id="fast_slides_image">
 									사진1
@@ -424,7 +422,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 								</div>
 							</div>
 							
-						</div>
 						
 						
 						
@@ -446,261 +443,40 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	
 	
 			<!-- 자바스크립트 -->
-			
+		
+	<!-- airline_main 의 bar에 관한 js -->		
+	<script th:src="@{/js/airline/airline_mainbar.js}" type="text/javascript"></script>
+	
 			
 	<script>
 	
-	$(loadedHandler)
-	function loadedHandler(){
-		$(".according").css("display","none");
+	//캐러셀
+	function slide(index) {
+		document.querySelector('.slides_wrap').style.transform = `translateX(-${index * 330}px)`;
+		currentindex = index;
 	}
 	
-				/* 편도 왕복 적용하는 펑션 */		
-		function ticketType(event,ticketType,ticketTypeBtn){
-			var i, tabcontent, tablinks;
-			tabcontent=document.getElementsByClassName("tabcontent");
-			tablinks = document.getElementsByClassName("tablinks");
-
-			
-			for(i = 0 ; i<tabcontent.length; i++){
-				tabcontent[i].style.display="none";
-			}
-		
-			for(i=0; i<tablinks.length; i++){
-				tablinks[i].style.border= "none";
-			}
-		
-			document.getElementById(ticketType).style.display="block";
-			document.getElementById(ticketTypeBtn).style.borderBottom = "2px solid  rgb(0,106,255)";
-			
-			event.currentTarget.className +=" active";
-		}	
-			
-				/* 편도 왕복 value input */
-		$("button.tablinks").on("click",function(){
-			if($(this).attr("id")=="one_way_btn"){
-				$("#hidden_ticket_type").val(1);
-			}else if($(this).attr("id")=="round_trip_btn"){
-				$("#hidden_ticket_type").val(2);
-			}
-		});
-		
-				/* 출입국 지역 날짜 인원 according 버튼 펑션 */		
-		function accordingInfo(event,accordingInfo){
-			var i, according;
-			according = document.getElementsByClassName("according");
-			
-			if(document.getElementById(accordingInfo).style.display==="block"){
-				for(i=0 ; i<according.length; i++){
-					according[i].style.display="none";
-				}
-			}else{
-				for(i=0 ; i<according.length; i++){
-					according[i].style.display="none";
-				}
-				if(accordingInfo == "depart_accoding" || accordingInfo == "arrival_accoding"){
-					document.getElementById(accordingInfo).style.display="flex";
-				}else{
-					document.getElementById(accordingInfo).style.display="block";
-				}
-			}
+	//캐러셀 버튼 클릭
+	function leftClickHandler() {
+		if(currentindex > 0) {
+			currentindex = currentindex-1;
+			slide(currentindex);
+		};
+	}
+	
+	function rightClickHandler() {
+		if(currentindex < $('.slides_wrap').children().length-3) {
+			currentindex = currentindex+1;
+			slide(currentindex);
 		}
+	}	
 		
-				/* 출국 설정하는 vertical Tabs 적용하는 펑션 */
-		function departNation(event,nation,nationId){
-			var i, tabcontent, tablinks;
-			tabcontent=document.getElementsByClassName("according_section_depart_tabcontent");
-			tablinks = document.getElementsByClassName("according_section_depart_tablinks");
-			
-			for(i = 0 ; i<tabcontent.length; i++){
-				tabcontent[i].style.display="none";
-			}
-		
-			for(i=0; i<tablinks.length; i++){
-				tablinks[i].style.fontWeight ="0";
-				tablinks[i].style.backgroundColor = "white";
-			}
-		
-			document.getElementById(nation).style.display="block";
-			document.getElementById(nationId).style.fontWeight ="900" ;
-			document.getElementById(nationId).style.backgroundColor = "var(--color_blue_2)";
-			}
-				
-				/* 입국 설정하는 vertical Tabs 적용하는 펑션 */
-		function arrivalNation(event,nation,nationId){
-			var i, tabcontent, tablinks;
-			tabcontent=document.getElementsByClassName("according_section_arrival_tabcontent");
-			tablinks = document.getElementsByClassName("according_section_arrival_tablinks");
-			
-			
-			for(i = 0 ; i<tabcontent.length; i++){
-				tabcontent[i].style.display="none";
-			}
-		
-			for(i=0; i<tablinks.length; i++){
-				tablinks[i].style.fontWeight ="0";
-				tablinks[i].style.backgroundColor = "white";
-			}
-		
-			document.getElementById(nation).style.display="block";
-			document.getElementById(nationId).style.fontWeight ="900" ;
-			document.getElementById(nationId).style.backgroundColor = "var(--color_blue_2)";
-			
-			event.currentTarget.className +=" active";
-		}
-		
-				/* 출국 바 이름 변경 + value input + 입국 according open 펑션 */
-		$("button.depart_accoding_value").on("click",function(){
-			$("#depart").text($(this).text());										/*  바 이름 변경 */
-	$("#hidden_depart_value").val($(this).attr("id"));								/* value input */
-			document.getElementById("depart_accoding").style.display="none"; 		/* 출국 according close */
-			document.getElementById("arrival_accoding").style.display="block";		/* 입국 according open */
-		});
-				
-				/* 입국 value input 펑션 */
-		$("button.arrival_accoding_value").on("click",function(){
-			$("#arrival").text($(this).text());										/*  바 이름 변경 */
-	$("#hidden_arrival_value").val($(this).attr("id"));								/* value input */
-			document.getElementById("arrival_accoding").style.display="none";		/* 입국 according close */
-			document.getElementById("date_accoding").style.display="block";			/* 날짜 according open */
-		});
-				
-				
-				/* 날짜 설정하는 펑션  */
-				
-														/* 달력 api */
-	    document.addEventListener('DOMContentLoaded', function() {
-	    	 var date = new Date();
-	    	    var year = date.getFullYear();
-	    	    var month = ("0" + (1 + date.getMonth())).slice(-2);
-	    	    var day = ("0" + date.getDate()).slice(-2);
-	    	
-	    	const departdate = new Date($("#hidden_depart_date").val());
-	    	const arrivaldate = new Date($("#hidden_arrival_date").val());
-		    var ij = 0;		
-			var calendarEl = document.getElementById('calendar');
-		    var calendar = new FullCalendar.Calendar(calendarEl, {
-		   		initialView: 'dayGridMonth',
-		       	dateClick: function(info) {
-		       		
-					if($("#hidden_ticket_type").val()==1){
-					   	$("#hidden_depart_date").val(info.dateStr);
-					   	$("#one_way_date").children(1).text($("#hidden_depart_date").val());
-					   	document.getElementById("date_accoding").style.display="none";
-					   	document.getElementById("people_lineup_sit_accoding").style.display="block";
-					}else if($("#hidden_ticket_type").val()==2){
-						if($("#depart_date").css("display")=="block"){
-							if(year + "-" + month + "-" + day > info.dateStr){
-								alert("금일보다 과거의 날짜를 선택하실 수 없습니다. \n다시 입력해 주시길 바랍니다.");
-								$("#round_trip_date").children(1).text("날짜 선택");
-							}else if(year + "-" + month + "-" + day <= info.dateStr){
-								$("#hidden_depart_date").val(info.dateStr);
-								$("#round_trip_date").children(1).text($("#hidden_depart_date").val()+"/");
-								document.getElementById("btn_return_depart_date").style.display="block";
-								document.getElementById("depart_date").style.display="none";
-								document.getElementById("arrival_date").style.display="block";
-							}
-						}
-						else if($("#arrival_date").css("display")=="block"){
-							$("#hidden_arrival_date").val(info.dateStr);
-							if($("#hidden_depart_date").val() > $("#hidden_arrival_date").val()){
-								alert("출발일보다 과거의 날짜를 선택하실 수 없습니다. \n다시 입력해 주시길 바랍니다.");
-								$("#round_trip_date").children(1).text("날짜 선택");
-							}
-							else if($("#hidden_depart_date").val() <= $("#hidden_arrival_date").val()){
-								$("#round_trip_date").children(1).text($("#hidden_depart_date").val()+"/ \n"+$("#hidden_arrival_date").val());
-								document.getElementById("btn_return_depart_date").style.display="none";
-								document.getElementById("arrival_date").style.display="none";
-								document.getElementById("depart_date").style.display="block";
-								document.getElementById("date_accoding").style.display="none";
-								document.getElementById("people_lineup_sit_accoding").style.display="block";
-							}
-						}
-					}
-		       	}
-		    });
-		    calendar.render();
-	    });
-	    
-													/* 오는날에서 가는날로 전환 */
-		$("#btn_return_depart_date").on("click",function(){
-			document.getElementById("arrival_date").style.display="none";
-			document.getElementById("btn_return_depart_date").style.display="none";
-			document.getElementById("depart_date").style.display="block";
-		});		
-				
-				/* 인원 설정하는 펑션 - plus */
-		$("button#plus").on("click",function(){
-			if(Number($("div#adult").children("div").text()) == Number($("div#baby").children("div").text())){
-				if($(this).parent().attr("id")=="adult"||$(this).parent().attr("id")=="child"){
-					$(this).prev().text(Number($(this).prev().text())+1);
-				}else if($(this).parent().attr("id")=="baby"){
-					alert("유아는 좌석이 따로 배정되지 않으므로, \n성인보다 많이 탑승할 수 없습니다.");
-				}
-			}else if(Number($("div#adult").children("div").text()) <= Number($("div#baby").children("div").text())){
-				alert("유아는 좌석이 따로 배정되지 않으므로, \n성인보다 많이 탑승할 수 없습니다.");
-			}else{
-				$(this).prev().text(Number($(this).prev().text())+1);
-			}
-			
-		});
-			
-			/* 인원 설정하는 펑션 - minus */
-		$("button#minus").on("click",function(){
-			if(Number($(this).next().text()) < 1){
-				alert("인원은 0명 이하로 입력하실 수 없습니다.");
-			}else if(Number($("div#adult").children("div").text()) == Number($("div#baby").children("div").text())){
-				if($(this).parent().attr("id")=="adult"){
-					alert("유아는 좌석이 따로 배정되지 않으므로, \n성인보다 많이 탑승할 수 없습니다.");
-				}else if($(this).parent().attr("id")=="baby"||$(this).parent().attr("id")=="child"){
-					$(this).next().text(Number($(this).next().text())-1);
-				}
-			}else if(Number($("div#adult").children("div").text()) < Number($("div#baby").children("div").text())){
-				alert("유아는 좌석이 따로 배정되지 않으므로, \n성인보다 많이 탑승할 수 없습니다.");
-			}else{
-			$(this).next().text(Number($(this).next().text())-1);
-			}
-		});
-			
-					/* 좌석 설정하는 펑션 */
-		$("button.sit_kinds").on("click",function(){
-			var kinds = document.getElementsByClassName("sit_kinds");
-			for(i = 0 ; i<kinds.length; i++){
-				kinds[i].style.background="none";
-				kinds[i].style.color="black";
-			}
-		document.getElementById($(this).attr("id")).style.backgroundColor="var(--color_blue_2)";
-		document.getElementById($(this).attr("id")).style.color="black";
-		}); 
-					
-					/* 인원 or 좌석 input value + 바에 띄우기  */
-		$("button#plus").on("click",lineupSitFunction);
-		$("button#minus").on("click",lineupSitFunction);
-		$("button.sit_kinds").on("click",lineupSitFunction);
-		function lineupSitFunction(){
-		 	if($(this).parent().attr("id")=="adult"){
-		 		$("#hidden_adult").val($("#adult_value").text());}
-			else if($(this).parent().attr("id")=="child"){
-				$("#hidden_child").val($("#child_value").text());			}
-			else if($(this).parent().attr("id")=="baby"){
-		 		$("#hidden_baby").val($("#baby_value").text());}
-			else if($(this).parent().attr("class")=="sit"){
-				$("#hidden_sit_type").val($(this).attr("id"));
-			} 
-		 	
-		 	$("#people_lineup").text(
-		 		$("#"+$("#hidden_sit_type").val()).text() +"/"+
-				"성인"+$("#hidden_adult").val()+"/"+
-				"소아"+$("#hidden_child").val()+"/"+
-				"유아"+$("#hidden_baby").val()
-		 	);
-		 
-		}
-		
-		
-		
-		
+	
+	
+	
+	
 				/*  Slide 기능 넣는 섹션 */
+	/* 
 	let cheapSlideIndex = 1;
 	cheapShowSlides(cheapSlideIndex);		
 	
@@ -729,6 +505,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	  }
 	  slides[cheapSlideIndex-1].style.display = "flex";  
 	}
+	
+	
 	
 	
 	
@@ -762,8 +540,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	  }
 	  slides[fastSlideIndex-1].style.display = "flex";  
 	}
-		
 	
+	 */
 	
     
 	

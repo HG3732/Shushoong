@@ -51,17 +51,14 @@ div.tabcontent > div{
 }
 
 div.tabcontent div:nth-child(1) {
-	position : absolute;
-	margin-top:-25px;
-	margin-left: 425px;
-	width : 500px;
+	width : 370px;
 }
 
 div.tabcontent div:nth-child(2) {
-	width : 450px;
+	width : 160px;
 }
 div.tabcontent div:nth-child(3) {
-	width : 300px;
+	width : 246px;
 }
 
 div.tabcontent > label{
@@ -69,14 +66,14 @@ div.tabcontent > label{
 	border : none;
 	color : black;
 	background-color: #BCEFFF;
-	width: 100px;
+	width: 60px;
 }
 
 div.tabcontent > label:hover{
 	border : none;
 	color : white;
 	background-color: rgb(0,106,255);
-	width: 100px;
+	width: 60px;
 }
 
 
@@ -89,7 +86,7 @@ div.tabcontent > label:hover{
 }
 
 button#depart{
-	width: 230px;
+	width: 165px;
 	border : none;
 	background : none;
 	height: 40px;
@@ -99,25 +96,21 @@ img.type {
 	height: 40px;
 }
 button#arrival{
-	width: 230px;
+	width: 165px;
 	border : none;
 	background : none;
 	height: 40px;
 }
 
 button#one_way_date , button#round_trip_date{
-	
-	width: 450px;
-	height: 40px;
 	border: none;
 	background: none;
 }
 
 button#one_way_date > div , button#round_trip_date > div{
-	margin-left :0;
-	margin-top : 0;
-	
-	width: 410px;
+
+	float : left;
+	width: 108px;
 	line-height: 40px;
 }
 
@@ -127,19 +120,24 @@ button#one_way_date > img , button#round_trip_date > img{
 	height: 40px;
 }
 button#people_lineup{
-	width : 300px;
+	width : 246px;
 	height: 40px;
 	background: none;
 	border: none;
+}
+button#people_lineup > div{
+	float : left;
+	width : 194px;
+	height: 40px;
+	line-height: 40px;
 }
 button#people_lineup >img{
 	width : 40px;
 	height: 40px;
 	float : right;
-	margin-top: -10px;
 }
 
-
+			/* 어코딩 섹션 */
 section.according_section{
 	width: 960px;
 	margin: auto;
@@ -240,7 +238,7 @@ button#arrival_date{
 
 							/* 인원 + 좌석 */
 div#people_lineup_sit_accoding{
-	margin-left:450px;
+	margin-left:530px;
 	width: 400px;
 }
 							
@@ -346,8 +344,11 @@ button#sit3{
 	
 	
 }
+.recommend_cheap{
+	display: flex;
+}
 
-.recommend_section > div > div > div:nth-of-type(1){
+/* .recommend_section > div > div > div:nth-of-type(1){
 	font-size : 20px;
 	text-align : center;
 	width : 500px;
@@ -359,7 +360,7 @@ button#sit3{
 	background-color : white;
 	
 	border: 1px solid black;
-}
+} */   												/* 저렴한곳 순서 태그 */
 .recommend_section > div > div > div:nth-of-type(2){
 	position: relative;
 }

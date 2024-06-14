@@ -4,7 +4,7 @@ function getSelectOptions() {
 	var arrivalLoc = $('#select-info-arrivalLoc-out').text();
 
 	$('#showlist').on('change', updateTimeRange);
-
+	$('#price-input-right').on('click', updateTimeRange); // 가격 사이드 바
 	$('.direct-btn').on('click', function() {
 		viaType = $(this).val();
 		$('#viaType').val(viaType);
@@ -20,14 +20,16 @@ function getSelectOptions() {
 	});
 	// 시간대 
 	function updateTimeRange() {
-
+	
 		// var departLoc = $('#select-info-departLoc-out').text();
 		// var arrivalLoc = $('#select-info-arrivalLoc-out').text();
 		var selectType = $('#showlist').val();
-
 		console.log('셀렉트바 active');
 		console.log('정렬 순서', selectType);
 
+		var maxPrice = $('#maxPrice').text(); // 가격대
+		console.log('가격 최댓 값 : ', maxPrice);
+		
 		console.log('사이드바 출발 시간대');
 		// 출발
 		var departTimeLeftVal = $('#depart-left-timeval').text()/*.split(':')[0]*/;
@@ -35,6 +37,7 @@ function getSelectOptions() {
 		// 도착
 		var arrivalTimeLeftVal = $('#arrival-left-timeval').text()/*.split(':')[0]*/;
 		var arrivalTimeRightVal = $('#arrival-right-timeval').text()/*.split(':')[0]*/;
+		// 가격대
 
 		console.log('출발지 : ', departLoc);
 		console.log('도착지 : ', arrivalLoc);
@@ -44,6 +47,7 @@ function getSelectOptions() {
 		console.log('RIGHT 출발 시간대 : ', departTimeRightVal);
 		console.log('LEFT 도착 시간대 : ', arrivalTimeLeftVal);
 		console.log('RIGHT 도착 시간대 : ', arrivalTimeRightVal);
+		console.log('가격 최댓 값 : ' , maxPrice);
 
 		$.ajax({
 			url: "/shushoong/airline/list_select_options/ajax",
@@ -56,7 +60,8 @@ function getSelectOptions() {
 				arrivalTimeLeft: arrivalTimeLeftVal,
 				arrivalTimeRight: arrivalTimeRightVal,
 				selectType: selectType,
-				viaType: viaType
+				viaType: viaType,
+				maxPrice: maxPrice
 			},
 			dataType: 'json',
 			success: function(response) {

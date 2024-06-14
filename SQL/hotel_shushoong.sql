@@ -1,6 +1,6 @@
 select * from hotel;
 
-select hotel_name, hotel_eng, hotel_address, hotel_call, hotel_check_in, hotel_check_out, hotel_policy, hotel_intro from hotel where hotel_code = #{hotelCode};
+select hotel_name, hotel_eng, hotel_address, hotel_call, hotel_check_in, hotel_check_out, hotel_policy, hotel_intro from hotel where hotel_code = #{hotelCode} ;
 
 select room_cat, hotel_price, room_att from hotel_room where hotel_code = #{hotelCode}	;	
 
@@ -51,15 +51,46 @@ join hotel_reserve hr using (hotel_reserve_code)
     where hr.hotel_code = '2OS001';
 
 ------리뷰 전체 평균 구하기
---일단 각 평점 항목 평균 먼저 구하기
-select avg(hotel_facility), avg(hotel_clean), avg(hotel_conven), avg(hotel_kind) from hotel_review
+--각 평점 항목 평균 먼저 구하기 -> chart js 용 
+select count(*), avg(hotel_facility), avg(hotel_clean), avg(hotel_conven), avg(hotel_kind) from hotel_review
     join hotel_reserve hr using (hotel_reserve_code)
 where hr.hotel_code = '2OS001';
 
---각 평점 항목 평균 가지고 전체 평균 구하기
+
+--각 평점 항목 평균 가지고 전체 평균 구하기 + 전체 리뷰 갯수 불러오기 --> chart js 왼쪽에 표시될 내용 
 select (avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4 as all_rate_avg from hotel_review
     join hotel_reserve hr using (hotel_reserve_code)
 where hr.hotel_code = '2OS001';
+
+
+---------위에 두개 합치기
+select count(*) as reply_count, avg(hotel_facility) as avg_facility, avg(hotel_clean) as avg_hotel_clean, avg(hotel_conven) as avg_hotel_conven, avg(hotel_kind) as avg_hotel_kind, 
+        (avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4 as avg_all_rate
+from hotel_review
+    join hotel_reserve hr using (hotel_reserve_code)
+where hr.hotel_code = '2OS001';      
+
+
+--- 다 같이 합치기
+SELECT hr.user_id, hr.tripper_cat, hr.review_title, hr.review_comment, SUBSTR(hr.hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hr.hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hr.hotel_reserve_code, 7, 2) || '일' as review_date, 
+    hr.hotel_facility, hr.hotel_clean, hr.hotel_conven,  hr.hotel_kind, (hr.hotel_facility + hr.hotel_clean + hr.hotel_conven + hr.hotel_kind)/4 as rate_avg,
+    stats.reply_count, stats.avg_facility, stats.avg_hotel_clean, stats.avg_hotel_conven, stats.avg_hotel_kind, stats.avg_all_rate
+FROM 
+    (SELECT hotel_reserve_code, user_id, tripper_cat, review_title, review_comment, hotel_facility, hotel_clean, hotel_conven, hotel_kind
+    FROM hotel_review 
+        JOIN hotel_reserve hr USING (hotel_reserve_code)
+    WHERE hr.hotel_code = '2OS001'
+    ) hr,
+        (SELECT count(*) as reply_count, avg(hotel_facility) as avg_facility, avg(hotel_clean) as avg_hotel_clean, avg(hotel_conven) as avg_hotel_conven, avg(hotel_kind) as avg_hotel_kind, 
+        (avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4 as avg_all_rate
+        FROM hotel_review
+          JOIN hotel_reserve hr USING (hotel_reserve_code)
+        WHERE hr.hotel_code = '2OS001'
+        ) stats;
+
+
+
+
 
 
 

@@ -5,7 +5,7 @@
 <!-- 검색한 호텔 리스트 띄우기 위한 SQL  -->
 	<!-- 호텔 이름, 영어이름, 주소, 최저가(인원수 고려), 사진 1장 -->
 	<select id="selectAllHotelList" parameterType="hashmap" resultType="HotelDtoRes">
-		select hotel_code, hotel_name, hotel_eng, hotel_address, hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num
+		select hotel_code, hotel_name, hotel_eng, hotel_address, to_char(hotel_price, '999,999') as hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num
 		from V_hotel_list 
 		where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap = #{people}
         <if test="keyword != null and keyword !='' ">
@@ -58,7 +58,7 @@
 	</select>
 	
 	<select id="selectRoomList" parameterType="String" resultType="HotelRoomDto">
-		select room_cat, hotel_price, room_att from hotel_room where hotel_code = #{hotelCode}		
+		select room_cat, to_char(hotel_price, '999,999') as hotel_price, room_att from hotel_room where hotel_code = #{hotelCode}		
 	</select>
 	
 	<select id="selectHotelSearchList" parameterType="String" resultType="HotelSearchDtoRes">
@@ -71,7 +71,7 @@
 	</select>
 	
 	<!-- 작성된 리뷰 불러오기 -->
-	<select id="selectReviewDetailList" parameterType="String" resultType="HotelReviewDtoRes">
+	<select id="selectReviewDetailList" parameterType="String" resultType="HotelReviewDto">
 		select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
 		hotel_facility, hotel_clean, hotel_conven, hotel_kind, (hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4 as rate_avg
 		from hotel_review 
@@ -87,6 +87,8 @@
 		    join hotel_reserve hr using (hotel_reserve_code)
 		where hr.hotel_code = #{hotelCode}
 	</select>
+
+	<!--  -->
 
 	
 </mapper>

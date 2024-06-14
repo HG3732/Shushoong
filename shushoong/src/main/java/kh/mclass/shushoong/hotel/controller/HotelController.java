@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
-import kh.mclass.shushoong.hotel.model.domain.HotelReviewDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
@@ -168,7 +168,7 @@ public class HotelController {
 		model.addAttribute("facilitylist", facilitylist);
 		
 		//작성된 리뷰 불러오기
-		List<HotelReviewDtoRes> reviewDetailDto = service.selectReviewDetailList("2OS001");
+		List<HotelReviewDto> reviewDetailDto = service.selectReviewDetailList("2OS001");
 			//여행객 종류
 			for(int i = 0; i<reviewDetailDto.size(); i++) {
 				switch(reviewDetailDto.get(i).getTripperCat()){

@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelPic;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
-import kh.mclass.shushoong.hotel.model.domain.HotelReviewDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
@@ -28,7 +28,7 @@ public interface HotelRepository {
 	
 	public List<HotelFacilityDtoRes> selectHotelFacility(String hotelCode);
 	
-	public List<HotelReviewDtoRes> selectReviewDetailList(String hotelCode);
+	public List<HotelReviewDto> selectReviewDetailList(String hotelCode);
 	
 	public List<HotelReviewOverallDtoRes> selectReviewOverall(String hotelCode);
 	

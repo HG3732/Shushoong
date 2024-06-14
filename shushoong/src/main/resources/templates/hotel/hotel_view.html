@@ -256,7 +256,13 @@ xmlns:th="http://www.thymeleaf.org">
 							<!-- 막대그래프 -->
 							<div class="chart_wrap">
 								<div class="grid-item">
-									<canvas id="myChart" style="width:100%; height:100%;" th:data-address="${reviewOverall}"></canvas>
+									<canvas id="myChart" style="width:100%; height:100%;" 
+									            th:data-avg-facility="${reviewOverall.avgHotelFacility}"
+									            th:data-avg-clean="${reviewOverall.avgHotelClean}"
+									            th:data-avg-conven="${reviewOverall.avgHotelConven}"
+									            th:data-avg-kind="${reviewOverall.avgHotelKind}">
+									</canvas>
+									<!-- th:data-address="${searchlist.hotelAddress}" -->
 								</div>
 							</div>
 						</div>

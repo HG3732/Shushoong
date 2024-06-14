@@ -64,7 +64,7 @@ where hr.hotel_code = '2OS001';
 
 
 ---------위에 두개 합치기
-select count(*) as reply_count, avg(hotel_facility) as avg_facility, avg(hotel_clean) as avg_hotel_clean, avg(hotel_conven) as avg_hotel_conven, avg(hotel_kind) as avg_hotel_kind, 
+select count(*) as review_count, avg(hotel_facility) as avg_facility, avg(hotel_clean) as avg_hotel_clean, avg(hotel_conven) as avg_hotel_conven, avg(hotel_kind) as avg_hotel_kind, 
         (avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4 as avg_all_rate
 from hotel_review
     join hotel_reserve hr using (hotel_reserve_code)

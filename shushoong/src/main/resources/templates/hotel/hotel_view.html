@@ -249,14 +249,14 @@ xmlns:th="http://www.thymeleaf.org">
 						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">호텔후기</p>
 						<hr style="border: 0.1em solid black;"></hr>
 						<!-- 리뷰 차트 -->
-						<div class="review_detail" th:each="reviewlist : ${reviewListDto}">
-							<div class="review_rate_avg"><strong style="font-family: 'SOYOMapleBoldTTF';font-size: 28px; color: var(--color_blue_1)">4.3</strong> / 5</div>
-							<div class="review_count" style="margin-left: 15px;" th:text="${reviewlist.replyCount}">(1436개)</div>
+						<div class="review_detail" th:each="reviewOverall : ${reviewOverallDto}">
+							<div class="review_rate_avg"><strong style="font-family: 'SOYOMapleBoldTTF';font-size: 28px; color: var(--color_blue_1)" th:text="${reviewOverall.avgAllRate}"></strong> / 5</div>
+							<div class="review_count" th:text="'(' + ${reviewOverall.reviewCount} + ')개'"></div>
 							<div class="vertical_line"></div>
 							<!-- 막대그래프 -->
 							<div class="chart_wrap">
 								<div class="grid-item">
-									<canvas id="myChart" style="width:100%; height:100%;" th:data-address="${reviewlist}"></canvas>
+									<canvas id="myChart" style="width:100%; height:100%;" th:data-address="${reviewOverall}"></canvas>
 								</div>
 							</div>
 						</div>

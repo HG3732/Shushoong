@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
 
@@ -186,6 +187,9 @@ public class HotelController {
 				}
 			}
 		model.addAttribute("reviewListDto", reviewListDto);		
+		
+		List<HotelReviewOverallDtoRes> reviewOverallDto = service.selectReviewOverall("2OS001");
+		model.addAttribute("reviewOverallDto", reviewOverallDto);	
 		
 		
 		return "hotel/hotel_view";

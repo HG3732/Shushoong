@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelPic;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
@@ -49,6 +50,11 @@ public class HotelService {
 	//해당 호텔 리뷰 작성된거 불러오기
 	public List<HotelReviewDtoRes> selectReviewAll(String hotelCode) {
 		return hotelRepository.selectReviewAll(hotelCode);
+	}
+	
+	//해당 호텔 리뷰 작성된거 불러오기
+	public List<HotelReviewOverallDtoRes> selectReviewOverall(String hotelCode) {
+		return hotelRepository.selectReviewOverall(hotelCode);
 	}
 
 }

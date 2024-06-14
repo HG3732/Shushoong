@@ -4,7 +4,7 @@ function getSelectOptionsReturn() {
 	var arrivalLoc = $('#select-info-arrivalLoc-out').text();
 	
 	$('#showlist').on('change', updateTimeRange);
-
+	$('#price-input-right').on('click', updateTimeRange);
 	$('.direct-btn').on('click', function() {
 		viaType = $(this).val();
 		$('#viaType').val(viaType);
@@ -28,6 +28,9 @@ function getSelectOptionsReturn() {
 
 		console.log('셀렉트바 active');
 		console.log('정렬 순서', selectType);
+		
+		var maxPrice = $('#maxPrice').text(); // 가격대
+		console.log('가격 최댓 값 : ', maxPrice);
 
 		console.log('사이드바 출발 시간대');
 		// 출발
@@ -45,7 +48,8 @@ function getSelectOptionsReturn() {
 		console.log('RIGHT 출발 시간대 : ', departTimeRightVal);
 		console.log('LEFT 도착 시간대 : ', arrivalTimeLeftVal);
 		console.log('RIGHT 도착 시간대 : ', arrivalTimeRightVal);
-
+		console.log('가격 최댓 값 : ' , maxPrice);
+		
 		$.ajax({
 			url: "/shushoong/airline/list_select_options/ajax",
 			method: "get",
@@ -57,9 +61,9 @@ function getSelectOptionsReturn() {
 				arrivalTimeLeft: arrivalTimeLeftVal,
 				arrivalTimeRight: arrivalTimeRightVal,
 				selectType: selectType,
-				viaType: viaType
+				viaType: viaType,
+				maxPrice: maxPrice
 			},
-			dataType: 'json',
 			success: function(response) {
 				console.log('Ajax Success', response);
 				if (response.length == 0) {
@@ -145,7 +149,7 @@ function updateAirlineList(data) {
                             <div class="ticket-adult">성인 1</div>
                             <div class="airticket">
                                 <div class="ticket-price">
-                                    <div>${air.ticketPrice}</div>
+                                    <div>${air.seatPrice}</div>
                                 </div>
                                 <div class="ticket-btn">
                                     <button class="ticketinfo-btn" type="button">

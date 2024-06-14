@@ -7,11 +7,12 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/admin/mypageAdminAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/admin/mypageAdminHome.css}" rel="stylesheet" />
 <meta charset="UTF-8">
-<title>슈슝</title>
+<title>슈슝::마이페이지</title>
 </head>
 <body>
-
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
@@ -22,9 +23,65 @@ xmlns:th="http://www.thymeleaf.org">
 			</header>
 		</div>
 		<div class="wrap-body">
-			<div class="wrap-">
-			<!-- 여기부터 작성 -->
-			
+			<div class="wrap-aside">
+				<aside>
+					<div th:replace="~{mypage/admin/mypageAdminAside :: Aside}"></div>
+				</aside>
+			</div>
+			<div class="wrap-section">
+				<section>
+					<div class="image-section">
+						<img th:src="@{/images/노트북.png}" alt="이미지" width="100px" height="100px">
+					</div>
+					<div class="section-header">
+						안녕하세요, 관리자님! 이곳은 관리자 전용 공간이에요. 
+					</div>
+					<div class="section-image">
+						<a th:href="@{/customer/my/information}">
+							<div class="editInfo">
+								<img th:src="@{/images/일반사람.png}" alt="개인회원 관리" width="150px" height="150px">
+								<div class="tail">개인회원 관리</div>
+							</div>
+						</a>
+						<a href="#">
+							<div class="reservationHotel">
+								<img th:src="@{/images/회사원.png}" alt="사업자 회원 관리" width="150px" height="150px">
+								<div class="tail">사업자 회원 관리</div>
+							</div>
+						</a>
+					</div>
+					<div class="noticeList">
+						<div class="notice-title">공지사항</div>
+						<div class="notice-grid">
+							<div>번호</div>
+							<div>제목</div>
+							<div>작성일</div>
+						</div>
+						<div class="notice-content">
+							<div>1</div>
+							<div>서버 점검 예정</div>
+							<div>2020-02-02</div>
+						</div>
+						<div class="viewAllList">
+							<button type="button" class="viewList">전체보기</button>
+						</div>
+					</div>
+					<div class="onlineQnAList">
+						<div class="onlineQnAList-title">문의 현황</div>
+						<div class="QnA-grid">
+							<div>번호</div>
+							<div>문의제목</div>
+							<div>카테고리</div>
+							<div>등록일자</div>
+						</div>
+						<div class="QnA-content">
+							<div>1</div>
+							<div>결제가 진짜 개판이네요</div>
+							<div>결제/환불</div>
+							<div>2020-08-09</div>
+						</div>
+					</div>
+				</section>
 			</div>
 		</div>
 	</div>

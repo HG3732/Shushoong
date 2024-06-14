@@ -26,14 +26,18 @@ public class AirlineController {
 	public String airlineInfo(
 			String departLoc,
 			String arrivalLoc,
+			String departDate,
+			String arrivalDate,
 			Model md) {
 		System.out.println("=========");
-		log.info("!!!Received departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc);
+		log.info("!!!Received departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc + ", departDate: " + departDate +", arrivalDate: " + arrivalDate);
 
 		if (departLoc != null && arrivalLoc != null) {
-			List<AirlineInfoDto> airlineData = service.getAirlineInfo(departLoc, arrivalLoc);
+			List<AirlineInfoDto> airlineData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate);
 			System.out.println("컨트롤러 airline data: " + airlineData);
+			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc);
 			md.addAttribute("airlineData", airlineData);
+			md.addAttribute("maxPrice", maxPrice);
 		}else {
 		}
 		return "airline/airline_list";
@@ -42,22 +46,29 @@ public class AirlineController {
 	// 왕복 오는 항공편
 	@GetMapping("airline/list_return")
 	public String airlineInfoReturn(
+			String airlineCode,
 			String departLoc,
 			String arrivalLoc,
-			String airlineCode,
+			String departDate,
+			String arrivalDate,
 			Model md) {
 		
 		System.out.println("에어 오는편 컨트롤러");
 		log.info("선택된 항공 코드 : ", airlineCode);
 		log.info("항공 오는 편 departLoc: {}, arrivalLoc: {}", departLoc, arrivalLoc);
 		
-		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc);
+		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate);
 		
 		// 선택한 항공
 		List<AirlineInfoDto> selectOneAirline = service.getSelectOne(airlineCode);
 		
+		Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc);
+		System.out.println("출발지 : " + departLoc);
+		System.out.println("도착지 : " + arrivalLoc);
+		
 		md.addAttribute("selectOneAirline", selectOneAirline);
 		md.addAttribute("airlineReturnData", airlineReturnData);
+		md.addAttribute("maxPrice", maxPrice);
 		log.debug("Return controller 왕복편 data : {}", airlineReturnData);
 		
 		return "airline/airline_list_return";
@@ -74,39 +85,28 @@ public class AirlineController {
 			String arrivalTimeLeft,
 			String arrivalTimeRight,
 			String selectType,
-			String viaType
+			String viaType,
+			String maxPrice,
+			Model md
 			){
 		System.out.println("컨트롤러 목록 정렬");
 		System.out.println("출발지 : " + departLoc);
 		System.out.println("도착지 : " + arrivalLoc);
 		System.out.println("정렬 타입 : " + selectType);
 		System.out.println("경유 타입 : " + viaType);
+		System.out.println("가격 최댓 값 : " + maxPrice);
 		
-		List<AirlineInfoDto> SideDepartTimeData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType);
-		log.debug("컨트롤러 디버깅 : " + SideDepartTimeData);
+		List<AirlineInfoDto> SortData = service.getAirlineSideTime(
+				departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice
+				);
+		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc);
+		md.addAttribute("maxPrice2", maxPrice2);
+		log.debug("컨트롤러 디버깅 : " + SortData);
 		
-		return SideDepartTimeData;
+		return SortData;
 	}
-//	
-//	// 목록 셀렉트 바
-//	@GetMapping("airline/list_select_options")
-//	@ResponseBody
-//	public List<AirlineInfoDto> airlineSelectType(
-//			String departLoc,
-//			String arrivalLoc,
-//			String selectType
-//			) {
-//		
-//	    System.out.println("DepartLoc: " + departLoc);
-//	    System.out.println("ArrivalLoc: " + arrivalLoc);
-//	    System.out.println("SelectType: " + selectType);
-////	    System.out.println("TicketPrice: " + ticketPrice);
-////	    System.out.println("FlightTime: " + flightTime);
-//		
-//		List<AirlineInfoDto> selectTypeDto = service.getSelectTypeList(departLoc, arrivalLoc, selectType);
-//		return selectTypeDto;
-//	}
-//
+
+
 	// 항공 메인 페이지
 	@GetMapping("/airline/main")
 	public String airlineMain() {

@@ -156,8 +156,6 @@ function searchHandler() {
 			}
 		}).done(function(resp){
 			$(".sidebar").replaceWith(resp);
-			console.log("############");
-			console.log(inputRight);
 			//inputRight = document.getElementById("input-right");
 			//inputRight.addEventListener("input", setRightValue);
 			

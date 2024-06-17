@@ -26,7 +26,9 @@ public class HotelController {
 	private HotelService service;
 	
 	@GetMapping("/hotel/main")
-	public String hotelMain() {
+	public String hotelMain(Model model) {
+		List<HotelDtoRes> hotHotelList = service.selectHotHotelList();
+		model.addAttribute("hotHotelList", hotHotelList);
 		return "hotel/hotel_main";
 	}
 	

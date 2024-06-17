@@ -90,15 +90,21 @@
 	
 	//캐러셀 버튼 클릭
 	function leftClickHandler() {
+		$('.right.btn2').prop('disable', false);
 		if(currentindex > 0) {
 			currentindex = currentindex-1;
 			slide(currentindex);
+		} else {
+			$('.left.btn2').prop('disable', true);
 		};
 	}
 	
 	function rightClickHandler() {
+		$('.left.btn2').prop('disable', false);
 		if(currentindex < $('.list-wrapper').children().length-3) {
 			currentindex = currentindex+1;
 			slide(currentindex);
+		} else {
+			$('.right.btn2').prop('disable', true);
 		}
 	}

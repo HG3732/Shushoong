@@ -16,4 +16,5 @@ public class HotelDtoRes {
 	private String hotelPrice;
 	private String hotelReviewNum;
 	private String roomDiscount;
+	private String hotelPcount;
 }

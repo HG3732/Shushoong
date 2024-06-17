@@ -2,6 +2,10 @@
 	box-sizing: border-box;
 }
 
+.wrap-header {
+	margin-bottom: 200px;
+}
+
 .wrap-hotel-main {
 	font-family: 'SOYOMapleRegularTTF';
 }
@@ -254,6 +258,8 @@
 	margin: 20px auto;
 }
 
+/* 인기있는 호텔 캐러셀*/
+
 .wrap-hot-hotel-list {
 	width: 960px;
 	margin: 0 auto;
@@ -286,14 +292,25 @@
 }
 
 .list-wrapper .hot-hotel {
-	width: 250px;
-	height: 250px;
-	background-color: green;
+	height: 300px;
 	flex: 0 0 300px;
+	border: 1px, solid, var(--color_gray_2);
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
-.list-wrapper .hot-hotel > img {
+.list-wrapper .hot-hotel-info {
+	flex: 1 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.list-wrapper .hot-hotel .hot-hotel-pic > img {
 	display: block;
+	width: 100%;
 	object-fit: cover;
 }
 
@@ -314,10 +331,10 @@
 
 .wrap-hot-hotel-list .btn2.left {
 	left:-65px;
-	top: 165px;
+	top: 185px;
 }
 
 .wrap-hot-hotel-list .btn2.right {
 	right:-65px;
-	top: 165px;
+	top: 185px;
 }

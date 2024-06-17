@@ -165,7 +165,7 @@ function searchHandler() {
 			//슬라이드 바 Max수치 설정
 			$("#input-right").on("input",setRightValue);
 			//슬라이드바 동작 재설정
-			//setInitialValues();	
+			setInitialValues();	
 		});
 	});
 }

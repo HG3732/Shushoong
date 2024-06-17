@@ -21,7 +21,7 @@
 	       			ORDER BY hotel_price
 	       		</when>
 	       		<when test="sortBy.equals('review')">
-	       			ORDER BY hotel_price
+	       			ORDER BY hotel_review_num
 	       		</when>
 	       		<when test="sortBy.equals('grade')">
 	       			ORDER BY hotel_score

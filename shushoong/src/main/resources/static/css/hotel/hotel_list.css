@@ -252,10 +252,15 @@ input[type="range"]::-webkit-slider-thumb {
 
 .hotel_review{
 	font-size: var(--font4);
-	
 	margin-bottom: 10px;
 	display: flex;
 	align-items:center;
+	gap: 5px;
+}
+
+.hotel_review .count_review {
+	text-indent: 10px;
+	color: var(--color_gray_2);
 }
 
 

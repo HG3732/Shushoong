@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +17,7 @@ import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
-import kh.mclass.shushoong.hotel.model.domain.HotelSearchDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
 
 @Controller
@@ -86,77 +87,11 @@ public class HotelController {
 	
 	@GetMapping("/hotel/view")
 	public String hotelview(Model model) {
-		
-		List<HotelSearchDtoRes> result = service.selectHotelSearchList("2OS001");
-		//이중포문.. --> HotelSearchDtoRes 안에 방관련 데이터 뽑으려면 얘 안에 있는 HotelRoomDto를 까야함
-		for(int i = 0; i < result.size(); i++) {
-			HotelSearchDtoRes resultIdx = result.get(i);
-			List<HotelRoomDto> hotelRoomsList = resultIdx.getHotelRooms();
-			
-			for(int j = 0; j < hotelRoomsList.size(); j++) {
-				//방 종류 뽑기
-				switch (hotelRoomsList.get(j).getRoomCat()) {
-				case "0":
-					hotelRoomsList.get(j).setRoomCat("스탠다드 룸");
-					break;
-				case "1":
-					hotelRoomsList.get(j).setRoomCat("디럭스 룸");
-					break;
-				case "2":
-					hotelRoomsList.get(j).setRoomCat("슈페리어 룸");
-					break;
-				case "3":
-					hotelRoomsList.get(j).setRoomCat("스위트 룸");
-					break;
-				default:
-					hotelRoomsList.get(j).setRoomCat("기타");
-					break;
-				}
-				
-				//방 속성 경우의 수 나누기
-				switch(hotelRoomsList.get(j).getRoomAtt()) {
-				case "0":
-					hotelRoomsList.get(j).setRoomAtt("뷰 없음");
-					break;
-				case "1":
-					hotelRoomsList.get(j).setRoomAtt("오션뷰");
-					break;
-				case "2":
-					hotelRoomsList.get(j).setRoomAtt("마운틴뷰");
-					break;
-				default:
-					hotelRoomsList.get(j).setRoomAtt("시티뷰");
-					break;			
-				}
-				
-			}
-			
-			resultIdx.setHotelRooms(hotelRoomsList);
-		}
+		// @PathVariable String hotelCode
 		
 		//호텔 상세정보들 출력
-		model.addAttribute("hotelSearchlist", service.selectHotelSearchList("2OS001")); 
-		
-		
-		
-		
-		
-//		for(int i = 0; i < result.size(); i++) {
-//			switch(result.get(i).getRoomAtt()) {
-//			case "0":
-//				result.get(i).setRoomAtt("뷰 없음");
-//				break;
-//			case "1":
-//				result.get(i).setRoomAtt("오션뷰");
-//				break;
-//			case "2":
-//				result.get(i).setRoomAtt("마운틴뷰");
-//				break;
-//			default:
-//				result.get(i).setRoomAtt("시티뷰");
-//				break;			
-//			}
-//		}
+		HotelViewDtoRes result = service.selectOneHotel("2OS001");
+		model.addAttribute("hotelViewList", result); 
 
 		
 		//편의시설
@@ -224,13 +159,13 @@ public class HotelController {
 	}
 	
 	//페이징 처리
-	@GetMapping("/hotel/view/paging.ajax")
-	public String hotelPaging() {
-		
-		return "hotel/hotel_view_paging";
-		
-	}
-	
+//	@GetMapping("/hotel/view/paging.ajax")
+//	public String hotelPaging() {
+//		
+//		return "hotel/hotel_view_paging";
+//		
+//	}
+//	
 	@GetMapping("/hotel/customer/reserve/pay")
 	public String hotelPay() {
 		return "hotel/hotel_pay";

@@ -15,6 +15,8 @@ import kh.mclass.shushoong.hotel.model.domain.HotelSearchDtoRes;
 @Mapper
 public interface HotelRepository {
 	
+	//Hot 호텔 리스트
+	public List<HotelDtoRes> selectHotHotelList();
 	//호텔 리스트
 	public List<HotelDtoRes> selectAllHotelList(String code, String people, String keyword, String maxPrice, String sortBy, String sortTo);
 	//호텔 리스트중 최고가(슬라이드 바 표시용)

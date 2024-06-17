@@ -9,7 +9,8 @@ import lombok.Data;
 @Data
 @Component
 public class HotelSearchDtoRes {
-	private List<String> hotelPic;
+	private String hotelCode;
+	private List<HotelPic> hotelPic;
 	private String hotelName;
 	private String hotelEng;
 	private String hotelAddress;

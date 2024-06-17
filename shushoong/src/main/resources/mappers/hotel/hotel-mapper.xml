@@ -53,7 +53,7 @@
 	        </if>
 	</select>
 	
-	<select id="selectHotelPicList" parameterType="String" resultType="HotelPic">
+	<!-- <select id="selectHotelPicList" parameterType="String" resultType="HotelPic">
 		select hotel_picture from hotel_pic where hotel_code = #{hotelCode}
 	</select>
 	
@@ -63,7 +63,7 @@
 	
 	<select id="selectHotelSearchList" parameterType="String" resultType="HotelSearchDtoRes">
 		select hotel_name, hotel_eng, hotel_address, hotel_call, hotel_check_in, hotel_check_out, hotel_policy, hotel_intro from hotel where hotel_code = #{hotelCode}
-	</select>
+	</select> -->
 	
 	<!-- 편의시설 -->
 	<select id="selectHotelFacility" parameterType="String" resultType="HotelFacilityDtoRes">
@@ -88,7 +88,43 @@
 		where hr.hotel_code = #{hotelCode}
 	</select>
 
-	<!--  -->
-
+	<!-- 호텔상세페이지 총 합친거 -->
+	<resultMap type="HotelSearchDtoRes" id="HotelSearchDtoResMap">
+	<!-- 밑에 select문에서 실행한 sql문의 column명이랑 dto의 변수명이랑 여기서 맞춰주기 -->
+	<!-- 원래 mybatis가 알아서 dto명이랑 컬럼명 연결헀는데 dto 안에 List 형태 있으면 알아서 찾지 못해서
+		우리가 하나하나 알려주는게 resultMap -->
+		<id column="HOTEL_CODE" property="hotelCode"/>
+		<!-- PK 나 unique 한 값 쓰기 - dto들을 구분하기 위해 필요(호텔마다 정보가 다 다르기 때문에..) -->
+		<result column="HOTEL_NAME" property="hotelName"/>
+		<result column="HOTEL_ENG" property="hotelEng"/>
+		<result column="HOTEL_ADDRESS" property="hotelAddress"/>
+		<result column="HOTEL_PRICE" property="hotelPrice"/>
+		<result column="HOTEL_CALL" property="hotelCall"/>
+		<result column="HOTEL_CHECK_IN" property="hotelCheckIn"/>
+		<result column="HOTEL_CHECK_OUT" property="hotelCheckOut"/>
+		<result column="HOTEL_INTRO" property="hotelIntro"/>
+		<result column="HOTEL_POLICY" property="hotelPolicy"/>
+		<result column="HOTEL_SAFETY" property="hotelSafety"/>
+		<!-- HotelSearchDtoRes에 있는 공통부분 -->
+		<collection ofType="HotelPic" property="hotelPic">
+			<result column="HOTEL_PICTURE" property="hotelPicture"/>
+		</collection>
+		<collection ofType="HotelRoomDto" property="hotelRooms">		
+			<result column="ROOM_CAT" property="roomCat"/>
+			<result column="HOTEL_PRICE" property="hotelPrice"/>
+			<result column="HOTEL_DISCOUNT" property="hotelDiscount"/>
+			<result column="ROOM_COUNT" property="roomCount"/>
+			<result column="ROOM_CAP" property="roomCap"/>
+			<result column="ROOM_ATT" property="roomAtt"/>
+		</collection>
+		<!-- HotelSearchDtoRes 안에 있는 list -->
+		<!-- property - dto변수명, column - db에서 쓰는 컬럼명  -->
+	</resultMap>
+	<select id="selectHotelSearchList" parameterType="String" resultMap="HotelSearchDtoResMap">
+		select * from hotel
+		    join hotel_pic using(hotel_code)
+		    join hotel_room using(hotel_code)
+		where hotel_code = #{hotelCode}
+	</select>
 	
 </mapper>

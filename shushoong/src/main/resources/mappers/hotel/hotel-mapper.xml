@@ -21,7 +21,7 @@
 	       			ORDER BY hotel_price
 	       		</when>
 	       		<when test="sortBy.equals('review')">
-	       			ORDER BY hotel_price
+	       			ORDER BY hotel_review_num
 	       		</when>
 	       		<when test="sortBy.equals('grade')">
 	       			ORDER BY hotel_score
@@ -40,16 +40,11 @@
 	
 	<!-- 호텔 최고가(슬라이드바 표시용) -->
 	<select id="selectMaxRoomlPrice" parameterType="hashmap" resultType="Integer">
-	        select max(min_price) as hotel_price
-			from hotel join (select hotel_code, max(hotel_discount) room_discount, MIN(hotel_price) min_price from hotel_room 
-        	join hotel using(hotel_code) where SUBSTR(hotel_code, 1, 3) = #{code} and room_count > 0 and room_cap = #{people} group by hotel_code) using(hotel_code)
-        	join (select distinct hotel_code, first_value(hotel_picture) over (partition by hotel_code) as hotel_pic from hotel_pic) using(hotel_code)
-        	left join (select hotel_code, ROUND((f + c + co + k)/4, 1) as score from (
-            	select hotel_code, avg(hotel_facility) f, avg(hotel_clean) c, avg(hotel_conven) co, avg(hotel_kind) k 
-            	from hotel_review join hotel h using(hotel_code) where h.hotel_loc_cat= 'OS' group by hotel_code)) using(hotel_code)
+            	select max(hotel_price) from V_hotel_list
+            	where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap = #{people}
             <if test="keyword != null and keyword !='' ">
 	        	<bind name="keyword2" value="'%' + keyword + '%'"/>
-	        	where hotel_name LIKE #{keyword2}
+	        	and hotel_name LIKE #{keyword2}
 	        </if>
 	</select>
 	

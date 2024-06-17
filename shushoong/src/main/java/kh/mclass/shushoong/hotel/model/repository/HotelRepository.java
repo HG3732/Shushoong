@@ -20,9 +20,9 @@ public interface HotelRepository {
 	//호텔 리스트중 최고가(슬라이드 바 표시용)
 	public Integer selectMaxRoomlPrice(String code, String people, String keyword);
 	
-	public List<HotelPic> selectHotelPicList(String hotelCode);
-	
-	public List<HotelRoomDto> selectRoomList(String hotelCode);
+//	public List<HotelPic> selectHotelPicList(String hotelCode);
+//	
+//	public List<HotelRoomDto> selectRoomList(String hotelCode);
 	
 	public List<HotelSearchDtoRes> selectHotelSearchList(String hotelCode);
 	

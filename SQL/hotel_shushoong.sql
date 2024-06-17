@@ -73,8 +73,8 @@ where hr.hotel_code = '2OS001';
 
 
 ---------위에 두개 합치기
-select count(*) as review_count, avg(hotel_facility) as avg_hotel_facility, avg(hotel_clean) as avg_hotel_clean, avg(hotel_conven) as avg_hotel_conven, avg(hotel_kind) as avg_hotel_kind, 
-        (avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4 as avg_all_rate
+select count(*) as review_count, ROUND(avg(hotel_facility), 1) as avg_hotel_facility, ROUND(avg(hotel_clean), 1) as avg_hotel_clean, ROUND(avg(hotel_conven),1) as avg_hotel_conven, ROUND(avg(hotel_kind),1) as avg_hotel_kind, 
+        ROUND((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_all_rate
 from hotel_review
     join hotel_reserve hr using (hotel_reserve_code)
 where hr.hotel_code = '2OS001';      
@@ -99,6 +99,52 @@ FROM
 
 ----> 합친거 사용 못함.... 이거 사용하게 되면 반복문 돌렸을 때 전체 댓글이 2번 출력되서 해당 칸이 2개 생겨버림..... 난 하나만 필요해서....
 
+---view 테이블 만들기
+SELECT ROOM_CAT 
+FROM HOTEL_ROOM;
+
+DESC HOTEL_ROOM;
+
+SELECT * FROM HOTEL_ROOM
+WHERE hotel_code='2OS001';
+
+SELECT ROOM_CAT_DESC, ROOM_CAP, ROOM_ATT, HOTEL_CODE FROM HOTEL_ROOM_CAT
+JOIN HOTEL_ROOM USING(ROOM_CAT)
+WHERE hotel_code='2OS001';
+
+SELECT * FROM HOTEL_ROOM_ATT
+JOIN HOTEL_ROOM USING(ROOM_ATT)
+WHERE hotel_code='2OS001';
+
+
+--내부적으로 데이터 처리를 위해 hotel_code 넣어야함
+SELECT hotel_code, to_char(HOTEL_PRICE, '999,999'), ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT_DESC as room_cat FROM HOTEL_ROOM
+JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
+JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
+WHERE hotel_code='2OS001';
+
+
+SELECT * FROM HOTEL_ROOM
+JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
+JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
+WHERE hotel_code='2OS001';
+
+
+CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_ROOM_LIST" (
+    hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, room_att, room_cat
+) AS 
+SELECT hotel_code, to_char(HOTEL_PRICE, '999,999,999'), ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT_DESC as room_cat FROM HOTEL_ROOM
+JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
+JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
+WHERE hotel_code='2OS001';
+
+--WHERE hotel_code='2OS001' 이거는 create 할때 붙이면 X --> 그러면 where 한 데이터만 조회됨(모두를 위한 view)
+
+select * from v_room_list
+WHERE hotel_code='2OS001';
+
+drop view v_room_list;
+
 
 
 -------------------------------------결제 관련 sql
@@ -119,9 +165,6 @@ pay 테이블
 pay_price
 
 DESC HOTEL_PIC;
-
-
-
 
 
 commit;

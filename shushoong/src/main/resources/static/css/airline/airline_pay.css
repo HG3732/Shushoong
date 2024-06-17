@@ -89,15 +89,14 @@ section.passenger_wrap > div:first-child{
 	font-size: 20px;
 	margin-left: 5px;
 	font-weight: bolder;
-	border-bottom: 3px solid var(--color_blue_1);
+	padding-bottom : 10px;
 }
 div.passenger_info{
-	width : 920px;
 	margin : auto;
 	
 }
 div.passenger_info > div:first-child{
-	margin-top: 20px;
+	border-top : 3px solid var(--color_blue_1);
 	border-bottom : 1px solid var(--color_blue_1);
 }
 
@@ -112,13 +111,18 @@ div.passenger_info_flex > div{
 div.passenger_info_flex > div:first-child > div:first-child{
 	width: 140px;
 	background-color: var(--color_blue_2);
+	font-weight: bold;
+	
 }
 div.passenger_info_flex > div:first-child > div:last-child{
-	margin-left: 10px;
+	margin-left: unset;
+	text-align: left
 }
 div.passenger_info_flex > div > div:nth-child(1){
 	width: 140px;
 	background-color: var(--color_blue_2);
+	font-weight: bold;
+	
 }
 div.passenger_info_flex > div > div:nth-child(2){
 	width: 320px;
@@ -127,6 +131,7 @@ div.passenger_info_flex > div > div:nth-child(2){
 div.passenger_info_flex > div > div:nth-child(3){
 	width: 140px;
 	background-color: var(--color_blue_2);
+	font-weight: bold;
 }
 div.passenger_info_flex > div > div:nth-child(4){
 	width: 320px;
@@ -139,26 +144,27 @@ div.passenger_info_flex > div > div:nth-child(3) > div:first-child{
 }
 
 
-div.passenger_info_flex > div > div > input , 
+div.passenger_info_flex > div > div > input[type=text] , 
 div.passenger_info_flex > div > div > select 
 {
 	width: 300px;
-}
-div.input_type_date > input[type=text]{
-	width: 90px
+	height: 35px;
+	border : 1px solid  var(--color_blue_1);
+	border-radius: 50px;
 }
 div.passenger_info_flex > div > div > input[type=radio]{
-	width: 20px;
-	margin: unset;
+	margin-left : 20px;
 }
 
 	
-
+												/* 수하물 section */
 
 div.select_baggage{
-	width : 920px;
 	margin : auto;
 	margin-top: 20px;
+}
+div.select_baggage > div{
+	margin-bottom: 10px;
 }
 div.select_baggage_flex{
 	border-top: 1px solid var(--color_blue_1);
@@ -170,6 +176,8 @@ div.select_baggage_flex > div:first-child{
 	background-color: var(--color_blue_2);
 	height: 30px;
 	line-height: 30px;
+	font-weight: bold;
+	
 }
 div.select_baggage_flex > div > *{
 	width: 229px;
@@ -186,33 +194,48 @@ div.select_baggage_flex > div > label{
 
 div.kg10{
 	margin : 20px auto;
-	width: 200px;
-	height : 200px;
+	width: 150px;
+	height : 150px;
 	background-image: url(../../images/10kg.png);
 	background-size: cover;
 }
 div.kg20{
 	margin : 20px auto;
-	width: 200px;
-	height : 200px;
+	width: 150px;
+	height : 150px;
 	background-image: url(../../images/20kg.png);
 	background-size: cover;
 }
 div.kg30{
 	margin : 20px auto;
-	width: 200px;
-	height : 200px;
+	width: 150px;
+	height : 150px;
 	background-image: url(../../images/30kg.png);
 	background-size: cover;
 }
 div.kg40{
 	margin : 20px auto;
-	width: 200px;
-	height : 200px;
+	width: 150px;
+	height : 150px;
 	background-image: url(../../images/40kg.png);
 	background-size: cover;
 }
-
+div.select_baggage_flex > div > label > div:nth-child(2) > div:first-child{
+	float : left;
+	margin-left: 40px;
+}
+div.select_baggage_flex > div > label > div:nth-child(2) > div:last-child{
+	float : right;
+	margin-right: 40px;
+	font-weight: bold;
+}
+div.select_baggage_flex > div > label > input {
+	display : block;
+	clear: both;
+	margin: auto;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
 					/* 임시 테스트 */
 
 			

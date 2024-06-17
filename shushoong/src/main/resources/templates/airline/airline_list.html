@@ -272,8 +272,13 @@
 												</div>
 												<span th:text="${air.arrivalLoc}">도착지</span>
 											</div>
-											<div class="btn-select-info">
+											
+											<div class="btn-select-info" th:if="${ticketType} != 1">
 												<button id="show-comeback-btn" type="button">선택하기</button>
+											</div>
+											
+											<div class="btn-select-info" th:if="${ticketType} == 1">
+												<button id="reserve-btn" type="button" onclick="">결제하기</button>
 											</div>
 										</div>
 									</div>

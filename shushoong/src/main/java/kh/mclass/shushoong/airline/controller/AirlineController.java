@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.service.AirlineService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +26,26 @@ public class AirlineController {
 	// 항공 목록 
 	@GetMapping("/airline/list")
 	public String airlineInfo(
-			String departLoc,
-			String arrivalLoc,
-			String departDate,
-			String arrivalDate,
+//			String departLoc,
+//			String arrivalLoc,
+//			String departDate,
+//			String arrivalDate,
+//			String adult,
+//			String child,
+//			String baby,
+//			String seatGrade,
+//			String ticketType,
+			HttpSession session,
 			Model md) {
+		String departLoc = (String) session.getAttribute("departLoc");
+		String arrivalLoc = (String) session.getAttribute("arrivalLoc");
+		String departDate = (String) session.getAttribute("departDate");
+		String arrivalDate = (String) session.getAttribute("arrivalDate");
+		String adult = (String) session.getAttribute("adult");
+		String child = (String) session.getAttribute("child");
+		String baby = (String) session.getAttribute("baby");
+		String ticketType = (String) session.getAttribute("ticketType");
+		
 		System.out.println("=========");
 		log.info("!!!Received departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc + ", departDate: " + departDate +", arrivalDate: " + arrivalDate);
 
@@ -36,6 +53,11 @@ public class AirlineController {
 			List<AirlineInfoDto> airlineData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate);
 			System.out.println("컨트롤러 airline data: " + airlineData);
 			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc);
+			
+			md.addAttribute("adult", adult);
+			md.addAttribute("child", child);
+			md.addAttribute("baby", baby);
+			md.addAttribute("ticketType", ticketType);
 			md.addAttribute("airlineData", airlineData);
 			md.addAttribute("maxPrice", maxPrice);
 		}else {
@@ -108,9 +130,32 @@ public class AirlineController {
 
 
 	// 항공 메인 페이지
-	@GetMapping("/airline/main")
-	public String airlineMain() {
-		return "airline/airline_main";
+    @GetMapping("/airline/main")
+    public String airlineMain() {
+        return "airline/airline_main"; // 폼이 있는 페이지로 이동
+    }
+	
+	@PostMapping("/airline/main")
+	public String airlineMainPost(
+			String departLoc,
+			String arrivalLoc,
+			String departDate,
+			String arrivalDate,
+			String adult,
+			String child,
+			String baby,
+			String seatGrade,
+			String ticketType,
+			HttpSession session) {
+		session.setAttribute("departLoc", departLoc);
+		session.setAttribute("arrivalLoc", arrivalLoc);
+		session.setAttribute("departDate", departDate);
+		session.setAttribute("arrivalDate", arrivalDate);
+		session.setAttribute("adult", adult);
+		session.setAttribute("child", child);
+		session.setAttribute("seatGrade", seatGrade);
+		session.setAttribute("ticketType", ticketType);
+		return "redirect:/airline/list";
 	}
 
 	// 항공 메인 페이지

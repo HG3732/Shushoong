@@ -41,7 +41,6 @@ function getSelectOptions() {
 
 		console.log('출발지 : ', departLoc);
 		console.log('도착지 : ', arrivalLoc);
-		console.log('도착지', arrivalLoc);
 		console.log('정렬 순서', selectType);
 		console.log('LEFT 출발 시간대 : ', departTimeLeftVal);
 		console.log('RIGHT 출발 시간대 : ', departTimeRightVal);
@@ -63,7 +62,7 @@ function getSelectOptions() {
 				viaType: viaType,
 				maxPrice: maxPrice
 			},
-			dataType: 'json',
+			/*
 			success: function(response) {
 				console.log('Ajax Success', response);
 				if (response.length == 0) {
@@ -71,12 +70,16 @@ function getSelectOptions() {
 					// location.reload(true); 새로고침
 					noAirlineList(response);
 				} else {
-					updateAirlineList(response);
+					// updateAirlineList(response);
+					
 				}
 			},
+			*/
 			error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
 			}
+		}).done(function(response){
+			$("#airline-info-box").replaceWith(response);
 		});
 	}
 
@@ -86,7 +89,7 @@ function getSelectOptions() {
 	$('#arr-input-left').on('click', updateTimeRange);
 	$('#arr-input-right').on('click', updateTimeRange);
 }
-
+/*
 function noAirlineList() {
 	$('.airline-info-container').empty(); // 기존 목록 초기화
 	var airlineEmpty = `
@@ -94,11 +97,9 @@ function noAirlineList() {
 	`;
 	$('.airline-info-container').html(airlineEmpty);
 }
-
 function updateAirlineList(data) {
 	// 항공 목록을 업데이트
 	$('.airline-info-container').empty(); // 기존 목록 초기화
-
 	let airlineInfo = '';
 	data.forEach(function(air) {
 		airlineInfo += `
@@ -204,7 +205,7 @@ function updateAirlineList(data) {
 	$('.airline-info-container').html(airlineInfo);
 	// $('.airline-info-container').append(airlineInfo);
 	// $(".ticketinfo-btn").on("click", clickedTicketInfo());
-	clickedTicketInfo();
-	clickedShowReturnBtn();
 }
-
+	clickedShowReturnBtn();
+	clickedTicketInfo();
+*/

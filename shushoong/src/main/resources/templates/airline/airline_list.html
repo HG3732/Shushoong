@@ -103,9 +103,10 @@
 											<!-- <div class="thumb left price"></div> -->
 											<div class="thumb right price"></div>
 										</div>
-										<div class="resultval time">
+										<div class="resultval price">
 											<div class="div1"></div>
-											<div class="div2" id="maxPrice" th:text="${maxPrice}"></div>
+											<div th:if="${ticketType != 1}" class="div2" id="maxPrice" th:text="${maxPrice}"></div>
+											<div th:if="${ticketType == 1}" class="div2" id="maxPrice" th:text="${maxPrice} / 2"></div>
 										</div>
 									</div>
 								</div>
@@ -148,34 +149,27 @@
 								</select>
 							</form>
 						</div>
-
-						<h1>Airlines Information</h1>
-						<form action="/shushoong/airline/list" method="get">
-							Departure Location: <input type="text" name="departLoc"><br>
-							Arrival City: <input type="text" name="arrivalLoc"><br>
-							<input type="submit" value="Search">
-						</form>
-
 						<div class="select-airplane">
 							<p>
 								<!-- <span th:text="${airlineData[0].arrivalLoc}"></span>행 항공편을 선택하세요 -->
 							</p>
 						</div>
 
-							<div hidden th:each="air : ${airlineData}" >
-								<div hidden="">
-									<span th:text="${air.departLoc}" id="select-info-departLoc-out" name="departLoc-out"></span> 
-									<span th:text="${air.arrivalLoc}" id="select-info-arrivalLoc-out" name="arrivalLoc-out"></span> 
-									<span th:text="${air.airlineCode}" id="select-info-airlineCode-out" name="airlineCode-out"></span>
-								</div>
+						<div hidden th:each="air : ${airlineData}" >
+							<div hidden="">
+								<span th:text="${air.departLoc}" id="select-info-departLoc-out" name="departLoc-out"></span> 
+								<span th:text="${air.arrivalLoc}" id="select-info-arrivalLoc-out" name="arrivalLoc-out"></span> 
+								<span th:text="${air.airlineCode}" id="select-info-airlineCode-out" name="airlineCode-out"></span>
 							</div>
-								
+						</div>
 						<div class="airline-info-container">
 							<form id="frm-return" hidden>
 								<input type="hidden" id="departLoc" name="departLoc"> 
 								<input type="hidden" id="arrivalLoc" name="arrivalLoc"> 
 								<input type="hidden" id="airlineCode" name="airlineCode">
 							</form>
+							<div th:replace="~{airline/airline_list_section :: airlineList}"></div>
+<!-- 								
 							<div th:each="air : ${airlineData}" class="airline-info">
 								<div hidden="">
 									<span th:text="${air.departLoc}" class="select-info-departLoc" name="departLoc"></span> 
@@ -226,8 +220,14 @@
 											<div class="ticket-adult">성인 1</div>
 
 											<div class="airticket">
-												<div class="ticket-price">
-													<div th:text="${air.seatPrice}"></div>
+												왕복일 시
+												<div class="ticket-price" th:if="${ticketType} != 1">
+													<div th:text="${#numbers.formatInteger(air.seatPrice, 3, 'COMMA') + '원'}"></div>
+												</div>
+												편도일 시 = 티켓 값 / 2
+												<div class="ticket-price" th:if="${ticketType} == 1">
+													<div th:text="${air.seatPrice} / 2"></div>
+
 												</div>
 												<div class="ticket-btn">
 													<button class="ticketinfo-btn" type="button">
@@ -285,6 +285,7 @@
 
 								</div>
 							</div>
+						 -->
 						</div>
 					</div>
 				</div>

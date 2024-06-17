@@ -1,7 +1,9 @@
 package kh.mclass.shushoong.airline.controller;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,26 +56,40 @@ public class AirlineController {
 			System.out.println("컨트롤러 airline data: " + airlineData);
 			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc);
 			
+			String maxPriceStr = formatCurrency(maxPrice);
+			
 			md.addAttribute("adult", adult);
 			md.addAttribute("child", child);
 			md.addAttribute("baby", baby);
 			md.addAttribute("ticketType", ticketType);
 			md.addAttribute("airlineData", airlineData);
-			md.addAttribute("maxPrice", maxPrice);
+			md.addAttribute("maxPrice", maxPriceStr);
+//			md.addAttribute("maxPrice", maxPrice);
 		}else {
 		}
 		return "airline/airline_list";
 	}
 	
+    private String formatCurrency(Integer amount) {
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.KOREA);
+        return currencyFormat.format(amount);
+    }
+	
 	// 왕복 오는 항공편
 	@GetMapping("airline/list_return")
 	public String airlineInfoReturn(
 			String airlineCode,
-			String departLoc,
-			String arrivalLoc,
-			String departDate,
-			String arrivalDate,
+//			String departLoc,
+//			String arrivalLoc,
+//			String departDate,
+//			String arrivalDate,
+			HttpSession session,
 			Model md) {
+		
+		String departLoc = (String) session.getAttribute("arrivalLoc");
+		String arrivalLoc = (String) session.getAttribute("departLoc");
+		String departDate = (String) session.getAttribute("departDate");
+		String arrivalDate = (String) session.getAttribute("arrivalDate");
 		
 		System.out.println("에어 오는편 컨트롤러");
 		log.info("선택된 항공 코드 : ", airlineCode);
@@ -100,8 +116,8 @@ public class AirlineController {
 	@GetMapping("airline/list_select_options/ajax")
 	@ResponseBody
 	public List<AirlineInfoDto> airlineSelectOptions(
-			String departLoc,
-			String arrivalLoc,
+//			String departLoc,
+//			String arrivalLoc,
 			String departTimeLeft,
 			String deaprtTimeRight,
 			String arrivalTimeLeft,
@@ -109,8 +125,12 @@ public class AirlineController {
 			String selectType,
 			String viaType,
 			String maxPrice,
+			HttpSession session,
 			Model md
 			){
+		String departLoc = (String) session.getAttribute("departLoc");
+		String arrivalLoc = (String) session.getAttribute("arrivalLoc");
+		
 		System.out.println("컨트롤러 목록 정렬");
 		System.out.println("출발지 : " + departLoc);
 		System.out.println("도착지 : " + arrivalLoc);

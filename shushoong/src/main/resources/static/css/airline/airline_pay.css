@@ -1,182 +1,218 @@
 @charset "UTF-8";
 
-section {
-	width: 960px;
-	margin: auto;
-}
-	/* reserve_process 섹션 */
-.reserve_process{
-	height : 200px;	
-	
-}
+								/* process section */
 
-.reserve_process > div {
-	width: 700px;
-	height: 200px;
-	display : flex;
-	margin: auto;
-}
-
-
-.reserve_process > div >div{
-	width: 100px;
-	height: 100px;
-	border-radius: 50px;
-	text-align: center;
-	font-size : 50px;
-	line-height: 100px;
-	
+section.reserve_process{
 	margin : auto;
-	border: 1px solid black;
-	
-}
-	/* reserver_info 섹션 */
-.reserver_info{
-	margin-top : 30px;
-}
-.reserver_info_flex > div {
-	display: flex;
-	
-}
-.reserver_info_flex > div > div{
-	height: 70px;
-	line-height : 70px;
-	border: 1px solid black;
-}
-
-.reserver_info_flex > div > div:nth-child(1){
-	width: 150px;
-	text-align: center;
-}
-.reserver_info_flex > div > div:nth-child(2){
-	width: 810px;
-	
-}
-
-.reserver_info_flex > div > div:nth-child(2) > *{
-	margin-left: 30px;
-	
-	height: 30px;
-}
-.reserver_info_flex > div > div:nth-child(2) > input{
-	width: 350px;
-}
-	/* passenger_info 섹션 */
-.passenger_info{
-	margin-top: 30px;
-}
-.passenger_info_flex > div{
-	display: flex;
-}
-.passenger_info_flex > div > div{
-	height: 70px;
-	line-height : 70px;
-	border: 1px solid black;
-}
-.passenger_info_flex > div:nth-child(1) > div:nth-child(1){
-	width: 150px;
-	text-align: center;
-}
-.passenger_info_flex > div:nth-child(1) > div:nth-child(2){
-	width: 810px;
-}
-
-
-	
-.passenger_info_flex > div > div:nth-child(1) {
-	font-size : 15px;
-	width: 150px;
-}
-.passenger_info_flex > div > div:nth-child(2) {
-	width: 330px;
-}
-.passenger_info_flex > div > div:nth-child(2) >input[type=text],.passenger_info_flex > div > div:nth-child(2) >button{
-	width: 260px;
-	height: 30px;
-	margin-left: 35px; 
-}
-.passenger_info_flex > div > div:nth-child(3) {
-	width: 150px;
-}
-.passenger_info_flex > div > div:nth-child(4) {
-	width: 330px;
-}
-.passenger_info_flex > div > div:nth-child(4) >*{
-	width: 260px;
-	height: 30px;
-	margin-left: 35px; 
-}
-
-		/* select_baggage 섹션 */
-.select_baggage{
-	margin-top : 30px;
-}	
-.select_baggage_flex > div{
-	display: flex;
-}
-.select_baggage_flex > div > div{
-	width: 240px;
-	
-	border: 1px solid black;
-	
-}
-.select_baggage_flex > div > div:nth-child(1){
-	border-radius: 20px 0 0 20px;
-}
-.select_baggage_flex > div > div:nth-child(4){
-	border-radius: 0 20px 20px 0;
-}
-.select_baggage_flex > div:nth-child(1) > div{
-	height: 40px;
-	line-height:40px;
-	text-align: center; 
-}
-.select_baggage_flex > div:nth-child(2) > div{
-	height: 340px;
-	margin-top: -40px;
-}
-div.select_baggage_flex > div:nth-child(2) > div > img{
-	width : 200px;
-	height: 200px;
-	margin-top: 50px;
-	margin-left: 20px;
-	
-}
-.select_baggage_flex > div:nth-child(2) > div > div{
-	color: red;
-}
-.select_baggage_flex > div:nth-child(2) > div > div>div:nth-child(1){
-	margin-top: 20px;
-	margin-left : 20px;
-	float: left;
-	width: 50px;
-	
-}
-.select_baggage_flex > div:nth-child(2) > div > div>div:nth-child(2){
-	margin-top: 20px;
-	float: right;
-	width : 140px;
-	margin-right: 20px;
-	text-align: right;
-	
-}
-.select_baggage_flex > div:nth-child(2) > div > input[type=radio]{
-	margin-top: 20px;
-	width: 240px;
-
-}
-.info_submit{
 	width: 960px;
 }
-.info_submit_btn{
-	margin: 40px auto;
-	display : block;
-	
-	width: 300px;
-	height: 40px;
-	
-	border: 1px solid black;
-	border-radius: 10px;
+
+.reserve_process > div:nth-child(1) {
+	margin-top : 50px;
+	display: flex;
+	font-size: 16px;
+}
+.reserve_process > div:nth-child(1) > div{
+		width:  40px;
+		height: 40px;
+		line-height: 40px;
+		border-radius: 50%;
+		text-align : center;
+		margin: auto;
+		background-color: var(--color_blue_2);
+}
+.reserve_process > div:nth-child(1) > div:nth-child(1){
+	background-color: var(--color_blue_1);
+	color: white;
+	font-weight: bolder;
 	
 }
+.reserve_process > div:nth-child(2) {
+	margin-top : 10px;
+	display: flex;
+}
+.reserve_process > div:nth-child(2) > div{
+	margin: auto;
+}
 
+
+								/* reserver info section */
+
+section.reserver_info{
+	margin : auto;
+	width: 960px;
+}
+section.reserver_info > div:nth-child(1) > div:nth-child(1) {
+	margin-top : 50px;
+	font-size: 20px;
+	font-weight: bolder;
+}
+section.reserver_info > div:nth-child(1) > div:nth-child(2) {
+	font-size: 13px;
+}
+div.reserver_info_flex > div{
+	height: 60px;
+	display: flex;
+	line-height: 60px;
+	border-top: 1.5px solid var(--color_blue_1);
+}								
+div.reserver_info_flex > div:first-child  {
+	
+	border-top: 3px solid var(--color_blue_1);
+}								
+div.reserver_info_flex > div:last-child{
+	border-bottom: 3px solid var(--color_blue_1);
+}
+div.reserver_info_flex > div > div:nth-child(1){
+	width: 155px;
+	text-align: center;
+	background-color: var(--color_blue_2);
+	font-weight: bolder;
+}			
+div.reserver_info_flex > div > div:nth-child(2){
+	margin-left : 10px;
+}			
+div.reserver_info_flex > div > div:nth-child(2) > input[type=text]{
+	width: 320px;
+}			
+div.reserver_info_flex > div:nth-child(2) > div:nth-child(2) > input[type=text]{
+	width: 100px;
+}			
+											/* 탑승자 정보 */
+section.passenger_wrap{
+	margin : auto;
+	margin-top : 75px;
+	width: 960px;
+	border-bottom: 3px solid var(--color_blue_1);
+}
+section.passenger_wrap > div:first-child{
+	font-size: 20px;
+	margin-left: 5px;
+	font-weight: bolder;
+	border-bottom: 3px solid var(--color_blue_1);
+}
+div.passenger_info{
+	width : 920px;
+	margin : auto;
+	
+}
+div.passenger_info > div:first-child{
+	margin-top: 20px;
+	border-bottom : 1px solid var(--color_blue_1);
+}
+
+div.passenger_info_flex > div{
+	display : flex;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	border-bottom : 1px solid var(--color_blue_1);
+}
+
+div.passenger_info_flex > div:first-child > div:first-child{
+	width: 140px;
+	background-color: var(--color_blue_2);
+}
+div.passenger_info_flex > div:first-child > div:last-child{
+	margin-left: 10px;
+}
+div.passenger_info_flex > div > div:nth-child(1){
+	width: 140px;
+	background-color: var(--color_blue_2);
+}
+div.passenger_info_flex > div > div:nth-child(2){
+	width: 320px;
+
+}
+div.passenger_info_flex > div > div:nth-child(3){
+	width: 140px;
+	background-color: var(--color_blue_2);
+}
+div.passenger_info_flex > div > div:nth-child(4){
+	width: 320px;
+}
+div.passenger_info_flex > div > div:nth-child(1) > div:first-child{
+	height : 20px;
+}
+div.passenger_info_flex > div > div:nth-child(3) > div:first-child{
+	height : 20px;
+}
+
+
+div.passenger_info_flex > div > div > input , 
+div.passenger_info_flex > div > div > select 
+{
+	width: 300px;
+}
+div.input_type_date > input[type=text]{
+	width: 90px
+}
+div.passenger_info_flex > div > div > input[type=radio]{
+	width: 20px;
+	margin: unset;
+}
+
+	
+
+
+div.select_baggage{
+	width : 920px;
+	margin : auto;
+	margin-top: 20px;
+}
+div.select_baggage_flex{
+	border-top: 1px solid var(--color_blue_1);
+}
+div.select_baggage_flex > div{
+	display: flex;
+}
+div.select_baggage_flex > div:first-child{
+	background-color: var(--color_blue_2);
+	height: 30px;
+	line-height: 30px;
+}
+div.select_baggage_flex > div > *{
+	width: 229px;
+	text-align: center;
+	border-left: 1px solid var(--color_blue_1);
+}
+div.select_baggage_flex > div > *:first-child{
+	border-left: none;
+}
+div.select_baggage_flex > div > label{
+	width: 229px;
+	text-align: center;
+}
+
+div.kg10{
+	margin : 20px auto;
+	width: 200px;
+	height : 200px;
+	background-image: url(../../images/10kg.png);
+	background-size: cover;
+}
+div.kg20{
+	margin : 20px auto;
+	width: 200px;
+	height : 200px;
+	background-image: url(../../images/20kg.png);
+	background-size: cover;
+}
+div.kg30{
+	margin : 20px auto;
+	width: 200px;
+	height : 200px;
+	background-image: url(../../images/30kg.png);
+	background-size: cover;
+}
+div.kg40{
+	margin : 20px auto;
+	width: 200px;
+	height : 200px;
+	background-image: url(../../images/40kg.png);
+	background-size: cover;
+}
+
+					/* 임시 테스트 */
+
+			

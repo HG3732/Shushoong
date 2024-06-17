@@ -34,15 +34,15 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-main">
-				<div th:each="hotel : ${hotelSearchlist}" class="hotel_name">
+				<div th:each="hotel : ${hotelViewList}" class="hotel_name">
  					<div th:text="${hotel.hotelName}" class="name_kr">세인트존스 호텔</div>
 					<div th:text="${hotel.hotelEng}" class="name_en">St.Jones Hotel</div>				
 				</div>
 				<hr></hr>
 				<div class="hotel_pic">
-					<div th:each="hotelpic : ${hotelSearchlist}"class="pic_slide">
+					<div th:each="hotelpic : ${hotelViewList}"class="pic_slide">
 						<th:block th:each="piclist : ${hotelpic.hotelPic}">
-							<img th:src="${piclist.hotelPicture}"class="pic"/>
+							<img th:src="${piclist.hotelPicture}" class="pic"/>
 						</th:block>
 					</div>
 				</div>
@@ -68,13 +68,8 @@ xmlns:th="http://www.thymeleaf.org">
 						<hr style="border: 0.1em solid black;"></hr>	
 							<form>
 								<div class="wrap_room">
-									<div th:each="roomlist: ${hotelSearchlist}" class="room">
-										<!-- <div th:utext="${roomlist.roomCat} + ', ' + ${roomlist.roomAtt}" class="room_cat"></div>
-										<div class="amount_num">
-											<strong th:text="${roomlist.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);"></strong>
-											원
-										</div> -->
-										<th:block th:each="room : ${roomlist.hotelRooms}" class="roomlist">
+									<div th:each="roomlist: ${hotelViewList}" class="room">
+										<div th:each="room : ${roomlist.hotelRooms}" class="roomlist">
 											<div th:utext="${room.roomCat} + ', ' + ${room.roomAtt}" class="room_cat"></div>
 											<div class="amount_num">
 												<strong th:text="${room.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);"></strong>
@@ -84,7 +79,7 @@ xmlns:th="http://www.thymeleaf.org">
 											<div style="grid-column: 1/9">
 												<hr style="border: 1px solid #F1F1F1;" >
 											</div>
-										</th:block>
+										</div>
 									</div>
 								</div>
 							</form>
@@ -96,8 +91,8 @@ xmlns:th="http://www.thymeleaf.org">
 					<div id="wrap_hotel_info">
 						<div class="hotel_info_head">
 							<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">호텔정보</p>
-							<div class="map_wrap" th:each="searchlist : ${hotelSearchlist}">
-								<button type="button" class="btn_map" th:data-address="${searchlist.hotelAddress}">
+							<div class="map_wrap" th:each="hotelInfo : ${hotelViewList}">
+								<button type="button" class="btn_map" th:data-address="${hotelInfo.hotelAddress}">
 								<!-- 속성 이름이 data-로 시작하는 모든 속성은 사용자 정의 데이터를 저장하는 데 사용 -->
 									<img th:src="@{/images/icon_pin.png}" alt="지도" class="map_pic" style="width:15px; height:20px; margin-right: 5px;">
 									지도에서 보기
@@ -107,14 +102,6 @@ xmlns:th="http://www.thymeleaf.org">
 						<hr style="border: 0.1em solid black;"></hr>
 						
 						<!-- 지도모달창 -->
-
-<!-- 			            	<div id="map" style="width: 900px; height: 800px;"></div>
-
-							<div>
-							  <input type="text" id="address">
-							  <input type="button" value="Encode" onclick="codeAddress()">
-							</div>
- -->
 						<div class="mapModal">
 					        <div class="modal-content">
 					            <div id="map"></div>
@@ -125,15 +112,14 @@ xmlns:th="http://www.thymeleaf.org">
 					        </div>
 						</div>
 
-
-						
+						<!-- 호텔정보 -->
 						<div class="wrap_info">
 							<div class="section">
 								<div class="basic_info">기본정보</div>
-								<div th:each="searchlist : ${hotelSearchlist}" class="hotel_about_write">
-									<p th:text="'호텔명 : ' + ${searchlist.hotelName}"></p>
-									<p th:text="'주소: ' + ${searchlist.hotelAddress}"></p>
-									<p th:text="'전화: ' + ${searchlist.hotelCall}">전화 : 1-213-6887777</p>
+								<div th:each="hotelinfo : ${hotelViewList}" class="hotel_about_write">
+									<p th:text="'호텔명 : ' + ${hotelinfo.hotelName}"></p>
+									<p th:text="'주소: ' + ${hotelinfo.hotelAddress}"></p>
+									<p th:text="'전화: ' + ${hotelinfo.hotelCall}">전화 : 1-213-6887777</p>
 									<p>팩스 :</p>
 								</div>
 							</div>
@@ -141,17 +127,17 @@ xmlns:th="http://www.thymeleaf.org">
 							
 							<div class="section">
 								<div  class="hotel_intro">호텔소개</div>
-								<div th:each="searchlist : ${hotelSearchlist}" class="hotel_intro_write">
-									<p th:text="${searchlist.hotelIntro}"></p>
+								<div th:each="hotelinfo : ${hotelViewList}" class="hotel_intro_write">
+									<p th:text="${hotelinfo.hotelIntro}"></p>
 								</div>
 							</div>
 							<hr></hr>
 							
 							<div class="section">
 								<div class="hotel_check">체크인/아웃</div>
-								<div th:each="searchlist : ${hotelSearchlist}" class="hotel_check_write">
-									<p th:text="'체크인: ' + ${searchlist.hotelCheckIn}"></p>
-									<p th:text="'체크아웃: ' + ${searchlist.hotelCheckOut}"></p>
+								<div th:each="hotelinfo : ${hotelViewList}" class="hotel_check_write">
+									<p th:text="'체크인: ' + ${hotelinfo.hotelCheckIn}"></p>
+									<p th:text="'체크아웃: ' + ${hotelinfo.hotelCheckOut}"></p>
 									<br>
  									<p style="font-size: var(--font4);">* 대표 체크인/아웃 시간은 객실별, 요일별로 상이할 수 있습니다. 자세한 정책은 해당 호텔측에 확인 해 주세요.</p>
 								</div>
@@ -225,8 +211,8 @@ xmlns:th="http://www.thymeleaf.org">
 							
 							<div class="section">
 								<div class="hotel_policy">유의사항	 </div>
-								<div th:each="searchlist : ${hotelSearchlist}" class="hotel_policy_write">
-									<p th:text="${searchlist.hotelPolicy}"></p>
+								<div th:each="hotelinfo : ${hotelViewList}" class="hotel_policy_write">
+									<p th:text="${hotelinfo.hotelPolicy}"></p>
 								</div>
 							</div>
 							<hr></hr>

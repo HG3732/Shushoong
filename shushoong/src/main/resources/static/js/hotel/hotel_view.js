@@ -1,6 +1,6 @@
 /*===========방 전체부기 눌렀을 때 나머지 방들 출력하는 함수============*/
 function showAllRoomHandler(){
-	$(".wrap_room .room:gt(2)").show();
+	$(".roomlist:gt(2)").show();
 	$(".more_room_btn").hide();
 	$('.price_explain').css('margin-top', '10px')
 	

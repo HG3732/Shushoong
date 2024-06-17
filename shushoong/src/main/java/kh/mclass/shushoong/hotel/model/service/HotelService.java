@@ -2,14 +2,13 @@
 
 import java.awt.print.Pageable;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 
-import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
-import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
-import kh.mclass.shushoong.hotel.model.domain.HotelSearchDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.repository.HotelRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -40,11 +39,8 @@ public class HotelService {
 //	}
 	
 	//호텔 상세정보
-	public List<HotelSearchDtoRes> selectHotelSearchList(String hotelCode) {
-		System.out.println("☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ ");
-		System.out.println("여기는 서비스");
-		System.out.println("☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ ");
-		return hotelRepository.selectHotelSearchList(hotelCode);
+	public HotelViewDtoRes selectOneHotel(String hotelCode) {
+		return hotelRepository.selectOneHotel(hotelCode);
 	}
 	
 	//해당 호텔 편의시설 정보 불러오기

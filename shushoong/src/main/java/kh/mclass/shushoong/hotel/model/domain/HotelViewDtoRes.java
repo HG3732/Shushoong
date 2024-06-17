@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Component
-public class HotelSearchDtoRes {
+public class HotelViewDtoRes {
 	private String hotelCode;
 	private List<HotelPic> hotelPic;
 	private String hotelName;

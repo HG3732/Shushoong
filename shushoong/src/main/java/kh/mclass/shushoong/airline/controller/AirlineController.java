@@ -1,16 +1,14 @@
 package kh.mclass.shushoong.airline.controller;
 
-import java.text.NumberFormat;
-import java.util.ArrayList;
+import java.text.DecimalFormat;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpSession;
@@ -24,7 +22,7 @@ public class AirlineController {
 
 	@Autowired
 	private AirlineService service;
-	
+	private AirlineInfoDto dto;
 	// 항공 목록 
 	@GetMapping("/airline/list")
 	public String airlineInfo(
@@ -37,6 +35,7 @@ public class AirlineController {
 //			String baby,
 //			String seatGrade,
 //			String ticketType,
+//			String seatPrice,
 			HttpSession session,
 			Model md) {
 		String departLoc = (String) session.getAttribute("departLoc");
@@ -53,27 +52,27 @@ public class AirlineController {
 
 		if (departLoc != null && arrivalLoc != null) {
 			List<AirlineInfoDto> airlineData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate);
+			
 			System.out.println("컨트롤러 airline data: " + airlineData);
 			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc);
 			
-			String maxPriceStr = formatCurrency(maxPrice);
+			
+			if(ticketType.equals("1")) {
+				maxPrice = maxPrice/2;
+				maxPrice = (int) Math.floor(maxPrice);
+			}
 			
 			md.addAttribute("adult", adult);
 			md.addAttribute("child", child);
 			md.addAttribute("baby", baby);
 			md.addAttribute("ticketType", ticketType);
 			md.addAttribute("airlineData", airlineData);
-			md.addAttribute("maxPrice", maxPriceStr);
-//			md.addAttribute("maxPrice", maxPrice);
+//			md.addAttribute("maxPrice", maxPriceStr);
+			md.addAttribute("maxPrice", maxPrice);
 		}else {
 		}
 		return "airline/airline_list";
 	}
-	
-    private String formatCurrency(Integer amount) {
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.KOREA);
-        return currencyFormat.format(amount);
-    }
 	
 	// 왕복 오는 항공편
 	@GetMapping("airline/list_return")
@@ -114,8 +113,8 @@ public class AirlineController {
 	
 	// 항공 목록 정렬 옵션
 	@GetMapping("airline/list_select_options/ajax")
-	@ResponseBody
-	public List<AirlineInfoDto> airlineSelectOptions(
+	//@ResponseBody
+	public String airlineSelectOptions(
 //			String departLoc,
 //			String arrivalLoc,
 			String departTimeLeft,
@@ -141,11 +140,12 @@ public class AirlineController {
 		List<AirlineInfoDto> SortData = service.getAirlineSideTime(
 				departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice
 				);
+		md.addAttribute("airlineData", SortData);
 		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc);
-		md.addAttribute("maxPrice2", maxPrice2);
+		md.addAttribute("maxPrice", maxPrice2);
 		log.debug("컨트롤러 디버깅 : " + SortData);
 		
-		return SortData;
+		return "airline/airline_list_section";
 	}
 
 

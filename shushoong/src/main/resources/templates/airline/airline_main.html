@@ -435,24 +435,40 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <!-- 				</div> -->
 				
 				
-				
-				<div class="wrap-hot-hotel-list">
-				<div class="hot-hotel-title">가장 많이 찾은 숙소</div>
-				<div class="hot-hotel-list">
-					<div class="list-wrapper">
-						<div class="hot-hotel"><img th:src="@{images/instancefolder/1696570529586.jpg}" alt="a"/></div>
-		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20230713_201311.jpg}" alt="b"/></div>
-		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20231010_171349.jpg}" alt="c"/></div>
-		                <div class="hot-hotel"><img th:src="@{images/instancefolder/hu_1431618317_6832524860.jpg}" alt="d"/></div>
-						<div class="hot-hotel"><img th:src="@{images/instancefolder/ej-chen-WUI6pTbPLdM-unsplash.jpg}" alt="e"/></div>
-		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20230713_201311.jpg}" alt="f"/></div>
-		                <div class="hot-hotel"><img th:src="@{images/instancefolder/20231010_171349.jpg}" alt="g"/></div>
-					</div>
-				</div>
-				<button type="button" class="left btn2">&lt;</button>
-				<button type="button" class="right btn2">&gt;</button>
-			</div>
-				
+		<!-- 		
+			<div class="carousel_main">
+    캐러셀 이미지 삽입
+    <div class="carousel_wrapper">
+        <div class="carousel_slide">
+            <img th:src="air_con.png"  alt="#" />
+        </div>
+        <div class="carousel_slide">
+            <img th:src="airline_line.png" alt="#" />
+        </div>
+        <div class="carousel_slide">
+            <img th:src="airline_logo.png" alt="#" />
+        </div>
+        <div class="carousel_slide">
+            <img th:src="airline_logo.png" alt="#" />
+        </div>
+    </div>
+
+    캐러셀 사이드 버튼
+    <div class="carousel_button_container">
+        <button type="button" class="carousel_prev">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+            </svg>
+        </button>
+        <button type="button" class="carousel_next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </button>
+    </div>
+ -->				
 			</section>
 			
 			
@@ -471,36 +487,62 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	
 			
 	<script>
-	function slide(index) {
-		document.querySelector('.list-wrapper').style.transform = `translateX(-${index * 330}px)`;
-		currentindex = index;
+	
+/* 
+	const swiper = document.querySelector('.carousel_wrapper');
+	const prevButtons = document.querySelectorAll('.carousel_prev');
+	const nextButtons = document.querySelectorAll('.carousel_next');
+	const bullets = document.querySelectorAll('.carousel_circle');
+
+	let currentSlide = 0;
+
+	function showSlide(slideIndex) {
+	    swiper.style.transform = `translateX(-${slideIndex * 300}px)`;
+	    currentSlide = slideIndex;
+
+	    bullets.forEach((bullet, index) => {
+	        if (index === currentSlide) {
+	            bullet.classList.add('active');
+	        } else {
+	            bullet.classList.remove('active');
+	        }
+	    });
 	}
+
+	prevButtons.forEach((prevButton) => {
+	    prevButton.addEventListener('click', () => {
+	        if (currentSlide > 0) {
+	            showSlide(currentSlide - 1);
+	        }
+	    });
+	});
+
+	nextButtons.forEach((nextButton) => {
+	    nextButton.addEventListener('click', () => {
+	        if (currentSlide < 3) {
+	            showSlide(currentSlide + 1);
+	        }
+	    });
+	});
+
+	bullets.forEach((bullet, index) => {
+	    bullet.addEventListener('click', () => {
+	        showSlide(index);
+	    });
+	});
+
+	showSlide(0);
 	
-	//캐러셀 버튼 클릭
-	function leftClickHandler() {
-		if(currentindex > 0) {
-			currentindex = currentindex-1;
-			slide(currentindex);
-		};
-	}
+	 */
 	
-	function rightClickHandler() {
-		if(currentindex < $('.list-wrapper').children().length-3) {
-			currentindex = currentindex+1;
-			slide(currentindex);
-		}
-	}
-	
-	
-	
-	
-// 	let currentIndex = 0;					//캐러셀 index
 	
 	$(loadedHandler)
 	function loadedHandler(){
 		$(".according").css("display","none");
 		
 		let currentIndex = 0;	//캐러셀 index
+		
+		
 		
 		/* $(".cheap_slide_prev").on("click",leftClickHandler);
 		$(".cheap_slide_prev").on("click",rightClickHandler);

@@ -69,6 +69,9 @@ inputRight.addEventListener("input", setRightValue);
 
 // 페이지가 로드될 때 초기값을 설정하는 함수
 const setInitialValues = () => {
+	inputRight = document.getElementById("input-right");
+	circleRight = document.querySelector(".slider > .circle.right");
+	range = document.querySelector(".slider > .range");
     // 초기 왼쪽 값과 오른쪽 값
 /*     const initialLeftValue = 0; */
 	//우측 숫자 변수 =  max 최초값
@@ -157,7 +160,12 @@ function searchHandler() {
 			console.log(inputRight);
 			//inputRight = document.getElementById("input-right");
 			//inputRight.addEventListener("input", setRightValue);
+			
+			//슬라이드바 셋팅
+			//슬라이드 바 Max수치 설정
 			$("#input-right").on("input",setRightValue);
+			//슬라이드바 동작 재설정
+			//setInitialValues();	
 		});
 	});
 }

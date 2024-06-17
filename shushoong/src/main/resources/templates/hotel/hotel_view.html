@@ -40,8 +40,10 @@ xmlns:th="http://www.thymeleaf.org">
 				</div>
 				<hr></hr>
 				<div class="hotel_pic">
-					<div th:each="hotelpic : ${piclist}"class="pic_slide">
-						<img th:src="${hotelpic.hotelPicture}"class="pic"/>
+					<div th:each="hotelpic : ${hotelSearchlist}"class="pic_slide">
+						<th:block th:each="piclist : ${hotelpic.hotelPic}">
+							<img th:src="${piclist.hotelPicture}"class="pic"/>
+						</th:block>
 					</div>
 				</div>
 				
@@ -66,16 +68,23 @@ xmlns:th="http://www.thymeleaf.org">
 						<hr style="border: 0.1em solid black;"></hr>	
 							<form>
 								<div class="wrap_room">
-									<div th:each="roomlist: ${roomlist}" class="room">
-										<div th:utext="${roomlist.roomCat} + ', ' + ${roomlist.roomAtt}" class="room_cat"></div>
+									<div th:each="roomlist: ${hotelSearchlist}" class="room">
+										<!-- <div th:utext="${roomlist.roomCat} + ', ' + ${roomlist.roomAtt}" class="room_cat"></div>
 										<div class="amount_num">
 											<strong th:text="${roomlist.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);"></strong>
 											원
-										</div>
-										<button type="button" class="btn_reserve">예약하기</button>
-										<div style="grid-column: 1/9">
-											<hr style="border: 1px solid #F1F1F1;" >
-										</div>
+										</div> -->
+										<th:block th:each="room : ${roomlist.hotelRooms}" class="roomlist">
+											<div th:utext="${room.roomCat} + ', ' + ${room.roomAtt}" class="room_cat"></div>
+											<div class="amount_num">
+												<strong th:text="${room.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);"></strong>
+											원
+											</div>
+											<button type="button" class="btn_reserve">예약하기</button>
+											<div style="grid-column: 1/9">
+												<hr style="border: 1px solid #F1F1F1;" >
+											</div>
+										</th:block>
 									</div>
 								</div>
 							</form>
@@ -287,7 +296,9 @@ xmlns:th="http://www.thymeleaf.org">
 									<div class="review_content">
 										<p th:text=" ${reviewDetail.reviewComment}"></p>
 									</div>
-									<div class="review_content_date"></div>
+									<div class="review_content_date">
+										<p th:text=" ${reviewDetail.reviewDate}"></p>
+									</div>
 								</div>
 							</div>	
 							<hr style="border: 1px solid #c5c5c5;"></hr>
@@ -424,7 +435,9 @@ xmlns:th="http://www.thymeleaf.org">
 			             </div>
 			        </div> <!-- 모달창 끝 -->
 
-					<div style="text-align: center;">페이징처리</div>
+					<div style="text-align: center;">
+						
+					</div>
 				</div>	
 			</div>
 		</div>
@@ -444,9 +457,12 @@ function loadedHandler(){
 	$(".more_room_btn").on("click", showAllRoomHandler);
 	
 	// 방의 개수가 3개 이상이면 "전체보기" 버튼을 보이게 하기
-	var roomCount = $(".wrap_room .room").length;
+	var roomCount = $(".roomlist").length;
+	console.log("=================" + roomCount);
+	
+	
 	if (roomCount > 3) {
-		$(".wrap_room .room:gt(2)").hide();
+		$(".roomlist:gt(2)").hide();
 		//gt(index) 선택자는 지정된 인덱스보다 큰 인덱스를 가진 요소들 모두 선택
 		$(".more_room_btn").show();
 	}

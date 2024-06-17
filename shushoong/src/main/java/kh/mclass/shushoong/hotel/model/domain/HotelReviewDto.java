@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Component
-public class HotelReviewDtoRes {
+public class HotelReviewDto {
 	private String userId;
 	private String roomCat;
 	private String reviewTitle;

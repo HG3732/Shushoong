@@ -20,16 +20,16 @@
 		WHERE USER_NAME=#{userName} AND USER_EMAIL=#{userEmail}
 	</select>
 	
+	<update id="setPwd" parameterType="map">
+		UPDATE MEMBER SET USER_PWD=#{userPwd} WHERE USER_ID=#{userId}
+	</update>
+	
 	<insert id="join" parameterType="MemberDto">
 	INSERT INTO MEMBER (USER_ID, USER_NAME, USER_PWD, USER_EMAIL, USER_GRADE, USER_STATUS, JOIN_DATE, EMAIL_RECEIVE, MSG_RECEIVE, LATEST_LOGIN) 
 	VALUES (#{userId}, #{userName}, #{userPwd}, #{userEmail}, #{userGrade}, #{userStatus}, #{joinDate}, #{emailReceive}, #{msgReceivce}, #{latestLogin})
 	</insert>
-	
-	<update id="setPwd" parameterType="map">
-		UPDATE INTO MEMBER SET USER_PWD=#{userPwd}
-	</update>
-	
+
 	<delete id="delete" parameterType="string">
-		DELETE FROM MEMBER WHERE USER_ID=#{userId} 
+		UPDATE MEMBER SET USER_STATUS="0" WHERE USER_ID=#{userId} 
 	</delete>
 </mapper>

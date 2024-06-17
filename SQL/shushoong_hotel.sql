@@ -198,3 +198,24 @@ where hotel_fac_cat='주차';
         	left join (select hotel_code, ROUND((f + c + co + k)/4, 1) as score from (
             	select hotel_code, avg(hotel_facility) f, avg(hotel_clean) c, avg(hotel_conven) co, avg(hotel_kind) k 
             	from hotel_review join hotel h using(hotel_code) where h.hotel_loc_cat= 'OS' group by hotel_code)) using(hotel_code);
+                
+                
+-- 호텔 리스트 뷰 생성
+create view V_hotel_list (hotel_code, hotel_pic, hotel_name, hotel_eng, hotel_address, hotel_score, hotel_review_num, hotel_price, room_discount, room_cap) as
+select distinct hp.hotel_code, first_value(hp.hotel_picture) over (partition by hp.hotel_code) as hotel_picture, h.hotel_name, h.hotel_eng, h.hotel_address, nvl(hotel_review2.avg_score, 0), hotel_review2.review_num, hrm.min_price, hrm.hotel_discount, hrm.room_cap
+
+from hotel_pic hp, hotel h, 
+(select h.hotel_code, round((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_score, count(hrv.hotel_code) as review_num
+from hotel_review hrv right join hotel h on hrv.hotel_code = h.hotel_code group by h.hotel_code) hotel_review2,
+(select t1.*, t2.min_price from hotel_room t1 join (select hotel_code, min(hotel_price) min_price from hotel_room where room_count > 0 group by hotel_code) t2 on t1.hotel_code = t2.hotel_code and t1.hotel_price = t2.min_price) hrm
+
+where hp.hotel_code = h.hotel_code and hp.hotel_code = hotel_review2.hotel_code and hp.hotel_code = hrm.hotel_code
+;
+
+drop view V_hotel_list;
+
+desc V_hotel_list;
+
+select hotel_code, hotel_name, hotel_eng, hotel_address, hotel_price, room_discount, hotel_pic, 
+hotel_score, hotel_review_num from V_hotel_list where SUBSTR(hotel_code, 1, 3) = '2OS' and 
+room_cap = '2' and hotel_name LIKE '%스%' and hotel_price <= 357315 ;

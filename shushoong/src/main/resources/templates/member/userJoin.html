@@ -8,6 +8,7 @@ xmlns:th="http://www.thymeleaf.org">
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/member/userJoin.css}" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>슈슝::개인회원가입</title>
 </head>
@@ -105,23 +106,39 @@ xmlns:th="http://www.thymeleaf.org">
 	</div>
 	
 	<script>
-		$(loadedHandler);
-		function loadedHandler() {
-			$(".btn.emailSend").on("click", btnEmailSendHandler);
-		} 
+		$(loadedHanlder);
+		function loadedHanlder() {
+			$(".btn.emailSend").on("click", emailSendHandler);
+			$(".btn.emailCheck").on("click", emailCheckHandler);
+		}
 		
-		function btnEmailSendHandler() {
-			const userEmail = $('#userEmail').val();
-			const code = $('#code').val();
-			
-			const data = {
-				"userEmail" : userEmail
-			}
+		// 이메일 전송 이벤트
+		function emailSendHandler() {	
+			var userEmail = $("#userEmail").val();
+			console.log(userEmail);
 			
 			$.ajax({
 				type: "post",
-				url: "/v2/verify-email",
-				data: data
+				url: "/shushoong/v2/verify-email",
+				contentType : 'application/json;',
+				data: JSON.stringify({
+					'userEmail' : userEmail
+				})
+			})
+		}
+		
+		// 이메일 체크 이벤트
+		function emailCheckHandler() {	
+			var code = $("#code").val();
+			console.log(userEmail);
+			
+			$.ajax({
+				type: "post",
+				url: "/shushoong/verification-code",
+				contentType : 'application/json;',
+				data: JSON.stringify({
+					'code' : code
+				})
 			})
 		}
 	</script>

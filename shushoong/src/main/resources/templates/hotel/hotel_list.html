@@ -56,32 +56,7 @@ xmlns:th="http://www.thymeleaf.org">
 				
 				<div class="container">
 					<!-- aside 부분 - 슬라이드바 -->
-					<div class="sidebar">
-						 <p style="font-size: var(--font2); margin-bottom: 20px; font-family: 'SOYOMapleRegularTTF';">가격</p>
-						 <form>
-							 <div class="price-slider">
-							     <div class="multi-range-slider">
-							         <!-- 진짜 슬라이더 -->
-							         <!-- <input type="range" id="input-left" min="0" max="100" value="1" /> -->
-							         <input type="range" id="input-right" min="0" th:max="${maxPrice}" th:value="${maxPrice}" />
-							
-							         <!-- 커스텀 슬라이더 -->
-							         <div class="slider">
-							             <div class="track"></div>
-							             <div class="range"></div>
-							             <!-- <div class="circle left"></div> -->
-							             <div class="circle right"></div>
-							         </div>
-							         <div class="circle price">
-							          <div class="price1">0</div>
-							          <div class="price2" th:text="${maxPrice}"></div>
-							         </div>
-							     </div>
-							 </div>
-						</form>
-					</div>
-					
-					<!-- section 부분 -->
+					<div th:replace="~{hotel/hotel_slide_bar :: hotelslidebar}"></div>
 					<div th:replace="~{hotel/hotel_list_section :: hotellistsection}"></div>
 				</div>
 			</div>
@@ -90,9 +65,11 @@ xmlns:th="http://www.thymeleaf.org">
 	<div class="wrap-footer">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
-	
+</body>
 <script>
 //URL로부터 파라미터 읽어오기 위해 search객체 생성
+$(loadedHandler);
+
 var urlParams = new URLSearchParams(window.location.search);
 var preloccode = urlParams.get('loc');
 var prepeople = Number(urlParams.get('adult')) + parseInt(urlParams.get('child')/2, 10);
@@ -101,8 +78,6 @@ var prekeyword = null;
 var maxPrice = null;
 var presortBy = null;
 var presortTo = null;
-
-$(loadedHandler);
 
 function loadedHandler(){
 	//좋아요 버튼 -- inline html onclick 
@@ -113,7 +88,7 @@ function loadedHandler(){
 	//리스트 내 키워드 검색
 	$('.btn_search').on('click', searchHandler);
 	//가격(슬라이드바)으로 조회
-	$('#input-right').on('click', priceHandler);
+	//$('#input-right').on('click', priceHandler);
 };
 
 </script>

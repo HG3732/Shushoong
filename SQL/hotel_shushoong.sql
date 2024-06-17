@@ -92,6 +92,22 @@ FROM
 
 
 
+-------------------------------------결제 관련 sql
+
+
+select * from hotel_room;
+
+select * from hotel_reserve
+join (
+select hotel_name, hotel_code
+from hotel
+    join hotel_room using (hotel_code)) using (hotel_code);
+
+hotel_reserve 테이블
+approve_no, room_cat, room_att, request, reserve_name
+
+pay 테이블
+pay_price
 
 
 

@@ -71,10 +71,27 @@ function codeAddress() {
 
 
 /*=================== 리뷰 막대그래프 관련 =================== */
-let reviewRate = [2, 4, 3, 4.6];
+
+var avgFacility = $('#myChart').data('avg-facility');
+var avgClean = $('#myChart').data('avg-clean');
+var avgConven = $('#myChart').data('avg-conven');
+var avgKind = $('#myChart').data('avg-kind');
+
+
+var reviewOverallList; /*리뷰 값*/
+let reviewRate = [avgFacility, avgClean, avgConven, avgKind]; /*배열선언*/
+console.log('별점 총 평균값======================='+ reviewRate);
+let reviewText = []; /* n/5 */
 let reviewDataList = ["청결 상태", "편의시설/서비스", "직원 및 서비스", "숙박시설 상태 및 시설"];
 
+
+for(var idx in reviewRate){
+    var reviewOne = reviewRate[idx];
+    reviewText[idx] = reviewOne + '/5';
+}
+
 var ctx = document.getElementById('myChart').getContext('2d');
+
 var myChart3 = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -84,7 +101,8 @@ var myChart3 = new Chart(ctx, {
             backgroundColor: '#D9D9D9',
             hoverOffset: 4,
             barThickness: 30
-        }]
+        }], 
+       
     },
     options: {
         responsive: true, // 차트 크기를 반응형으로 조절
@@ -117,17 +135,39 @@ var myChart3 = new Chart(ctx, {
             },
         }
     },
-    plugins: [{
+
+		plugins: [{
+	    afterDraw: function(chart) {
+	        var ctx = chart.ctx;
+	        var xAxis = chart.scales['x'];
+	
+	        xAxis.ticks.forEach((tick, index) => {
+	            let x = xAxis.getPixelForTick(index);
+	            let y = chart.chartArea.bottom + 30; /* 레이블의 아래쪽에 위치 */
+	
+	            // 평가 항목마다 하나의 추가 레이블만 표시
+	            let additionalLabel = reviewText[index];
+	
+	            ctx.textAlign = 'center';
+	            ctx.textBaseline = 'top';
+	            ctx.fillStyle = '#000';
+	            ctx.fillText(additionalLabel, x, y); // 추가 레이블 그리기
+	        });
+	    }
+	}]
+
+    
+/*    plugins: [{
         afterDraw: function(chart) {
             var ctx = chart.ctx;
             var xAxis = chart.scales['x'];
 
             xAxis.ticks.forEach((tick, index) => {
                 let x = xAxis.getPixelForTick(index);
-                let y = chart.chartArea.bottom + 30; /* 레이블의 아래쪽에 위치 */
+                let y = chart.chartArea.bottom + 30;  레이블의 아래쪽에 위치 
 
                 // "4.5/5" 추가
-                let additionalLabel = '4.5/5';
+                let additionalLabel = reviewText;  '4.5/5'
 
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -135,7 +175,7 @@ var myChart3 = new Chart(ctx, {
                 ctx.fillText(additionalLabel, x, y); // 추가 레이블 그리기
             });
         }
-    }]
+    }]*/
 });
 
 

@@ -92,8 +92,9 @@ button#depart{
 	height: 40px;
 }
 img.type {
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
+	margin: 5px;
 }
 button#arrival{
 	width: 165px;
@@ -116,8 +117,9 @@ button#one_way_date > div , button#round_trip_date > div{
 
 button#one_way_date > img , button#round_trip_date > img{
 	float : right;
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
+	margin: 5px;
 }
 button#people_lineup{
 	width : 246px;
@@ -132,8 +134,9 @@ button#people_lineup > div{
 	line-height: 40px;
 }
 button#people_lineup >img{
-	width : 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
+	margin: 5px;
 	float : right;
 }
 
@@ -451,6 +454,77 @@ button#sit3{
 	position: fixed;
 	bottom: 5px;
 	display : none;
+}
+
+
+
+
+.wrap-hot-hotel-list {
+	width: 960px;
+	margin: 0 auto;
+	margin-top: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	gap: 40px;
+	position:relative;
+}
+
+.wrap-hot-hotel-list .hot-hotel-title {
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.wrap-hot-hotel-list .hot-hotel-list {
+	width: 100%;
+	height: 300px;
+	overflow: hidden;
+}
+
+.wrap-hot-hotel-list .hot-hotel-list .list-wrapper {
+	display: flex;
+	flex-direction: row;
+	gap: 30px;
+	transition: transform 1s;
+	width: auto;
+}
+
+.list-wrapper .hot-hotel {
+	width: 250px;
+	height: 250px;
+	background-color: green;
+	flex: 0 0 300px;
+}
+
+.list-wrapper .hot-hotel > img {
+	display: block;
+	object-fit: cover;
+}
+
+.wrap-hot-hotel-list .btn2 {
+	position: absolute;
+	width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color_blue_2);
+    cursor: pointer;
+}
+
+.wrap-hot-hotel-list .btn2:hover {
+	background-color: var(--color_blue_1);
+	color: white;
+}
+
+.wrap-hot-hotel-list .btn2.left {
+	left:-65px;
+	top: 165px;
+}
+
+.wrap-hot-hotel-list .btn2.right {
+	right:-65px;
+	top: 165px;
 }
 
 

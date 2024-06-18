@@ -46,6 +46,11 @@
 		</if>
 	</select>
 	
+	<!-- 좋아요 누른 호텔 조회 -->
+	<select id="selectLikeHotelList" parameterType="hashmap" resultType="String">
+		select hotel_code from hotel_like where substr(hotel_code, 1, 3) = #{code} and user_id = #{userId}
+	</select>
+	
 	<!-- 호텔 최고가(슬라이드바 표시용) -->
 	<select id="selectMaxRoomlPrice" parameterType="hashmap" resultType="Integer">
             	select max(hotel_price) from V_hotel_list
@@ -55,6 +60,16 @@
 	        	and hotel_name LIKE #{keyword2}
 	        </if>
 	</select>
+	
+	<!-- 좋아요 추가 -->
+	<insert id="insertHotelLike" parameterType="hashmap">
+		insert into hotel_like values (#{userId}, #{hotelCode})
+	</insert>
+	
+	<!-- 좋아요 삭제 -->
+	<insert id="deleteHotelLike" parameterType="hashmap">
+		delete from hotel_like where user_id = #{userId} and hotel_code = #{hotelCode}
+	</insert>
 	
 <!-- 	<select id="selectHotelPicList" parameterType="String" resultType="HotelPic">
 		select hotel_picture from hotel_pic where hotel_code = #{hotelCode}

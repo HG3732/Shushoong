@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
@@ -27,31 +28,38 @@ public class HotelController {
 	private HotelService service;
 	
 	@GetMapping("/hotel/main")
-	public String hotelMain(Model model) {
+	public String hotelMain(Model model, HttpSession session) {
 		List<HotelDtoRes> hotHotelList = service.selectHotHotelList();
 		model.addAttribute("hotHotelList", hotHotelList);
+		session.setAttribute("userId", "ex1");
 		return "hotel/hotel_main";
 	}
 	
 	//main에서 지역, 인원 검색 시 호텔 리스트 표시
 	@GetMapping("/hotel/list")
-	public String hotelList(Model model, String loc, String room, String adult, String child) {
+	public String hotelList(Model model, HttpSession session, String loc, String room, String adult, String child) {
 		Integer child1 = Integer.parseInt(child)/2;
 		Integer adult1 = Integer.parseInt(adult);
 		String people = String.valueOf(child1+adult1);
 		List<HotelDtoRes> result = service.selectAllHotelList(loc, people, null, null, null, null);
 		Integer maxPrice = service.selectMaxRoomlPrice(loc, people, null);
+		
+		//좋아요 여부 검색
+		String userId = (String)session.getAttribute("userId");
+		List<String> likeList = service.selectLikeHotelList(loc, userId);
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 		model.addAttribute("hotelList", result);
 		model.addAttribute("maxPrice", maxPrice);
+		model.addAttribute("likeList", likeList);
 		return "hotel/hotel_list";
 	}
 
 	@GetMapping("/hotel/list/sort.ajax")
 	public String hotelListSort(
 			Model model,
+			HttpSession session,
 			String loccode,
 			String people,
 			String keyword,
@@ -62,14 +70,18 @@ public class HotelController {
 		List<HotelDtoRes> result = service.selectAllHotelList(loccode, people, keyword, maxPrice, sortBy, sortTo);
 		Integer maxPrice2 = service.selectMaxRoomlPrice(loccode, people, keyword);
 		//session의 이름이 43행에 있는 List와 같아야 덮어쓰기됨, 다를 경우 기존 List + 새 List 출력
+		String userId = (String)session.getAttribute("userId");
+		List<String> likeList = service.selectLikeHotelList(loccode, userId);
 		model.addAttribute("hotelList", result);
 		model.addAttribute("maxPrice", maxPrice2);
+		model.addAttribute("likeList", likeList);
 		return "hotel/hotel_list_section";
 	}
 	
 	@GetMapping("/hotel/list/price.ajax")
 	public String hotelPriceSort(
 			Model model,
+			HttpSession session,
 			String loccode,
 			String people,
 			String keyword,
@@ -80,10 +92,31 @@ public class HotelController {
 		List<HotelDtoRes> result = service.selectAllHotelList(loccode, people, keyword, maxPrice, sortBy, sortTo);
 		Integer maxPrice2 = service.selectMaxRoomlPrice(loccode, people, keyword);
 		//session의 이름이 43행에 있는 List와 같아야 덮어쓰기됨, 다를 경우 기존 List + 새 List 출력
+		String userId = (String)session.getAttribute("userId");
+		List<String> likeList = service.selectLikeHotelList(loccode, userId);
 		model.addAttribute("hotelList", result);
 		model.addAttribute("maxPrice", maxPrice2);
+		model.addAttribute("likeList", likeList);
 		return "hotel/hotel_slide_bar";
 	}
+	
+	//좋아요 테이블에 추가
+	@GetMapping("/hotel/like/insert.ajax")
+	public String insertHotelLike(Model model, HttpSession session, String hotelCode) {
+		String userId = (String)session.getAttribute("userId");
+		Integer result = service.insertHotelLike(userId, hotelCode);
+		model.addAttribute("result", result);
+		return "hotel/hotel_list_section";
+	}
+	
+	//좋아요 테이블에서 삭제
+		@GetMapping("/hotel/like/delete.ajax")
+		public String deleteHotelLike(Model model, HttpSession session, String hotelCode) {
+			String userId = (String)session.getAttribute("userId");
+			Integer result = service.deleteHotelLike(userId, hotelCode);
+			model.addAttribute("result", result);
+			return "hotel/hotel_list_section";
+		}
 	
 	@GetMapping("/hotel/view")
 	public String hotelview(Model model) {

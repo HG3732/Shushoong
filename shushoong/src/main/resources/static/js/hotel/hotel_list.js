@@ -4,18 +4,41 @@ function likeHandler(thisElement){
 	//console.log(event.target);	//마우스 클릭 시 제일 가까운 요소 (하트 사진 누르면 하트 사진 뜨는....)
 	
 	var currentSrc = $(thisElement).children().attr('src');
-	
-	console.log("현재 소스값" + currentSrc);
 	/* 이 경로를 토대로 이미지 바뀌는 경우의 수 적어주기 */
 	
+	//좋아요 클릭 시 해당 호텔 코드 출력
+	var hotelcode = $(thisElement).parents('.hotel').data('hotelcode');
+	console.log(hotelcode);
+	
 	if( currentSrc === '/shushoong/images/heart.png'){
-		$(thisElement).children().attr("src", "/shushoong/images/heart_color.png");
+		$.ajax({
+		url: "/shushoong/hotel/like/insert.ajax",
+		method: "get",
+		data: {hotelCode : hotelcode},
+		success: function(result) {
+			if(result < 1) {alert("좋아요 작동 에러, 다시 시도해주세요.");}
+			else {$(thisElement).children().attr("src", "/shushoong/images/heart_color.png");}
+		},
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+		})
 		/* console 창에 결과나온거 보면 흰색  하트 img src 경로 보이는데 그 경로 토대로 작성 */
 	} else {
-		$(thisElement).children().attr("src", "/shushoong/images/heart.png");
+		$.ajax({
+		url: "/shushoong/hotel/like/delete.ajax",
+		method: "get",
+		data: {hotelCode : hotelcode},
+		success: function(result) {
+			if(result < 1) {alert("좋아요 작동 에러, 다시 시도해주세요.");}
+			else {$(thisElement).children().attr("src", "/shushoong/images/heart.png");}
+		},
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+		})
 	}
 }
-	
 
 /* const inputLeft = document.getElementById("input-left"); */
 let inputRight = document.getElementById("input-right");

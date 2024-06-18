@@ -30,6 +30,18 @@ public class HotelService {
 		return hotelRepository.selectMaxRoomlPrice(loc, people, keyword);
 	}
 	
+	public List<String> selectLikeHotelList(String code, String userId){
+		return hotelRepository.selectLikeHotelList(code, userId);
+	}
+	
+	public Integer insertHotelLike(String userId, String hotelCode) {
+		return hotelRepository.insertHotelLike(userId, hotelCode);
+	}
+	
+	public Integer deleteHotelLike(String userId, String hotelCode) {
+		return hotelRepository.deleteHotelLike(userId, hotelCode);
+	}
+	
 //	public List<HotelPic> selectPicList(String hotelCode) {
 //		return hotelRepository.selectHotelPicList(hotelCode);
 //	}

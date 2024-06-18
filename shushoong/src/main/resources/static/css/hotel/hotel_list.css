@@ -263,15 +263,30 @@ input[type="range"]::-webkit-slider-thumb {
 	color: var(--color_gray_2);
 }
 
+.wrap-price {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.wrap-price > div {
+	font-family: 'SOYOMapleBoldTTF';
+	color: var(--color_red_1);
+	margin-bottom: 10px;
+}
 
 .hotel_price{
-	font-family: 'SOYOMapleBoldTTF';
 	font-size: var(--font1);
-	color: var(--color_red_1);
-	
 	align-content: end;
 	text-align: end;
-	margin-bottom: 10px;
+}
+
+.wrap-price > div:last-child {
+	font-size: var(--font2);
+	align-content: end;
+	text-align: end;
+	margin-bottom: 12px;
+	font-weight: 100;
 }
 
 .isEmpty{

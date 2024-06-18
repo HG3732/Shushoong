@@ -7,9 +7,16 @@ xmlns:th="http://www.thymeleaf.org">
 	<div class="hotel_list" id="realHotelList" th:fragment="hotellistsection">
 		<div class="hotel" th:each="hotel : ${hotelList}" th:data-hotelcode="${hotel.hotelCode}">
 			<div class="hotel_pic" th:style="'background-image: url(' + ${hotel.hotelPic} + '); background-size: cover;'">
-				<div class="hotel_like" onclick="likeHandler(thisElement);">
-					<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart">
-				</div>
+				<th:block th:if="${!likeList.contains(hotel.hotelCode)}">
+					<div class="hotel_like" onclick="likeHandler(this);">
+						<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart">
+					</div>
+				</th:block>
+				<th:block th:if="${likeList.contains(hotel.hotelCode)}">
+					<div class="hotel_like" onclick="likeHandler(this);">
+						<img th:src="@{/images/heart_color.png}" alt="좋아요" style="width:40px;" class="heart">
+					</div>
+				</th:block>
 			</div>
 			<div class="hotel_attr">
 				<div class="hotel_kr" th:text="${hotel.hotelName}"></div>
@@ -21,7 +28,7 @@ xmlns:th="http://www.thymeleaf.org">
 					<span class="count_review" th:text="'(' + ${hotel.hotelReviewNum} + ')'"></span>
 				</div>
 			</div>
-			<div class="hotel_price" th:text="${hotel.hotelPrice} + '원'"></div>
+			<div class="wrap-price"><div class="hotel_price" th:text="${hotel.hotelPrice}"></div><div> 원~</div></div>
 		</div>
 		
 	<!--

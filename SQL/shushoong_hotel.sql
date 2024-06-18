@@ -274,6 +274,14 @@ where hotel_fac_cat='주차';
             	from hotel_review join hotel h using(hotel_code) where h.hotel_loc_cat= 'OS' group by hotel_code)) using(hotel_code);
                 
                 
+select * from hotel_like;
+
+insert all 
+    into hotel_like values ('ex1', '2OS001', 1)
+    into hotel_like values ('ex1', '2OS003', 1)
+    select * from dual;
+
+commit;
 -- 호텔 리스트 뷰 생성
 create view V_hotel_list (hotel_code, hotel_pic, hotel_name, hotel_eng, hotel_address, hotel_pcount, hotel_score, hotel_review_num, hotel_price, room_discount, room_cap) as
 select distinct hp.hotel_code, first_value(hp.hotel_picture) over (partition by hp.hotel_code) as hotel_picture, h.hotel_name, h.hotel_eng, h.hotel_address, h.hotel_pcount, nvl(hotel_review2.avg_score, 0), hotel_review2.review_num, hrm.min_price, hrm.hotel_discount, hrm.room_cap

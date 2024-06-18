@@ -35,37 +35,30 @@
         AND DEPART_LOC LIKE #{departLoc}
         AND ARRIVAL_LOC LIKE #{arrivalLoc}
     	<choose>
-    		<when test="selectType != null and selectType.equals('flytime-low')">
-    			ORDER BY FLIGHT_TIME
+    		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY FLIGHT_TIME
     		</when>
-    		 <when test="selectType != null and selectType.equals('flytime-long')">
-    			ORDER BY FLIGHT_TIME DESC
+    		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY FLIGHT_TIME
+    		</when>
+    		 <when test="selectType != null and selectType.equals('flytime-long') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY FLIGHT_TIME DESC
+    		</when>
+    		 <when test="selectType != null and selectType.equals('flytime-long') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY FLIGHT_TIME DESC
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-cheap') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY SEAT_PRICE
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-cheap') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY SEAT_PRICE
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-expensive') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY SEAT_PRICE DESC
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-expensive') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY SEAT_PRICE DESC
     		</when>
         </choose>
     </select>
-    <!-- 
-    <select id="selectType" resultType="AirlineInfoDto">
-    	SELECT * FROM AIRLINE_INFO
-    	WHERE DEPART_LOC LIKE #{departLoc} AND ARRIVAL_LOC LIKE #{arrivalLoc}
-    	<choose>
-    		 <when test="selectType != null and selectType.equals('flytime-low')">
-    			ORDER BY FLIGHT_TIME
-    		</when>
-    		 <when test="selectType != null and selectType.equals('flytime-long')">
-    			ORDER BY FLIGHT_TIME DESC
-    		</when>
-    		 -->
-    	<!-- 
-    		 <when test="selectType != null and selectType.equals('flytime-low')">
-    			ORDER BY REGEXP_REPLACE(#{flightTime}, '(\d+)시간 (\d+)분', '\1')
-         		+ REGEXP_REPLACE(#{flight_time}, '(\d+)시간 (\d+)분', '\2') 
-    		</when>
-    		 <when test="selectType != null and selectType.equals('flytime-long')">
-    			
-    			ORDER BY REGEXP_REPLACE(#{flightTime}, '(\d+)시간 (\d+)분', '\1')
-         		+ REGEXP_REPLACE(#{flightTime}, '(\d+)시간 (\d+)분', '\2') DESC
-    		</when>
-    	</choose>
-    </select>
-    		 -->
 </mapper>

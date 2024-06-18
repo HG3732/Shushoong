@@ -101,7 +101,7 @@ section .onlineQnAList{
 	margin-bottom: 100px;
 }
 
-section .viewList {
+section .viewNoticeList, .viewQnAList {
 	border: none;
 	border-radius: 20px;
 	width: 90px;
@@ -134,7 +134,7 @@ section .QnA-content {
 	font-size: 11px;
 	font-weight: bold;
 	border-bottom: 1px solid #006AFF;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	
 	display: grid;
 	grid-template-columns: 1fr 4fr 2fr 2fr;

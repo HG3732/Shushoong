@@ -4,6 +4,8 @@
 			const adult = urlParams.get('adult');
 			var htmlVal = '';
 			
+			$(".adultNum").text(adult);
+			
 			console.log(adult)
 			
 			for(var  i = 0; i < adult; i++){
@@ -16,8 +18,8 @@
 								<div>
 									<div>성별</div>
 									<div>
-										<input type="radio" name="passenger_gender" id="male" value="M"><label for="male" >남성</label>
-										<input type="radio" name="passenger_gender" id="female" value="F"><label for="female">여성</label>
+										<input type="radio" class="passenger_gender" name="passenger_gender_adult${i}" id="male_adult${i}" value="M"><label for="male_adult${i}" >남성</label>
+										<input type="radio" class="passenger_gender" name="passenger_gender_adult${i}" id="female_adult${i}" value="F"><label for="female_adult${i}">여성</label>
 									</div>
 								</div>
 								<div>
@@ -99,7 +101,7 @@
 									<label for="adult_40kg${i}">
 										<div class="kg40"></div>
 										<div><div>KRW :</div><div>90,000</div></div>
-										<input id="adult_40kg${i}" type="radio" name="adult_baggage_size${i}" value="4">
+										<input class="baggage" id="adult_40kg${i}" type="radio" name="adult_baggage_size${i}" value="4">
 									</label>
 								</div>
 							</div>
@@ -132,8 +134,8 @@
 								<div>
 									<div>성별</div>
 									<div>
-										<input type="radio" name="passenger_gender" value="M">남성
-										<input type="radio" name="passenger_gender" value="F">여성
+										<input type="radio" class="passenger_gender" name="passenger_gender_child${i}" id="male_child${i}" value="M"><label for="male_child${i}" >남성</label>
+										<input type="radio" class="passenger_gender" name="passenger_gender_child${i}" id="female_child${i}" value="F"><label for="female_child${i}">여성</label>
 									</div>
 								</div>
 								<div>
@@ -215,7 +217,7 @@
 									<label for="child_40kg${i}">
 										<div class="kg40"></div>
 										<div><div>KRW :</div><div>90,000</div></div>
-										<input id="child_40kg${i}" type="radio" name="child_baggage_size${i}" value="4">
+										<input class="baggage" id="child_40kg${i}" type="radio" name="child_baggage_size${i}" value="4">
 									</label>
 								</div>
 							</div>
@@ -237,15 +239,15 @@
 			for(var  i = 0; i < baby; i++){
 				console.log("baby");
 				htmlVal+=`
-					<section class="passenger_wrap">
+					<section class="passenger_wrap baby">
 						<div>탑승자 : 유아 : ${i+1}</div>
 						<div class="passenger_info">
 							<div class="passenger_info_flex">
 								<div>
 									<div>성별</div>
 									<div>
-										<input type="radio" name="passenger_gender" value="M">남성
-										<input type="radio" name="passenger_gender" value="F">여성
+										<input type="radio" class="passenger_gender" name="passenger_gender_baby${i}" id="male_baby${i}" value="M"><label for="male_baby${i}" >남성</label>
+										<input type="radio" class="passenger_gender" name="passenger_gender_baby${i}" id="female_baby${i}" value="F"><label for="female_baby${i}">여성</label>
 									</div>
 								</div>
 								<div>
@@ -295,17 +297,79 @@
 									<div class="input_type_date">
 										<input type="text" placeholder="만료 날짜" name="passenger_lastName">
 									</div>
+									<input class="baggage" id="baby_30kg${i}" type="hidden" name="child_baggage_size${i}" value="1">
 								</div>
 							</div>
 						</div>
 						
-						<div class="select_baggage">
-							<input id="baby_30kg${i}" type="hidden" name="child_baggage_size${i}" value="1">
-						</div>
 					</section>
 				`;
 				
 				$(".baby_list_wrap").html(htmlVal)
 			}
 		}
+		
+		
+		
+		
+		
+		
+		$("input.confirm_btn").on("click",function(){
+			console.log(this)
+			$(this).css("backgroundColor","#006AFF");
+			$(this).css("color","white");
+			$("input").attr("readonly",true);
+			$("input").attr("disabled",true);
+			$("select").attr("disabled",true);
+		})
+		
+		
+				/*약관 상세보기*/
+		function arrowDownClickHandler(){
+			console.log($(this).parents().eq(1).next());
+			
+			var downArrow = $(this).attr('src');
+			
+			if(downArrow == '/shushoong/images/down_arrow.png'){
+				$(this).attr("src", "/shushoong/images/up_arrow.png");
+				$(this).parents().eq(1).next().show();
+				$(this).parents().eq(1).next().css('margin-bottom', '20px')
+				
+			} else {
+				$(this).attr("src", "/shushoong/images/down_arrow.png");
+				$(this).parents().eq(1).next().hide();
+			}
+		
+		}
+		
+		/*전체동의*/
+		function allAgreeCheckHandler(){
+			console.log($(this).parent().siblings().eq(12).children('div:even').children());
+		
+			if(this.checked) {
+					$('.agree_radio').prop('checked', true);
+				} else {
+					$('.disagree_radio').prop('checked', true);
+				}
+		
+		}
+		
+		/*동의합니다 개별 체크 다 누를 시 전체동의 선택되게 하기*/
+		function checkAllEscHandler(){
+			console.log(this);
+			
+			if(this.checked){
+				$('#check1').prop('checked', false);
+			}
+			
+			var checkEsc = document.querySelectorAll('.agree_radio:checked');
+			console.log(checkEsc.length);
+			
+			if(checkEsc.length == 5) {
+				$('#check1').prop('checked', true);
+			} else {
+				$('#check1').prop('checked', false);
+			}
+		}
+
 	

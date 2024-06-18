@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/admin/adminLogin.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>슈슝::관리자 로그인</title>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-section">
+				<section>
+					<div class="login-header">
+						<img th:src="@{/images/logo.png}" alt="로고">
+					</div>
+					<div class="login-title">
+						관리자 로그인
+					</div>
+					<div class="main">
+						<div class="adminlogin-section">
+							<form id="frm-post" th:action="@{/login}" method="post">
+								<div class="loginInfo">
+									<input type="text" name="userId" placeholder="아이디" autofocus>
+									<input type="password" name="userPwd" placeholder="비밀번호">
+								</div>
+								<small th:text="${exception}"></small>
+								<div class="login-check">
+									<input type="checkbox" id="idsaved" name="idsaved">아이디 저장
+								</div>
+								<div class="loginBtn">
+									<button type="submit" class="btn login">로그인</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+		<div th:replace="~{common/footer :: Footer}"></div>
+	</div>
+</body>
+</html>

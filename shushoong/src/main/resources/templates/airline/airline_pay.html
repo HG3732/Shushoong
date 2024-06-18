@@ -49,23 +49,12 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="reserver_info_flex">
 							<div>
 								<div>이름</div>
-								<div><input type="text" name="reserver_name" placeholder="이름을 입력해 주세요"></div>
+								<div><input type="text" name="reserver_name" readonly="readonly" placeholder="이름이 공백일 경우 F5버튼을 눌러주세요"></div>
 							</div>
 							<div>
 								<div>휴대전화번호</div>
 								<div>
-									<select name="local_num">
-										<option selected value="0">선택하기</option>
-							            <option value="010">010</option>
-							            <option value="02">02</option>
-							            <option value="051">051</option>
-							            <option value="052">052</option>
-									</select>
-									-
-									<input type="text" name="reserver_middle_phone_number" placeholder="중간 번호">
-									-
-									<input type="text" name="reserver_last_phone_number" placeholder="끝 번호">
-									
+									<input type="text" name="reserver_middle_phone_number" placeholder="전화번호를 입력해 주세요">
 								</div>
 							</div>
 							<div>
@@ -79,8 +68,174 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="adult_list_wrap"></div>
 						<div class="child_list_wrap"></div>
 						<div class="baby_list_wrap"></div>
+						<input type="button" class="confirm_btn" value="확정하기" >
+					</section>
+					
+					
+					<section class="final_confirm">
+								<!-- 약관동의 -->
+						<div class="agreement">
+							<p style="font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">약관동의</p>
+							<input type="checkbox" id="check1"><label for="check1" style="margin-left: 690px;"></label>
+							<div class="all_agree">모든 약관에 동의합니다</div>
+						</div>
+						<hr style="border: 2px solid #006AFF; margin-top: 5px;"></hr>
+						<div class="policy_check">
+							<div class="refund">
+								<p class="class_info">예약 취소 및 환불 정책 안내</p>
+								<p class="required" style="color: red;">(필수)</p>
+								<div class="radio_wrap">
+									<input type="radio" name="policy_1" value="agree" id="radio_agree1" class="agree_radio">
+									<label for="radio_agree1"></label>
+										<div style="margin-right: 20px;">동의합니다</div>
+									<input type="radio" name="policy_1" value="disagree" id="radio_disagree1" class="disagree_radio">
+										<label for="radio_disagree1"></label>
+										<div>동의하지 않습니다</div>
+									<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">
+								</div>
+							</div>
+							<div class="policy_detail" hidden>
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+								Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+								when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+								It has survived not only five centuries, but also the leap into electronic typesetting, 
+								remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+								sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+								Aldus PageMaker including versions of Lorem Ipsum.
+							</div>
+							<div class="caution">
+								<p class="class_info">항공 예약 주의 사항</p>
+								<p class="required" style="color: red;">(필수)</p>
+								<div class="radio_wrap">
+									<input type="radio" name="policy_2" value="agree" id="radio_agree2" class="agree_radio">
+										<label for="radio_agree2"></label>
+										<div style="margin-right: 20px;">동의합니다</div>
+									<input type="radio" name="policy_2" value="disagree" id="radio_disagree2" class="disagree_radio">
+										<label for="radio_disagree2"></label>
+										<div>동의하지 않습니다</div>
+									<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">
+								</div>
+							</div>
+							<div class="policy_detail" hidden>
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+								Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+								when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+								It has survived not only five centuries, but also the leap into electronic typesetting, 
+								remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+								sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+								Aldus PageMaker including versions of Lorem Ipsum.
+							</div>
+		
+							
+							<div class="personal_info">
+								<p class="class_info">개인정보 수집 및 이용</p>
+								<p class="required" style="color: red;">(필수)</p>
+								<div class="radio_wrap">
+									<input type="radio" name="policy_3" value="agree" id="radio_agree3" class="agree_radio">
+										<label for="radio_agree3"></label>
+										<div style="margin-right: 20px;">동의합니다</div>
+									<input type="radio" name="policy_3" value="disagree" id="radio_disagree3" class="disagree_radio">
+										<label for="radio_disagree3"></label>
+										<div>동의하지 않습니다</div>
+									<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">
+								</div>
+							</div>
+							<div class="policy_detail" hidden>
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+								Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+								when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+								It has survived not only five centuries, but also the leap into electronic typesetting, 
+								remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+								sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+								Aldus PageMaker including versions of Lorem Ipsum.
+							</div>
+		
+							
+							<div class="third_party">
+								<p class="class_info">개인정보 제3자 제공 동의</p>
+								<p class="required" style="color: red;">(필수)</p>
+								<div class="radio_wrap">
+									<input type="radio" name="policy_4" value="agree" id="radio_agree4" class="agree_radio">
+										<label for="radio_agree4" style="display: inline-block;"></label>
+										<div style="margin-right: 20px;">동의합니다</div>
+									<input type="radio" name="policy_4" value="disagree" id="radio_disagree4"  class="disagree_radio">
+										<label for="radio_disagree4"></label>
+										<div>동의하지 않습니다</div>
+									<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">	
+								</div>
+							</div>
+							<div class="policy_detail" hidden>
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+								Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+								when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+								It has survived not only five centuries, but also the leap into electronic typesetting, 
+								remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+								sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+								Aldus PageMaker including versions of Lorem Ipsum.
+							</div>
+							
+							<div class="marketing">
+								<p class="class_info">마케팅 수신동의</p>
+								<p class="option" style="color: blue;">(선택)</p>
+								<div class="radio_wrap">
+									<input type="radio" name="policy_5" value="agree" id="radio_agree5" class="agree_radio">
+										<label for="radio_agree5" style="display: inline-block;"></label>
+										<div style="margin-right: 20px;">동의합니다</div>
+									<input type="radio" name="policy_5" value="disagree" id="radio_disagree5"  class="disagree_radio">
+										<label for="radio_disagree5"></label>
+										<div>동의하지 않습니다</div>
+									<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">	
+								</div>
+							</div>
+							<div class="policy_detail" hidden>
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+								Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+								when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+								It has survived not only five centuries, but also the leap into electronic typesetting, 
+								remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+								sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+								Aldus PageMaker including versions of Lorem Ipsum.
+							</div>
+						</div>
+						
+								
+						<div class="paycheck">
+							<p style="font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">결제 상세 내역</p>
+						</div>
+						<hr style="border: 2px solid #006AFF; margin-top: 5px; margin-bottom: 0;"></hr>
+						<div class="paycheck_wrap">
+							<div class="paycheck_info">
+								<div class="total_cost">
+									<div class="how_much">총 상품 금액</div>
+									<div class="total_num"><input type="text" class="total_value" readonly="readonly" placeholder="확정하기 버튼을 눌러주세요."> 원</div>
+								</div>
+								<div class="headcount_exchange">
+									<div class="headcount">
+									성인 : <div class="adultNum"></div>
+									, 아동 0</div>
+									<div class="exchange">JPY(83,953)</div>
+								</div>
+								<div class="mileage_wrap">
+									<p style="font-size: var(--font4);">마일리지</p>
+									<button type="button" class="use_all">전액사용</button>
+									<input type="text">
+									<p style="font-size: var(--font4);">원</p>
+								</div>
+								<div class="left">
+									<p>잔액: 1000원</p>
+								</div>
+								<div class="exchange_info">
+									<div class="apply_exchange">* 적용 환율 JPY=8.8301(2024.05.23) 기준</div>
+									<div class="mileage_save">슈슝투어 마일리지 741 적립</div>
+									<div class="mileage_guide">호텔은 대표 투숙객1인 에게 마일리지 적립이 됩니다.</div>
+								</div>						
+							</div>
+						</div>
+						
+						
 						<input class="info_submit_btn" type="submit" value="결제 페이지로 이동">
 					</section>
+					
 				</form>
 			</div>
 		</div>
@@ -104,7 +259,10 @@ xmlns:th="http://www.thymeleaf.org">
 			childNum();
 			babyNum();
 		}
-		
+
+		$('#check1').on("click", allAgreeCheckHandler);
+		$('.arrow').on("click", arrowDownClickHandler);
+		$('input[type=radio]').on("click", checkAllEscHandler);
 		
 	
 	</script>

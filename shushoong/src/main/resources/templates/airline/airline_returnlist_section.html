@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div id="airline-return-box" th:fragment="airlineList-return">
+
+	<div th:each="air : ${airlineReturnData}" class="airline-info return">
+		<div class="seat-count">
+			<div class="airline-flex">
+				<div class="airline-logo">
+					<div class="span-seat-div">
+						<span class="span-seat">잔여 9석</span>
+					</div>
+					<img th:src="${air.airlineImg}" alt="">
+				</div>
+				<div class="airline-name">
+					<span th:text="${air.airlineName}"></span>
+				</div>
+				<div class="airinfo depart-info">
+					<div th:text="${air.departDate}" class="info date"></div>
+					<div th:text="${air.departTime}" class="info time"></div>
+					<div th:text="${air.departLoc}" class="info loc"></div>
+				</div>
+				<div class="arrow">
+					<div class="via-count">
+						<span th:text="${air.viaCount}"></span>
+					</div>
+					<img src="/shushoong/images/airline_via.png" alt="">
+					<div th:text="${air.flightTime}" class="flytime"></div>
+				</div>
+				<div class="airinfo arr-info">
+					<div th:text="${air.arrivalDate}" class="info date"></div>
+					<div th:text="${air.arrivalTime}" class="info time"></div>
+					<div th:text="${air.arrivalLoc}" class="info loc"></div>
+				</div>
+				<div class="nop">
+					<div class="sero">
+						<img src="/shushoong/images/airline_line.png" alt="">
+					</div>
+					<div class="ticket-adult">성인 1</div>
+					<div class="airticket">
+						<!-- 왕복일 시 -->
+						<div class="ticket-price" th:if="${ticketType} != 1">
+							<div
+								th:text="${#numbers.formatInteger(air.seatPrice, 3, 'COMMA') + '원'}"></div>
+						</div>
+						<!-- 편도일 시 = 티켓 값 / 2 -->
+						<div class="ticket-price" th:if="${ticketType} == 1">
+							<span
+								th:text="${#numbers.formatInteger(T(java.lang.Integer).parseInt(air.seatPrice) / 2, 3, 'COMMA') + '원'}"></span>
+
+						</div>
+						<div class="ticket-btn">
+							<button class="ticketinfo-btn" type="button">
+								<img class="price-img-btn"
+									src="/shushoong/images/skyblue_right.png" alt="">
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="contain-select-info" hidden>
+				<div class="flex-select-info">
+					<div class="date-select-info">
+						<div>
+							<div>
+								<span th:text="${air.departDate}"></span>
+							</div>
+							<div>
+								<span th:text="${air.departTime}"></span>
+							</div>
+						</div>
+						<div>
+							<span th:text="${air.flightTime}"></span>
+						</div>
+						<div>
+							<div>
+								<span th:text="${air.arrivalDate}"></span>
+							</div>
+							<div>
+								<span th:text="${air.departTime}"></span>
+							</div>
+						</div>
+					</div>
+					<div class="loc-select-info">
+						<span th:text="${air.departLoc}"></span>
+						<div>
+							<span th:text="${air.airlineName}"></span>
+						</div>
+						<div>
+							<span>좌석등급 항공편명</span>
+						</div>
+						<span th:text="${air.arrivalLoc}"></span>
+					</div>
+					<div class="btn-select-info">
+						<button id="reserve-btn" type="button">결제하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	
+	$(document).ready(function() {
+		// getSelectOptionsReturn();
+		clickedTicketInfo(); // 티켓 상세 정보
+	});
+</script>
+
+</html>

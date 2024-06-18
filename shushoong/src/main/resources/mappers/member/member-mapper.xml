@@ -29,7 +29,7 @@
 	VALUES (#{userId}, #{userName}, #{userPwd}, #{userEmail}, #{userGrade}, #{userStatus}, #{joinDate}, #{emailReceive}, #{msgReceivce}, #{latestLogin})
 	</insert>
 
-	<delete id="delete" parameterType="string">
+	<update id="stopUse" parameterType="string">
 		UPDATE MEMBER SET USER_STATUS="0" WHERE USER_ID=#{userId} 
-	</delete>
+	</update>
 </mapper>

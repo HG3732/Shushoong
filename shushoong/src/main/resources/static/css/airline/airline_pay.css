@@ -49,6 +49,7 @@ section.reserver_info > div:nth-child(1) > div:nth-child(1) {
 }
 section.reserver_info > div:nth-child(1) > div:nth-child(2) {
 	font-size: 13px;
+	margin-bottom: 10px;
 }
 div.reserver_info_flex > div{
 	height: 60px;
@@ -73,12 +74,14 @@ div.reserver_info_flex > div > div:nth-child(2){
 	margin-left : 10px;
 }			
 div.reserver_info_flex > div > div:nth-child(2) > input[type=text]{
-	width: 320px;
+	width: 300px;
+	height: 35px;
+	border : 1px solid  var(--color_blue_1);
+	border-radius: 50px;
+	text-align: left;
+	outline-color:  var(--color_blue_1);
 }			
-div.reserver_info_flex > div:nth-child(2) > div:nth-child(2) > input[type=text]{
-	width: 100px;
-}			
-											/* 탑승자 정보 */
+										/* 탑승자 정보 */
 section.passenger_wrap{
 	margin : auto;
 	margin-top : 75px;
@@ -139,8 +142,16 @@ div.passenger_info_flex > div > div:nth-child(4){
 div.passenger_info_flex > div > div:nth-child(1) > div:first-child{
 	height : 20px;
 }
+div.passenger_info_flex > div > div:nth-child(1) > div:last-child{
+	font-size: 12px;
+	margin-top: -5px;
+}
 div.passenger_info_flex > div > div:nth-child(3) > div:first-child{
 	height : 20px;
+}
+div.passenger_info_flex > div > div:nth-child(3) > div:last-child{
+	font-size: 12px;
+	margin-top: -5px;
 }
 
 
@@ -151,6 +162,7 @@ div.passenger_info_flex > div > div > select
 	height: 35px;
 	border : 1px solid  var(--color_blue_1);
 	border-radius: 50px;
+	outline-color:  var(--color_blue_1);
 }
 div.passenger_info_flex > div > div > input[type=radio]{
 	margin-left : 20px;
@@ -180,7 +192,7 @@ div.select_baggage_flex > div:first-child{
 	
 }
 div.select_baggage_flex > div > *{
-	width: 229px;
+	width: 240px;
 	text-align: center;
 	border-left: 1px solid var(--color_blue_1);
 }
@@ -188,7 +200,7 @@ div.select_baggage_flex > div > *:first-child{
 	border-left: none;
 }
 div.select_baggage_flex > div > label{
-	width: 229px;
+	width: 240px;
 	text-align: center;
 }
 
@@ -236,6 +248,273 @@ div.select_baggage_flex > div > label > input {
 	margin-top: 50px;
 	margin-bottom: 10px;
 }
-					/* 임시 테스트 */
 
+
+
+
+section.baby{
+	border-bottom: none;
+
+}
+section.into_submit{
+	width: 960px;
+	margin: auto;
+}
+
+input.confirm_btn{
+	width: 960px;
+	height: 45px;
+	border-radius: 30px;
+	margin-top : 20px;
+	border-color:  var(--color_blue_1);
+	background-color: var(--color_blue_2);
+}
+
+
+
+section.final_confirm{
+	width: 960px;
+	margin: auto;
+}
+
+.agreement{
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+
+
+
+								/* final_confirm */
+
+					/* hotel 약관 동의 가져온 것 */
+
+input[type=checkbox]{ 
+	display:none; 
+}
+
+input[type=checkbox] + label { 
+    cursor: pointer;
+    width: 20px;
+	height: 20px;
+    background-repeat: no-repeat;
+    background-image: url("../../images/skybluecheck.png");
+	background-size: 100%;
+}
+	
+input[type=checkbox]:checked + label { 
+		background-image: url("../../images/bluecheck.png");
+		border: none;
+}
+
+.agreement{
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.refund{
+ 	display: flex;
+/* 	align-items: center; */
+	margin-bottom: 10px;
+}
+
+.class_info{
+	flex-grow: 1;
+}
+
+.required{
+	flex-grow: 40;
+}
+
+.radio_wrap{
+	display: flex;
+} 
+
+.caution{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+
+.policy_check > div.caution > p.required{
+	flex-grow: 45;
+}
+
+.personal_info{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.policy_check > div.personal_info > p.required {
+	flex-grow: 45;
+}
+
+.third_party{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.policy_check > div.third_party > p.required {
+	flex-grow: 45;
+}
+
+.marketing{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.policy_check > div.marketing > p.option {
+	flex-grow: 40;
+}
+
+.yes{
+	margin-left: 100px;
+}
+
+.paycheck{
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+.paycheck_wrap{
+	background-color: var(--color_blue_2); 
+	padding: 10px 0;
+}
+
+.paycheck_info{
+	width: 860px;
+	margin: 0 auto;
+}
+
+.total_cost{
+	display:flex;
+	justify-content: space-between;
+}
+.how_much{
+	font-family: 'SOYOMapleBoldTTF';
+	font-size: var(--font2);
+}
+
+.total_num{
+	color: red;
+	font-size: var(--font4);
+}
+input.total_value{
+	font-size: var(--font1);
+	color: red;
+	text-align: right;
+	
+	width: 300px;
+	height: 35px;
+	border : 1px solid  var(--color_blue_1);
+	border-radius: 50px;
+	background-color : white;
+	outline-color:  var(--color_blue_1);
+}
+input.total_value::placeholder{
+	text-align: center;
+}
+
+.headcount_exchange{
+	display: flex;
+	justify-content: space-between;
+	font-size: var(--font4);
+	margin-top: 10px;
+}
+.headcount{
+	display: flex;
+}
+
+.mileage_wrap{
+ 	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-top: 30px;
+	
+}
+
+.mileage_wrap > input[type=text] {
+	border: none; 
+	background-color: var(--color_gray_3); 
+	border-radius: 20px;
+	width: 120px;
+	font-size: var(--font4);
+	padding:5px;
+	margin-left: 20px;
+}
+
+.mileage_wrap > input[type=text]:focus{
+	outline: none;
+	font-size: var(--font4);
+}
+
+
+.use_all{
+	border-radius: 20px;
+	border: none;
+	font-size: var(--font4);
+	background-color: var(--color_gray_3);
+	padding: 5px;
+	margin-left: 5px;
+}
+
+.use_all:hover{
+	cursor:pointer;
+	padding: 5px;
+	border-radius: 20px;
+	border: none;
+	font-size: var(--font4);
+	margin-left: 5px;
+}
+
+.left{
+	margin-top: 5px;
+	text-align: end;
+	font-size: var(--font4);
+}
+
+.exchange_info{
+	margin-top: 30px;
+	text-align: end;
+	font-size: var(--font4);
+	color: #7C7C7C;
+}
+
+.apply_exchange{
+	margin-bottom: 5px;
+}
+
+.mileage_save{
+	margin-bottom: 5px;
+}
+
+.pay_button{
+	margin: 30px 0;
+	width: 100%;
+}
+
+input[type=radio]{
+	-webkit-appearance: none; 
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	outline: none; 
+	background-image: url("../../images/skybluecheck.png");
+	background-size : cover;
+	cursor: pointer;
+
+}
+input[type="radio"]:checked{
+	background-image: url("../../images/bluecheck.png");
+	border: none;
+  
+}
 			

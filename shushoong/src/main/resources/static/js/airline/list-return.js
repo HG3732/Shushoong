@@ -1,5 +1,5 @@
 function clickedShowReturnBtn() {
-    $('#show-comeback-btn').on('click', function() {
+    $('.show-comeback-btn').on('click', function() {
         console.log("오는편 항공 정보 눌림");
 
 		//var departLoc = $(this).closest('.airline-info').find('.select-info-departLoc').text().trim();

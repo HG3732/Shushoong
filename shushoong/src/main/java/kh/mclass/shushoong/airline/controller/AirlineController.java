@@ -47,6 +47,8 @@ public class AirlineController {
 		String baby = (String) session.getAttribute("baby");
 		String ticketType = (String) session.getAttribute("ticketType");
 		
+		System.out.println("컨트롤러 세션" + child + baby + ticketType);
+		
 		System.out.println("=========");
 		log.info("!!!Received departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc + ", departDate: " + departDate +", arrivalDate: " + arrivalDate);
 
@@ -147,7 +149,42 @@ public class AirlineController {
 		
 		return "airline/airline_list_section";
 	}
-
+	// 항공 돌아오는 목록 정렬 옵션
+	@GetMapping("airline/list_select_options_return/ajax")
+	//@ResponseBody
+	public String airlineReturnSelectOptions(
+//			String departLoc,
+//			String arrivalLoc,
+			String departTimeLeft,
+			String deaprtTimeRight,
+			String arrivalTimeLeft,
+			String arrivalTimeRight,
+			String selectType,
+			String viaType,
+			String maxPrice,
+			HttpSession session,
+			Model md
+			){
+		String departLoc = (String) session.getAttribute("arrivalLoc");
+		String arrivalLoc = (String) session.getAttribute("departLoc");
+		
+		System.out.println("컨트롤러 목록 정렬");
+		System.out.println("출발지 : " + departLoc);
+		System.out.println("도착지 : " + arrivalLoc);
+		System.out.println("정렬 타입 : " + selectType);
+		System.out.println("경유 타입 : " + viaType);
+		System.out.println("가격 최댓 값 : " + maxPrice);
+		
+		List<AirlineInfoDto> SortData = service.getAirlineSideTime(
+				departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice
+				);
+		md.addAttribute("airlineReturnData", SortData);
+		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc);
+		md.addAttribute("maxPrice", maxPrice2);
+		log.debug("컨트롤러 디버깅 : " + SortData);
+		
+		return "airline/airline_returnlist_section";
+	}
 
 	// 항공 메인 페이지
     @GetMapping("/airline/main")

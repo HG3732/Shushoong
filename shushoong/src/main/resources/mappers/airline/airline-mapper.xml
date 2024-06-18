@@ -41,6 +41,12 @@
     		 <when test="selectType != null and selectType.equals('flytime-long')">
     			ORDER BY FLIGHT_TIME DESC
     		</when>
+    		 <when test="selectType != null and selectType.equals('price-cheap')">
+    			ORDER BY SEAT_PRICE
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-expensive')">
+    			ORDER BY SEAT_PRICE DESC
+    		</when>
         </choose>
     </select>
     <!-- 

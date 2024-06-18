@@ -35,17 +35,29 @@
         AND DEPART_LOC LIKE #{departLoc}
         AND ARRIVAL_LOC LIKE #{arrivalLoc}
     	<choose>
-    		<when test="selectType != null and selectType.equals('flytime-low')">
-    			ORDER BY FLIGHT_TIME
+    		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY FLIGHT_TIME
     		</when>
-    		 <when test="selectType != null and selectType.equals('flytime-long')">
-    			ORDER BY FLIGHT_TIME DESC
+    		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY FLIGHT_TIME
     		</when>
-    		 <when test="selectType != null and selectType.equals('price-cheap')">
-    			ORDER BY SEAT_PRICE
+    		 <when test="selectType != null and selectType.equals('flytime-long') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY FLIGHT_TIME DESC
     		</when>
-    		 <when test="selectType != null and selectType.equals('price-expensive')">
-    			ORDER BY SEAT_PRICE DESC
+    		 <when test="selectType != null and selectType.equals('flytime-long') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY FLIGHT_TIME DESC
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-cheap') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY SEAT_PRICE
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-cheap') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY SEAT_PRICE
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-expensive') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY SEAT_PRICE DESC
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-expensive') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY SEAT_PRICE DESC
     		</when>
         </choose>
     </select>

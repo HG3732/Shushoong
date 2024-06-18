@@ -16,4 +16,5 @@ public class MypageAdminController {
 	public String managerHome() {
 		return "mypage/admin/mypageAdminHome";
 	}
+
 }

@@ -12,5 +12,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-co
 		<package name="kh.mclass.shushoong.member.model.domain"/>
 		<package name="kh.mclass.shushoong.airline.model.domain"/>
 		<package name="kh.mclass.shushoong.hotel.model.domain"/>
+		<package name="kh.mclass.shushoong.mypage.model.domain"/>
 	</typeAliases>
 </configuration>

@@ -8,6 +8,8 @@
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 <link th:href="@{/css/mypage/business/mypageBusinessAside.css}" rel="stylesheet" />
 <link th:href="@{/css/mypage/business/mypageBusinessCorrectInfo.css}" rel="stylesheet" />
+<link th:href="@{/css/modal/mypageModal.css}" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>슈슝::개인정보 수정</title>
 </head>
@@ -83,7 +85,7 @@
 							<hr>
 						</div>
 						<div class="warning content1">
-							※ [주의] 개인정보 취급 방침에 의해 탈퇴 이후의 결제, 환불 건은 도움을 드릴 수 없는 점 양해해주시기를 바랍니다  
+							※ [주의] 개인정보 취급 방침에 의해 탈퇴 이후의 결제, 환불 건은 도움을 드리기 힘든 점 양해해주시기를 바랍니다  
 						</div>
 						<div class="warning content2">
 							위에 동의하신다면 하단의 버튼을 눌러 진행해 주세요.
@@ -99,6 +101,56 @@
 	<div class="wrap-footer">
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
-
+	
+	<!-- 모달창 -->
+	<div class="popup-wrap" id="popup">
+		<div class="close_btn" id="close_btn">X</div>
+		<div class="popup">
+			<div class="popup-head">
+				
+			</div>
+			<div class="popup-body">
+				<div class="body-content">
+					<div class="body-titlebox">
+						<img th:src="@{/images/logo.png}" alt="로고">
+					</div>
+					<div class="body-contentbox">
+						<div class="warning title">
+							※ [주의] 개인정보 취급 방침에 의해 탈퇴 이후의</div>
+						<div class="warning title"> 결제, 환불 건은 도움을 드리기 힘든 점 양해해주시기를 바랍니다.</div>
+						<div class="warning content">
+							정말 탈퇴하시겠습니까? 
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="popup-footer">
+				<span class="pop-btn confirm" id="confirm">
+					확인
+				</span>
+				<span class="pop-btn cancle" id="cancle">
+					취소
+				</span>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		$(loadedHandler);
+		
+		function loadedHandler() {
+			$(".btn.secession").on("click", deleteAccHandler);
+			$(".pop-btn.cancle").on("click", cancleHandler);
+			$(".close_btn").on("click", cancleHandler)
+		}
+		
+		function deleteAccHandler() {
+			$("#popup").hide().fadeIn();
+		}
+		
+		function cancleHandler() {
+			$("#popup").fadeOut();
+		}
+	</script>
 </body>
 </html>

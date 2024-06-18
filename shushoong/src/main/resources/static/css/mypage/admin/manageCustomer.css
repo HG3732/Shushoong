@@ -1,0 +1,243 @@
+@charset "UTF-8";
+
+input, input:focus, textarea, textarea:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+section .main input[type=radio] {
+	display: none;
+}
+
+.wrap-body {
+    /* 중앙 배치 */
+    width: 1440px; margin: 0 auto;
+
+    /* float - 부모 height를 위해  */
+    overflow: hidden;
+}
+
+.wrap-body > .wrap-section{
+    /* float 왼쪽 배치 */
+	width : 960px; 
+    float: left;
+    box-sizing: border-box;
+    padding: 20px;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+section .section-header1 {
+	font-family: 'SOYOMapleBoldTTF';
+	text-align: left;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 30px 0 20px 0;
+}
+
+section .hrline > hr {
+	border: 1px solid  #006AFF;
+	margin-bottom: 50px;
+}
+
+section .content-title {
+	font-size: 17px;
+	font-weight: bold;
+	
+	margin-bottom: 20px;
+}
+
+section .content-body > .article-title, .article-title2 {
+	height: 50px;
+	border : none;
+	border-top: 3px solid #006AFF;
+	background-color: #BCEFFF;
+}
+
+section .article-title2 {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	text-indent: 20px;
+	
+	font-weight: bold;
+}
+
+section .customer {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	
+	margin-bottom: 100px;
+}
+
+section .customerList, .customerInformation  {
+	width: 49.9%;
+	height: 400px;
+}
+
+section .customerList {
+	margin-right: 5px;
+}
+
+section .article-title {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	align-items: center;
+	
+	position: relative;
+}
+
+section .searchInput {
+	/* 	글상자서식 */
+	border: 1px solid #BCEFFF;
+	border-radius: 20px;
+	width: 330px;
+	height: 40px;
+	/* 	글자서식 */
+	font-family: SOYOMapleRegularTTF;
+	text-indent: 10px;
+	font-size: 15px;
+	/* 	배치서식 */
+	display: flex;
+	flex-direction: column;
+}
+
+section .searchInput:focus{
+	/* 	글상자서식 */
+	border: 2px solid #006AFF;
+}
+
+section .article-title > img {
+	position : absolute;
+	top: 27%;
+  	left: 65%;
+}
+
+section .idSearch {
+	background-color: #006AFF;
+	width: 100px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	
+	color:white;
+	font-family: SOYOMapleRegularTTF;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+section .article-body {
+	padding : 10px;
+}
+
+section .userName{
+	margin : 5px;
+}
+
+section .customerInformation:nth-child(2) > .article-title {
+	text-align: left;
+}
+
+section .tab {
+	overflow: hidden;
+	/* 	크기설정  */
+	width: 350px;
+	height: 50px;
+	/* 	영역설정  */
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: center;
+	margin-bottom: 50px;
+}
+
+section .tab label {
+	/* 영역 설정 */
+	border-bottom: 3px solid #006AFF;
+	cursor: pointer;
+	float: left;
+	width: 50%;
+	text-align: center;
+	padding: 15px 0;
+	/* 폰트 설정 */
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+#tab-1:checked ~ .tab label:nth-child(1), #tab-2:checked ~ .tab label:nth-child(2)
+	{
+	border: 3px solid #006AFF;
+	border-bottom: none;
+	box-shadow: none;
+}
+
+section .content>div {
+	display: none;
+}
+
+#tab-1:checked ~ .content > div:nth-child(1),
+#tab-2:checked ~ .content > div:nth-child(2) {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+
+section .onlineQnAList {
+	margin-bottom: 100px;
+}
+
+section .viewAllList {
+	display: flex;
+	justify-content: right;
+}
+
+section .QnA-grid {
+	height: 40px;
+	font-size: 13px;
+	font-weight: bold;
+	border-top: 2px solid #006AFF;
+	border-bottom: 2px solid #006AFF;
+	background-color:#BCEFFF;
+	
+	display: grid;
+	grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
+    align-items: center;
+    text-align: center;
+}
+
+section .QnA-content {
+	height: 40px;
+	font-size: 11px;
+	font-weight: bold;
+	border-bottom: 1px solid #006AFF;
+	margin-bottom: 10px;
+	
+	display: grid;
+	grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
+    align-items: center;
+    text-align: center;
+}
+
+section .viewQnAList {
+	border: none;
+	border-radius: 20px;
+	width: 90px;
+	height: 40px;
+	background-color: #006AFF;
+	cursor: pointer;
+	
+	color:white;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: SOYOMapleRegularTTF;
+}

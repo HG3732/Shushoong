@@ -51,11 +51,11 @@ function getSelectOptionsReturn() {
 		console.log('가격 최댓 값 : ' , maxPrice);
 		
 		$.ajax({
-			url: "/shushoong/airline/list_select_options/ajax",
+			url: "/shushoong/airline/list_select_options_return/ajax",
 			method: "get",
 			data: {
-				departLoc: arrivalLoc,
-				arrivalLoc: departLoc,
+				departLoc: departLoc,
+				arrivalLoc: arrivalLoc,
 				departTimeLeft: departTimeLeftVal,
 				deaprtTimeRight: departTimeRightVal,
 				arrivalTimeLeft: arrivalTimeLeftVal,
@@ -64,6 +64,7 @@ function getSelectOptionsReturn() {
 				viaType: viaType,
 				maxPrice: maxPrice
 			},
+			/*
 			success: function(response) {
 				console.log('Ajax Success', response);
 				if (response.length == 0) {
@@ -74,10 +75,13 @@ function getSelectOptionsReturn() {
 					updateAirlineList(response);
 				}
 			},
+			*/
 			error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
 			}
-		});
+		}).done(function(response){
+			$("#airline-return-box").replaceWith(response);
+			});
 	}
 
 	// 양방향 레인지 바 이벤트 핸들러 설정
@@ -86,7 +90,7 @@ function getSelectOptionsReturn() {
 	$('#arr-input-left').on('click', updateTimeRange);
 	$('#arr-input-right').on('click', updateTimeRange);
 }
-
+/*
 function noAirlineList() {
 	$('.airlineReturn-container').empty(); // 기존 목록 초기화
 	var airlineEmpty = `
@@ -95,117 +99,9 @@ function noAirlineList() {
 	$('.airlineReturn-container').html(airlineEmpty);
 }
 
-function updateAirlineList(data) {
-	// 항공 목록을 업데이트
-	$('.airlineReturn-container').empty(); // 기존 목록 초기화
-
-	let airlineInfo = '';
-	data.forEach(function(air) {
-		airlineInfo += `
-			<form id="frm-return" hidden>
-				<input type="hidden" id="departLoc" name="departLoc">
-				<input type="hidden" id="arrivalLoc" name="arrivalLoc">
-				<input type="hidden" id="airlineCode" name="airlineCode">
-			</form>
-            <div class="airline-info">
-                <div hidden="">
-                    <span class="select-info-departLoc" name="departLoc">${air.departLoc}</span>
-                    <span class="select-info-arrivalLoc" name="arrivalLoc">${air.arrivalLoc}</span>
-                    <span class="select-info-airlineCode" name="airlineCode">${air.airlineCode}</span>
-                </div>
-                <div class="seat-count">
-                    <div class="airline-flex">
-                        <div class="airline-logo">
-                            <div class="span-seat-div">
-                                <span class="span-seat">${air.seatCount}석</span>
-                            </div>
-                            <img src="${air.airlineImg}" alt="">
-                        </div>
-                        <div class="airline-name">
-                            <span>${air.airlineName}</span>
-                        </div>
-                        <div class="airinfo depart-info">
-                            <div class="info date">${air.departDate}</div>
-                            <div class="info time">${air.departTime}</div>
-                            <div class="info loc depart">${air.departLoc}</div>
-                        </div>
-                        <div class="arrow">
-                            <div class="via-count">
-                                <span>${air.viaCount}</span>
-                            </div>
-                            <img src="/shushoong/images/airline_via.png" alt="">
-                            <div class="flytime">${air.flightTime}</div>
-                            <div hidden>${air.flightNo}</div>
-                        </div>
-                        <div class="airinfo arr-info">
-                            <div class="info date">${air.arrivalDate}</div>
-                            <div class="info time">${air.arrivalTime}</div>
-                            <div class="info loc arrival">${air.arrivalLoc}</div>
-                        </div>
-                        <div class="nop">
-                            <div class="sero">
-                                <img src="/shushoong/images/airline_line.png" alt="">
-                            </div>
-                            <div class="ticket-adult">성인 1</div>
-                            <div class="airticket">
-                                <div class="ticket-price">
-                                    <div>${air.seatPrice}</div>
-                                </div>
-                                <div class="ticket-btn">
-                                    <button class="ticketinfo-btn" type="button">
-                                        <img class="price-img-btn" src="/shushoong/images/skyblue_right.png" alt="">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 <div hidden="" class="contain-select-info">
-										<div class="flex-select-info">
-											<div class="date-select-info">
-												<div>
-													<div>
-														<span>${air.departDate}</span>
-													</div>
-													<div>
-														<span>${air.departTime}</span>
-													</div>
-												</div>
-												<div>
-													<span${air.flightTime}></span>
-												</div>
-												<div>
-													<div>
-														<span>${air.arrivalDate}</span>
-													</div>
-													<div>
-														<span>${air.departTime}</span>
-													</div>
-												</div>
-											</div>
-											<div class="loc-select-info">
-												<span>${air.departLoc}</span>
-												<div>
-													<span>${air.airlineName}</span>
-												</div>
-												<div>
-													<span>좌석등급 항공편명</span>
-												</div>
-												<span>${air.arrivalLoc}</span>
-											</div>
-											<div class="btn-select-info">
-												<button id="show-comeback-btn" type="button">결제하기</button>
-											</div>
-										</div>
-									</div>
-                </div>
-            </div>
-            </div>
-        `;
-	});
 	$('.airlineReturn-container').html(airlineInfo);
 	// $('.airline-info-container').append(airlineInfo);
 	// $(".ticketinfo-btn").on("click", clickedTicketInfo());
 	clickedTicketInfo();
 	// clickedShowReturnBtn();
-}
-
+*/

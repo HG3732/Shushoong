@@ -9,18 +9,12 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
-public class MypageAdminController {
+public class MypageManageCustomerController {
 
-	// 관리자 로그인
-	@GetMapping("/manager/login")
-	public String managerLogin() {
-		return "mypage/admin/adminLogin";
-	}
-
-	// 마이페이지 메인 페이지로 이동
-	@GetMapping("/manager/home")
-	public String managerHome() {
-		return "mypage/admin/mypageAdminHome";
+	// 일반 회원 관리 페이지로 이동
+	@GetMapping("/manager/customer")
+	public String manageCustomer() {
+		return "mypage/admin/manageCustomer";
 	}
 
 }

@@ -89,7 +89,6 @@ function getSelectOptions() {
 	$('#arr-input-left').on('click', updateTimeRange);
 	$('#arr-input-right').on('click', updateTimeRange);
 }
-/*
 function noAirlineList() {
 	$('.airline-info-container').empty(); // 기존 목록 초기화
 	var airlineEmpty = `
@@ -97,115 +96,7 @@ function noAirlineList() {
 	`;
 	$('.airline-info-container').html(airlineEmpty);
 }
-function updateAirlineList(data) {
-	// 항공 목록을 업데이트
-	$('.airline-info-container').empty(); // 기존 목록 초기화
-	let airlineInfo = '';
-	data.forEach(function(air) {
-		airlineInfo += `
-			<form id="frm-return" hidden>
-				<input type="hidden" id="departLoc" name="departLoc">
-				<input type="hidden" id="arrivalLoc" name="arrivalLoc">
-				<input type="hidden" id="airlineCode" name="airlineCode">
-			</form>
-            <div class="airline-info">
-                <div hidden="">
-                    <span class="select-info-departLoc" name="departLoc">${air.departLoc}</span>
-                    <span class="select-info-arrivalLoc" name="arrivalLoc">${air.arrivalLoc}</span>
-                    <span class="select-info-airlineCode" name="airlineCode">${air.airlineCode}</span>
-                </div>
-                <div class="seat-count">
-                    <div class="airline-flex">
-                        <div class="airline-logo">
-                            <div class="span-seat-div">
-                                <span class="span-seat">잔여9석${air.seatCount}</span>
-                            </div>
-                            <img src="${air.airlineImg}" alt="">
-                        </div>
-                        <div class="airline-name">
-                            <span>${air.airlineName}</span>
-                        </div>
-                        <div class="airinfo depart-info">
-                            <div class="info date">${air.departDate}</div>
-                            <div class="info time">${air.departTime}</div>
-                            <div class="info loc depart">${air.departLoc}</div>
-                        </div>
-                        <div class="arrow">
-                            <div class="via-count">
-                                <span>${air.viaCount}</span>
-                            </div>
-                            <img src="/shushoong/images/airline_via.png" alt="">
-                            <div class="flytime">${air.flightTime}</div>
-                            <div hidden>${air.flightNo}</div>
-                        </div>
-                        <div class="airinfo arr-info">
-                            <div class="info date">${air.arrivalDate}</div>
-                            <div class="info time">${air.arrivalTime}</div>
-                            <div class="info loc arrival">${air.arrivalLoc}</div>
-                        </div>
-                        <div class="nop">
-                            <div class="sero">
-                                <img src="/shushoong/images/airline_line.png" alt="">
-                            </div>
-                            <div class="ticket-adult">성인 1</div>
-                            <div class="airticket">
-                                <div class="ticket-price">
-                                    <div>${air.seatPrice}</div>
-                                </div>
-                                <div class="ticket-btn">
-                                    <button class="ticketinfo-btn" type="button">
-                                        <img class="price-img-btn" src="/shushoong/images/skyblue_right.png" alt="">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 <div hidden="" class="contain-select-info">
-										<div class="flex-select-info">
-											<div class="date-select-info">
-												<div>
-													<div>
-														<span>${air.departDate}</span>
-													</div>
-													<div>
-														<span>${air.departTime}</span>
-													</div>
-												</div>
-												<div>
-													<span${air.flightTime}>비행 시간</span>
-												</div>
-												<div>
-													<div>
-														<span>${air.arrivalDate}</span>
-													</div>
-													<div>
-														<span>${air.departTime}10:20</span>
-													</div>
-												</div>
-											</div>
-											<div class="loc-select-info">
-												<span>${air.departLoc}</span>
-												<div>
-													<span>${air.airlineName}항공사 명</span>
-												</div>
-												<div>
-													<span>좌석등급 항공편명</span>
-												</div>
-												<span>${air.arrivalLoc}도착지</span>
-											</div>
-											<div class="btn-select-info">
-												<button id="show-comeback-btn" type="button">선택하기</button>
-											</div>
-										</div>
-									</div>
-                </div>
-            </div>
-        `;
-	});
-	$('.airline-info-container').html(airlineInfo);
-	// $('.airline-info-container').append(airlineInfo);
-	// $(".ticketinfo-btn").on("click", clickedTicketInfo());
-}
-	clickedShowReturnBtn();
+/*
 	clickedTicketInfo();
+	clickedShowReturnBtn();
 */

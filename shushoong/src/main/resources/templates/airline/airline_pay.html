@@ -49,23 +49,12 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="reserver_info_flex">
 							<div>
 								<div>이름</div>
-								<div><input type="text" name="reserver_name" placeholder="이름을 입력해 주세요"></div>
+								<div><input type="text" name="reserver_name" readonly="readonly" placeholder="이름이 공백일 경우 F5버튼을 눌러주세요"></div>
 							</div>
 							<div>
 								<div>휴대전화번호</div>
 								<div>
-									<select name="local_num">
-										<option selected value="0">선택하기</option>
-							            <option value="010">010</option>
-							            <option value="02">02</option>
-							            <option value="051">051</option>
-							            <option value="052">052</option>
-									</select>
-									-
-									<input type="text" name="reserver_middle_phone_number" placeholder="중간 번호">
-									-
-									<input type="text" name="reserver_last_phone_number" placeholder="끝 번호">
-									
+									<input type="text" name="reserver_middle_phone_number" placeholder="전화번호를 입력해 주세요">
 								</div>
 							</div>
 							<div>

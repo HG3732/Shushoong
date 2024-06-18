@@ -59,6 +59,30 @@ from hotel_review
 join hotel_reserve hr using (hotel_reserve_code)
     where hr.hotel_code = '2OS001';
 
+
+--페이징처리 위한 sql --> 한페이지에 몇개 띄울건지.. startRonum이랑 endRounum 사이
+select s2.* 
+from
+    (select s1.*, rownum rn 
+    from
+        (select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
+                hotel_facility, hotel_clean, hotel_conven, hotel_kind, (hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4 as rate_avg
+        from hotel_review 
+            join hotel_reserve hr using (hotel_reserve_code)
+        where hr.hotel_code = '2OS001'
+            order by review_date desc) 
+    s1)
+s2;
+--WHERE RN BETWEEN #{startRounum} AND #{endRounum}    ;  
+
+
+--- 리뷰 페이지 수 (호텔마다 페이지 수 달라짐)   
+select count(*) from hotel_review
+where hotel_code = '2OS001';
+
+    
+    
+
 ------리뷰 전체 평균 구하기
 --각 평점 항목 평균 먼저 구하기 -> chart js 용 
 select count(*), avg(hotel_facility), avg(hotel_clean), avg(hotel_conven), avg(hotel_kind) from hotel_review
@@ -144,6 +168,11 @@ select * from v_room_list
 WHERE hotel_code='2OS001';
 
 drop view v_room_list;
+
+
+
+
+
 
 
 

@@ -90,12 +90,26 @@
 	
 	<!-- 작성된 리뷰 불러오기 -->
 	<select id="selectReviewDetailList" parameterType="String" resultType="HotelReviewDto">
-		select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
-		hotel_facility, hotel_clean, hotel_conven, hotel_kind, (hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4 as rate_avg
-		from hotel_review 
-			join hotel_reserve hr using (hotel_reserve_code)
-		where hr.hotel_code = #{hotelCode}
+		select s2.* 
+		from
+		    (select s1.*, rownum rn 
+		    from
+		        (select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
+		                hotel_facility, hotel_clean, hotel_conven, hotel_kind, (hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4 as rate_avg
+		        from hotel_review 
+		            join hotel_reserve hr using (hotel_reserve_code)
+		        where hr.hotel_code = #{hotelCode}
+		            order by review_date desc) 
+		    s1)
+		s2
+		<!-- WHERE RN BETWEEN #{startRounum} AND #{endRounum}  -->
 	</select>
+	
+	<!-- 리뷰 페이지 수 구하기 -->
+<!-- 	<select id="selectReviewPage"  parameterType="String" resultType="_int"></select>
+	select count(*) from hotel_review
+	where hotel_code = #{hotelCode} -->
+	
 	
 	<!-- 호텔에 달린 모든 리뷰에 대한 평균 및 총 리뷰 갯수 -->
  	<select id="selectReviewOverall" parameterType="String" resultType="HotelReviewOverallDtoRes">

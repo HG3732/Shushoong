@@ -25,6 +25,7 @@ public interface HotelRepository {
 	public Integer insertHotelLike(String userId, String hotelCode);
 	//좋아요 삭제
 	public Integer deleteHotelLike(String userId, String hotelCode);
+	
 //	public List<HotelPic> selectHotelPicList(String hotelCode);
 //	
 //	public List<HotelRoomDto> selectRoomList(String hotelCode);
@@ -39,13 +40,13 @@ public interface HotelRepository {
 	// 리뷰 list 전체 수 구하기 - 페이지 수 계산하려함
 	//ex. 리뷰글이 총 10개면 2개로 나눈다 했을때 총 5페이지 나옴
 	//총 페이지 수가 결정됨 - 숫자만 뽑는거
-	public List<HotelReviewDto> selectReviewDetailList(String hotelCode);
-//	String currentPage									(int start, int end);
-	
+//	public List<HotelReviewDto> selectReviewDetailList(String hotelCode);
+
+	public List<HotelReviewDto> selectReviewDetailList(String hotelCode, int startRounum, int endRounum );
 	
 	// 페이지 당 나오는 게시글 수 뽑기
 	//위에꺼 토대로 얘가 배치됨 - 게시글 관련 데이터까지 뽑는거
-//	public List<HotelReviewDto> selectReviewPage(int start, int end);	
+	public Integer selectTotalPageCount(String hotelCode);	
 	
 	
 	//호텔 상세페이지 전체평균리뷰

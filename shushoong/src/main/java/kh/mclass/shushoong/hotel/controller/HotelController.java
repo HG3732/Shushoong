@@ -165,28 +165,28 @@ public class HotelController {
 		model.addAttribute("facilitylist", facilitylist);
 		
 		//작성된 리뷰 불러오기
-		List<HotelReviewDto> reviewDetailDto = service.selectReviewDetailList("2OS001");
-			//여행객 종류
-			for(int i = 0; i<reviewDetailDto.size(); i++) {
-				switch(reviewDetailDto.get(i).getTripperCat()){
-					case "0":
-						reviewDetailDto.get(i).setTripperCat("혼자");
-						break;
-					case "1":
-						reviewDetailDto.get(i).setTripperCat("커플/부부");
-						break;
-					case "2":
-						reviewDetailDto.get(i).setTripperCat("가족");
-						break;
-					case "3":
-						reviewDetailDto.get(i).setTripperCat("단체");
-						break;
-					default:
-						reviewDetailDto.get(i).setTripperCat("출장");
-						break;		
-				}
-			}
-		model.addAttribute("reviewDetailDto", reviewDetailDto);		
+//		List<HotelReviewDto> reviewDetailDto = service.selectReviewDetailList("2OS001");
+//			//여행객 종류
+//			for(int i = 0; i<reviewDetailDto.size(); i++) {
+//				switch(reviewDetailDto.get(i).getTripperCat()){
+//					case "0":
+//						reviewDetailDto.get(i).setTripperCat("혼자");
+//						break;
+//					case "1":
+//						reviewDetailDto.get(i).setTripperCat("커플/부부");
+//						break;
+//					case "2":
+//						reviewDetailDto.get(i).setTripperCat("가족");
+//						break;
+//					case "3":
+//						reviewDetailDto.get(i).setTripperCat("단체");
+//						break;
+//					default:
+//						reviewDetailDto.get(i).setTripperCat("출장");
+//						break;		
+//				}
+//			}
+//		model.addAttribute("reviewDetailDto", reviewDetailDto);		
 		
 		List<HotelReviewOverallDtoRes> reviewOverallDto = service.selectReviewOverall("2OS001");
 		model.addAttribute("reviewOverallDto", reviewOverallDto);
@@ -200,16 +200,18 @@ public class HotelController {
 	public String hotelPaging(
 			Model model,
 			String hotelCode,
-			String currentPage,
-			String userId
+			String currentPage, 
+			String totalPageCount, 
+			String startPageNum, 
+			String endPageNum
 		) {
 		//정보를 받아올 때 어떤것을 참조해서 받아올지 --> 매개변수(java에서의 getParameter 역할을 대신해줌)
 		
 //		한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
-		int pageSize = 3;
+		int reviewNum = 3;
 		
 //		화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
-		int pageBlockSize = 5;
+		int reviewPageNum = 5;
 		
 //		누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
 		int currentPageNum = 1;  // 기본1
@@ -224,32 +226,34 @@ public class HotelController {
 			
 		}
 		
-		List<HotelReviewDto> reviewDetailDto = service.selectReviewDetailList(hotelCode,currentPage, userId);
-
-
-		for(int i = 0; i<reviewDetailDto.size(); i++) {
-			switch(reviewDetailDto.get(i).getTripperCat()){
+		Map<String, Object> reviewDetailDto = service.selectReviewDetailList(hotelCode, reviewNum, reviewPageNum, currentPageNum);
+		
+		List<HotelReviewDto> reviewDtoList = (List)reviewDetailDto.get(reviewDetailDto);
+		// Map 에 묶인 얘를 꺼내면 java에서 object로 인식해서 강제형변환 해줘야함
+		
+		for(int i = 0; i<reviewDtoList.size(); i++) {
+			switch(reviewDtoList.get(i).getTripperCat()){
 				case "0":
-					reviewDetailDto.get(i).setTripperCat("혼자");
+					reviewDtoList.get(i).setTripperCat("혼자");
 					break;
 				case "1":
-					reviewDetailDto.get(i).setTripperCat("커플/부부");
+					reviewDtoList.get(i).setTripperCat("커플/부부");
 					break;
 				case "2":
-					reviewDetailDto.get(i).setTripperCat("가족");
+					reviewDtoList.get(i).setTripperCat("가족");
 					break;
 				case "3":
-					reviewDetailDto.get(i).setTripperCat("단체");
+					reviewDtoList.get(i).setTripperCat("단체");
 					break;
 				default:
-					reviewDetailDto.get(i).setTripperCat("출장");
+					reviewDtoList.get(i).setTripperCat("출장");
 					break;		
 			}
 		}
 		model.addAttribute("reviewDetailDto", reviewDetailDto);		
 		//매개변수를 가지고 가서 mapper에서 조회해서 dto에 넣고 여기로 가져와서 model 안에 넣음
 
-		return "hotel/hotel_view";
+		return "hotel/hotel_view_review";
 		//위에서 넣은 값을 session안에 담고 그 session을 여기로 보내서 띄움
 		
 	}

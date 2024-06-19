@@ -89,7 +89,7 @@
 	</select>
 	
 	<!-- 작성된 리뷰 불러오기 -->
-	<select id="selectReviewDetailList" parameterType="String" resultType="HotelReviewDto">
+	<select id="selectReviewDetailList" parameterType="hashmap" resultType="HotelReviewDto">
 		select s2.* 
 		from
 		    (select s1.*, rownum rn 
@@ -102,14 +102,15 @@
 		            order by review_date desc) 
 		    s1)
 		s2
-		<!-- WHERE RN BETWEEN #{startRounum} AND #{endRounum}  -->
+		WHERE RN BETWEEN #{startRounum} AND #{endRounum}
 	</select>
 	
 	<!-- 리뷰 페이지 수 구하기 -->
-<!-- 	<select id="selectReviewPage"  parameterType="String" resultType="_int"></select>
-	select count(*) from hotel_review
-	where hotel_code = #{hotelCode} -->
-	
+	<select id="selectTotalPageCount"  parameterType="String" resultType="_int">
+		select count(*) c from hotel_review
+		where hotel_code = #{hotelCode}
+	</select>
+
 	
 	<!-- 호텔에 달린 모든 리뷰에 대한 평균 및 총 리뷰 갯수 -->
  	<select id="selectReviewOverall" parameterType="String" resultType="HotelReviewOverallDtoRes">

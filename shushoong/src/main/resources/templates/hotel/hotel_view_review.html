@@ -36,13 +36,18 @@ xmlns:th="http://www.thymeleaf.org">
 
 						<div style="text-align: center;">
 							<ul class="paging_wrap">
-								<li class="left_page">&lt;</li>
-								<li>1</li>
-								<li>2</li>
-								<li>3</li>
-								<li>4</li>
-								<li class="right_page">&gt;</li>
-								<!--  th:data-page="${}" -->
+								<li th:if="${reviewDetailDto.startPageNum > 1}">
+									<a href="@{/hotel/view(page=${reviewDetailDto.startPageNum - 1})}" class="left_page" >&lt;</a>
+								</li>
+								<li th:each="page : ${#numbers.sequence(reviewDetailDto.startPageNum, reviewDetailDto.endPageNum)}"
+									th:class="${reviewDetailDto.currentPage == page} ? page : ''">
+									<span th:if="${reviewDetailDto.currentPage == page}" th:text="${page}"></span>
+									 <a th:if="${reviewDetailDto.currentPage != page}" th:href="@{/hotel/view(page=${page})}" th:text="${page}"></a>
+									  <input type="hidden" class="pageHidden" th:value="${page}" th:if="${reviewDetailDto.currentPage != page}">
+								</li>
+							    <li th:if="${reviewDetailDto.endPageNum < reviewDetailDto.totalPageCount}">
+							        <a th:href="@{/hotel/view(page=${reviewDetailDto.endPageNum + 1})}" class="right_page">&gt;</a>
+							    </li>
 							</ul>
 						</div>
 

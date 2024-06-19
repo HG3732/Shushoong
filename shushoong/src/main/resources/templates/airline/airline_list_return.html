@@ -87,49 +87,53 @@
 						</div>
 						<div class="price-list">
 							<form class="price-frm">
-									<div>
-										<p>가격</p>
-									</div>
-									<div class="middle-range price">
-										<div class="multi-range-slider">
-											<!-- 진짜 슬라이더 -->
-											<!-- <input type="range" id="price-input-left" min="0" max="22" value="0" /> -->
-											<input type="range" id="price-input-right" min="0" th:max="${maxPrice}" th:value="${maxPrice}" />
-	
-											<!-- 커스텀 슬라이더 -->
-											<div class="slider price">
-												<div class="track"></div>
-												<div class="range"></div>
-												<!-- <div class="thumb left price"></div> -->
-												<div class="thumb right price"></div>
-											</div>
-											<div class="resultval time">
-												<div class="div1"></div>
-												<div class="div2" id="maxPrice" th:text="${maxPrice}"></div>
-											</div>
+								<div>
+									<p>가격</p>
+								</div>
+								<div class="middle-range price">
+									<div class="multi-range-slider">
+										<!-- 진짜 슬라이더 -->
+										<!-- <input type="range" id="price-input-left" min="0" max="22" value="0" /> -->
+										<input type="range" id="price-input-right" min="0"
+											th:max="${maxPrice}" th:value="${maxPrice}" />
+
+										<!-- 커스텀 슬라이더 -->
+										<div class="slider price">
+											<div class="track"></div>
+											<div class="range"></div>
+											<!-- <div class="thumb left price"></div> -->
+											<div class="thumb right price"></div>
+										</div>
+										<div class="resultval time">
+											<div class="div1"></div>
+											<div class="div2" id="maxPrice" th:text="${maxPrice}"></div>
 										</div>
 									</div>
+								</div>
 
 							</form>
 						</div>
 						<div class="layover-list">
-								<div>
-									<p>직항/경유</p>
-								</div>
-								<div class="layover-select">
-									<label>
-										<button type="button" class="direct-btn zero" id="direct-btn" value="direct">
-											<img alt="" th:src="@{/images/bluecheck.png}" id="blue-direct"> 
-											<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-direct">
-										</button> <span>직항</span>
-									</label> 
-									<label>
-										<button type="button" class="direct-btn one" id="layover-btn" value="layover">
-											<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-layover"> 
-											<img alt="" th:src="@{/images/bluecheck.png}" id="blue-layover">
-										</button> <span>경유</span>
-									</label>
-								</div>
+							<div>
+								<p>직항/경유</p>
+							</div>
+							<div class="layover-select">
+								<label>
+									<button type="button" class="direct-btn zero" id="direct-btn"
+										value="direct">
+										<img alt="" th:src="@{/images/bluecheck.png}" id="blue-direct">
+										<img alt="" th:src="@{/images/skybluecheck.png}"
+											id="sky-direct">
+									</button> <span>직항</span>
+								</label> <label>
+									<button type="button" class="direct-btn one" id="layover-btn"
+										value="layover">
+										<img alt="" th:src="@{/images/skybluecheck.png}"
+											id="sky-layover"> <img alt=""
+											th:src="@{/images/bluecheck.png}" id="blue-layover">
+									</button> <span>경유</span>
+								</label>
+							</div>
 							<form class="layover-frm" hidden>
 								<input type="hidden" id="viaType" name="viaType">
 							</form>
@@ -149,7 +153,7 @@
 							</form>
 						</div>
 
-						<div hidden th:each="air : ${selectOneAirline}" >
+						<div hidden th:each="air : ${selectOneAirline}">
 							<div hidden="">
 								<span th:text="${air.departLoc}" id="select-info-departLoc-out" name="departLoc-out"></span> 
 								<span th:text="${air.arrivalLoc}" id="select-info-arrivalLoc-out" name="arrivalLoc-out"></span> 
@@ -258,96 +262,13 @@
 							</p>
 						</div>
 						<div class="airlineReturn-container">
-						<div th:replace="~{airline/airline_returnlist_section :: airlineList-return}"></div>
-<!-- 						
-							<div th:each="air : ${airlineReturnData}" class="airline-info return">
-								<div class="seat-count">
-									<div class="airline-flex">
-										<div class="airline-logo">
-											<div class="span-seat-div">
-												<span class="span-seat">잔여 9석</span>
-											</div>
-											<img th:src="${air.airlineImg}" alt="">
-										</div>
-										<div class="airline-name">
-											<span th:text="${air.airlineName}"></span>
-										</div>
-										<div class="airinfo depart-info">
-											<div th:text="${air.departDate}" class="info date"></div>
-											<div th:text="${air.departTime}" class="info time"></div>
-											<div th:text="${air.departLoc}" class="info loc"></div>
-										</div>
-										<div class="arrow">
-											<div class="via-count">
-												<span th:text="${air.viaCount}"></span>
-											</div>
-											<img src="/shushoong/images/airline_via.png" alt="">
-											<div th:text="${air.flightTime}" class="flytime"></div>
-										</div>
-										<div class="airinfo arr-info">
-											<div th:text="${air.arrivalDate}" class="info date"></div>
-											<div th:text="${air.arrivalTime}" class="info time"></div>
-											<div th:text="${air.arrivalLoc}" class="info loc"></div>
-										</div>
-										<div class="nop">
-											<div class="sero">
-												<img src="/shushoong/images/airline_line.png" alt="">
-											</div>
-											<div class="ticket-adult">성인 1</div>
-											<div class="airticket">
-												<div class="ticket-price">
-													<div th:text="${air.seatPrice}"></div>
-												</div>
-												<div class="ticket-btn">
-													<button class="ticketinfo-btn" type="button">
-														<img class="price-img-btn"
-															src="/shushoong/images/skyblue_right.png" alt="">
-													</button>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="contain-select-info" hidden>
-										<div class="flex-select-info">
-											<div class="date-select-info">
-												<div>
-													<div>
-														<span th:text="${air.departDate}"></span>
-													</div>
-													<div>
-														<span th:text="${air.departTime}"></span>
-													</div>
-												</div>
-												<div>
-													<span th:text="${air.flightTime}"></span>
-												</div>
-												<div>
-													<div>
-														<span th:text="${air.arrivalDate}"></span>
-													</div>
-													<div>
-														<span th:text="${air.departTime}"></span>
-													</div>
-												</div>
-											</div>
-											<div class="loc-select-info">
-												<span th:text="${air.departLoc}"></span>
-												<div>
-													<span th:text="${air.airlineName}"></span>
-												</div>
-												<div>
-													<span>좌석등급 항공편명</span>
-												</div>
-												<span th:text="${air.arrivalLoc}"></span>
-											</div>
-											<div class="btn-select-info">
-												<button id="reserve-btn" type="button">결제하기</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							 -->
+							<form id="frm-return" hidden>
+								<input type="hidden" id="departLoc" name="departLocReturn"> <input
+									type="hidden" id="arrivalLoc" name="arrivalLocReturn"> <input
+									type="hidden" id="airlineCodeReturn" name="airlineCodeReturn">
+							</form>
+							<div
+								th:replace="~{airline/airline_returnlist_section :: airlineList-return}"></div>
 						</div>
 					</div>
 				</div>
@@ -370,6 +291,8 @@
 			btnClickHandler(); // 직항/경유
 			clickedTicketInfo(); // 티켓 상세 정보
 			getSelectOptionsReturn(); // 목록 정렬
+			clickedReserveBtn();
+			clickedReturnReserve();
 		};
 	</script>
 	<!-- 양방향 레인지 바 -->
@@ -378,9 +301,16 @@
 	<!-- 직항/경유 버튼 -->
 	<script th:src="@{/js/airline/list-layover.js}" type="text/javascript"></script>
 	<!-- 티켓 상세 정보 버튼 -->
-	<script th:src="@{/js/airline/list-detailinfo.js}" type="text/javascript"></script>
+	<script th:src="@{/js/airline/list-detailinfo.js}"
+		type="text/javascript"></script>
 	<!-- 항공 목록 정렬 -->
-	<script th:src="@{/js/airline/list-select-options-return.js}" type="text/javascript"></script>
+	<script th:src="@{/js/airline/list-select-options-return.js}"
+		type="text/javascript"></script>
+		<!-- 항공 예약 -->
+	<script th:src="@{/js/airline/list-reserve.js}"
+		type="text/javascript"></script>
+		
+
 	<script>
 		
 	</script>

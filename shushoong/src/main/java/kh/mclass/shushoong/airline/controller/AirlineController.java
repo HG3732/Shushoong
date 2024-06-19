@@ -27,7 +27,7 @@ public class AirlineController {
 	// 항공 목록 
 	@GetMapping("/airline/list")
 	public String airlineInfo(
-			String airlineCode,
+//			String airlineCode,
 //			String departLoc,
 //			String arrivalLoc,
 //			String departDate,
@@ -40,7 +40,7 @@ public class AirlineController {
 //			String seatPrice,
 			HttpSession session,
 			Model md) {
-		session.setAttribute("airlineCode", airlineCode);
+//		session.setAttribute("airlineCode", airlineCode);
 		
 		String departLoc = (String) session.getAttribute("departLoc");
 		String arrivalLoc = (String) session.getAttribute("arrivalLoc");
@@ -87,6 +87,8 @@ public class AirlineController {
 	@PostMapping("airline/list_return")
 	public String airlineInfoReturn(
 			String airlineCode,
+//			String airlineCodeReturn,
+//			String airlineCodeReturn,
 //			String departLoc,
 //			String arrivalLoc,
 //			String departDate,
@@ -95,6 +97,7 @@ public class AirlineController {
 			Model md) {
 		
 		session.setAttribute("airlineCode", airlineCode);
+//		session.setAttribute("airlineCodeReturn", airlineCodeReturn);
 		
 		String departLoc = (String) session.getAttribute("arrivalLoc");
 		String arrivalLoc = (String) session.getAttribute("departLoc");
@@ -118,7 +121,7 @@ public class AirlineController {
 		Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc);
 		System.out.println("출발지 : " + departLoc);
 		System.out.println("도착지 : " + arrivalLoc);
-		
+		md.addAttribute("airlineCode", airlineCode2);
 		md.addAttribute("selectOneAirline", selectOneAirline);
 		md.addAttribute("airlineReturnData", airlineReturnData);
 		md.addAttribute("maxPrice", maxPrice);
@@ -230,14 +233,19 @@ public class AirlineController {
 	}
 
 	// 항공 메인 페이지
-	@GetMapping("/airline/customer/reserve/pay")
-	public String airlinePay(HttpSession session,
-			String airlineCode
+	@PostMapping("/airline/customer/reserve/pay")
+	public String airlinePay(HttpSession session, Model md,
+			String airlineCodeDirect,
+			String airlineCodeReturn
 							) {
-		session.setAttribute("airlineCode", airlineCode);
+		System.out.println("예약페이지 컨트롤러");
 		String airlineCode2 = (String) session.getAttribute("airlineCode");
-		System.out.println("항공 예약 페이지 컨트롤러 === ");
-		System.out.println("항공코드 체킹 : " + airlineCode2);
+		String adult = (String) session.getAttribute("adult");
+		String child = (String) session.getAttribute("child");
+		String baby = (String) session.getAttribute("baby");
+		md.addAttribute("airlineCodeReturn", airlineCodeReturn);
+		
+		log.info("어른 adult: {}, 소아 child: {}, 유아 baby {}, 왕복 항공코드 {}, 오는편 항공코드{}, 편도 항공코드{}", adult, child, baby,airlineCode2,airlineCodeReturn,airlineCode2);
 		
 		return "airline/airline_pay";
 	}

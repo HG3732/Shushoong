@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/modal/hotelInformation.css}" rel="stylesheet" />
+	<link th:href="@{/css/modal/stopHotelmodal.css}" rel="stylesheet" />
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<title>호텔 상세정보</title>
+</head>
+<body>
+	<div class="hotelInformation">
+		<div class="hotelTitle">
+			호텔 이름 들어가는 곳 
+		</div>
+		<div class="hotelContent">
+			<div class="hotelDateInfo">
+				<div class="label">등록일</div>
+				<div class="hotelDate">2011.11.11</div>
+			</div>
+			<div class="businessNumInfo">
+				<div class="label">사업자번호</div>
+				<div class="businessNum">1111111111111</div>
+			</div>
+			<div class="hotelCodeInfo">
+				<div class="label">등록코드</div>
+				<div class="hotelCode">12457987564</div>
+			</div>
+			<div class="userNameInfo">
+				<div class="label">담당자</div>
+				<div class="userName">홍길동</div>
+			</div>
+			<div class="hotelAddressInfo">
+				<div class="label">주소</div>
+				<div class="hotelAddress">제주호텔</div>
+			</div>
+			<div class="payInfo">
+				<div class="label">결제횟수</div>
+				<div class="payCount">2</div>
+			</div>
+		</div>
+		<div class="buttonContainer">
+			<button type="button" class="btn stopHotel">이용정지</button>
+		</div>
+	</div>
+	
+	<!-- 확인모달창 -->
+	<div class="popup-wrap" id="popup">
+		<div class="close_btn" id="close_btn">X</div>
+		<div class="popup">
+			<div class="popup-body">
+				<div class="body-content">
+					<div class="body-contentbox">
+						<div class="warning content">
+							정말 정지하겠습니까?
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="popup-footer">
+				<span class="pop-btn confirm" id="confirm">
+					확인
+				</span>
+				<span class="pop-btn cancle" id="cancle">
+					취소
+				</span>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(loadedHandler);
+			
+		function loadedHandler() {
+			$(".btn.stopHotel").on("click", deleteHotelHandler);
+			$(".pop-btn.cancle").on("click", cancleHandler);
+			$(".close_btn").on("click", cancleHandler)
+		}
+			
+		function deleteHotelHandler() {
+			$("#popup").hide().fadeIn();
+		}
+			
+		function cancleHandler() {
+			$("#popup").fadeOut();
+		}
+	</script>
+</body>
+</html>

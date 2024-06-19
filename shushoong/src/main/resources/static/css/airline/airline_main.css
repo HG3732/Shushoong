@@ -327,126 +327,145 @@ button#sit3{
 
 		/* 추천 section */
 		
-.recommend_section{
-	margin-top: 30px;
-}
-.recomend_section_cheap_background{
-	background-color: gray;
-	margin: 25px 0;
-}
 
-.recomend_section_fast_background{
-	background-color: gray;
-	margin: 25px 0;
-}
 
-.recommend_section > div > div{
+
+section.recommend_section{
 	width: 960px;
-	margin: auto;
-	height: 600px;
-	
-	
+	height: 500px;
+	border:1px solid black;
+	margin:  auto;
+	position:relative;
+	justify-content: center;
 }
-.recommend_cheap{
+
+.item{
 	display: flex;
 }
-
-/* .recommend_section > div > div > div:nth-of-type(1){
-	font-size : 20px;
-	text-align : center;
-	width : 500px;
-	margin: auto;
-	margin-top : 40px;
-	border-radius : 10px;
-	height : 50px;
-	line-height : 50px;
-	background-color : white;
-	
+.item_child{
+	width: 320px;
 	border: 1px solid black;
-} */   												/* 저렴한곳 순서 태그 */
-.recommend_section > div > div > div:nth-of-type(2){
-	position: relative;
-}
-.recommend_section > div > div > div:nth-of-type(3){
-	position: relative;
+	overflow: hidden;
+	
 }
 
-.slides{
+
+
+
+/* 인기있는 호텔 캐러셀*/
+
+.wrap-hot-hotel-list {
+	width: 960px;
+	margin: 0 auto;
+	margin-top: 200px;
 	display: flex;
-}
-.slides_wrap{
-	width: 270px;
-	height: 340px;
-	margin : 80px auto;
-	background-color : white;
-	border: 1px solid black;
-	
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	gap: 40px;
+	position:relative;
 }
 
-.slides_image{
-	margin: auto;
-	width: 230px;
-	height: 200px;
-	margin-top : 15px;
-	
-	
-	border: 1px solid black;
+.wrap-hot-hotel-list .hot-hotel-title {
+	font-size: 20px;
+	font-weight: 900;
 }
 
-
-.slides_name{
-	width: 250px;
-	margin: auto;
-	margin-top: 15px;
-	height: 85px;
-	
+.wrap-hot-hotel-list .hot-hotel-list {
+	width: 100%;
+	height: 300px;
+	overflow: hidden;
 }
 
-.slides_price{
-	width: 250px;
-	text-align: right;
-	color: #E12D2D;
-	font-size: 13px;
-	font-weight: bolder;
+.wrap-hot-hotel-list .hot-hotel-list .list-wrapper {
+	display: flex;
+	flex-direction: row;
+	gap: 30px;
+	transition: transform 1s;
+	width: auto;
 }
 
-.slides_price > div{
-	float: right;
+.list-wrapper .hot-hotel {
+	height: 300px;
+	flex: 0 0 300px;
+	border: 1px, solid, var(--color_gray_2);
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
-.slide_prev,.slide_next{
+.list-wrapper .hot-hotel-info {
+	flex: 1 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.list-wrapper .hot-hotel .hot-hotel-pic > img {
 	display: block;
+	width: 100%;
+	height: 186px;
+	object-fit: cover;
+}
+
+.hot-hotel .wrap-price {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.hot-hotel .wrap-price > div {
+	padding-right: 10px;
+	color: red;
+}
+
+.hot-hotel .wrap-price > div:last-child {
+	vertical-align: bottom;
+	line-height: 20px;
+}
+
+.hot-hotel .hot-hotel-name {
+	text-align: left;
+	padding-left : 10px;
+}
+
+
+.hot-hotel .hot-hotel-price {
+	text-align: right;
+	font-weight: 900;
+	font-size: var(--font1);
+}
+
+.wrap-hot-hotel-list .btn2 {
 	position: absolute;
-	width : 70px;
-	height : 70px;
-	margin-top:   -270px;
-	border : none;
-	border-radius : 50%;
-	background: none;
+	width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color_blue_2);
+    cursor: pointer;
+    font-family: 'SOYOMapleRegularTTF';
+    font-size: var(--font1);
+}
+
+.wrap-hot-hotel-list .btn2:hover {
+	background-color: var(--color_blue_1);
+	color: white;
+	font-family: 'SOYOMapleBoldTTF';
 	
 }
 
-.slide_prev{
-	margin-left: -115px;
-	background-image: url("../../images/skyblue_left.png");
-	background-size: cover;
-}
-.slide_prev:hover{
-	margin-left: -115px;
-	background-image: url("../../images/blue_left.png");
-	background-size: cover;
+.wrap-hot-hotel-list .btn2.left {
+	left:-65px;
+	top: 185px;
 }
 
-.slide_next{
-	margin-left:  1000px;
-	background-image: url("../../images/skyblue_right.png");
-	background-size: cover;
+.wrap-hot-hotel-list .btn2.right {
+	right:-65px;
+	top: 185px;
 }
-.slide_next:hover{
-	margin-left:  1000px;
-	background-image: url("../../images/blue_right.png");
-	background-size: cover;
-}
+
 
 
 				/* 임시 */
@@ -454,72 +473,4 @@ button#sit3{
 	position: fixed;
 	bottom: 5px;
 	display : none;
-}
-
-
-/* 캐러셀 전체 구조  */
-.carousel_main {
-    width: 300px; /* 이미지 크기 설정  */
-    position: relative;
-    overflow: hidden;
-    margin: 0 auto;
-    user-select: none;
-}
-
-.carousel_wrapper {
-    display: flex;
-    transition: transform 1s;
-}
-
-.carousel_slide {
-    flex: 0 0 300px; /* 이미지 크기 설정  */
-    position: relative;
-}
-
-.carousel_slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-/* 캐러셀 사이드 버튼 */
-.carousel_button_container {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.carousel_button {
-    width: 50px;
-    height: 50px;
-    color: #fff;
-    background: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-}
-
-.carousel_prev {
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 0px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.carousel_next {
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 0px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+xmlns:th="http://www.thymeleaf.org">
+
+						<div class="review_info_wrap"  th:each="reviewDetail: ${reviewDetailDto}" th:fragment="review_info_wrap">
+							<div class="review_flex">
+								<div class="review_grade">
+									<p class="review_rate" th:text="${reviewDetail.rateAvg}"></p>
+									<div class="review_id">
+										<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:20px;">
+										<p style="font-size: var(--font3);" th:text="${reviewDetail.userId}"></p>
+									</div>
+									<div class="review_tripper">
+										<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:20px;">										
+										<p style="font-size: var(--font3);">출장여행객</p>
+									</div>
+								</div>
+								<div class="review_content_wrap">
+									<div class="review_content_title">
+										<p th:text=" ${reviewDetail.reviewTitle}"></p>
+									</div>
+									<div class="review_content">
+										<p th:text=" ${reviewDetail.reviewComment}"></p>
+									</div>
+									<div class="review_content_date">
+										<p th:text=" ${reviewDetail.reviewDate}"></p>
+									</div>
+								</div>
+							</div>	
+							<hr style="border: 1px solid #c5c5c5;"></hr>
+						</div>
+						
+						<div class="review_btn">
+							<button type="button" class="review_write_btn">리뷰 작성</button>
+						</div>
+
+						<div style="text-align: center;">
+							<ul class="paging_wrap">
+								<li class="left_page">&lt;</li>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li class="right_page">&gt;</li>
+								<!--  th:data-page="${}" -->
+							</ul>
+						</div>
+
+</html>

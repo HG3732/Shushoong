@@ -2,10 +2,73 @@
 
 .top-nav{
     width: 100%;
-    height: 80px;
+    height: 100px;
     border: 1px solid black;
     background-color: aqua;
     margin-bottom: 20px;
+    display: flex;
+}
+
+.top-nav .search.location{
+	display: flex;
+	flex: 3.5;
+	background-color: blue;
+	height: 50px;
+	align-self: center;
+}
+.top-nav .search.location .inputLoc{
+border-radius: 15px;
+	}
+
+.top-nav .search.location .selectLoc.departLoc{
+	display: flex;
+	flex: 1;
+}
+.top-nav .search.location .reverse{
+	display: flex;
+	flex: 1;
+	}
+
+.top-nav .search.location .selectLoc.arrivalLoc{
+	display: flex;
+	flex: 1;
+}
+.top-nav .search.location .selectLoc{
+	
+}
+.top-nav .search.date{
+	display: flex;
+	flex: 2.5;
+	background-color: gray;
+}
+
+.top-nav .search.date .selectDate.departDate{
+	display: flex;
+	flex: 1;
+}
+.top-nav .search.date .selectDate.arrivalDate{
+	display: flex;
+	flex: 1;
+
+	}
+.top-nav .search.date .selectDate.departDate .inputdate{
+	
+
+	}
+.top-nav .search.passenger{
+	display: flex;
+	flex: 1;
+	background-color: green;
+}
+.top-nav .search.seat-grade{
+	display: flex;
+	flex: 1;
+	background-color: lime;
+}
+.top-nav .search.btn{
+	display: flex;
+	flex: 2;
+	background-color: orange;
 }
 .flex-container{
     display: flex;

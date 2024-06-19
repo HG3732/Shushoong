@@ -4,11 +4,9 @@
 	<!-- <input type="hidden" id="update-maxprice" th:value="${maxPrice}"> -->
 	<div th:each="air : ${airlineData}" class="airline-info">
 		<div hidden="">
-			<span th:text="${air.departLoc}" class="select-info-departLoc"
-				name="departLoc"></span> <span th:text="${air.arrivalLoc}"
-				class="select-info-arrivalLoc" name="arrivalLoc"></span> <span
-				th:text="${air.airlineCode}" class="select-info-airlineCode"
-				name="airlineCode"></span>
+			<span th:text="${air.departLoc}" class="select-info-departLoc" name="departLoc"></span> 
+			<span th:text="${air.arrivalLoc}" class="select-info-arrivalLoc" name="arrivalLoc"></span> 
+			<span th:text="${air.airlineCode}" class="select-info-airlineCode" name="airlineCode"></span>
 		</div>
 		<div class="seat-count">
 			<div class="airline-flex">
@@ -112,7 +110,7 @@
 					</div>
 
 					<div class="btn-select-info" th:if="${ticketType} == 1">
-						<button class="show-comeback-btn" id="reserve-btn" type="button"
+						<button class="reserve-btn" id="reserve-btn" type="button"
 							onclick="">결제하기</button>
 					</div>
 				</div>

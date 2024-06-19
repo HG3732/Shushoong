@@ -4,10 +4,6 @@
 			const adult = urlParams.get('adult');
 			var htmlVal = '';
 			
-			$(".adultNum").text(adult);
-			
-			console.log(adult)
-			
 			for(var  i = 0; i < adult; i++){
 				console.log("adult");
 				htmlVal+=`
@@ -122,8 +118,6 @@
 			const child = urlParams.get('child');
 			var htmlVal = '';
 			
-			console.log(child)
-			
 			for(var  i = 0; i < child; i++){
 				console.log("child");
 				htmlVal+=`
@@ -234,7 +228,7 @@
 			const baby = urlParams.get('baby');
 			var htmlVal = '';
 			
-			console.log(baby)
+			$(".babyNum").text(baby);   /*별개의 내용*/
 			
 			for(var  i = 0; i < baby; i++){
 				console.log("baby");
@@ -309,19 +303,7 @@
 			}
 		}
 		
-		
-		
-		
-		
-		
-		$("input.confirm_btn").on("click",function(){
-			console.log(this)
-			$(this).css("backgroundColor","#006AFF");
-			$(this).css("color","white");
-			$("input").attr("readonly",true);
-			$("input").attr("disabled",true);
-			$("select").attr("disabled",true);
-		})
+	
 		
 		
 				/*약관 상세보기*/
@@ -369,6 +351,72 @@
 				$('#check1').prop('checked', true);
 			} else {
 				$('#check1').prop('checked', false);
+			}
+		}
+		
+		function payCheckInfo(){
+			const urlParams = new URL(location.href).searchParams;
+			const adult = urlParams.get('adult');
+			const child = urlParams.get('child');
+			const baby = urlParams.get('baby');
+			const departLoc = urlParams.get('departLoc');
+			const arrivalLoc = urlParams.get('arrivalLoc');
+			const departDate = urlParams.get('departDate');
+			const arrivalDate = urlParams.get('arrivalDate');
+			/* 여기서부터  - 정확하지 않은 파라메타 값 */
+			const departTime = urlParams.get('departTime');
+			const arrivalTime = urlParams.get('arrivalTime');
+			const airlineCode = urlParams.get('airlineCode');
+			const flightNo = urlParams.get('flightNo');
+			/* 여기까지  - 정확하지 않은 파라메타 값 */
+			
+			var ticketType = urlParams.get('ticketType');
+			var htmlVal = '';
+			
+			console.log(ticketType);
+			for(var i = 0 ; i < ticketType ; i++){
+				htmlVal += `
+				<div class="final_check_info">
+									<div>
+										<div class="final_check_lineup">
+											성인 : <div class="adultNum">${adult}</div>
+											, 아동 : <div class="childNum">${child}</div>
+											, 유아 : <div class="babyNum">${adult}</div>
+										</div>
+										<div class="airlineCode">
+											${airlineCode}
+										</div>
+									</div>
+									<div>
+										<div class="flightNo">
+											${flightNo}
+										</div>
+										<div>출발 : </div>
+										<div class="date_time_local">
+											<div class="date_time">
+												<div class="departDate">${departDate}</div>
+												<div class="departTime">${departTime}</div>
+											</div>
+											
+											<div class="departLoc">
+												${departLoc}
+											</div>
+										</div>
+										<div>도착 : </div>
+										<div class="date_time_local">
+											<div class="date_time">
+												<div class="arrivalDate">${arrivalDate}</div>
+												<div class="arrivalTime">${arrivalTime}</div>
+											</div>
+											<div class="arrivalLoc">
+												${arrivalLoc}
+											</div>
+										</div>
+									</div>
+								</div>
+				
+				`;
+				$(".final_check_info_list").html(htmlVal);
 			}
 		}
 

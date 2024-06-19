@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+input, input:focus, textarea, textarea:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+.wrap-body {
+    /* 중앙 배치 */
+    width: 1440px; margin: 0 auto;
+
+    /* float - 부모 height를 위해  */
+    overflow: hidden;
+}
+
+.wrap-body > .wrap-section{
+    /* float 왼쪽 배치 */
+	width : 960px; 
+    float: left;
+    box-sizing: border-box;
+    padding: 20px;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+section .content-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+section .header-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 30px 0 20px 0;
+}
+
+section .header-section {
+	position: relative;
+}
+
+section .searchInput {
+	/* 	글상자서식 */
+	border: 1px solid #BCEFFF;
+	border-radius: 20px;
+	width: 320px;
+	height: 40px;
+	/* 	글자서식 */
+	font-family: SOYOMapleRegularTTF;
+	text-indent: 10px;
+	font-size: 15px;
+	/* 	배치서식 */
+	display: flex;
+	flex-direction: column;
+	margin: 10px 10px 0 10px;
+}
+
+section .searchInput:focus {
+	border: 3px solid #006AFF;
+}
+
+section .header-section > img {
+	position: absolute;
+	top: 40%;
+	left: 85%;
+}
+
+section .hotelSearch {
+	background-color: #006AFF;
+	width: 130px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	color: white;
+	font-family: SOYOMapleRegularTTF;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	
+	margin: 20px 0 30px 0;
+}
+
+section .content-section {
+	margin: 20px 0 30px 0;
+}
+
+section .listHeader-grid {
+	display: grid;
+	grid-template-columns: 2fr 5fr 2fr;
+	align-items: center;
+    text-align: center;
+	
+	height: 40px;
+	font-size: 13px;
+	font-weight: bold;
+	border-top: 2px solid #006AFF;
+	background-color:#BCEFFF;
+}
+
+section .hotelList-grid {
+	display: grid;
+	grid-template-columns: 2fr 5fr 2fr;
+	align-items: center;
+    text-align: center;
+    
+    height: 40px;
+	font-size: 13px;
+	border-bottom: 1px solid #006AFF;
+}

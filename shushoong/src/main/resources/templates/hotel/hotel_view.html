@@ -37,6 +37,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<div th:each="hotel : ${hotelViewList}" class="hotel_name">
  					<div th:text="${hotel.hotelName}" class="name_kr">세인트존스 호텔</div>
 					<div th:text="${hotel.hotelEng}" class="name_en">St.Jones Hotel</div>				
+					<input type="hidden" th:value="${hotel.hotelCode}" class="hotel_code">
 				</div>
 				<hr></hr>
 				<div class="hotel_pic">
@@ -262,37 +263,9 @@ xmlns:th="http://www.thymeleaf.org">
 							</div>
 						</div>
 						<hr style="border: 1px solid #c5c5c5;"></hr>
-						<div class="review_info_wrap"  th:each="reviewDetail: ${reviewDetailDto}">
-							<div class="review_flex">
-								<div class="review_grade">
-									<p class="review_rate" th:text="${reviewDetail.rateAvg}"></p>
-									<div class="review_id">
-										<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:20px;">
-										<p style="font-size: var(--font3);" th:text="${reviewDetail.userId}"></p>
-									</div>
-									<div class="review_tripper">
-										<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:20px;">										
-										<p style="font-size: var(--font3);">출장여행객</p>
-									</div>
-								</div>
-								<div class="review_content_wrap">
-									<div class="review_content_title">
-										<p th:text=" ${reviewDetail.reviewTitle}"></p>
-									</div>
-									<div class="review_content">
-										<p th:text=" ${reviewDetail.reviewComment}"></p>
-									</div>
-									<div class="review_content_date">
-										<p th:text=" ${reviewDetail.reviewDate}"></p>
-									</div>
-								</div>
-							</div>	
-							<hr style="border: 1px solid #c5c5c5;"></hr>
-						</div>
+						<div th:replace="~{hotel/hotel_view_review :: review_info_wrap}"></div>	
 					</div>
-					<div class="review_btn">
-						<button type="button" class="review_write_btn">리뷰 작성</button>
-					</div>
+
 					
 					<!-- 모달창 구현 -->
 			        <div id="modal" class="modal_overlay">
@@ -421,9 +394,7 @@ xmlns:th="http://www.thymeleaf.org">
 			             </div>
 			        </div> <!-- 모달창 끝 -->
 
-					<div style="text-align: center;">
-						
-					</div>
+
 				</div>	
 			</div>
 		</div>
@@ -431,8 +402,6 @@ xmlns:th="http://www.thymeleaf.org">
 	<div class="wrap-footer">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
-	
-	
 <script>
 
 $(loadedHandler)
@@ -466,6 +435,14 @@ function loadedHandler(){
 	
 	/* 별점 체크 */
 	$('.score').on('click', checkScoreHandler);
+
+	/* 리뷰 페이지 표시 */
+	$(showAllReview);
+	
+	/* 페이지 이동 */
+	$('.right_page').on('click', rightPageHandler);
+	
+	
 }
 
 </script>	

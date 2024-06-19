@@ -6,14 +6,14 @@
 	<div class="inner" th:fragment="Aside">
 		<div class="aside-title">관리자</div>
 		<div class="aside-content">
-			<a href="#">
+			<a th:href="@{/admin/manager/customer}">
 				<div class="manageCustomer">회원 관리</div>
 			</a>
 			<div class="dropdown">
 				<button class="dropbtn1">사업자 관리</button>
 				<div class="dropdown-content">
-					<a href=#>사업자 회원 관리</a> 
-					<a href=#>사업장 관리</a>
+					<a th:href="@{/admin/manager/business}">사업자 회원 관리</a> 
+					<a th:href="@{/admin/manager/product}">사업장 관리</a>
 				</div>
 			</div>
 			<a href=>

@@ -2,6 +2,7 @@ package kh.mclass.shushoong.hotel.model.domain;
 
 import org.springframework.stereotype.Component;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

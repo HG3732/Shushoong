@@ -22,4 +22,9 @@ public class MypageManageBusinessController {
 	public String manageProduct() {
 		return "mypage/admin/manageProduct";
 	}
+	
+	@GetMapping ("/hotel/test")
+	public String test() {
+		return "modal/hotelInformation";
+	}
 }

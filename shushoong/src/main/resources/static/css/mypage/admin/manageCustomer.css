@@ -5,27 +5,50 @@ input, input:focus, textarea, textarea:focus {
 	box-shadow: none !important;
 }
 
+section .userInformation::-webkit-scrollbar,
+		.article-body::-webkit-scrollbar,
+		.stopUserList::-webkit-scrollbar,
+		.secessionUserList::-webkit-scrollbar {
+	width: 10px;
+}
+
+section .userInformation::-webkit-scrollbar-thumb,
+		.article-body::-webkit-scrollbar-thumb,
+		.stopUserList::-webkit-scrollbar-thumb,
+		.secessionUserList::-webkit-scrollbar-thumb {
+	background-color: #9A9A9A;
+	border-radius: 10px;
+}
+
+section .userInformation::-webkit-scrollbar-track,
+		.article-body::-webkit-scrollbar-track,
+		.stopUserList::-webkit-scrollbar-track,
+		.secessionUserList::-webkit-scrollbar-track {
+	background-color: none;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px white;
+}
+
 section .main input[type=radio] {
 	display: none;
 }
 
 .wrap-body {
-    /* 중앙 배치 */
-    width: 1440px; margin: 0 auto;
-
-    /* float - 부모 height를 위해  */
-    overflow: hidden;
+	/* 중앙 배치 */
+	width: 1440px;
+	margin: 0 auto;
+	/* float - 부모 height를 위해  */
+	overflow: hidden;
 }
 
-.wrap-body > .wrap-section{
-    /* float 왼쪽 배치 */
-	width : 960px; 
-    float: left;
-    box-sizing: border-box;
-    padding: 20px;
-    
-    display: flex;
-    flex-direction: column;
+.wrap-body>.wrap-section {
+	/* float 왼쪽 배치 */
+	width: 960px;
+	float: left;
+	box-sizing: border-box;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
 }
 
 section .section-header1 {
@@ -36,21 +59,20 @@ section .section-header1 {
 	margin: 30px 0 20px 0;
 }
 
-section .hrline > hr {
-	border: 1px solid  #006AFF;
+section .hrline>hr {
+	border: 1px solid #006AFF;
 	margin-bottom: 50px;
 }
 
 section .content-title {
 	font-size: 17px;
 	font-weight: bold;
-	
 	margin-bottom: 20px;
 }
 
-section .content-body > .article-title, .article-title2 {
+section .content-body>.article-title, .article-title2 {
 	height: 50px;
-	border : none;
+	border: none;
 	border-top: 3px solid #006AFF;
 	background-color: #BCEFFF;
 }
@@ -60,7 +82,6 @@ section .article-title2 {
 	justify-content: left;
 	align-items: center;
 	text-indent: 20px;
-	
 	font-weight: bold;
 }
 
@@ -68,17 +89,18 @@ section .customer {
 	display: flex;
 	justify-content: space-around;
 	flex-direction: row;
-	
 	margin-bottom: 100px;
 }
 
-section .customerList, .customerInformation  {
+section .customerList, .customerInformation {
 	width: 49.9%;
 	height: 400px;
 }
 
 section .customerList {
 	margin-right: 5px;
+	
+	overflow-y: auto;
 }
 
 section .article-title {
@@ -86,7 +108,6 @@ section .article-title {
 	justify-content: space-around;
 	flex-direction: row;
 	align-items: center;
-	
 	position: relative;
 }
 
@@ -105,15 +126,15 @@ section .searchInput {
 	flex-direction: column;
 }
 
-section .searchInput:focus{
+section .searchInput:focus {
 	/* 	글상자서식 */
 	border: 2px solid #006AFF;
 }
 
-section .article-title > img {
-	position : absolute;
+section .article-title>img {
+	position: absolute;
 	top: 27%;
-  	left: 65%;
+	left: 65%;
 }
 
 section .idSearch {
@@ -122,8 +143,7 @@ section .idSearch {
 	height: 40px;
 	border: none;
 	border-radius: 20px;
-	
-	color:white;
+	color: white;
 	font-family: SOYOMapleRegularTTF;
 	font-size: 15px;
 	font-weight: bold;
@@ -131,28 +151,109 @@ section .idSearch {
 }
 
 section .article-body {
-	padding : 10px;
+	margin-top:10px;
+	padding: 10px;
+	overflow-y: auto;
 }
 
-section .userName{
-	margin : 5px;
+section .userName-content {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 
-section .customerInformation:nth-child(2) > .article-title {
+section .userName {
+	margin: 5px;
+}
+
+section .customerInformation:nth-child(2)>.article-title {
 	text-align: left;
+}
+
+section .onlineQnAList {
+	margin-bottom: 100px;
+}
+
+section .viewAllList {
+	display: flex;
+	justify-content: right;
+}
+
+section .QnA-grid {
+	height: 40px;
+	font-size: 13px;
+	font-weight: bold;
+	border-top: 2px solid #006AFF;
+	border-bottom: 2px solid #006AFF;
+	background-color: #BCEFFF;
+	display: grid;
+	grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
+	align-items: center;
+	text-align: center;
+}
+
+section .QnA-content {
+	height: 40px;
+	font-size: 11px;
+	font-weight: bold;
+	border-bottom: 1px solid #006AFF;
+	margin-bottom: 10px;
+	display: grid;
+	grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
+	align-items: center;
+	text-align: center;
+}
+
+section .viewQnAList {
+	border: none;
+	border-radius: 20px;
+	width: 90px;
+	height: 40px;
+	background-color: #006AFF;
+	cursor: pointer;
+	color: white;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: SOYOMapleRegularTTF;
+}
+
+section .manageStopCustomer {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	margin-bottom: 100px;
+}
+
+section .search-user {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+section .search-user>img {
+	position: absolute;
+	top: 25%;
+	left: 65%;
+}
+
+section .stopCustomerList {
+	margin-right: 10px;
 }
 
 section .tab {
 	overflow: hidden;
 	/* 	크기설정  */
-	width: 350px;
+	width: 460px;
 	height: 50px;
 	/* 	영역설정  */
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-content: center;
-	margin-bottom: 50px;
+	margin-bottom: 10px;
 }
 
 section .tab label {
@@ -175,6 +276,7 @@ section .tab label {
 	{
 	border: 3px solid #006AFF;
 	border-bottom: none;
+	background-color: #BCEFFF;
 	box-shadow: none;
 }
 
@@ -182,62 +284,158 @@ section .content>div {
 	display: none;
 }
 
-#tab-1:checked ~ .content > div:nth-child(1),
-#tab-2:checked ~ .content > div:nth-child(2) {
+#tab-1:checked ~ .content>div:nth-child(1), #tab-2:checked ~ .content>div:nth-child(2)
+	{
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: center;
-	align-content: center;
+	align-content: stretch;
 	text-align: center;
 }
 
-section .onlineQnAList {
-	margin-bottom: 100px;
-}
-
-section .viewAllList {
+section .secessionUserList, .stopUserList {
 	display: flex;
-	justify-content: right;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 10px;
+	height: 186px;
+	overflow-y: auto;
 }
 
-section .QnA-grid {
-	height: 40px;
-	font-size: 13px;
+
+section .secessionUserName, .stopUserName  {
+	margin: 5px;
+	text-align: left;
+}
+
+section .userInformation {
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+}
+
+section .joinDate-content, .userId-content, .userEmail-content,
+	.userStatus-content, .purchaseProduct-content, .faqId-content {
+	display: flex;
+	flex-direction: row;
+}
+
+section .userInformation>label {
+	display: inline-block;
+	text-align: center;
+	width: 100px;
 	font-weight: bold;
-	border-top: 2px solid #006AFF;
-	border-bottom: 2px solid #006AFF;
-	background-color:#BCEFFF;
-	
-	display: grid;
-	grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
-    align-items: center;
-    text-align: center;
+	margin-left: 10px;
+	margin-bottom: 20px;
 }
 
-section .QnA-content {
-	height: 40px;
-	font-size: 11px;
+section .joinDate-content>label {
+	display: inline-block;
+	text-align: left;
+	width: 100px;
 	font-weight: bold;
-	border-bottom: 1px solid #006AFF;
-	margin-bottom: 10px;
-	
-	display: grid;
-	grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
-    align-items: center;
-    text-align: center;
+	margin: 0 20px 20px 10px;
 }
 
-section .viewQnAList {
+section .userId-content>label {
+	display: inline-block;
+	text-align: left;
+	width: 100px;
+	font-weight: bold;
+	margin: 0 20px 20px 10px;
+}
+
+section .userEmail-content>label {
+	display: inline-block;
+	text-align: left;
+	width: 100px;
+	font-weight: bold;
+	margin: 0 20px 20px 10px;
+}
+
+section .userStatus-content>label {
+	display: inline-block;
+	text-align: left;
+	width: 100px;
+	font-weight: bold;
+	margin: 0 20px 20px 10px;
+}
+
+section .purchaseProduct-content>label {
+	display: inline-block;
+	text-align: left;
+	width: 100px;
+	font-weight: bold;
+	margin: 0 20px 20px 10px;
+}
+
+section .purchaseProduct {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+section .faqId-content>label {
+	display: inline-block;
+	text-align: left;
+	width: 100px;
+	font-weight: bold;
+	margin: 0 20px 20px 10px;
+}
+
+section .btn.container {
+	display:flex;
+	justify-content: center;
+	margin: 30px 0 30px 0;
+}
+
+section .stopBtn {
+	background-color: red;
+	width: 130px;
+	height: 40px;
 	border: none;
 	border-radius: 20px;
-	width: 90px;
-	height: 40px;
-	background-color: #006AFF;
+	color: white;
+	font-family: SOYOMapleRegularTTF;
+	font-size: 15px;
+	font-weight: bold;
 	cursor: pointer;
 	
-	color:white;
-	font-size: 13px;
-	font-weight: bold;
+	margin-right: 5px;
+}
+
+section .stopCancleBtn {
+	background-color: #BCEFFF;
+	width: 130px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	color: black;
 	font-family: SOYOMapleRegularTTF;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	
+	margin-left: 5px;
+}
+
+section .stopCancleBtn:hover {
+	background-color: #006AFF;
+	color: white;
+}
+
+section .allstopBtn {
+	background-color: red;
+	width: 130px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	color: white;
+	font-family: SOYOMapleRegularTTF;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	
+	margin: 20px 0 30px 0;
 }

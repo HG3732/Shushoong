@@ -155,27 +155,6 @@ var myChart3 = new Chart(ctx, {
 	        });
 	    }
 	}]
-
-    
-/*    plugins: [{
-        afterDraw: function(chart) {
-            var ctx = chart.ctx;
-            var xAxis = chart.scales['x'];
-
-            xAxis.ticks.forEach((tick, index) => {
-                let x = xAxis.getPixelForTick(index);
-                let y = chart.chartArea.bottom + 30;  레이블의 아래쪽에 위치 
-
-                // "4.5/5" 추가
-                let additionalLabel = reviewText;  '4.5/5'
-
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'top';
-                ctx.fillStyle = '#000';
-                ctx.fillText(additionalLabel, x, y); // 추가 레이블 그리기
-            });
-        }
-    }]*/
 });
 
 
@@ -204,3 +183,85 @@ function reviewEscHandler(){
  	$('.score').next().children().attr("src", "/shushoong/images/star.png").css('width', '15px;');
 	
 }
+
+
+/*===========================페이징 처리==========================*/
+
+
+
+var currentPage = 1;
+
+
+/*페이지 바로 로딩했을 때 나오는 review들*/
+function showAllReview(){
+	
+	hotelCode = $('.hotel_code').val();
+	
+	$.ajax({
+		url: "/shushoong/hotel/view/review.ajax",
+		method: "get",
+		data: {
+			hotelCode: hotelCode
+		}, 
+		error: function(xhr, status, error) {
+			console.log('페이징처리 에러' + error);
+		}
+		
+		}).done(function(response){
+			$('.review_info_wrap').replacewith(response);
+	});
+}
+
+/*페이지 번호 표시 및 오른쪽 > 눌렀을 때 페이지 이동*/
+
+/*var totalPageCount = datalist.totalPageCount;
+var startPageNum = datalist.startPageNum;
+var endPageNum = datalist.endPageNum;*/
+
+function rightPageHandler(){
+	console.log($(this).val() + '=============페이지이동');
+	/*$.ajax({
+		url: "/shushoong/hotel/view/review.ajax",
+		method: "get",
+		data: {
+			hotelCode: hotelCode,
+			currentPage: currentPage, 
+			totalPageCount : totalPageCount,
+			startPageNum : startPageNum , 
+			endPageNum : endPageNum  
+		}, 
+		error: function(xhr, status, error) {
+			console.log('페이징처리 에러' + error);
+		}
+		
+		}).done(function(response){
+			$('.review_content_wrap').replacewith(response);
+	});*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

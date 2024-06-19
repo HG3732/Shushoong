@@ -1,7 +1,5 @@
 package kh.mclass.shushoong.airline.controller;
 
-import java.text.DecimalFormat;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.service.AirlineService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @Slf4j
@@ -22,10 +23,11 @@ public class AirlineController {
 
 	@Autowired
 	private AirlineService service;
-	private AirlineInfoDto dto;
+	
 	// 항공 목록 
 	@GetMapping("/airline/list")
 	public String airlineInfo(
+			String airlineCode,
 //			String departLoc,
 //			String arrivalLoc,
 //			String departDate,
@@ -38,6 +40,8 @@ public class AirlineController {
 //			String seatPrice,
 			HttpSession session,
 			Model md) {
+		session.setAttribute("airlineCode", airlineCode);
+		
 		String departLoc = (String) session.getAttribute("departLoc");
 		String arrivalLoc = (String) session.getAttribute("arrivalLoc");
 		String departDate = (String) session.getAttribute("departDate");
@@ -47,7 +51,10 @@ public class AirlineController {
 		String baby = (String) session.getAttribute("baby");
 		String ticketType = (String) session.getAttribute("ticketType");
 		
-		System.out.println("컨트롤러 세션" + child + baby + ticketType);
+//		String airlineCode2 = (String) session.getAttribute("airlineCode"); 
+		
+		System.out.println(" ==== 컨트롤러 세션 값 ====");
+		System.out.println("ticketType : " + ticketType + "adult : " + adult + "child : " + child + "baby : " + baby );
 		
 		System.out.println("=========");
 		log.info("!!!Received departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc + ", departDate: " + departDate +", arrivalDate: " + arrivalDate);
@@ -77,7 +84,7 @@ public class AirlineController {
 	}
 	
 	// 왕복 오는 항공편
-	@GetMapping("airline/list_return")
+	@PostMapping("airline/list_return")
 	public String airlineInfoReturn(
 			String airlineCode,
 //			String departLoc,
@@ -87,19 +94,26 @@ public class AirlineController {
 			HttpSession session,
 			Model md) {
 		
+		session.setAttribute("airlineCode", airlineCode);
+		
 		String departLoc = (String) session.getAttribute("arrivalLoc");
 		String arrivalLoc = (String) session.getAttribute("departLoc");
 		String departDate = (String) session.getAttribute("departDate");
 		String arrivalDate = (String) session.getAttribute("arrivalDate");
 		
+		String airlineCode2 = (String) session.getAttribute("airlineCode");
+		
+		System.out.println("선택된 항공 코드 : " +  airlineCode2);
+		
 		System.out.println("에어 오는편 컨트롤러");
-		log.info("선택된 항공 코드 : ", airlineCode);
 		log.info("항공 오는 편 departLoc: {}, arrivalLoc: {}", departLoc, arrivalLoc);
 		
 		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate);
 		
 		// 선택한 항공
-		List<AirlineInfoDto> selectOneAirline = service.getSelectOne(airlineCode);
+		List<AirlineInfoDto> selectOneAirline = service.getSelectOne(airlineCode2);
+		log.info("선택된 항공 코드 : ", airlineCode2);
+		System.out.println("선택된 항공 코드 : " +  airlineCode2);
 		
 		Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc);
 		System.out.println("출발지 : " + departLoc);
@@ -217,7 +231,14 @@ public class AirlineController {
 
 	// 항공 메인 페이지
 	@GetMapping("/airline/customer/reserve/pay")
-	public String airlinePay() {
+	public String airlinePay(HttpSession session,
+			String airlineCode
+							) {
+		session.setAttribute("airlineCode", airlineCode);
+		String airlineCode2 = (String) session.getAttribute("airlineCode");
+		System.out.println("항공 예약 페이지 컨트롤러 === ");
+		System.out.println("항공코드 체킹 : " + airlineCode2);
+		
 		return "airline/airline_pay";
 	}
 

@@ -68,22 +68,24 @@
 											<label for="userEmail">이메일</label>
 											<div class="userEmail" id="userEmail">aaa@aaa</div>
 										</div>
+										<div class="userStatus-content">
+											<label for="userStatus">상태</label>
+											<div class="userStatus" id="userStatus">정지</div>
+										</div>
 										<div class="purchaseProduct-content">
 											<label for="purchaseProduct">구매한 상품</label>
-											<div class="purchaseProduct" id="purchaseProduct">asdasdasd</div>
+											<div class="purchaseProduct">
+												<div class="productName" id="productName">asdasdasd</div>
+											</div>
 										</div>
 										<div class="faqId-content">
 											<label for="faqId">1:1 문의 건수</label>
 											<div class="faqId" id="faqId">1건</div>
 										</div>
 									</div>
-									<div class="btn content">
-										<div class="btn stop">
-											<button type="button" class="stopBtn">이용정지</button>
-										</div>
-										<div class="btn stopCancle">
-											<button type="button" class="stopCancleBtn">이용정지 해제</button>
-										</div>
+									<div class="btn container">
+										<button type="button" class="stopBtn">이용정지</button>
+										<button type="button" class="stopCancleBtn">이용정지 해제</button>
 									</div>
 								</div>
 							</div>
@@ -112,14 +114,7 @@
 					
 					<div class="manageStopCustomer">
 						<div class="stopCustomerList">
-							<div class="content-title">
-								<div class="contentText">장기 미접속, 탈퇴 회원 관리</div>
-								<div class="search-user">
-									<input type="text" id="userId" class="searchInput" placeholder="아이디 검색">
-									<img class="absolute" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" width="20px" height="20px">
-									<button type="button" class="idSearch">검색</button>
-								</div>
-							</div>
+							<div class="content-title">장기 미접속, 탈퇴 신청 회원 관리 </div>
 							<div class="content-body">
 								<div class="main">
 									<input type="radio" id="tab-1" name="show" checked /> <input
@@ -129,14 +124,34 @@
 										<label for="tab-2">장기미접속 회원</label>
 									</div>
 									<div class="content">
-										<div class="userList">
-											<div class="secessionUser-section"></div>
-											<div class="stopUser-section"></div>
+										<div class="secessionUser-section">
+											<div class="search-user">
+												<input type="text" id="userId" class="searchInput" placeholder="아이디 검색">
+												<img class="absolute" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" width="20px" height="20px">
+												<button type="button" class="idSearch">검색</button>
+											</div>
+											<div class="stopUserList">
+												<div class="stopUserName">
+													테스트용 이름
+												</div>
+											</div>
+										</div>
+										<div class="stopUser-section">
+											<div class="search-user">
+												<input type="text" id="userId" class="searchInput" placeholder="아이디 검색">
+												<img class="absolute" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" width="20px" height="20px">
+												<button type="button" class="idSearch">검색</button>
+											</div>
+											<div class="secessionUserList">
+												<div class="secessionUserName">
+													테스트용 이름
+												</div>
+											</div>
+											<div class="btn allstop">
+												<button type="button" class="allstopBtn">일괄 이용정지</button>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="btn allstop">
-									<button type="button" class="allstopBtn">일괄 이용정지</button>
 								</div>
 							</div>
 						</div>
@@ -159,22 +174,24 @@
 											<label for="userEmail">이메일</label>
 											<div class="userEmail" id="userEmail">aaa@aaa</div>
 										</div>
+										<div class="userStatus-content">
+											<label for="userStatus">상태</label>
+											<div class="userStatus" id="userStatus">정지</div>
+										</div>
 										<div class="purchaseProduct-content">
 											<label for="purchaseProduct">구매한 상품</label>
-											<div class="purchaseProduct" id="purchaseProduct">asdasdasd</div>
+											<div class="purchaseProduct">
+												<div class="productName" id="productName">asdasdasd</div>
+											</div>
 										</div>
 										<div class="faqId-content">
 											<label for="faqId">1:1 문의 건수</label>
 											<div class="faqId" id="faqId">1건</div>
 										</div>
 									</div>
-									<div class="btn content">
-										<div class="btn stop">
-											<button type="button" class="stopBtn">이용정지</button>
-										</div>
-										<div class="btn stopCancle">
-											<button type="button" class="stopCancleBtn">이용정지 해제</button>
-										</div>
+									<div class="btn container">
+										<button type="button" class="stopBtn">이용정지</button>
+										<button type="button" class="stopCancleBtn">이용정지 해제</button>
 									</div>
 								</div>
 							</div>

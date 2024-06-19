@@ -187,10 +187,10 @@ function reviewEscHandler(){
 
 /*===========================페이징 처리==========================*/
 
-
-
 var currentPage = 1;
-
+var totalPageCount = null;
+var startPageNum = null;
+var endPageNum = null;
 
 /*페이지 바로 로딩했을 때 나오는 review들*/
 function showAllReview(){
@@ -201,23 +201,15 @@ function showAllReview(){
 		url: "/shushoong/hotel/view/review.ajax",
 		method: "get",
 		data: {
-			hotelCode: hotelCode
-		}, 
-		error: function(xhr, status, error) {
-			console.log('페이징처리 에러' + error);
+			hotelCode: hotelCode,
+			currentPage: currentPage
 		}
-		
 		}).done(function(response){
-			$('.review_info_wrap').replacewith(response);
+			$('.review_info_wrap').replaceWith(response);
 	});
 }
 
 /*페이지 번호 표시 및 오른쪽 > 눌렀을 때 페이지 이동*/
-
-/*var totalPageCount = datalist.totalPageCount;
-var startPageNum = datalist.startPageNum;
-var endPageNum = datalist.endPageNum;*/
-
 function rightPageHandler(){
 	console.log($(this).val() + '=============페이지이동');
 	/*$.ajax({
@@ -225,10 +217,7 @@ function rightPageHandler(){
 		method: "get",
 		data: {
 			hotelCode: hotelCode,
-			currentPage: currentPage, 
-			totalPageCount : totalPageCount,
-			startPageNum : startPageNum , 
-			endPageNum : endPageNum  
+			currentPage: currentPage
 		}, 
 		error: function(xhr, status, error) {
 			console.log('페이징처리 에러' + error);

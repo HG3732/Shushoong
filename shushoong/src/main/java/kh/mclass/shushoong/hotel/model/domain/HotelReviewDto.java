@@ -9,7 +9,7 @@ import lombok.Data;
 @Component
 public class HotelReviewDto {
 	private String userId;
-	private String roomCat;
+	private String tripperCat;
 	private String reviewTitle;
 	private String reviewComment;
 	private String reviewDate;
@@ -18,5 +18,5 @@ public class HotelReviewDto {
 	private String hotelConven;
 	private String hotelKind;
 	private String rateAvg;
-	private String tripperCat;
+
 }

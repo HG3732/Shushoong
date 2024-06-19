@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.GsonBuilder;
+
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
@@ -120,19 +122,20 @@ public class HotelController {
 			return "hotel/hotel_list_section";
 		}
 	
-	@GetMapping("/hotel/view")
-	public String hotelview(Model model) {
+	@GetMapping("/hotel/view/{hotelCode}")
+	public String hotelview(Model model, @PathVariable String hotelCode) {
 		// @PathVariable String hotelCode
+//		String hotelCode = "2OS001";
 		
 		//호텔 상세정보들 출력
-		HotelViewDtoRes result = service.selectOneHotel("2OS001");
+		HotelViewDtoRes result = service.selectOneHotel(hotelCode);
 		//ajax와는 다르게 이 문장으로 인해서 service 가서 쭉쭉가서 db에서 정보 조회해서 dto에 넣고 다시 돌아옴
 		//돌아온 데이터 밑에 넣음
 		model.addAttribute("hotelViewList", result);
 		//넣어서 보내면 사라짐(일회성) - setAttribute 같은 얘
 	
 		//편의시설
-		List<HotelFacilityDtoRes> facilitylist = service.selectHotelFacility("2OS001");
+		List<HotelFacilityDtoRes> facilitylist = service.selectHotelFacility(hotelCode);
 		for(int i = 0; i<facilitylist.size(); i++) {
 			switch(facilitylist.get(i).getHotelFacCat()){
 				case "0":
@@ -165,7 +168,7 @@ public class HotelController {
 		model.addAttribute("facilitylist", facilitylist);
 		
 		//작성된 리뷰 불러오기
-//		List<HotelReviewDto> reviewDetailDto = service.selectReviewDetailList("2OS001");
+//		List<HotelReviewDto> reviewDetailDto = service.selectReviewDetailList(hotelCode);
 //			//여행객 종류
 //			for(int i = 0; i<reviewDetailDto.size(); i++) {
 //				switch(reviewDetailDto.get(i).getTripperCat()){
@@ -188,7 +191,7 @@ public class HotelController {
 //			}
 //		model.addAttribute("reviewDetailDto", reviewDetailDto);		
 		
-		List<HotelReviewOverallDtoRes> reviewOverallDto = service.selectReviewOverall("2OS001");
+		List<HotelReviewOverallDtoRes> reviewOverallDto = service.selectReviewOverall(hotelCode);
 		model.addAttribute("reviewOverallDto", reviewOverallDto);
 		
 		
@@ -200,10 +203,7 @@ public class HotelController {
 	public String hotelPaging(
 			Model model,
 			String hotelCode,
-			String currentPage, 
-			String totalPageCount, 
-			String startPageNum, 
-			String endPageNum
+			String currentPage
 		) {
 		//정보를 받아올 때 어떤것을 참조해서 받아올지 --> 매개변수(java에서의 getParameter 역할을 대신해줌)
 		
@@ -228,8 +228,10 @@ public class HotelController {
 		
 		Map<String, Object> reviewDetailDto = service.selectReviewDetailList(hotelCode, reviewNum, reviewPageNum, currentPageNum);
 		
-		List<HotelReviewDto> reviewDtoList = (List)reviewDetailDto.get(reviewDetailDto);
+		
+		List<HotelReviewDto> reviewDtoList = (List<HotelReviewDto>)reviewDetailDto.get("reviewDtoList");
 		// Map 에 묶인 얘를 꺼내면 java에서 object로 인식해서 강제형변환 해줘야함
+		// 어쩔수 없이 뜨는 오류..... 그냥 그러려니 하고 넘어가자...
 		
 		for(int i = 0; i<reviewDtoList.size(); i++) {
 			switch(reviewDtoList.get(i).getTripperCat()){
@@ -252,7 +254,10 @@ public class HotelController {
 		}
 		model.addAttribute("reviewDetailDto", reviewDetailDto);		
 		//매개변수를 가지고 가서 mapper에서 조회해서 dto에 넣고 여기로 가져와서 model 안에 넣음
-
+		
+		
+		//System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(reviewDetailDto));
+		
 		return "hotel/hotel_view_review";
 		//위에서 넣은 값을 session안에 담고 그 session을 여기로 보내서 띄움
 		

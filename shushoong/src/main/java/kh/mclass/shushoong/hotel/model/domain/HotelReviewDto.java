@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 @Component
-@AllArgsConstructor
 public class HotelReviewDto {
 	private String userId;
 	private String roomCat;

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-secur">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/home.css}" rel="stylesheet" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>슈슝 Home</title>
+<script>
+let currentIndex = 0;	//캐러셀 index
+
+$(loadedHandler)
+
+	function loadedHandler() {
+		$('.left.btn2').on('click', leftClickHandler);
+		$('.right.btn2').on('click', rightClickHandler);
+		slide(0);
+	}
+</script>
+<script th:src="@{/js/home.js}"
+		type="text/javascript">
+</script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-discount-hotel-list">
+				<div class="discount-hotel-title">지금 할인하는 호텔</div>
+				<div class="discount-hotel-list">
+					<div class="list-wrapper" >
+						<a class="discount-hotel" th:each="discounthotel : ${discounthotelList}" th:href="'/shushoong/hotel/view?hotelCode=' + ${discounthotel.hotelCode}">
+							<div class="discount-hotel-pic"><img th:src="${discounthotel.hotelPic}" alt="a" style="display: block;"/></div>
+							<div class="discount-hotel-info">
+								<div class="discount-hotel-name" th:text="${discounthotel.hotelName}">호텔이름</div>
+								<div class="discount-hotel-eng" th:text="${discounthotel.hotelEng}">영어이름</div>
+								<div class="discount-hotel-address" th:text="${discounthotel.hotelAddress}">주소</div>
+								<div class="discount-hotel-room-remain" th:text="'현재 ' + ${discounthotel.roomCat} + '은 ' + ${discounthotel.roomCount} + '개의 방이 남았습니다!'"></div>
+							</div>
+							<div class="wrap-price">
+								<div class="original-hotel-price" th:text="${discounthotel.hotelPrice}"></div>
+								<div class="discount-hotel-price" th:text="${discounthotel.discountedPrice}">호텔 가격</div><div>원~</div>
+								<!-- th:text="${#numbers.formatInteger(T(java.lang.Integer).parseInt(air.seatPrice) / 2, 3, 'COMMA') + '원'}" -->
+							</div>
+						</a>
+					</div>
+				</div>
+				<button type="button" class="left btn2">&lt;</button>
+				<button type="button" class="right btn2">&gt;</button>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+</body>
+</html>

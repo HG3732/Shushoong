@@ -206,7 +206,9 @@ function showAllReview(){
 		}
 		}).done(function(response){
 			$('.review_info_wrap').replaceWith(response);
+			$('.review_write_btn').on('click', reviewWriteHandler);
 	});
+
 }
 
 /*페이지 번호 표시 및 오른쪽 > 눌렀을 때 페이지 이동*/

@@ -89,7 +89,7 @@
 	</select>
 	
 	<!-- 작성된 리뷰 불러오기 -->
-	<select id="selectReviewDetailList" parameterType="hashmap" resultType="HotelReviewDto">
+	<select id="selectReviewDetailList" parameterType="map" resultType="HotelReviewDto">
 		select s2.* 
 		from
 		    (select s1.*, rownum rn 

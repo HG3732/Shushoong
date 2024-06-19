@@ -1,54 +1,60 @@
 <!DOCTYPE html>
 <html
 xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="review_info_wrap">
 
-						<div class="review_info_wrap"  th:each="reviewDetail: ${reviewDetailDto}" th:fragment="review_info_wrap">
-							<div class="review_flex">
-								<div class="review_grade">
-									<p class="review_rate" th:text="${reviewDetail.rateAvg}"></p>
-									<div class="review_id">
-										<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:20px;">
-										<p style="font-size: var(--font3);" th:text="${reviewDetail.userId}"></p>
-									</div>
-									<div class="review_tripper">
-										<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:20px;">										
-										<p style="font-size: var(--font3);">출장여행객</p>
-									</div>
-								</div>
-								<div class="review_content_wrap">
-									<div class="review_content_title">
-										<p th:text=" ${reviewDetail.reviewTitle}"></p>
-									</div>
-									<div class="review_content">
-										<p th:text=" ${reviewDetail.reviewComment}"></p>
-									</div>
-									<div class="review_content_date">
-										<p th:text=" ${reviewDetail.reviewDate}"></p>
-									</div>
-								</div>
-							</div>	
-							<hr style="border: 1px solid #c5c5c5;"></hr>
-						</div>
-						
-						<div class="review_btn">
-							<button type="button" class="review_write_btn">리뷰 작성</button>
-						</div>
+<div th:if="${reviewDetailDto}">
+	<div th:each="reviewDetail:${reviewDetailDto.reviewDtoList}"  class="review_info_wrap">
+		<div class="review_flex">
+			<div class="review_grade">
+				<p class="review_rate" th:text="${reviewDetail.rateAvg}"></p>
+				<div class="review_id">
+					<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:20px;">
+					<p style="font-size: var(--font3);" th:text="${reviewDetail.userId}"></p>
+				</div>
+				<div class="review_tripper">
+					<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:20px;">										
+					<p style="font-size: var(--font3);" th:text="${reviewDetail.tripperCat}"></p>
+				</div>
+			</div>
+			<div class="review_content_wrap">
+				<div class="review_content_title">
+					<p th:text=" ${reviewDetail.reviewTitle}"></p>
+				</div>
+				<div class="review_content">
+					<p th:text=" ${reviewDetail.reviewComment}"></p>
+				</div>
+				<div class="review_content_date">
+					<p th:text=" ${reviewDetail.reviewDate}"></p>
+				</div>
+			</div>
+		</div>	
+		<hr style="border: 1px solid #c5c5c5;"></hr>
+	</div>
+</div>
+	<div class="review_btn">
+		<button type="button" class="review_write_btn">리뷰 작성</button>
+	</div>
 
-						<div style="text-align: center;">
-							<ul class="paging_wrap">
-								<li th:if="${reviewDetailDto.startPageNum > 1}">
-									<a href="@{/hotel/view(page=${reviewDetailDto.startPageNum - 1})}" class="left_page" >&lt;</a>
-								</li>
-								<li th:each="page : ${#numbers.sequence(reviewDetailDto.startPageNum, reviewDetailDto.endPageNum)}"
-									th:class="${reviewDetailDto.currentPage == page} ? page : ''">
-									<span th:if="${reviewDetailDto.currentPage == page}" th:text="${page}"></span>
-									 <a th:if="${reviewDetailDto.currentPage != page}" th:href="@{/hotel/view(page=${page})}" th:text="${page}"></a>
-									  <input type="hidden" class="pageHidden" th:value="${page}" th:if="${reviewDetailDto.currentPage != page}">
-								</li>
-							    <li th:if="${reviewDetailDto.endPageNum < reviewDetailDto.totalPageCount}">
-							        <a th:href="@{/hotel/view(page=${reviewDetailDto.endPageNum + 1})}" class="right_page">&gt;</a>
-							    </li>
-							</ul>
-						</div>
-
+<div th:if="${reviewDetailDto}">
+	<div th:if="${reviewDetailDto.totalReviewCount > 0}">
+		<div style="text-align: center;">
+			<ul class="paging_wrap">
+				<li th:if="${reviewDetailDto.startPageNum > 1}">
+					<a href="@{/hotel/view(page=${reviewDetailDto.startPageNum - 1})}" class="left_page" >&lt;</a>
+				</li>
+				<li th:each="page : ${#numbers.sequence(reviewDetailDto.startPageNum, reviewDetailDto.endPageNum)}"
+					th:class="${reviewDetailDto.currentPage == page} ? page : ''">
+					<span th:if="${reviewDetailDto.currentPage == page}" th:text="${page}"></span>
+					 <a th:if="${reviewDetailDto.currentPage != page}" th:href="@{/hotel/view(page=${page})}" th:text="${page}"></a>
+					  <input type="hidden" class="pageHidden" th:value="${page}" th:if="${reviewDetailDto.currentPage != page}">
+				</li>
+			    <li th:if="${reviewDetailDto.endPageNum < reviewDetailDto.totalReviewCount}">
+			        <a th:href="@{/hotel/view(page=${reviewDetailDto.endPageNum + 1})}" class="right_page">&gt;</a>
+			    </li>
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
 </html>

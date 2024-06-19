@@ -100,7 +100,7 @@ public class HotelService {
 		result.put("totalReviewCount", totalReviewCount);
 		result.put("startPageNum", startPageNum);
 		result.put("endPageNum", endPageNum);
-		result.put("currentPageNum", currentPageNum);
+		result.put("currentPage", currentPageNum);
 		
 		return result;
 

@@ -27,22 +27,19 @@
 			<AppenderRef ref="ConsoleLog" />
 		</Logger>
 		<!-- JDBC -->
-		<Logger name="jdbc.sql" level="info" additivity="false">
+		<Logger name="jdbc.sqlonly"  level="warn" additivity="false">
 			<AppenderRef ref="ConsoleLogAspect" />
 		</Logger>
-		<Logger name="jdbc.sqlonly"  level="info" additivity="false">
+		<Logger name="jdbc.sqltiming"  level="info" additivity="false">
 			<AppenderRef ref="ConsoleLogAspect" />
 		</Logger>
-		<Logger name="jdbc.sqltiming"  level="debug" additivity="false">
+		<Logger name="jdbc.audit"   level="warn" additivity="false">
 			<AppenderRef ref="ConsoleLogAspect" />
 		</Logger>
-		<Logger name="jdbc.audit"   level="debug" additivity="false">
+		<Logger name="jdbc.resultset"   level="warn" additivity="false">
 			<AppenderRef ref="ConsoleLogAspect" />
 		</Logger>
-		<Logger name="jdbc.resultset"   level="debug" additivity="false">
-			<AppenderRef ref="ConsoleLogAspect" />
-		</Logger>
-		<Logger name="jdbc.resultsettable"  level="debug" additivity="false">
+		<Logger name="jdbc.resultsettable"  level="info" additivity="false">
 			<AppenderRef ref="ConsoleLogAspect" />
 		</Logger>
 		<Logger name="jdbc.connection"  level="off" additivity="false">

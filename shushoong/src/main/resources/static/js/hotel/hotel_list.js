@@ -1,14 +1,14 @@
 //좋아요 누를 시 색깔 변함
 function likeHandler(thisElement){
-	console.log(thisElement);	//이벤트 함수가 걸린 태그
+	//console.log(thisElement);	//이벤트 함수가 걸린 태그
 	//console.log(event.target);	//마우스 클릭 시 제일 가까운 요소 (하트 사진 누르면 하트 사진 뜨는....)
 	
-	var currentSrc = $(thisElement).children().attr('src');
+	var currentSrc = $(thisElement).attr('src');
 	/* 이 경로를 토대로 이미지 바뀌는 경우의 수 적어주기 */
 	
 	//좋아요 클릭 시 해당 호텔 코드 출력
 	var hotelcode = $(thisElement).parents('.hotel').data('hotelcode');
-	console.log(hotelcode);
+	//console.log(hotelcode);
 	
 	if( currentSrc === '/shushoong/images/heart.png'){
 		$.ajax({
@@ -17,7 +17,7 @@ function likeHandler(thisElement){
 		data: {hotelCode : hotelcode},
 		success: function(result) {
 			if(result < 1) {alert("좋아요 작동 에러, 다시 시도해주세요.");}
-			else {$(thisElement).children().attr("src", "/shushoong/images/heart_color.png");}
+			else {$(thisElement).attr("src", "/shushoong/images/heart_color.png");}
 		},
 		error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
@@ -31,7 +31,7 @@ function likeHandler(thisElement){
 		data: {hotelCode : hotelcode},
 		success: function(result) {
 			if(result < 1) {alert("좋아요 작동 에러, 다시 시도해주세요.");}
-			else {$(thisElement).children().attr("src", "/shushoong/images/heart.png");}
+			else {$(thisElement).attr("src", "/shushoong/images/heart.png");}
 		},
 		error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
@@ -111,6 +111,7 @@ window.onload = setInitialValues;
 
 //정렬 기준에 맞게 정렬
 function sortHandler() {
+	start = 1;
 	presortBy = $('.sort-by option:selected').val();
 	presortTo = $('.sort-to option:selected').val();
 	
@@ -136,10 +137,13 @@ function sortHandler() {
 		$("#realHotelList").replaceWith(response);
 		//updateHotelList(response);
 	});
+	
 }
 
 //호텔 이름 키워드 검색
 function searchHandler() {
+	start = 1;
+	end = 3;
 	prekeyword = $('.type_hotel').val();
 	presortBy = null;
 	presortTo = null;
@@ -162,6 +166,7 @@ function searchHandler() {
 	}).done(function(response){
 //		$("#hotellistsection").replaceWith(response);
 		$("#realHotelList").replaceWith(response);
+		$('.hotel_list').children('.hotel:gt(2)').css('display', 'none');
 	
 		$.ajax({
 		url: "/shushoong/hotel/list/price.ajax",
@@ -189,6 +194,8 @@ function searchHandler() {
 			setInitialValues();	
 		});
 	});
+	
+	
 }
 //엔터키 눌렀을 때 키워드 검색버튼 클릭
 function enterkey() {
@@ -199,6 +206,7 @@ function enterkey() {
 
 // 호텔 가격(슬라이드바) 검색
 function priceHandler() {
+	start = 1;
 	maxPrice = $('#input-right').val();
 	$.ajax({
 		url: "/shushoong/hotel/list/sort.ajax",
@@ -217,5 +225,16 @@ function priceHandler() {
 	}).done(function(response){
 		$("#realHotelList").replaceWith(response);
 	});
+}
+
+//스크롤 내리면 데이터 추가 로드
+function loadHotelListHandler() {
+	var end = Number(2);
+	
+	//스크롤이 화면의 일정높이까지 내려가면
+	if($(document).height() - $(this).scrollTop() < 900) {
+			$('.hotel_list').children('.hotel:gt(' + end + '):lt(' + (end+3) + ')').css('display', 'grid');
+			end += 3;
+	}
 }
 

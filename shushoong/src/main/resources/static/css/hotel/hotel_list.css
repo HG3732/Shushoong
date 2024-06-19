@@ -5,6 +5,17 @@
 	height: 100px;
 }
 
+.hotel1 {
+	display:flex;
+	flex-direction: column;
+	flex-basis: 200px;
+}
+
+.hotel1 > div {
+	height: 100px;
+	border: 1px solid black;
+}
+
 .category {
 	width: 960px;
     margin: 0 auto;
@@ -198,14 +209,8 @@ input[type="range"]::-webkit-slider-thumb {
 	margin-top: 10px;
 }
 
-.hotel_like:hover{
-	cursor: pointer;
-	text-align:end;
-	margin-right: 10px;
-	margin-top: 10px;
-}
-
 .heart {
+	cursor: pointer;
 	border: none;
 	background-color: none;
 }

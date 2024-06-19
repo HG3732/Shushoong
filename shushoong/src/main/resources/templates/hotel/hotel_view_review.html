@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html
 xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="review_info_wrap">
+<div th:fragment="review_info_wrap" class="review_info_wrap">
 
 <div th:if="${reviewDetailDto}">
-	<div th:each="reviewDetail:${reviewDetailDto.reviewDtoList}"  class="review_info_wrap">
+	<div th:each="reviewDetail:${reviewDetailDto.reviewDtoList}">
 		<div class="review_flex">
 			<div class="review_grade">
 				<p class="review_rate" th:text="${reviewDetail.rateAvg}"></p>

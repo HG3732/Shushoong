@@ -188,18 +188,18 @@
 								<!-- <span th:text="${airlineData[0].arrivalLoc}"></span>행 항공편을 선택하세요 -->
 							</p>
 						</div>
-
+<!-- 
 						<div hidden th:each="air : ${airlineData}">
 							<div hidden="">
-								<span th:text="${air.departLoc}" id="select-info-departLoc-out"
-									name="departLoc-out"></span> <span th:text="${air.arrivalLoc}"
-									id="select-info-arrivalLoc-out" name="arrivalLoc-out"></span> <span
-									th:text="${air.airlineCode}" id="select-info-airlineCode-out"
-									name="airlineCode-out"></span>
+								<span th:text="${air.departLoc}" id="select-info-departLoc" name="departLoc"></span> 
+								<span th:text="${air.arrivalLoc}" id="select-info-arrivalLoc" name="arrivalLoc"></span>
+								<span th:text="${air.airlineCode}" id="select-info-airlineCode" name="airlineCode"></span>
 							</div>
+							
 						</div>
+						 -->
 						<div class="airline-info-container">
-							<form id="frm-return" hidden>
+							<form id="frm-airinfo" hidden>
 								<input type="hidden" id="departLoc" name="departLoc"> <input
 									type="hidden" id="arrivalLoc" name="arrivalLoc"> <input
 									type="hidden" id="airlineCode" name="airlineCode">

@@ -238,14 +238,14 @@ input[type="range"]::-webkit-slider-thumb {
 
 .hotel_eng{
 	font-size: var(--font4);
-	color: var(--color_gray_2);
+	color: var(--color_gray_4);
 	
 	margin-bottom: 35px;
 }
 
 .hotel_location{
 	font-size: var(--font4);
-	color: var(--color_gray_2);
+	color: var(--color_gray_4);
 	
 	margin-bottom: 15px;
 }

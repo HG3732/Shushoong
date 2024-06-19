@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+.hotelInformation {
+	width: 400px;
+	height: 400px;
+}
+
+.hotelTitle {
+	display: flex;
+	flex-wrap:wrap;
+	align-content:center;
+	
+	height: 40px;
+	background-color: #BCEFFF;
+	font-size: 15px;
+	font-weight: bold;
+	text-indent: 20px;
+	
+	border-top: 3px solid #006AFF;
+	border-bottom: 3px solid #006AFF;
+}
+
+.hotelContent {
+	display: flex;
+	flex-wrap:wrap;
+	flex-direction:column;
+	
+	padding: 10px;
+	margin-top: 5px;
+}
+
+.label {
+	display: inline-block;
+	text-align: left;
+	width: 100px;
+	font-weight: bold;
+	margin: 0 20px 20px 10px;
+}
+
+.hotelDateInfo, .businessNumInfo, .hotelCodeInfo, 
+.hotelDate, .hotelAddressInfo, .payInfo, .userNameInfo {
+	display: flex;
+	flex-wrap:wrap;
+	flex-direction:row;
+}
+
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn.stopHotel {
+	background-color: red;
+	width: 130px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	color: white;
+	font-family: SOYOMapleRegularTTF;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	
+	margin: 30px 0 30px 0;
+}

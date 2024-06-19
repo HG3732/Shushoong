@@ -21,9 +21,9 @@ function clickedShowReturnBtn() {
             airlineCode: $('#airlineCode').val()
         });
 		
-        $('#frm-return').attr('method', 'POST');
-        $('#frm-return').attr('action', '/shushoong/airline/list_return');
-        $('#frm-return').submit();
+        $('#frm-airinfo').attr('method', 'POST');
+        $('#frm-airinfo').attr('action', '/shushoong/airline/list_return');
+        $('#frm-airinfo').submit();
     });
 }
 

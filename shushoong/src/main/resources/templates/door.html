@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/door.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>슈슝</title>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="door1">
+			    <img th:src="@{/images/door1.png}" class="door1_img" alt="첫번째사진">
+         		<div class="letter">여행을 떠나여~</div>
+			</div>
+			<div class="door2">
+			    <img th:src="@{/images/door2.jpg}" class="door2_img" alt="두번째사진">
+			</div>
+			<div class="door3">
+			    <img th:src="@{/images/door3.png}" class="door3_img" alt="세번째사진">
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+</body>
+</html>

@@ -68,7 +68,6 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="adult_list_wrap"></div>
 						<div class="child_list_wrap"></div>
 						<div class="baby_list_wrap"></div>
-						<input type="button" class="confirm_btn" value="확정하기" >
 					</section>
 					
 					
@@ -207,28 +206,48 @@ xmlns:th="http://www.thymeleaf.org">
 							<div class="paycheck_info">
 								<div class="total_cost">
 									<div class="how_much">총 상품 금액</div>
-									<div class="total_num"><input type="text" class="total_value" readonly="readonly" placeholder="확정하기 버튼을 눌러주세요."> 원</div>
+									<div class="total_num"><input type="text" class="total_value" readonly="readonly"> 원</div>
 								</div>
-								<div class="headcount_exchange">
-									<div class="headcount">
-									성인 : <div class="adultNum"></div>
-									, 아동 0</div>
-									<div class="exchange">JPY(83,953)</div>
+								<div class="final_check_info_list">
+									<div class="final_check_info">
+										<div>
+											<div class="final_check_lineup">
+												성인 : <div class="adultNum"></div>
+												, 아동 : <div class="childNum"></div>
+												, 유아 : <div class="babyNum"></div>
+											</div>
+											<div class="airlineCode">
+											
+											</div>
+										</div>
+										<div>
+											<div class="flightNo">
+											
+											</div>
+											<div>출발 : </div>
+											<div class="date_time_local">
+												<div class="date_time">
+													<div class="departDate"></div>
+													<div class="departTime"></div>
+												</div>
+												
+												<div class="departLoc">
+												
+												</div>
+											</div>
+											<div>도착 : </div>
+											<div class="date_time_local">
+												<div class="date_time">
+													<div class="arrivalDate"></div>
+													<div class="arrivalTime"></div>
+												</div>
+												<div class="arrivalLoc">
+												
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="mileage_wrap">
-									<p style="font-size: var(--font4);">마일리지</p>
-									<button type="button" class="use_all">전액사용</button>
-									<input type="text">
-									<p style="font-size: var(--font4);">원</p>
-								</div>
-								<div class="left">
-									<p>잔액: 1000원</p>
-								</div>
-								<div class="exchange_info">
-									<div class="apply_exchange">* 적용 환율 JPY=8.8301(2024.05.23) 기준</div>
-									<div class="mileage_save">슈슝투어 마일리지 741 적립</div>
-									<div class="mileage_guide">호텔은 대표 투숙객1인 에게 마일리지 적립이 됩니다.</div>
-								</div>						
 							</div>
 						</div>
 						
@@ -258,6 +277,7 @@ xmlns:th="http://www.thymeleaf.org">
 			adultNum();
 			childNum();
 			babyNum();
+			payCheckInfo();
 		}
 
 		$('#check1').on("click", allAgreeCheckHandler);

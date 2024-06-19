@@ -44,6 +44,7 @@ section.reserver_info{
 }
 section.reserver_info > div:nth-child(1) > div:nth-child(1) {
 	margin-top : 50px;
+	margin-bottom : 4px;
 	font-size: 20px;
 	font-weight: bolder;
 }
@@ -261,14 +262,6 @@ section.into_submit{
 	margin: auto;
 }
 
-input.confirm_btn{
-	width: 960px;
-	height: 45px;
-	border-radius: 30px;
-	margin-top : 20px;
-	border-color:  var(--color_blue_1);
-	background-color: var(--color_blue_2);
-}
 
 
 
@@ -418,88 +411,75 @@ input.total_value{
 	border-radius: 50px;
 	background-color : white;
 	outline-color:  var(--color_blue_1);
+	
+	background: none;
+	border: none;
 }
 input.total_value::placeholder{
 	text-align: center;
 }
 
-.headcount_exchange{
-	display: flex;
-	justify-content: space-between;
-	font-size: var(--font4);
-	margin-top: 10px;
-}
-.headcount{
-	display: flex;
+
+div.final_check_info{
+	height: 60px;
+	margin: 30px;
 }
 
-.mileage_wrap{
- 	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	margin-top: 30px;
+div.final_check_info > div{
+	display: flex;
+}
+div.final_check_info > div:first-child{
+	height: 15px;
+	margin: 5px 5px;
+	line-height: 15px;
+}
+div.final_check_info > div:last-child{
+	height: 35px;
+	line-height: 15px;
+	margin-bottom: 20px;
+}
+
+div.final_check_info > div:last-child >*{
+	margin-right: 10px;
+	line-height: 35px;
+	font-size: 17px;
+}
+
+div.final_check_lineup{
+	display: flex;
+	font-size: 12px;
+}
+div.airlineCode{
+	font-size : 15px;
+	margin-left: 40px;
+}
+div.flightNo{
+	width: 150px;
+	font-weight: bolder;
+}
+
+div.final_check_info > div:last-child > div:nth-child(2),
+div.final_check_info > div:last-child > div:nth-child(4){
+	width:  70px;
+	text-align: center;
+	font-weight: bolder;
+}
+div.date_time_local{
+	width: 200px;
 	
 }
-
-.mileage_wrap > input[type=text] {
-	border: none; 
-	background-color: var(--color_gray_3); 
-	border-radius: 20px;
-	width: 120px;
-	font-size: var(--font4);
-	padding:5px;
-	margin-left: 20px;
+div.date_time{
+	height : 15px;
+	font-size: 12px;
+	display: flex;
+	margin-top: -10px
 }
-
-.mileage_wrap > input[type=text]:focus{
-	outline: none;
-	font-size: var(--font4);
+div.departTime{
+	margin-left: 2px;
 }
 
 
-.use_all{
-	border-radius: 20px;
-	border: none;
-	font-size: var(--font4);
-	background-color: var(--color_gray_3);
-	padding: 5px;
-	margin-left: 5px;
-}
 
-.use_all:hover{
-	cursor:pointer;
-	padding: 5px;
-	border-radius: 20px;
-	border: none;
-	font-size: var(--font4);
-	margin-left: 5px;
-}
-
-.left{
-	margin-top: 5px;
-	text-align: end;
-	font-size: var(--font4);
-}
-
-.exchange_info{
-	margin-top: 30px;
-	text-align: end;
-	font-size: var(--font4);
-	color: #7C7C7C;
-}
-
-.apply_exchange{
-	margin-bottom: 5px;
-}
-
-.mileage_save{
-	margin-bottom: 5px;
-}
-
-.pay_button{
-	margin: 30px 0;
-	width: 100%;
-}
 
 input[type=radio]{
 	-webkit-appearance: none; 
@@ -516,5 +496,27 @@ input[type="radio"]:checked{
 	background-image: url("../../images/bluecheck.png");
 	border: none;
   
+}
+
+input.info_submit_btn {
+	width: 960px;
+	height: 45px;
+	border-radius: 30px;
+	
+	border-color:  var(--color_blue_1);
+	background-color: white;
+	font-size:  21px;
+	font-weight: bold;
+	margin: 20px 0;
+	font-family: 'SOYOMapleRegularTTF';
+}
+
+input.info_submit_btn:hover {
+	background-color: var(--color_blue_1);
+	color: white;
+}
+
+input , label{
+	cursor: pointer;
 }
 			

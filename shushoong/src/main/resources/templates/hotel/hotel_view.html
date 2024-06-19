@@ -37,6 +37,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<div th:each="hotel : ${hotelViewList}" class="hotel_name">
  					<div th:text="${hotel.hotelName}" class="name_kr">세인트존스 호텔</div>
 					<div th:text="${hotel.hotelEng}" class="name_en">St.Jones Hotel</div>				
+					<input type="hidden" th:value="${hotel.hotelCode}" class="hotel_code">
 				</div>
 				<hr></hr>
 				<div class="hotel_pic">
@@ -437,6 +438,7 @@ function loadedHandler(){
 
 	/* 리뷰 페이지 표시 */
 	$(showAllReview);
+	
 	/* 페이지 이동 */
 	$('.right_page').on('click', rightPageHandler);
 	

@@ -307,19 +307,14 @@ select hotel_code, hotel_name, to_char(hotel_price, '999,999') as hotel_price, r
 select v.hotel_code, v.hotel_pic, v.hotel_name, v.hotel_eng, v.hotel_address, v.hotel_price, trunc(v.hotel_price*(1 - hr.hotel_discount/100)), hr.room_count, hr.hotel_discount 
 from V_hotel_list v join hotel_room hr on v.hotel_code = hr.hotel_code and v.hotel_price = hr.hotel_price; 
 
--- 할인 중 호텔 리스트 뷰 생성
-create view V_discounted_hotel_list (hotel_code, hotel_pic, hotel_name, hotel_eng, hotel_address, hotel_price, room_discount, room_cap) as
-select distinct hp.hotel_code, first_value(hp.hotel_picture) over (partition by hp.hotel_code) as hotel_picture, h.hotel_name, h.hotel_eng, h.hotel_address, h.hotel_pcount, nvl(hotel_review2.avg_score, 0), hotel_review2.review_num, hrm.min_price, hrm.hotel_discount, hrm.room_cap
-
-from hotel_pic hp, hotel h, 
-(select h.hotel_code, round((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_score, count(hrv.hotel_code) as review_num
-from hotel_review hrv right join hotel h on hrv.hotel_code = h.hotel_code group by h.hotel_code) hotel_review2,
-(select t1.*, t2.min_price from hotel_room t1 join (select hotel_code, min(hotel_price) min_price from hotel_room where room_count > 0 group by hotel_code) t2 on t1.hotel_code = t2.hotel_code and t1.hotel_price = t2.min_price) hrm
-
-where hp.hotel_code = h.hotel_code and hp.hotel_code = hotel_review2.hotel_code and hp.hotel_code = hrm.hotel_code
-;
-
+-- 할인 중 호텔 리스트
 select v.hotel_code hotel_code, v.hotel_pic hotel_pic, v.hotel_name hotel_name, v.hotel_eng hotel_eng,
 		v.hotel_address hotel_address, hr.room_cat_desc room_cat, v.hotel_price hotel_price, to_char(trunc(v.hotel_price*(1 - hr.hotel_discount/100)), '999,999,999') discounted_price, hr.hotel_discount discount_ratio, hr.room_count room_count 
 		from (select * from hotel_room join hotel_room_cat using(room_cat)) hr join v_hotel_list v on hr.hotel_code = v.hotel_code where hr.hotel_discount > 0
 		order by hotel_discount desc;
+
+select t1.* 
+from (select hotel_code, hotel_name, hotel_eng, hotel_address, to_char(hotel_price, '999,999,999') as hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num, rownum rn
+		from V_hotel_list 
+		where SUBSTR(hotel_code, 1, 3) = '2OS' and room_cap = 2) t1
+        where rn between 3 and 5;

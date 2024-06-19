@@ -16,7 +16,6 @@ xmlns:th="http://www.thymeleaf.org">
 <title>호텔 목록</title>
 </head>
 <body>
-
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
@@ -79,6 +78,8 @@ var maxPrice = null;
 var presortBy = null;
 var presortTo = null;
 
+var lastScroll = 0;
+
 function loadedHandler(){
 	//좋아요 버튼 -- inline html onclick 
 	//$(".hotel_like").on("click", likeHandler);
@@ -89,6 +90,11 @@ function loadedHandler(){
 	$('.btn_search').on('click', searchHandler);
 	//가격(슬라이드바)으로 조회
 	//$('#input-right').on('click', priceHandler);
+	
+	//호텔 리스트의 자식요소들 중 4번째부터 전부 숨김 
+	$('.hotel_list').children('.hotel:gt(2)').css('display', 'none');
+	$(window).on('scroll', loadHotelListHandler);
+	
 };
 
 </script>

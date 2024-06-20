@@ -3,34 +3,40 @@
 xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="review_info_wrap" class="review_info_wrap">
 
+
 <div th:if="${reviewDetailDto}">
-	<div th:each="reviewDetail:${reviewDetailDto.reviewDtoList}">
-		<div class="review_flex">
-			<div class="review_grade">
-				<p class="review_rate" th:text="${reviewDetail.rateAvg}"></p>
-				<div class="review_id">
-					<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:20px;">
-					<p style="font-size: var(--font3);" th:text="${reviewDetail.userId}"></p>
+    <th:block th:if="${#lists.isEmpty(reviewDetailDto.reviewDtoList)}">
+        <div style="text-align: center; margin-top: 30px; font-family: 'SOYOMapleBoldTTF';">작성된 리뷰가 없습니다.</div>
+    </th:block>
+     <th:block th:if="${not #lists.isEmpty(reviewDetailDto.reviewDtoList)}">
+		<div th:each="reviewDetail:${reviewDetailDto.reviewDtoList}">
+			<div class="review_flex">
+				<div class="review_grade">
+					<p class="review_rate" th:text="${reviewDetail.rateAvg}"></p>
+					<div class="review_id">
+						<img th:src="@{/images/person.png}" class="id_img" alt="오른쪽 화살표" style="width:20px;">
+						<p style="font-size: var(--font3);" th:text="${reviewDetail.userId}"></p>
+					</div>
+					<div class="review_tripper">
+						<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:20px;">										
+						<p style="font-size: var(--font3);" th:text="${reviewDetail.tripperCat}"></p>
+					</div>
 				</div>
-				<div class="review_tripper">
-					<img th:src="@{/images/suitcase.png}" class="tripper_img" alt="오른쪽 화살표" style="width:20px;">										
-					<p style="font-size: var(--font3);" th:text="${reviewDetail.tripperCat}"></p>
+				<div class="review_content_wrap">
+					<div class="review_content_title">
+						<p th:text=" ${reviewDetail.reviewTitle}"></p>
+					</div>
+					<div class="review_content">
+						<p th:text=" ${reviewDetail.reviewComment}"></p>
+					</div>
+					<div class="review_content_date">
+						<p th:text=" ${reviewDetail.reviewDate}"></p>
+					</div>
 				</div>
-			</div>
-			<div class="review_content_wrap">
-				<div class="review_content_title">
-					<p th:text=" ${reviewDetail.reviewTitle}"></p>
-				</div>
-				<div class="review_content">
-					<p th:text=" ${reviewDetail.reviewComment}"></p>
-				</div>
-				<div class="review_content_date">
-					<p th:text=" ${reviewDetail.reviewDate}"></p>
-				</div>
-			</div>
-		</div>	
-		<hr style="border: 1px solid #c5c5c5;"></hr>
-	</div>
+			</div>	
+			<hr style="border: 1px solid #c5c5c5;"></hr>
+		</div>
+	</th:block>
 </div>
 	<div class="review_btn">
 		<button type="button" class="review_write_btn">리뷰 작성</button>
@@ -49,8 +55,8 @@ xmlns:th="http://www.thymeleaf.org">
 					 <a th:if="${reviewDetailDto.currentPage != page}" th:href="@{/hotel/view(page=${page})}" th:text="${page}"></a>
 					  <input type="hidden" class="pageHidden" th:value="${page}" th:if="${reviewDetailDto.currentPage != page}">
 				</li>
-			    <li th:if="${reviewDetailDto.endPageNum < reviewDetailDto.totalReviewCount}">
-			        <a th:href="@{/hotel/view(page=${reviewDetailDto.endPageNum + 1})}" class="right_page">&gt;</a>
+			    <li th:if="${reviewDetailDto.endPageNum > reviewDetailDto.totalReviewCount}">
+			        <a th:href="@{/hotel/view(page=${reviewDetailDto.endPageNum})}" class="right_page">&gt;</a>
 			    </li>
 			</ul>
 		</div>

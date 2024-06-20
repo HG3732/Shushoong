@@ -41,31 +41,31 @@
 /* 사진 안 text */
 .door1_text {
     position: absolute;
-/*     top: 150px;
-    left: 720px; */
-    top: 10%; /* 뷰포트 높이의 15% 지점에 배치 */
-    left: 35%; /* 뷰포트 너비의 72% 지점에 배치 */
+
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: white;
     padding: 5px 10px;
-    font-size: 40px;
+    font-size: 50px;
     font-family: 'SOYOMapleBoldTTF';
 }
 
 .door2_text {
     position: absolute;
-    top: 400px; /* 이미지 좌측에 여백 추가 */
-    left: 1100px;
-    padding: 5px 10px;
+    top: 40%;
+    left: 60%;
+    transform: translate(-50%, -50%);
     font-size: 40px;
     font-family: 'SOYOMapleBoldTTF';
 }
 
 .door3_text {
     position: absolute;
-    top: 400px; /* 이미지 좌측에 여백 추가 */
-    left: 300px;
+    top: 40%;
+    left: 20%;
+    transform: translate(-50%, -50%);
     color: white;
-    padding: 5px 10px;
     font-size: 40px;
     font-family: 'SOYOMapleBoldTTF';
 }

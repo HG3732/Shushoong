@@ -1,39 +1,87 @@
 @charset "UTF-8";
 
-.wrap-main{
+.pic-container {
+    display: grid;
+    grid-template-columns: 1fr; /* 한 줄에 한 개의 열 */
     position: relative;
-    background-image: linear-gradient(rgba(0,0,0, 0.4), rgba(0,0,0, 0.4)),url(/johny-goerend-KB9r_hTzyeQ-unsplash.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 900px;
-    display: flex;
-    align-items: center;
 }
 
-/* .door_img1 {
+.pic {
+    position: relative;
+}
+
+
+.pic img {
     width: 100%;
-    filter: brightness(70%);
-    position:absolute;
-    top: 50%;
+    height: auto;
+    display: block;
+}
+
+/* 사진 안 text */
+.door1_text {
+    position: absolute;
+
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: -1;
-} 
-
-.letter {
-    color:white;
-    text-align: center;
-    margin-left: 50px;
-    font-size: 60px;
-    animation: fadeInUp 1s;
+    color: white;
+    padding: 5px 10px;
+    font-size: 50px;
+    font-family: 'SOYOMapleBoldTTF';
 }
 
- @keyframes fadeInUp{
-    0%{opacity: 0;
-    transform: translate3d(0, 100%, 0);
-    }
-    to {
-        opacity: 1;
-        transform: translateZ(0);
-    }
+.door2_text {
+    position: absolute;
+    top: 40%;
+    right: 40%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    font-family: 'SOYOMapleBoldTTF';
 }
+
+.door3_text {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 40px;
+    font-family: 'SOYOMapleBoldTTF';
+}
+
+
+/* 해당 위치로 이동 */
+.door2_button {
+    position: absolute;
+    bottom: 40%;
+    right: 20%;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    background-color: var(--color_gray_3);
+    border: none;
+}
+
+.door2_button:hover{
+	 cursor: pointer;
+	 background-color: var(--color_gray_2);
+	 font-family: 'SOYOMapleBoldTTF';
+}  
+  
+.door3_button {
+    position: absolute;
+    bottom: 40%;
+    left: 20%;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    background-color: var(--color_gray_1);
+    border: none;
+}
+
+.door3_button:hover{
+	 cursor: pointer;
+	 background-color: var(--color_gray_2);
+	 font-family: 'SOYOMapleBoldTTF';
+}
+     

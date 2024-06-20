@@ -318,3 +318,4 @@ from (select hotel_code, hotel_name, hotel_eng, hotel_address, to_char(hotel_pri
 		from V_hotel_list 
 		where SUBSTR(hotel_code, 1, 3) = '2OS' and room_cap = 2) t1
         where rn between 3 and 5;
+        

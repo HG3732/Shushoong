@@ -170,6 +170,42 @@ WHERE hotel_code='2OS001';
 drop view v_room_list;
 
 
+--------------------- 2024.06.20 리뷰 수정
+select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
+        ROUND((hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4, 1) as rate_avg
+        from hotel_review 
+            join hotel_reserve using (hotel_reserve_code)
+        where hotel_code = '2OS001'
+            order by review_date desc;
+
+
+
+select count(*) as review_count, ROUND(avg(hotel_facility), 1) as avg_hotel_facility, ROUND(avg(hotel_clean), 1) as avg_hotel_clean, ROUND(avg(hotel_conven),1) as avg_hotel_conven, ROUND(avg(hotel_kind),1) as avg_hotel_kind, 
+        ROUND((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_all_rate
+from hotel_review
+    join hotel_reserve hr using (hotel_reserve_code)
+where hotel_code = '2OS001';
+
+
+
+select count(*) c from hotel_review
+    join hotel_reserve using(hotel_reserve_code)
+where hotel_code = '2OS001';
+
+
+
+
+
+-----------------------------------------------리뷰 등록하기-----------------------------------------
+
+desc hotel_review;
+
+insert into hotel_review values (
+    #{approveNo}, #{hotelReserveCode}, #{roomCat}, #{hotelCode}, #{roomCap}, #{roomAtt}, #{reviewTitle}, #{reviewComment}, #{hotelFacility}, ${hotelClean} ,${hotelConven},
+    #{hotelKind}, #{tripperCat}
+);
+
+
 
 
 

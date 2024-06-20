@@ -1,13 +1,12 @@
 package kh.mclass.shushoong.hotel.model.domain;
 
 import org.springframework.stereotype.Component;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @Component
 public class HotelReviewDto {
+	
 	private String userId;
 	private String tripperCat;
 	private String reviewTitle;

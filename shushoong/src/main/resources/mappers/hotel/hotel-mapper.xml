@@ -95,11 +95,11 @@
 		    (select s1.*, rownum rn 
 		    from
 		        (select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
-		                hotel_facility, hotel_clean, hotel_conven, hotel_kind, (hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4 as rate_avg
-		        from hotel_review 
-		            join hotel_reserve hr using (hotel_reserve_code)
-		        where hr.hotel_code = #{hotelCode}
-		            order by review_date desc) 
+			        ROUND((hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4, 1) as rate_avg
+			        from hotel_review 
+			            join hotel_reserve using (hotel_reserve_code)
+			        where hotel_code = #{hotelCode}
+			            order by review_date desc) 
 		    s1)
 		s2
 		WHERE RN BETWEEN #{startRounum} AND #{endRounum}
@@ -108,6 +108,7 @@
 	<!-- 리뷰 페이지 수 구하기 -->
 	<select id="selectTotalPageCount"  parameterType="String" resultType="_int">
 		select count(*) c from hotel_review
+		    join hotel_reserve using(hotel_reserve_code)
 		where hotel_code = #{hotelCode}
 	</select>
 

@@ -10,4 +10,12 @@
 		order by hotel_discount desc
 	</select>
 
+	<!-- 가장 최근에 달린 호텔 리뷰 1개 -->
+	<select id="selectLatestReview" resultType="LatestHotelReviewDtoRes">
+		select distinct hp.hotel_code hotel_code, first_value(hotel_picture) over (partition by hp.hotel_code) as hotel_picture, review_title, review_comment
+	    from hotel_pic hp
+	    join (select rank() over(order by hotel_reserve_code desc) daterank, substr(hotel_reserve_code, 9, 6) hotel_code, review_title, review_comment from hotel_review) hr
+	    on hp.hotel_code = hr.hotel_code
+	    where daterank = 1
+	</select>
 </mapper>

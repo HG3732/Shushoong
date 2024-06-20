@@ -80,10 +80,17 @@
 	justify-content: flex-end;
 	align-items: end;
     padding-bottom: 10px;
+    position: relative;
 }
 
 .discount-hotel .wrap-price > div {
 	padding-right: 10px;
+}
+
+.discount-hotel .wrap-price .discount-ratio {
+	position: absolute;
+	bottom: 40px;
+    right: 45px;
 }
 
 .discount-hotel .wrap-price .original-hotel-price {
@@ -141,4 +148,98 @@
 .wrap-discount-hotel-list .btn2.right {
 	right:-65px;
 	top: 170px;
+}
+
+/* 추천 여행지역 */
+.wrap-recommend {
+	width: 960px;
+	margin: 0 auto;
+	margin-top: 100px;
+	display: flex;
+	flex-direction: column;
+}
+
+.wrap-recommend .recommend-title{
+    text-align: center;
+    margin: 20px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.recommended-loc {
+	display: flex;
+	flex-direction: row;
+    justify-content: space-around;
+    height: 200px;
+}
+
+.recommended-loc > a {
+	border-radius: 50%;
+	width: 200px;
+	text-align: center;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    /* position:relative; */
+    cursor: pointer;
+}
+
+/* .recommended-loc > div::before {
+	content: '';
+	border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 검은색 반투명 오버레이
+    pointer-events: none; 오버레이가 클릭을 차단하지 않도록 설정
+} */
+
+.recommended-loc > a > div {
+	color: white;
+	font-size: 20px;
+	font-weight: 900;
+}
+
+/* 후기 */
+
+.wrap-review {
+	width: 960px;
+	margin: 0 auto;
+	margin-top: 100px;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--color_blue_2);
+}
+
+.review-title {
+	text-align: center;
+	margin: 20px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.review-content {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+}
+
+.review-detail {
+	display: flex;
+	flex-direction: column;
+	flex: 5 1 0;
+	padding: 40px;
+    gap: 30px;
+}
+
+.pic {
+	flex-basis: 250px;
+	border-radius: 50%;
+	background-size: cover;
+	height: 250px;
+	margin-right: 40px;
+    margin-bottom: 40px;
 }

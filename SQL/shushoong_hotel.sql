@@ -179,9 +179,7 @@ where hotel_loc_cat= 'OS'
 
 -- 각 호텔 사진 한장씩
 select distinct hotel_code, first_value(hotel_picture) over (partition by hotel_code) as a 
-    from hotel_pic 
-    --where  hotel_code = '2OS001'
-    ;
+    from hotel_pic;
 
 --해당 호텔의 항목별 별점 평균
 select round(avg(hotel_facility), 1), round(avg(hotel_clean), 1), round(avg(hotel_conven), 1), round(avg(hotel_kind), 1)
@@ -326,4 +324,12 @@ from (select hotel_code, hotel_name, hotel_eng, hotel_address, to_char(hotel_pri
 		from V_hotel_list 
 		where SUBSTR(hotel_code, 1, 3) = '2OS' and room_cap = 2) t1
         where rn between 3 and 5;
-        
+
+select rank() over(order by hotel_reserve_code desc) daterank, substr(hotel_reserve_code, 9, 6) hotel_code, review_title, review_comment from hotel_review order by hotel_reserve_code desc;
+
+select distinct hp.hotel_code hotel_code, first_value(hotel_picture) over (partition by hp.hotel_code) as hotel_picture, review_title, review_comment
+    from hotel_pic hp
+    join (select rank() over(order by hotel_reserve_code desc) daterank, substr(hotel_reserve_code, 9, 6) hotel_code, review_title, review_comment from hotel_review) hr
+    on hp.hotel_code = hr.hotel_code
+    where daterank = 1
+    ;

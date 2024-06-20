@@ -51,6 +51,7 @@ $(loadedHandler)
 								<div class="discount-hotel-room-remain" th:text="'현재 ' + ${discounthotel.roomCat} + '은 ' + ${discounthotel.roomCount} + '개의 방이 남았습니다!'"></div>
 							</div>
 							<div class="wrap-price">
+								<div class="discount-ratio" th:text="${discounthotel.discountRatio} + '% 할인!'"></div>
 								<div class="original-hotel-price" th:text="${discounthotel.hotelPrice}"></div>
 								<div class="discount-hotel-price" th:text="${discounthotel.discountedPrice}">호텔 가격</div><div>원~</div>
 								<!-- th:text="${#numbers.formatInteger(T(java.lang.Integer).parseInt(air.seatPrice) / 2, 3, 'COMMA') + '원'}" -->
@@ -60,6 +61,25 @@ $(loadedHandler)
 				</div>
 				<button type="button" class="left btn2">&lt;</button>
 				<button type="button" class="right btn2">&gt;</button>
+			</div>
+			<div class="wrap-recommend">
+				<div class="recommend-title">지금 추천하는 여행지</div>
+				<div class="recommended-loc">
+					<a class="korea" th:style="'background-image: url(' + @{/images/instancefolder/20230713_201311.jpg} + ');'" href="http://localhost:8080/shushoong/hotel/list?loc=2OS&room=1&adult=2&child=0"><div>제주</div></a>
+					<a class="china" th:style="'background-image: url(' + @{/images/instancefolder/1696570529586.jpg} + ');'" href="http://localhost:8080/shushoong/hotel/list?loc=2OS&room=1&adult=2&child=0"><div>북경</div></a>
+					<a class="japan" th:style="'background-image: url(' + @{/images/instancefolder/20231010_171349.jpg} + ');'" href="http://localhost:8080/shushoong/hotel/list?loc=2OS&room=1&adult=2&child=0"><div>오사카</div></a>
+					<a class="usa" th:style="'background-image: url(' + @{/images/instancefolder/hu_1431618317_6832524860.jpg} + ');'" href="http://localhost:8080/shushoong/hotel/list?loc=2OS&room=1&adult=2&child=0"><div>하와이</div></a>
+				</div>
+			</div>
+			<div class="wrap-review">
+				<div class="review-title">여행 후기</div>
+				<div class="review-content">
+					<div class="review-detail" th:data-hotelCode="${latestReview.hotelCode}">
+						<div class="detail-title" th:text="${latestReview.reviewTitle}"></div>
+						<div class="detail-content" th:text="${latestReview.reviewComment}"></div>
+					</div>
+					<div class="pic" th:style="'background-image: url(' + ${latestReview.hotelPicture} + ');'"></div>
+				</div>
 			</div>
 		</div>
 	</div>

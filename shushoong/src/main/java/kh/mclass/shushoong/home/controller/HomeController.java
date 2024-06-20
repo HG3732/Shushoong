@@ -17,6 +17,7 @@ public class HomeController {
 	@GetMapping("/home")
 	public String home(Model model, HttpSession session) {
 		model.addAttribute("discounthotelList", service.selectDiscountHotelList());
+		model.addAttribute("latestReview", service.selectLatestReview());
 		return "home";
 	}
 	

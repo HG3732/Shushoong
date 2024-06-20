@@ -282,13 +282,21 @@ insert all
     select * from dual;
 
 commit;
+
+select * from hotel;
+select substr(hotel_reserve_code, 9, 6) from hotel_review;
+
+select * from hotel_review;
+
+select h.hotel_code, round((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_score, count(substr(hrv.hotel_reserve_code, 9, 6)) as review_num
+from hotel_review hrv right join hotel h on substr(hrv.hotel_reserve_code, 9, 6) = h.hotel_code group by h.hotel_code;
 -- 호텔 리스트 뷰 생성
-create view V_hotel_list (hotel_code, hotel_pic, hotel_name, hotel_eng, hotel_address, hotel_pcount, hotel_score, hotel_review_num, hotel_price, room_discount, room_cap) as
-select distinct hp.hotel_code, first_value(hp.hotel_picture) over (partition by hp.hotel_code) as hotel_picture, h.hotel_name, h.hotel_eng, h.hotel_address, h.hotel_pcount, nvl(hotel_review2.avg_score, 0), hotel_review2.review_num, hrm.min_price, hrm.hotel_discount, hrm.room_cap
+  CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG"."V_HOTEL_LIST" ("HOTEL_CODE", "HOTEL_PIC", "HOTEL_NAME", "HOTEL_ENG", "HOTEL_ADDRESS", "HOTEL_PCOUNT", "HOTEL_SCORE", "HOTEL_REVIEW_NUM", "HOTEL_PRICE", "ROOM_DISCOUNT", "ROOM_CAP") AS 
+  select distinct hp.hotel_code, first_value(hp.hotel_picture) over (partition by hp.hotel_code) as hotel_picture, h.hotel_name, h.hotel_eng, h.hotel_address, h.hotel_pcount, nvl(hotel_review2.avg_score, 0), hotel_review2.review_num, hrm.min_price, hrm.hotel_discount, hrm.room_cap
 
 from hotel_pic hp, hotel h, 
-(select h.hotel_code, round((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_score, count(hrv.hotel_code) as review_num
-from hotel_review hrv right join hotel h on hrv.hotel_code = h.hotel_code group by h.hotel_code) hotel_review2,
+(select h.hotel_code, round((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_score, count(substr(hrv.hotel_reserve_code, 9, 6)) as review_num
+from hotel_review hrv right join hotel h on substr(hrv.hotel_reserve_code, 9, 6) = h.hotel_code group by h.hotel_code) hotel_review2,
 (select t1.*, t2.min_price from hotel_room t1 join (select hotel_code, min(hotel_price) min_price from hotel_room where room_count > 0 group by hotel_code) t2 on t1.hotel_code = t2.hotel_code and t1.hotel_price = t2.min_price) hrm
 
 where hp.hotel_code = h.hotel_code and hp.hotel_code = hotel_review2.hotel_code and hp.hotel_code = hrm.hotel_code

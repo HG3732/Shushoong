@@ -24,16 +24,22 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			</header>
 		</div>
 		<div class="wrap-body">
-			<div class="door1">
-			    <img th:src="@{/images/door1.png}" class="door1_img" alt="첫번째사진">
-         		<div class="letter">여행을 떠나여~</div>
-			</div>
-			<div class="door2">
-			    <img th:src="@{/images/door2.jpg}" class="door2_img" alt="두번째사진">
-			</div>
-			<div class="door3">
-			    <img th:src="@{/images/door3.png}" class="door3_img" alt="세번째사진">
-			</div>
+	   		<div class="pic-container">
+		        <div class="pic">
+		            <img th:src="@{/images/door1.png}" alt="첫번째사진" class="door_1">
+		            <div class="overlay-text">슈슝과 함께 떠나는 여행</div>
+		        </div>
+		        <div class="pic">
+		            <img th:src="@{/images/door2.jpg}" alt="두번째사진" class="door_2">
+		            <div class="overlay-text">항공</div>
+		            <button type="button" class="overlay-button">예약하기</button>
+		        </div>
+		        <div class="pic">
+		            <img th:src="@{/images/door3.png}" alt="첫번째사진" class="door_3">
+		            <div class="overlay-text">숙소</div>
+		            <button type="button" class="overlay-button">예약하기</button>
+		        </div>
+	   		</div>
 		</div>
 	</div>
 	<div class="wrap-footer">

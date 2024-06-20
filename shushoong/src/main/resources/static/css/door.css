@@ -1,16 +1,82 @@
 @charset "UTF-8";
 
-.wrap-main{
+ .door1{
+
     position: relative;
-    background-image: linear-gradient(rgba(0,0,0, 0.4), rgba(0,0,0, 0.4)),url(/johny-goerend-KB9r_hTzyeQ-unsplash.jpg);
+    /* background-image: linear-gradient(rgba(0,0,0, 0.4), rgba(0,0,0, 0.4)),url(/johny-goerend-KB9r_hTzyeQ-unsplash.jpg); */
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 900px;
+/*     min-height: 900px; */
     display: flex;
     align-items: center;
 }
 
-/* .door_img1 {
+
+
+
+
+
+
+
+
+
+.pic-container {
+    display: grid;
+    grid-template-columns: 1fr; /* 한 줄에 한 개의 열 */
+    overflow-y: auto;
+}
+
+/* 각 사진을 포함하는 요소 */
+.pic {
+    position: relative;
+}
+
+/* 각 사진과 텍스트를 포함하는 내부 요소 */
+.pic-inner {
+    position: relative;
+}
+
+/* 이미지 스타일 */
+.pic img {
+    width: 100%; /* 가로로 꽉 차게 */
+    height: auto;
+    display: block;
+}
+
+/* 오버레이 텍스트 */
+.overlay-text {
+    position: absolute;
+    bottom: 10px; /* 이미지 하단에 여백 추가 */
+    left: 10px; /* 이미지 좌측에 여백 추가 */
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+    padding: 5px 10px;
+    font-size: 18px;
+}
+
+/* 오버레이 버튼 */
+.overlay-button {
+    position: absolute;
+    bottom: 10px; /* 이미지 하단에 여백 추가 */
+    right: 10px; /* 이미지 우측에 여백 추가 */
+    padding: 8px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+    
+    
+    
+    
+    
+    
+    
+
+
+/* .door1_img {
+
     width: 100%;
     filter: brightness(70%);
     position:absolute;
@@ -19,7 +85,7 @@
     transform: translate(-50%, -50%);
     z-index: -1;
 } 
-
+ */
 .letter {
     color:white;
     text-align: center;
@@ -28,7 +94,7 @@
     animation: fadeInUp 1s;
 }
 
- @keyframes fadeInUp{
+@keyframes fadeInUp{
     0%{opacity: 0;
     transform: translate3d(0, 100%, 0);
     }

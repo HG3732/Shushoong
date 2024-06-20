@@ -9,7 +9,6 @@
 		}else{
 			cheapIndex++;
 			cheapSlide(cheapIndex);
-			console.log("cheapIndex : " + cheapIndex);
 		}
 	});
 	
@@ -19,21 +18,22 @@
 		}else{
 			cheapIndex--;
 			cheapSlide(cheapIndex);
-			console.log("cheapIndex : " + cheapIndex);
 		}
 	});
 	
 	
 	function cheapSlide(cheapIndex){
-			console.log("asdfasdf");
 		$(".cheap_item").each(function(){
 			var transval = -320*cheapIndex;
-			console.log("transval : " + transval);
-			console.log("cheapIndex : " + cheapIndex);
-			console.log($(this).css("transform"));
 			$(this).css("transform","translateX("+transval+"px)")
 		});
 	};
+							
+							
+							
+							
+							
+							
 							
 							/* 빠른 도착시간 캐러셀 */
 	
@@ -45,7 +45,6 @@
 		}else{
 			fastIndex++;
 			fastSlide(fastIndex);
-			console.log("fastIndex : " + fastIndex);
 		}
 	});
 	
@@ -55,18 +54,13 @@
 		}else{
 			fastIndex--;
 			fastSlide(fastIndex);
-			console.log("fastIndex : " + fastIndex);
 		}
 	});
 	
 	
 	function fastSlide(fastIndex){
-			console.log("asdfasdf");
 		$(".fast_item").each(function(){
 			var transval = -320*fastIndex;
-			console.log("transval : " + transval);
-			console.log("fastIndex : " + fastIndex);
-			console.log($(this).css("transform"));
 			$(this).css("transform","translateX("+transval+"px)")
 		});
 	};

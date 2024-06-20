@@ -36,10 +36,10 @@
 		
 				/* 출입국 지역 날짜 인원 according 버튼 펑션 */		
 		function accordingInfo(event,accordingInfo){
+		
 			var i, according;
 			according = document.getElementsByClassName("according");
-			
-			if(document.getElementById(accordingInfo).style.display==="block"){
+			if(document.getElementById(accordingInfo).style.display==="block"||document.getElementById(accordingInfo).style.display==="flex"){
 				for(i=0 ; i<according.length; i++){
 					according[i].style.display="none";
 				}

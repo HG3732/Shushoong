@@ -22,4 +22,10 @@ public class MypageBusinessController {
 		public String correctInfoBusiness() {
 			return "mypage/business/mypageCorrectInfoBusiness";
 		}
+		
+		// 사업장 관리 페이지 이동
+		@GetMapping("/my/hotel")
+		public String myBusiness() {
+			return "mypage/business/mypageBusinessHotel";
+		}
 }

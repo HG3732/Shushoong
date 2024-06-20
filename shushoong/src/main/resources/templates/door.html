@@ -27,17 +27,17 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	   		<div class="pic-container">
 		        <div class="pic">
 		            <img th:src="@{/images/door1.png}" alt="첫번째사진" class="door_1">
-		            <div class="overlay-text">슈슝과 함께 떠나는 여행</div>
+		            <div class="door1_text">슈슝과 함께 떠나는 여행</div>
 		        </div>
 		        <div class="pic">
 		            <img th:src="@{/images/door2.jpg}" alt="두번째사진" class="door_2">
-		            <div class="overlay-text">항공</div>
-		            <button type="button" class="overlay-button">예약하기</button>
+		            <div class="door2_text">항공</div>
+		            <a th:href="@{/airline/main}" class="door2_button">예약하기</a>
 		        </div>
 		        <div class="pic">
 		            <img th:src="@{/images/door3.png}" alt="첫번째사진" class="door_3">
-		            <div class="overlay-text">숙소</div>
-		            <button type="button" class="overlay-button">예약하기</button>
+		            <div class="door3_text">숙소</div>
+		            <a th:href="@{/hotel/main}" class="door3_button">예약하기</a>
 		        </div>
 	   		</div>
 		</div>

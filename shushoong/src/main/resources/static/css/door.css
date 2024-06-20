@@ -23,16 +23,11 @@
 .pic-container {
     display: grid;
     grid-template-columns: 1fr; /* 한 줄에 한 개의 열 */
-    overflow-y: auto;
+    position: relative;
 }
 
 /* 각 사진을 포함하는 요소 */
 .pic {
-    position: relative;
-}
-
-/* 각 사진과 텍스트를 포함하는 내부 요소 */
-.pic-inner {
     position: relative;
 }
 
@@ -43,19 +38,41 @@
     display: block;
 }
 
-/* 오버레이 텍스트 */
-.overlay-text {
+/* 사진 안 text */
+.door1_text {
     position: absolute;
-    bottom: 10px; /* 이미지 하단에 여백 추가 */
-    left: 10px; /* 이미지 좌측에 여백 추가 */
+/*     top: 150px;
+    left: 720px; */
+    top: 10%; /* 뷰포트 높이의 15% 지점에 배치 */
+    left: 35%; /* 뷰포트 너비의 72% 지점에 배치 */
     color: white;
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
     padding: 5px 10px;
-    font-size: 18px;
+    font-size: 40px;
+    font-family: 'SOYOMapleBoldTTF';
 }
 
-/* 오버레이 버튼 */
-.overlay-button {
+.door2_text {
+    position: absolute;
+    top: 400px; /* 이미지 좌측에 여백 추가 */
+    left: 1100px;
+    padding: 5px 10px;
+    font-size: 40px;
+    font-family: 'SOYOMapleBoldTTF';
+}
+
+.door3_text {
+    position: absolute;
+    top: 400px; /* 이미지 좌측에 여백 추가 */
+    left: 300px;
+    color: white;
+    padding: 5px 10px;
+    font-size: 40px;
+    font-family: 'SOYOMapleBoldTTF';
+}
+
+
+/* 해당 위치로 이동 */
+.door2_button {
     position: absolute;
     bottom: 10px; /* 이미지 하단에 여백 추가 */
     right: 10px; /* 이미지 우측에 여백 추가 */
@@ -66,7 +83,20 @@
     border: none;
     cursor: pointer;
 }
-    
+  
+  
+.door3_button {
+    position: absolute;
+    bottom: 10px; /* 이미지 하단에 여백 추가 */
+    right: 10px; /* 이미지 우측에 여백 추가 */
+    padding: 8px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+     
     
     
     

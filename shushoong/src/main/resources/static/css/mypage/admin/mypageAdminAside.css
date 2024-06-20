@@ -8,6 +8,16 @@
 	overflow: hidden;
 }
 
+.wrap-body>.wrap-section {
+	/* float 왼쪽 배치 */
+	width: 960px;
+	float: left;
+	box-sizing: border-box;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
 .wrap-aside {
 	/* float 왼쪽 배치 */
 	width: 200px;

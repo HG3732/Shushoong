@@ -33,24 +33,6 @@ section .main input[type=radio] {
 	display: none;
 }
 
-.wrap-body {
-	/* 중앙 배치 */
-	width: 1440px;
-	margin: 0 auto;
-	/* float - 부모 height를 위해  */
-	overflow: hidden;
-}
-
-.wrap-body>.wrap-section {
-	/* float 왼쪽 배치 */
-	width: 960px;
-	float: left;
-	box-sizing: border-box;
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-}
-
 section .section-header1 {
 	font-family: 'SOYOMapleBoldTTF';
 	text-align: left;

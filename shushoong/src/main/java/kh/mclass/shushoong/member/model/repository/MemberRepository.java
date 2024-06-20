@@ -25,8 +25,8 @@ public interface MemberRepository {
 	public int join(MemberDto memberDto);
 	
 	// 아이디 찾기
-	public String findId(Map<String, Object> map);
-	
+	public MemberDto findId(MemberDto memberDto);
+		
 	// 아이디 중복 확인
 	public int idCheck(String userId);
 	

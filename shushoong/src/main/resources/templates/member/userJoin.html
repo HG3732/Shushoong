@@ -136,7 +136,7 @@ xmlns:th="http://www.thymeleaf.org">
 				url : '/shushoong/idcheck.ajax',
 				type : 'post',
 				data : {userId:userId},
-				success:function(cnt) {
+				success:function() {
 					if(cnt == 0) {
 						$('.test_Idok').css("display","inline-block");
 					} else {
@@ -161,15 +161,11 @@ xmlns:th="http://www.thymeleaf.org">
 				data: JSON.stringify({
 					'userEmail' : userEmail
 				}), 
-				success:function(code) {
-					if(code == "COMMON204") {
-						$('.test_Emailok').css("display","inline-block");
-					} else {
-						$('.test_Emailexception').css("display","inline-block");
-					}
+				success:function(request,status,error) {
+					$('.test_Emailok').css("display","inline-block");
 				}, 
 				error:function(request,status,error) {
-					alert("시스템 에러. 관리자에게 문의해 주세요.");
+					$('.test_Emailexception').css("display","inline-block");
 				}
 			})
 		}
@@ -185,15 +181,11 @@ xmlns:th="http://www.thymeleaf.org">
 				data: JSON.stringify({
 					'code' : code
 				}),
-				success:function(code) {
-					if(code == "COMMON204") {
-						$('.test_Echkok').css("display","inline-block");
-					} else {
-						$('.test_Echkexception').css("display","inline-block");
-					}
+				success:function(request,status,error) {
+					$('.test_Echkok').css("display","inline-block");
 				}, 
 				error:function(request,status,error) {
-					alert("시스템 에러. 관리자에게 문의해 주세요.");
+					$('.test_Echkexception').css("display","inline-block");
 				}
 			})
 		}

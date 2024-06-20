@@ -243,18 +243,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			
 			
 			<section class="input_values">
-				<div class="wrap-hot-hotel-list">
-					<div class="hot-hotel-title">가장 많이 찾은 호텔</div>
-					<div class="hot-hotel-list">
-						<div class="list-wrapper" >
-							<div></div>
-						</div>
-					</div>
-					<button type="button" class="left btn2">&lt;</button>
-					<button type="button" class="right btn2">&gt;</button>
-				</div>
-				
-			
 			
 			
 				<div>
@@ -276,288 +264,136 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			
 			
 			<section class="recommend_section">
-			
-			<div class="cheap_caru">
-				<div class="recommend_head"> 싼 항공기</div>
-				<div class="item">
-					<div class="item_child">1</div>
-					<div class="item_child">2</div>
-					<div class="item_child">3</div>
-					<div class="item_child">4</div>
-					<div class="item_child">5</div>
-					<div class="item_child">6</div>
-					<div class="item_child">7</div>
-				</div>
-			</div>
-			
-			
-			
-			
-			
-			
-			
-<!-- 			    <div class="carousel-wrapper"> -->
-<!--       <div class="carousel"> -->
-<!--        <div class="slides_wrap" id="cheap_slides_wrap"> -->
-<!-- 							<div class="slides_image" id="cheap_slides_image"> -->
-<!-- 								사진1 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_name" id="cheap_slides_name"> -->
-<!-- 								맑고 투명한 물~~ 괌으로 오세요~~1 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_price" id="cheap_slides_price"> -->
-<!-- 								성인 1인 기준 :   -->
-<!-- 								<div>10,000,000원1</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="slides_wrap" id="cheap_slides_wrap"> -->
-<!-- 							<div class="slides_image" id="cheap_slides_image"> -->
-<!-- 								사진2 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_name" id="cheap_slides_name"> -->
-<!-- 								맑고 투명한 물~~ 괌으로 오세요~~2 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_price" id="cheap_slides_price"> -->
-<!-- 								성인 1인 기준 :   -->
-<!-- 								<div>10,000,000원2</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="slides_wrap" id="cheap_slides_wrap"> -->
-<!-- 							<div class="slides_image" id="cheap_slides_image"> -->
-<!-- 								사진3 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_name" id="cheap_slides_name"> -->
-<!-- 								맑고 투명한 물~~ 괌으로 오세요~~3 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_price" id="cheap_slides_price"> -->
-<!-- 								성인 1인 기준 :   -->
-<!-- 								<div>10,000,000원3</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
+				
+				
+				<div class="recomends_slides">
+					<div class="slide_head">저렴한 항공기</div>
+					<div class="slides_items">
+						
+						<a class="cheap_item" href="">
+							<div class="slides_img">사진 <div class="slides_number">1</div></div>
+							<div class="slides_name">이름</div>
+							<div class="slides_price">
+								<div class="won">원</div>
+								<div class="slides_value">~~~</div>
+							</div>
+						</a>
 					
-<!-- 						<div class="slides_wrap" id="cheap_slides_wrap"> -->
-<!-- 							<div class="slides_image" id="cheap_slides_image"> -->
-<!-- 								사진4 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_name" id="cheap_slides_name"> -->
-<!-- 								맑고 투명한 물~~ 괌으로 오세요~~4 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_price" id="cheap_slides_price"> -->
-<!-- 								성인 1인 기준 :   -->
-<!-- 								<div>10,000,000원4</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="slides_wrap" id="cheap_slides_wrap"> -->
-<!-- 							<div class="slides_image" id="cheap_slides_image"> -->
-<!-- 								사진5 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_name" id="cheap_slides_name"> -->
-<!-- 								맑고 투명한 물~~ 괌으로 오세요~~5 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_price" id="cheap_slides_price"> -->
-<!-- 								성인 1인 기준 :   -->
-<!-- 								<div>10,000,000원5</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="slides_wrap" id="cheap_slides_wrap"> -->
-<!-- 							<div class="slides_image" id="cheap_slides_image"> -->
-<!-- 								사진6 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_name" id="cheap_slides_name"> -->
-<!-- 								맑고 투명한 물~~ 괌으로 오세요~~6 -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_price" id="cheap_slides_price"> -->
-<!-- 								성인 1인 기준 :   -->
-<!-- 								<div>10,000,000원6</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--     <button class="prev" type="button">prev</button> -->
-<!--     <button class="next" type="button">next</button> -->
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-<!-- 			<div id="carouselExample" class="carousel slide" data-ride="carousel"> -->
-<!-- 				  <div class="carousel-inner"> -->
-<!-- 				    <div class="carousel-item active"> -->
-<!-- 				      <img th:src="@{/images/10kg.png}" class="d-block w-50" alt="..."> -->
-<!-- 				    </div> -->
-<!-- 				    <div class="carousel-item"> -->
-<!-- 				      <img th:src="@{/images/20kg.png}" class="d-block w-50" alt="..."> -->
-<!-- 				    </div> -->
-<!-- 				    <div class="carousel-item"> -->
-<!-- 				      <img th:src="@{/images/30kg.png}" class="d-block w-50" alt="..."> -->
-<!-- 				    </div> -->
-<!-- 				  </div> -->
-<!-- 				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"> -->
-<!-- 				    <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
-<!-- 				    <span class="visually-hidden">Previous</span> -->
-<!-- 				  </button> -->
-<!-- 				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next"> -->
-<!-- 				    <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
-<!-- 				    <span class="visually-hidden">Next</span> -->
-<!-- 				  </button> -->
-<!-- 			</div> -->
-  			
-<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-<!-- 				<div class="recomend_section_cheap_background"> -->
-<!-- 					<div class="recommend_cheap" > -->
+						<a class="cheap_item" href="">
+							<div class="slides_img">사진 <div class="slides_number">2</div></div>
+							<div class="slides_name">이름</div>
+							<div class="slides_price">
+								<div class="won">원</div>
+								<div class="slides_value">~~~</div>
+							</div>
+						</a>
 						
+						<a class="cheap_item" href="">
+							<div class="slides_img">사진 <div class="slides_number">3</div></div>
+							<div class="slides_name">이름</div>
+							<div class="slides_price">
+								<div class="won">원</div>
+								<div class="slides_value">~~~</div>
+							</div>
+						</a>
+					
+						<a class="cheap_item" href="">
+							<div class="slides_img">사진 <div class="slides_number">4</div></div>
+							<div class="slides_name">이름</div>
+							<div class="slides_price">
+								<div class="won">원</div>
+								<div class="slides_value">~~~</div>
+							</div>
+						</a>
 						
+						<a class="cheap_item" href="">
+							<div class="slides_img">사진 <div class="slides_number">5</div></div>
+							<div class="slides_name">이름</div>
+							<div class="slides_price">
+								<div class="slides_value">~~~</div>
+								<div class="won">원</div>
+							</div>
+						</a>
 						
-						
-<!-- 						<button id="cheap_slide_prev" class="slide_prev pointer" ></button> -->
-<!-- 						<button id="cheap_slide_next" class="slide_next pointer" ></button> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+						<a class="cheap_item" href="">
+							<div class="slides_img">사진 <div class="slides_number">6</div></div>
+							<div class="slides_name">이름</div>
+							<div class="slides_price">
+								<div class="won">원</div>
+								<div class="slides_value">~~~</div>
+							</div>
+						</a>
+					
+					</div>
+					<button class="cheap_prev_btn"><</button>
+					<button class="cheap_next_btn">></button>
+				</div>
 				
-				
-<!-- 				<div class="recomend_section_fast_background"> -->
-<!-- 					<div class="recommend_fast"> -->
-<!-- 						<div> 저렴한곳 순서</div> -->
-<!-- 							<div class="slides_wrap" id="fast_slides_wrap"> -->
-<!-- 								<div class="slides_image" id="fast_slides_image"> -->
-<!-- 									사진1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_name" id="fast_slides_name"> -->
-<!-- 									맑고 투명한 물~~ 괌으로 오세요~~1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_price" id="fast_slides_price"> -->
-<!-- 									성인 1인 기준 :   -->
-<!-- 									<div>10,000,000원1</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_wrap" id="fast_slides_wrap"> -->
-<!-- 								<div class="slides_image" id="fast_slides_image"> -->
-<!-- 									사진1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_name" id="fast_slides_name"> -->
-<!-- 									맑고 투명한 물~~ 괌으로 오세요~~1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_price" id="fast_slides_price"> -->
-<!-- 									성인 1인 기준 :   -->
-<!-- 									<div>10,000,000원1</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_wrap" id="fast_slides_wrap"> -->
-<!-- 								<div class="slides_image" id="fast_slides_image"> -->
-<!-- 									사진1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_name" id="fast_slides_name"> -->
-<!-- 									맑고 투명한 물~~ 괌으로 오세요~~1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_price" id="fast_slides_price"> -->
-<!-- 									성인 1인 기준 :   -->
-<!-- 									<div>10,000,000원1</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
+			
+				<div class="recomends_slides">
+						<div class="slide_head">빠른 항공기</div>
+						<div class="slides_items">
 							
+							<a class="fast_item" href="">
+								<div class="slides_img">사진 <div class="slides_number">1</div></div>
+								<div class="slides_name">이름</div>
+								<div class="slides_price">
+									<div class="won">원</div>
+									<div class="slides_value">~~~</div>
+								</div>
+							</a>
 						
-<!-- 							<div class="slides_wrap" id="fast_slides_wrap"> -->
-<!-- 								<div class="slides_image" id="fast_slides_image"> -->
-<!-- 									사진1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_name" id="fast_slides_name"> -->
-<!-- 									맑고 투명한 물~~ 괌으로 오세요~~1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_price" id="fast_slides_price"> -->
-<!-- 									성인 1인 기준 :   -->
-<!-- 									<div>10,000,000원1</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_wrap" id="fast_slides_wrap"> -->
-<!-- 								<div class="slides_image" id="fast_slides_image"> -->
-<!-- 									사진1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_name" id="fast_slides_name"> -->
-<!-- 									맑고 투명한 물~~ 괌으로 오세요~~1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_price" id="fast_slides_price"> -->
-<!-- 									성인 1인 기준 :   -->
-<!-- 									<div>10,000,000원1</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="slides_wrap" id="fast_slides_wrap"> -->
-<!-- 								<div class="slides_image" id="fast_slides_image"> -->
-<!-- 									사진1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_name" id="fast_slides_name"> -->
-<!-- 									맑고 투명한 물~~ 괌으로 오세요~~1 -->
-<!-- 								</div> -->
-<!-- 								<div class="slides_price" id="fast_slides_price"> -->
-<!-- 									성인 1인 기준 :   -->
-<!-- 									<div>10,000,000원1</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
+							<a class="fast_item" href="">
+								<div class="slides_img">사진 <div class="slides_number">2</div></div>
+								<div class="slides_name">이름</div>
+								<div class="slides_price">
+									<div class="won">원</div>
+									<div class="slides_value">~~~</div>
+								</div>
+							</a>
 							
+							<a class="fast_item" href="">
+								<div class="slides_img">사진 <div class="slides_number">3</div></div>
+								<div class="slides_name">이름</div>
+								<div class="slides_price">
+									<div class="won">원</div>
+									<div class="slides_value">~~~</div>
+								</div>
+							</a>
 						
+							<a class="fast_item" href="">
+								<div class="slides_img">사진 <div class="slides_number">4</div></div>
+								<div class="slides_name">이름</div>
+								<div class="slides_price">
+									<div class="won">원</div>
+									<div class="slides_value">~~~</div>
+								</div>
+							</a>
+							
+							<a class="fast_item" href="">
+								<div class="slides_img">사진 <div class="slides_number">5</div></div>
+								<div class="slides_name">이름</div>
+								<div class="slides_price">
+									<div class="won">원</div>
+									<div class="slides_value">~~~</div>
+								</div>
+							</a>
+							
+							<a class="fast_item" href="">
+								<div class="slides_img">사진 <div class="slides_number">6</div></div>
+								<div class="slides_name">이름</div>
+								<div class="slides_price">
+									<div class="won">원</div>
+									<div class="slides_value">~~~</div>
+								</div>
+							</a>
 						
-						
-						
-						
-<!-- 						<button id="fast_slide_prev" class="slide_prev pointer" onclick="fastSlidePlusSlides(-1)"></button> -->
-<!-- 						<button id="fast_slide_next" class="slide_next pointer" onclick="fastSlidePlusSlides(1)"></button> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-				
-				
-		<!-- 		
-			<div class="carousel_main">
-    캐러셀 이미지 삽입
-    <div class="carousel_wrapper">
-        <div class="carousel_slide">
-            <img th:src="air_con.png"  alt="#" />
-        </div>
-        <div class="carousel_slide">
-            <img th:src="airline_line.png" alt="#" />
-        </div>
-        <div class="carousel_slide">
-            <img th:src="airline_logo.png" alt="#" />
-        </div>
-        <div class="carousel_slide">
-            <img th:src="airline_logo.png" alt="#" />
-        </div>
-    </div>
-
-    캐러셀 사이드 버튼
-    <div class="carousel_button_container">
-        <button type="button" class="carousel_prev">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-            </svg>
-        </button>
-        <button type="button" class="carousel_next">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
-                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
-            </svg>
-        </button>
-    </div>
- -->				
+						</div>
+						<button class="fast_prev_btn"><</button>
+						<button class="fast_next_btn">></button>
+					</div>
+			
+			
 			</section>
 			
 			
@@ -573,59 +409,22 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		
 	<!-- airline_main 의 bar에 관한 js -->		
 	<script th:src="@{/js/airline/airline_mainbar.js}" type="text/javascript"></script>
+	<script th:src="@{/js/airline/airline_slides.js}" type="text/javascript"></script>
 	
 			
 	<script>
 	
-// 	class Carousel {
-// 		  index = 0;
-
-// 		  constructor() {
-// 		    this.prevButton = document.querySelector('.prev');
-// 		    this.nextButton = document.querySelector('.next');
-// 		    this.carousel = document.querySelector('.carousel');
-// 		  }
-
-// 		  mount() {
-// 		    this.prevButton.addEventListener('click', () => {
-// 		      this.prev();
-// 		    });
-
-// 		    this.nextButton.addEventListener('click', () => {
-// 		      this.next();
-// 		    });
-// 		  }
-
-// 		  prev() {
-// 		    if (this.index === 0) return;
-// 		    this.index -= 1;
-
-// 		    this.carousel.style.transform = `translate3d(-${500 * this.index}px, 0, 0)`;
-// 		  }
-
-// 		  next() {
-// 		    if (this.index === 2) return;
-// 		    this.index += 1;
-
-// 		    this.carousel.style.transform = `translate3d(-${330 * this.index}px, 0, 0)`;
-// 		  }
-// 		}
-// 	const carousel = new Carousel();
-// 	carousel.mount();
 	
 	
 	$(loadedHandler)
 	function loadedHandler(){
 		$(".according").css("display","none");
-		slide(0);
 		
 		
+		cheapSlide();
+		fastSlide();
 	}
-	let currentIndex = 0;	//캐러셀 index
-	function slide(index) {
-		document.querySelector('.list-wrapper').style.transform = `translateX(-${index * 330}px)`;
-		currentindex = index;
-	}
+	
 		
 	
 	

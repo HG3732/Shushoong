@@ -331,113 +331,67 @@ button#sit3{
 
 
 section.recommend_section{
-	width: 960px;
-	height: 500px;
-	border:1px solid black;
+	width : 960px;
 	margin:  auto;
-	position:relative;
-	justify-content: center;
-}
-
-.item{
-	display: flex;
-}
-.item_child{
-	width: 320px;
-	border: 1px solid black;
 	overflow: hidden;
-	
 }
 
-
-
-
-/* 인기있는 호텔 캐러셀*/
-
-.wrap-hot-hotel-list {
-	width: 960px;
-	margin: 0 auto;
-	margin-top: 200px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	gap: 40px;
-	position:relative;
+div.recomends_slides{
+	margin: 100px 0;
 }
-
-.wrap-hot-hotel-list .hot-hotel-title {
+div.slide_head{
 	font-size: 20px;
 	font-weight: 900;
+	text-align: center;
 }
-
-.wrap-hot-hotel-list .hot-hotel-list {
-	width: 100%;
-	height: 300px;
-	overflow: hidden;
-}
-
-.wrap-hot-hotel-list .hot-hotel-list .list-wrapper {
+div.slides_items{
 	display: flex;
-	flex-direction: row;
-	gap: 30px;
+}
+a.cheap_item , a.fast_item{
+	flex : none;
 	transition: transform 1s;
-	width: auto;
-}
-
-.list-wrapper .hot-hotel {
+	width: 280px;
+	margin: 20px;
 	height: 300px;
-	flex: 0 0 300px;
-	border: 1px, solid, var(--color_gray_2);
-	padding: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	border: 1px solid black;
+}
+div.slides_img{
+	widows: 280px;
+	margin : 10px;
+	height: 200px;
+	border: 1px solid black;
 }
 
-.list-wrapper .hot-hotel-info {
-	flex: 1 0 auto;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
+div.slides_number{
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align : center;
+	float : right;
+	margin : 10px 10px 0 0;
+	font-size : 20px;
+	border-radius : 20px;
+	background-color : white;
+	font-weight: bolder;
 }
 
-.list-wrapper .hot-hotel .hot-hotel-pic > img {
-	display: block;
-	width: 100%;
-	height: 186px;
-	object-fit: cover;
+div.slides_name{
+	margin-left: 30px;
+	margin-top: 30px;
 }
-
-.hot-hotel .wrap-price {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
+div.slides_value{
+	margin-right : 30px;
+	float : right;
+	color: red;
 }
-
-.hot-hotel .wrap-price > div {
-	padding-right: 10px;
+div.won{
+	margin-right : 20px;
+	float : right;
 	color: red;
 }
 
-.hot-hotel .wrap-price > div:last-child {
-	vertical-align: bottom;
-	line-height: 20px;
-}
-
-.hot-hotel .hot-hotel-name {
-	text-align: left;
-	padding-left : 10px;
-}
-
-
-.hot-hotel .hot-hotel-price {
-	text-align: right;
-	font-weight: 900;
-	font-size: var(--font1);
-}
-
-.wrap-hot-hotel-list .btn2 {
+button.cheap_prev_btn,
+button.fast_prev_btn{
 	position: absolute;
 	width: 45px;
     height: 45px;
@@ -447,24 +401,39 @@ section.recommend_section{
     cursor: pointer;
     font-family: 'SOYOMapleRegularTTF';
     font-size: var(--font1);
+    
+    margin-top: -200px;
+    margin-left: -100px;
 }
-
-.wrap-hot-hotel-list .btn2:hover {
+button.cheap_prev_btn:hover,
+button.fast_prev_btn:hover{
 	background-color: var(--color_blue_1);
 	color: white;
 	font-family: 'SOYOMapleBoldTTF';
-	
 }
 
-.wrap-hot-hotel-list .btn2.left {
-	left:-65px;
-	top: 185px;
+button.cheap_next_btn,
+button.fast_next_btn{
+	position: absolute;
+	width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color_blue_2);
+    cursor: pointer;
+    font-family: 'SOYOMapleRegularTTF';
+    font-size: var(--font1);
+    
+    margin-top: -200px;
+    margin-left: 1010px;
+}
+button.cheap_next_btn:hover,
+button.fast_next_btn:hover{
+	background-color: var(--color_blue_1);
+	color: white;
+	font-family: 'SOYOMapleBoldTTF';
 }
 
-.wrap-hot-hotel-list .btn2.right {
-	right:-65px;
-	top: 185px;
-}
 
 
 

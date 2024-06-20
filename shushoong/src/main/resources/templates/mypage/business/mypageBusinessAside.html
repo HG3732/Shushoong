@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html 
-xmlns:th="http://www.thymeleaf.org"
->
-<head>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 	<div class="inner" th:fragment="Aside">
 		<div class="aside-title">
@@ -13,9 +9,10 @@ xmlns:th="http://www.thymeleaf.org"
 			<a th:href="@{/business/my/information}">
 				<div class="correctionInfo">개인 정보 수정</div>
 			</a>
-			<a href=>
-				<div class="manageBusiness">사업장 관리</div>
-			</a>
+			<div class="manageBusiness">
+				<a th:href="@{/business/my/hotel}">사업장 관리</a>
+			</div>
+
 			<a href=>
 				<div class="paymentlist">예약, 취소 내역</div>
 			</a>

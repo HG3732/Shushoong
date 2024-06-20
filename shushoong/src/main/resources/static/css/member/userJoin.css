@@ -1,18 +1,5 @@
 @charset "UTF-8";
 
-small {
-    visibility: hidden;
-    padding: 0px 0px 2px 10px;
-    margin-bottom: 10px;
-    font-size: 10px;
-}
-
-.error small {
-    font-size: 10px;
-    color: red;
-    visibility: visible;
-}
-
 input, input:focus, textarea, textarea:focus {
 	outline: none !important;
 	box-shadow: none !important;
@@ -41,6 +28,36 @@ section .userJoinInfo {
 	align-items: flex-start;
 }
 
+section .userJoinInfo > div {
+	margin-bottom: 30px;
+}
+
+section .testmessage {
+	display: flex;
+	justify-content: left;
+}
+
+section .test_Idok, .test_Emailok, .test_Echkok{
+	color:blue;
+	font-size:12px;
+	font-weight: bold;
+	text-indent: 20px;
+	margin-top: 5px;
+	display: none;
+}
+
+section .test_IDexception, .test_IDexception2, .test_Nameexception, .test_Pwdexception, 
+		.test_PwdChkexception, .test_Emailexception, .test_Echkexception {
+	display:inline-block;
+	color:red; 
+	font-size:12px;
+	font-weight: bold;
+	text-indent: 20px;
+	text-align: left;
+	margin-top: 5px;
+	display: none;
+}
+
 section .longinput {
 	/* 	글상자서식 */
 	border: 1px solid #BCEFFF;
@@ -54,7 +71,7 @@ section .longinput {
 	/* 	배치서식 */
 	display: flex;
 	flex-direction: column;
-	margin: 10px 10px 5px 10px;
+	margin: 10px 10px 0 10px;
 }
 
 section .shortinput {
@@ -68,7 +85,7 @@ section .shortinput {
 	text-indent: 10px;
 	font-size: 15px;
 	/* 	배치서식 */
-	margin: 10px 0 5px 10px;
+	margin: 10px 0 0 10px;
 }
 
 section .userJoinInfo>div>input:focus {

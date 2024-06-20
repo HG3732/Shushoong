@@ -20,6 +20,12 @@ public class MypageBusinessController {
 		// 개인정보 수정 페이지로 이동
 		@GetMapping("/my/information")
 		public String correctInfoBusiness() {
-			return "mypage/business/mypageCorrectInfoBusiness";
+			return "mypage/business/mypageBusinessCorrectInfo";
+		}
+		
+		// 사업장 관리 페이지 이동
+		@GetMapping("/my/hotel")
+		public String myBusiness() {
+			return "mypage/business/mypageBusinessHotel";
 		}
 }

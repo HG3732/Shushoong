@@ -8,6 +8,7 @@ xmlns:th="http://www.thymeleaf.org">
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/member/businessJoin.css}" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>슈슝::사업자 회원가입</title>
 </head>
@@ -77,10 +78,10 @@ xmlns:th="http://www.thymeleaf.org">
 								<hr class="marketingLine" />
 								<div class="checkSelection">
 									<div class="serviceCheck">
-										<input type="checkbox" name="chk" id="usingService" class="usingService" onclick="chkClicked()"><span class="on">슈슝 이용약관 동의<font color="#ff0000">(필수)</font></span>
+										<input type="checkbox" name="chk" id="usingService" class="chk" onclick="chkClicked()"><span class="on">슈슝 이용약관 동의<font color="#ff0000">(필수)</font></span>
 									</div>
 									<div class="privacyCheck">
-										<input type="checkbox" name="chk" id="privacy" class="privacy" onclick="chkClicked()"><span class="on">개인정보 수집 및 이용 동의<font color="#ff0000">(필수)</font></span>
+										<input type="checkbox" name="chk" id="privacy" class="chk" onclick="chkClicked()"><span class="on">개인정보 수집 및 이용 동의<font color="#ff0000">(필수)</font></span>
 									</div>
 								</div>
 							</div>
@@ -98,6 +99,42 @@ xmlns:th="http://www.thymeleaf.org">
 	</div>
 	
 	<script>
+		$(loadedHanlder);
+		function loadedHanlder() {
+			$(".btn.emailSend").on("click", emailSendHandler);
+			$(".btn.emailCheck").on("click", emailCheckHandler);
+		}
+
+		// 이메일 전송 이벤트
+		function emailSendHandler() {	
+			var userEmail = $("#userEmail").val();
+			console.log(userEmail);
+			
+			$.ajax({
+				type: "post",
+				url: "/shushoong/v2/verify-email",
+				contentType : 'application/json;',
+				data: JSON.stringify({
+					'userEmail' : userEmail
+				})
+			})
+		}
+		
+		// 이메일 체크 이벤트
+		function emailCheckHandler() {	
+			var code = $("#code").val();
+			console.log(userEmail);
+			
+			$.ajax({
+				type: "post",
+				url: "/shushoong/verification-code",
+				contentType : 'application/json;',
+				data: JSON.stringify({
+					'code' : code
+				})
+			})
+		}
+		
 		function allChecked(target) {
 			// 전체 체크박스 버튼
 			const checkbox = document.getElementById('allCheckBox');

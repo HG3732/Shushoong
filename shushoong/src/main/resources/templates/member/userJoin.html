@@ -68,25 +68,25 @@ xmlns:th="http://www.thymeleaf.org">
 							<div class="agreement-items">
 								<div class="marketing-title">서비스 이용약관 동의</div>
 								<div class="allchk">
-									<input type="checkbox" id="allCheckBox"><span class="on">전체 선택</span>
+									<input type="checkbox" id="allCheckBox" class="allCheckBox" onclick="allChecked()"><span class="on">전체 선택</span>
 								</div>
 								<hr class="marketingLine" />
 								<div class="checkSelection">
 									<div class="serviceCheck">
-										<input type="checkbox" name="usingAgree" id="usingService" class="usingService"><span class="on">슈슝 이용약관 동의<font color="#ff0000">(필수)</font></span>
+										<input type="checkbox" name="usingAgree" id="usingService" class="chk" onclick="chkClicked()"><span class="on">슈슝 이용약관 동의<font color="#ff0000">(필수)</font></span>
 									</div>
 									<div class="privacyCheck">
-										<input type="checkbox" name="usingAgree" id="privacy" class="privacy"><span class="on">개인정보 수집 및 이용 동의<font color="#ff0000">(필수)</font></span>
+										<input type="checkbox" name="usingAgree" id="privacy" class="chk" onclick="chkClicked()"><span class="on">개인정보 수집 및 이용 동의<font color="#ff0000">(필수)</font></span>
 									</div>
 									<div class="marketingsend">
-										<input type="checkbox" id="receiveMarketing" class="receiveMarketing" onclick="checkClicked()"><span class="on">슈슝 마케팅 수신 동의(선택)</span>
+										<input type="checkbox" id="receiveMarketing" name = "receiveMarketing" class="receiveMarketing" onclick="checkMarketing()"><span class="on">슈슝 마케팅 수신 동의(선택)</span>
 									</div>
 									<div class="choice">
 										<div class="smsMarketing">
-											<input type="checkbox" name="usingAgree" id="snsagree" value="1" onclick="checkClicked()"><span class="on">SMS 수신</span>
+											<input type="checkbox" name="marketing" id="snsagree"  class="marketing" value="1" onclick="chkClicked()"><span class="on">SMS 수신</span>
 										</div>
 										<div class="emailMarketing">
-											<input type="checkbox" name="usingAgree" id="emailagree" value="1" onclick="checkClicked()"><span class="on">이메일 수신</span>
+											<input type="checkbox" name="marketing" id="emailagree" class="marketing" value="1" onclick="chkClicked()"><span class="on">이메일 수신</span>
 										</div>
 									</div>
 									<div class="text">마케팅 수신 시 다양한 혜택을 받아보실 수 있습니다.</div>
@@ -140,6 +140,106 @@ xmlns:th="http://www.thymeleaf.org">
 					'code' : code
 				})
 			})
+		}
+		
+		function allChecked(target) {
+			// 전체 체크박스 버튼
+			const checkbox = document.getElementById('allCheckBox');
+			
+			// 전체 체크박스 체크 여부
+			const is_checked = checkbox.checked;
+			
+			// 전체 체크박스를 제외한 모든 체크박스
+			if(is_checked) {
+				//체크박스 전부 체크
+				chkAllChecked();
+			}
+			
+			else {
+				// 체크박스 전부 해제
+				chkAllUnChecked();
+			}
+		}
+		
+		// 자식 체크박스 클릭 이벤트
+		function chkClicked() {
+			// 체크박스 전체개수
+			const allCount = document.querySelectorAll(".chk").length;
+			const allMarketingCount = document.querySelectorAll(".marketing").length;
+			
+			// 체크된 체크박스 전체개수 
+			const query = 'input[name="usingAgree"]:checked';
+			const marketingquery = 'input[name="marketing"]:checked';
+			
+			const selectedElements = document.querySelectorAll(query);
+			const selectedElementsCnt = selectedElements.length;
+			
+			const selectMarketingElements = document.querySelectorAll(marketingquery);
+			const selectedMarketingElementsCnt = selectMarketingElements.length;
+			
+			// 체크박스 전체개수와 체크된 체박스 전체개수가 같으면 전체 체크박스 체크
+			if(allCount == selectedElementsCnt && allMarketingCount == selectedMarketingElementsCnt) {
+				document.getElementById('allCheckBox').checked = true;
+				document.getElementById('receiveMarketing').checked = true;
+			}
+			
+			else if(allMarketingCount == selectedMarketingElementsCnt) { 
+				document.getElementById('receiveMarketing').checked = true;
+			}
+			
+			// 같지 않으면 전체 해제
+			else {
+				document.getElementById('allCheckBox').checked = false;
+				document.getElementById('receiveMarketing').checked = false;
+			}
+		}
+		
+		// 체크박스 전체 체크
+		function chkAllChecked() {
+			document.querySelectorAll(".chk,.receiveMarketing,.marketing").forEach(function(v,i) {
+				v.checked = true;
+			});
+		}
+		
+		// 체크박스 전체 해제
+		function chkAllUnChecked() {
+			document.querySelectorAll(".chk,.receiveMarketing,.marketing").forEach(function(v,i) {
+				v.checked = false;
+			});
+		}
+		
+		// 마케팅 allChecked 이벤트
+		function checkMarketing(target) {
+			// 전체 체크박스 버튼
+			const checkbox = document.getElementById('receiveMarketing');
+			
+			// 전체 체크박스 체크 여부
+			const is_checked = checkbox.checked;
+			
+			// 전체 체크박스를 제외한 모든 체크박스
+			if(is_checked) {
+				//체크박스 전부 체크
+				chkAllMarketing();
+			}
+			
+			else {
+				// 체크박스 전부 해제
+				chkAllUnMarketing();
+			}
+		}
+		
+		// 체크박스 전체 체크
+		function chkAllMarketing() {
+			document.querySelectorAll('.marketing').forEach(function(v,i) {
+				v.checked = true;
+			});
+		}
+		
+		// 체크박스 전체 해제
+		function chkAllUnMarketing() {
+			document.querySelectorAll('.marketing').forEach(function(v,i) {
+				v.checked = false;
+			});
 		}
 	</script>
 </body>

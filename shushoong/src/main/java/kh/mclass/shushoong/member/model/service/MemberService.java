@@ -45,8 +45,8 @@ public class MemberService {
 	}
 
 	// 아이디 찾기
-	public String findId(Map<String, Object> map) {
-		return memberRepository.findId(map);
+	public MemberDto findId(MemberDto memberDto) {
+		return memberRepository.findId(memberDto);
 	}
 
 	// 비밀번호 재설정

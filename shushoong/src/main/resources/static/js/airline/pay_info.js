@@ -5,7 +5,6 @@
 			var htmlVal = '';
 			
 			for(var  i = 0; i < adult; i++){
-				console.log("adult");
 				htmlVal+=`
 					<section class="passenger_wrap">
 						<div>탑승자 : 성인 : ${i+1}</div>
@@ -119,7 +118,6 @@
 			var htmlVal = '';
 			
 			for(var  i = 0; i < child; i++){
-				console.log("child");
 				htmlVal+=`
 					<section class="passenger_wrap">
 						<div>탑승자 : 소아 : ${i+1}</div>
@@ -231,7 +229,6 @@
 			$(".babyNum").text(baby);   /*별개의 내용*/
 			
 			for(var  i = 0; i < baby; i++){
-				console.log("baby");
 				htmlVal+=`
 					<section class="passenger_wrap baby">
 						<div>탑승자 : 유아 : ${i+1}</div>
@@ -308,7 +305,6 @@
 		
 				/*약관 상세보기*/
 		function arrowDownClickHandler(){
-			console.log($(this).parents().eq(1).next());
 			
 			var downArrow = $(this).attr('src');
 			
@@ -326,7 +322,6 @@
 		
 		/*전체동의*/
 		function allAgreeCheckHandler(){
-			console.log($(this).parent().siblings().eq(12).children('div:even').children());
 		
 			if(this.checked) {
 					$('.agree_radio').prop('checked', true);
@@ -338,14 +333,12 @@
 		
 		/*동의합니다 개별 체크 다 누를 시 전체동의 선택되게 하기*/
 		function checkAllEscHandler(){
-			console.log(this);
 			
 			if(this.checked){
 				$('#check1').prop('checked', false);
 			}
 			
 			var checkEsc = document.querySelectorAll('.agree_radio:checked');
-			console.log(checkEsc.length);
 			
 			if(checkEsc.length == 5) {
 				$('#check1').prop('checked', true);
@@ -373,7 +366,6 @@
 			var ticketType = urlParams.get('ticketType');
 			var htmlVal = '';
 			
-			console.log(ticketType);
 			for(var i = 0 ; i < ticketType ; i++){
 				htmlVal += `
 				<div class="final_check_info">

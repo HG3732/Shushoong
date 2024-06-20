@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 //@PropertySource("classpath:/keyfiles/apikey.properties")
 public class JoinController {
 	
@@ -32,7 +31,6 @@ public class JoinController {
 	@ResponseBody
 	public int idCheck(@RequestParam("userId") String userId) {
 		int cnt = memberservice.idCheck(userId);
-		log.info("userId : " + userId);
 		return cnt;
 	}
 

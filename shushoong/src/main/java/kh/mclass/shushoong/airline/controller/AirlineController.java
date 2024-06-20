@@ -249,5 +249,11 @@ public class AirlineController {
 		
 		return "airline/airline_pay";
 	}
-
+	
+	
+	//항공에서 받는 값
+	@PostMapping("/airline/input/info")
+	public void customerInfo() {
+		
+	}
 }

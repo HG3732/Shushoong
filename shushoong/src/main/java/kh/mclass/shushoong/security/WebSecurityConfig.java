@@ -39,7 +39,6 @@ public class WebSecurityConfig {
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
-				.defaultSuccessUrl("/airline/main") 
 				.successHandler(authSuccessHandler)
 				.failureHandler(authFailureHandler)
 				.usernameParameter("userId")

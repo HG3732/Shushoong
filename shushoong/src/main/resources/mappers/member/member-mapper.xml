@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="idCheck" parameterType="string" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE MEM_ID=#{userId} 
+		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{userId} 
 	</select>
 	
 	<select id="findId" resultType="string">

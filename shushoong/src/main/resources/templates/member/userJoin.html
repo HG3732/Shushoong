@@ -35,35 +35,51 @@ xmlns:th="http://www.thymeleaf.org">
 									<label for="userId">아이디</label>
 									<input type="text" id="userId" name="userId" placeholder="4-15자 영문, 숫자" class="shortinput" autofocus>
 									<button type="button" class="btn idCheck">중복확인</button>
+									<div class="testmessage">
+										<span class="test_Idok">사용 가능한 아이디입니다.</span>
+										<span class="test_IDexception2">잘못된 아이디 형식입니다.</span>
+										<span class="test_IDexception">이미 존재하는 아이디입니다.</span>
+									</div>
 								</div>
-								<small>Error message</small>
 								<div class="namewrite">
 									<label for="userName">이름</label>
 									<input type="text" id="userName" name="userName" placeholder="이름" class="longinput" >
+									<div class="testmessage">
+										<span class="test_Nameexception">사용할 수 없는 이름 입니다.</span>
+									</div>
 								</div>
-								<small>Error message</small>
 								<div class="passwordwrite">
 									<label for="userPwd">비밀번호</label>
 									<input type="password" id="userPwd" name="userPwd" placeholder="8-20자의 영문, 숫자, 특수문자" class="longinput">
+									<div class="testmessage">
+										<span class="test_Pwdexception">사용할 수 없는 비밀번호 입니다.</span>
+									</div>
 								</div>
-								<small>Error message</small>
 								<div class="check password">
 									<label for="pwdCheck">비밀번호 확인</label>
 									<input type="password" id="pwdCheck" name="pwdCheck" placeholder="비밀번호 재입력" class="longinput">
+									<div class="testmessage">
+										<span class="test_PwdChkexception">비밀번호가 일치하지 않습니다.</span>
+									</div>
 								</div>
-								<small>Error message</small>
 								<div class="send num">
 									<label for="userEmail">이메일</label>
 									<input type="text" id="userEmail" name="userEmail" placeholder="이메일 입력" class="shortinput" >
 									<button type="button" class="btn emailSend">인증번호 전송</button>
+									<div class="testmessage">
+										<span class="test_Emailok">인증번호가 전송되었습니다.</span>
+										<span class="test_Emailexception">이메일을 다시 한 번 확인해 주세요.</span>
+									</div>
 								</div>
-								<small>Error message</small>						
 								<div class="answer email">
 									<label for="code">인증번호</label>
 									<input type="text" id="code" name="code" placeholder="인증번호 입력" class="shortinput" >
-									<button type="submit" class="btn emailCheck">인증확인</button>
+									<button type="button" class="btn emailCheck">인증확인</button>
+									<div class="testmessage">
+										<span class="test_Echkok">인증 완료되었습니다.</span>
+										<span class="test_Echkexception">인증번호가 일치하지 않습니다.</span>
+									</div>
 								</div>
-								<small>Error message</small>
 							</div>
 							<div class="agreement-items">
 								<div class="marketing-title">서비스 이용약관 동의</div>
@@ -110,12 +126,33 @@ xmlns:th="http://www.thymeleaf.org">
 		function loadedHanlder() {
 			$(".btn.emailSend").on("click", emailSendHandler);
 			$(".btn.emailCheck").on("click", emailCheckHandler);
+			$(".btn.idCheck").on("click", idCheckHandler);
+		}
+		
+		// 아이디 체크 이벤트
+		function idCheckHandler() {
+			var userId = $('#userId').val();
+			$.ajax({
+				url : '/shushoong/idcheck.ajax',
+				type : 'post',
+				data : {userId:userId},
+				success:function(cnt) {
+					if(cnt == 0) {
+						$('.test_Idok').css("display","inline-block");
+					} else {
+						$('.test_IDexception').css("display","inline-block");
+	                    $('#userId').val('');
+					}
+				}, 
+				error:function(request,status,error) {
+					alert("시스템 에러. 관리자에게 문의해 주세요.");
+				}
+			})
 		}
 		
 		// 이메일 전송 이벤트
 		function emailSendHandler() {	
 			var userEmail = $("#userEmail").val();
-			console.log(userEmail);
 			
 			$.ajax({
 				type: "post",
@@ -123,14 +160,23 @@ xmlns:th="http://www.thymeleaf.org">
 				contentType : 'application/json;',
 				data: JSON.stringify({
 					'userEmail' : userEmail
-				})
+				}), 
+				success:function(code) {
+					if(code == "COMMON204") {
+						$('.test_Emailok').css("display","inline-block");
+					} else {
+						$('.test_Emailexception').css("display","inline-block");
+					}
+				}, 
+				error:function(request,status,error) {
+					alert("시스템 에러. 관리자에게 문의해 주세요.");
+				}
 			})
 		}
 		
 		// 이메일 체크 이벤트
 		function emailCheckHandler() {	
 			var code = $("#code").val();
-			console.log(userEmail);
 			
 			$.ajax({
 				type: "post",
@@ -138,7 +184,17 @@ xmlns:th="http://www.thymeleaf.org">
 				contentType : 'application/json;',
 				data: JSON.stringify({
 					'code' : code
-				})
+				}),
+				success:function(code) {
+					if(code == "COMMON204") {
+						$('.test_Echkok').css("display","inline-block");
+					} else {
+						$('.test_Echkexception').css("display","inline-block");
+					}
+				}, 
+				error:function(request,status,error) {
+					alert("시스템 에러. 관리자에게 문의해 주세요.");
+				}
 			})
 		}
 		

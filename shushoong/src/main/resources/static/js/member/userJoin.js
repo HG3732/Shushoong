@@ -50,6 +50,35 @@ function idCheckHandler() {
 	})
 }
 
+// 비밀번호 체크
+$('#userPwd').keyup(function(){
+	var inputPwd = $(this).val();
+	var lengthPwd = $(this).val().length;
+	var pwdtextCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
+	
+	if(lengthPwd > 3 && pwdtextCheck.test(inputPwd) == false) {
+		$('.test_Pwdexception').css("display", "inline-block");
+	} if(pwdtextCheck.test(inputPwd) == true) {
+		$('.test_Pwdexception').css("display", "none");
+	} else {
+		$('.test_Pwdexception').css("display", "none");
+	}
+});
+
+// 비밀번호 확인 체크
+$('#pwdCheck').on("propertychange change paste input", function(){
+	var inputPwd = $('#userPwd').val();
+	var inputPwdChk = $('#pwdCheck').val();
+	
+	if(inputPwd == inputPwdChk) {
+		$('.test_PwdChkexception').css("display", "inline-block");
+	} else {
+		$('.test_PwdChkexception').css("display", "none");
+	}
+});
+
+
+
 // 이메일 전송 이벤트
 function emailSendHandler() {
 	var userEmail = $("#userEmail").val();

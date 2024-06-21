@@ -318,7 +318,8 @@ div.sit > button {
 	border-radius: 15px;
 }
 
-button#sit3{
+button.sit_kinds#3{
+	
 	background-color: var(--color_blue_2);
 }
 

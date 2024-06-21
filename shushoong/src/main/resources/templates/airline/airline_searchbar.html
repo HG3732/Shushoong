@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html
+xmlns:th="http://www.thymeleaf.org" 
+>
+<head>
+</head>
+<body>
+	<div class="searchbar" th:fragment="searchbar">
+			
+			<!-- mainbar.js -->			
+			<section class="search_section">
+				
+				<div class="search">
+					<div class="tab">
+						<button class="tablinks pointer" id="one_way_btn" onclick="ticketType(event,'one_way','one_way_btn')">편도</button>
+						<button class="tablinks pointer" id="round_trip_btn" onclick="ticketType(event,'round_trip','round_trip_btn')">왕복</button>
+					</div>
+					
+					<div id="one_way" class="tabcontent">
+						<div class="depart_arrival_flex">
+							<button id="depart" class="according_btn pointer"  onclick="accordingInfo(event,'depart_accoding')">출발지</button>
+							<img class="type" alt="one_way" th:src="@{/images/one_way.png}">
+							<button id="arrival" class="according_btn pointer" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
+						</div>
+						<div>
+							<button id="one_way_date" class="according_btn pointer" onclick="accordingInfo(event,'date_accoding')">
+								<div>날짜 선택</div>
+								<img alt="달력 사진" th:src="@{/images/calendar.png}">
+							</button>
+							
+						</div>
+						
+						<div>
+							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">
+								<div id="people_lineup_text">이코노미석/성인1/소아0/유아0</div>
+								<img alt="사람" th:src="@{/images/person.png}">
+							</button>
+							
+						</div>
+						
+						<label for="hidden_submit" >검색</label>
+					</div>
+					
+					<div id="round_trip" class="tabcontent">
+						<div class="depart_arrival_flex">
+							<button id="depart" class="according_btn pointer" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
+							<img class="type" alt="double_way" th:src="@{/images/double_way.png}">
+							<button id="arrival" class="according_btn pointer" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
+						</div>
+						
+						<div>
+							<button id="round_trip_date" class="according_btn pointer" onclick="accordingInfo(event,'date_accoding')">
+								<div>날짜 선택</div>
+								<img alt="달력 사진" th:src="@{/images/calendar.png}">
+							</button>
+							
+						</div>
+						
+						<div>
+							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">
+								<div id="people_lineup_text">이코노미석/성인1/소아0/유아0</div>
+								<img alt="사람" th:src="@{/images/person.png}">
+							</button>
+						</div>
+						<!-- checkpoint -->
+						<label for="hidden_submit" >검색</label>
+					</div>
+					
+				</div>
+			</section>
+			
+			<section class="according_section">
+				<div class="one_way_accoding">
+					<div id="depart_accoding" class="according">
+						<div class="accoding_title">출발지</div>
+						<div id="depart_accoding_wrap">
+							<div class="depart_nation">
+								<button id="btn_dep_korea" class="according_section_depart_tablinks pointer" onclick="departNation(event,'depart_korea','btn_dep_korea')">한국</button>
+								<button id="btn_dep_japan" class="according_section_depart_tablinks pointer" onclick="departNation(event,'depart_japan','btn_dep_japan')">일본</button>
+								<button id="btn_dep_china" class="according_section_depart_tablinks pointer" onclick="departNation(event,'depart_china','btn_dep_china')">중국</button>
+								<button id="btn_dep_USA" class="according_section_depart_tablinks pointer" onclick="departNation(event,'depart_USA','btn_dep_USA')">미국</button>
+	<!-- 							<button id="btn_dep_canada" class="according_section_depart_tablinks pointer" onclick="departNation(event,'depart_canada','btn_dep_canada')">캐나다</button> -->
+							</div>
+							
+							<div id="depart_korea" class="according_section_depart_tabcontent">
+								<button id="ICN" class="depart_accoding_value pointer">인천</button>
+								<button id="ICN" class="depart_accoding_value pointer">인천</button>
+								<button id="ICN" class="depart_accoding_value pointer">인천</button>
+								<button id="ICN" class="depart_accoding_value pointer">인천</button>
+								<button id="ICN" class="depart_accoding_value pointer">인천</button>
+								<button id="ICN" class="depart_accoding_value pointer">인천</button>
+								<button id="ICN" class="depart_accoding_value pointer">인천</button>
+								<button id="ICN" class="depart_accoding_value pointer">인천</button>
+								<button id="ICN" class="depart_accoding_value pointer">인천</button>
+								<button id="GMP" class="depart_accoding_value pointer">김포</button>
+								<button id="PUS" class="depart_accoding_value pointer">김해</button>
+								
+							</div>
+							
+							<div id="depart_japan" class="according_section_depart_tabcontent">
+								<button id="TYO" class="depart_accoding_value pointer">도쿄</button>
+								<button id="KIX" class="depart_accoding_value pointer">오사카</button>
+								<button id="FUK" class="depart_accoding_value pointer">후쿠오카</button>
+								<button id="NGO" class="depart_accoding_value pointer">나고야</button>
+								<button id="CTS" class="depart_accoding_value pointer">삿포로</button>
+							</div>
+							
+							<div id="depart_china" class="according_section_depart_tabcontent">
+								<button id="CAN" class="depart_accoding_value pointer">광저우</button>
+								<button id="PEK" class="depart_accoding_value pointer">베이징</button>
+								<button id="SHA" class="depart_accoding_value pointer">상하이</button>
+							</div>
+							
+							<div id="depart_USA" class="according_section_depart_tabcontent">
+								<button id="LAX" class="depart_accoding_value pointer">로스앤젤레스</button>
+								<button id="HNL" class="depart_accoding_value pointer">호놀룰루</button>
+								<button id="JFK" class="depart_accoding_value pointer">뉴욕</button>
+							</div>
+							
+							<div id="depart_canada" class="according_section_depart_tabcontent">
+								<button id="YYZ" class="depart_accoding_value pointer">토론토</button>
+								<button id="YUL" class="depart_accoding_value pointer">몬트리올</button>
+								<button id="YVR" class="depart_accoding_value pointer">밴쿠버</button>
+								<button id="YYC" class="depart_accoding_value pointer">캘거리</button>
+								<button id="YOW" class="depart_accoding_value pointer">오타와</button>
+							</div>
+							
+						</div>
+						</div>
+					
+					<div id="arrival_accoding" class="according">
+						<div class="accoding_title">도착지</div>
+						<div class="arrival_nation">
+							<button id="btn_ari_korea" class="according_section_arrival_tablinks pointer" onclick="arrivalNation(event,'arrival_korea','btn_ari_korea')">한국</button>
+							<button id="btn_ari_japan" class="according_section_arrival_tablinks pointer" onclick="arrivalNation(event,'arrival_japan','btn_ari_japan')">일본</button>
+							<button id="btn_ari_china" class="according_section_arrival_tablinks pointer" onclick="arrivalNation(event,'arrival_china','btn_ari_china')">중국</button>
+							<button id="btn_ari_USA" class="according_section_arrival_tablinks pointer" onclick="arrivalNation(event,'arrival_USA','btn_ari_USA')">미국</button>
+<!-- 							<button id="btn_ari_canada" class="according_section_arrival_tablinks pointer" onclick="arrivalNation(event,'arrival_canada','btn_ari_canada')">캐나다</button> -->
+						</div>
+						<div id="arrival_korea" class="according_section_arrival_tabcontent">
+							<button id="ICN" class="arrival_accoding_value pointer">인천</button>
+							<button id="GMP" class="arrival_accoding_value pointer">김포</button>
+							<button id="PUS" class="arrival_accoding_value pointer">김해</button>
+						</div>
+						
+						<div id="arrival_japan" class="according_section_arrival_tabcontent">
+							<button id="TYO" class="arrival_accoding_value pointer">도쿄</button>
+							<button id="KIX" class="arrival_accoding_value pointer">오사카</button>
+							<button id="FUK" class="arrival_accoding_value pointer">후쿠오카</button>
+							<button id="NGO" class="arrival_accoding_value pointer">나고야</button>
+							<button id="CTS" class="arrival_accoding_value pointer">삿포로</button>
+						</div>
+						
+						<div id="arrival_china" class="according_section_arrival_tabcontent">
+							<button id="CAN" class="arrival_accoding_value pointer">광저우</button>
+							<button id="PEK" class="arrival_accoding_value pointer">베이징</button>
+							<button id="SHA" class="arrival_accoding_value pointer">상하이</button>
+						</div>
+						
+						<div id="arrival_USA" class="according_section_arrival_tabcontent">
+							<button id="LAX" class="arrival_accoding_value pointer">로스앤젤레스</button>
+							<button id="HNL" class="arrival_accoding_value pointer">호놀룰루</button>
+							<button id="JFK" class="arrival_accoding_value pointer">뉴욕</button>
+						</div>
+						
+						<div id="arrival_canada" class="according_section_arrival_tabcontent">
+							<button id="YYZ" class="arrival_accoding_value pointer">토론토</button>
+							<button id="YUL" class="arrival_accoding_value pointer">몬트리올</button>
+							<button id="YVR" class="arrival_accoding_value pointer">밴쿠버</button>
+							<button id="YYC" class="arrival_accoding_value pointer">캘거리</button>
+							<button id="YOW" class="arrival_accoding_value pointer">오타와</button>
+						</div>
+					</div>
+					
+					<div id="date_accoding" class="according">
+						<button id="depart_date">가는날</button>
+						<button id="arrival_date">오는날</button>
+						<button id="btn_return_depart_date">가는날 설정 변경</button>
+						
+						<div>
+							<div id='calendar'></div>
+						</div>
+  
+					</div>
+					
+					<div id="people_lineup_sit_accoding" class="according">
+						<div class="people_lineup">
+							<div id="adult">
+								<h1>어른 :</h1>
+								<button id="minus" class="pointer">-</button>
+								<div id="adult_value">1</div>
+								<button id="plus" class="pointer">+</button>						
+							</div>
+							<div id="child">
+								<h1>소아 :</h1>
+								<button id="minus" class="pointer">-</button>
+								<div id="child_value">0</div>
+								<button id="plus" class="pointer">+</button>						
+							</div>
+							<div id="baby">
+								<h1>유아 :</h1>
+								<button id="minus" class="pointer">-</button>
+								<div id="baby_value">0</div>
+								<button id="plus" class="pointer">+</button>						
+							</div>
+						</div>
+						<div class="sit">
+							<button id="3" class="sit_kinds pointer">이코노미석</button>
+							<button id="2" class="sit_kinds pointer">비즈니스석</button>
+							<button id="1" class="sit_kinds pointer">일등석</button>
+						</div>	
+					</div>
+				</div>
+				
+				
+				<div class="round_trip_accoding">
+				
+				</div>
+			</section>
+			
+			<!-- mainbar.js -->	
+	</div>
+</body>
+</html>

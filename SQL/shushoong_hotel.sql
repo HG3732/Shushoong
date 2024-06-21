@@ -318,6 +318,8 @@ select v.hotel_code hotel_code, v.hotel_pic hotel_pic, v.hotel_name hotel_name, 
 		v.hotel_address hotel_address, hr.room_cat_desc room_cat, v.hotel_price hotel_price, to_char(trunc(v.hotel_price*(1 - hr.hotel_discount/100)), '999,999,999') discounted_price, hr.hotel_discount discount_ratio, hr.room_count room_count 
 		from (select * from hotel_room join hotel_room_cat using(room_cat)) hr join v_hotel_list v on hr.hotel_code = v.hotel_code where hr.hotel_discount > 0
 		order by hotel_discount desc;
+        
+        select * from pay;
 
 select t1.* 
 from (select hotel_code, hotel_name, hotel_eng, hotel_address, to_char(hotel_price, '999,999,999') as hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num, rownum rn
@@ -333,3 +335,16 @@ select distinct hp.hotel_code hotel_code, first_value(hotel_picture) over (parti
     on hp.hotel_code = hr.hotel_code
     where daterank = 1
     ;
+
+--이 레코드에 조회 되면 리뷰 달 수 있는 테이블
+select * from(
+select hotel_reserve_code, approve_no, substr(hotel_reserve_code, 9, 6) hotel_code, to_date(substr(hotel_reserve_code, 1, 8)) check_in, sysdate
+from hotel_reserve join pay using(hotel_reserve_code))
+where check_in < to_date('240101')
+-- and user_Id = '' and hotel_code = ''
+;
+select * from hotel_review;
+select count(*) from hotel_review
+where user_Id = 'ex1';
+
+select * from hotel_reserve;

@@ -6,7 +6,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <!-- section 부분 -->
 	<div class="hotel_list" id="realHotelList" th:fragment="hotellistsection">
-		<div class="hotel" th:each="hotel : ${hotelList}" th:data-hotelcode="${hotel.hotelCode}">
+		<a class="hotel" th:each="hotel : ${hotelList}" th:data-hotelcode="${hotel.hotelCode}" th:href="'http://localhost:8080/shushoong/hotel/view/' + ${hotel.hotelCode}">
 			<div class="hotel_pic" th:style="'background-image: url(' + ${hotel.hotelPic} + '); background-size: cover;'">
 				<th:block th:if="${!likeList.contains(hotel.hotelCode)}">
 					<div class="hotel_like" >
@@ -24,13 +24,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div class="hotel_eng" th:text="${hotel.hotelEng}"></div>
 				<div class="hotel_location" th:text="${hotel.hotelAddress}"></div>
 				<div class="hotel_review">
-					<span><img th:src="@{/images/star_line.png}" alt="별" style="width:20px;" class="heart"></span>
+					<span><img th:src="@{/images/star_line.png}" alt="별" style="width:20px;" class="star"></span>
 					<span th:text="${hotel.hotelScore} + '/5'"></span>
 					<span class="count_review" th:text="'(' + ${hotel.hotelReviewNum} + ')'"></span>
 				</div>
 			</div>
 			<div class="wrap-price"><div class="hotel_price" th:text="${hotel.hotelPrice}"></div><div> 원~</div></div>
-		</div>
+		</a>
 		
 	<!--
 		<div class="hotel_list">

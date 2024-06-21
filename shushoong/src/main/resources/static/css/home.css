@@ -243,3 +243,79 @@
 	margin-right: 40px;
     margin-bottom: 40px;
 }
+
+/* 상담 */
+
+.wrap-customer-service {
+	width: 960px;
+	margin: 0 auto;
+	margin-top: 100px;
+	display: flex;
+	background-color: var(--color_gray_2);
+	gap: 35px;
+	justify-content: center;
+	padding: 25px;
+}
+
+.trip-service {
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+	padding: 15px;
+}
+
+.trip-service > * {
+	padding: 15px;
+	font-weight: 900;
+}
+
+.wrap-customer-service .hr {
+	padding-bottom: 14px;
+}
+
+.wrap-customer-service hr {
+	height: 100%;
+	border-left-width: 1px;
+	border-left-color: black;
+	border-left-style: solid;
+}
+
+.trip-service > button {
+	border: none;
+	border-radius: 10px;
+	background-color: var(--color_blue_2);
+	cursor: pointer;
+}
+
+.trip-service > button:hover {
+	color: white;
+	background-color: var(--color_blue_1);
+}
+
+.service-time {
+	display: flex;
+	gap:30px;
+}
+
+.service-time > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    gap: 15px;
+}
+
+.service-time button {
+	border: none;
+	border-radius: 10px;
+	background-color: var(--color_blue_2);
+	cursor: pointer;
+	font-weight: 900;
+	padding-inline: 30px;
+    padding-block: 12px;
+    height: fit-content;
+}
+
+.service-time button:hover {
+	color: white;
+	background-color: var(--color_blue_1);
+}

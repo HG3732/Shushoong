@@ -3,6 +3,9 @@ function likeHandler(thisElement){
 	//console.log(thisElement);	//이벤트 함수가 걸린 태그
 	//console.log(event.target);	//마우스 클릭 시 제일 가까운 요소 (하트 사진 누르면 하트 사진 뜨는....)
 	
+	event.stopPropagation();  // 부모요소로의 이벤트 전파 중지
+    event.preventDefault();   // 기본 동작 중지 (a , submit 등...)
+	
 	var currentSrc = $(thisElement).attr('src');
 	/* 이 경로를 토대로 이미지 바뀌는 경우의 수 적어주기 */
 	

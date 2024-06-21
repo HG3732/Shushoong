@@ -101,6 +101,22 @@ div#people_lineup_sit_accoding{
 				
 				<div th:replace="~{airline/airline_searchbar :: searchbar}"></div>
 				
+				<div hidden>
+					<form action="/shushoong/airline/main" method="post">
+						<input type="text" name="ticketType" id="hidden_ticket_type" 	value="1" 	readonly="readonly" required="required">
+						<input type="text" name="departLoc" id="hidden_depart_value" 				readonly="readonly" required="required">
+						<input type="text" name="arrivalLoc" id="hidden_arrival_value"		 	readonly="readonly" required="required">
+						<input type="text" name="departDate" id="hidden_depart_date" 				readonly="readonly" required="required">
+						<input type="text" name="arrivalDate" id="hidden_arrival_date" 				readonly="readonly" required="required">
+						<input type="text" name="adult" id="hidden_adult" 				value="1" 	readonly="readonly" required="required">
+						<input type="text" name="child" id="hidden_child" 				value="0"	readonly="readonly" required="required">
+						<input type="text" name="baby" id="hidden_baby" 					value="0"	readonly="readonly" required="required">
+						<input type="text" name="seatGrade" id="hidden_seat_grade" 			value="3"	readonly="readonly" required="required">
+						<input type="submit" id="hidden_submit">
+						<!-- checkpoint -->
+					</form>					
+				</div>
+				
 				<div class="flex-container">
 					<div class="sidebar">
 						<div class="time-list">
@@ -174,11 +190,8 @@ div#people_lineup_sit_accoding{
 											<div class="thumb right price"></div>
 										</div>
 										<div class="resultval price">
-											<div class="div1"></div>
-											<div th:if="${ticketType != 1}" class="div2" id="maxPrice"
-												th:text="${maxPrice}"></div>
-											<div th:if="${ticketType == 1}" class="div2" id="maxPrice"
-												th:text="${maxPrice} / 2"></div>
+											<div th:if="${ticketType != 1}" class="div2" id="maxPrice" th:text="${maxPrice}"></div>
+											<div th:if="${ticketType == 1}" class="div2" id="maxPrice" th:text="${maxPrice} / 2"></div>
 										</div>
 									</div>
 								</div>

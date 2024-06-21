@@ -159,10 +159,14 @@ div.according{
 	z-index: 999;
 }
 					/* 이/착륙 국가 */
-.one_way_accoding .according{
-	display: flex;
-	
+div.accoding_title{
+	position: absolute;
+	margin-top: -20px;
 }
+div#depart_accoding_wrap{
+	display: flex;
+}
+
 
 .depart_nation,.arrival_nation{
 	width : 90px;
@@ -241,7 +245,7 @@ button#arrival_date{
 
 							/* 인원 + 좌석 */
 div#people_lineup_sit_accoding{
-	margin-left:530pxz;
+	margin-left:530px;
 	width: 400px;
 }
 							
@@ -318,7 +322,7 @@ div.sit > button {
 	border-radius: 15px;
 }
 
-button#sit3{
+div.sit > button:first-child{
 	background-color: var(--color_blue_2);
 }
 

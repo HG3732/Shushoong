@@ -40,7 +40,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<div>예약완료</div>
 					</div>
 				</section>
-				<form action="/airline/input/info" method="post">
+				<form action="/shushoong/airline/input/info" method="post">
 					<section class="reserver_info">
 						<div>
 							<div>예약자 정보</div>
@@ -278,11 +278,15 @@ xmlns:th="http://www.thymeleaf.org">
 			childNum();
 			babyNum();
 			payCheckInfo();
+			$("input[type='radio'].baggage").change(totalValueFunction);
+
 		}
+		
+		
+			
 
 		$('#check1').on("click", allAgreeCheckHandler);
 		$('.arrow').on("click", arrowDownClickHandler);
-		$('input[type=radio]').on("click", checkAllEscHandler);
 		
 	
 	</script>

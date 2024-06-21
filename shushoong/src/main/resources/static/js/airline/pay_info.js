@@ -81,17 +81,17 @@
 									<label for="adult_10kg${i}">
 										<div class="kg10"></div>
 										<div><div>KRW :</div><div>0</div></div>
-										<input id="adult_10kg${i}" type="radio" name="adult_baggage_size${i}" value="1" checked="checked">
+										<input class="baggage" id="adult_10kg${i}" type="radio" name="adult_baggage_size${i}" value="1" checked="checked">
 									</label>
 									<label for="adult_20kg${i}">
 										<div class="kg20"></div>
 										<div><div>KRW :</div><div>48,000</div></div>
-										<input id="adult_20kg${i}" type="radio" name="adult_baggage_size${i}" value="2">
+										<input class="baggage" id="adult_20kg${i}" type="radio" name="adult_baggage_size${i}" value="2">
 									</label>
 									<label for="adult_30kg${i}">
 										<div class="kg30"></div>
 										<div><div>KRW :</div><div>64,000</div></div>
-										<input id="adult_30kg${i}" type="radio" name="adult_baggage_size${i}" value="3">
+										<input class="baggage" id="adult_30kg${i}" type="radio" name="adult_baggage_size${i}" value="3">
 									</label>
 									<label for="adult_40kg${i}">
 										<div class="kg40"></div>
@@ -104,7 +104,8 @@
 					</section>
 				`;
 				
-				$(".adult_list_wrap").html(htmlVal)
+				$(".adult_list_wrap").html(htmlVal);
+
 			}
 		}
 		
@@ -194,17 +195,17 @@
 									<label for="child_10kg${i}">
 										<div class="kg10"></div>
 										<div><div>KRW :</div><div>0</div></div>
-										<input id="child_10kg${i}" type="radio" name="child_baggage_size${i}" value="1" checked="checked">
+										<input class="baggage" id="child_10kg${i}" type="radio" name="child_baggage_size${i}" value="1" checked="checked">
 									</label>
 									<label for="child_20kg${i}">
 										<div class="kg20"></div>
 										<div><div>KRW :</div><div>48,000</div></div>
-										<input id="child_20kg${i}" type="radio" name="child_baggage_size${i}" value="2">
+										<input  class="baggage"id="child_20kg${i}" type="radio" name="child_baggage_size${i}" value="2">
 									</label>
 									<label for="child_30kg${i}">
 										<div class="kg30"></div>
 										<div><div>KRW :</div><div>64,000</div></div>
-										<input id="child_30kg${i}" type="radio" name="child_baggage_size${i}" value="3">
+										<input class="baggage" id="child_30kg${i}" type="radio" name="child_baggage_size${i}" value="3">
 									</label>
 									<label for="child_40kg${i}">
 										<div class="kg40"></div>
@@ -218,6 +219,7 @@
 				`;
 				
 				$(".child_list_wrap").html(htmlVal)
+		
 			}
 		}
 		
@@ -411,5 +413,31 @@
 				$(".final_check_info_list").html(htmlVal);
 			}
 		}
-
-	
+		
+		function totalValueFunction(){
+			var result = 0;
+//			console.log("working now");
+//			console.log("$(this).val()  :"+$(this).val());
+//			console.log("$(.baggage).val()  :"+$("input.baggage:checked").val());
+			$(".baggage:checked").each(function(){
+				console.log($(this).val());
+				if($(this).val()==1){
+					
+				}else if($(this).val()==2){
+					result += 48000
+				}else if($(this).val()==3){
+					result += 64000
+				}else if($(this).val()==4){
+					result += 90000
+				}else{
+					console.log("total value function on error")
+				}
+				$(this).val();
+			});
+			
+			
+			
+			$(".total_value").val(result);
+		}
+		
+		

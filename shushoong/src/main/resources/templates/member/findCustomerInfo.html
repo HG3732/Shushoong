@@ -53,7 +53,7 @@ xmlns:th="http://www.thymeleaf.org">
 											<button type="button" class="btn emailCheck">인증확인</button>
 									</div>
 									<div class="searchIdCustomer">
-										<button type="submit" class="btn findId">아이디 찾기</button>
+										<button type="button" class="btn findId">아이디 찾기</button>
 									</div>
 								</form>
 							</div>
@@ -89,6 +89,7 @@ xmlns:th="http://www.thymeleaf.org">
 		function loadedHanlder() {
 			$(".btn.emailSend").on("click", emailSendHandler);
 			$(".btn.emailCheck").on("click", emailCheckHandler);
+			$(".btn.findId").on("click", findIdCheckHandler);
 		}
 		
 		// 이메일 전송 이벤트
@@ -122,11 +123,30 @@ xmlns:th="http://www.thymeleaf.org">
 				data: JSON.stringify({
 					'code' : code
 				}),
-				success:function(isSuccess) {
+				success:function(request,status,error) {
 					alert("인증이 완료되었습니다.");
 				}, 
 				error:function(request,status,error) {
 					alert("유효한 코드가 아닙니다.");
+				}
+			})
+		}
+		
+		function findIdCheckHandler() {
+			var userName = $("#userName").val();
+			var userEmail = $("#userEmail").val();
+			var userGrade = "customer";
+						
+			$.ajax({
+				url : '/shushoong/find/customer/id.ajax',
+				type : 'post',
+				data : {userName:userName, userEmail:userEmail, userGrade:userGrade},
+				success:function(result) {
+					if(result == 0) {
+						alert("등록하신 정보와 일치하는지 다시 한 번 확인해 주세요.");
+					} else {
+						alert("설정하신 아이디는 " + result + " 입니다.");
+					}
 				}
 			})
 		}

@@ -31,6 +31,23 @@ public class FindAccountController {
 	public String findInfoCustomer() {
 		return "member/findCustomerInfo";
 	}
+	
+	// 일반회원 아이디 찾기
+	@PostMapping("find/customer/id.ajax")
+	@ResponseBody
+	public String findIdCustomer(@RequestParam("userName") String userName,
+								@RequestParam("userEmail") String userEmail,
+								@RequestParam("userGrade") String userGrade) {
+		
+		String result = "";
+			
+		try {
+			result = memberservice.findId(userName, userEmail, userGrade);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+		}
 
 	// 사업자 회원 아이디/비밀번호 찾기 페이지로 이동
 	@GetMapping("find/business")
@@ -52,8 +69,6 @@ public class FindAccountController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
-
 		return result;
 	}
 }

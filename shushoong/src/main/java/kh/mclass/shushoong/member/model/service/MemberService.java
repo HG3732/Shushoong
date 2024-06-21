@@ -48,6 +48,11 @@ public class MemberService {
 	public String findId(String userName, String userEmail, String userGrade) {
 		return memberRepository.findId(userName, userEmail, userGrade);
 	}
+	
+	// 계정 확인 
+	public String accountCheck(String userId, String Email, String userGrade) {
+		return memberRepository.accountCheck(userId, Email, userGrade);
+	}
 
 	// 비밀번호 재설정
 	public String setPwd(Map<String, Object> map) {

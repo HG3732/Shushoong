@@ -15,6 +15,11 @@
 		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{userId} 
 	</select>
 	
+	<select id="accountCheck" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE USER_NAME=#{userId} AND USER_EMAIL=#{userEmail} AND USER_GRADE=#{userGrade}
+	</select>
+	
 	<select id="findId" resultType="String">
 		SELECT USER_ID FROM MEMBER
 		WHERE USER_NAME=#{userName} AND USER_EMAIL=#{userEmail} AND USER_GRADE=#{userGrade}

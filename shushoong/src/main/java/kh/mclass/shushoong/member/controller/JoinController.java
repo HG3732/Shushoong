@@ -2,11 +2,15 @@ package kh.mclass.shushoong.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kh.mclass.shushoong.member.model.domain.MemberDto;
+import kh.mclass.shushoong.member.model.repository.MemberRepository;
 import kh.mclass.shushoong.member.model.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,10 +40,17 @@ public class JoinController {
 
 	// 일반유저 가입 페이지로 이동
 	@GetMapping("join/customer")
-	public String joinCustomer() {
+	public String joinCustomer(Model model) {
+		model.addAttribute("memberAdd");
 		return "member/userJoin";
 	}
 	
+	// 일반유저 회원가입
+	@PostMapping("signup/customer")
+	public String singupCustomer(MemberDto memberDto) {
+		
+		return "redirect:/home";
+	}
 
 	// 사업자회원 가입 페이지로 이동
 	@GetMapping("join/business")

@@ -1,0 +1,343 @@
+@charset "UTF-8";
+
+.pointer {
+  cursor: pointer;
+}
+section.search_section{
+	height: 150px;
+    position: relative;
+}
+div.search{
+	width: 960px;
+	height : 145px;
+	border: var(--color_blue_1), 2px, solid;
+	border-radius : 20px;
+	margin: auto;
+	top: 135px;
+	background-color: rgba(255, 255, 255, .7);
+}	
+
+button.tablinks{
+	background: none;
+    border: none;
+    font-size: 17px;
+}
+
+button#one_way_btn{
+	margin-left : 30px;
+	margin-top : 20px;
+	border-bottom: 3px solid  rgb(0,106,255);
+}
+
+div#round_trip{
+	display: none;
+}
+
+div.tabcontent > *{
+	height: 40px;
+	margin: 30px 15px 20px 15px;
+	border-radius: 10px;
+	font-size: 15px;
+	text-align: center;
+	line-height: 40px;
+	float: left;
+}
+
+div.tabcontent > div{
+	margin-top : 30px;
+	background-color: #D9D9D9;
+}
+
+div.tabcontent div:nth-child(1) {
+	width : 370px;
+}
+
+div.tabcontent div:nth-child(2) {
+	width : 160px;
+}
+div.tabcontent div:nth-child(3) {
+	width : 246px;
+}
+
+div.tabcontent > label{
+	
+	border : none;
+	color : black;
+	background-color: #BCEFFF;
+	width: 60px;
+}
+
+div.tabcontent > label:hover{
+	border : none;
+	color : white;
+	background-color: rgb(0,106,255);
+	width: 60px;
+}
+
+
+
+										
+.depart_arrival_flex{
+	display: flex;
+	margin: auto;
+	
+}
+
+button#depart{
+	width: 165px;
+	border : none;
+	background : none;
+	height: 40px;
+}
+img.type {
+	width: 30px;
+	height: 30px;
+	margin: 5px;
+}
+button#arrival{
+	width: 165px;
+	border : none;
+	background : none;
+	height: 40px;
+}
+
+button#one_way_date , button#round_trip_date{
+	border: none;
+	background: none;
+}
+
+button#one_way_date > div , button#round_trip_date > div{
+
+	float : left;
+	width: 108px;
+	line-height: 40px;
+}
+
+button#one_way_date > img , button#round_trip_date > img{
+	float : right;
+	width: 30px;
+	height: 30px;
+	margin: 5px;
+}
+button#people_lineup{
+	width : 246px;
+	height: 40px;
+	background: none;
+	border: none;
+}
+button#people_lineup > div{
+	float : left;
+	width : 194px;
+	height: 40px;
+	line-height: 40px;
+}
+button#people_lineup >img{
+	width: 30px;
+	height: 30px;
+	margin: 5px;
+	float : right;
+}
+
+			/* 어코딩 섹션 */
+section.according_section{
+	width: 960px;
+	margin: auto;
+}
+
+
+div.according{
+	max-width:960px;
+	position : absolute;
+	margin-top : -60px;
+	width:fit-content;
+	border : var(--color_blue_1), 2px, solid;
+	border-radius : 20px;
+	padding : 40px;
+	background-color: white;
+	z-index: 999;
+}
+					/* 이/착륙 국가 */
+div.accoding_title{
+	position: absolute;
+	margin-top: -20px;
+}
+div#depart_accoding_wrap{
+	display: flex;
+}
+
+
+.depart_nation,.arrival_nation{
+	width : 90px;
+	font-size: 17px;
+	
+}
+
+.according_section_depart_tablinks , .according_section_arrival_tablinks {
+    width : 90px;
+    border-style: solid;
+    border-left:none;
+    border-bottom:none;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+    border-color: black;
+    font-size: 16px;
+    padding: 15px;
+    padding-right : 40px;
+    height : 50px;
+    background: none;
+}
+.according_section_depart_tablinks:first-child, .according_section_arrival_tablinks:first-child{
+	background-color: var(--color_blue_2);
+	font-weight: 900;
+}
+.according_section_depart_tablinks:last-child, .according_section_arrival_tablinks:last-child{
+	border-bottom : 1px solid black;
+}
+.according_section_depart_tabcontent,.according_section_arrival_tabcontent{
+	border-bottom : 1px solid black;
+	border-top : 1px solid black;
+	font-size: 17px;
+	display : grid;
+    grid-template-columns: repeat(5, 150px);
+    grid-auto-flow: row;
+    grid-auto-rows: 25%;
+	display: none;    
+}
+.according_section_depart_tabcontent#depart_korea ,.according_section_arrival_tabcontent#arrival_korea{
+	 display: block;
+}
+.according_section_depart_tabcontent > button,.according_section_arrival_tabcontent > button{
+    width:150px;
+    height:50px;
+    padding: 7px 10px;
+    cursor: pointer;
+    align-content: center;
+    background: none;
+    border: none;
+}
+
+ 							/* 날짜 */
+#date_accoding{
+	left: 798px;
+	margin-top: -24px;
+    width: 500px;
+    height: auto;
+    border: var(--color_blue_1), 2px, solid;
+    border-radius: 20px;
+    background-color: white;
+    padding: 10px;
+    display: block;
+    
+}
+
+button#depart_date{
+	display: block;
+}
+button#arrival_date{
+	display: none;
+}
+
+#btn_return_depart_date{
+	margin-left : 50px;
+	display: none;
+}
+
+
+
+							/* 인원 + 좌석 */
+div#people_lineup_sit_accoding{
+	margin-left:530px;
+	width: 400px;
+}
+							
+div.people_lineup{
+	
+}
+
+div.people_lineup > div{
+	display : flex;
+	margin : 20px;
+	
+}
+
+div.people_lineup > div > * {
+	padding: 10px 15px;
+	background: none;
+	text-align: center;
+	margin: auto;
+	font-size: 15px;
+}
+
+div.people_lineup > div > h1{
+	    color: #5E5E5E;
+	    float : left;
+	
+}	
+
+div.people_lineup > div > button:nth-child(2){
+	width : 42px;
+	height : 42px;
+	text-align: center;
+    background-color: var(--color_blue_2);
+    color: black;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px 15px;
+	
+}	
+
+div.people_lineup > div > div:nth-child(3){
+    color: #5E5E5E;
+	
+}
+
+div.people_lineup > div > button:nth-child(4){
+	width : 42px;
+	height : 42px;
+	text-align: center;
+    background-color: var(--color_blue_2);
+    color: black;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px 15px;
+}	
+
+div.people_lineup > div > button:hover{
+	background-color : rgb(0,106,255);
+}
+div.sit{
+	border-top: 1px solid black;
+
+}
+
+div.sit > button {
+	display: block;
+	margin : 20px auto;
+	width : 300px;
+	height: 60px;
+	background: none;
+	border-radius: 15px;
+}
+
+div.sit > button:first-child{
+	background-color: var(--color_blue_2);
+}
+
+#calendar > div.fc-header-toolbar.fc-toolbar{
+	margin-bottom: 5px;
+}
+#calendar > div.fc-header-toolbar.fc-toolbar > div:nth-child(3) > button{
+	width: 50px;
+    height: 30px;
+    font-size: 11px;
+}
+.fc .fc-button{
+	    padding: 0;
+}
+#fc-dom-1{
+	font-size: 13px;
+}

@@ -3,7 +3,6 @@
 <div id="airline-info-box" th:fragment="airlineList">
 	<!-- <input type="hidden" id="update-maxprice" th:value="${maxPrice}"> -->
 	<div th:each="air : ${airlineData}" class="airline-info">
-	
 		<div hidden="">
 			<span th:text="${air.departLoc}" class="select-info-departLoc" name="departLoc"></span> 
 			<span th:text="${air.arrivalLoc}" class="select-info-arrivalLoc" name="arrivalLoc"></span> 

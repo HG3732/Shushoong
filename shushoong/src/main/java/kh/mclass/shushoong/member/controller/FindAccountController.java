@@ -41,23 +41,19 @@ public class FindAccountController {
 	// 사업자회원 아이디 찾기
 	@PostMapping("find/business/id.ajax")
 	@ResponseBody
-	public String findIdBusiness(HttpServletRequest request, Model model, MemberDto memberDto,
-								@RequestParam("userName") String userName,
+	public String findIdBusiness(@RequestParam("userName") String userName,
 								@RequestParam("userEmail") String userEmail,
 								@RequestParam("userGrade") String userGrade) {
+	
+		String result = "";
+		
 		try {
-			memberDto.setUserName(userName);
-			memberDto.setUserEmail(userEmail);
-			memberDto.setUserGrade(userGrade);
-			
-			MemberDto findId = memberservice.findId(memberDto);
-			model.addAttribute("userId", findId);
-			
+			result = memberservice.findId(userName, userEmail, userGrade);
 		} catch (Exception e) {
-			model.addAttribute("msg", "오류가 발생되었습니다.");
 			e.printStackTrace();
 		}
-		
-		return "member/findbusinessInfo";
+			
+
+		return result;
 	}
 }

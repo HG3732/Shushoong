@@ -45,8 +45,8 @@ public class MemberService {
 	}
 
 	// 아이디 찾기
-	public MemberDto findId(MemberDto memberDto) {
-		return memberRepository.findId(memberDto);
+	public String findId(String userName, String userEmail, String userGrade) {
+		return memberRepository.findId(userName, userEmail, userGrade);
 	}
 
 	// 비밀번호 재설정

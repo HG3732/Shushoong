@@ -30,6 +30,58 @@ xmlns:th="http://www.thymeleaf.org">
 				</aside>
 			</div>
 			<div class="wrap-section">
+				<div class="register_hotel">등록한 사업장</div>
+			<div class="hotel_table">
+				<table>
+					<colgroup>
+						<col style="width: 40%;">
+						<col style="width: 20%;">
+						<col style="width: 20%;">
+						<col style="width: 10%;">
+					</colgroup>
+					<tr class="tr-first">
+						<th>상품명</th>
+						<th>상세페이지</th>
+						<th>등록일자</th>
+						<th></th>
+					</tr>
+					<tr class="tr-second">
+						<td style="text-align: center;">스위소텔 난카이 오사카</td>
+						<td style="text-align: center;">http://www.naver.com</td>
+						<td style="text-align: center;">2024.06.20</td>
+						<td><img th:src="@{/images/trash.png}" style="width:20px;"></td>
+					</tr>
+<!-- 					<c:choose>
+						<c:when test="${empty mapboardlist.boardlistdto}">
+	          				<tr>
+	          					<td colspan="5" style="border-bottom: none;">
+	          						게시글이 존재하지 않습니다.
+	          					</td>
+	          				</tr>
+	          			
+	          			</c:when>
+						<c:otherwise>
+							<tbody>
+								<c:forEach items="${mapboardlist.boardlistdto}" var="dto">
+								mapboardlist 안에 boardlistdto를 dto로 분리시킴
+									<tr class="tr-sec">
+										<td style="text-align: center;">${dto.boardId}</td>
+										<td><a href="${pageContext.request.contextPath }/board/content?id=${dto.boardId }">${dto.title }</a></td>
+										boardId 에 의해 해당 게시판 상세 페이지로 이동
+										url에 있는 parameter 값 가지고 와서 쓸 수 있기 때문에 여기 있는 id는
+										BoardContentController에에서 쓰임
+										<td>${dto.boardWriter}</td>
+										<td>${dto.writeTime}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</c:otherwise>
+					</c:choose> -->
+				</table>
+				<div class="btn">
+					<button type="button" class="btn_register">등록하기</button>
+				</div>
+			</div>
 				
 			</div>
 			

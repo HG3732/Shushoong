@@ -25,13 +25,14 @@ public interface MemberRepository {
 	public int join(MemberDto memberDto);
 	
 	// 아이디 찾기
-	public MemberDto findId(MemberDto memberDto);
+	public String findId(String userName, String userEmail, String userGrade);
 		
+	// 계정 체크 
+	public String accountCheck(String userName, String userEmail, String userGrade);
+	
 	// 아이디 중복 확인
 	public int idCheck(String userId);
-	
-	// ---------- 마이페이지 ----------
-	
+		
 	// 비밀번호 재설정 
 	public String resetPwd(Map<String, Object> map);
 

@@ -135,22 +135,6 @@
 		</div>
 	</div>
 	
-	<script>
-		$(loadedHandler);
-		
-		function loadedHandler() {
-			$(".btn.secession").on("click", deleteAccHandler);
-			$(".pop-btn.cancle").on("click", cancleHandler);
-			$(".close_btn").on("click", cancleHandler)
-		}
-		
-		function deleteAccHandler() {
-			$("#popup").hide().fadeIn();
-		}
-		
-		function cancleHandler() {
-			$("#popup").fadeOut();
-		}
-	</script>
+	<script th:src="@{/js/mypage/business/mypageBusinessCorrectInfo.js}" type="text/javascript"></script>
 </body>
 </html>

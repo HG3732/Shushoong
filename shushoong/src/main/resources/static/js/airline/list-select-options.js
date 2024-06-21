@@ -1,7 +1,7 @@
 function getSelectOptions() {
 	var viaType = "direct";
-	var departLoc = $('#select-info-departLoc-out').text();
-	var arrivalLoc = $('#select-info-arrivalLoc-out').text();
+	var departLoc = $('#select-info-departLoc').text();
+	var arrivalLoc = $('#select-info-arrivalLoc').text();
 
 	$('#showlist').on('change', updateTimeRange);
 	$('#price-input-right').on('click', updateTimeRange); // 가격 사이드 바

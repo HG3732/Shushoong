@@ -96,14 +96,13 @@ public class AirlineController {
 			HttpSession session,
 			Model md) {
 		
+		
 		session.setAttribute("airlineCode", airlineCode);
 //		session.setAttribute("airlineCodeReturn", airlineCodeReturn);
-		
 		String departLoc = (String) session.getAttribute("arrivalLoc");
 		String arrivalLoc = (String) session.getAttribute("departLoc");
 		String departDate = (String) session.getAttribute("departDate");
 		String arrivalDate = (String) session.getAttribute("arrivalDate");
-		
 		String airlineCode2 = (String) session.getAttribute("airlineCode");
 		
 		System.out.println("선택된 항공 코드 : " +  airlineCode2);

@@ -5,16 +5,87 @@
 <meta charset="UTF-8">
 <title>항공 목록 조회</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
 <link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 <!-- <link th:href="@{/css/airline/reset.css}" rel="stylesheet" /> -->
+<!-- <link th:href="@{/css/airline/airline_searchbar.css}" rel="stylesheet" /> -->
+<link th:href="@{/css/airline/airline_mainbar.js}" rel="stylesheet" />
 <link th:href="@{/css/airline/core.css}" rel="stylesheet" />
 <link th:href="@{/css/airline/airline_list.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+<link th:href="@{/css/airline/airline_searchbar.css}" rel="stylesheet" />
 </head>
+<style>
+div.sit > button {
+	width: 178px;
+	height: 32px;
+}
+#minus{
+	width: 26px;
+	height: 26px;
+	padding: 0;
+}
+#plus{
+	width: 26px;
+	height: 26px;
+	padding: 0;
+}
+div.people_lineup > div{
+margin: 4px;
+}
+div#people_lineup_sit_accoding{
+	margin-top: -24px;
+	width: 220px;
+	margin-left: 606px;
+	padding: 10px;
+}
+#arrival_accoding{
+	width: 600px;
+	margin-top: -24px;
+	padding: 30px;
+}
+.according_section_arrival_tabcontent > button {
+	width: 100px;
+}
+.according_section_depart_tabcontent > button {
+	width: 100px;
+}
+#date_accoding{
+	left: 721px;
+	margin-top: -24px;
+    width: 500px;
+    height: auto;
+    border: var(--color_blue_1), 2px, solid;
+    border-radius: 20px;
+    background-color: white;
+    padding: 10px;
+    display: block;
+    
+}
+#depart_accoding{
+	width: 600px;
+	margin-top: -24px;
+	padding: 30px;
+}
+
+#calendar > div.fc-header-toolbar.fc-toolbar{
+	margin-bottom: 5px;
+}
+#calendar > div.fc-header-toolbar.fc-toolbar > div:nth-child(3) > button{
+	width: 50px;
+    height: 30px;
+    font-size: 11px;
+}
+.fc .fc-button{
+	    padding: 0;
+}
+#fc-dom-1{
+	font-size: 13px;
+}
+</style>
 <body>
 	<div class="wrapper">
 		<div class="wrap-header">
@@ -25,41 +96,27 @@
 				</div>
 			</header>
 		</div>
-		<!-- 
-		<div class="wrap-body">
-			<div class="wrap-">
-			 -->
 		<div class="wrap-main">
 			<div class="container">
-				<div class="top-nav">
-					<div class="search location">
-						<div class="selectLoc departLoc">
-							<input type="text" class="inputLoc">
-						</div>
-						<div class="reverse">
-							<button type="button"></button>
-						</div>
-						<div class="selectLoc arrivalLoc">
-							<input type="text" class="inputLoc">
-						</div>
-					</div>
-					<div class="search date" th:if="${ticketType} != 1">
-						<div class="selectDate departDate">
-							<button type="button" class="inputdate">날짜 선택</button>
-						</div>
-						<div class="selectDate arrivalDate">
-							<button type="button"></button>
-						</div>
-					</div>
-					<div class="search date" th:if="${ticketType} == 1">
-						<div class="selectDate departDate">
-							<button type="button"></button>
-						</div>
-					</div>
-					<div class="search passenger"></div>
-					<div class="search seat-grade"></div>
-					<div class="search btn"></div>
+				
+				<div th:replace="~{airline/airline_searchbar :: searchbar}"></div>
+				
+				<div hidden>
+					<form action="/shushoong/airline/main" method="post">
+						<input type="text" name="ticketType" id="hidden_ticket_type" 	value="1" 	readonly="readonly" required="required">
+						<input type="text" name="departLoc" id="hidden_depart_value" 				readonly="readonly" required="required">
+						<input type="text" name="arrivalLoc" id="hidden_arrival_value"		 	readonly="readonly" required="required">
+						<input type="text" name="departDate" id="hidden_depart_date" 				readonly="readonly" required="required">
+						<input type="text" name="arrivalDate" id="hidden_arrival_date" 				readonly="readonly" required="required">
+						<input type="text" name="adult" id="hidden_adult" 				value="1" 	readonly="readonly" required="required">
+						<input type="text" name="child" id="hidden_child" 				value="0"	readonly="readonly" required="required">
+						<input type="text" name="baby" id="hidden_baby" 					value="0"	readonly="readonly" required="required">
+						<input type="text" name="seatGrade" id="hidden_seat_grade" 			value="3"	readonly="readonly" required="required">
+						<input type="submit" id="hidden_submit">
+						<!-- checkpoint -->
+					</form>					
 				</div>
+				
 				<div class="flex-container">
 					<div class="sidebar">
 						<div class="time-list">
@@ -133,11 +190,16 @@
 											<div class="thumb right price"></div>
 										</div>
 										<div class="resultval price">
-											<div class="div1"></div>
+<<<<<<< HEAD
+											<!-- <div class="div1"></div> -->
 											<div th:if="${ticketType != 1}" class="div2" id="maxPrice"
 												th:text="${maxPrice}"></div>
 											<div th:if="${ticketType == 1}" class="div2" id="maxPrice"
 												th:text="${maxPrice} / 2"></div>
+=======
+											<div th:if="${ticketType != 1}" class="div2" id="maxPrice" th:text="${maxPrice}"></div>
+											<div th:if="${ticketType == 1}" class="div2" id="maxPrice" th:text="${maxPrice} / 2"></div>
+>>>>>>> 91782612ca445ec508cd620fb66e02b2006fd3ef
 										</div>
 									</div>
 								</div>
@@ -188,7 +250,6 @@
 								<!-- <span th:text="${airlineData[0].arrivalLoc}"></span>행 항공편을 선택하세요 -->
 							</p>
 						</div>
-<!-- 
 						<div hidden th:each="air : ${airlineData}">
 							<div hidden="">
 								<span th:text="${air.departLoc}" id="select-info-departLoc" name="departLoc"></span> 
@@ -197,7 +258,6 @@
 							</div>
 							
 						</div>
-						 -->
 						<div class="airline-info-container">
 							<form id="frm-airinfo" hidden>
 								<input type="hidden" id="departLoc" name="departLoc"> <input
@@ -220,6 +280,7 @@
 	<script type="text/javascript">
 		$(loadedHandler);
 		function loadedHandler() {
+			$(".according").css("display","none"); // 검색 바
 			setDepartLeftValue();
 			setDepartRightValue();
 			setDepartInitialValues(); // 시간대 출발
@@ -249,6 +310,8 @@
 	<script th:src="@{/js/airline/list-select-options-return.js}" type="text/javascript"></script>
 	<!-- 예약페이지로 이동 -->
 	<script th:src="@{/js/airline/list-reserve.js}" type="text/javascript"></script>
+	<!-- 검색 바 -->
+	<script th:src="@{/js/airline/airline_mainbar.js}" type="text/javascript"></script>
 
 </body>
 </html>

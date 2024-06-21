@@ -1,1 +1,17 @@
 @charset "UTF-8";
+
+.register_hotel{
+	font-family: 'SOYOMapleBoldTTF';
+	font-size: var(--font1);
+	margin-top: 20px;
+}
+
+.hotel_table{
+	margin-top: 20px;
+	vertical-align: middle;
+}
+
+.tr-first th {
+	text-align: center;
+	font-family: 'SOYOMapleBoldTTF';
+}

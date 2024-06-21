@@ -1,5 +1,5 @@
 function getSelectOptionsReturn() {
-	var viaType;
+	var viaType = "direct";
 	var departLoc = $('#select-info-departLoc-out').text();
 	var arrivalLoc = $('#select-info-arrivalLoc-out').text();
 	

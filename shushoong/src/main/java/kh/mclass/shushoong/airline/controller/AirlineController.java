@@ -27,20 +27,8 @@ public class AirlineController {
 	// 항공 목록 
 	@GetMapping("/airline/list")
 	public String airlineInfo(
-//			String airlineCode,
-//			String departLoc,
-//			String arrivalLoc,
-//			String departDate,
-//			String arrivalDate,
-//			String adult,
-//			String child,
-//			String baby,
-//			String seatGrade,
-//			String ticketType,
-//			String seatPrice,
 			HttpSession session,
 			Model md) {
-//		session.setAttribute("airlineCode", airlineCode);
 		
 		String departLoc = (String) session.getAttribute("departLoc");
 		String arrivalLoc = (String) session.getAttribute("arrivalLoc");
@@ -50,8 +38,6 @@ public class AirlineController {
 		String child = (String) session.getAttribute("child");
 		String baby = (String) session.getAttribute("baby");
 		String ticketType = (String) session.getAttribute("ticketType");
-		
-//		String airlineCode2 = (String) session.getAttribute("airlineCode"); 
 		
 		System.out.println(" ==== 컨트롤러 세션 값 ====");
 		System.out.println("ticketType : " + ticketType + "adult : " + adult + "child : " + child + "baby : " + baby );
@@ -87,18 +73,11 @@ public class AirlineController {
 	@PostMapping("airline/list_return")
 	public String airlineInfoReturn(
 			String airlineCode,
-//			String airlineCodeReturn,
-//			String airlineCodeReturn,
-//			String departLoc,
-//			String arrivalLoc,
-//			String departDate,
-//			String arrivalDate,
 			HttpSession session,
 			Model md) {
 		
 		
 		session.setAttribute("airlineCode", airlineCode);
-//		session.setAttribute("airlineCodeReturn", airlineCodeReturn);
 		String departLoc = (String) session.getAttribute("arrivalLoc");
 		String arrivalLoc = (String) session.getAttribute("departLoc");
 		String departDate = (String) session.getAttribute("departDate");
@@ -133,8 +112,6 @@ public class AirlineController {
 	@GetMapping("airline/list_select_options/ajax")
 	//@ResponseBody
 	public String airlineSelectOptions(
-//			String departLoc,
-//			String arrivalLoc,
 			String departTimeLeft,
 			String deaprtTimeRight,
 			String arrivalTimeLeft,
@@ -169,8 +146,6 @@ public class AirlineController {
 	@GetMapping("airline/list_select_options_return/ajax")
 	//@ResponseBody
 	public String airlineReturnSelectOptions(
-//			String departLoc,
-//			String arrivalLoc,
 			String departTimeLeft,
 			String deaprtTimeRight,
 			String arrivalTimeLeft,

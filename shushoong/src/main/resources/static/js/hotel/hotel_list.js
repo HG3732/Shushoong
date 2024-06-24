@@ -2,10 +2,10 @@
 function likeHandler(thisElement){
 	//console.log(thisElement);	//이벤트 함수가 걸린 태그
 	//console.log(event.target);	//마우스 클릭 시 제일 가까운 요소 (하트 사진 누르면 하트 사진 뜨는....)
-	
+/*	
 	event.stopPropagation();  // 부모요소로의 이벤트 전파 중지
     event.preventDefault();   // 기본 동작 중지 (a , submit 등...)
-	
+*/
 	var currentSrc = $(thisElement).attr('src');
 	/* 이 경로를 토대로 이미지 바뀌는 경우의 수 적어주기 */
 	
@@ -41,6 +41,7 @@ function likeHandler(thisElement){
 			}
 		})
 	}
+	return false;
 }
 
 /* const inputLeft = document.getElementById("input-left"); */
@@ -239,10 +240,25 @@ function priceHandler() {
 function loadHotelListHandler() {
 	var end = Number(2);
 	
+	console.log("작동중");
+	
+	event.stopPropagation();  // 부모요소로의 이벤트 전파 중지
+    event.preventDefault();   // 기본 동작 중지 (a , submit 등...)
+
 	//스크롤이 화면의 일정높이까지 내려가면
-	if($(document).height() - $(this).scrollTop() < 900) {
+	if($(document).height() - ($(this).scrollTop()+200) <= $(this).height()) {
 			$('.hotel_list').children('.hotel:gt(' + end + '):lt(' + (end+3) + ')').css('display', 'grid');
 			end += 3;
 	}
+	/*
+	var scrollT = $(this).scrollTop(); //스크롤바의 상단위치 
+	var scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
+	var contentH = $(document).height(); //문서 전체 내용을 갖는 div의 높이
+	if(scrollT + scrollH +1 >= contentH) { // 스크롤바가 아래 쪽에 위치할 때            
+		console.log("aaaaaaaa");
+	}
+	*/
+	
+	
 }
 

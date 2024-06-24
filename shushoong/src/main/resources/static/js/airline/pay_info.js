@@ -22,12 +22,12 @@
 										<div>영문 이름</div> 
 										<div>(First Name)</div>
 									</div>
-									<div><input type="text" placeholder="여권에 적힌 이름을 영어로 입력해 주세요" name="passenger_firstName"></div>
+									<div><input type="text" placeholder="이름을 영어로 입력해 주세요" name="passenger_firstName"></div>
 									<div>
 										<div>영문 성 </div>
 										<div>(Last Name)</div>
 									</div>
-									<div><input type="text" placeholder="여권에 적힌 성씨를 영어로 입력해 주세요" name="passenger_lastName"></div>
+									<div><input type="text" placeholder="성씨를 영어로 입력해 주세요" name="passenger_lastName"></div>
 								</div>
 								<div>
 									<div>
@@ -35,7 +35,7 @@
 										<div>(Birth)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="생년월일" name="passenger_lastName">
+										<input type="text" placeholder="생년월일" name="passenger_birth">
 									</div>
 									<div>
 										<div>국적 </div>
@@ -56,13 +56,13 @@
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
 									</div>
-									<div><input type="text" placeholder="여권 번호"></div>
+									<div><input type="text" placeholder="여권 번호" name="passport_num"></div>
 									<div>
 										<div>여권 만료일</div>
 										<div>(Expired Date)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="만료 날짜" name="passenger_lastName">
+										<input type="text" placeholder="만료 날짜" name="expiration_date">
 									</div>
 								</div>
 							</div>
@@ -149,7 +149,7 @@
 										<div>(Birth)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="생년월일" name="passenger_lastName">
+										<input type="text" placeholder="생년월일" name="passenger_birth">
 									</div>
 									<div>
 										<div>국적 </div>
@@ -170,13 +170,13 @@
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
 									</div>
-									<div><input type="text" placeholder="여권 번호"></div>
+									<div><input type="text" placeholder="여권 번호" name="passport_num"></div>
 									<div>
 										<div>여권 만료일</div>
 										<div>(Expired Date)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="만료 날짜" name="passenger_lastName">
+										<input type="text" placeholder="만료 날짜" name="expiration_date">
 									</div>
 								</div>
 							</div>
@@ -261,7 +261,7 @@
 										<div>(Birth)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="생년월일" name="passenger_lastName">
+										<input type="text" placeholder="생년월일" name="passenger_birth">
 									</div>
 									<div>
 										<div>국적 </div>
@@ -282,13 +282,13 @@
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
 									</div>
-									<div><input type="text" placeholder="여권 번호"></div>
+									<div><input type="text" placeholder="여권 번호" name="passport_num"></div>
 									<div>
 										<div>여권 만료일</div>
 										<div>(Expired Date)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="만료 날짜" name="passenger_lastName">
+										<input type="text" placeholder="만료 날짜" name="expiration_date">
 									</div>
 									<input class="baggage" id="baby_30kg${i}" type="hidden" name="child_baggage_size${i}" value="1">
 								</div>

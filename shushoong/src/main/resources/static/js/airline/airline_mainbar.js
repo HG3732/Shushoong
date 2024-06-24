@@ -106,7 +106,7 @@
 			})
 			$("#hidden_depart_value").val($(this).attr("id"));								/* value input */
 			document.getElementById("depart_accoding").style.display="none"; 		/* 출국 according close */
-			document.getElementById("arrival_accoding").style.display="block";		/* 입국 according open */
+			document.getElementById("arrival_accoding").style.display="flex";		/* 입국 according open */
 		});
 				
 				/* 입국 value input 펑션 */
@@ -129,10 +129,13 @@
     	    var year = date.getFullYear();
     	    var month = ("0" + (1 + date.getMonth())).slice(-2);
     	    var day = ("0" + date.getDate()).slice(-2);
+    	    
+    	    
 	    	
 			var calendarEl = document.getElementById('calendar');
 		    var calendar = new FullCalendar.Calendar(calendarEl, {
 		   		initialView: 'dayGridMonth',
+		   		selectable : true,
 		       	dateClick: function(info) {
 		       		
 					if($("#hidden_ticket_type").val()==1){
@@ -175,8 +178,11 @@
 						}
 					}
 		       	}
+		       
+		       	  
 		    });
 		    calendar.render();
+	    
 	    });
 	    
 													/* 오는날에서 가는날로 전환 */

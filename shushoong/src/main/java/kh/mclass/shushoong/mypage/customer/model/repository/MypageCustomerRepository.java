@@ -9,14 +9,11 @@ import kh.mclass.shushoong.member.model.domain.MemberDto;
 
 @Mapper
 public interface MypageCustomerRepository {
-	
-	// 관리자 전용
-	// 회원, 사업자 전용
-	// 회원 정보
-	List<MemberDto> selectAllList();
-	List<MemberDto> selectOne(String userId);
-	
-	// 비밀번호 재설정 
-	public String resetPwd(Map<String, Object> map);
+
+	// 로그인 정보 불러오기 
+	public MemberDto selectOne(String userId);
+
+	// 비밀번호 재설정
+	public String resetPwd(MemberDto dto);
 
 }

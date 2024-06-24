@@ -43,13 +43,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								이름
 							</div>
 							<div class="namebox">
-								예시
+								<span th:text="${dto.userName}"></span>
 							</div>
 							<div class="menu">
 								아이디
 							</div>
 							<div class="idbox">
-								<span sec:authentication="name">Bob</span>
+								<span sec:authentication="name"></span>
 							</div>
 							<div class="menu">
 								비밀번호
@@ -80,7 +80,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								이메일
 							</div>
 							<div class="emailbox">
-								aaa@aaa
+								<span th:text="${dto.userEmail}"></span>
 							</div>
 						</div>
 						<div class="save">

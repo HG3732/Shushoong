@@ -10,12 +10,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<div class="hotel_pic" th:style="'background-image: url(' + ${hotel.hotelPic} + '); background-size: cover;'">
 				<th:block th:if="${!likeList.contains(hotel.hotelCode)}">
 					<div class="hotel_like" >
-						<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart" onclick="likeHandler(this);">
+						<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart" onclick="return likeHandler(this);">
 					</div>
 				</th:block>
 				<th:block th:if="${likeList.contains(hotel.hotelCode)}">
 					<div class="hotel_like">
-						<img th:src="@{/images/heart_color.png}" alt="좋아요" style="width:40px;" class="heart" onclick="likeHandler(this);">
+						<img th:src="@{/images/heart_color.png}" alt="좋아요" style="width:40px;" class="heart" onclick="return likeHandler(this);">
 					</div>
 				</th:block>
 			</div>

@@ -34,7 +34,7 @@
 	margin: 0 auto;
 	width: 960px;
 	position: relative;
-	z-index: 1;
+	z-index: 2;
 }
 
 .main-back .hotel-search-bar {
@@ -179,7 +179,7 @@
 	border-radius: 20px;
 	background-color: white;
 	padding : 40px;
-	display: block;
+	display: none;
 }
 
 .wrap-room-box {

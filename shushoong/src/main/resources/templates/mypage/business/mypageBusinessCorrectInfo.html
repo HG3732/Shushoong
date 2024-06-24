@@ -43,19 +43,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								이름
 							</div>
 							<div class="namebox">
-								예시
+								<span th:text="${dto.userName}"></span>
 							</div>
 							<div class="menu">
 								아이디
 							</div>
 							<div class="idbox">
-								<span sec:authentication="name">Bob</span>
+								<span sec:authentication="name"></span>
 							</div>
 							<div class="menu">
 								비밀번호
 							</div>
 							<div class="password write">
-								<input type="password" id="userPwd" class="textline" placeholder="비밀번호">
+								<input type="password" id="userPwd" class="textline" placeholder="8~20자 영,특문 비밀번호">
 							</div>
 							<div class="menu">
 								비밀번호 확인
@@ -73,11 +73,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								이메일
 							</div>
 							<div class="emailbox">
-								aaa@aaa
+								<span th:text="${dto.userEmail}"></span>
 							</div>
 						</div>
 						<div class="save">
-							<button class="btn save">변경사항 저장</button>
+							<button type="button" class="btn save">변경사항 저장</button>
 						</div>
 					</div>
 					<div>

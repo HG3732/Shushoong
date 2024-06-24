@@ -23,7 +23,6 @@
 		var loc = $(this).text();
 		var loc_nation = $(this).data('nation');
 		var loc_code = $(this).data('loccode');
-		console.log(loc_code);
 		$('.selected-loc').val(loc);
 		$('input[name=loc]').val(loc_nation + loc_code);
 	}
@@ -33,6 +32,8 @@
 		$('.wrap-loc-box').css('display', 'none');
 		$('.wrap-room-box').css('display', 'none');
 		$('.wrap-date-box').toggle();
+		renderCalendar();
+		
 /*		console.log($('.wrap-date-box').css('display'));
 		if($('.wrap-date-box').css('display') == 'block'){
 			calendar.render();

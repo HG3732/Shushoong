@@ -49,8 +49,6 @@ public class HotelController {
 		List<HotelDtoRes> result = service.selectAllHotelList(loc, people, null, null, null, null);
 		Integer maxPrice = service.selectMaxRoomlPrice(loc, people, null);
 		
-		System.out.println("checkIn : " + checkIn);
-		System.out.println("checkOut : " + checkOut);
 		//좋아요 여부 검색
 		String userId = (String)session.getAttribute("userId");
 		List<String> likeList = service.selectLikeHotelList(loc, userId);
@@ -60,11 +58,10 @@ public class HotelController {
 		model.addAttribute("hotelList", result);
 		model.addAttribute("maxPrice", maxPrice);
 		model.addAttribute("likeList", likeList);
-		model.addAttribute("nation", nation);
-		model.addAttribute("checkIn", checkIn);
-		model.addAttribute("checkOut", checkOut);
+		session.setAttribute("nation", nation);
 		session.setAttribute("checkIn", checkIn);
 		session.setAttribute("checkOut", checkOut);
+		System.out.println("session.nation : "+(String)session.getAttribute("nation"));
 		return "hotel/hotel_list";
 	}
 

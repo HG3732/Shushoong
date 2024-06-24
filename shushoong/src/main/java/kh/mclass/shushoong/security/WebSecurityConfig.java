@@ -53,7 +53,7 @@ public class WebSecurityConfig {
 	
 	// 비밀번호 암호화
 	@Bean
-	PasswordEncoder passwordEncoder() {
+	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	

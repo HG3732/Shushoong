@@ -1,27 +1,31 @@
 package kh.mclass.shushoong.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
-import kh.mclass.shushoong.member.model.repository.MemberRepository;
+import kh.mclass.shushoong.member.model.domain.MemberRole;
 import kh.mclass.shushoong.member.model.service.MemberService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.AllArgsConstructor;
+
 
 @Controller
-@RequiredArgsConstructor
+@AllArgsConstructor
 //@PropertySource("classpath:/keyfiles/apikey.properties")
 public class JoinController {
 	
 	@Autowired
 	private final MemberService memberservice;
+	
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+//	private final MemberRole Role;
 	
 	
 	// 회원가입 메인 페이지로 이동
@@ -47,9 +51,16 @@ public class JoinController {
 	
 	// 일반유저 회원가입
 	@PostMapping("signup/customer")
+	@ResponseBody
 	public String singupCustomer(MemberDto memberDto) {
+				
+		memberDto.setUserId(memberDto.getUserId());
+		memberDto.setUserName(memberDto.getUserName());
+		memberDto.setUserPwd(bCryptPasswordEncoder.encode(memberDto.getUserPwd()));
+		memberDto.setUserEmail(memberDto.getUserEmail());
+//		memberDto.setUserGrade(Role.CUSTOMER);
 		
-		return "redirect:/home";
+		return "redirect:/member/login";
 	}
 
 	// 사업자회원 가입 페이지로 이동
@@ -57,5 +68,18 @@ public class JoinController {
 	public String joinBusiness() {
 		return "member/businessJoin";
 	}
-
+	
+	@PostMapping("signup/business")
+	@ResponseBody
+	public String singupBusiness(MemberDto memberDto) {
+				
+		memberDto.setUserId(memberDto.getUserId());
+		memberDto.setUserName(memberDto.getUserName());
+		memberDto.setUserPwd(bCryptPasswordEncoder.encode(memberDto.getUserPwd()));
+		memberDto.setUserEmail(memberDto.getUserEmail());
+//		memberDto.setUserGrade(Role.BUSINESS);
+		
+		
+		return "redirect:/member/login";
+	}
 }

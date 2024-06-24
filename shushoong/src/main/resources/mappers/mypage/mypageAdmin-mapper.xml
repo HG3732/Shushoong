@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kh.mclass.shushoong.mypage.admin.model.repository.MypageAdminRepository">
-<!-- 관리자 전용 -->
-<!-- 유저관리 -->
-	<select id="selectAllCustomerList" resultType="CustomerManageDto">
-		SELECT USER_ID, USER_NAME, USER_EMAIL, USER_GRADE, USER_STATUS, EMAIL_RECEIVE, MSG_RECEIVE, LATEST_LOGIN FROM MEMBER
-	</select>
-	<select id="selectOne" resultType="CustomerManageDto">
-		SELECT USER_ID, USER_NAME, USER_EMAIL, USER_GRADE, USER_STATUS, EMAIL_RECEIVE, MSG_RECEIVE, LATEST_LOGIN FROM MEMBER WHERE USER_ID=#{userId}
+	<select id="login" parameterType="string" resultType="MemberDto">
+		SELECT USER_ID, USER_NAME, USER_PWD, USER_EMAIL, USER_GRADE, USER_STATUS, JOIN_DATE, EMAIL_RECEIVE, MSG_RECEIVE, LATEST_LOGIN FROM MEMBER  WHERE USER_ID=#{userId} 
 	</select>
 	
-<!-- 사업자관리 -->
-	<select id="selectAllBusinessList" resultType="BusinessManageDto">
-		SELECT USER_ID, USER_NAME, USER_EMAIL, USER_GRADE, USER_STATUS, JOIN_DATE, LATEST_LOGIN, BUSINESS_NUM, HOTEL_NAME FROM MEMBER WHERE USER_ID=#{userId}
+	<select id="selectAllList" resultType="MemberDTO">
+		SELECT USER_ID, USER_NAME, USER_GRADE FROM MEMBER WHERE NOT USER_GRADE='ADMIN'
 	</select>
 	
-<!-- 공통관리 -->
-	<update id="stopUse" parameterType="string">
-		UPDATE MEMBER SET USER_STATUS="0" WHERE USER_ID=#{userId} 
-	</update>
+	<select id="selectOne" parameterType="string" resultType="MemberDto">
+		SELECT USER_ID,USER_NAME,USER_EMAIL, EMAIL_RECEIVE, MSG_RECEIVE FROM MEMBER WHERE USER_ID=#{userId}
+	</select>
 	
-<!-- 사업자 회원 전용 -->
+	<select id="selectSuspendedOne" parameterType="string" resultType="MemberDto">
+		SELECT USER_ID,USER_NAME,USER_EMAIL, EMAIL_RECEIVE, MSG_RECEIVE FROM MEMBER WHERE USER_STATUS='1'
+	</select>
 </mapper>

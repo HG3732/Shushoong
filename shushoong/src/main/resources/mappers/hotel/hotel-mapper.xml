@@ -71,18 +71,6 @@
 		delete from hotel_like where user_id = #{userId} and hotel_code = #{hotelCode}
 	</insert>
 	
-<!-- 	<select id="selectHotelPicList" parameterType="String" resultType="HotelPic">
-		select hotel_picture from hotel_pic where hotel_code = #{hotelCode}
-	</select>
-	
-	<select id="selectRoomList" parameterType="String" resultType="HotelRoomDto">
-		select room_cat, to_char(hotel_price, '999,999') as hotel_price, room_att from hotel_room where hotel_code = #{hotelCode}		
-	</select>
-	
-	<select id="selectHotelSearchList" parameterType="String" resultType="HotelSearchDtoRes">
-		select hotel_name, hotel_eng, hotel_address, hotel_call, hotel_check_in, hotel_check_out, hotel_policy, hotel_intro from hotel where hotel_code = #{hotelCode}
-	</select> -->
-	
 	<!-- 편의시설 -->
 	<select id="selectHotelFacility" parameterType="String" resultType="HotelFacilityDtoRes">
 		select * from hotel_facility where hotel_code = #{hotelCode}
@@ -94,10 +82,10 @@
 		from
 		    (select s1.*, rownum rn 
 		    from
-		        (select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
+		        (select hrv.user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
 			        ROUND((hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4, 1) as rate_avg
-			        from hotel_review 
-			            join hotel_reserve using (hotel_reserve_code)
+			        from hotel_review hrv 
+			            join hotel_reserve hrs using (hotel_reserve_code)
 			        where hotel_code = #{hotelCode}
 			            order by review_date desc) 
 		    s1)
@@ -161,5 +149,6 @@
 		where hotel_code = #{hotelCode}
 	</select>
 
+	<!-- 결제 -->
 	
 </mapper>

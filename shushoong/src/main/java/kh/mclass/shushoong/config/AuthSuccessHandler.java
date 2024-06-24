@@ -39,7 +39,7 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 		if (savedRequest != null) {
 			String url = savedRequest.getRedirectUrl();
 			if (url == null || url.equals("")) {
-				url = "/";
+				url = "/home";
 			}
 			if (url.contains("/register")) {
 				url = "/home";

@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.mypage.business.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,11 @@ public class MypageBusinessService {
 	
 	private BCryptPasswordEncoder bcrypt;
 	
-	// 비밀번호 재설정
+	public MemberDto selectOne(String userId) {
+		return mypageRepository.selectOne(userId);
+	}
 	
+	// 비밀번호 재설정
 	public String resetPwd(MemberDto dto) {
 		dto.setUserPwd(bcrypt.encode(dto.getUserPwd()));
 		return mypageRepository.resetPwd(dto);

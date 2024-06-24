@@ -77,9 +77,7 @@ xmlns:th="http://www.thymeleaf.org">
 											<input type="hidden" th:value="${room.hotelPrice}" name="hotelPrice">
 											<div th:utext="${room.roomCat} + ', ' + ${room.roomAtt}" class="room_cat"></div>
 											<div class="amount_num">
-												<!-- <strong th:text="${room.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);"></strong>원 -->
 												<strong th:text="${#numbers.formatInteger(room.hotelPrice, 3, 'COMMA')}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong>원
-												 <!-- <strong th:text="${#strings.replace(room.hotelPrice, '(?<=\\d)(?=(\\d{3})+$)', ',') + ' 원'}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong> -->
 											</div>
 											<button type="submit" class="btn_reserve" >예약하기</button>
 											<div style="grid-column: 1/9">

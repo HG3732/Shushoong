@@ -173,7 +173,12 @@ div#depart_accoding_wrap{
 	font-size: 17px;
 	
 }
-
+button.depart_accoding_value:hover , button.arrival_accoding_value:hover{
+	background-color: var(--color_gray_1);
+	border-bottom-width: 1px;
+	border-bottom-color: var(--color_gray_2);
+	border-bottom-style: solid;
+}
 .according_section_depart_tablinks , .according_section_arrival_tablinks {
     width : 90px;
     border-style: solid;

@@ -61,4 +61,24 @@
     		</when>
         </choose>
     </select>
+    <insert id="insertAllList" parameterType="AirlinePassengerInfoDto">
+		   
+		   INSERT 
+			   INTO passenger_info (
+			   		FIRST_NAME
+			   		,LAST_NAME
+			   		,BIRTH
+			   		,NATION
+			   	)
+   		<foreach collection="param1" item="item" separator=",">
+		   VALUES
+		   		(
+				        #{item.firstName}
+				        , #{item.lastName}
+				        , #{item.birth}
+				        , #{item.nation}
+			    )
+		</foreach>
+		   	
+	</insert>
 </mapper>

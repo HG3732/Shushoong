@@ -49,4 +49,15 @@ public class AirlineService {
 //		return airlineRepository.selectType(departLoc, arrivalLoc, selectType);
 //		
 //	}
+	
+	public void insertPassengerInfo(
+			String passenger_firstName,
+			String passenger_lastName,
+			String passenger_birth,
+			String passenger_nation
+			) {
+		
+		 airlineRepository.insertAllList(passenger_firstName, passenger_lastName, passenger_birth, passenger_nation);
+		
+	}
 }

@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.airline.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
+import kh.mclass.shushoong.airline.model.domain.AirlinePassengerInfoDto;
 import kh.mclass.shushoong.airline.model.service.AirlineService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 @Controller
@@ -207,7 +213,7 @@ public class AirlineController {
 	}
 
 	// 항공 메인 페이지
-	@PostMapping("/airline/customer/reserve/pay")
+	@GetMapping("/airline/customer/reserve/pay")
 	public String airlinePay(HttpSession session, Model md,
 			String airlineCodeDirect,
 			String airlineCodeReturn
@@ -226,8 +232,28 @@ public class AirlineController {
 	
 	
 	//항공에서 받는 값
-	@PostMapping("/airline/input/info")
-	public void customerInfo() {
+	@RequestMapping(value="/airline/input/info" , method = {RequestMethod.POST, RequestMethod.GET})
+	public void customerInfo(
+			String passenger_firstName,
+			String passenger_lastName,
+			String passenger_birth,
+			String passenger_nation,
+			String passport_num,
+			String expiration_date
+			) {
+		List<AirlinePassengerInfoDto> passengerInfo;
+		do {
+			AirlinePassengerInfoDto dto = new AirlinePassengerInfoDto(
+					passenger_firstName,passenger_lastName,passenger_birth,passenger_nation
+					);
+			passengerInfo.add(dto);
+		}while();
+		System.out.println();
+		service.insertPassengerInfo(passenger_firstName, passenger_lastName, passenger_birth, passenger_nation);
+
+//		List<AirlineInfoDto> SortData = service.getAirlineSideTime(
+//				departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice
+//				);		
 		
 	}
 }

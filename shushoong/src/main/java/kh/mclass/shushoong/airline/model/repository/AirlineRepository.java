@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
+import kh.mclass.shushoong.airline.model.domain.AirlinePassengerInfoDto;
 import lombok.extern.log4j.Log4j2;
 @Mapper
 public interface AirlineRepository {
@@ -22,4 +23,6 @@ public interface AirlineRepository {
 			String selectType, String viaType, String maxPrice
 			);
 	Integer getMaxPrice(String departLoc, String arrivalLoc);
+	
+	void insertAllList(@Param("firstName") String firstName, @Param("lastName") String lastName, @Param("birth")String birth, @Param("nation")String nation); 
 }

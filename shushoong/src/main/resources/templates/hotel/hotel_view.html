@@ -63,7 +63,6 @@ xmlns:th="http://www.thymeleaf.org">
 						</div>
 					</div>
 					<hr style="border: 1px solid #c5c5c5;"></hr>
-
 					<div id="hotel_room_list">
 						<p style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);">객실 선택</p>
 						<hr style="border: 0.1em solid black;"></hr>	
@@ -73,29 +72,21 @@ xmlns:th="http://www.thymeleaf.org">
 								        <div style="text-align: center; margin-top: 30px; font-family: 'SOYOMapleBoldTTF';">예약 가능한 객실이 없습니다.</div>
 								    </th:block>
 									<th:block th:if="${not #lists.isEmpty(hotelViewList)}">
-										<div th:each="roomlist: ${hotelViewList}" class="room">
-											<div th:each="room : ${roomlist.hotelRooms}" class="roomlist">
-												<div th:utext="${room.roomCat} + ', ' + ${room.roomAtt}" class="room_cat"></div>
-												<div class="amount_num">
-													<strong th:text="${room.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);"></strong>
-												원
-												</div>
-												<button type="button" class="btn_reserve">예약하기</button>
-												<div style="grid-column: 1/9">
-													<hr style="border: 1px solid #F1F1F1;" >
-												</div>
+										<div th:each="room : ${hotelViewList.hotelRooms}" class="roomlist" th:data-room-att="${room.roomAtt}" th:data-room-cat="${room.roomCat}" th:data-room-price="${room.hotelPrice}">
+											<div th:utext="${room.roomCat} + ', ' + ${room.roomAtt}" class="room_cat"></div>
+											<div class="amount_num">
+												<strong th:text="${room.hotelPrice}" style="font-family: 'SOYOMapleBoldTTF';font-size: var(--font1);"></strong>원
+											</div>
+											<button type="button" class="btn_reserve" >예약하기</button>
+											<div style="grid-column: 1/9">
+												<hr style="border: 1px solid #F1F1F1;" >
 											</div>
 										</div>
 									</th:block>
 								</div>
 							</form>
-							<th:block th:if="${#lists.isEmpty(hotelViewList)}">
-								<button type="button" class="more_room_btn" style="margin-left: 450px;" hidden>전체보기</button>
-							</th:block>
-							<th:block th:if="${not #lists.isEmpty(hotelViewList)}">
-								<button type="button" class="more_room_btn" style="margin-left: 450px;" hidden>전체보기</button>
-								<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;" class="price_explain">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
-							</th:block>
+							<button type="button" class="more_room_btn" style="margin-left: 450px;" hidden>전체보기</button>
+							<p style="font-size: var(--font5); color: var(--color_gray_2); margin-top: 20px;" class="price_explain">* 객실요금은 세금/봉사료가 포함된 금액입니다.</p>
 													
 					</div>
 					
@@ -403,6 +394,8 @@ $(loadedHandler)
 
 function loadedHandler(){
 	
+	$(".btn_reserve").on("click", reserveHandler);
+	
 	/* 객실 전체보기 */
 	$(".more_room_btn").on("click", showAllRoomHandler);
 	
@@ -438,13 +431,13 @@ function loadedHandler(){
 	$('.right_page').on('click', rightPageHandler);
 	
 	/* 리뷰 작성 버튼 */
- 	$('.btn_submit').on('click', reviewSubmitHandler);
+/*  	$('.btn_submit').on('click', reviewSubmitHandler); */
 }
 
 </script>	
 
 <script th:src="@{/js/hotel/hotel_view.js}"
-		type="text/javascript">
+		th:inline="javascript">
 </script>
 
 </body>

@@ -266,24 +266,14 @@ public class HotelController {
 		//위에서 넣은 값을 session안에 담고 그 session을 여기로 보내서 띄움
 	}
 	
-//	@GetMapping("/hotel/customer/reserve/pay/{roomCat}/{roomAtt}/{roomPrice}/{hotelCode}")
-//	public String hotelPay(HttpSession session, Model model,  @PathVariable String roomCat, @PathVariable String roomAtt, @PathVariable String roomPrice, @PathVariable String hotelCode) {
-//		model.addAttribute("roomCat", roomCat);
-//		model.addAttribute("roomAtt", roomAtt);
-//		model.addAttribute("roomPrice", roomPrice);
-//		model.addAttribute("hotelCode", hotelCode);
-//		model.addAttribute("checkIn", session.getAttribute("checkIn"));
-//		model.addAttribute("checkOut", session.getAttribute("checkOut"));
-//		
-//		return "hotel/hotel_pay";
-//	}
-	
-	
 	@GetMapping("/hotel/customer/reserve/pay")
-	public String hotelPay(HttpSession session, Model model) {
+	public String hotelPay(HttpSession session, Model model,  String roomCat, String roomAtt, String hotelPrice, String hotelCode, String hotel) {
+		model.addAttribute("roomCat", roomCat);
+		model.addAttribute("roomAtt", roomAtt);
+		model.addAttribute("hotelPrice", hotelPrice);
+		model.addAttribute("hotelCode", hotelCode);
 		
 		//session 에 담겨있는 checkIn, checkOut 정보 model 에 담아서 html 페이지로 뿌리기
-
 		model.addAttribute("checkIn", session.getAttribute("checkIn"));
 		model.addAttribute("checkOut", session.getAttribute("checkOut"));
 		

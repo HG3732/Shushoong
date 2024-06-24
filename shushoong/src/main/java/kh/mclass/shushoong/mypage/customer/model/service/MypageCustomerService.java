@@ -12,23 +12,4 @@ import kh.mclass.shushoong.mypage.admin.model.repository.MypageAdminRepository;
 @Service
 public class MypageCustomerService {
 
-	@Autowired
-	private MypageAdminRepository mypageRepository;
-	
-	// 관리자
-	
-	// 일반, 사업자
-	// 회원 정보 
-	public List<MemberDto> selectAllList() {
-		return mypageRepository.selectAllList();
-	}
-	
-	public List<MemberDto> selectOne(String userId) {
-		return mypageRepository.selectOne(userId);
-	}
-	
-	// 비밀번호 재설정
-	public String resetPwd(Map<String, Object> map) {
-		return mypageRepository.resetPwd(map);
-	}
 }

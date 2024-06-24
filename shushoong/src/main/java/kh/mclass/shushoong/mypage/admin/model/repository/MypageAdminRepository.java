@@ -17,6 +17,6 @@ public interface MypageAdminRepository {
 	List<MemberDto> selectOne(String userId);
 	
 	// 비밀번호 재설정 
-	public String resetPwd(Map<String, Object> map);
+	public int resetPwd(Map<String, Object> map);
 
 }

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.wrap-section{
+	min-height: 400px;
+}
+
 .register_hotel{
 	font-family: 'SOYOMapleBoldTTF';
 	font-size: var(--font1);
@@ -7,11 +11,45 @@
 }
 
 .hotel_table{
+	margin-top: 30px;
+}
+
+.my_hotel_info th {
+	width: 200px;
+	padding: 20px 0;
+	background-color: var(--color_blue_2);
+	font-family: 'SOYOMapleBoldTTF';
+	font-size: var(--font3);
+}
+
+.my_hotel_info td {
+	font-size: var(--font3);
+	width: 960px;
+	padding: 15px 0;
+	text-align: center;
+}
+
+.trash:hover {
+	cursor: pointer;
+}
+
+.btn{
 	margin-top: 20px;
+	text-align: center;
+}
+
+.btn_register{
+	border: none;
+	width: 100px;
+	padding: 10px 15px;
+	border-radius: 20px;
+	background-color: var(--color_blue_2);
 	vertical-align: middle;
 }
 
-.tr-first th {
-	text-align: center;
+.btn_register:hover{
+	cursor: pointer;
+	background-color: var(--color_blue_1);
+	color: white;
 	font-family: 'SOYOMapleBoldTTF';
 }

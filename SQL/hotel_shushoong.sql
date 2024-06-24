@@ -160,7 +160,8 @@ CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_ROOM_LIST" (
 SELECT hotel_code, to_char(HOTEL_PRICE, '999,999,999'), ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT_DESC as room_cat FROM HOTEL_ROOM
 JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
 JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
-WHERE hotel_code='2OS001';
+where room_count > 0;
+
 
 --WHERE hotel_code='2OS001' 이거는 create 할때 붙이면 X --> 그러면 where 한 데이터만 조회됨(모두를 위한 view)
 
@@ -169,6 +170,7 @@ WHERE hotel_code='2OS001';
 
 drop view v_room_list;
 
+commit;
 
 --------------------- 2024.06.20 리뷰 수정
 select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
@@ -180,11 +182,11 @@ select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_
 
 
 
-select count(*) as review_count, ROUND(avg(hotel_facility), 1) as avg_hotel_facility, ROUND(avg(hotel_clean), 1) as avg_hotel_clean, ROUND(avg(hotel_conven),1) as avg_hotel_conven, ROUND(avg(hotel_kind),1) as avg_hotel_kind, 
-        ROUND((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_all_rate
+select count(*) as review_count, NVL(ROUND(avg(hotel_facility), 1), 0) as avg_hotel_facility, NVL(ROUND(avg(hotel_clean), 1),0) as avg_hotel_clean, NVL(ROUND(avg(hotel_conven),1),0) as avg_hotel_conven, NVL(ROUND(avg(hotel_kind),1), 0) as avg_hotel_kind, 
+        NVL(ROUND((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1),0) as avg_all_rate
 from hotel_review
     join hotel_reserve hr using (hotel_reserve_code)
-where hotel_code = '2OS001';
+where hotel_code = '2OS004';
 
 
 
@@ -201,16 +203,99 @@ where hotel_code = '2OS001';
 desc hotel_review;
 
 insert into hotel_review values (
-    #{approveNo}, #{hotelReserveCode}, #{roomCat}, #{hotelCode}, #{roomCap}, #{roomAtt}, #{reviewTitle}, #{reviewComment}, #{hotelFacility}, ${hotelClean} ,${hotelConven},
+    #{approveNo}, #{hotelReserveCode}, #{reviewTitle}, #{reviewComment}, #{hotelFacility}, #{hotelClean} ,#{hotelConven},
     #{hotelKind}, #{tripperCat}
 );
 
+select * from hotel_reserve
+where hotel_code = '2OS001';
+
+
+-----호텔페이지 들어올 때 예약번호 통해서 user_Id, hotel_reserve_code 정보 들고 들어오기
+
+select * 
+from (select hotel_reserve_code, approve_no, substr(hotel_reserve_code, 9, 6) as hotel_code, to_date(SUBSTR(hotel_reserve_code, 1, 8)) as check_in
+from hotel_reserve
+    join pay using(hotel_reserve_code)
+where user_id = 'ex1') t1
+where sysdate > check_in and hotel_code = '2OS001';
+
+---결제해서 호텔에 실제로 체크인한 사람만 리뷰쓰기...
+-- sysdate보다 전에 묶었던 날이어야 review달 수 있음 
+-- hotel_view페이지 들어올 때 들고 들어오는 호텔코드를 hidden 으로 처리해서 위에 있는 hotel_code 와 비교를 해야함
+-- 데이터가 null 이면 review button 안보이게 하고 있으면 보이게 함
+
+
+
+pay 테이블에 레코드가 추가될 때 review_available 테이블에 레코드에 변화를 주는데, 
+레코드가 없다면 하나 추가하고 이때 review_available테이블의 review_count값은 1로 하고, 
+거기서 또 트리거가 발동하면 횟수만큼 review_count가 늘어났다가,
+다른 조건으로 review_count가 0이되면 해당 레코드를 삭제하는 코드를 짜줄래
+
+
+
+--리뷰 등록전에 결제 승인번호를 통해 리뷰 쓸 수 있는 가능 여부와 리뷰 쓸 수 있는 count 파악하고 리뷰 다 쓰면 이 테이블에서 record 지워주기
+--  => 같은 호텔에서 두번 묵게 되면 리뷰를 2개를 쓸 수 있어서 리뷰 몇개 쓸 수있는지 알아야함
+CREATE OR REPLACE TRIGGER trg_after_approve_no
+AFTER INSERT ON pay 
+FOR EACH ROW 
+DECLARE 
+    review_count NUMBER;
+BEGIN 
+    -- review_available 테이블에서 해당 레코드를 찾습니다. 
+    SELECT COUNT(*) INTO review_count FROM review_available WHERE review_count = :NEW.review_count; 
+    
+    IF v_count = 0 THEN 
+        -- 레코드가 없으면 새로운 레코드를 추가하고 review_count 값을 1로 설정합니다. 
+        INSERT INTO B (column1, count) VALUES (:NEW.column1, 1); 
+    ELSE 
+        -- 레코드가 이미 존재하면 count 값을 증가시킵니다. 
+        UPDATE review_available 
+        SET review_count = review_count + 1 
+        WHERE review_count = :NEW.review_count; 
+    END IF; 
+    
+        -- count 값이 0이 된 레코드를 삭제합니다. 
+        DELETE 
+        FROM review_available 
+        WHERE review_count = :NEW.review_count = 0; 
+END;
+/
+
+select * from review_available;
+
+select * from hotel;
+
+--리뷰 달 수 있는 총 갯수에 대한 column 추가
+alter table review_available
+add (review_count number(5));
+
+-- review_count 컬럼 not null 제약조건 추가
+alter table review_available
+modify review_count not null;
+
+
+
+select s2.* from (select s1.*, rownum rn from (select user_id, tripper_cat, review_title, review_comment, 
+SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 
+7, 2) || '일' as review_date, ROUND((hotel_facility + hotel_clean + hotel_conven + hotel_kind)/4, 
+1) as rate_avg from hotel_review join hotel_reserve using (hotel_reserve_code) where hotel_code 
+= '2OS001' order by review_date desc) s1) s2 WHERE RN BETWEEN 1 AND 3;
+
+
+select user_id, tripper_cat, review_title, review_comment
+from hotel_review hrv join hotel_reserve hrs using (hotel_reserve_code) where hotel_code 
+= '2OS001';
+
+select * from hotel_review;
+
+select * from hotel_reserve;
 
 
 
 
 
-
+select * from hotel_facility;
 
 -------------------------------------결제 관련 sql
 

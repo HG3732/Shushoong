@@ -112,6 +112,11 @@ const setInitialValues = () => {
 // 페이지가 로드될 때 초기값 설정 함수(setInitialValues)를 호출
 window.onload = setInitialValues;
 
+//searchbar에서 날짜 클릭시 링크 변경
+function dateLinkHandler() {
+	
+}
+
 //정렬 기준에 맞게 정렬
 function sortHandler() {
 	start = 1;

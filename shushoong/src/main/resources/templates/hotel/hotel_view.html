@@ -56,7 +56,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="hotel_review"><a href="#wrap_hotel_review">호텔후기</a></div>
 						<div class="calendar">
 							<img th:src="@{/images/calendar.png}" alt="오른쪽 화살표" class="cal_pic" style="width:30px;">
-							<button type="button" class="cal_btn" style="vertical-align: middle;">2024.06.05(수) ~ 2024.06.07(금)</button>
+							<button type="button" class="cal_btn" style="vertical-align: middle;"><span th:text="${checkIn}"></span> ~ <span th:text="${checkOut}"></span></button>
 						</div>
 						<div class="headcount">
 							<button type="button" class="count_btn">객실 1 ⦁ 성인 2명</button>
@@ -158,11 +158,8 @@ xmlns:th="http://www.thymeleaf.org">
 							
 							<div class="section">
 								<div class="room_explain">객실</div>
-								<div class="room_explain_write">
-									<p>에어컨이 설치된 889개의 객실에는 미니바 및 평면 TV도 갖추어져 있어 편하게 머무실 수 있습니다. 유선 및 무선 
-									인터넷이 무료로 제공되며 위성 채널 프로그램도 구비되어 있어 지루하지 않게 시간을 보내실 수 있습니다. 
-									별도의 욕조 및 샤워 시설을 갖춘 전용 욕실에는 고급 세면용품 및 헤어드라이어도 마련되어 있습니다. 
-									편의 시설/서비스로는 전화 외에 금고 및 책상도 있습니다.</p>
+								<div class="room_explain_write" th:each="hotelinfo : ${hotelViewList}">
+									<p th:text="${hotelinfo.hotelIntro}"></p>
 								</div>
 							</div>
 							<hr></hr>
@@ -231,20 +228,8 @@ xmlns:th="http://www.thymeleaf.org">
 							
 							<div class="section">
 								<div class="hotel_sanitary">위생 및 안전조치</div>
-								<div class="hotel_sanitary_write">
-									<p>법인 호스트/관리자</p>
-									<p>주요 접촉 구역에 고객과 직원 간 가림막 있음</p>
-									<p>성소수자 환영</p>
-									<p>고객 체온 검사 실시 가능</p>
-									<p>사회적 거리두기 시행 중</p>
-									<p>지원 대상 체온 검사를 정기적으로 실시함</p>
-									<p>고객에게 무료 손 소독제 제공</p>
-									<p>숙박 시설을 소독제로 청소함</p>
-									<p>무현금 거래 이용 가능</p>
-									<p>직원이 개인 보호 장비 착용함</p>
-									<p>안전 조치 강화를 위한 음식 서비스 변경 있음</p>
-									<p>침구 및 타월을 60°C 이상의 고온으로 세탁함</p>
-									<p>고객에게 마스크 제공 가능</p>							
+								<div class="hotel_sanitary_write" th:each="hotelinfo : ${hotelViewList}"  >
+									<p th:text="${hotelinfo.hotelSafety}"></p>
 								</div>
 							</div>
 							<hr></hr>
@@ -281,9 +266,8 @@ xmlns:th="http://www.thymeleaf.org">
 					<!-- 모달창 구현 -->
 			        <div id="modal" class="modal_overlay">
 			            <div class="modal_window">
-			            	<form id="frm_review">
+			            	<form id="frm_review" th:action="@{/hotel/review/write.ajax}" method="post"> 
 			            			<button type="button" class="review_esc">X</button>
-
 					            		<div class="facility">
 					            			<p style="font-size: var(--font2);">숙박시설 상태 및 시설</p>
 					            			<div class="facility_stars">
@@ -453,7 +437,8 @@ function loadedHandler(){
 	/* 페이지 이동 */
 	$('.right_page').on('click', rightPageHandler);
 	
-	
+	/* 리뷰 작성 버튼 */
+ 	$('.btn_submit').on('click', reviewSubmitHandler);
 }
 
 </script>	

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/core.css}" rel="stylesheet" />
@@ -42,13 +43,13 @@
 								이름
 							</div>
 							<div class="namebox">
-								예시
+								<span th:text="${dto.userName}"></span>
 							</div>
 							<div class="menu">
 								아이디
 							</div>
 							<div class="idbox">
-								예시
+								<span sec:authentication="name"></span>
 							</div>
 							<div class="menu">
 								비밀번호
@@ -79,7 +80,7 @@
 								이메일
 							</div>
 							<div class="emailbox">
-								aaa@aaa
+								<span th:text="${dto.userEmail}"></span>
 							</div>
 						</div>
 						<div class="save">

@@ -1,11 +1,15 @@
 package kh.mclass.shushoong.member.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,10 +27,7 @@ public class JoinController {
 	@Autowired
 	private final MemberService memberservice;
 	
-	private final BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-//	private final MemberRole Role;
-	
+	private final BCryptPasswordEncoder bcrypt;	
 	
 	// 회원가입 메인 페이지로 이동
 	@GetMapping("join")
@@ -53,14 +54,22 @@ public class JoinController {
 	@PostMapping("signup/customer")
 	@ResponseBody
 	public String singupCustomer(MemberDto memberDto) {
-				
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		String joinDate = sdf1.format(now);
+		
 		memberDto.setUserId(memberDto.getUserId());
 		memberDto.setUserName(memberDto.getUserName());
-		memberDto.setUserPwd(bCryptPasswordEncoder.encode(memberDto.getUserPwd()));
+		memberDto.setUserPwd(bcrypt.encode(memberDto.getUserPwd()));
 		memberDto.setUserEmail(memberDto.getUserEmail());
-//		memberDto.setUserGrade(Role.CUSTOMER);
+		memberDto.setUserGrade("customer");
+		memberDto.setUserStatus(1);
+		memberDto.setJoinDate(joinDate);
+		memberDto.setMsgReceive(memberDto.getMsgReceive());
+		memberDto.setEmailReceive(memberDto.getMsgReceive());
+		memberDto.setLatestLogin(null);
 		
-		return "redirect:/member/login";
+		return "redirect:/login";
 	}
 
 	// 사업자회원 가입 페이지로 이동
@@ -72,14 +81,22 @@ public class JoinController {
 	@PostMapping("signup/business")
 	@ResponseBody
 	public String singupBusiness(MemberDto memberDto) {
-				
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		String joinDate = sdf1.format(now);
+		
 		memberDto.setUserId(memberDto.getUserId());
 		memberDto.setUserName(memberDto.getUserName());
-		memberDto.setUserPwd(bCryptPasswordEncoder.encode(memberDto.getUserPwd()));
+		memberDto.setUserPwd(bcrypt.encode(memberDto.getUserPwd()));
 		memberDto.setUserEmail(memberDto.getUserEmail());
-//		memberDto.setUserGrade(Role.BUSINESS);
+		memberDto.setUserGrade("business");
+		memberDto.setUserStatus(1);
+		memberDto.setJoinDate(joinDate);
+		memberDto.setMsgReceive(0);
+		memberDto.setEmailReceive(0);
+		memberDto.setLatestLogin(null);
 		
 		
-		return "redirect:/member/login";
+		return "redirect:/login";
 	}
 }

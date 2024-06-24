@@ -44,30 +44,18 @@ public class HotelService {
 		return hotelRepository.deleteHotelLike(userId, hotelCode);
 	}
 	
-//	public List<HotelPic> selectPicList(String hotelCode) {
-//		return hotelRepository.selectHotelPicList(hotelCode);
-//	}
-//	
-//	public List<HotelRoomDto> selectRoomList(String hotelCode) {
-//		return hotelRepository.selectRoomList(hotelCode);
-//	}
-	
 	//호텔 상세정보
 	public HotelViewDtoRes selectOneHotel(String hotelCode) {
 		return hotelRepository.selectOneHotel(hotelCode);
 	}
+
 	
 	//해당 호텔 편의시설 정보 불러오기
 	public List<HotelFacilityDtoRes> selectHotelFacility(String hotelCode) {
 		return hotelRepository.selectHotelFacility(hotelCode);
 	}
-
-	//해당 호텔 리뷰 작성된거 불러오기
-//	public List<HotelReviewDto> selectReviewDetailList(String hotelCode) {
-//		return hotelRepository.selectReviewDetailList(hotelCode);
-//	}
 	
-	//위에꺼랑 합치기!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//해당 호텔 리뷰 작성된거 불러오기
 	public Map<String, Object> selectReviewDetailList(String hotelCode, int reviewNum, int reviewPageNum, int currentPageNum) {
 												
 		
@@ -103,7 +91,6 @@ public class HotelService {
 		result.put("currentPage", currentPageNum);
 		
 		return result;
-
 	}
 	
 	//해당 호텔 총리뷰 기록 불러오기

@@ -103,11 +103,11 @@
 	
 	<!-- 호텔에 달린 모든 리뷰에 대한 평균 및 총 리뷰 갯수 -->
  	<select id="selectReviewOverall" parameterType="String" resultType="HotelReviewOverallDtoRes">
-		select count(*) as review_count, ROUND(avg(hotel_facility), 1) as avg_hotel_facility, ROUND(avg(hotel_clean), 1) as avg_hotel_clean, ROUND(avg(hotel_conven),1) as avg_hotel_conven, ROUND(avg(hotel_kind),1) as avg_hotel_kind, 
-        ROUND((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_all_rate
+		select count(*) as review_count, NVL(ROUND(avg(hotel_facility), 1), 0) as avg_hotel_facility, NVL(ROUND(avg(hotel_clean), 1),0) as avg_hotel_clean, NVL(ROUND(avg(hotel_conven),1),0) as avg_hotel_conven, NVL(ROUND(avg(hotel_kind),1), 0) as avg_hotel_kind, 
+		        NVL(ROUND((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1),0) as avg_all_rate
 		from hotel_review
 		    join hotel_reserve hr using (hotel_reserve_code)
-		where hr.hotel_code = #{hotelCode}
+		where hotel_code = #{hotelCode}
 	</select>
 
 	<!-- 호텔상세페이지 총 합친거 -->

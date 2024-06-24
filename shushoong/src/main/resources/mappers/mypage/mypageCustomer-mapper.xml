@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository">
+	<select id="selectOne" parameterType="string" resultType="MemberDto">
+		SELECT USER_ID,USER_NAME,USER_EMAIL, EMAIL_RECEIVE, MSG_RECEIVE FROM MEMBER WHERE USER_ID=#{userId}
+	</select>
+</mapper>

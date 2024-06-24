@@ -287,17 +287,12 @@ select user_id, tripper_cat, review_title, review_comment
 from hotel_review hrv join hotel_reserve hrs using (hotel_reserve_code) where hotel_code 
 = '2OS001';
 
-select * from hotel_review;
-
-select * from hotel_reserve;
 
 
-
-
-
-select * from hotel_facility;
 
 -------------------------------------결제 관련 sql
+
+
 
 
 select * from hotel_room;
@@ -316,5 +311,13 @@ pay_price
 
 DESC HOTEL_PIC;
 
+
+select * from hotel_reserve;
+
+select * from hotel_room_cat;
+
+update hotel_room_cat
+set room_cat_desc ='스위트룸'
+where room_cat = '3';
 
 commit;

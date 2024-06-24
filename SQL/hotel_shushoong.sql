@@ -157,7 +157,7 @@ WHERE hotel_code='2OS001';
 CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_ROOM_LIST" (
     hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, room_att, room_cat
 ) AS 
-SELECT hotel_code, to_char(HOTEL_PRICE, '999,999,999'), ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT_DESC as room_cat FROM HOTEL_ROOM
+SELECT hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT_DESC as room_cat FROM HOTEL_ROOM
 JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
 JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
 where room_count > 0;
@@ -311,7 +311,6 @@ pay_price
 
 DESC HOTEL_PIC;
 
-
 select * from hotel_reserve;
 
 select * from hotel_room_cat;
@@ -321,3 +320,7 @@ set room_cat_desc ='스위트룸'
 where room_cat = '3';
 
 commit;
+
+select * from hotel_room_cat;
+
+select * from v_room_list;

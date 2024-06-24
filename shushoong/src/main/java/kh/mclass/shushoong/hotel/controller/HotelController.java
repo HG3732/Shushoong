@@ -1,15 +1,22 @@
 package kh.mclass.shushoong.hotel.controller;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,11 +33,25 @@ import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
 
+//@Configuration
+//@PropertySource("classpath:/keyfiles/apikey.properties")
 @Controller
 public class HotelController {
 
 	@Autowired
 	private HotelService service;
+		
+		//PortOne
+		@Value("${portone.store.key}")
+		private String portoneStoreKey;
+	
+		@Value("${portone.channel.key}")
+		private String portoneChannelKey;
+		
+		@Value("${portone.secret.key}")
+		private String portoneSecretKey;
+		
+		
 	
 	@GetMapping("/hotel/main")
 	public String hotelMain(Model model, HttpSession session) {
@@ -128,21 +149,21 @@ public class HotelController {
 		}
 	
 	@GetMapping("/hotel/view/{hotelCode}")
-	public String hotelview(Model model, HttpSession session, @PathVariable String hotelCode) {
-		// @PathVariable String hotelCode
-//		String hotelCode = "2OS001";
+	public String hotelview(Model model,HttpSession session, @PathVariable String hotelCode) {
+		//main 에서 session 안에 checkIn, checkOut 정보 들고들어와서 그 정보를 밑에서 model 안에 넣고 html 페이지에 뿌림
 		
-		System.out.println(hotelCode);
+		System.out.println("=========호텔코드=======" + hotelCode);
 		//호텔 상세정보들 출력
 		HotelViewDtoRes result = service.selectOneHotel(hotelCode);
 		//ajax와는 다르게 이 문장으로 인해서 service 가서 쭉쭉가서 db에서 정보 조회해서 dto에 넣고 다시 돌아옴
 		//돌아온 데이터 밑에 넣음
+		
 		model.addAttribute("hotelViewList", result);
 		//넣어서 보내면 사라짐(일회성) - setAttribute 같은 얘
 		
+		//list에서 들고온 checkIn, checkOut 정보 다시 session 에 담아서 hotelview페이지에 뿌리기 
 		model.addAttribute("checkIn", session.getAttribute("checkIn"));
-		model.addAttribute("checkOut", session.getAttribute("checkOut"));
-		
+		model.addAttribute("checkOut", session.getAttribute("checkOut"));	
 		
 		//편의시설
 		List<HotelFacilityDtoRes> facilitylist = service.selectHotelFacility(hotelCode);
@@ -177,33 +198,9 @@ public class HotelController {
 		}
 		model.addAttribute("facilitylist", facilitylist);
 		
-		//작성된 리뷰 불러오기
-//		List<HotelReviewDto> reviewDetailDto = service.selectReviewDetailList(hotelCode);
-//			//여행객 종류
-//			for(int i = 0; i<reviewDetailDto.size(); i++) {
-//				switch(reviewDetailDto.get(i).getTripperCat()){
-//					case "0":
-//						reviewDetailDto.get(i).setTripperCat("혼자");
-//						break;
-//					case "1":
-//						reviewDetailDto.get(i).setTripperCat("커플/부부");
-//						break;
-//					case "2":
-//						reviewDetailDto.get(i).setTripperCat("가족");
-//						break;
-//					case "3":
-//						reviewDetailDto.get(i).setTripperCat("단체");
-//						break;
-//					default:
-//						reviewDetailDto.get(i).setTripperCat("출장");
-//						break;		
-//				}
-//			}
-//		model.addAttribute("reviewDetailDto", reviewDetailDto);		
-		
+		//전체 평균 리뷰
 		List<HotelReviewOverallDtoRes> reviewOverallDto = service.selectReviewOverall(hotelCode);
 		model.addAttribute("reviewOverallDto", reviewOverallDto);
-		
 		
 		return "hotel/hotel_view";
 	}
@@ -232,8 +229,6 @@ public class HotelController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
 		}
 		
 		Map<String, Object> reviewDetailDto = service.selectReviewDetailList(hotelCode, reviewNum, reviewPageNum, currentPageNum);
@@ -265,18 +260,55 @@ public class HotelController {
 		model.addAttribute("reviewDetailDto", reviewDetailDto);		
 		//매개변수를 가지고 가서 mapper에서 조회해서 dto에 넣고 여기로 가져와서 model 안에 넣음
 		
-		
 		//System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(reviewDetailDto));
 		
 		return "hotel/hotel_view_review";
 		//위에서 넣은 값을 session안에 담고 그 session을 여기로 보내서 띄움
-		
 	}
 	
+//	@GetMapping("/hotel/customer/reserve/pay/{roomCat}/{roomAtt}/{roomPrice}/{hotelCode}")
+//	public String hotelPay(HttpSession session, Model model,  @PathVariable String roomCat, @PathVariable String roomAtt, @PathVariable String roomPrice, @PathVariable String hotelCode) {
+//		model.addAttribute("roomCat", roomCat);
+//		model.addAttribute("roomAtt", roomAtt);
+//		model.addAttribute("roomPrice", roomPrice);
+//		model.addAttribute("hotelCode", hotelCode);
+//		model.addAttribute("checkIn", session.getAttribute("checkIn"));
+//		model.addAttribute("checkOut", session.getAttribute("checkOut"));
+//		
+//		return "hotel/hotel_pay";
+//	}
+	
+	
 	@GetMapping("/hotel/customer/reserve/pay")
-	public String hotelPay() {
+	public String hotelPay(HttpSession session, Model model) {
+		
+		//session 에 담겨있는 checkIn, checkOut 정보 model 에 담아서 html 페이지로 뿌리기
+
+		model.addAttribute("checkIn", session.getAttribute("checkIn"));
+		model.addAttribute("checkOut", session.getAttribute("checkOut"));
+		
 		return "hotel/hotel_pay";
 	}
+
+//	@PostMapping("/payment")
+//	@ResponseBody
+//	public int hotelPayment() throws IOException, InterruptedException{
+////		ajax로 보내지는 데이터 () 안에 작성
+//		HttpRequest request = HttpRequest.newBuilder()
+//			    .uri(URI.create("https://api.portone.io/payments/" + 결제번호 + "?storeId=" + storeId))
+//			    //payments/" + 결제번호 - PathVariable(경로) - 어디로가냐 - 경로에 따라 목적지 달라짐... , ?storeId=" + storeId = 결제API에 전달할 data - 뭘 가지고 가냐(바껴도 상관없음)
+//			    .header("Content-Type", "application/json")
+//			    .header("Authorization", "PortOne " + paySecret)
+//			    .method("GET", HttpRequest.BodyPublishers.ofString("{}"))
+//			    .build();
+//			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+//			System.out.println(response.body());
+//			
+//			
+//		
+//			
+//	}
+	
 
 	//지역, 인원수 선택 안한채로 hotel_list를 url에 직접 입력하여 진입할 경우 예외처리  
 //	@ExceptionHandler(Exception.class)

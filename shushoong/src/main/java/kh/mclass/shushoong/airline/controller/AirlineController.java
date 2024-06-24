@@ -3,6 +3,7 @@ package kh.mclass.shushoong.airline.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Arg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -213,7 +214,7 @@ public class AirlineController {
 	}
 
 	// 항공 메인 페이지
-	@GetMapping("/airline/customer/reserve/pay")
+	@PostMapping("/airline/customer/reserve/pay")
 	public String airlinePay(HttpSession session, Model md,
 			String airlineCodeDirect,
 			String airlineCodeReturn
@@ -232,7 +233,7 @@ public class AirlineController {
 	
 	
 	//항공에서 받는 값
-	@RequestMapping(value="/airline/input/info" , method = {RequestMethod.POST, RequestMethod.GET})
+	@PostMapping("/airline/input/info")
 	public void customerInfo(
 			String passenger_firstName,
 			String passenger_lastName,
@@ -241,14 +242,9 @@ public class AirlineController {
 			String passport_num,
 			String expiration_date
 			) {
-		List<AirlinePassengerInfoDto> passengerInfo;
-		do {
-			AirlinePassengerInfoDto dto = new AirlinePassengerInfoDto(
-					passenger_firstName,passenger_lastName,passenger_birth,passenger_nation
-					);
-			passengerInfo.add(dto);
-		}while();
-		System.out.println();
+		
+		
+		System.out.println("!@#$%%%^^!@                  :      "+passenger_birth.charAt(2));
 		service.insertPassengerInfo(passenger_firstName, passenger_lastName, passenger_birth, passenger_nation);
 
 //		List<AirlineInfoDto> SortData = service.getAirlineSideTime(

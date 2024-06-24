@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.GsonBuilder;
 
@@ -41,13 +42,15 @@ public class HotelController {
 	
 	//main에서 지역, 인원 검색 시 호텔 리스트 표시
 	@GetMapping("/hotel/list")
-	public String hotelList(Model model, HttpSession session, String loc, String room, String adult, String child) {
+	public String hotelList(Model model, HttpSession session, String loc, String room, String adult, String child, String nation, String checkIn, String checkOut) {
 		Integer child1 = Integer.parseInt(child)/2;
 		Integer adult1 = Integer.parseInt(adult);
 		String people = String.valueOf(child1+adult1);
 		List<HotelDtoRes> result = service.selectAllHotelList(loc, people, null, null, null, null);
 		Integer maxPrice = service.selectMaxRoomlPrice(loc, people, null);
 		
+		System.out.println("checkIn : " + checkIn);
+		System.out.println("checkOut : " + checkOut);
 		//좋아요 여부 검색
 		String userId = (String)session.getAttribute("userId");
 		List<String> likeList = service.selectLikeHotelList(loc, userId);
@@ -57,6 +60,11 @@ public class HotelController {
 		model.addAttribute("hotelList", result);
 		model.addAttribute("maxPrice", maxPrice);
 		model.addAttribute("likeList", likeList);
+		model.addAttribute("nation", nation);
+		model.addAttribute("checkIn", checkIn);
+		model.addAttribute("checkOut", checkOut);
+		session.setAttribute("checkIn", checkIn);
+		session.setAttribute("checkOut", checkOut);
 		return "hotel/hotel_list";
 	}
 
@@ -123,17 +131,22 @@ public class HotelController {
 		}
 	
 	@GetMapping("/hotel/view/{hotelCode}")
-	public String hotelview(Model model, @PathVariable String hotelCode) {
+	public String hotelview(Model model, HttpSession session, @PathVariable String hotelCode) {
 		// @PathVariable String hotelCode
 //		String hotelCode = "2OS001";
 		
+		System.out.println(hotelCode);
 		//호텔 상세정보들 출력
 		HotelViewDtoRes result = service.selectOneHotel(hotelCode);
 		//ajax와는 다르게 이 문장으로 인해서 service 가서 쭉쭉가서 db에서 정보 조회해서 dto에 넣고 다시 돌아옴
 		//돌아온 데이터 밑에 넣음
 		model.addAttribute("hotelViewList", result);
 		//넣어서 보내면 사라짐(일회성) - setAttribute 같은 얘
-	
+		
+		model.addAttribute("checkIn", session.getAttribute("checkIn"));
+		model.addAttribute("checkOut", session.getAttribute("checkOut"));
+		
+		
 		//편의시설
 		List<HotelFacilityDtoRes> facilitylist = service.selectHotelFacility(hotelCode);
 		for(int i = 0; i<facilitylist.size(); i++) {

@@ -9,11 +9,13 @@ xmlns:th="http://www.thymeleaf.org">
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/hotel/hotel_list.css}" rel="stylesheet" />
+	<link th:href="@{/css/hotel/hotel_searchbar.css}" rel="stylesheet" />
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
-	
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
 <meta charset="UTF-8">
 <title>호텔 목록</title>
+<style th:replace="~{hotel/hotel_main :: calendarStyle}"></style>
 </head>
 <body>
 	<div class="wrapper">
@@ -25,15 +27,9 @@ xmlns:th="http://www.thymeleaf.org">
 				</div>
 			</header>
 		</div>
+		<div th:replace="~{hotel/hotel_main :: hotelSearchBar}"></div>
 		<div class="wrap-body">
 			<div class="wrap-main">
-				<div class="top-line">
-					<div class="select">
-						<span class="nation"></span>
-						<span class="search-date"></span>
-						<span class="room-capacity"></span>
-					</div>
-				</div>
 				<div class="category">
 					<div class="word_search">
 						<input type="text" class="type_hotel" name="hotel_name" onkeypress="return enterkey();"/>
@@ -51,8 +47,6 @@ xmlns:th="http://www.thymeleaf.org">
 						</select>
 					</div>
 				</div>
-
-				
 				<div class="container">
 					<!-- aside 부분 - 슬라이드바 -->
 					<div th:replace="~{hotel/hotel_slide_bar :: hotelslidebar}"></div>
@@ -66,6 +60,7 @@ xmlns:th="http://www.thymeleaf.org">
 	</div>
 </body>
 <script>
+
 //URL로부터 파라미터 읽어오기 위해 search객체 생성
 $(loadedHandler);
 
@@ -80,9 +75,26 @@ var presortTo = null;
 
 var lastScroll = 0;
 
+var select_status = 0;
+let today = new Date();
+let today_year = today.getFullYear(); // 년도
+let today_month = today.getMonth() + 1;  // 월
+let today_day = today.getDate();  // 날짜
+
+let currentIndex = 0;	//캐러셀 index
+
 function loadedHandler(){
 	//좋아요 버튼 -- inline html onclick 
 	//$(".hotel_like").on("click", likeHandler);
+	
+	$('.wrap-date-box').css('display', 'none');	//처음 화면에서 달력 안보이게
+	$('.input.location').on('click', locationClickHandler);
+	$('.country').on('click', localClickHandler);
+	$('.local').on('click', selectLocHandler);
+	$('.input.time').on('click', timeClickHandler);
+	$('.input.room').on('click', roomClickHandler);
+	$('.plus').on('click', plusClickHandler);
+	$('.minus').on('click', minusClickHandler);
 	
 	//리스트 정렬
 	$('.sort').on('change', sortHandler);
@@ -98,7 +110,11 @@ function loadedHandler(){
 };
 
 </script>
+<script th:replace="~{hotel/hotel_main :: calendarScript}"></script>
 <script th:src="@{/js/hotel/hotel_list.js}"
+		type="text/javascript">
+</script>
+<script th:src="@{/js/hotel/hotel_searchbar.js}"
 		type="text/javascript">
 </script>
 </html>

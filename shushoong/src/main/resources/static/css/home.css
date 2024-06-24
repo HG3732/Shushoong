@@ -161,7 +161,7 @@
 
 .wrap-recommend .recommend-title{
     text-align: center;
-    margin: 20px;
+    margin: 30px;
     font-size: 20px;
     font-weight: 900;
 }
@@ -251,7 +251,6 @@
 	margin: 0 auto;
 	margin-top: 100px;
 	display: flex;
-	background-color: var(--color_gray_2);
 	gap: 35px;
 	justify-content: center;
 	padding: 25px;

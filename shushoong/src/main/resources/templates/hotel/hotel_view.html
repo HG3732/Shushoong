@@ -56,7 +56,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="hotel_review"><a href="#wrap_hotel_review">호텔후기</a></div>
 						<div class="calendar">
 							<img th:src="@{/images/calendar.png}" alt="오른쪽 화살표" class="cal_pic" style="width:30px;">
-							<button type="button" class="cal_btn" style="vertical-align: middle;">2024.06.05(수) ~ 2024.06.07(금)</button>
+							<button type="button" class="cal_btn" style="vertical-align: middle;"><span th:text="${checkIn}"></span> ~ <span th:text="${checkOut}"></span></button>
 						</div>
 						<div class="headcount">
 							<button type="button" class="count_btn">객실 1 ⦁ 성인 2명</button>

@@ -23,10 +23,7 @@ public class JoinController {
 	@Autowired
 	private final MemberService memberservice;
 	
-	private final BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-//	private final MemberRole Role;
-	
+	private final BCryptPasswordEncoder bcrypt;	
 	
 	// 회원가입 메인 페이지로 이동
 	@GetMapping("join")
@@ -56,9 +53,10 @@ public class JoinController {
 				
 		memberDto.setUserId(memberDto.getUserId());
 		memberDto.setUserName(memberDto.getUserName());
-		memberDto.setUserPwd(bCryptPasswordEncoder.encode(memberDto.getUserPwd()));
+		memberDto.setUserPwd(bcrypt.encode(memberDto.getUserPwd()));
 		memberDto.setUserEmail(memberDto.getUserEmail());
-//		memberDto.setUserGrade(Role.CUSTOMER);
+		memberDto.setUserGrade("customer");
+		memberDto.setUserStatus("1");
 		
 		return "redirect:/member/login";
 	}
@@ -75,9 +73,10 @@ public class JoinController {
 				
 		memberDto.setUserId(memberDto.getUserId());
 		memberDto.setUserName(memberDto.getUserName());
-		memberDto.setUserPwd(bCryptPasswordEncoder.encode(memberDto.getUserPwd()));
+		memberDto.setUserPwd(bcrypt.encode(memberDto.getUserPwd()));
 		memberDto.setUserEmail(memberDto.getUserEmail());
-//		memberDto.setUserGrade(Role.BUSINESS);
+		memberDto.setUserGrade("business");
+		memberDto.setUserStatus("1");
 		
 		
 		return "redirect:/member/login";

@@ -22,7 +22,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			<ul>
 				<li><a th:href="@{/login}" sec:authorize="isAnonymous()" >로그인</a></li>
 				<li><a th:href="@{/join}" sec:authorize="isAnonymous()" >회원가입</a></li>
-				<li><a th:href="@{/customer/mypage/home}" sec:authorize="isAuthenticated()">마이페이지</a></li>
+				<li><a href="#" sec:authorize="isAuthenticated()">마이페이지</a></li>
 				<li><a th:href="@{/logout}" sec:authorize="isAuthenticated()">로그아웃</a></li>			
 			</ul>
 		</div>

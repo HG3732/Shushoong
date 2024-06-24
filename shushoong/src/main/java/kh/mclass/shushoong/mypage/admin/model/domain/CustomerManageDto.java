@@ -1,4 +1,4 @@
-package kh.mclass.shushoong.mypage.model.domain;
+package kh.mclass.shushoong.mypage.admin.model.domain;
 
 import org.springframework.stereotype.Component;
 

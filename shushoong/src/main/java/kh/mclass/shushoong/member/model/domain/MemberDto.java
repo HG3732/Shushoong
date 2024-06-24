@@ -12,7 +12,7 @@ public class MemberDto {
 	private String userName;
 	private String userPwd;
 	private String userEmail;
-	private MemberRole userGrade;
+	private String userGrade;
 	private String userStatus;
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private String joinDate;

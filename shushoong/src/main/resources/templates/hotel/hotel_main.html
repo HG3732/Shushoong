@@ -9,23 +9,11 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/hotel/hotel_searchbar.css}" rel="stylesheet" />
 	<link th:href="@{/css/hotel/hotel_main.css}" rel="stylesheet" />
+	<link th:href="@{/css/calendar_ss.css}" rel="stylesheet" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
 <meta charset="UTF-8">
-	<style th:fragment="calendarStyle">
-		#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button {
-			background-color: #BCEFFF;
-		}
-		#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button > span {
-			color: black;
-		}
-		#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button:hover {
-			background-color: #006AFF;
-		}
-		#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button:hover * {
-			color: white;
-		}
-	</style>
+	
 <title>Insert title here</title>
 <script type="text/javascript">
 var select_status = 0;
@@ -36,28 +24,26 @@ let today_day = today.getDate();  // 날짜
 
 let currentIndex = 0;	//캐러셀 index
 
-$(loadedHandler)
+$(loadedHandler);
+
+function loadedHandler() {
+	//$('.wrap-date-box').css('display', 'none');	//처음 화면에서 달력 안보이게
+	$('.input.location').on('click', locationClickHandler);
+	$('.country').on('click', localClickHandler);
+	$('.local').on('click', selectLocHandler);
+	$('.input.time').on('click', timeClickHandler);
+	$('.input.room').on('click', roomClickHandler);
+	$('.plus').on('click', plusClickHandler);
+	$('.minus').on('click', minusClickHandler);
+	$('.left.btn2').on('click', leftClickHandler);
+	$('.right.btn2').on('click', rightClickHandler);
+	slide(0);
 	
-	function loadedHandler() {
-		$('.wrap-date-box').css('display', 'none');	//처음 화면에서 달력 안보이게
-		$('.input.location').on('click', locationClickHandler);
-		$('.country').on('click', localClickHandler);
-		$('.local').on('click', selectLocHandler);
-		$('.input.time').on('click', timeClickHandler);
-		$('.input.room').on('click', roomClickHandler);
-		$('.plus').on('click', plusClickHandler);
-		$('.minus').on('click', minusClickHandler);
-		$('.left.btn2').on('click', leftClickHandler);
-		$('.right.btn2').on('click', rightClickHandler);
-		slide(0);
-	}
+}
 </script>	
-<script th:src="@{/js/hotel/hotel_main.js}"
-		type="text/javascript">
-</script>
-<script th:src="@{/js/hotel/hotel_searchbar.js}"
-		type="text/javascript">
-</script>
+<script th:src="@{/js/hotel/hotel_main.js}"		type="text/javascript"></script>
+<script th:src="@{/js/hotel/hotel_searchbar.js}"		type="text/javascript"></script>
+<script th:src='@{/js/calendar_ss.js}'></script>
 </head>
 <body>
 	<div class="wrap-header">
@@ -201,55 +187,4 @@ $(loadedHandler)
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
 </body>
-<script th:fragment="calendarScript">
-var calendarEl = document.getElementById('calendar');
-var calendar = new FullCalendar.Calendar(calendarEl, {
- initialView: 'dayGridMonth',
- height: 'auto',
- locale:'ko',
- headerToolbar:{
-		left:'prevYear prev',
-		center:'title' ,
-		right:'next nextYear' 				
-	},
-	selectable : true,
-	droppable : true,
-	editable : true,
-	dateClick : function (info) {
-		//클릭한 날짜 == info.dateStr
-		console.log(info.dateStr);
-		
-		var year = info.dateStr.substr(0, 4);
-		var month = info.dateStr.substr(5, 2);
-		var day = info.dateStr.substr(8, 2);
-		if(today_year > year || today_month > month || today_day > day) {	//현재 날짜 이전의 시간을 선택한다면
-			alert("현재 날짜 이전은 선택하실 수 없습니다.");
-		} else {
-			if(select_status == 0){	//체크인 날짜 선택
-				var startdate = $('.check-in-date').text(year + "년" + month + "월" + day + "일");
-				date1 = new Date(info.dateStr);
-				$('.check-in').val(year + "년" + month + "월" + day + "일");
-				select_status = 1;
-			} else {
-				date2 = new Date(info.dateStr); 
-				console.log(date1 < date2);
-				if(date1 <= date2) {
-					$('.check-out-date').text(year + "년" + month + "월" + day + "일");
-					$('.check-out').val(year + "년" + month + "월" + day + "일");
-					select_status = 0;
-				} else {
-					$('.check-in-date').text(year + "년" + month + "월" + day + "일");
-					$('.check-out-date').text("");
-					$('.check-in').val();
-					$('.check-out').val();
-					select_status = 0;
-				}
-			}
-		}
-	}
-});
-if(calendar){
-	calendar.render();
-};
-</script>
 </html>

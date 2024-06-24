@@ -1,0 +1,13 @@
+/* 할인 호텔 캐러셀*/
+#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button {
+	background-color: #BCEFFF;
+}
+#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button > span {
+	color: black;
+}
+#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button:hover {
+	background-color: #006AFF;
+}
+#calendar > div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button.fc-button:hover * {
+	color: white;
+}

@@ -10,12 +10,13 @@ xmlns:th="http://www.thymeleaf.org">
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/hotel/hotel_list.css}" rel="stylesheet" />
 	<link th:href="@{/css/hotel/hotel_searchbar.css}" rel="stylesheet" />
-	
+	<link th:href="@{/css/calendar_ss.css}" rel="stylesheet" />
+<!-- 	<style th:replace="~{hotel/hotel_main :: calendarStyle}"></style> -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
 <meta charset="UTF-8">
 <title>호텔 목록</title>
-<style th:replace="~{hotel/hotel_main :: calendarStyle}"></style>
+
 </head>
 <body>
 	<div class="wrapper">
@@ -62,8 +63,6 @@ xmlns:th="http://www.thymeleaf.org">
 <script>
 
 //URL로부터 파라미터 읽어오기 위해 search객체 생성
-$(loadedHandler);
-
 var urlParams = new URLSearchParams(window.location.search);
 var preloccode = urlParams.get('loc');
 var prepeople = Number(urlParams.get('adult')) + parseInt(urlParams.get('child')/2, 10);
@@ -83,11 +82,13 @@ let today_day = today.getDate();  // 날짜
 
 let currentIndex = 0;	//캐러셀 index
 
+$(loadedHandler);
+
 function loadedHandler(){
 	//좋아요 버튼 -- inline html onclick 
 	//$(".hotel_like").on("click", likeHandler);
 	
-	$('.wrap-date-box').css('display', 'none');	//처음 화면에서 달력 안보이게
+	//$('.wrap-date-box').css('display', 'none');	//처음 화면에서 달력 안보이게
 	$('.input.location').on('click', locationClickHandler);
 	$('.country').on('click', localClickHandler);
 	$('.local').on('click', selectLocHandler);
@@ -106,15 +107,10 @@ function loadedHandler(){
 	//호텔 리스트의 자식요소들 중 4번째부터 전부 숨김 
 	$('.hotel_list').children('.hotel:gt(2)').css('display', 'none');
 	$(window).on('scroll', loadHotelListHandler);
-	
 };
 
 </script>
-<script th:replace="~{hotel/hotel_main :: calendarScript}"></script>
-<script th:src="@{/js/hotel/hotel_list.js}"
-		type="text/javascript">
-</script>
-<script th:src="@{/js/hotel/hotel_searchbar.js}"
-		type="text/javascript">
-</script>
+<script th:src="@{/js/hotel/hotel_list.js}"		type="text/javascript"></script>
+<script th:src="@{/js/hotel/hotel_searchbar.js}"		type="text/javascript"></script>
+<script th:src='@{/js/calendar_ss.js}'></script>
 </html>

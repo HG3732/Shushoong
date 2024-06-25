@@ -72,9 +72,12 @@ xmlns:th="http://www.thymeleaf.org">
 									<th:block th:if="${not #lists.isEmpty(hotelViewList)}">
 										<input type="hidden" th:value="${hotelViewList.hotelCode}" name="hotelCode">
 										<form th:each="room : ${hotelViewList.hotelRooms}" class="roomlist" id="frm-reserve" method="get" action="/shushoong/hotel/customer/reserve/pay">
+											<input type="hidden" th:value="${hotelViewList.hotelName}" name="hotel">
+											<input type="hidden" th:value="${hotelCode}"  name="hotelCode">
 											<input type="hidden" th:value="${room.roomAtt}" name="roomAtt">
 											<input type="hidden" th:value="${room.roomCat}" name="roomCat">
 											<input type="hidden" th:value="${room.hotelPrice}" name="hotelPrice">
+											<input type="hidden" th:value="${room.roomCap}" name="roomCap">
 											<div th:utext="${room.roomCat} + ', ' + ${room.roomAtt}" class="room_cat"></div>
 											<div class="amount_num">
 												<strong th:text="${#numbers.formatInteger(room.hotelPrice, 3, 'COMMA')}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong>원

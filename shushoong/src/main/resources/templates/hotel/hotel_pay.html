@@ -42,13 +42,16 @@ xmlns:th="http://www.thymeleaf.org">
 				
 				<!-- 호텔 정보 -->
 				<!-- <form id="frm-reserve" method="post" action="/shushoong/hotel/customer/reserve/pay"> -->
-					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">호텔이름</p>
+					<input type="hidden" th:value="${userId}" class="user_id">
+					<input type="hidden" th:value="${roomCap}" class="room_cap">
+					<input type="hidden" th:value="${hotelCode}" class="hotel_code">
+					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';" th:text="${hotel}"></p>
 					<table class="reserve_info">
 						<thead>
 							<tr class="tr_first" style="border-top: 3px solid #006AFF;">
 								<th >도시</th>
 								<td style="width: 760px;">
-									<input type="text" readonly value="도쿄" onfocus="this.blur()" style="width: 400px; border: none;">
+									<input type="text" readonly th:value="${nation}" onfocus="this.blur()" style="width: 400px; border: none;">
 								</td>
 							</tr>
 						</thead>
@@ -56,13 +59,15 @@ xmlns:th="http://www.thymeleaf.org">
 							<tr class="tr_second"  style="border-top: 1px solid #006AFF;">
 								<th>체크인/체크아웃</th>
 								<td>
-									<input type="text" readonly th:value="${checkIn} + ' ~ ' + ${checkOut}" onfocus="this.blur()" style="width: 400px; border: none;">
+									<input type="text" readonly th:value="${checkIn}" onfocus="this.blur()" style="width: 100px; border: none;" id="check_in"> ~ 
+									<input type="text" readonly th:value="${checkOut}" onfocus="this.blur()" style="border: none;" id="check_out">
 								</td>
 							</tr>
 							<tr class="tr_third" style="border-top: 1px solid #006AFF; border-bottom: 3px solid #006AFF; ">
 								<th>객실정보</th>
 								<td>
-									<input type="text" readonly th:value="${roomCat} + ', ' + ${roomAtt}" onfocus="this.blur()" style="width: 400px; border: none;">
+									<input type="text" readonly th:value="${roomCat}" onfocus="this.blur()" style=" border: none; width: 80px;" class="room_cat">,
+									<input type="text" readonly th:value="${roomAtt}" onfocus="this.blur()" style="border: none;" class="room_att">
 								</td>
 							</tr>
 						</tbody>
@@ -70,7 +75,10 @@ xmlns:th="http://www.thymeleaf.org">
 					
 					<!-- 예약자 정보 -->
 					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">예약자 정보</p>
-					<p style="margin-top: 10px; font-size: var(--font4); font-family: 'SOYOMapleRegularTTF';">객실 1 ⦁ 성인1</p>
+					<div class="party">
+						<span>성인 </span><span th:text="${adult}"></span>명, 
+						<span>아동 </span><span th:text="${child}"></span>명
+					</div>
 						<table class="customer_info">
 							<thead>
 								<tr class="c_first" style="border-top: 3px solid #006AFF;">
@@ -126,27 +134,27 @@ xmlns:th="http://www.thymeleaf.org">
 					<hr style="border: 2px solid #006AFF; margin-top: 5px;"></hr>
 					<div class="require_check">
 						<div class="single">
-							<input type="checkbox" id="box1"><label for="box1"></label>
+							<input type="checkbox" id="box1" value="싱글"><label for="box1"></label>
 							<div class="img_next_word">싱글</div>
 						</div>
 						<div class="twin">
-							<input type="checkbox" id="box2"><label for="box2"></label>
+							<input type="checkbox" id="box2" value="트윈"><label for="box2"></label>
 							<div class="img_next_word">트윈</div>
 						</div>
 						<div class="double">
-							<input type="checkbox" id="box3"><label for="box3"></label>
+							<input type="checkbox" id="box3" value="더블"><label for="box3"></label>
 							<div class="img_next_word">더블</div>
 						</div>
 						<div class="non_smoking">
-							<input type="checkbox" id="box4"><label for="box4"></label>
+							<input type="checkbox" id="box4" value="금연실"><label for="box4"></label>
 							<div class="img_next_word">금연실</div>
 						</div>
 						<div class="smoking">
-							<input type="checkbox" id="box5"><label for="box5"></label>
+							<input type="checkbox" id="box5" value="흡연실"><label for="box5"></label>
 							<div class="img_next_word">흡연실</div>
 						</div>
 						<div class="skyview">
-							<input type="checkbox" id="box6"><label for="box6"></label>
+							<input type="checkbox" id="box6" value="고층"><label for="box6"></label>
 							<div class="img_next_word">고층</div>
 						</div>
 					</div>

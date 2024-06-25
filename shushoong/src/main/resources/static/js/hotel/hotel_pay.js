@@ -46,7 +46,84 @@ function checkAllEscHandler(){
 	}
 }
 
-function payHandler(){
-	console.log($(this));
+async function payHandler(){
+
+	var hotelReserveCode = '';
+	var reserveName = $('#name').val();
+	var reserveEmail = $('#email').val();
+	var residenceNameKo = $('#name').val();
+	var residenceNameEng = $('#last_name').val() + ', ' + $('#first_name').val();
+	var residenceGender = $('input[name=gender]:checked').val();
+	var residencePhone = $('#phone').val();
+	var request = $('.require_check').children().children('input[type=checkbox]:checked').val();
+	var reserveCheckIn = $('#check_in').val();
+	var reserveCheckOut = $('#check_out').val();
+	var userId = $('.user_id').val();
+	var roomCap = $('.room_cap').val();
+	var hotelCode = $('.hotel_code').val();
+	var roomCat = $('.room_cat').val();
+	var roomAtt = $('.room_att').val();
+	var hotelPrice = $('.final_pay').val();
+	
+	console.log(reserveCheckOut);
+
+	/*	const response = await PortOne.requestPayment({
+			storeId : storeId, // 
+			paymentId : buyId,
+			orderName : orderName,
+			totalAmount : totalAmount,
+			currency : "CURRENCY_KRW",
+			channelKey : channelKey, // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
+			payMethod : "CARD",
+			customer : {
+				fullName : memNick,
+				phoneNumber : memTel,
+				email : memEmail,
+			}
+		});
+			if (response.code) {
+			// 오류 발생
+				console.log('결제 오류');
+		} else {
+			// 결제 검증
+			$.ajax({
+				url : contextPath + "store/payment",
+				type : "post",
+				data : {
+					paymentId : response.paymentId,
+					totalAmount : totalAmount,
+					items : items,
+					buyId : buyId
+				},
+				error : ajaxErrorHandler,
+				success : async function(data) {
+					if (data == 1) {
+						Swal.fire({
+							title: "결제가 완료되었습니다.\n구매내역으로 이동하시겠습니까?",
+							icon: "success",
+							showCancelButton: true,
+							confirmButtonText: "이동하기",
+							confirmButtonColor: "#000000",
+							cancelButtonText: "돌아가기",
+							cancelButtonColor: "#ff0000"
+						}).then((swal) => {
+							if(swal.isConfirmed){
+								location.href = contextPath + "store/buy";
+							}
+						});
+						return;
+					} else {
+						Swal.fire({
+							title: "결제 금액과 지불 금액이 일치하지 않거나 알 수 없는 오류가 발생했습니다.",
+							icon: "error",
+							confirmButtonText: "확인",
+							confirmButtonColor: "#000000",
+						});
+						return;
+					}
+				}
+			});
+		}
+*/
 }
 

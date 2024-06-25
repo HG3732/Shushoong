@@ -82,6 +82,12 @@ input[type=tel]{
 	font-size: var(--font3);
 }
 
+.party {
+	 margin-top: 10px; 
+	 font-size: var(--font4); 
+	 font-family: 'SOYOMapleRegularTTF';
+}
+
 .customer_info th {
 	width: 160px;
 	padding: 20px 10px;

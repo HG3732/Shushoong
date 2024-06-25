@@ -2,6 +2,7 @@ package kh.mclass.shushoong.airline.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Arg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -237,6 +241,7 @@ public class AirlineController {
 	public String customerInfo(
 			String reserver_middle_phone_number,
 			String reserver_email,
+			
 			String passenger_gender,
 			String passenger_firstName,
 			String passenger_lastName,
@@ -245,13 +250,26 @@ public class AirlineController {
 			String passport_num,
 			String expiration_date
 			) {
-		
+//		args
 		//RESERVER_INFO 안에 들어가는 내용
-//		service.insertPassengerInfo(reserver_middle_phone_number, reserver_email);
+//		service.insertReserverInfo(reserver_middle_phone_number, reserver_email);
 		
 		//PASSENGER_INFO 에 들어갈 LIST 내용
 		System.out.println("21416547sdafdsaf6677daafdsfasdadsfsafd : "+ passenger_firstName.length());
 		
 		return "redirect:/airline/main";
 	}
+	
+	@ResponseBody
+	@PostMapping("/airline/input/passengerInfo")
+	public void passengerInfo(
+			@RequestBody List<Map<String, Object>> param
+			) {
+		System.out.println("21416547sdafdsaf6677daafdsfasdadsfsafd : "+ param);
+		service.insertPassengerInfo(param);
+		
+
+	}
+	
+	
 }

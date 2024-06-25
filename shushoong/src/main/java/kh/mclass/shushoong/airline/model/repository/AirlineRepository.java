@@ -1,6 +1,7 @@
 package kh.mclass.shushoong.airline.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -24,5 +25,7 @@ public interface AirlineRepository {
 			);
 	Integer getMaxPrice(String departLoc, String arrivalLoc);
 	
-	void insertPassengerInfo(String phoneNum,String email);
+	void insertReserverInfo(String phoneNum,String email);
+	
+	void insertPassengerInfo(List<Map<String, Object>> passengerList);
 }

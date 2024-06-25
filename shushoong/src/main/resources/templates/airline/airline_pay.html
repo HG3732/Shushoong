@@ -254,8 +254,21 @@ xmlns:th="http://www.thymeleaf.org">
 						
 						<input class="info_submit_btn" type="submit" value="결제 페이지로 이동">
 					</section>
-					
 				</form>
+				<section class="info_sumit_button_section">
+					<button class="info_submit_btn" type="submit">페이지로 이동</button>
+				</section>
+				
+				
+				<section class="testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest">
+					<input type="hidden" name="resCode" value="1234">
+					<input type="hidden" name="resCode" value="1235">
+					<input type="hidden" name="resCode" value="1236">
+					<input type="hidden" name="resCode" value="1237">
+					<input type="hidden" name="resCode" value="1238">
+				</section>
+				
+				
 			</div>
 		</div>
 	</div>
@@ -284,7 +297,39 @@ xmlns:th="http://www.thymeleaf.org">
 
 		}
 		
+		$("button.info_submit_btn").on("click",menuListInserthandler);
 		
+		function menuListInserthandler(){
+			var passengerInfo = [];
+			for(var i=0; i< $("[name=passenger_firstName]").length; i++){
+				var infoObj = new Object();
+				infoObj.passenger_gender = $("[name=passenger_gender]").eq(i).val();
+				infoObj.passenger_firstName = $("[name=passenger_firstName]").eq(i).val();
+				infoObj.passenger_lastName = $("[name=passenger_lastName]").eq(i).val();
+				infoObj.passenger_birth = $("[name=passenger_birth]").eq(i).val();
+				infoObj.passenger_nation = $("[name=passenger_nation]").eq(i).val();
+				infoObj.baggage_size = $("[name=baggage_size]").eq(i).val();
+				infoObj.passport_num = $("[name=passport_num]").eq(i).val();
+// 				infoObj.expiration_date = $("[name=expiration_date]").eq(i).val();
+ 				infoObj.resCode = $("[name=resCode]").eq(i).val();
+		
+				passengerInfo.push(infoObj);
+			}
+			console.log(passengerInfo)
+			$.ajax({
+				url:"/shushoong/airline/input/passengerInfo",
+				type : "POST",
+				data: JSON.stringify(passengerInfo),
+				contentType: "application/json; charset=utf-8",
+				success: function(result){
+					
+				},
+				 error: function(errorThrown) {
+			            alert(errorThrown.statusText);
+			        }
+		       });
+			
+		}
 			
 
 		$('#check1').on("click", allAgreeCheckHandler);

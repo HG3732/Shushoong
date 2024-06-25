@@ -1,6 +1,7 @@
 package kh.mclass.shushoong.airline.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +51,14 @@ public class AirlineService {
 //		
 //	}
 	
-	public void insertPassengerInfo(String phoneNum,String email) {
+	public void insertReserverInfo(String phoneNum,String email) {
 		
-		airlineRepository.insertPassengerInfo(phoneNum, email);
+		airlineRepository.insertReserverInfo(phoneNum, email);
 		
 		
+	}
+	
+	public void insertPassengerInfo(List<Map<String, Object>> passengerList) {
+		airlineRepository.insertPassengerInfo(passengerList);
 	}
 }

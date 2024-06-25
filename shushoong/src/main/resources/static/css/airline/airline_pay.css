@@ -509,6 +509,8 @@ input.info_submit_btn {
 	font-weight: bold;
 	margin: 20px 0;
 	font-family: 'SOYOMapleRegularTTF';
+	
+	display: none;
 }
 
 input.info_submit_btn:hover {
@@ -517,6 +519,32 @@ input.info_submit_btn:hover {
 }
 
 input , label{
+	cursor: pointer;
+}
+section.info_sumit_button_section{
+	width: 960px;
+	margin: auto;
+}
+button.info_submit_btn {
+	margin : auto;
+	width: 960px;
+	height: 45px;
+	border-radius: 30px;
+	
+	border-color:  var(--color_blue_1);
+	background-color: white;
+	font-size:  21px;
+	font-weight: bold;
+	margin: 20px 0;
+	font-family: 'SOYOMapleRegularTTF';
+}
+
+button.info_submit_btn:hover {
+	background-color: var(--color_blue_1);
+	color: white;
+}
+
+input , label,button{
 	cursor: pointer;
 }
 			

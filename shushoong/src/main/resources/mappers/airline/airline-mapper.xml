@@ -62,11 +62,28 @@
         </choose>
     </select>
     
-    <insert id="insertPassengerInfo" >
+    <insert id="insertReserverInfo" >
     	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL)
     		VALUES ('357596' , 'ex1' , #{phoneNum} , #{email} )
     </insert>
     
+    <insert id="insertPassengerInfo" parameterType="list">
+    	INSERT ALL
+    		<foreach collection="list" item="item" separator="">
+			    INTO passenger_info (AIRLINE_RESERVE_CODE,LAST_NAME, FIRST_NAME, GENDER, BIRTH, NATION, BAGGAGE, PASSPORT_CODE)
+		    		VALUES(
+		    			#{item.passport_num},
+		    			#{item.passenger_lastName},
+		    			#{item.passenger_firstName},
+		    			#{item.passenger_gender},
+		    			#{item.passenger_birth},
+		    			#{item.passenger_nation},
+		    			#{item.baggage_size},
+		    			#{item.passport_num}
+		    		)
+    		</foreach>
+    		SELECT * FROM DUAL;
+    </insert>
   
 		   	
 	

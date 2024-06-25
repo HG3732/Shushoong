@@ -135,15 +135,15 @@ function submitJoinHandler() {
 	}
 	
 	if($("#msgReceive").is(':checked') == true) {
-		data.set("#msgReceive",1);
+		$("#msgReceive") = 1;
 	} else {
-		data.set("#msgReceive",0);
+		$("#msgReceive") = 0;
 	}
 	
 	if($("#emailReceive").is(':checked') == true) {
-		data.set("#emailReceive",1);
+		$("#emailReceive") = 1;
 	} else {
-		data.set("#emailReceive",0);
+		$("#emailReceive") = 0;
 	}
 
 	joinCustomer();
@@ -155,6 +155,7 @@ function joinCustomer() {
 			alert("회원가입에 성공했습니다.");
 		}, error: function() {
 			alert("오류로 회원가입에 실패했습니다. 다시 시도해 주세요.");
+			return false;
 		}
 	})
 }
@@ -183,6 +184,7 @@ function idCheckHandler() {
 		},
 		error: function(request, status, error) {
 			alert("시스템 에러. 관리자에게 문의해 주세요.");
+			return false;
 		}
 	})
 }

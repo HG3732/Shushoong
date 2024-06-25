@@ -111,7 +111,7 @@ public class JoinController {
 		memberDto.setJoinDate(joinDate);
 		memberDto.setMsgReceive(0);
 		memberDto.setEmailReceive(0);
-		memberDto.setLatestLogin(null);
+		memberDto.setLatestLogin(joinDate);
 		
 		int result = memberservice.join(memberDto);
 		if(result < 0) {

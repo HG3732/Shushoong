@@ -1,0 +1,454 @@
+@charset "UTF-8";
+
+.wrap-main{
+	width: 960px;
+    margin: 0 auto;
+}
+
+.wrap-section{
+	min-height: 400px;
+}
+
+#frm_register{
+	align-self: center;
+}
+
+.grid_wrap{
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-auto-rows: minmax(45px, auto);
+	align-items: center;
+	margin-top: 30px;
+	width: 800px;
+	border-top: 2px solid #006AFF;
+	border-bottom: 2px solid #006AFF;
+}
+
+.register{
+	grid-column: 1/ 3;
+	grid-row: 1/ 2;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.p{
+	position: absolute;
+	transform: translate(10px, 90%);
+}
+
+
+.div_register_btn{
+	grid-column: 3 / 8;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);	
+}
+
+.register_btn {
+	position: absolute;
+	transform: translate(480px, 30%);
+	border: none;
+	background-color: var(--color_blue_2);
+	padding: 5px 10px;
+	border-radius: 20px;
+}
+
+.register_btn:hover {
+	cursor: pointer;
+	background-color: var(--color_blue_1);
+	color:white;
+	font-family: 'SOYOMapleBoldTTF';
+}
+
+.license{
+	grid-column: 1/ 3;
+	grid-row: 2/ 3;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.div_license_btn{
+	grid-column: 3 / 8;	
+	grid-row: 2/ 3;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);		
+}
+
+.license_btn{
+	position: absolute;
+	transform: translate(480px, 30%);
+	border: none;
+	background-color: var(--color_blue_2);
+	padding: 5px 10px;
+	border-radius: 20px;
+}
+
+.license_btn:hover {
+	cursor: pointer;
+	background-color: var(--color_blue_1);
+	color:white;
+	font-family: 'SOYOMapleBoldTTF';
+}
+
+.more_info{
+	grid-column: 1/ 8;
+	grid-row: 3/ 4;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);	
+}
+
+.p_more_info{
+	position: absolute;
+	transform: translate(350px, 90%);
+}
+
+.hotel_intro{
+	grid-column: 1/ 3;
+	grid-row: 4/ 5;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.hotel_intro > p {
+	position: absolute;
+	transform: translate(10px, 75px);
+}
+
+.hotel_text_div {
+    grid-column: 3 / 8;
+	grid-row: 4/ 5;
+    position: relative;
+    width: 100%;
+    height: 170px;
+    border-bottom: 1px solid var(--color_blue_1);
+}
+
+.hotel_intro_textarea{
+    position: absolute;
+    transform: translate(20px, 20px);
+    resize: none;
+    border-radius: 10px;
+}
+
+.checkin_time{
+	grid-column: 1/ 3;
+	grid-row: 5/ 6;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);	
+}
+
+.checkin_time > p {
+	position: absolute;
+	transform: translate(10px, 15px);
+}
+
+.input_checkin_div {
+	grid-column: 3 / 8;
+	grid-row: 5/ 6;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid var(--color_blue_1);
+}
+
+.input_checkin{
+    position: absolute;
+    transform: translate(20px, 10px);
+    height: 30px;
+    border-radius: 10px;
+}
+
+.checkout_time{
+	grid-column: 1/ 3;
+	grid-row: 6/ 7;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.checkout_time > p{
+	position: absolute;
+	transform: translate(10px, 15px);
+}
+
+.input_checkout_div {
+	grid-column: 3 / 8;
+	grid-row: 6/ 7;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid var(--color_blue_1);
+}
+
+.input_checkout{
+    position: absolute;
+    transform: translate(20px, 10px);
+    height: 30px;
+    border-radius: 10px;    
+}
+
+.room_intro{
+	grid-column: 1/ 3;
+	grid-row: 7/ 8;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.room_intro > p{
+	position: absolute;
+	transform: translate(10px, 70px);
+}
+.room_text_div{
+	grid-column: 3 / 8;
+	grid-row: 7/ 8;
+    position: relative;
+	width: 100%;
+	height: 170px;
+    border-bottom: 1px solid var(--color_blue_1);
+}
+
+.room_intro_textarea{
+	position: absolute;
+    transform: translate(20px, 20px);
+    resize: none;
+    border-radius: 10px;
+}	
+
+.room_cat{
+	grid-column: 1/ 3;
+	grid-row: 8/ 9;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);	
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.room_cat > p{
+	position: absolute;
+	transform: translate(10px, 80px);
+}
+
+.select_option{
+	grid-column: 3/ 8;
+	grid-row: 8/ 9;
+    width: 100%;
+    height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);
+}
+
+.add_btn{
+	width: 80px;
+	border: none;
+	border-radius: 20px;
+	padding: 5px;
+	font-family: 'SOYOMapleRegularTTF';
+	background-color: var(--color_blue_2);
+	margin: 20px 400px 30px 10px;
+}
+
+.add_btn:hover{
+	cursor: pointer;
+	font-family: 'SOYOMapleBoldTTF';
+	background-color: var(--color_blue_1);
+	color: white;
+}
+
+.select_wrap{
+	margin-bottom: 20px;	
+}
+.category{
+	grid-column: 1/ 3;
+	grid-row: 8/ 9;
+	margin: 0 10px;
+}
+
+.capacity{
+	margin: 0 10px;
+}
+
+.attribute{
+	margin: 0 10px;
+}
+
+.input_roomnum{
+	height: 30px;
+	border-radius: 10px;
+}
+
+.facility{
+	grid-column: 1/ 3;
+	grid-row: 9/ 10;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);		
+}
+
+.facility > p{
+	position: absolute;
+	transform: translate(10px, 60px);
+}
+
+.facility_check{
+	grid-column: 3/ 8;
+	grid-row: 9/ 10;
+	display: flex;
+	flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);	
+}
+
+.internet{
+	display: flex;
+	align-items: center;
+    margin: 30px 30px 30px 10px;
+}
+
+.parking{
+	display: flex;
+	align-items: center;
+	margin-right: 30px; 
+}
+
+.restaurant{
+	display: flex;
+	align-items: center;
+	margin-right: 30px;  
+}
+
+.swimming{
+	display: flex;
+	align-items: center;
+	margin-right: 30px; 
+}
+
+.fitness{
+	display: flex;
+	align-items: center;
+	margin-right: 30px;  
+}
+
+.aircon{
+	display: flex;
+	align-items: center;
+	margin: 0 60px 30px 10px;
+}
+
+.bar{
+	display: flex;
+	align-items: center;
+	margin: 0 43px 30px 0;   
+}
+
+.casino{
+	display: flex;
+	align-items: center;
+	margin: 0 30px 30px 0; 
+}
+
+input[type=checkbox]{ 
+	display:none; 
+}
+
+input[type=checkbox] + label { 
+    cursor: pointer;
+    width: 20px;
+	height: 20px;
+    background-repeat: no-repeat;
+    background-image: url("../../../images/skybluecheck.png");
+	background-size: 100%;
+}
+	
+input[type=checkbox]:checked + label { 
+	background-image: url("../../../images/bluecheck.png");
+	border: none;
+}
+
+.policy{
+	grid-column: 1/ 3;
+	grid-row: 10/ 11;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);			
+}
+
+.policy > p {
+	position: absolute;
+	transform: translate(10px, 70px);	
+}
+
+.policy_text_div {
+    grid-column: 3 / 8;
+	grid-row: 10/ 11;
+    position: relative;
+    width: 100%;
+    height: 170px;
+    border-bottom: 1px solid var(--color_blue_1);
+}
+
+.policy_textarea{
+    position: absolute;
+    transform: translate(20px, 20px);
+    resize: none;
+    border-radius: 10px;
+}
+
+.safety{
+	grid-column: 1/ 3;
+	grid-row: 11/ 12;	
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-right: 1px solid var(--color_blue_1);				
+}
+
+.safety > p {
+	position: absolute;
+	transform: translate(10px, 70px);	
+}
+
+.safety_textarea{
+    grid-column: 3 / 8;
+	grid-row: 11/ 12;
+	resize: none;
+    margin: 20px;
+    border-radius: 10px;		
+}

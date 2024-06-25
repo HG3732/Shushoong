@@ -31,6 +31,148 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</aside>
 			</div>
 			<div class="wrap-section">
+				<p style="font-size: var(--font1); text-align: center; margin-top: 40px; font-family: 'SOYOMapleBoldTTF';">사업장 등록</p>
+				<form id="frm_register" method="post">
+					<div class="grid_wrap">
+					<!-- 다 같은 선상에 있는데 너무 어지러워서 들여쓰기만 한것뿐... -->
+						<div class="register">
+							<p class="p">사업자 등록증</p>
+						</div>
+						<div class="div_register_btn">
+							<button type="button" class="register_btn">파일첨부</button>
+						</div>
+						<div class="license">
+							<p class="p">호텔 사업자 인허가 증명서</p>
+						</div>
+						<div class="div_license_btn">
+							<button type="button" class="license_btn">파일첨부</button>
+						</div>						
+						<div class="more_info">
+							<p class="p_more_info">그 외 시설 정보</p>
+						</div>
+						<div class="hotel_intro">
+							<p class="p">호텔소개</p>
+						</div>
+						<div class="hotel_text_div">
+							<textarea class="hotel_intro_textarea" cols="73" rows="8"></textarea>
+						</div>								
+						<div class="checkin_time">
+							<p>체크인</p>
+						</div>
+						<div class="input_checkin_div">
+							<input type="text" class="input_checkin">
+						</div>						
+						<div class="checkout_time">
+							<p>체크아웃</p>
+						</div>
+						<div class="input_checkout_div">
+							<input type="text" class="input_checkout">
+						</div>							
+						<div class="room_intro">
+							<P>객실 설명</P>
+						</div>
+						<div class="room_text_div">
+							<textarea class="room_intro_textarea" cols="73" rows="8"></textarea>
+						</div>
+						<div class="room_cat">
+							<p>객실 종류</p>
+						</div>
+						<div class="select_option">
+							<button type="button" class="add_btn">추가</button>
+							<div class="select_wrap">
+								<select name="room_cat" class="category" style="width:100px; height:30px; border-radius:10px;">
+									 <option value="standard">스탠다드룸</option>
+									 <option value="deluxe">디럭스룸</option>
+									 <option value="superior">슈페리어룸</option>
+									 <option value="sweet">스위트룸</option>
+									 <option value="etc">기타</option>
+								</select>
+								<select name="room_cap" class="capacity" style="width:100px; height:30px; border-radius:10px;">
+									 <option value="double">더블룸</option>
+									 <option value="triple">트리플룸</option>
+									 <option value="quad">쿼드룸</option>
+									 <option value="party">파티룸</option>
+								</select>
+								<select name="room_att" class="attribute" style="width:100px; height:30px; border-radius:10px;">
+									 <option value="none">없음</option>
+									 <option value="ocean">오션뷰</option>
+									 <option value="mountain">마운틴뷰</option>
+									 <option value="city">시티뷰</option>
+								</select>
+								<input type="text" placeholder="방 개수(숫자만 적어주세요)" class="input_roomnum">														
+							</div>
+							<div class="select_wrap">
+								<select name="room_cat" class="category" style="width:100px; height:30px; border-radius:10px;">
+									 <option value="standard">스탠다드룸</option>
+									 <option value="deluxe">디럭스룸</option>
+									 <option value="superior">슈페리어룸</option>
+									 <option value="sweet">스위트룸</option>
+									 <option value="etc">기타</option>
+								</select>
+								<select name="room_cap" class="capacity" style="width:100px; height:30px; border-radius:10px;">
+									 <option value="double">더블룸</option>
+									 <option value="triple">트리플룸</option>
+									 <option value="quad">쿼드룸</option>
+									 <option value="party">파티룸</option>
+								</select>
+								<select name="room_att" class="attribute" style="width:100px; height:30px; border-radius:10px;">
+									 <option value="none">없음</option>
+									 <option value="ocean">오션뷰</option>
+									 <option value="mountain">마운틴뷰</option>
+									 <option value="city">시티뷰</option>
+								</select>
+								<input type="text" placeholder="방 개수(숫자만 적어주세요)" class="input_roomnum">													
+							</div>	
+						</div>
+						<div class="facility">
+							<p>편의시설</p>
+						</div>
+						<div class="facility_check">
+							<div class="internet">
+								<input type="checkbox" id="box1" value="인터넷"><label for="box1"></label>
+								<div style="font-size: var(--font3); margin-left: 5px;">무선인터넷</div>
+							</div>
+							<div class="parking">
+								<input type="checkbox" id="box2" value="주차"><label for="box2"></label>
+								<div style="font-size: var(--font3); margin-left: 5px;">주차</div>
+							</div>
+							<div class="restaurant">
+								<input type="checkbox" id="box3" value="레스토랑"><label for="box3"></label>
+								<div style="font-size: var(--font3); margin-left: 5px;">레스토랑</div>
+							</div>
+							<div class="swimming">
+								<input type="checkbox" id="box4" value="금연실"><label for="box4"></label>
+								<div style="font-size: var(--font3); margin-left: 5px;">수영장</div>
+							</div>
+							<div class="fitness">
+								<input type="checkbox" id="box5" value="피트니스센터"><label for="box5"></label>
+								<div style="font-size: var(--font3); margin-left: 5px;">피트니스센터</div>
+							</div>
+							<div class="aircon">
+								<input type="checkbox" id="box6" value="에어컨"><label for="box6"></label>
+								<div style="font-size: var(--font3); margin-left: 5px;">에어컨</div>
+							</div>
+							<div class="bar">
+								<input type="checkbox" id="box7" value="바"><label for="box7"></label>
+								<div style="font-size: var(--font3); margin-left: 5px;">바</div>
+							</div>
+							<div class="casino">
+								<input type="checkbox" id="box8" value="카지노"><label for="box8"></label>
+								<div style="font-size: var(--font3); margin-left: 5px;">카지노</div>
+							</div>
+						</div>
+						<div class="policy">
+							<p>유의사항</p>
+						</div>
+						<div class="policy_text_div">
+							<textarea class="policy_textarea" cols="73" rows="8"></textarea>
+						</div>						
+						<div class="safety">
+							<p>위생 및 안전조치</p>
+						</div>
+							<textarea class="safety_textarea" cols="30" rows="8"></textarea>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

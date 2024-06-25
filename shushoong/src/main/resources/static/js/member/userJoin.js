@@ -205,6 +205,7 @@ function emailSendHandler() {
 		error: function(request, status, error) {
 			$('.test_Emailok').css("display", "none");
 			$('.test_Emailexception').css("display", "inline-block");
+			return false;
 		}
 	})
 }

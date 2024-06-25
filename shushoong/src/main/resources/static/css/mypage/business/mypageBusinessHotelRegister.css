@@ -7,6 +7,7 @@
 
 .wrap-section{
 	min-height: 400px;
+	margin-bottom: 70px;
 }
 
 #frm_register{
@@ -451,4 +452,18 @@ input[type=checkbox]:checked + label {
 	resize: none;
     margin: 20px;
     border-radius: 10px;		
+}
+
+.submit_btn{
+	margin: 40px 0 0 350px;
+	border: none;
+	border-radius: 20px;
+	background-color: var(--color_blue_2);
+	padding: 10px 40px;
+}
+
+.submit_btn:hover{
+	cursor:pointer;
+	background-color: var(--color_blue_1);
+	color: white;
 }

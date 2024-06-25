@@ -244,7 +244,7 @@ public class AirlineController {
 			) {
 		
 		
-		System.out.println("!@#$%%%^^!@                  :      "+passenger_birth.charAt(2));
+		System.out.println("!@#$%%%^^!@                  :      "+passenger_firstName);
 		service.insertPassengerInfo(passenger_firstName, passenger_lastName, passenger_birth, passenger_nation);
 
 //		List<AirlineInfoDto> SortData = service.getAirlineSideTime(

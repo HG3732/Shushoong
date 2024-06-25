@@ -48,7 +48,22 @@ public class FindAccountController {
 		}
 		return result;
 		}
-
+	
+	@PostMapping("find/customer/pwd.ajax")
+	@ResponseBody
+	public int resetPasswordCustomer(@RequestParam("userId") String userId,
+										@RequestParam("userEmail") String userEmail,
+										@RequestParam("userGrade") String userGrade) {
+		int result = 0;
+		
+		try {
+			result = memberservice.findPwd(userId, userEmail, userGrade);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	// 사업자 회원 아이디/비밀번호 찾기 페이지로 이동
 	@GetMapping("find/business")
 	public String findInfoBusiness() {
@@ -70,5 +85,25 @@ public class FindAccountController {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	@PostMapping("find/business/pwd.ajax")
+	@ResponseBody
+	public int resetPasswordBusiness(@RequestParam("userId") String userId,
+										@RequestParam("userEmail") String userEmail,
+										@RequestParam("userGrade") String userGrade) {
+		int result = 0;
+		
+		try {
+			result = memberservice.findPwd(userId, userEmail, userGrade);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@GetMapping("reset/password")
+	public String resetPassword() {
+		return "member/passwordReset";
 	}
 }

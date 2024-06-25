@@ -52,7 +52,13 @@ public class MypageBusinessController {
 
 	// 사업장 관리 페이지 이동
 	@GetMapping("/my/hotel")
-	public String myBusiness() {
+	public String myBusinessHotel() {
 		return "mypage/business/mypageBusinessHotel";
+	}
+	
+	// 사업장 등록 페이지 이동
+	@GetMapping("/my/hotel/register")
+	public String myHotelRegister() {
+		return "mypage/business/mypageBusinessHotelRegister";
 	}
 }

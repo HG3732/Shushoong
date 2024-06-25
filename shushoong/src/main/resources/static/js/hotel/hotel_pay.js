@@ -46,4 +46,7 @@ function checkAllEscHandler(){
 	}
 }
 
+function payHandler(){
+	console.log($(this));
+}
 

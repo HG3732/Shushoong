@@ -111,6 +111,13 @@ input[type=text]:foucs{
 	width: 200px;
 }
 
+.gender_man{
+	display: flex;
+}
+
+.gender_woman {
+		display: flex;
+}
 
 .require_check{
 	display: flex;
@@ -390,46 +397,3 @@ input[type="radio"]:checked + label{
 	font-family: 'SOYOMapleBoldTTF';
 	font-size: var(--font2);
 }
-
-
-/* .hotel_city{
-	display: flex;
-}
-
-.city{
-	flex: 1;
-	background-color: var(--color_blue_2);
-}
-
-.city_name{
-	flex: 5;
-}
-
-
-.reserve_time{
-	display: flex;
-}
-
-.check_in_out{
-	flex: 1;
-	background-color: var(--color_blue_2);
-}
-
-.check_date{
-	flex: 5;
-}
-
-
-.room{
-	display: flex;
-}
-
-.room_info{
-	flex: 1;
-	background-color: var(--color_blue_2);
-}
-
-.room_cat{
-	flex: 5;
-}
- */

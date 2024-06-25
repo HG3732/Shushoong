@@ -214,7 +214,7 @@ public class AirlineController {
 	}
 
 	// 항공 메인 페이지
-	@PostMapping("/airline/customer/reserve/pay")
+	@GetMapping("/airline/customer/reserve/pay")
 	public String airlinePay(HttpSession session, Model md,
 			String airlineCodeDirect,
 			String airlineCodeReturn
@@ -234,7 +234,10 @@ public class AirlineController {
 	
 	//항공에서 받는 값
 	@PostMapping("/airline/input/info")
-	public void customerInfo(
+	public String customerInfo(
+			String reserver_middle_phone_number,
+			String reserver_email,
+			String passenger_gender,
 			String passenger_firstName,
 			String passenger_lastName,
 			String passenger_birth,
@@ -243,13 +246,12 @@ public class AirlineController {
 			String expiration_date
 			) {
 		
+		//RESERVER_INFO 안에 들어가는 내용
+//		service.insertPassengerInfo(reserver_middle_phone_number, reserver_email);
 		
-		System.out.println("!@#$%%%^^!@                  :      "+passenger_firstName);
-		service.insertPassengerInfo(passenger_firstName, passenger_lastName, passenger_birth, passenger_nation);
-
-//		List<AirlineInfoDto> SortData = service.getAirlineSideTime(
-//				departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice
-//				);		
+		//PASSENGER_INFO 에 들어갈 LIST 내용
+		System.out.println("21416547sdafdsaf6677daafdsfasdadsfsafd : "+ passenger_firstName.length());
 		
+		return "redirect:/airline/main";
 	}
 }

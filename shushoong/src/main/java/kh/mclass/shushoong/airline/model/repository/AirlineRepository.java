@@ -24,5 +24,5 @@ public interface AirlineRepository {
 			);
 	Integer getMaxPrice(String departLoc, String arrivalLoc);
 	
-	void insertAllList(@Param("firstName") String firstName, @Param("lastName") String lastName, @Param("birth")String birth, @Param("nation")String nation); 
+	void insertPassengerInfo(String phoneNum,String email);
 }

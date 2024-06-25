@@ -61,24 +61,13 @@
     		</when>
         </choose>
     </select>
-    <insert id="insertAllList" parameterType="AirlinePassengerInfoDto">
-		   
-		   INSERT 
-			   INTO passenger_info (
-			   		FIRST_NAME
-			   		,LAST_NAME
-			   		,BIRTH
-			   		,NATION
-			   	)
-   		<foreach collection="param1" item="item" separator=",">
-		   VALUES
-		   		(
-				        #{item.firstName}
-				        , #{item.lastName}
-				        , #{item.birth}
-				        , #{item.nation}
-			    )
-		</foreach>
+    
+    <insert id="insertPassengerInfo" >
+    	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL)
+    		VALUES ('357596' , 'ex1' , #{phoneNum} , #{email} )
+    </insert>
+    
+  
 		   	
-	</insert>
+	
 </mapper>

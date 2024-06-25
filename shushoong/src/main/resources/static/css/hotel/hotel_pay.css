@@ -77,6 +77,11 @@ input[type=text]:foucs{
 	font-size: var(--font3);
 }
 
+input[type=tel]{
+	border: 1px solid #006AFF;
+	font-size: var(--font3);
+}
+
 .customer_info th {
 	width: 160px;
 	padding: 20px 10px;

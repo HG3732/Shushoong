@@ -36,7 +36,7 @@
 	
 	<insert id="join" parameterType="MemberDto">
 	INSERT INTO MEMBER (USER_ID, USER_NAME, USER_PWD, USER_EMAIL, USER_GRADE, USER_STATUS, JOIN_DATE, EMAIL_RECEIVE, MSG_RECEIVE, LATEST_LOGIN) 
-	VALUES (#{userId}, #{userName}, #{userPwd}, #{userEmail}, #{userGrade}, #{userStatus}, #{joinDate}, #{emailReceive}, #{msgReceivce}, #{latestLogin})
+	VALUES (#{userId}, #{userName}, #{userPwd}, #{userEmail}, #{userGrade}, #{userStatus}, #{joinDate}, #{emailReceive}, #{msgReceive}, #{latestLogin})
 	</insert>
 
 	<update id="stopUse" parameterType="string">

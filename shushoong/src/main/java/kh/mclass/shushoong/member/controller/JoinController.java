@@ -2,26 +2,30 @@ package kh.mclass.shushoong.member.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.member.model.domain.MemberRole;
 import kh.mclass.shushoong.member.model.service.MemberService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 
 @Controller
 @AllArgsConstructor
-//@PropertySource("classpath:/keyfiles/apikey.properties")
+@Slf4j
 public class JoinController {
 	
 	@Autowired
@@ -53,8 +57,13 @@ public class JoinController {
 	// 일반유저 회원가입
 	@PostMapping("signup/customer")
 	@ResponseBody
-	public String singupCustomer(MemberDto memberDto) {
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public String singupCustomer(MemberDto memberDto, BindingResult bindingResult,
+								ModelAndView mav) {
+		if (bindingResult.hasErrors()) {
+            return "member/userJoin";
+        }
+		
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date now = new Date();
 		String joinDate = sdf1.format(now);
 		
@@ -66,8 +75,16 @@ public class JoinController {
 		memberDto.setUserStatus(1);
 		memberDto.setJoinDate(joinDate);
 		memberDto.setMsgReceive(memberDto.getMsgReceive());
-		memberDto.setEmailReceive(memberDto.getMsgReceive());
+		memberDto.setEmailReceive(memberDto.getEmailReceive());
 		memberDto.setLatestLogin(null);
+		
+		log.debug("member Information = " + memberDto);
+		
+		int result = memberservice.join(memberDto);
+		if(result < 0) {
+			
+			return "member/userJoin";
+		}
 		
 		return "redirect:/login";
 	}
@@ -96,6 +113,10 @@ public class JoinController {
 		memberDto.setEmailReceive(0);
 		memberDto.setLatestLogin(null);
 		
+		int result = memberservice.join(memberDto);
+		if(result < 0) {
+			return "member/userJoin";
+		}
 		
 		return "redirect:/login";
 	}

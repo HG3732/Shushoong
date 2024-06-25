@@ -21,7 +21,7 @@ public interface MemberRepository {
 	public int log(Map<String, Object> map);
 
 	// 회원가입
-	public int join(MemberDto memberDto);
+	public Integer join(MemberDto memberDto);
 
 	// 아이디 찾기
 	public String findId(String userName, String userEmail, String userGrade);

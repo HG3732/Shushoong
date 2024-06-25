@@ -14,7 +14,7 @@ public class MemberDto {
 	private String userGrade;
 	private int userStatus;
 	private String joinDate;
-	private Integer emailReceive;
-	private Integer msgReceive;
+	private int emailReceive;
+	private int msgReceive;
 	private String latestLogin;
 }

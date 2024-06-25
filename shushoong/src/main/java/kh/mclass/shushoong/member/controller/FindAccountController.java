@@ -2,14 +2,11 @@ package kh.mclass.shushoong.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.servlet.http.HttpServletRequest;
-import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.member.model.service.MemberService;
 import lombok.RequiredArgsConstructor;
 

@@ -82,6 +82,8 @@ public class HotelController {
 		session.setAttribute("nation", nation);
 		session.setAttribute("checkIn", checkIn);
 		session.setAttribute("checkOut", checkOut);
+		session.setAttribute("adult", adult);
+		session.setAttribute("child", child);
 		System.out.println("session.nation : "+(String)session.getAttribute("nation"));
 		return "hotel/hotel_list";
 	}
@@ -158,6 +160,7 @@ public class HotelController {
 		//ajax와는 다르게 이 문장으로 인해서 service 가서 쭉쭉가서 db에서 정보 조회해서 dto에 넣고 다시 돌아옴
 		//돌아온 데이터 밑에 넣음
 		
+		model.addAttribute("hotelCode", hotelCode);
 		model.addAttribute("hotelViewList", result);
 		//넣어서 보내면 사라짐(일회성) - setAttribute 같은 얘
 		
@@ -267,15 +270,22 @@ public class HotelController {
 	}
 	
 	@GetMapping("/hotel/customer/reserve/pay")
-	public String hotelPay(HttpSession session, Model model,  String roomCat, String roomAtt, String hotelPrice, String hotelCode, String hotel) {
+	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomAtt, String hotelPrice, String roomCap) {
+		model.addAttribute("hotel", hotel);
+		model.addAttribute("hotelCode", hotelCode);
 		model.addAttribute("roomCat", roomCat);
 		model.addAttribute("roomAtt", roomAtt);
 		model.addAttribute("hotelPrice", hotelPrice);
-		model.addAttribute("hotelCode", hotelCode);
+		model.addAttribute("roomCap", roomCap);
 		
 		//session 에 담겨있는 checkIn, checkOut 정보 model 에 담아서 html 페이지로 뿌리기
 		model.addAttribute("checkIn", session.getAttribute("checkIn"));
 		model.addAttribute("checkOut", session.getAttribute("checkOut"));
+		model.addAttribute("userId", session.getAttribute("userId"));
+		model.addAttribute("adult", session.getAttribute("adult"));
+		model.addAttribute("child", session.getAttribute("child"));
+		model.addAttribute("nation", session.getAttribute("nation"));
+		//이미 session 안에 이 위에 정보들 있는데 굳이 화면에 값 출력해서 결제페이지 이동할 떄 가지고 가야하나? 그냥 session 불러서 넣으면 안되나?
 		
 		return "hotel/hotel_pay";
 	}

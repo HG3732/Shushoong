@@ -266,7 +266,6 @@ xmlns:th="http://www.thymeleaf.org">
 	
 	
 	
-	
 	<!-- airline_pay info 에 관한 js -->		
 	<script th:src="@{/js/airline/pay_info.js}" type="text/javascript"></script>
 	
@@ -278,7 +277,10 @@ xmlns:th="http://www.thymeleaf.org">
 			childNum();
 			babyNum();
 			payCheckInfo();
+			$("input[type='radio'].passenger_gender").change(radioGenderInputValueFunction);
+			$("input[type='radio'].baggage").change(raidoBaggageInputValueFunction);
 			$("input[type='radio'].baggage").change(totalValueFunction);
+			
 
 		}
 		

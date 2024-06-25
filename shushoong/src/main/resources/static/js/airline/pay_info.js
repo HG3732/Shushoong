@@ -13,8 +13,9 @@
 								<div>
 									<div>성별</div>
 									<div>
-										<input type="radio" class="passenger_gender" name="passenger_gender_adult${i}" id="male_adult${i}" value="M"><label for="male_adult${i}" >남성</label>
+										<input type="radio" checked="checked" class="passenger_gender" name="passenger_gender_adult${i}" id="male_adult${i}" value="M"><label for="male_adult${i}" >남성</label>
 										<input type="radio" class="passenger_gender" name="passenger_gender_adult${i}" id="female_adult${i}" value="F"><label for="female_adult${i}">여성</label>
+										<input type="hidden" name="passenger_gender" value="M">
 									</div>
 								</div>
 								<div>
@@ -98,6 +99,7 @@
 										<div><div>KRW :</div><div>90,000</div></div>
 										<input class="baggage" id="adult_40kg${i}" type="radio" name="adult_baggage_size${i}" value="4">
 									</label>
+									<input type="hidden" name="baggage_size" value="1">
 								</div>
 							</div>
 						</div>
@@ -127,8 +129,9 @@
 								<div>
 									<div>성별</div>
 									<div>
-										<input type="radio" class="passenger_gender" name="passenger_gender_child${i}" id="male_child${i}" value="M"><label for="male_child${i}" >남성</label>
+										<input type="radio" checked="checked" class="passenger_gender" name="passenger_gender_child${i}" id="male_child${i}" value="M"><label for="male_child${i}" >남성</label>
 										<input type="radio" class="passenger_gender" name="passenger_gender_child${i}" id="female_child${i}" value="F"><label for="female_child${i}">여성</label>
+										<input type="hidden" name="passenger_gender" value="M">
 									</div>
 								</div>
 								<div>
@@ -212,6 +215,8 @@
 										<div><div>KRW :</div><div>90,000</div></div>
 										<input class="baggage" id="child_40kg${i}" type="radio" name="child_baggage_size${i}" value="4">
 									</label>
+									<input type="hidden" name="baggage_size" value="1">
+
 								</div>
 							</div>
 						</div>
@@ -239,8 +244,9 @@
 								<div>
 									<div>성별</div>
 									<div>
-										<input type="radio" class="passenger_gender" name="passenger_gender_baby${i}" id="male_baby${i}" value="M"><label for="male_baby${i}" >남성</label>
+										<input type="radio" checked="checked" class="passenger_gender" name="passenger_gender_baby${i}" id="male_baby${i}" value="M"><label for="male_baby${i}" >남성</label>
 										<input type="radio" class="passenger_gender" name="passenger_gender_baby${i}" id="female_baby${i}" value="F"><label for="female_baby${i}">여성</label>
+										<input type="hidden" name="passenger_gender" value="M">
 									</div>
 								</div>
 								<div>
@@ -290,7 +296,7 @@
 									<div class="input_type_date">
 										<input type="text" placeholder="만료 날짜" name="expiration_date">
 									</div>
-									<input class="baggage" id="baby_30kg${i}" type="hidden" name="child_baggage_size${i}" value="1">
+									<input type="hidden" name="baggage_size" value="1">
 								</div>
 							</div>
 						</div>
@@ -416,11 +422,7 @@
 		
 		function totalValueFunction(){
 			var result = 0;
-//			console.log("working now");
-//			console.log("$(this).val()  :"+$(this).val());
-//			console.log("$(.baggage).val()  :"+$("input.baggage:checked").val());
 			$(".baggage:checked").each(function(){
-				console.log($(this).val());
 				if($(this).val()==1){
 					
 				}else if($(this).val()==2){
@@ -439,5 +441,18 @@
 			
 			$(".total_value").val(result);
 		}
+		
+		function radioGenderInputValueFunction(){
+			$(".passenger_gender:checked").each(function(){
+				$(this).parent().children("[name='passenger_gender']").val($(this).val());
+			});
+		}
+		function raidoBaggageInputValueFunction(){
+			$(".baggage:checked").each(function(){
+				$(this).parent().parent().children("[name='baggage_size']").val($(this).val());
+			});
+		}
+		
+		
 		
 		

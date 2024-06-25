@@ -48,8 +48,13 @@ public class MemberService {
 	public String findId(String userName, String userEmail, String userGrade) {
 		return memberRepository.findId(userName, userEmail, userGrade);
 	}
-	
-	// 계정 확인 
+
+	// 비밀번호 찾기
+	public int findPwd(String userId, String userEmail, String userGrade) {
+		return memberRepository.findPwd(userId, userEmail, userGrade);
+	}
+
+	// 계정 확인
 	public String accountCheck(String userId, String Email, String userGrade) {
 		return memberRepository.accountCheck(userId, Email, userGrade);
 	}

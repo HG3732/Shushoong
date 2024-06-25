@@ -42,14 +42,14 @@ public class HotelController {
 	private HotelService service;
 		
 		//PortOne
-		@Value("${portone.store.key}")
-		private String portoneStoreKey;
-	
-		@Value("${portone.channel.key}")
-		private String portoneChannelKey;
-		
-		@Value("${portone.secret.key}")
-		private String portoneSecretKey;
+//		@Value("${portone.store.key}")
+//		private String portoneStoreKey;
+//	
+//		@Value("${portone.channel.key}")
+//		private String portoneChannelKey;
+//		
+//		@Value("${portone.secret.key}")
+//		private String portoneSecretKey;
 		
 		
 	

@@ -61,7 +61,7 @@ xmlns:th="http://www.thymeleaf.org">
 								<form id="frm-post" th:action="@{/find/customer}" method="post">
 									<div class="findInfo">
 										<label for="userId">아이디</label>
-										<input type="text" id="userId" name="userId" class="longinput" autofocus>
+										<input type="text" id="userId" name="userId" class="longinput" placeholder="아이디" autofocus>
 										<label for="userEmail">이메일</label>
 										<input type="text" name="userEmail" id="userEmail" class="shortinput" placeholder="이메일">
 										<button type="button" class="btn emailSend">인증번호 전송</button>
@@ -69,7 +69,7 @@ xmlns:th="http://www.thymeleaf.org">
 										<input type="text" name="code" id="code" class="shortinput" placeholder="인증번호">
 										<button type="button" class="btn emailCheck">인증확인</button>
 										<div class="searchPwdBusiness">
-											<button type="submit" class="btn findPwd">비밀번호 찾기</button>
+											<button type="button" class="btn findPwd">비밀번호 초기화</button>
 										</div>
 									</div>
 								</form>
@@ -84,72 +84,6 @@ xmlns:th="http://www.thymeleaf.org">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
 	
-	<script>
-		$(loadedHanlder);
-		function loadedHanlder() {
-			$(".btn.emailSend").on("click", emailSendHandler);
-			$(".btn.emailCheck").on("click", emailCheckHandler);
-			$(".btn.findId").on("click", findIdCheckHandler);
-		}
-		
-		// 이메일 전송 이벤트
-		function emailSendHandler() {	
-			var userEmail = $("#userEmail").val();
-			
-			$.ajax({
-				type: "post",
-				url: "/shushoong/v2/verify-email",
-				contentType : 'application/json;',
-				data: JSON.stringify({
-					'userEmail' : userEmail
-				}), 
-				success:function(request,status,error) {
-					alert(userEmail + "로 인증번호가 전송되었습니다.");
-				}, 
-				error:function(request,status,error) {
-					alert("잘못된 이메일 형식입니다.");
-				}
-			})
-		}
-		
-		// 이메일 체크 이벤트
-		function emailCheckHandler() {	
-			var code = $("#code").val();
-			
-			$.ajax({
-				type: "post",
-				url: "/shushoong/verification-code",
-				contentType : 'application/json;',
-				data: JSON.stringify({
-					'code' : code
-				}),
-				success:function(request,status,error) {
-					alert("인증이 완료되었습니다.");
-				}, 
-				error:function(request,status,error) {
-					alert("유효한 코드가 아닙니다.");
-				}
-			})
-		}
-		
-		function findIdCheckHandler() {
-			var userName = $("#userName").val();
-			var userEmail = $("#userEmail").val();
-			var userGrade = "business";
-						
-			$.ajax({
-				url : '/shushoong/find/business/id.ajax',
-				type : 'post',
-				data : {userName:userName, userEmail:userEmail, userGrade:userGrade},
-				success:function(result) {
-					if(result == 0) {
-						alert("등록하신 정보와 일치하는지 다시 한 번 확인해 주세요.");
-					} else {
-						alert("설정하신 아이디는 " + result + " 입니다.");
-					}
-				}
-			})
-		}
-	</script>
+	<script th:src="@{/js/member/findBusinessInfo.js}" type="text/javascript"></script>
 </body>
 </html>

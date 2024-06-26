@@ -45,6 +45,7 @@ xmlns:th="http://www.thymeleaf.org">
 					<input type="hidden" th:value="${userId}" class="user_id">
 					<input type="hidden" th:value="${roomCap}" class="room_cap">
 					<input type="hidden" th:value="${hotelCode}" class="hotel_code">
+					<input type="hidden" th:value="${roomCat}" class="room_cat">
 					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';" th:text="${hotel}"></p>
 					<table class="reserve_info">
 						<thead>
@@ -66,16 +67,17 @@ xmlns:th="http://www.thymeleaf.org">
 							<tr class="tr_third" style="border-top: 1px solid #006AFF; border-bottom: 3px solid #006AFF; ">
 								<th>객실정보</th>
 								<td>
-									<input type="text" readonly th:value="${roomCat}" onfocus="this.blur()" style=" border: none; width: 80px;" class="room_cat">,
+									<input type="text" readonly th:value="${roomCatDesc}" onfocus="this.blur()" style=" border: none; width: 80px;" class="room_cat_desc">,
 									<input type="text" readonly th:value="${roomAtt}" onfocus="this.blur()" style="border: none;" class="room_att">
 								</td>
 							</tr>
 						</tbody>
 					</table>
 					
-					<!-- 예약자 정보 -->
-					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">예약자 정보</p>
+					<!-- 투숙객 정보 -->
+					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">투숙객 정보</p>
 					<div class="party">
+						<span>객실 </span><span th:text="${room}"></span>개, 
 						<span>성인 </span><span th:text="${adult}"></span>명, 
 						<span>아동 </span><span th:text="${child}"></span>명
 					</div>

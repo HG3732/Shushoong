@@ -84,6 +84,7 @@ public class HotelController {
 		session.setAttribute("checkOut", checkOut);
 		session.setAttribute("adult", adult);
 		session.setAttribute("child", child);
+		session.setAttribute("room", room);
 		System.out.println("session.nation : "+(String)session.getAttribute("nation"));
 		return "hotel/hotel_list";
 	}
@@ -166,7 +167,10 @@ public class HotelController {
 		
 		//list에서 들고온 checkIn, checkOut 정보 다시 session 에 담아서 hotelview페이지에 뿌리기 
 		model.addAttribute("checkIn", session.getAttribute("checkIn"));
-		model.addAttribute("checkOut", session.getAttribute("checkOut"));	
+		model.addAttribute("checkOut", session.getAttribute("checkOut"));
+		model.addAttribute("adult", session.getAttribute("adult"));		
+		model.addAttribute("child", session.getAttribute("child"));
+		model.addAttribute("room", session.getAttribute("room"));
 		
 		//편의시설
 		List<HotelFacilityDtoRes> facilitylist = service.selectHotelFacility(hotelCode);
@@ -270,10 +274,11 @@ public class HotelController {
 	}
 	
 	@GetMapping("/hotel/customer/reserve/pay")
-	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomAtt, String hotelPrice, String roomCap) {
+	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomCatDesc, String roomAtt, String hotelPrice, String roomCap) {
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelCode", hotelCode);
 		model.addAttribute("roomCat", roomCat);
+		model.addAttribute("roomCatDesc", roomCatDesc);
 		model.addAttribute("roomAtt", roomAtt);
 		model.addAttribute("hotelPrice", hotelPrice);
 		model.addAttribute("roomCap", roomCap);
@@ -285,6 +290,7 @@ public class HotelController {
 		model.addAttribute("adult", session.getAttribute("adult"));
 		model.addAttribute("child", session.getAttribute("child"));
 		model.addAttribute("nation", session.getAttribute("nation"));
+		model.addAttribute("room", session.getAttribute("room"));
 		//이미 session 안에 이 위에 정보들 있는데 굳이 화면에 값 출력해서 결제페이지 이동할 떄 가지고 가야하나? 그냥 session 불러서 넣으면 안되나?
 		
 		return "hotel/hotel_pay";

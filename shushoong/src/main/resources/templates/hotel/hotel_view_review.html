@@ -47,7 +47,7 @@ xmlns:th="http://www.thymeleaf.org">
 		<div style="text-align: center;">
 			<div class="paging_wrap">
 				<div th:if="${reviewDetailDto.startPageNum > 1}" class="goprepage">
-		            <button type="button" class="btn-leftpage" th:data-targetpage="${reviewDetailDto.startPageNum - 1}">&lt;</button>
+		            <button type="button" class="btn-gopage" th:data-targetpage="${reviewDetailDto.startPageNum - 1}">&lt;</button>
 		        </div>
 		        
 		        <div th:each="page :  ${#numbers.sequence(reviewDetailDto.startPageNum, reviewDetailDto.endPageNum)}">
@@ -60,7 +60,7 @@ xmlns:th="http://www.thymeleaf.org">
 		        </div>
 		        
 		        <div th:if="${reviewDetailDto.endPageNum < reviewDetailDto.totalReviewCount}">
-		            <button type="button" th:data-targetpage="${reviewDetailDto.endPageNum + 1}" class="right_page">&gt;</button>
+		            <button type="button" th:data-targetpage="${reviewDetailDto.endPageNum + 1}" class="btn-gopage">&gt;</button>
 		        </div>			
 			</div>
 		</div>

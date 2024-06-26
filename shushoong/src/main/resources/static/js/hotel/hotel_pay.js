@@ -48,11 +48,16 @@ function checkAllEscHandler(){
 
 async function payHandler(){
 
-	var hotelReserveCode = '';
-	var reserveName = $('#name').val();
+	const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    
+    const currentTime = year + month + day;	
+	var reserveName = $('#name').val(); //예약자 --> 회원명
 	var reserveEmail = $('#email').val();
-	var residenceNameKo = $('#name').val();
-	var residenceNameEng = $('#last_name').val() + ', ' + $('#first_name').val();
+	var residenceNameKo = $('#name').val(); //투숙객명
+	var residenceNameEng = $('#last_name').val() + $('#first_name').val();
 	var residenceGender = $('input[name=gender]:checked').val();
 	var residencePhone = $('#phone').val();
 	var request = $('.require_check').children().children('input[type=checkbox]:checked').val();
@@ -64,8 +69,9 @@ async function payHandler(){
 	var roomCat = $('.room_cat').val();
 	var roomAtt = $('.room_att').val();
 	var hotelPrice = $('.final_pay').val();
+	var hotelReserveCode = currentTime + hotelCode + roomCat; //sysdate + hotelCode + room_cat
 	
-	console.log(reserveCheckOut);
+	console.log(hotelReserveCode);
 
 	/*	const response = await PortOne.requestPayment({
 			storeId : storeId, // 

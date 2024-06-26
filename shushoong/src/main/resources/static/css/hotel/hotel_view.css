@@ -67,13 +67,13 @@ p{
 
 .info_list {
 	display: grid;
-	grid-template-columns: repeat(8, 1fr);
+	grid-template-columns: repeat(10, 1fr);
 	align-items: center;
 	
 }
 
 .calendar{
-	grid-column: 5/ 8;
+	grid-column: 6 / 9;
 	width: 300px;
 	border: 1px solid #006AFF;
 	border-radius: 10px;
@@ -93,7 +93,7 @@ p{
 }
 
 .headcount{
-	grid-column: 8 / 9;
+	grid-column: 9 / 11;
 	text-align: end;
 }
 

@@ -58,7 +58,7 @@ xmlns:th="http://www.thymeleaf.org">
 							<button type="button" class="cal_btn" style="vertical-align: middle;"><span th:text="${checkIn}"></span> ~ <span th:text="${checkOut}"></span></button>
 						</div>
 						<div class="headcount">
-							<button type="button" class="count_btn">객실 1 ⦁ 성인 2명</button>
+							<button type="button" class="count_btn"><span th:text="'성인 ' + ${adult} + '명'"></span> ⦁ <span th:text="'아동 ' + ${child} + '명'"></span></button>
 						</div>
 					</div>
 					<hr style="border: 1px solid #c5c5c5;"></hr>
@@ -70,15 +70,17 @@ xmlns:th="http://www.thymeleaf.org">
 								        <div style="text-align: center; margin-top: 30px; font-family: 'SOYOMapleBoldTTF';">예약 가능한 객실이 없습니다.</div>
 								    </th:block>
 									<th:block th:if="${not #lists.isEmpty(hotelViewList)}">
-										<input type="hidden" th:value="${hotelViewList.hotelCode}" name="hotelCode">
+										<input type="hidden" th:value="${hotelViewList.hotelCode}" name="hotelCode" class="hotel_code">
 										<form th:each="room : ${hotelViewList.hotelRooms}" class="roomlist" id="frm-reserve" method="get" action="/shushoong/hotel/customer/reserve/pay">
 											<input type="hidden" th:value="${hotelViewList.hotelName}" name="hotel">
 											<input type="hidden" th:value="${hotelCode}"  name="hotelCode">
+											<input type="hidden" th:value="${room}"  name="room">
 											<input type="hidden" th:value="${room.roomAtt}" name="roomAtt">
+											<input type="hidden" th:value="${room.roomCatDesc}" name="roomCatDesc">
 											<input type="hidden" th:value="${room.roomCat}" name="roomCat">
 											<input type="hidden" th:value="${room.hotelPrice}" name="hotelPrice">
 											<input type="hidden" th:value="${room.roomCap}" name="roomCap">
-											<div th:utext="${room.roomCat} + ', ' + ${room.roomAtt}" class="room_cat"></div>
+											<div th:utext="${room.roomCatDesc} + ', ' + ${room.roomAtt}" class="room_cat"></div>
 											<div class="amount_num">
 												<strong th:text="${#numbers.formatInteger(room.hotelPrice, 3, 'COMMA')}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong>원
 											</div>

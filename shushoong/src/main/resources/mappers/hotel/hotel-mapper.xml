@@ -77,7 +77,7 @@
 	</select>
 	
 	<!-- 작성된 리뷰 불러오기 -->
-	<select id="selectReviewDetailList" parameterType="map" resultType="HotelReviewDto">
+	<select id="selectReviewDetailList" parameterType="hashmap" resultType="HotelReviewDto">
 		select s2.* 
 		from
 		    (select s1.*, rownum rn 
@@ -133,6 +133,7 @@
 		</collection>
 		<collection ofType="HotelRoomDto" property="hotelRooms">		
 			<result column="ROOM_CAT" property="roomCat"/>
+			<result column="ROOM_CAT_DESC" property="roomCatDesc"/>
 			<result column="HOTEL_PRICE" property="hotelPrice"/>
 			<result column="HOTEL_DISCOUNT" property="hotelDiscount"/>
 			<result column="ROOM_COUNT" property="roomCount"/>

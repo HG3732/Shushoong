@@ -9,11 +9,10 @@ import lombok.Data;
 public class HotelReserveDtoRes {
 
 	private String hotelReserveCode;
-	private String reserveName;
-	private String reserveEmail;
 	private String residenceNameKo;
 	private String residenceNameEng;
 	private String residencePhone;
+	private String residenceEmail;
 	private String request;
 	private String reserveCheckIn;
 	private String reserveCheckOut;

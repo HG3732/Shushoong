@@ -153,11 +153,13 @@ JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
 JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
 WHERE hotel_code='2OS001';
 
+select * from hotel_room;
+
 
 CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_ROOM_LIST" (
-    hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, room_att, room_cat
+    hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, room_att, room_cat, ROOM_CAT_DESC
 ) AS 
-SELECT hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT_DESC as room_cat FROM HOTEL_ROOM
+SELECT hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT, ROOM_CAT_DESC FROM HOTEL_ROOM
 JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
 JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
 where room_count > 0;
@@ -165,8 +167,7 @@ where room_count > 0;
 
 --WHERE hotel_code='2OS001' 이거는 create 할때 붙이면 X --> 그러면 where 한 데이터만 조회됨(모두를 위한 view)
 
-select * from v_room_list
-WHERE hotel_code='2OS001';
+select * from v_room_list;
 
 drop view v_room_list;
 
@@ -320,7 +321,3 @@ set room_cat_desc ='스위트룸'
 where room_cat = '3';
 
 commit;
-
-select * from hotel_room_cat;
-
-select * from v_room_list;

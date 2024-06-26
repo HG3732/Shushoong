@@ -1,4 +1,11 @@
 let calendar;
+
+let today = new Date();
+let today_year = today.getFullYear(); // 년도
+let today_month = (today.getMonth() + 1) < 10 ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1);  // 월
+let today_day = today.getDate();  // 날짜
+now = `${today_year}${today_month}${today_day}`;
+
 function createCalendar(){
 	var calendarEl = document.getElementById('calendar');
 	calendar = new FullCalendar.Calendar(calendarEl, {
@@ -15,12 +22,11 @@ function createCalendar(){
 		editable : true,
 		dateClick : function (info) {
 			//클릭한 날짜 == info.dateStr
-			console.log(info.dateStr);
 			
 			var year = info.dateStr.substr(0, 4);
 			var month = info.dateStr.substr(5, 2);
 			var day = info.dateStr.substr(8, 2);
-			if(today_year > year || today_month > month || today_day > day) {	//현재 날짜 이전의 시간을 선택한다면
+			if(now > year+month+day) {	//현재 날짜 이전의 시간을 선택한다면
 				alert("현재 날짜 이전은 선택하실 수 없습니다.");
 			} else {
 				if(select_status == 0){	//체크인 날짜 선택

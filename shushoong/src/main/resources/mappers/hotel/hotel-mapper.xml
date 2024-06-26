@@ -15,7 +15,7 @@
 	<select id="selectAllHotelList" parameterType="hashmap" resultType="HotelDtoRes">
 		select hotel_code, hotel_name, hotel_eng, hotel_address, to_char(hotel_price, '999,999,999') as hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num, rownum rn
 		from V_hotel_list 
-		where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap = #{people}
+		where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap &gt;= #{people}
         <if test="keyword != null and keyword !='' ">
         	<bind name="keyword2" value="'%' + keyword + '%'"/>
         	and hotel_name LIKE #{keyword2}
@@ -54,7 +54,7 @@
 	<!-- 호텔 최고가(슬라이드바 표시용) -->
 	<select id="selectMaxRoomlPrice" parameterType="hashmap" resultType="Integer">
             	select max(hotel_price) from V_hotel_list
-            	where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap = #{people}
+            	where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap &gt;= #{people}
             <if test="keyword != null and keyword !='' ">
 	        	<bind name="keyword2" value="'%' + keyword + '%'"/>
 	        	and hotel_name LIKE #{keyword2}

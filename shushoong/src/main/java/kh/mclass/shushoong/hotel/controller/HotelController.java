@@ -232,10 +232,10 @@ public class HotelController {
 		//정보를 받아올 때 어떤것을 참조해서 받아올지 --> 매개변수(java에서의 getParameter 역할을 대신해줌)
 		
 //		한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
-		int reviewNum = 3;
+		int reviewNum = 1;
 		
 //		화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
-		int reviewPageNum = 5;
+		int reviewPageNum = 2;
 		
 //		누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
 		int currentPageNum = 1;  // 기본1
@@ -249,7 +249,6 @@ public class HotelController {
 		}
 		
 		Map<String, Object> reviewDetailDto = service.selectReviewDetailList(hotelCode, reviewNum, reviewPageNum, currentPageNum);
-		
 		
 		List<HotelReviewDto> reviewDtoList = (List<HotelReviewDto>)reviewDetailDto.get("reviewDtoList");
 		// Map 에 묶인 얘를 꺼내면 java에서 object로 인식해서 강제형변환 해줘야함

@@ -45,20 +45,24 @@ xmlns:th="http://www.thymeleaf.org">
 <div th:if="${reviewDetailDto}">
 	<div th:if="${reviewDetailDto.totalReviewCount > 0}">
 		<div style="text-align: center;">
-			<ul class="paging_wrap">
-				<li th:if="${reviewDetailDto.startPageNum > 1}">
-					<a href="@{/hotel/view(page=${reviewDetailDto.startPageNum - 1})}" class="left_page" >&lt;</a>
-				</li>
-				<li th:each="page : ${#numbers.sequence(reviewDetailDto.startPageNum, reviewDetailDto.endPageNum)}"
-					th:class="${reviewDetailDto.currentPage == page} ? page : ''">
-					<span th:if="${reviewDetailDto.currentPage == page}" th:text="${page}"></span>
-					 <a th:if="${reviewDetailDto.currentPage != page}" th:href="@{/hotel/view(page=${page})}" th:text="${page}"></a>
-					  <input type="hidden" class="pageHidden" th:value="${page}" th:if="${reviewDetailDto.currentPage != page}">
-				</li>
-			    <li th:if="${reviewDetailDto.endPageNum > reviewDetailDto.totalReviewCount}">
-			        <a th:href="@{/hotel/view(page=${reviewDetailDto.endPageNum})}" class="right_page">&gt;</a>
-			    </li>
-			</ul>
+			<div class="paging_wrap">
+				<div th:if="${reviewDetailDto.startPageNum > 1}" class="goprepage">
+		            <button type="button" class="btn-leftpage" th:data-targetpage="${reviewDetailDto.startPageNum - 1}">&lt;</button>
+		        </div>
+		        
+		        <div th:each="page :  ${#numbers.sequence(reviewDetailDto.startPageNum, reviewDetailDto.endPageNum)}">
+			        <div th:if="${reviewDetailDto.currentPage == page}" class="current_page">
+			            <span th:text="${page}"></span>
+			        </div>
+			        <div th:if="${reviewDetailDto.currentPage != page}" class="gopage">
+			            <button type="button" class="btn-gopage" th:data-targetpage="${page}" th:text="${page}"></button>
+			        </div>
+		        </div>
+		        
+		        <div th:if="${reviewDetailDto.endPageNum < reviewDetailDto.totalReviewCount}">
+		            <button type="button" th:data-targetpage="${reviewDetailDto.endPageNum + 1}" class="right_page">&gt;</button>
+		        </div>			
+			</div>
 		</div>
 	</div>
 </div>

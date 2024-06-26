@@ -210,27 +210,28 @@ function showAllReview(){
 		}).done(function(response){
 			$('.review_info_wrap').replaceWith(response);
 			$('.review_write_btn').on('click', reviewWriteHandler);
+			$('.btn-gopage').on('click', goPageHandler);
 	});
 
 }
 
 /*페이지 번호 표시 및 오른쪽 > 눌렀을 때 페이지 이동*/
-function rightPageHandler(){
-	console.log($(this).val() + '=============페이지이동');
-	/*$.ajax({
+function goPageHandler(){
+	
+	var targetPage = $(this).data('targetpage');
+	console.log('타겟페이지==============' + targetPage);
+
+		$.ajax({
 		url: "/shushoong/hotel/view/review.ajax",
 		method: "get",
 		data: {
 			hotelCode: hotelCode,
-			currentPage: currentPage
-		}, 
-		error: function(xhr, status, error) {
-			console.log('페이징처리 에러' + error);
+			currentPage: targetPage
 		}
-		
 		}).done(function(response){
-			$('.review_content_wrap').replacewith(response);
-			$(showallReview);
-	});*/
+			$('.review_info_wrap').replaceWith(response);
+			$('.btn-gopage').on('click', goPageHandler);
+	});
+
 }
 

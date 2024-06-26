@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+	<div class="article-body" id="article-body" th:fragment="memberlist">
+		<div th:if="${memberList == null or #lists.isEmpty(memberList)}" class="userName-content">
+			<div class="noContent">조건에 맞는 회원이 없습니다.</div>
+		</div>
+		<div th:if="${memberList != null and !#lists.isEmpty(memberList)}" class="userName-content">
+			<button type="button" class="userName" th:each="idList : ${memberList}" th:text="${idList}" th:data-userid="${idList}"></button>
+		</div>
+	</div>
+</html>

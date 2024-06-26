@@ -11,20 +11,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MypageManageBusinessController {
 
-	// 사업자 회원 관리 페이지로 이동
-	@GetMapping("/manager/business")
-	public String manageBusiness() {
-		return "mypage/admin/manageBusiness";
-	}
-
-	// 등록 상품 관리 페이지로 이동
-	@GetMapping("/manager/product")
-	public String manageProduct() {
-		return "mypage/admin/manageProduct";
-	}
-	
-	@GetMapping ("/hotel/test")
-	public String test() {
-		return "modal/hotelInformation";
-	}
+//	// 사업자 회원 관리 페이지로 이동
+//	@GetMapping("/manager/business")
+//	public String manageBusiness() {
+//		return "mypage/admin/manageBusiness";
+//	}
+//
+//	// 등록 상품 관리 페이지로 이동
+//	@GetMapping("/manager/product")
+//	public String manageProduct() {
+//		return "mypage/admin/manageProduct";
+//	}
+//	
+//	@GetMapping ("/hotel/test")
+//	public String test() {
+//		return "modal/hotelInformation";
+//	}
 }

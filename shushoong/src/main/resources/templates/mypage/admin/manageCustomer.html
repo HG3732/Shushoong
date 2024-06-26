@@ -8,6 +8,7 @@
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 <link th:href="@{/css/mypage/admin/mypageAdminAside.css}" rel="stylesheet" />
 <link th:href="@{/css/mypage/admin/manageCustomer.css}" rel="stylesheet" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>[관리자모드] 슈슝::회원 관리</title>
 </head>
@@ -35,18 +36,14 @@
 					</div>
 					<div class="customer">
 						<div class="customerList">
-							<div class="content-title">일반 회원 관리</div>
+							<div class="content-title">회원 검색</div>
 							<div class="content-body">
 								<div class="article-title">
 									<input type="text" id="userId" class="searchInput" placeholder="아이디 검색">
 									<img class="absolute" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" width="20px" height="20px">
 									<button type="button" class="idSearch">검색</button>
 								</div>
-								<div class="article-body">
-									<div class="userName-content">
-										<div class="userName" id="userName">aaaa</div>
-									</div>
-								</div>
+								<div th:replace="~{mypage/admin/customerList :: memberlist}"></div>
 							</div>
 						</div>
 
@@ -205,4 +202,5 @@
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
 </body>
+<script th:src='@{/js/mypage/admin/manageCustomer.js}'></script>
 </html>

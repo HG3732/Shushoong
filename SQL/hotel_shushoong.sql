@@ -289,8 +289,18 @@ from hotel_review hrv join hotel_reserve hrs using (hotel_reserve_code) where ho
 = '2OS001';
 
 
+INSERT INTO hotel_reserve 
+VALUES ('202406262OS001S01', 3, '2OS001', 4, 2, 'ex1@gmail.com', '한국이름', '영어이름', 'M', '고층', '20240616', '20240618', 'ex1', '01012345678');
 
+INSERT INTO PAY 
+VALUES (776, 2, 06290629, 15004080, DEFAULT, 0, '202406262OS001S01', NULL);
 
+INSERT INTO HOTEL_REVIEW VALUES (776, '202406262OS001S01', '저런', '저런저런', 4, 3, 5, 2, 2, 'ex1');
+
+commit;
+
+select * from hotel_reserve;
+desc hotel_review;
 -------------------------------------결제 관련 sql
 
 
@@ -316,8 +326,14 @@ select * from hotel_reserve;
 
 select * from hotel_room_cat;
 
+select * from v_room_list where room_cap >= 3;
+
 update hotel_room_cat
 set room_cat_desc ='스위트룸'
 where room_cat = '3';
 
 commit;
+
+select * from hotel_review;
+
+select * from hotel_reserve;

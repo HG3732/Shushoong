@@ -5,10 +5,28 @@
 		SELECT USER_ID, USER_NAME, USER_PWD, USER_EMAIL, USER_GRADE, USER_STATUS, JOIN_DATE, EMAIL_RECEIVE, MSG_RECEIVE, LATEST_LOGIN FROM MEMBER  WHERE USER_ID=#{userId} 
 	</select>
 	
-	<select id="selectAllList" resultType="MemberDTO">
+	<select id="selectAllList" parameterType="string" resultType="MemberDto">
 		SELECT USER_ID, USER_NAME, USER_GRADE FROM MEMBER WHERE NOT USER_GRADE='ADMIN'
 	</select>
 	
+	<!-- 유저 아이디 키워드로 검색 시 조건에 맞는 회원 리스트 출력 -->
+	<select id="selectAllList1" parameterType="string" resultType="String">
+		SELECT USER_ID, USER_NAME, USER_GRADE FROM MEMBER WHERE NOT USER_GRADE='ADMIN'
+		<if test="keyword != null and keyword !='' ">
+		 	<bind name="keyword3" value="'%' + keyword + '%'" />
+		 		AND USER_ID LIKE #{keyword3}
+		 </if>
+	</select>
+	
+	<!-- 조건에 맞는 회원의 수(페이징용) -->
+	<select id="selectTotalCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		<if test='keyword != null and keyword !=""'>
+			<bind name="keyword3" value="'%' + keyword + '%'"/>
+ 			WHERE USER_ID LIKE #{keyword3}
+		</if>
+	</select>
+
 	<select id="selectOne" parameterType="string" resultType="MemberDto">
 		SELECT USER_ID,USER_NAME,USER_EMAIL, EMAIL_RECEIVE, MSG_RECEIVE FROM MEMBER WHERE USER_ID=#{userId}
 	</select>

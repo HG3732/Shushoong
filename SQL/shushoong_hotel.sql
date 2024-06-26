@@ -295,10 +295,12 @@ from hotel_review hrv right join hotel h on substr(hrv.hotel_reserve_code, 9, 6)
 from hotel_pic hp, hotel h, 
 (select h.hotel_code, round((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_score, count(substr(hrv.hotel_reserve_code, 9, 6)) as review_num
 from hotel_review hrv right join hotel h on substr(hrv.hotel_reserve_code, 9, 6) = h.hotel_code group by h.hotel_code) hotel_review2,
-(select t1.*, t2.min_price from hotel_room t1 join (select hotel_code, min(hotel_price) min_price from hotel_room where room_count > 0 group by hotel_code) t2 on t1.hotel_code = t2.hotel_code and t1.hotel_price = t2.min_price) hrm
+(select t1.*, t2.min_price from hotel_room t1 join (select hotel_code, min(hotel_price) min_price from hotel_room where room_count > 0 group by hotel_code, room_cap) t2 on t1.hotel_code = t2.hotel_code and t1.hotel_price = t2.min_price) hrm
 
 where hp.hotel_code = h.hotel_code and hp.hotel_code = hotel_review2.hotel_code and hp.hotel_code = hrm.hotel_code
 ;
+
+select * from v_hotel_list;
 
 drop view V_hotel_list;
 
@@ -347,4 +349,10 @@ select * from hotel_review;
 select count(*) from hotel_review
 where user_Id = 'ex1';
 
-select * from hotel_reserve;
+select * from hotel_room;
+
+select * from hotel_room where hotel_code = '2OS001' order by room_cap;
+
+select max(hotel_price) from V_hotel_list where SUBSTR(hotel_code, 1, 3) = '2OS' and room_cap >= '4';
+
+--

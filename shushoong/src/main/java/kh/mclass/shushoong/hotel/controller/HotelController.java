@@ -157,13 +157,6 @@ public class HotelController {
 		
 		System.out.println("=========호텔코드=======" + hotelCode);
 		//호텔 상세정보들 출력
-		HotelViewDtoRes result = service.selectOneHotel(hotelCode);
-		//ajax와는 다르게 이 문장으로 인해서 service 가서 쭉쭉가서 db에서 정보 조회해서 dto에 넣고 다시 돌아옴
-		//돌아온 데이터 밑에 넣음
-		
-		model.addAttribute("hotelCode", hotelCode);
-		model.addAttribute("hotelViewList", result);
-		//넣어서 보내면 사라짐(일회성) - setAttribute 같은 얘
 		
 		//list에서 들고온 checkIn, checkOut 정보 다시 session 에 담아서 hotelview페이지에 뿌리기 
 		model.addAttribute("checkIn", session.getAttribute("checkIn"));
@@ -171,6 +164,23 @@ public class HotelController {
 		model.addAttribute("adult", session.getAttribute("adult"));		
 		model.addAttribute("child", session.getAttribute("child"));
 		model.addAttribute("room", session.getAttribute("room"));
+		
+		String people = null;
+		String adult = (String) session.getAttribute("adult");
+		String child = (String) session.getAttribute("child");
+		Integer adult1 = Integer.parseInt(adult);
+		Integer child1 = Integer.parseInt(child);
+		people = String.valueOf(child1+adult1);
+		//session에 담긴 정보는 string 으로 뽑을 수 있기 때문에 위에서 integer로 session에 넣었기 때문에 session 에서 꺼낼 때 string으로 뽑아주고 그 다음에 integer로 다시 변환해주기
+		
+		HotelViewDtoRes result = service.selectOneHotel(hotelCode, people);
+		//ajax와는 다르게 이 문장으로 인해서 service 가서 쭉쭉가서 db에서 정보 조회해서 dto에 넣고 다시 돌아옴
+		//돌아온 데이터 밑에 넣음
+		
+		model.addAttribute("hotelCode", hotelCode);
+		model.addAttribute("hotelViewList", result);
+		//넣어서 보내면 사라짐(일회성) - setAttribute 같은 얘
+		
 		
 		//편의시설
 		List<HotelFacilityDtoRes> facilitylist = service.selectHotelFacility(hotelCode);

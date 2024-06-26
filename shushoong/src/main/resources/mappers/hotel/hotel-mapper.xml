@@ -143,11 +143,12 @@
 		<!-- HotelSearchDtoRes 안에 있는 list -->
 		<!-- property - dto변수명, column - db에서 쓰는 컬럼명  -->
 	</resultMap>
-	<select id="selectOneHotel" parameterType="String" resultMap="HotelViewDtoResMap">
+	<select id="selectOneHotel" parameterType="hashmap" resultMap="HotelViewDtoResMap">
+		<!-- 매개변수가 여러개라서 hashmap -->
 		select * from hotel
 		    join hotel_pic using(hotel_code)
 		    join v_room_list using(hotel_code)
-		where hotel_code = #{hotelCode}
+		where hotel_code = #{hotelCode} and room_cap &gt;= #{people}
 	</select>
 
 	<!-- 결제 -->

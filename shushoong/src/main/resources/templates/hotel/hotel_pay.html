@@ -40,13 +40,13 @@ xmlns:th="http://www.thymeleaf.org">
 					</div>
 				</div>
 				
-				<!-- 호텔 정보 -->
+				<!-- 결제 정보 -->
 				<!-- <form id="frm-reserve" method="post" action="/shushoong/hotel/customer/reserve/pay"> -->
 					<input type="hidden" th:value="${userId}" class="user_id">
 					<input type="hidden" th:value="${roomCap}" class="room_cap">
 					<input type="hidden" th:value="${hotelCode}" class="hotel_code">
 					<input type="hidden" th:value="${roomCat}" class="room_cat">
-					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';" th:text="${hotel}"></p>
+					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';" th:text="${hotel}" class="hotel_name"></p>
 					<table class="reserve_info">
 						<thead>
 							<tr class="tr_first" style="border-top: 3px solid #006AFF;">
@@ -86,7 +86,7 @@ xmlns:th="http://www.thymeleaf.org">
 								<tr class="c_first" style="border-top: 3px solid #006AFF;">
 									<th>성명</th>
 									<td>
-										<input type="text" class="reserve_text" style="width: 300px; border:none;" readonly value="송채원" onfocus="this.blur()" id="name">
+										<input type="text" class="reserve_text" style="width: 300px; border:none;" id="name">
 									</td>
 								</tr>
 							</thead>
@@ -97,7 +97,7 @@ xmlns:th="http://www.thymeleaf.org">
 										<input type="text" class="reserve_text" style="width: 300px;">
 									</td>
 									<th>성별</th>
-									<td style="display: flex; vertical-align: middle;" >
+									<td style="display: flex; vertical-align: middle; justify-content: space-evenly;" >
 										<div class="gender_man">
 											<input type="radio" name="gender" value="남" id="radio_man"><label for="radio_man"></label>
 											<div>남</div>

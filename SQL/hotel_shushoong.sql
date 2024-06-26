@@ -153,11 +153,13 @@ JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
 JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
 WHERE hotel_code='2OS001';
 
+select * from hotel_room;
+
 
 CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_ROOM_LIST" (
-    hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, room_att, room_cat
+    hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, room_att, room_cat, ROOM_CAT_DESC
 ) AS 
-SELECT hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT_DESC as room_cat FROM HOTEL_ROOM
+SELECT hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT, ROOM_CAT_DESC FROM HOTEL_ROOM
 JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
 JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
 where room_count > 0;
@@ -165,8 +167,7 @@ where room_count > 0;
 
 --WHERE hotel_code='2OS001' 이거는 create 할때 붙이면 X --> 그러면 where 한 데이터만 조회됨(모두를 위한 view)
 
-select * from v_room_list
-WHERE hotel_code='2OS001';
+select * from v_room_list;
 
 drop view v_room_list;
 
@@ -288,8 +289,18 @@ from hotel_review hrv join hotel_reserve hrs using (hotel_reserve_code) where ho
 = '2OS001';
 
 
+INSERT INTO hotel_reserve 
+VALUES ('202406262OS001S01', 3, '2OS001', 4, 2, 'ex1@gmail.com', '한국이름', '영어이름', 'M', '고층', '20240616', '20240618', 'ex1', '01012345678');
 
+INSERT INTO PAY 
+VALUES (776, 2, 06290629, 15004080, DEFAULT, 0, '202406262OS001S01', NULL);
 
+INSERT INTO HOTEL_REVIEW VALUES (776, '202406262OS001S01', '저런', '저런저런', 4, 3, 5, 2, 2, 'ex1');
+
+commit;
+
+select * from hotel_reserve;
+desc hotel_review;
 -------------------------------------결제 관련 sql
 
 
@@ -315,12 +326,14 @@ select * from hotel_reserve;
 
 select * from hotel_room_cat;
 
+select * from v_room_list where room_cap >= 3;
+
 update hotel_room_cat
 set room_cat_desc ='스위트룸'
 where room_cat = '3';
 
 commit;
 
-select * from hotel_room_cat;
+select * from hotel_review;
 
-select * from v_room_list;
+select * from hotel_reserve;

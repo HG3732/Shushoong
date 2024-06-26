@@ -66,17 +66,20 @@ async function payHandler(){
 	var userId = $('.user_id').val();
 	var roomCap = $('.room_cap').val();
 	var hotelCode = $('.hotel_code').val();
+	var hotelName = $('.hotel_name').text();
 	var roomCat = $('.room_cat').val();
+	var roomCatDesc = $('.room_cat_desc').val();
 	var roomAtt = $('.room_att').val();
 	var hotelPrice = $('.final_pay').val();
 	var hotelReserveCode = currentTime + hotelCode + roomCat; //sysdate + hotelCode + room_cat
+	var orderName = hotelName + + roomCatDesc;
 	
-	console.log(hotelReserveCode);
+	console.log(currentTime);
 
 	/*	const response = await PortOne.requestPayment({
 			storeId : storeId, // 
 			paymentId : buyId,
-			orderName : orderName,
+			orderName : orderName, //호텔이름 + 방속성이름(상품명 - 고객에게 표시를 위해...)
 			totalAmount : totalAmount,
 			currency : "CURRENCY_KRW",
 			channelKey : channelKey, // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.

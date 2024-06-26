@@ -27,7 +27,7 @@ public interface HotelRepository {
 	public Integer deleteHotelLike(String userId, String hotelCode);
 	
 	//호텔 상세페이지
-	public HotelViewDtoRes selectOneHotel(String hotelCode);
+	public HotelViewDtoRes selectOneHotel(String hotelCode, String people);
 	
 	//호텔 상세페이지 시설정보
 	public List<HotelFacilityDtoRes> selectHotelFacility(String hotelCode);

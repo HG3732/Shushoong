@@ -45,8 +45,8 @@ public class HotelService {
 	}
 	
 	//호텔 상세정보
-	public HotelViewDtoRes selectOneHotel(String hotelCode) {
-		return hotelRepository.selectOneHotel(hotelCode);
+	public HotelViewDtoRes selectOneHotel(String hotelCode, String people) {
+		return hotelRepository.selectOneHotel(hotelCode, people);
 	}
 
 	

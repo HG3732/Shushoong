@@ -70,7 +70,7 @@ xmlns:th="http://www.thymeleaf.org">
 								        <div style="text-align: center; margin-top: 30px; font-family: 'SOYOMapleBoldTTF';">예약 가능한 객실이 없습니다.</div>
 								    </th:block>
 									<th:block th:if="${not #lists.isEmpty(hotelViewList)}">
-										<input type="hidden" th:value="${hotelViewList.hotelCode}" name="hotelCode">
+										<input type="hidden" th:value="${hotelViewList.hotelCode}" name="hotelCode" class="hotel_code">
 										<form th:each="room : ${hotelViewList.hotelRooms}" class="roomlist" id="frm-reserve" method="get" action="/shushoong/hotel/customer/reserve/pay">
 											<input type="hidden" th:value="${hotelViewList.hotelName}" name="hotel">
 											<input type="hidden" th:value="${hotelCode}"  name="hotelCode">

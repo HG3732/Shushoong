@@ -56,8 +56,7 @@ public class HotelService {
 	}
 	
 	//해당 호텔 리뷰 작성된거 불러오기
-	public Map<String, Object> selectReviewDetailList(String hotelCode, int reviewNum, int reviewPageNum, int currentPageNum) {
-												
+	public Map<String, Object> selectReviewDetailList(String hotelCode, int reviewNum, int reviewPageNum, int currentPageNum) {					
 		
 		//현재페이지: currentPage
 		//리뷰 하단에 표시할 페이지 수: reviewPageNum

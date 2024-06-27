@@ -48,7 +48,24 @@ public class MypageAdminController {
 			}
 		}
 		model.addAttribute("memberList", service.selectAllList(keyword, 8, 7, currentPageNum));
-		return "mypage/admin/customerList";
+		return "mypage/admin/managecustomer/customerList";
+	}
+	
+	//회원 세부 정보 조회 ajax
+	@GetMapping("/manager/customer/viewMember.ajax")
+	public String viewMember(Model model, String id) {
+		model.addAttribute("userInfo", service.selectOne(id));
+		if(service.selectHotelPayCount(id) != null) {
+			model.addAttribute("userHotelPayInfo", service.selectHotelPayCount(id).size());
+		} else {
+			model.addAttribute("userHotelPayInfo", 0);
+		}
+		if(service.selectFlyPayCount(id) != null) {
+			model.addAttribute("userFlyPayInfo", service.selectFlyPayCount(id).size());
+		} else {
+			model.addAttribute("userFlyPayInfo", 0);
+		}
+		return "mypage/admin/managecustomer/viewMember";
 	}
 	
 	// 사업자 회원 관리 페이지로 이동

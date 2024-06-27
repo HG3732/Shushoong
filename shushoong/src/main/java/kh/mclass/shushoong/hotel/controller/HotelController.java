@@ -12,26 +12,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.google.gson.GsonBuilder;
 
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
-import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
 
@@ -286,12 +277,13 @@ public class HotelController {
 	}
 	
 	@PostMapping("/hotel/customer/reserve/pay")
-	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomCatDesc, String roomAtt, String hotelPrice, String roomCap) {
+	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomCatDesc, String roomAtt, String roomAttDesc, String hotelPrice, String roomCap) {
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelCode", hotelCode);
 		model.addAttribute("roomCat", roomCat);
 		model.addAttribute("roomCatDesc", roomCatDesc);
 		model.addAttribute("roomAtt", roomAtt);
+		model.addAttribute("roomAttDesc", roomAttDesc);
 		model.addAttribute("hotelPrice", hotelPrice);
 		model.addAttribute("roomCap", roomCap);
 		

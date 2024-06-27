@@ -1,10 +1,12 @@
 package kh.mclass.shushoong.mypage.admin.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
+import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.admin.model.repository.MypageAdminRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +27,18 @@ public class MypageAdminService {
 		int offset = (currentPageNum - 1) * pageSize;
 		RowBounds rowBounds = new RowBounds(offset, pageSize);
 		
-		return mypageAdminRepository.selectAllList1(keyword, rowBounds);
+		return mypageAdminRepository.selectAllList(keyword, rowBounds);
+	}
+	
+	public MemberDto selectOne(String id) {
+		return mypageAdminRepository.selectOne(id);
+	}
+	
+	public List<Map<String, String>> selectHotelPayCount(String id) {
+		return mypageAdminRepository.selectHotelPayCount(id);
+	}
+	
+	public List<Map<String, String>> selectFlyPayCount(String id) {
+		return mypageAdminRepository.selectFlyPayCount(id);
 	}
 }

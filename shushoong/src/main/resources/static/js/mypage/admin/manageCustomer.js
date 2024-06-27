@@ -16,7 +16,24 @@ function memberSearchHandler() {
 				console.log('AJAX 실패:', error);
 			}
 	}).done(function(response) {
-		console.log(response);
-		$('#article-body').replaceWith(response);
+		$('#memberlist').replaceWith(response);
+	});
+}
+
+/* 회원 아이디 클릭 시 세부 정보 확인 */
+function memberViewHandler(thisElement) {
+	var id = $(thisElement).data("userid");
+	
+	$.ajax({
+		url: "/shushoong/admin/manager/customer/viewMember.ajax",
+		method: "get",
+		data: { id : id },
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	})
+	//success함수 대체
+	.done(function(response){
+		$("#viewmember").replaceWith(response);
 	});
 }

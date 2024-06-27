@@ -138,6 +138,17 @@ section .article-body {
 	overflow-y: auto;
 }
 
+section .no-content {
+	justify-content: center;
+    height: 280px;
+    align-items: center;
+}
+
+section .no-content .noContent{
+	font-weight: 900;
+    font-size: 20px;
+}
+
 section .userName-content {
 	display: flex;
 	flex-direction: row;
@@ -146,6 +157,15 @@ section .userName-content {
 
 section .userName {
 	margin: 5px;
+	padding: 5px;
+	background-color: var(--color_blue_2);
+	border: none;
+	border-radius: 10px;
+}
+
+section .userName:hover {
+	background-color: var(--color_blue_1);
+	color: white;
 }
 
 section .customerInformation:nth-child(2)>.article-title {

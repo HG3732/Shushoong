@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kh.mclass.shushoong.mypage.admin.model.repository.MypageAdminRepository">
+	<!-- 로그인 -->
 	<select id="login" parameterType="string" resultType="MemberDto">
 		SELECT USER_ID, USER_NAME, USER_PWD, USER_EMAIL, USER_GRADE, USER_STATUS, JOIN_DATE, EMAIL_RECEIVE, MSG_RECEIVE, LATEST_LOGIN FROM MEMBER  WHERE USER_ID=#{userId} 
 	</select>
 	
-	<select id="selectAllList" parameterType="string" resultType="MemberDto">
-		SELECT USER_ID, USER_NAME, USER_GRADE FROM MEMBER WHERE NOT USER_GRADE='ADMIN'
-	</select>
-	
 	<!-- 유저 아이디 키워드로 검색 시 조건에 맞는 회원 리스트 출력 -->
-	<select id="selectAllList1" parameterType="string" resultType="String">
+	<select id="selectAllList" parameterType="string" resultType="String">
 		SELECT USER_ID, USER_NAME, USER_GRADE FROM MEMBER WHERE NOT USER_GRADE='ADMIN'
 		<if test="keyword != null and keyword !='' ">
 		 	<bind name="keyword3" value="'%' + keyword + '%'" />
@@ -27,10 +24,25 @@
 		</if>
 	</select>
 
+	<!-- 회원 한명의 세부 정보 조회 -->
 	<select id="selectOne" parameterType="string" resultType="MemberDto">
-		SELECT USER_ID,USER_NAME,USER_EMAIL, EMAIL_RECEIVE, MSG_RECEIVE FROM MEMBER WHERE USER_ID=#{userId}
+		SELECT USER_ID, USER_NAME, USER_EMAIL, to_char(JOIN_DATE) as JOIN_DATE, USER_STATUS FROM MEMBER WHERE USER_ID=#{userId}
 	</select>
 	
+	<!-- 회원의 결제 내역 조회 -->
+	<!-- 1. 호텔 -->
+	<select id="selectHotelPayCount" parameterType="string" resultType="hashmap">
+		select user_name, hotel_reserve_code, residence_phone from member 
+		join HOTEL_RESERVE using(user_id) where user_id = #{id}
+	</select>
+	
+	<!-- 2. 항공 -->
+	<select id="selectFlyPayCount" parameterType="string" resultType="hashmap">
+		select user_name, airline_reserve_code, reserve_phone from member 
+		join AIRLINE_RESERVE_INFO using(user_id) where user_id = #{id}
+	</select>
+	
+	<!-- 정지회원 조회 -->
 	<select id="selectSuspendedOne" parameterType="string" resultType="MemberDto">
 		SELECT USER_ID,USER_NAME,USER_EMAIL, EMAIL_RECEIVE, MSG_RECEIVE FROM MEMBER WHERE USER_STATUS='1'
 	</select>

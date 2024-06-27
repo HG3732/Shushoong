@@ -11,13 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
-import kh.mclass.shushoong.member.model.domain.MemberRole;
 import kh.mclass.shushoong.member.model.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,17 +53,19 @@ public class JoinController {
 	}
 	
 	// 일반유저 회원가입
-	@PostMapping("signup/customer")
-	@ResponseBody
+	@PostMapping(value = "join/customer")
 	public String singupCustomer(MemberDto memberDto, BindingResult bindingResult,
 								ModelAndView mav) {
 		if (bindingResult.hasErrors()) {
             return "member/userJoin";
         }
 		
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+//		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mi:ss");
+		
 		Date now = new Date();
 		String joinDate = sdf1.format(now);
+//		String loginDate = sdf2.format(now);
 		
 		memberDto.setUserId(memberDto.getUserId());
 		memberDto.setUserName(memberDto.getUserName());
@@ -76,15 +76,11 @@ public class JoinController {
 		memberDto.setJoinDate(joinDate);
 		memberDto.setMsgReceive(memberDto.getMsgReceive());
 		memberDto.setEmailReceive(memberDto.getEmailReceive());
-		memberDto.setLatestLogin(null);
+		memberDto.setLatestLogin(joinDate);
 		
-		log.debug("member Information = " + memberDto);
+		log.info("member Information = " + memberDto);
 		
-		int result = memberservice.join(memberDto);
-		if(result < 0) {
-			
-			return "member/userJoin";
-		}
+		memberservice.join(memberDto);
 		
 		return "redirect:/login";
 	}
@@ -95,12 +91,19 @@ public class JoinController {
 		return "member/businessJoin";
 	}
 	
-	@PostMapping("signup/business")
-	@ResponseBody
-	public String singupBusiness(MemberDto memberDto) {
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	@PostMapping(value = "join/business")
+	public String singupBusiness(MemberDto memberDto, BindingResult bindingResult,
+			ModelAndView mav) {
+		if (bindingResult.hasErrors()) {
+            return "member/userJoin";
+        }
+		
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+//		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mi:ss");
+		
 		Date now = new Date();
 		String joinDate = sdf1.format(now);
+//		String loginDate = sdf2.format(now);
 		
 		memberDto.setUserId(memberDto.getUserId());
 		memberDto.setUserName(memberDto.getUserName());
@@ -113,10 +116,9 @@ public class JoinController {
 		memberDto.setEmailReceive(0);
 		memberDto.setLatestLogin(joinDate);
 		
-		int result = memberservice.join(memberDto);
-		if(result < 0) {
-			return "member/userJoin";
-		}
+		memberservice.join(memberDto);
+		
+		log.info("member Information = " + memberDto);
 		
 		return "redirect:/login";
 	}

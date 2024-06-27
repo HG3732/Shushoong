@@ -42,19 +42,19 @@ xmlns:th="http://www.thymeleaf.org">
 									</div>
 								</div>
 								<div class="namewrite">
-									<label for="userName">담당자명</label>
+									<label for="userName">회사명</label>
 									<input type="text" id="userName" name="userName" placeholder="이름" class="longinput" >
 									<div class="testmessage">
 										<span class="test_Nameexception">사용할 수 없는 이름 입니다.</span>
 									</div>
 								</div>
-								<div class="companywrite">
-									<label for="userName">회사명</label>
-									<input type="text" id="companyname" name="companyname" placeholder="회사명" class="longinput" >
-									<div class="testmessage">
-										<span class="test_Nameexception2">사용할 수 없는 이름 입니다.</span>
-									</div>
-								</div>
+<!-- 								<div class="companywrite"> -->
+<!-- 									<label for="userName">회사명</label> -->
+<!-- 									<input type="text" id="companyname" name="companyname" placeholder="회사명" class="longinput" > -->
+<!-- 									<div class="testmessage"> -->
+<!-- 										<span class="test_Nameexception2">사용할 수 없는 이름 입니다.</span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 								<div class="passwordwrite">
 									<label for="userPwd">비밀번호</label>
 									<input type="password" id="userPwd" name="userPwd" placeholder="8-20자의 영문, 숫자, 특수문자" class="longinput">
@@ -80,7 +80,7 @@ xmlns:th="http://www.thymeleaf.org">
 								</div>
 								<div class="answer email">
 									<label for="emailCheck">인증번호</label>
-									<input type="text" id="emailCheck" name="emailCheck" placeholder="인증번호 입력" class="shortinput" >
+									<input type="text" id="code" name="code" placeholder="인증번호 입력" class="shortinput" >
 									<button type="button" class="btn emailCheck">인증확인</button>
 									<div class="testmessage">
 										<span class="test_Echkok">인증 완료되었습니다.</span>

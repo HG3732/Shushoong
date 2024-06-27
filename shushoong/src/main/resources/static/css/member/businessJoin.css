@@ -32,6 +32,11 @@ section .businessJoinInfo > div {
 	margin-bottom: 30px;
 }
 
+section .testmessage {
+	display: flex;
+	justify-content: left;
+}
+
 section .test_Idok, .test_Emailok, .test_Echkok{
 	color:blue;
 	font-size:12px;

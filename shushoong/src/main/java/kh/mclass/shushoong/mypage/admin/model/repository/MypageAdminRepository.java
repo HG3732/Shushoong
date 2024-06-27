@@ -22,8 +22,5 @@ public interface MypageAdminRepository {
 	
 	//회원 키워드 검색 시 조건에 맞는 회원 수 카운트(페이징용)
 	public Integer selectTotalCount(String keyword);
-	
-	// 비밀번호 재설정 
-	public int resetPwd(Map<String, Object> map);
 
 }

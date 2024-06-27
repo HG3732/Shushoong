@@ -5,6 +5,10 @@
 		SELECT USER_ID,USER_NAME,USER_EMAIL, EMAIL_RECEIVE, MSG_RECEIVE FROM MEMBER WHERE USER_ID=#{userId}
 	</select>
 	
+	<select id="pwdCheck" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{userId} AND USER_PWD=#{userPwd}
+	</select>
+	
 	<update id="setCustomerInfo">
 		UPDATE MEMBER SET USER_PWD=#{userPwd}, EMAIL_RECEIVE=#{emailReceive}, MSG_RECEIVE=#{msgReceive}  WHERE USER_ID=#{userId}
 	</update>

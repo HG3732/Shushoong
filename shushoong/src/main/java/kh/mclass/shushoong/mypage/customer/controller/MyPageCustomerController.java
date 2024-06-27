@@ -36,7 +36,7 @@ public class MyPageCustomerController {
 		return "mypage/customer/mypageCheckPwd";
 	}
 	
-	@PostMapping(value = "/check/pwd")
+	@PostMapping("/check/pwd.ajax")
 	public String checkPwdForm() {
 		try {
 			return "redirect:/my/information";

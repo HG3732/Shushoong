@@ -69,10 +69,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<div class="checkSelection">
 								<div class="choice">
 									<div class="smsMarketing">
-										<input type="checkbox" name="usingAgree" id="snsagree" value="1"><span class="on">SMS 수신</span>
+										<input type="checkbox" name="usingAgree" id="snsagree" th:checked="${dto.msgReceive == '1' ? 'true' : 'false'}"><span class="on">SMS 수신</span>
 									</div>
 									<div class="emailMarketing">
-										<input type="checkbox" name="usingAgree" id="emailagree" value="1"><span class="on">이메일 수신</span>
+										<input type="checkbox" name="usingAgree" id="emailagree" th:checked="${emailReceive == '1' ? 'true' : 'false'}"><span class="on">이메일 수신</span>
 									</div>
 								</div>
 							</div>

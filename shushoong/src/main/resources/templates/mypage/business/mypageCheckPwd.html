@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/business/mypageBusinessAside.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/mypageCheckPwd.css}" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>슈슝::개인정보 수정</title>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-aside">
+				<aside>
+					<div th:replace="~{mypage/business/mypageBusinessAside :: Aside}"></div>
+				</aside>
+			</div>
+			<div class="wrap-section">
+				<section>
+					<div class="container">
+						<div class="section-header">
+							<div class="img-header">
+								<img th:src="@{/images/자물쇠.png}" alt="자물쇠" width="150px" height="150px">
+							</div>
+							<div class="text-header">
+								비밀번호를 입력해 주세요.
+							</div>
+						</div>
+						<form class="formStyle">
+							<div class="section-body">
+								<input type="password" class="pwdInput" id="userPwd" placeholder="현재 비밀번호" autofocus="autofocus">
+							</div>
+							<div class="submit btn">
+								<button type="submit" class="submitBtn">제출하기</button>
+							</div>
+						</form>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+		<div th:replace="~{common/footer :: Footer}"></div>
+	</div>
+	<script>
+	</script>
+</body>
+</html>

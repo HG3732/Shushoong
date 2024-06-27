@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
@@ -28,7 +29,22 @@ public class MyPageCustomerController {
 	public String mypageHome() {
 		return "mypage/customer/mypageCustomerHome";
 	}
-
+	
+	// 비밀번호 확인 페이지로 이동 
+	@GetMapping("/check/pwd")
+	public String checkPwd() {
+		return "mypage/customer/mypageCheckPwd";
+	}
+	
+	@PostMapping(value = "/check/pwd")
+	public String checkPwdForm() {
+		try {
+			return "redirect:/my/information";
+		} catch (Exception e) {
+			return "redirect:/find/business";
+		}
+	}
+	
 	// 개인정보 수정 페이지로 이동
 	@GetMapping("/my/information")
 	public String correctInfoCustomer(Principal principal, ModelMap modelMap) {

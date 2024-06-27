@@ -76,9 +76,9 @@
 	</insert>
 	
 	<!-- 좋아요 삭제 -->
-	<insert id="deleteHotelLike" parameterType="hashmap">
+	<delete id="deleteHotelLike" parameterType="hashmap">
 		delete from hotel_like where user_id = #{userId} and hotel_code = #{hotelCode}
-	</insert>
+	</delete>
 	
 	<!-- 편의시설 -->
 	<select id="selectHotelFacility" parameterType="String" resultType="HotelFacilityDtoRes">
@@ -162,5 +162,5 @@
 	</select>
 
 	<!-- 결제 -->
-	
+
 </mapper>

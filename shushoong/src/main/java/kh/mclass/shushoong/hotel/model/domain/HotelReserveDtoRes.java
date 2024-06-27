@@ -1,5 +1,7 @@
 package kh.mclass.shushoong.hotel.model.domain;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -14,7 +16,7 @@ public class HotelReserveDtoRes {
 	private String residenceGender;
 	private String residencePhone;
 	private String residenceEmail;
-	private String request;
+	private List<String> request;
 	private String reserveCheckIn;
 	private String reserveCheckOut;
 	private String userId;

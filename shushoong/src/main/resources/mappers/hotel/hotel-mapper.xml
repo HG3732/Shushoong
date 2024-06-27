@@ -162,5 +162,19 @@
 	</select>
 
 	<!-- 결제 -->
-
+<!-- 	<insert id="insertHotelReserve">
+		insert into hotel_reserve values(
+		    #{hotelReserveCode}, #{roomCat}, #{hotelCode}, #{roomCap}, #{roomAtt}, #{residenceEmail}, #{residenceNameKo}, #{residenceNameEng},
+		    #{residenceGender}, #{hotelReserveCode}, #{residenceCheckIn}, #{residenceCheckOut}, #{userId}, #{residencePhone}, #{residenceBirth}
+		)
+	</insert> -->
+	
+	<!-- 결제 완료시  -->
+<!-- 	<insert id="insertHotelPay">
+		insert into pay values(
+    		#{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{moneyCat}, #{payStatus}, #{hotelReserveCode}, {airlineReserveCode}
+		)
+	</insert> -->	
+	
+	
 </mapper>

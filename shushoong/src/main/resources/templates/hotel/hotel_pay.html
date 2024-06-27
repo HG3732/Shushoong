@@ -60,7 +60,7 @@ xmlns:th="http://www.thymeleaf.org">
 							<tr class="tr_second"  style="border-top: 1px solid #006AFF;">
 								<th>체크인/체크아웃</th>
 								<td>
-									<input type="text" readonly th:value="${checkIn}" onfocus="this.blur()" style="width: 100px; border: none;" id="check_in"> ~ 
+									<input type="text" readonly th:value="${checkIn}" onfocus="this.blur()" style="width: 115px; border: none;" id="check_in"> ~ 
 									<input type="text" readonly th:value="${checkOut}" onfocus="this.blur()" style="border: none;" id="check_out">
 								</td>
 							</tr>
@@ -68,7 +68,11 @@ xmlns:th="http://www.thymeleaf.org">
 								<th>객실정보</th>
 								<td>
 									<input type="text" readonly th:value="${roomCatDesc}" onfocus="this.blur()" style=" border: none; width: 80px;" class="room_cat_desc">,
-									<input type="text" readonly th:value="${roomAtt}" onfocus="this.blur()" style="border: none;" class="room_att">
+									<input type="text" readonly th:value="${roomAttDesc}" onfocus="this.blur()" style="border: none;" class="room_att">
+									<input type="hidden" readonly th:value="${roomAtt}">
+									<input type="hidden" readonly th:value="${roomCat}">
+									<input type="hidden" readonly th:value="${storeId}" class="store_id">
+									<input type="hidden" readonly th:value="${channelKey}" class="channel_key">
 								</td>
 							</tr>
 						</tbody>
@@ -136,27 +140,27 @@ xmlns:th="http://www.thymeleaf.org">
 					<hr style="border: 2px solid #006AFF; margin-top: 5px;"></hr>
 					<div class="require_check">
 						<div class="single">
-							<input type="checkbox" id="box1" value="싱글"><label for="box1"></label>
+							<input type="checkbox" id="box1" value="싱글" name="checkbox"><label for="box1"></label>
 							<div class="img_next_word">싱글</div>
 						</div>
 						<div class="twin">
-							<input type="checkbox" id="box2" value="트윈"><label for="box2"></label>
+							<input type="checkbox" id="box2" value="트윈" name="checkbox"><label for="box2"></label>
 							<div class="img_next_word">트윈</div>
 						</div>
 						<div class="double">
-							<input type="checkbox" id="box3" value="더블"><label for="box3"></label>
+							<input type="checkbox" id="box3" value="더블" name="checkbox"><label for="box3"></label>
 							<div class="img_next_word">더블</div>
 						</div>
 						<div class="non_smoking">
-							<input type="checkbox" id="box4" value="금연실"><label for="box4"></label>
+							<input type="checkbox" id="box4" value="금연실" name="checkbox"><label for="box4"></label>
 							<div class="img_next_word">금연실</div>
 						</div>
 						<div class="smoking">
-							<input type="checkbox" id="box5" value="흡연실"><label for="box5"></label>
+							<input type="checkbox" id="box5" value="흡연실" name="checkbox"><label for="box5"></label>
 							<div class="img_next_word">흡연실</div>
 						</div>
 						<div class="skyview">
-							<input type="checkbox" id="box6" value="고층"><label for="box6"></label>
+							<input type="checkbox" id="box6" value="고층" name="checkbox"><label for="box6"></label>
 							<div class="img_next_word">고층</div>
 						</div>
 					</div>
@@ -300,6 +304,7 @@ xmlns:th="http://www.thymeleaf.org">
 								<div class="how_much">총 상품 금액</div>
 								<div class="total_num">
 									<strong th:text="${#numbers.formatInteger(hotelPrice, 3, 'COMMA')}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong>원
+									<input type="hidden" class="hotel_price" th:value="${hotelPrice}">
 								</div>
 							</div>
 							<div class="headcount_exchange">

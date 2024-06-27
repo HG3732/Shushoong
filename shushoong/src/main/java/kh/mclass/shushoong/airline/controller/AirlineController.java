@@ -262,13 +262,15 @@ public class AirlineController {
 	
 	@ResponseBody
 	@PostMapping("/airline/input/passengerInfo")
-	public void passengerInfo(
-			@RequestBody List<Map<String, Object>> param
+	public int passengerInfo(
+			@RequestBody List<Map<String, Object>> param,
+			Model md
 			) {
+		int result = 0;
 		System.out.println("21416547sdafdsaf6677daafdsfasdadsfsafd : "+ param);
-		service.insertPassengerInfo(param);
+		result = service.insertPassengerInfo(param);
+		return result;
 		
-
 	}
 	
 	

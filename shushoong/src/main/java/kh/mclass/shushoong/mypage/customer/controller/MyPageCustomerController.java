@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
+import kh.mclass.shushoong.member.model.repository.MemberRepository;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
 import kh.mclass.shushoong.mypage.customer.model.service.MypageCustomerService;
 import lombok.RequiredArgsConstructor;
@@ -37,12 +38,9 @@ public class MyPageCustomerController {
 	}
 	
 	@PostMapping("/check/pwd.ajax")
-	public String checkPwdForm() {
-		try {
-			return "redirect:/my/information";
-		} catch (Exception e) {
-			return "redirect:/find/business";
-		}
+	public boolean checkPwdForm(String userId, String userPwd) {
+		MemberDto dto = MemberRepository.
+		boolean matches;
 	}
 	
 	// 개인정보 수정 페이지로 이동

@@ -63,7 +63,7 @@ public class HotelService {
 		//화면에 한번에 표시되는 리뷰부분 당 글 수 : reviewNum	
 		Map<String, Object> result = null;
 		
-		//총 게시글 개수
+		//총 리뷰 개수
 		//DB가서 그때그때 알아와야함 - 호텔 한개 당 리뷰글이 몇개냐에 따라 달라질 수 있음
 		int totalReviewCount = hotelRepository.selectTotalPageCount(hotelCode);
 		

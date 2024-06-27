@@ -78,13 +78,13 @@ async function payHandler(){
 
 	var roomCatDesc = $('.room_cat_desc').val();
 	var hotelName = $('.hotel_name').text();
-	var hotelPriceStr = $('.hotel_price').val();
+	//var hotelPriceStr = $('.hotel_price').val();
+	var hotelPriceStr = '100';
 	var hotelPrice = parseInt(hotelPriceStr, 10);
 	
 	var hotelReserveCode = currentTime + hotelCode + roomCat; //sysdate + hotelCode + room_cat
 	var orderName = hotelName + ' ' + roomCatDesc;
 
-	console.log(hotelPrice);
 
 	let reservationData = {
 		residenceNameKo : residenceNameKo,
@@ -125,21 +125,20 @@ async function payHandler(){
 		} else {
 			// 결제 검증 - 위에서 선언한거를 데이터로 보냄(결제 정보 외 것들)
 			$.ajax({
-				url : contextPath + "hotel/payment",
+				url : "/shushoong/hotel/payment",
 				type : "post",
 				data : { //이건 내가 마음ㅇ대로 이름 지을 수 있음 - 호텔정보들 여기로 보내기
 					paymentId : response.paymentId,
-					totalAmount : totalAmount,
+					hotelPrice : hotelPrice,
 					reservationData : reservationData
 				},
 				error : ajaxErrorHandler,
 				success : async function(data) {
 					if (data == 1) {
-						location.href = contextPath + "hotel/reserve/complete";
 						return;
 					} else {
 						alert("결제에 실패하셨습니다. 메인페이지로 돌아갑니다.");
-						location.href = contextPath + "hotel/main";
+						location.href = "shushoong/main";
 						return;
 					}
 				}

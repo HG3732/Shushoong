@@ -18,7 +18,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
@@ -27,10 +31,12 @@ import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
+import lombok.RequiredArgsConstructor;
 
 //@Configuration
 //@PropertySource("classpath:/keyfiles/apikey.properties")
 @Controller
+@RequiredArgsConstructor
 public class HotelController {
 
 	@Autowired
@@ -45,6 +51,8 @@ public class HotelController {
 		
 		@Value("${portone.secret.key}")
 		private String secretKey;
+	
+	private final Gson gson;
 
 		
 	@GetMapping("/hotel/main")
@@ -308,34 +316,33 @@ public class HotelController {
 		return "hotel/hotel_pay";
 	}
 
-//	@PostMapping("/hotel/payment")
-//	@ResponseBody
-//	public int hotelPayment(String paymentId, String totalAmount, String[] items, String buyId, Principal principal) throws IOException, InterruptedException{
-////		ajax로 보내지는 데이터 () 안에 작성
-//		HttpRequest request = HttpRequest.newBuilder()
-//			    .uri(URI.create("https://api.portone.io/payments/" + 결제번호 + "?storeId=" + storeId))
-//			    //payments/" + 결제번호 - PathVariable(경로) - 어디로가냐 - 경로에 따라 목적지 달라짐... , ?storeId=" + storeId = 결제API에 전달할 data - 뭘 가지고 가냐(바껴도 상관없음)
-//			    .header("Content-Type", "application/json")
-//			    .header("Authorization", "PortOne " + paySecret)
-//			    .method("GET", HttpRequest.BodyPublishers.ofString("{}"))
-//			    .build();
-//			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-//			System.out.println(response.body());
-//			
-//		
-//			// 결제 단건 조회 응답
-//			Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
-//			System.out.println("responseBody >>>>>>>>> "+responseBody.toString());
-//			
-//			// 응답 중 결제 금액 세부 정보 항목 추출
-//			Map<String, Object> amount = gson.fromJson(gson.toJson(responseBody.get("amount")), Map.class);
-//			System.out.println("amount >>>>>>>>> "+amount);
-//			// 그 중 지불된 금액
-//			double paid = (double) amount.get("paid");
-//			
+	@PostMapping("/hotel/payment")
+	@ResponseBody
+	public int hotelPayment(String paymentId, String hotelPrice, String[] reservationData) throws IOException, InterruptedException{
+//		ajax로 보내지는 데이터 () 안에 작성
+		HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://api.portone.io/payments/" + paymentId + "?storeId=" + storeId))
+			    //payments/" + 결제번호 - PathVariable(경로) - 어디로가냐 - 경로에 따라 목적지 달라짐... , ?storeId=" + storeId = 결제API에 전달할 data - 뭘 가지고 가냐(바껴도 상관없음)
+			    .header("Content-Type", "application/json")
+			    .header("Authorization", "PortOne " + secretKey)
+			    .method("GET", HttpRequest.BodyPublishers.ofString("{}"))
+			    .build();
+			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+			System.out.println(response.body());
+		
+			// 결제 단건 조회 응답
+			Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
+			System.out.println("responseBody >>>>>>>>> "+responseBody.toString());
+			
+			// 응답 중 결제 금액 세부 정보 항목 추출
+			Map<String, Object> amount = gson.fromJson(gson.toJson(responseBody.get("amount")), Map.class);
+			System.out.println("amount >>>>>>>>> "+amount);
+			// 그 중 지불된 금액
+			double paid = (double) amount.get("paid");
+			
 //			int result;
 //			// 결제 금액과 지불된 금액이 같다면
-//			if(Double.parseDouble(totalAmount) == paid) {
+//			if(Double.parseDouble(hotelPrice) == paid) {
 //				Map<String, Object> map = new HashMap<>();
 //				map.put("memEmail", principal.getName());
 //				map.put("buyId", buyId);
@@ -349,10 +356,10 @@ public class HotelController {
 //			}else {
 //				return result = 0;
 //			}
-//			
-//		
-//			
-//	}
+			
+		return 0;
+			
+	}
 	
 
 	//지역, 인원수 선택 안한채로 hotel_list를 url에 직접 입력하여 진입할 경우 예외처리  

@@ -8,6 +8,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerReservedAlirlineList.css}" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
@@ -25,14 +28,60 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<div class="wrap-body">
 			<div class="wrap-">
 			<!-- 여기부터 작성 -->
-				<div class="wrap-body">
-					<div class="wrap-aside">
-						<aside>
-							<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
-						</aside>
-					</div>
-					
+				<div class="wrap-aside">
+					<aside>
+						<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+					</aside>
 				</div>
+				
+				<div class="main_section">
+					<section class="list_bar">
+						<div>
+							<button class="display_list_button" id="reserved_btn"> 완료된 예약</button>
+							<button class="display_list_button" id="canceled_btn"> 취소된 예약</button>
+						</div>
+					</section>		
+							
+					<section class="reserved_list">
+						<div class="reserved_code">
+							<div>예약 코드</div>
+							<div>hijklimop</div>
+						</div>
+						<div class="reserved_airline_code">
+							<div>항공편</div>
+							<div>
+								<div>hijklmnop</div>
+								<div>2024-15-45(월)</div>
+								<div>
+									<div>인천</div>
+									<div>32:61 . 38:99</div>
+									<div>중국</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					
+					<section class="canceled_list">
+						<div class="canceled_code">
+							<div>예약 코드</div>
+							<div>abcdefg</div>
+						</div>
+						<div class="canceled_airline_code">
+							<div>항공편</div>
+							<div>
+								<div>abcdefg</div>
+								<div>2024-07-22(월)</div>
+								<div>
+									<div>후쿠오카</div>
+									<div>14:40 . 16:00</div>
+									<div>인천</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				
+				</div>
+					
 			
 			</div>
 		</div>
@@ -40,6 +89,31 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<div class="wrap-footer">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
+	
+	<script>
+		$("#reserved_btn").on("click",function(){
+			console.log("clicked");
+			$(".reserved_list").css("display","block");
+			$(".canceled_list").css("display","none");
+			
+			$("#reserved_btn").css("border-bottom","none");
+			$("#reserved_btn").css("border-top","3px solid var(--color_gray_4)");
+			$("#canceled_btn").css("border-top","none");
+			$("#canceled_btn").css("border-bottom","3px solid var(--color_gray_4)");
+			
+		});
+		$("#canceled_btn").on("click",function(){
+			console.log("clicked");
+			$(".reserved_list").css("display","none");
+			$(".canceled_list").css("display","block");
+			
+			$("#reserved_btn").css("border-top","none");
+			$("#reserved_btn").css("border-bottom","3px solid var(--color_gray_4)");
+			$("#canceled_btn").css("border-bottom","none");
+			$("#canceled_btn").css("border-top","3px solid var(--color_gray_4)");
+		});
+	</script>
+	
 	
 </body>
 </html>

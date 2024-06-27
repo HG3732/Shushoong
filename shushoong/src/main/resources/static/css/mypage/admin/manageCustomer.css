@@ -403,8 +403,6 @@ section .stopBtn {
 	font-size: 15px;
 	font-weight: bold;
 	cursor: pointer;
-	
-	margin-right: 5px;
 }
 
 section .stopCancleBtn {
@@ -418,8 +416,6 @@ section .stopCancleBtn {
 	font-size: 15px;
 	font-weight: bold;
 	cursor: pointer;
-	
-	margin-left: 5px;
 }
 
 section .stopCancleBtn:hover {

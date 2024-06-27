@@ -52,6 +52,7 @@ public class AirlineService {
 //	}
 	
 	public int insertReserverInfo(String phoneNum,String email) {
+		
 		return airlineRepository.insertReserverInfo(phoneNum, email);
 		
 		

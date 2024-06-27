@@ -27,4 +27,13 @@ public interface MypageAdminRepository {
 	//2. 항공
 	public List<Map<String, String>> selectFlyPayCount(String id);
 
+	//1:1문의내역 갯수 조회
+	public String selectFAQCount(String id);
+	
+	//회원 정지, 정지해제
+	public int updateLockAccount(String id);
+	public int updateUnlockAccount(String id);
+	
+	//1:1문의내역 최근 3개 조회
+	public List<Map<String, String>> selectLatestFaq();
 }

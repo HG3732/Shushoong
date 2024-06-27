@@ -31,7 +31,9 @@ public class MypageAdminController {
 	
 	// 일반 회원 관리 페이지로 이동
 	@GetMapping("/manager/customer")
-	public String manageCustomer() {
+	public String manageCustomer(Model model) {
+		System.out.println(service.selectLatestFaq());
+		model.addAttribute("latestFaq", service.selectLatestFaq());
 		return "mypage/admin/manageCustomer";
 	}
 	
@@ -65,6 +67,21 @@ public class MypageAdminController {
 		} else {
 			model.addAttribute("userFlyPayInfo", 0);
 		}
+		model.addAttribute("faqCount", service.selectFAQCount(id));
+		return "mypage/admin/managecustomer/viewMember";
+	}
+	
+	//회원 계정 정지
+	@GetMapping("/manager/customer/lockAccount.ajax")
+	public String lockAccount(Model model, String id) {
+		service.updateLockAccount(id);
+		return "mypage/admin/managecustomer/viewMember";
+	}
+	
+	//회원 계정 정지 해제
+	@GetMapping("/manager/customer/unlockAccount.ajax")
+	public String unlockAccount(Model model, String id) {
+		service.updateUnlockAccount(id);
 		return "mypage/admin/managecustomer/viewMember";
 	}
 	

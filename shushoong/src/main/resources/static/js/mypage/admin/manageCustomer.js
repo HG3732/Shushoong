@@ -37,3 +37,59 @@ function memberViewHandler(thisElement) {
 		$("#viewmember").replaceWith(response);
 	});
 }
+
+//회원 정지
+function lockAccountHandler(thisElement) {
+	var id = $(thisElement).parent('.btn.container').data("targetid");
+	$.ajax({
+		url: "/shushoong/admin/manager/customer/lockAccount.ajax",
+		method: "get",
+		data: { id : id },
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	})
+	//success함수 대체
+	.done(function(response1){
+		$.ajax({
+			url: "/shushoong/admin/manager/customer/viewMember.ajax",
+			method: "get",
+			data: { id : id },
+			error: function(xhr, status, error) {
+					console.log('AJAX 실패:', error);
+				}
+			})
+		//success함수 대체
+			.done(function(response){
+				$("#viewmember").replaceWith(response);
+			});
+	});
+}
+
+//회원 정지 해제
+function unlockAccountHandler(thisElement) {
+	var id = $(thisElement).parent('.btn.container').data("targetid");
+	$.ajax({
+		url: "/shushoong/admin/manager/customer/unlockAccount.ajax",
+		method: "get",
+		data: { id : id },
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	})
+	//success함수 대체
+	.done(function(response1){
+		$.ajax({
+			url: "/shushoong/admin/manager/customer/viewMember.ajax",
+			method: "get",
+			data: { id : id },
+			error: function(xhr, status, error) {
+					console.log('AJAX 실패:', error);
+				}
+			})
+		//success함수 대체
+			.done(function(response){
+				$("#viewmember").replaceWith(response);
+			});
+	});
+}

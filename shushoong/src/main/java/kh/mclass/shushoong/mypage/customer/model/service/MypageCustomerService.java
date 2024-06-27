@@ -9,16 +9,24 @@ import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerReposi
 
 @Service
 public class MypageCustomerService {
-	
+
 	@Autowired
 	private MypageCustomerRepository mypageRepository;
-	
+
 	private BCryptPasswordEncoder bcrypt;
-	
+
 	public MemberDto selectOne(String userId) {
 		return mypageRepository.selectOne(userId);
 	}
-	
+
+	// 비밀번호 체크
+	public boolean pwdCheck(String userId, String userPwd) {
+		MemberDto member;
+		String realPassword = member.getUserPwd();
+		boolean matches = encoder.matches(checkPassword, realPassword);
+		return realPassword;
+	}
+
 	// 비밀번호 재설정
 	public String resetPwd(MemberDto dto) {
 		dto.setUserPwd(bcrypt.encode(dto.getUserPwd()));

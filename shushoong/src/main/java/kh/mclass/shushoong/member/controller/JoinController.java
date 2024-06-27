@@ -61,11 +61,11 @@ public class JoinController {
         }
 		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-//		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mi:ss");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mi:ss");
 		
 		Date now = new Date();
 		String joinDate = sdf1.format(now);
-//		String loginDate = sdf2.format(now);
+		String loginDate = sdf2.format(now);
 		
 		memberDto.setUserId(memberDto.getUserId());
 		memberDto.setUserName(memberDto.getUserName());
@@ -76,7 +76,7 @@ public class JoinController {
 		memberDto.setJoinDate(joinDate);
 		memberDto.setMsgReceive(memberDto.getMsgReceive());
 		memberDto.setEmailReceive(memberDto.getEmailReceive());
-		memberDto.setLatestLogin(joinDate);
+		memberDto.setLatestLogin(loginDate);
 		
 		log.info("member Information = " + memberDto);
 		
@@ -99,11 +99,11 @@ public class JoinController {
         }
 		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-//		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mi:ss");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mi:ss");
 		
 		Date now = new Date();
 		String joinDate = sdf1.format(now);
-//		String loginDate = sdf2.format(now);
+		String loginDate = sdf2.format(now);
 		
 		memberDto.setUserId(memberDto.getUserId());
 		memberDto.setUserName(memberDto.getUserName());
@@ -114,7 +114,7 @@ public class JoinController {
 		memberDto.setJoinDate(joinDate);
 		memberDto.setMsgReceive(0);
 		memberDto.setEmailReceive(0);
-		memberDto.setLatestLogin(joinDate);
+		memberDto.setLatestLogin(loginDate);
 		
 		memberservice.join(memberDto);
 		

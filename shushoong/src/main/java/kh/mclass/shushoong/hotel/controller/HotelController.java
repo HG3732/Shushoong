@@ -1,6 +1,5 @@
 package kh.mclass.shushoong.hotel.controller;
 
-<<<<<<< Updated upstream
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -9,8 +8,6 @@ import java.net.http.HttpResponse;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
-=======
->>>>>>> Stashed changes
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;

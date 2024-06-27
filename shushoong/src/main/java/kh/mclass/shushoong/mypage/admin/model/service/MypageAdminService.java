@@ -41,4 +41,19 @@ public class MypageAdminService {
 	public List<Map<String, String>> selectFlyPayCount(String id) {
 		return mypageAdminRepository.selectFlyPayCount(id);
 	}
+	
+	public String selectFAQCount(String id) {
+		return mypageAdminRepository.selectFAQCount(id);
+	}
+	
+	public int updateLockAccount(String id) {
+		return mypageAdminRepository.updateLockAccount(id);
+	}
+	public int updateUnlockAccount(String id) {
+		return mypageAdminRepository.updateUnlockAccount(id);
+	}
+	
+	public List<Map<String, String>> selectLatestFaq() {
+		return mypageAdminRepository.selectLatestFaq();
+	};
 }

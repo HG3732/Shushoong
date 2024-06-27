@@ -33,12 +33,16 @@
 				</div>
 				<div class="faqId-content">
 					<label for="faqId">1:1 문의 건수</label>
-					<div class="faqId" id="faqId">1건</div>
+					<div class="faqId" id="faqId" th:text="${faqCount} + '건'"></div>
 				</div>
 			</div>
-			<div class="btn container">
-				<button type="button" class="stopBtn">이용정지</button>
-				<button type="button" class="stopCancleBtn">이용정지 해제</button>
+			<div class="btn container" th:data-targetid="${userInfo.userId}">
+				<th:block th:if="${userInfo.userStatus == 1}">
+					<button type="button" class="stopBtn" onclick="lockAccountHandler(this)">이용정지</button>
+				</th:block>
+				<th:block th:if="${userInfo.userStatus == 0}">
+					<button type="button" class="stopCancleBtn" onclick="unlockAccountHandler(this)">이용정지 해제</button>
+				</th:block>
 			</div>
 		</th:block>
 		<th:block th:if="${userInfo == null or userInfo == ''}">

@@ -42,6 +42,30 @@
 		join AIRLINE_RESERVE_INFO using(user_id) where user_id = #{id}
 	</select>
 	
+	<!-- 회원의 문의내역 조회 -->
+	<select id="selectFAQCount" parameterType="string" resultType="String">
+		select count(*) from SERVICE_CENTER where user_id = #{id}
+	</select>
+	
+	<!-- 회원 정지 -->
+	<update id="updateLockAccount" parameterType="string">
+		update member set user_status = '0' where user_id = #{id}
+	</update>
+
+	<!-- 회원 정지 해제 -->
+	<update id="updateUnlockAccount" parameterType="string">
+		update member set user_status = '1' where user_id = #{id}
+	</update>
+	
+	<!-- 문의 내역 최신 3건 조회 -->
+	<select id="selectLatestFaq" resultType="hashmap">
+		select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE from (
+			select faq_id, quest_cat, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center
+            join faq_cat using(faq_id) order by ask_date desc)
+            join faq_cat_desc using(quest_cat)
+			where rownum &lt;= 3
+	</select>
+
 	<!-- 정지회원 조회 -->
 	<select id="selectSuspendedOne" parameterType="string" resultType="MemberDto">
 		SELECT USER_ID,USER_NAME,USER_EMAIL, EMAIL_RECEIVE, MSG_RECEIVE FROM MEMBER WHERE USER_STATUS='1'

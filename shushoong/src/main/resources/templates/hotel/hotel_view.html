@@ -71,7 +71,7 @@ xmlns:th="http://www.thymeleaf.org">
 								    </th:block>
 									<th:block th:if="${not #lists.isEmpty(hotelViewList)}">
 										<input type="hidden" th:value="${hotelViewList.hotelCode}" name="hotelCode" class="hotel_code">
-										<form th:each="room : ${hotelViewList.hotelRooms}" class="roomlist" id="frm-reserve" method="get" action="/shushoong/hotel/customer/reserve/pay">
+										<form th:each="room : ${hotelViewList.hotelRooms}" class="roomlist" id="frm-reserve" method="post" action="/shushoong/hotel/customer/reserve/pay">
 											<input type="hidden" th:value="${hotelViewList.hotelName}" name="hotel">
 											<input type="hidden" th:value="${hotelCode}"  name="hotelCode">
 											<input type="hidden" th:value="${room}"  name="room">

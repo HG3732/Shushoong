@@ -47,92 +47,104 @@ function checkAllEscHandler(){
 }
 
 async function payHandler(){
-
+	const storeId = $('.store_id').val();
+	const channelKey = $('.channel_key').val();
+	
 	const now = new Date();
     const year = now.getFullYear();
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const day = String(now.getDate()).padStart(2, '0');
-    
+
     const currentTime = year + month + day;	
-	var reserveName = $('#name').val(); //예약자 --> 회원명
-	var reserveEmail = $('#email').val();
 	var residenceNameKo = $('#name').val(); //투숙객명
 	var residenceNameEng = $('#last_name').val() + $('#first_name').val();
 	var residenceGender = $('input[name=gender]:checked').val();
 	var residencePhone = $('#phone').val();
-	var request = $('.require_check').children().children('input[type=checkbox]:checked').val();
+	var residenceEmail = $('#email').val();
+	
+	var requestItems= [];
+	var request = $('.require_check').children().children('input[name="checkbox"]:checked').each(function() {
+                    // 값을 배열에 추가합니다.
+                    requestItems.push($(this).val());
+					});
+					
 	var reserveCheckIn = $('#check_in').val();
 	var reserveCheckOut = $('#check_out').val();
 	var userId = $('.user_id').val();
 	var roomCap = $('.room_cap').val();
 	var hotelCode = $('.hotel_code').val();
-	var hotelName = $('.hotel_name').text();
 	var roomCat = $('.room_cat').val();
-	var roomCatDesc = $('.room_cat_desc').val();
 	var roomAtt = $('.room_att').val();
-	var hotelPrice = $('.final_pay').val();
-	var hotelReserveCode = currentTime + hotelCode + roomCat; //sysdate + hotelCode + room_cat
-	var orderName = hotelName + + roomCatDesc;
-	
-	console.log(currentTime);
 
-	/*	const response = await PortOne.requestPayment({
-			storeId : storeId, // 
-			paymentId : buyId,
+	var roomCatDesc = $('.room_cat_desc').val();
+	var hotelName = $('.hotel_name').text();
+	var hotelPriceStr = $('.hotel_price').val();
+	var hotelPrice = parseInt(hotelPriceStr, 10);
+	
+	var hotelReserveCode = currentTime + hotelCode + roomCat; //sysdate + hotelCode + room_cat
+	var orderName = hotelName + ' ' + roomCatDesc;
+
+	console.log(hotelPrice);
+
+	let reservationData = {
+		residenceNameKo : residenceNameKo,
+		residenceNameEng : residenceNameEng, 
+		residenceGender : residenceGender,
+		residencePhone : residencePhone,
+		residenceEmail : residenceEmail,
+		request : requestItems,
+		reserveCheckIn : reserveCheckIn,
+		reserveCheckOut : reserveCheckOut,
+		userId : userId,
+		roomCap : roomCap,
+		hotelCode : hotelCode,
+		roomCat : roomCat,
+		roomAtt : roomAtt,
+		/*위에는 예약으로, 아래는 예약완료됐을때 띄워주기*/
+		roomCatDesc : roomCatDesc,
+		hotelName : hotelName,
+		hotelPrice : hotelPrice,
+		hotelReserveCode : hotelReserveCode,
+	}
+
+	const response = await PortOne.requestPayment({
+			storeId : storeId, 
+			paymentId : hotelReserveCode,
 			orderName : orderName, //호텔이름 + 방속성이름(상품명 - 고객에게 표시를 위해...)
-			totalAmount : totalAmount,
+			totalAmount : hotelPrice,
 			currency : "CURRENCY_KRW",
 			channelKey : channelKey, // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
 			payMethod : "CARD",
 			customer : {
-				fullName : memNick,
-				phoneNumber : memTel,
-				email : memEmail,
+				fullName : userId	
 			}
 		});
 			if (response.code) {
 			// 오류 발생
 				console.log('결제 오류');
 		} else {
-			// 결제 검증
+			// 결제 검증 - 위에서 선언한거를 데이터로 보냄(결제 정보 외 것들)
 			$.ajax({
-				url : contextPath + "store/payment",
+				url : contextPath + "hotel/payment",
 				type : "post",
-				data : {
+				data : { //이건 내가 마음ㅇ대로 이름 지을 수 있음 - 호텔정보들 여기로 보내기
 					paymentId : response.paymentId,
 					totalAmount : totalAmount,
-					items : items,
-					buyId : buyId
+					reservationData : reservationData
 				},
 				error : ajaxErrorHandler,
 				success : async function(data) {
 					if (data == 1) {
-						Swal.fire({
-							title: "결제가 완료되었습니다.\n구매내역으로 이동하시겠습니까?",
-							icon: "success",
-							showCancelButton: true,
-							confirmButtonText: "이동하기",
-							confirmButtonColor: "#000000",
-							cancelButtonText: "돌아가기",
-							cancelButtonColor: "#ff0000"
-						}).then((swal) => {
-							if(swal.isConfirmed){
-								location.href = contextPath + "store/buy";
-							}
-						});
+						location.href = contextPath + "hotel/reserve/complete";
 						return;
 					} else {
-						Swal.fire({
-							title: "결제 금액과 지불 금액이 일치하지 않거나 알 수 없는 오류가 발생했습니다.",
-							icon: "error",
-							confirmButtonText: "확인",
-							confirmButtonColor: "#000000",
-						});
+						alert("결제에 실패하셨습니다. 메인페이지로 돌아갑니다.");
+						location.href = contextPath + "hotel/main";
 						return;
 					}
 				}
 			});
 		}
-*/
+
 }
 

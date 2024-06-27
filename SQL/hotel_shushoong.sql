@@ -7,6 +7,28 @@ select * from hotel where hotel_name like '%호텔%';
 select * from hotel join hotel_room using(hotel_code);
 
 
+
+----검색 시 최저가 하나만 나타나도록
+select hotel_code, hotel_name, hotel_eng, hotel_address, to_char(hotel_price, '999,999,999') as hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num, rownum rn
+from V_hotel_list 
+where SUBSTR(hotel_code, 1, 3) = '2OS' and room_cap >= 3;
+
+SELECT hotel_code, hotel_name, hotel_eng, hotel_address, 
+       TO_CHAR(hotel_price, '999,999,999') AS hotel_price, 
+       room_discount, hotel_pic, hotel_score, hotel_review_num, rn
+FROM (
+    SELECT hotel_code, hotel_name, hotel_eng, hotel_address, 
+           hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num,
+           ROW_NUMBER() OVER (PARTITION BY hotel_code ORDER BY hotel_price) AS rn
+    FROM V_hotel_list
+    WHERE SUBSTR(hotel_code, 1, 3) = '2OS'
+    AND room_cap >= 2
+)
+WHERE rn = 1;
+
+select * from hotel_room where room_cap >= 3 order by hotel_code, hotel_price;
+
+
 ----------------------------------------객실 정보랑 호텔 상세정보랑 합친 table----------------------------------------
 select hotel_name, hotel_eng, hotel_address, hotel_call, hotel_check_in, hotel_check_out, hotel_policy, hotel_intro, room_cat, hotel_price, room_att 
 from hotel 
@@ -157,9 +179,9 @@ select * from hotel_room;
 
 
 CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_ROOM_LIST" (
-    hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, room_att, room_cat, ROOM_CAT_DESC
+    hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, room_att, ROOM_ATT_DESC, room_cat, ROOM_CAT_DESC
 ) AS 
-SELECT hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT, ROOM_CAT_DESC FROM HOTEL_ROOM
+SELECT hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT, ROOM_ATT_DESC, ROOM_CAT, ROOM_CAT_DESC FROM HOTEL_ROOM
 JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
 JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
 where room_count > 0;
@@ -171,7 +193,15 @@ select * from v_room_list;
 
 drop view v_room_list;
 
+desc hotel_room_cat;
+
+
 commit;
+
+		select * from hotel
+		    join hotel_pic using(hotel_code)
+		    join v_room_list using(hotel_code)
+		where hotel_code = '2OS001';
 
 --------------------- 2024.06.20 리뷰 수정
 select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
@@ -303,37 +333,13 @@ select * from hotel_reserve;
 desc hotel_review;
 -------------------------------------결제 관련 sql
 
+select * from pay;
 
+insert into hotel_reserve values(
+    #{hotelReserveCode}, #{roomCat}, #{hotelCode}, #{roomCap}, #{roomAtt}, #{residenceEmail}, #{residenceNameKo}, #{residenceNameEng},
+    #{residenceGender}, #{hotelReserveCode}, #{residenceCheckIn}, #{residenceCheckOut}, #{userId}, #{residencePhone}, #{residenceBirth}
+);
 
-
-select * from hotel_room;
-
-select * from hotel_reserve
-join (
-select hotel_name, hotel_code
-from hotel
-    join hotel_room using (hotel_code)) using (hotel_code);
-
-hotel_reserve 테이블
-approve_no, room_cat, room_att, request, reserve_name
-
-pay 테이블
-pay_price
-
-DESC HOTEL_PIC;
-
-select * from hotel_reserve;
-
-select * from hotel_room_cat;
-
-select * from v_room_list where room_cap >= 3;
-
-update hotel_room_cat
-set room_cat_desc ='스위트룸'
-where room_cat = '3';
-
-commit;
-
-select * from hotel_review;
-
-select * from hotel_reserve;
+insert into pay values(
+    #{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{moneyCat}, #{payStatus}, #{hotelReserveCode}, {airlineReserveCode}
+);

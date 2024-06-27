@@ -13,9 +13,18 @@
 <!-- 검색한 호텔 리스트 띄우기 위한 SQL  -->
 	<!-- 호텔 이름, 영어이름, 주소, 최저가(인원수 고려), 사진 1장 -->
 	<select id="selectAllHotelList" parameterType="hashmap" resultType="HotelDtoRes">
-		select hotel_code, hotel_name, hotel_eng, hotel_address, to_char(hotel_price, '999,999,999') as hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num, rownum rn
-		from V_hotel_list 
-		where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap &gt;= #{people}
+		SELECT hotel_code, hotel_name, hotel_eng, hotel_address, 
+		       TO_CHAR(hotel_price, '999,999,999') AS hotel_price, 
+		       room_discount, hotel_pic, hotel_score, hotel_review_num, rn
+		FROM (
+		    SELECT hotel_code, hotel_name, hotel_eng, hotel_address, 
+		           hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num,
+		           ROW_NUMBER() OVER (PARTITION BY hotel_code ORDER BY hotel_price) AS rn
+		    FROM V_hotel_list
+		    WHERE SUBSTR(hotel_code, 1, 3) = #{code} 
+		    AND room_cap &gt;= #{people}
+		)
+		WHERE rn = 1
         <if test="keyword != null and keyword !='' ">
         	<bind name="keyword2" value="'%' + keyword + '%'"/>
         	and hotel_name LIKE #{keyword2}
@@ -67,9 +76,9 @@
 	</insert>
 	
 	<!-- 좋아요 삭제 -->
-	<insert id="deleteHotelLike" parameterType="hashmap">
+	<delete id="deleteHotelLike" parameterType="hashmap">
 		delete from hotel_like where user_id = #{userId} and hotel_code = #{hotelCode}
-	</insert>
+	</delete>
 	
 	<!-- 편의시설 -->
 	<select id="selectHotelFacility" parameterType="String" resultType="HotelFacilityDtoRes">
@@ -139,6 +148,7 @@
 			<result column="ROOM_COUNT" property="roomCount"/>
 			<result column="ROOM_CAP" property="roomCap"/>
 			<result column="ROOM_ATT" property="roomAtt"/>
+			<result column="ROOM_ATT_DESC" property="roomAttDesc"/>
 		</collection>
 		<!-- HotelSearchDtoRes 안에 있는 list -->
 		<!-- property - dto변수명, column - db에서 쓰는 컬럼명  -->
@@ -152,5 +162,19 @@
 	</select>
 
 	<!-- 결제 -->
+<!-- 	<insert id="insertHotelReserve">
+		insert into hotel_reserve values(
+		    #{hotelReserveCode}, #{roomCat}, #{hotelCode}, #{roomCap}, #{roomAtt}, #{residenceEmail}, #{residenceNameKo}, #{residenceNameEng},
+		    #{residenceGender}, #{hotelReserveCode}, #{residenceCheckIn}, #{residenceCheckOut}, #{userId}, #{residencePhone}, #{residenceBirth}
+		)
+	</insert> -->
+	
+	<!-- 결제 완료시  -->
+<!-- 	<insert id="insertHotelPay">
+		insert into pay values(
+    		#{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{moneyCat}, #{payStatus}, #{hotelReserveCode}, {airlineReserveCode}
+		)
+	</insert> -->	
+	
 	
 </mapper>

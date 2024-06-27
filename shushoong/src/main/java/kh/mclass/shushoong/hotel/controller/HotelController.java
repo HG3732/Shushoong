@@ -15,23 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.google.gson.GsonBuilder;
+import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
-import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
 
@@ -44,14 +37,14 @@ public class HotelController {
 	private HotelService service;
 		
 		//PortOne
-//		@Value("${portone.store.key}")
-//		private String portoneStoreKey;
-//	
-//		@Value("${portone.channel.key}")
-//		private String portoneChannelKey;
-//		
-//		@Value("${portone.secret.key}")
-//		private String portoneSecretKey;
+		@Value("${portone.store.key}")
+		private String storeId;
+	
+		@Value("${portone.channel.key}")
+		private String channelKey;
+		
+		@Value("${portone.secret.key}")
+		private String secretKey;
 
 		
 	@GetMapping("/hotel/main")
@@ -184,7 +177,6 @@ public class HotelController {
 		model.addAttribute("hotelViewList", result);
 		//넣어서 보내면 사라짐(일회성) - setAttribute 같은 얘
 		
-		
 		//편의시설
 		List<HotelFacilityDtoRes> facilitylist = service.selectHotelFacility(hotelCode);
 		for(int i = 0; i<facilitylist.size(); i++) {
@@ -286,14 +278,18 @@ public class HotelController {
 	}
 	
 	@PostMapping("/hotel/customer/reserve/pay")
-	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomCatDesc, String roomAtt, String hotelPrice, String roomCap) {
+	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomCatDesc, String roomAtt, String roomAttDesc, String hotelPrice, String roomCap) {
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelCode", hotelCode);
 		model.addAttribute("roomCat", roomCat);
 		model.addAttribute("roomCatDesc", roomCatDesc);
 		model.addAttribute("roomAtt", roomAtt);
+		model.addAttribute("roomAttDesc", roomAttDesc);
 		model.addAttribute("hotelPrice", hotelPrice);
 		model.addAttribute("roomCap", roomCap);
+		
+		model.addAttribute("storeId", storeId);
+		model.addAttribute("channelKey", channelKey);
 		
 		//session 에 담겨있는 checkIn, checkOut 정보 model 에 담아서 html 페이지로 뿌리기
 		model.addAttribute("checkIn", session.getAttribute("checkIn"));
@@ -304,6 +300,8 @@ public class HotelController {
 		model.addAttribute("nation", session.getAttribute("nation"));
 		model.addAttribute("room", session.getAttribute("room"));
 		//이미 session 안에 이 위에 정보들 있는데 굳이 화면에 값 출력해서 결제페이지 이동할 떄 가지고 가야하나? 그냥 session 불러서 넣으면 안되나?
+		
+		
 		
 		System.out.println(roomCap + "=========================");
 		

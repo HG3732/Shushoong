@@ -20,10 +20,25 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 				<li><a th:href="@{/hotel/main}">숙소</a></li>
 			</ul>
 			<ul>
-				<li><a th:href="@{/login}" sec:authorize="isAnonymous()" >로그인</a></li>
-				<li><a th:href="@{/join}" sec:authorize="isAnonymous()" >회원가입</a></li>
-				<li><a href="#" sec:authorize="isAuthenticated()">마이페이지</a></li>
-				<li><a th:href="@{/logout}" sec:authorize="isAuthenticated()">로그아웃</a></li>			
+			
+				<th:block th:if="${#authorization.expr('isAnonymous()')}">
+					<li style="width:80px;"></li>
+					<li><a th:href="@{/login}">로그인</a></li>
+					<li><a th:href="@{/join}">회원가입</a></li>
+				</th:block>
+				<th:block th:if="${#authorization.expr('isAuthenticated()')}">
+					<li sec:authentication="name" style="font-size: var(--font3); font-weight: bold;" font-style: "SOYOMapleBoldTTF";></li>
+					<th:block th:if="${#authorization.expression('hasAnyAuthority(''admin'')')}">
+						<li><a th:href="@{/admin/manager/home}">마이페이지</a></li>
+					</th:block>
+					<th:block th:if="${#authorization.expression('hasAnyAuthority(''business'')')}">
+						<li><a th:href="@{/business/my/information}">마이페이지</a></li>
+					</th:block>
+					<th:block th:if="${#authorization.expression('hasAnyAuthority(''customer'')')}">
+						<li><a th:href="@{/customer/mypage/home}">마이페이지</a></li>
+					</th:block>
+					<li><a th:href="@{/logout}">로그아웃</a></li>	
+				</th:block>	
 			</ul>
 		</div>
 	</div>

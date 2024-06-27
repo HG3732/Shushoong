@@ -76,11 +76,12 @@ xmlns:th="http://www.thymeleaf.org">
 											<input type="hidden" th:value="${hotelCode}"  name="hotelCode">
 											<input type="hidden" th:value="${room}"  name="room">
 											<input type="hidden" th:value="${room.roomAtt}" name="roomAtt">
+											<input type="hidden" th:value="${room.roomAttDesc}" name="roomAttDesc">
 											<input type="hidden" th:value="${room.roomCatDesc}" name="roomCatDesc">
 											<input type="hidden" th:value="${room.roomCat}" name="roomCat">
 											<input type="hidden" th:value="${room.hotelPrice}" name="hotelPrice">
 											<input type="hidden" th:value="${room.roomCap}" name="roomCap">
-											<div th:utext="${room.roomCatDesc} + ', ' + ${room.roomAtt}" class="room_cat"></div>
+											<div th:utext="${room.roomCatDesc} + ', ' + ${room.roomAttDesc}" class="room_cat"></div>
 											<div class="amount_num">
 												<strong th:text="${#numbers.formatInteger(room.hotelPrice, 3, 'COMMA')}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong>원
 											</div>

@@ -286,12 +286,13 @@ public class HotelController {
 	}
 	
 	@PostMapping("/hotel/customer/reserve/pay")
-	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomCatDesc, String roomAtt, String hotelPrice, String roomCap) {
+	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomCatDesc, String roomAtt, String roomAttDesc, String hotelPrice, String roomCap) {
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelCode", hotelCode);
 		model.addAttribute("roomCat", roomCat);
 		model.addAttribute("roomCatDesc", roomCatDesc);
 		model.addAttribute("roomAtt", roomAtt);
+		model.addAttribute("roomAttDesc", roomAttDesc);
 		model.addAttribute("hotelPrice", hotelPrice);
 		model.addAttribute("roomCap", roomCap);
 		

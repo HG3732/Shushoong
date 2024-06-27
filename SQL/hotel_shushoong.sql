@@ -157,9 +157,9 @@ select * from hotel_room;
 
 
 CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_ROOM_LIST" (
-    hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, room_att, room_cat, ROOM_CAT_DESC
+    hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, room_att, ROOM_ATT_DESC, room_cat, ROOM_CAT_DESC
 ) AS 
-SELECT hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT_DESC as room_att, ROOM_CAT, ROOM_CAT_DESC FROM HOTEL_ROOM
+SELECT hotel_code, HOTEL_PRICE, ROOM_CAP, HOTEL_DISCOUNT, ROOM_COUNT, ROOM_ATT, ROOM_ATT_DESC, ROOM_CAT, ROOM_CAT_DESC FROM HOTEL_ROOM
 JOIN HOTEL_ROOM_ATT USING(ROOM_ATT)
 JOIN HOTEL_ROOM_CAT USING(ROOM_CAT)
 where room_count > 0;
@@ -303,6 +303,7 @@ select * from hotel_reserve;
 desc hotel_review;
 -------------------------------------결제 관련 sql
 
+select * from v_room_list;
 
 
 

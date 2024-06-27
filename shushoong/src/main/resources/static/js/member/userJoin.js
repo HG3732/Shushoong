@@ -231,6 +231,7 @@ function emailCheckHandler() {
 		error: function(request, status, error) {
 			$('.test_Echkok').css("display", "none");
 			$('.test_Echkexception').css("display", "inline-block");
+			return false;
 			code_success = 0;
 		}
 	})

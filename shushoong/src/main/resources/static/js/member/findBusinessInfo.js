@@ -100,6 +100,7 @@ function emailSendHandler() {
 		},
 		error: function(request, status, error) {
 			alert("잘못된 이메일 형식입니다.");
+			return false;
 		}
 	})
 }
@@ -122,6 +123,7 @@ function emailCheckHandler() {
 		},
 		error: function(request, status, error) {
 			alert("유효한 코드가 아닙니다.");
+			return false;
 			code_success = 0;
 		}
 	})

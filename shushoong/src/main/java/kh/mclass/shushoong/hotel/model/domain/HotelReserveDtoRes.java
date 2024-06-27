@@ -11,6 +11,7 @@ public class HotelReserveDtoRes {
 	private String hotelReserveCode;
 	private String residenceNameKo;
 	private String residenceNameEng;
+	private String residenceGender;
 	private String residencePhone;
 	private String residenceEmail;
 	private String request;

@@ -6,6 +6,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,9 +52,8 @@ public class HotelController {
 //		
 //		@Value("${portone.secret.key}")
 //		private String portoneSecretKey;
+
 		
-		
-	
 	@GetMapping("/hotel/main")
 	public String hotelMain(Model model, HttpSession session) {
 		List<HotelDtoRes> hotHotelList = service.selectHotHotelList();
@@ -173,6 +174,8 @@ public class HotelController {
 		people = String.valueOf(child1+adult1);
 		//session에 담긴 정보는 string 으로 뽑을 수 있기 때문에 위에서 integer로 session에 넣었기 때문에 session 에서 꺼낼 때 string으로 뽑아주고 그 다음에 integer로 다시 변환해주기
 		
+		System.out.println(people + "=======================");
+		
 		HotelViewDtoRes result = service.selectOneHotel(hotelCode, people);
 		//ajax와는 다르게 이 문장으로 인해서 service 가서 쭉쭉가서 db에서 정보 조회해서 dto에 넣고 다시 돌아옴
 		//돌아온 데이터 밑에 넣음
@@ -282,7 +285,7 @@ public class HotelController {
 		//위에서 넣은 값을 session안에 담고 그 session을 여기로 보내서 띄움
 	}
 	
-	@GetMapping("/hotel/customer/reserve/pay")
+	@PostMapping("/hotel/customer/reserve/pay")
 	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomCatDesc, String roomAtt, String hotelPrice, String roomCap) {
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelCode", hotelCode);
@@ -302,12 +305,14 @@ public class HotelController {
 		model.addAttribute("room", session.getAttribute("room"));
 		//이미 session 안에 이 위에 정보들 있는데 굳이 화면에 값 출력해서 결제페이지 이동할 떄 가지고 가야하나? 그냥 session 불러서 넣으면 안되나?
 		
+		System.out.println(roomCap + "=========================");
+		
 		return "hotel/hotel_pay";
 	}
 
-//	@PostMapping("/payment")
+//	@PostMapping("/hotel/payment")
 //	@ResponseBody
-//	public int hotelPayment() throws IOException, InterruptedException{
+//	public int hotelPayment(String paymentId, String totalAmount, String[] items, String buyId, Principal principal) throws IOException, InterruptedException{
 ////		ajax로 보내지는 데이터 () 안에 작성
 //		HttpRequest request = HttpRequest.newBuilder()
 //			    .uri(URI.create("https://api.portone.io/payments/" + 결제번호 + "?storeId=" + storeId))
@@ -319,6 +324,33 @@ public class HotelController {
 //			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 //			System.out.println(response.body());
 //			
+//		
+//			// 결제 단건 조회 응답
+//			Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
+//			System.out.println("responseBody >>>>>>>>> "+responseBody.toString());
+//			
+//			// 응답 중 결제 금액 세부 정보 항목 추출
+//			Map<String, Object> amount = gson.fromJson(gson.toJson(responseBody.get("amount")), Map.class);
+//			System.out.println("amount >>>>>>>>> "+amount);
+//			// 그 중 지불된 금액
+//			double paid = (double) amount.get("paid");
+//			
+//			int result;
+//			// 결제 금액과 지불된 금액이 같다면
+//			if(Double.parseDouble(totalAmount) == paid) {
+//				Map<String, Object> map = new HashMap<>();
+//				map.put("memEmail", principal.getName());
+//				map.put("buyId", buyId);
+//				List<String> list = new ArrayList<>();
+//				for(int i = 0; i < items.length; i++) {
+//					list.add(items[i]);
+//				}
+//				map.put("list", list);
+//				result = storeService.pay(map);
+//				return result;
+//			}else {
+//				return result = 0;
+//			}
 //			
 //		
 //			

@@ -37,4 +37,10 @@ public class MyPageCustomerController {
 		modelMap.addAttribute("dto",dto);
 		return "mypage/customer/mypageCorrectInfoCustomer";
 	}
+	
+	@GetMapping("/mypage/reserved/airline/list")
+	public String getMethodName() {
+		return "mypageCustomerReservedAlirlineList";
+	}
+	
 }

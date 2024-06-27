@@ -40,7 +40,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<div>예약완료</div>
 					</div>
 				</section>
-				<form action="/shushoong/airline/input/info" method="post">
+				<form action="" method="">
 					<section class="reserver_info">
 						<div>
 							<div>예약자 정보</div>
@@ -54,7 +54,7 @@ xmlns:th="http://www.thymeleaf.org">
 							<div>
 								<div>휴대전화번호</div>
 								<div>
-									<input type="text" name="reserver_middle_phone_number" placeholder="전화번호를 입력해 주세요">
+									<input type="text" name="reserver_phone_number" placeholder="전화번호를 입력해 주세요">
 								</div>
 							</div>
 							<div>
@@ -252,22 +252,11 @@ xmlns:th="http://www.thymeleaf.org">
 						</div>
 						
 						
-						<input class="info_submit_btn" type="submit" value="결제 페이지로 이동">
 					</section>
 				</form>
 				<section class="info_sumit_button_section">
-					<button class="info_submit_btn" type="submit">페이지로 이동</button>
+					<button class="info_submit_btn" id="reserver_info_insert">결제 페이지로 이동</button>
 				</section>
-				
-				
-				<section class="testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest">
-					<input type="hidden" name="resCode" value="1234">
-					<input type="hidden" name="resCode" value="1235">
-					<input type="hidden" name="resCode" value="1236">
-					<input type="hidden" name="resCode" value="1237">
-					<input type="hidden" name="resCode" value="1238">
-				</section>
-				
 				
 			</div>
 		</div>
@@ -296,12 +285,41 @@ xmlns:th="http://www.thymeleaf.org">
 			
 
 		}
+		$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
 		
-		$("button.info_submit_btn").on("click",menuListInserthandler);
+		function reserverInfoInsertFunction(){
+			console.log($("[name=reserver_phone_number]").val());
+			console.log($("[name=reserver_email]").val());
+			$.ajax({
+				url:"/shushoong/airline/input/reserverInfo",
+				type : "POST",
+				data:{
+					phone_number :	$("[name=reserver_phone_number]").val()
+					,reserver_email :	$("[name=reserver_email]").val()
+		    	 },
+				
+				success: function(result){
+					console.log(result);
+					if(result == 1){
+						console.log("성공성공성공");
+						passengerInfoInsertFunction();
+					}else{
+						alert("데이터 리스트 값 insert 실패");
+					}
+				},
+				 error: function(errorThrown) {
+			            console.log("일단 여기 표기")
+// 			            alert("데이터 리스트 값 insert 실패");
+			        }
+		       });
+		}
 		
-		function menuListInserthandler(){
+		$("button#passenger_info_insert").on("click",passengerInfoInsertFunction);
+		
+		function passengerInfoInsertFunction(){
 			var passengerInfo = [];
-			for(var i=0; i< $("[name=passenger_firstName]").length; i++){
+			var i;
+			for(i = 0 ; i< $("[name=passenger_firstName]").length; i++){
 				var infoObj = new Object();
 				infoObj.passenger_gender = $("[name=passenger_gender]").eq(i).val();
 				infoObj.passenger_firstName = $("[name=passenger_firstName]").eq(i).val();
@@ -315,17 +333,22 @@ xmlns:th="http://www.thymeleaf.org">
 		
 				passengerInfo.push(infoObj);
 			}
-			console.log(passengerInfo)
+			
 			$.ajax({
 				url:"/shushoong/airline/input/passengerInfo",
 				type : "POST",
 				data: JSON.stringify(passengerInfo),
 				contentType: "application/json; charset=utf-8",
 				success: function(result){
-					
+					if(result == i){
+						location.href="/shushoong/airline/main";
+					}else{
+						alert("데이터 리스트 값 insert 실패");
+					}
 				},
 				 error: function(errorThrown) {
-			            alert(errorThrown.statusText);
+			            
+			            alert("데이터 리스트 값 insert 실패");
 			        }
 		       });
 			

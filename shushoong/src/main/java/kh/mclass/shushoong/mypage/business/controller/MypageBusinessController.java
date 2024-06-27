@@ -28,7 +28,13 @@ public class MypageBusinessController {
 	private MypageBusinessRepository repository;
 	
 	private final MypageBusinessService service;
-
+	
+	// 비밀번호 확인 페이지로 이동 
+	@GetMapping("/check/pwd")
+	public String checkPwd() {
+		return "mypage/business/mypageCheckPwd";
+	}
+	
 	// 개인정보 수정 페이지로 이동
 	@GetMapping("/my/information")
 	public String correctInfoBusiness(Principal principal, ModelMap modelMap) {

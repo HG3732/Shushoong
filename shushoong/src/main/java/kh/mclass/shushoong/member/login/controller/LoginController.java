@@ -15,13 +15,12 @@ public class LoginController {
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
 	public String login(@RequestParam(value = "error", required = false)String error, 
-			@RequestParam(value = "exception", required = false)String exception, 
-			Model model) {
+						Model model) {
 		
 		String message="";
 		
-		if(exception != null) {
-			switch(exception) {
+		if(error != null) {
+			switch(error) {
 			case "BadCredentialsException":
 				message = "이메일 또는 비밀번호가 맞지 않습니다. 다시 확인해주세요.";
 				break;

@@ -17,8 +17,6 @@ import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.domain.AirlinePassengerInfoDto;
 import kh.mclass.shushoong.airline.model.service.AirlineService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -218,7 +216,7 @@ public class AirlineController {
 	}
 
 	// 항공 메인 페이지
-	@GetMapping("/airline/customer/reserve/pay")
+	@PostMapping("/airline/customer/reserve/pay")
 	public String airlinePay(HttpSession session, Model md,
 			String airlineCodeDirect,
 			String airlineCodeReturn
@@ -237,38 +235,29 @@ public class AirlineController {
 	
 	
 	//항공에서 받는 값
-	@PostMapping("/airline/input/info")
-	public String customerInfo(
-			String reserver_middle_phone_number,
-			String reserver_email,
-			
-			String passenger_gender,
-			String passenger_firstName,
-			String passenger_lastName,
-			String passenger_birth,
-			String passenger_nation,
-			String passport_num,
-			String expiration_date
+	
+	@ResponseBody
+	@PostMapping("/airline/input/reserverInfo")
+	public int customerInfo(
+			@RequestParam("phone_number") String phone_number,
+			@RequestParam("reserver_email") String reserver_email			
 			) {
-//		args
-		//RESERVER_INFO 안에 들어가는 내용
-//		service.insertReserverInfo(reserver_middle_phone_number, reserver_email);
-		
-		//PASSENGER_INFO 에 들어갈 LIST 내용
-		System.out.println("21416547sdafdsaf6677daafdsfasdadsfsafd : "+ passenger_firstName.length());
-		
-		return "redirect:/airline/main";
+		int result = 0;
+		System.out.println("!@#$%^%^&2311322312132213              :       "+phone_number+reserver_email);
+		 result = service.insertReserverInfo(phone_number,reserver_email);
+		return result;
 	}
 	
 	@ResponseBody
 	@PostMapping("/airline/input/passengerInfo")
-	public void passengerInfo(
+	public int passengerInfo(
 			@RequestBody List<Map<String, Object>> param
 			) {
+		int result = 0;
 		System.out.println("21416547sdafdsaf6677daafdsfasdadsfsafd : "+ param);
-		service.insertPassengerInfo(param);
+		result = service.insertPassengerInfo(param);
+		return result;
 		
-
 	}
 	
 	

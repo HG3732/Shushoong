@@ -171,7 +171,15 @@ select * from v_room_list;
 
 drop view v_room_list;
 
+desc hotel_room_cat;
+
+
 commit;
+
+		select * from hotel
+		    join hotel_pic using(hotel_code)
+		    join v_room_list using(hotel_code)
+		where hotel_code = '2OS001';
 
 --------------------- 2024.06.20 리뷰 수정
 select user_id, tripper_cat, review_title, review_comment, SUBSTR(hotel_reserve_code, 1, 4) || '년 ' || SUBSTR(hotel_reserve_code, 5, 2) || '월 ' || SUBSTR(hotel_reserve_code, 7, 2) || '일' as review_date, 
@@ -338,3 +346,36 @@ commit;
 select * from hotel_review;
 
 select * from hotel_reserve;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select hotel_code, hotel_name, hotel_eng, hotel_address, to_char(hotel_price, '999,999,999') as hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num, rownum rn
+from V_hotel_list 
+where SUBSTR(hotel_code, 1, 3) = '2OS' and room_cap >= 3;
+
+SELECT hotel_code, hotel_name, hotel_eng, hotel_address, 
+       TO_CHAR(hotel_price, '999,999,999') AS hotel_price, 
+       room_discount, hotel_pic, hotel_score, hotel_review_num, rn
+FROM (
+    SELECT hotel_code, hotel_name, hotel_eng, hotel_address, 
+           hotel_price, room_discount, hotel_pic, hotel_score, hotel_review_num,
+           ROW_NUMBER() OVER (PARTITION BY hotel_code ORDER BY hotel_price) AS rn
+    FROM V_hotel_list
+    WHERE SUBSTR(hotel_code, 1, 3) = '2OS'
+    AND room_cap >= 2
+)
+WHERE rn = 1;
+
+select * from hotel_room where room_cap >= 3 order by hotel_code, hotel_price;

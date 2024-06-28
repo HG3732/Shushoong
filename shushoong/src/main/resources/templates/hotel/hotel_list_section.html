@@ -6,7 +6,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <!-- section 부분 -->
 	<div class="hotel_list" id="realHotelList" th:fragment="hotellistsection">
-		<a class="hotel" th:each="hotel : ${hotelList}" th:data-hotelcode="${hotel.hotelCode}" th:href="'http://localhost:8080/shushoong/hotel/view/' + ${hotel.hotelCode}">
+		<a class="hotel" th:each="hotel : ${hotelList}" th:data-hotelcode="${hotel.hotelCode}" th:href="@{/hotel/view/{hotelCode}(hotelCode=${hotel.hotelCode})}">
 			<div class="hotel_pic" th:style="'background-image: url(' + ${hotel.hotelPic} + '); background-size: cover;'">
 				<th:block th:if="${!likeList.contains(hotel.hotelCode)}">
 					<div class="hotel_like" >

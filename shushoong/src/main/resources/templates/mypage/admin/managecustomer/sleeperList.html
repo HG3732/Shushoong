@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+	<div class="secessionUserList" id="sleeperlist" th:fragment="sleeperlist">
+		<th:block th:if="${result == null or #lists.isEmpty(result)}">
+			<div class="secessionUserName no-content">
+				<div class="noContent" style="text-indent: 90px;">조건에 맞는 회원이 없습니다.</div>
+			</div>
+		</th:block>
+		<th:block th:if="${result != null and !#lists.isEmpty(result)}">
+			<div class="secessionUserName">
+				<button type="button" class="userName sleeperUser" th:each="idList : ${result}" th:text="${idList}" th:data-userid="${idList}" onclick="sleeperViewHandler(this)"></button>
+			</div>
+		</th:block>
+	</div>
+</html>

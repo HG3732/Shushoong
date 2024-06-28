@@ -1,9 +1,14 @@
 package kh.mclass.shushoong.mypage.admin.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.mclass.shushoong.mypage.admin.model.service.MypageAdminService;
@@ -39,17 +44,8 @@ public class MypageAdminController {
 	
 	//회원 검색 ajax
 	@GetMapping("/manager/customer/searchMember.ajax")
-	public String searchMember(Model model, String keyword, String currentPage) {
-		//pageSize, pageBlockSize, CurrentPage
-		int currentPageNum = 1;
-		if(currentPage != null && !currentPage.equals("")) {
-			try {
-				currentPageNum = Integer.parseInt(currentPage);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-		}
-		model.addAttribute("memberList", service.selectAllList(keyword, 8, 7, currentPageNum));
+	public String searchMember(Model model, String keyword) {
+		model.addAttribute("result", service.selectAllList(keyword));
 		return "mypage/admin/managecustomer/customerList";
 	}
 	
@@ -83,6 +79,32 @@ public class MypageAdminController {
 	public String unlockAccount(Model model, String id) {
 		service.updateUnlockAccount(id);
 		return "mypage/admin/managecustomer/viewMember";
+	}
+	
+	//장기 미사용 계정 검색
+	@GetMapping("/manager/customer/searchSleeper.ajax")
+	public String searchSleeper(Model model, String keyword) {
+		model.addAttribute("result", service.selectDormantAccount(keyword));
+		return "mypage/admin/managecustomer/sleeperList";
+	}
+	
+	//장기 미사용 계정 세부 정보 조회
+	@GetMapping("/manager/customer/viewSleeper.ajax")
+	public String viewSleeper(Model model, String id) {
+		model.addAttribute("userInfo", service.selectOne(id));
+		model.addAttribute("term", service.selectUseTerm(id));
+		model.addAttribute("faqCount", service.selectFAQCount(id));
+		return "mypage/admin/managecustomer/viewSleeper";
+	}
+	
+	//일괄 정지(list 데이터에 ""가 붙어서 인코딩해야하므로 Get대신 Post를 사용함)
+	@PostMapping("/manager/customer/allLock.ajax")
+	public String allLock(Model model, @RequestBody List<String> sleeperList) {
+		System.out.println("controller List : " + sleeperList);
+		for(String sleeperId : sleeperList) {
+			service.updateLockAccount(sleeperId);
+		}
+		return "mypage/admin/manageCustomer";
 	}
 	
 	// 사업자 회원 관리 페이지로 이동

@@ -35,6 +35,38 @@ select * from (
 select faq_id, quest_cat, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center join faq_cat using(faq_id) order by ask_date desc)
 where rownum <= 3;
 
-select * from (
-			select faq_id, quest_cat_desc, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center join (select * from faq_cat join faq_cat_desc using(quest_cat)) using(faq_id) order by ask_date desc)
+select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE from (
+        select faq_id, quest_cat_desc, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center 
+            join (select faq_id, quest_cat_desc from faq_cat join faq_cat_desc using(quest_cat)) using(faq_id) order by ask_date desc)
+        where rownum <= 3;
+        
+        select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE from (
+			select faq_id, quest_cat, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center
+            join faq_cat using(faq_id) order by ask_date desc)
+            join faq_cat_desc using(quest_cat)
 			where rownum <= 3;
+
+desc member;
+--예시용 회원 레코드 등록 반복문
+BEGIN 
+    FOR N IN 2..50 LOOP
+        insert into member values ('ex' || N, 'name' || N, 'pwd' || N, 'ss' || N || '@shoong.com', 'customer', 1, to_date('230101'), 0, 0, to_date('230102'));
+    END LOOP;
+    commit;
+END;
+/
+
+BEGIN 
+    FOR N IN 1..50 LOOP
+        insert into service_center values (N, 'ex1', '문의' || N, '어떻게 하냐고 ' || N || '번째 물어봅니다', to_char(to_date('2024-06-26 16:' || N, 'YYYY-MM-DD HH24:MI'), 'YYYY-MM-DD HH24:MI'), NULL, NULL);
+    END LOOP;
+    commit;
+END;
+/
+
+select (sysdate - year) from dual;
+
+
+select add_months(sysdate, -12) from dual;
+select * from member where latest_login < add_months(sysdate, -12);
+select to_number(trunc(sysdate - latest_login)) from member;

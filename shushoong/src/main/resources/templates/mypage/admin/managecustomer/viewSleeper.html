@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+	<div class="article-body" id="viewsleeper" th:fragment="viewSleeper">
+		<th:block th:if="${userInfo != null}">
+			<div class="userInformation">
+				<div class="joinDate-content">
+					<label for="joinDate">가입일</label>
+					<div class="joinDate" id="joinDate" th:text="${userInfo.joinDate}"></div>
+				</div>
+				<div class="userId-content">
+					<label for="userId">아이디</label>
+					<div class="userId" id="userId" th:text="${userInfo.userId}"></div>
+				</div>
+				<div class="userEmail-content">
+					<label for="userEmail">이메일</label>
+					<div class="userEmail" id="userEmail" th:text="${userInfo.userEmail}"></div>
+				</div>
+				<div class="userStatus-content">
+					<label for="userStatus">상태</label>
+					<th:block th:if="${userInfo.userStatus == 0}">
+						<div class="userStatus" id="userStatus">정지</div>
+					</th:block>
+					<th:block th:if="${userInfo.userStatus == 1}">
+						<div class="userStatus" id="userStatus">정상</div>
+					</th:block>
+				</div>
+				<div class="purchaseProduct-content">
+					<label for="purchaseProduct">마지막 접속 시간</label>
+					<div class="purchaseProduct">
+						<div class="productName" id="productName" th:text="${'마지막 접속으로부터 ' + term + '일 경과하였습니다.'}"></div>
+					</div>
+				</div>
+				<div class="faqId-content">
+					<label for="faqId">1:1 문의 건수</label>
+					<div class="faqId" id="faqId" th:text="${faqCount} + '건'"></div>
+				</div>
+			</div>
+			<div class="btn container" th:data-targetid="${userInfo.userId}">
+				<th:block th:if="${userInfo.userStatus == 1}">
+					<button type="button" class="stopBtn" onclick="lockAccountHandler(this)">이용정지</button>
+				</th:block>
+				<th:block th:if="${userInfo.userStatus == 0}">
+					<button type="button" class="stopCancleBtn" onclick="unlockAccountHandler(this)">이용정지 해제</button>
+				</th:block>
+			</div>
+		</th:block>
+		<th:block th:if="${userInfo == null or userInfo == ''}">
+			<div class="no-user"> 조회할 회원을 선택해주세요.</div>		
+		</th:block>
+	</div>
+</html>
+
+<!-- <div class="article-body">
+		<div class="userInformation">
+			<div class="joinDate-content">
+				<label for="joinDate">가입일</label>
+				<div class="joinDate" id="joinDate">2010.10.10</div>
+			</div>
+			<div class="userId-content">
+				<label for="userId">아이디</label>
+				<div class="userId" id="userId">aaaa</div>
+			</div>
+			<div class="userEmail-content">
+				<label for="userEmail">이메일</label>
+				<div class="userEmail" id="userEmail">aaa@aaa</div>
+			</div>
+			<div class="userStatus-content">
+				<label for="userStatus">상태</label>
+				<div class="userStatus" id="userStatus">정지</div>
+			</div>
+			<div class="purchaseProduct-content">
+				<label for="purchaseProduct">구매한 상품</label>
+				<div class="purchaseProduct">
+					<div class="productName" id="productName">asdasdasd</div>
+				</div>
+			</div>
+			<div class="faqId-content">
+				<label for="faqId">1:1 문의 건수</label>
+				<div class="faqId" id="faqId">1건</div>
+			</div>
+		</div>
+		<div class="btn container">
+			<button type="button" class="stopBtn">이용정지</button>
+			<button type="button" class="stopCancleBtn">이용정지 해제</button>
+		</div>
+	</div> -->

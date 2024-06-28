@@ -119,7 +119,7 @@ section .article-title>img {
 	left: 65%;
 }
 
-section .idSearch {
+section .btnSearch {
 	background-color: #006AFF;
 	width: 100px;
 	height: 40px;
@@ -139,9 +139,12 @@ section .article-body {
 }
 
 section .no-content {
+	display: flex;
 	justify-content: center;
     height: 280px;
     align-items: center;
+    text-align: center;
+    vertical-align: middle;
 }
 
 section .no-content .noContent{
@@ -153,6 +156,7 @@ section .userName-content {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	height: 220px;
 }
 
 section .userName {
@@ -161,6 +165,7 @@ section .userName {
 	background-color: var(--color_blue_2);
 	border: none;
 	border-radius: 10px;
+	height: fit-content;
 }
 
 section .userName:hover {
@@ -231,8 +236,8 @@ section .search-user {
 	justify-content: space-around;
 	flex-direction: row;
 	align-items: center;
-	margin-bottom: 10px;
 	position: relative;
+	gap:15px;
 }
 
 section .search-user>img {
@@ -243,6 +248,7 @@ section .search-user>img {
 
 section .stopCustomerList {
 	margin-right: 10px;
+	width: 50%;
 }
 
 section .tab {
@@ -255,45 +261,13 @@ section .tab {
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-content: center;
-	margin-bottom: 10px;
-}
-
-section .tab label {
-	/* 영역 설정 */
-	border-bottom: 3px solid #006AFF;
-	cursor: pointer;
-	float: left;
-	width: 50%;
 	text-align: center;
-	padding: 15px 0;
-	/* 폰트 설정 */
-	font-weight: bold;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	user-select: none;
-	-webkit-user-select: none;
-}
-
-#tab-1:checked ~ .tab label:nth-child(1), #tab-2:checked ~ .tab label:nth-child(2)
-	{
-	border: 3px solid #006AFF;
-	border-bottom: none;
+	margin-bottom: 10px;
+	border-top-color: #006AFF;
+	border-top-width: 3px;
+	border-top-style: solid;
 	background-color: #BCEFFF;
 	box-shadow: none;
-}
-
-section .content>div {
-	display: none;
-}
-
-#tab-1:checked ~ .content>div:nth-child(1), #tab-2:checked ~ .content>div:nth-child(2)
-	{
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
-	justify-content: center;
-	align-content: stretch;
-	text-align: center;
 }
 
 section .secessionUserList, .stopUserList {
@@ -301,7 +275,7 @@ section .secessionUserList, .stopUserList {
 	flex-direction: row;
 	flex-wrap: wrap;
 	padding: 10px;
-	height: 186px;
+	height: 225px;
 	overflow-y: auto;
 }
 
@@ -389,7 +363,7 @@ section .faqId-content>label {
 section .btn.container {
 	display:flex;
 	justify-content: center;
-	margin: 30px 0 30px 0;
+	margin: 30px 0;
 }
 
 section .stopBtn {
@@ -423,6 +397,11 @@ section .stopCancleBtn:hover {
 	color: white;
 }
 
+section .allstop {
+	display: flex;
+    justify-content: center;
+}
+
 section .allstopBtn {
 	background-color: red;
 	width: 130px;
@@ -435,5 +414,5 @@ section .allstopBtn {
 	font-weight: bold;
 	cursor: pointer;
 	
-	margin: 20px 0 30px 0;
+	margin: 40px 0;
 }

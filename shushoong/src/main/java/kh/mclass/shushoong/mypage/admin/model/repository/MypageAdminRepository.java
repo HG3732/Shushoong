@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.session.RowBounds;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 
@@ -12,7 +11,7 @@ import kh.mclass.shushoong.member.model.domain.MemberDto;
 public interface MypageAdminRepository {
 	
 	//회원 아이디 키워드로 검색
-	public List<String> selectAllList(String keyword, RowBounds rowBounds);
+	public List<String> selectAllList(String keyword);
 		
 	//회원 키워드 검색 시 조건에 맞는 회원 수 카운트(페이징용)
 	public Integer selectTotalCount(String keyword);
@@ -36,4 +35,10 @@ public interface MypageAdminRepository {
 	
 	//1:1문의내역 최근 3개 조회
 	public List<Map<String, String>> selectLatestFaq();
+	
+	//장기 미사용 계정 검색
+	public List<String> selectDormantAccount(String keyword);
+	
+	//마지막 로그인으로부터 경과시간 조회
+	public int selectUseTerm(String id);
 }

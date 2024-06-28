@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+								/* process section */
+
+section.reserve_process{
+	margin : auto;
+	width: 960px;
+}
+
+.reserve_process > div:nth-child(1) {
+	margin-top : 50px;
+	display: flex;
+	font-size: 16px;
+}
+.reserve_process > div:nth-child(1) > div{
+		width:  40px;
+		height: 40px;
+		line-height: 40px;
+		border-radius: 50%;
+		text-align : center;
+		margin: auto;
+		background-color: var(--color_blue_2);
+}
+.reserve_process > div:nth-child(1) > div:nth-child(1){
+	background-color: var(--color_blue_1);
+	color: white;
+	font-weight: bolder;
+	
+}
+.reserve_process > div:nth-child(2) {
+	margin-top : 10px;
+	display: flex;
+}
+.reserve_process > div:nth-child(2) > div{
+	margin: auto;
+}
+

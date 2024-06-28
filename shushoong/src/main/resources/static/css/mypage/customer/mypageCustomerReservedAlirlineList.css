@@ -32,45 +32,65 @@ button#canceled_btn{
 	border-bottom: 3px solid var(--color_gray_4);
 }
 							/* 예약 list section */
-section.reserved_list,section.canceled_list{
+div.list_wrap,div.list_wrap{
 	margin: 30px 0;
 }
 
-section.reserved_list > div,section.canceled_list > div{
+div.list_wrap > div,div.list_wrap > div{
 	display: flex;
 }
 
 /* 첫번째 열 */
-section.reserved_list > div:first-child,section.canceled_list > div:first-child{
+div.list_wrap > div:first-child,div.list_wrap > div:first-child{
 	height: 50px;
 	border-top: 3px solid 	var(--color_blue_1);
 	line-height: 50px;
 }
 /* 두번째 열 */
-section.reserved_list > div:last-child,section.canceled_list > div:last-child{
-	height: 100px;
+div.list_wrap > div:last-child,div.list_wrap > div:last-child{
+	height: 110px;
 	border-top: 1px solid 	var(--color_blue_1);
 	border-bottom: 3px solid 	var(--color_blue_1);
 }
 /* 첫번째 행 */
-section.reserved_list > div > div:first-child,section.canceled_list > div > div:first-child{
+div.list_wrap > div > div:first-child,div.list_wrap > div > div:first-child{
 	width : 200px;
 	background-color:  var(--color_blue_2);
 	text-align: center;
 }
 /* 두번째 행 */
-section.reserved_list > div > div:last-child,section.canceled_list > div > div:last-child{
+div.list_wrap > div > div:last-child,div.list_wrap > div > div:last-child{
 	padding-left: 10px;
 }
 /* 두번째 행, 첫번째 열 */
-section.reserved_list > div:last-child > div:first-child,section.canceled_list > div:last-child > div:first-child{
+div.list_wrap > div:last-child > div:first-child,div.list_wrap > div:last-child > div:first-child{
 	line-height : 50px;
 }
 /* 두번째 행, 두번째 열 */
-section.reserved_list > div:last-child > div:last-child,section.canceled_list > div:last-child > div:last-child{
+div.list_wrap > div:last-child > div:last-child,div.list_wrap > div:last-child > div:last-child{
 	line-height : 30px;
 }
-/* 두번째 행, 두번째열 의 div의 마지막 열 */
-section.reserved_list > div:last-child > div:last-child > div:last-child,section.canceled_list > div:last-child > div:last-child > div:last-child{
+/* 두번째 행, 두번째열 의 div의 첫번째열 */
+div.list_wrap > div:last-child > div:last-child > div:first-child,div.list_wrap > div:last-child > div:last-child > div:first-child{
 	display: flex;
+	margin-top: 10px;
+}
+/* 두번째 행, 두번째열 의 div의 첫번째열 두번째 행*/
+div.list_wrap > div:last-child > div:last-child > div:first-child > div,div.list_wrap > div:last-child > div:last-child > div:first-child > div{
+	margin-left: 15px;
+}
+/* 두번째 행, 두번째열 의 div의 마지막열 */
+div.list_wrap > div:last-child > div:last-child > div:last-child,div.list_wrap > div:last-child > div:last-child > div:last-child{
+	display: flex;
+}
+
+div.list_wrap > div:last-child > div:last-child > div:first-child > img,div.list_wrap > div:last-child > div:last-child > div:first-child > img{
+	width: 30px;
+	height : 30px;
+}
+
+
+section.canceled_list{
+	display: none;
+	
 }

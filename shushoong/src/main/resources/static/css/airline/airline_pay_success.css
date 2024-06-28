@@ -1,0 +1,175 @@
+@charset "UTF-8";
+
+								/* process section */
+
+section.reserve_process{
+	margin : auto;
+	width: 960px;
+}
+
+.reserve_process > div:nth-child(1) {
+	margin-top : 50px;
+	display: flex;
+	font-size: 16px;
+}
+.reserve_process > div:nth-child(1) > div{
+		width:  40px;
+		height: 40px;
+		line-height: 40px;
+		border-radius: 50%;
+		text-align : center;
+		margin: auto;
+		background-color: var(--color_blue_1);
+		color: white;
+		font-weight: bolder;
+}
+
+.reserve_process > div:nth-child(2) {
+	margin-top : 10px;
+	display: flex;
+}
+.reserve_process > div:nth-child(2) > div{
+	margin: auto;
+}
+
+
+									/* depart info/ arrival info */
+section.depart_info,section.arrival_info{
+	width:960px;
+	margin:  70px auto;
+}
+div.reserve_head{
+	margin-left: 5px;
+	font-size: 17px;
+}
+div.reserve_wrap{
+	border : 3px solid var(--color_blue_1);
+	border-radius: 15px;
+}
+
+div.reserve_code{
+	margin : 3px 0 0 3px;
+	border: 3px solid var(--color_gray_2);
+	width: 300px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border-radius: 15px;
+	
+}
+div.reserve_lineup{
+	float : right;
+	margin:  10px 10px 0 0;
+	font-size: 13px;
+
+}
+div.reserve_info_wrap > div{
+	display: flex;
+	height: 70px;
+	line-height: 70px;
+	margin-left: 20px;
+}
+div.reserve_info_wrap > div:first-child{
+	margin-top: 40px;
+}
+
+div.reserve_info_wrap > div > img{
+	width: 30px;
+	height: 30px;
+	margin: 20px;
+	
+}
+div.airline_name{
+	width : 200px;
+	margin-left: 10px;
+}
+div.airline_date {
+	margin-left: 280px;
+	width : 350px;
+	text-align : right;
+	
+}
+
+div.departLoc{
+	width : 150px;
+	
+}								
+
+div.departTime{
+	width : 100px;
+	margin-left: 20px;
+	margin-right:150px;
+	color : var(--color_gray_4);
+	
+}
+
+div.arrivalTime{
+	width : 100px;
+	margin-left: 150px;
+	margin-right:20px;
+	text-align : right;
+	color : var(--color_gray_4);
+	
+}
+
+div.arrivalLoc{
+	width : 150px;
+	text-align : right;
+					
+}				
+div.sitType{
+	width:150px;
+	
+}
+
+div.KRW{
+	margin-left : 410px;
+	text-align:right;
+	width : 100px;
+	color : var(--color_gray_4);
+	font-size :  13px;
+}
+
+div.price{
+	width: 250px;
+	text-align:right;
+	font-size : 20px;
+	color : red;
+	
+}
+
+								/* 총 요금  섹션 */
+section.allPrice{
+	width: 960px;
+	margin: 50px auto ;
+	border : 3px solid var(--color_blue_1);
+	border-radius: 15px;
+	height: 70px;
+}
+
+section.allPrice > div:first-child {
+	float: left;
+	margin-left: 50px;
+	font-size: 20px;
+	height: 70px;
+	line-height: 70px;
+}
+div.total_KRW{
+	text-align:right;
+	width : 100px;
+	color : var(--color_gray_4);
+	font-size :  13px;
+	float: right;
+	line-height: 70px
+}
+section.allPrice > div:nth-child(2) {
+	width: 250px; 
+	color: red;
+	float: right;
+	margin-right: 50px;
+	font-size: 20px;
+	height: 70px;
+	line-height: 70px;
+	text-align : right;
+	
+}	

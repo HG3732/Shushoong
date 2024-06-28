@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/airline/airline_pay_success.css}" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>슈슝</title>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-">
+			<!-- 여기부터 작성 -->
+			
+			
+			
+				<section class="reserve_process">
+						<div>
+							<div>1</div>
+							<div>2</div>
+							<div>3</div>
+						</div>
+						<div>
+							<div>예약하기</div>
+							<div>결제</div>
+							<div>예약완료</div>
+						</div>
+				</section>
+				
+				<section class="depart_info">
+					<div class="reserve_info">
+						<div class="reserve_head">가는 편</div>
+						<div class="reserve_wrap">
+							<div class="reserve_lineup">예약번호 성인 : \${adult}, 소아 : \${child}, 유아 : "\${baby}</div>
+							<div class="reserve_code">예약번호 (\${reserveCode})</div>
+							<div class="reserve_info_wrap">
+								<div>
+									<img alt="이미지" th:src="@{/images/airline_logo.png}">
+									<div class="airline_name">${airlineName}</div>
+									<div class="airline_date">\${departDate(weekdays)}출발</div>
+								</div>
+								<div>
+									<div class="departLoc">\${departLoc}</div>
+									<div class="departTime">\${departTime}</div>
+									<img alt="비행기" th:src="@{/images/airline_via.png}">
+									<div class="arrivalTime">\${arrivalTime}</div>
+									<div class="arrivalLoc">\${arrivalLoc}</div>
+								</div>
+								<div>
+									<div class="sitType">${sitType}</div>
+									<div class="KRW">KRW</div>
+									<div class="price">\${price}</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</section>
+				
+				<section class="arrival_info">
+					<div class="reserve_info">
+						<div class="reserve_head">오는 편</div>
+						<div class="reserve_wrap">
+							<div class="reserve_lineup">예약번호 성인 : \${adult}, 소아 : \${child}, 유아 : "\${baby}</div>
+							<div class="reserve_code">예약번호 (\${reserveCode})</div>
+							<div class="reserve_info_wrap">
+								<div>
+									<img alt="이미지" th:src="@{/images/airline_logo.png}">
+									<div class="airline_name">${airlineName}</div>
+									<div class="airline_date">\${departDate(weekdays)}출발</div>
+								</div>
+								<div>
+									<div class="departLoc">\${departLoc}</div>
+									<div class="departTime">\${departTime}</div>
+									<img alt="비행기" th:src="@{/images/airline_via.png}">
+									<div class="arrivalTime">\${arrivalTime}</div>
+									<div class="arrivalLoc">\${arrivalLoc}</div>
+								</div>
+								<div>
+									<div class="sitType">${sitType}</div>
+									<div class="KRW">KRW</div>
+									<div class="price">\${price}</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</section>
+				
+				
+				<section class="allPrice">
+					<div>총 요금</div>
+					<div>\${price}+\${price}</div>
+					<div class="total_KRW">KRW</div>
+				</section>
+			
+			
+			
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+</body>
+</html>
+
+
+
+
+				

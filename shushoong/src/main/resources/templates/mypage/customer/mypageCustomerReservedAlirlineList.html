@@ -43,43 +43,55 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					</section>		
 							
 					<section class="reserved_list">
-						<div class="reserved_code">
-							<div>예약 코드</div>
-							<div>hijklimop</div>
-						</div>
-						<div class="reserved_airline_code">
-							<div>항공편</div>
-							<div>
-								<div>hijklmnop</div>
-								<div>2024-15-45(월)</div>
+						<div class="list_wrap">
+							<div class="reserved_code">
+								<div>예약 코드</div>
+								<div>hijklimop</div>
+							</div>
+							<div class="reserved_airline_code">
+								<div>항공편</div>
 								<div>
-									<div>인천</div>
-									<div>32:61 . 38:99</div>
-									<div>중국</div>
+									<div>
+										<img alt="" th:src="@{/images/airline_logo.png}">
+										<div>hijklmnop</div>
+									</div>
+									<div>2024-15-45(월)</div>
+									<div>
+										<div>인천</div>
+										<div>32:61 . 38:99</div>
+										<div>중국</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</section>
 					
 					<section class="canceled_list">
-						<div class="canceled_code">
-							<div>예약 코드</div>
-							<div>abcdefg</div>
-						</div>
-						<div class="canceled_airline_code">
-							<div>항공편</div>
-							<div>
+						<div class="list_wrap">
+						
+							<div class="canceled_code">
+								<div>예약 코드</div>
 								<div>abcdefg</div>
-								<div>2024-07-22(월)</div>
+							</div>
+							<div class="canceled_airline_code">
+								<div>항공편</div>
 								<div>
-									<div>후쿠오카</div>
-									<div>14:40 . 16:00</div>
-									<div>인천</div>
+									
+									<div>
+										<img alt="항공사 사진" th:src="@{/images/airline_logo.png}">
+										<div>abcdefg</div>
+									</div>
+									
+									<div>2024-07-22(월)</div>
+									<div>
+										<div>후쿠오카</div>
+										<div>14:40 . 16:00</div>
+										<div>인천</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</section>
-				
+						</section>
+					</div>
 				</div>
 					
 			

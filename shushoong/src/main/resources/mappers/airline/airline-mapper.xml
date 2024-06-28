@@ -18,8 +18,13 @@
 	</select>
 	
 	<select id="selectOne" parameterType="String" resultType="AirlineInfoDto">
+		SELECT * FROM AIRLINE_INFO a
+		JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
+		WHERE a.AIRLINE_CODE LIKE #{airlineCode}
+		<!-- 
 		SELECT * FROM AIRLINE_INFO 
 		WHERE AIRLINE_CODE LIKE #{airlineCode}
+		 -->
 	</select>
 	
     <select id="selectOptions" parameterType="map" resultType="AirlineInfoDto">

@@ -10,8 +10,6 @@
 <link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
-<!-- <link th:href="@{/css/airline/reset.css}" rel="stylesheet" /> -->
-<!-- <link th:href="@{/css/airline/airline_searchbar.css}" rel="stylesheet" /> -->
 <link th:href="@{/css/airline/airline_searchbar.css}" rel="stylesheet" />
 <link th:href="@{/css/airline/core.css}" rel="stylesheet" />
 <link th:href="@{/css/airline/airline_list.css}" rel="stylesheet" />
@@ -39,7 +37,7 @@ margin: 4px;
 div#people_lineup_sit_accoding{
 	margin-top: -24px;
 	width: 220px;
-	margin-left: 606px;
+	margin-left: 606px !important;
 	padding: 10px;
 }
 #arrival_accoding{
@@ -54,7 +52,7 @@ div#people_lineup_sit_accoding{
 	width: 100px;
 }
 #date_accoding{
-	left: 721px;
+	margin-left: 418px;
 	margin-top: -24px;
     width: 500px;
     height: auto;
@@ -98,9 +96,7 @@ div#people_lineup_sit_accoding{
 		</div>
 		<div class="wrap-main">
 			<div class="container">
-				
 				<div th:replace="~{airline/airline_searchbar :: searchbar}"></div>
-				
 				<div hidden>
 					<form action="/shushoong/airline/main" method="post">
 						<input type="text" name="ticketType" id="hidden_ticket_type" 	value="1" 	readonly="readonly" required="required">
@@ -190,18 +186,8 @@ div#people_lineup_sit_accoding{
 											<div class="thumb right price"></div>
 										</div>
 										<div class="resultval price">
-<!-- <<<<<<< HEAD -->
-											<!-- <div class="div1"></div> -->
-											<!-- 
-											<div th:if="${ticketType != 1}" class="div2" id="maxPrice"
-												th:text="${maxPrice}"></div>
-											<div th:if="${ticketType == 1}" class="div2" id="maxPrice"
-											 	th:text="${maxPrice} / 2"></div>
-											 	-->
-<!-- ======= -->
 											<div th:if="${ticketType != 1}" class="div2" id="maxPrice" th:text="${maxPrice}"></div>
 											<div th:if="${ticketType == 1}" class="div2" id="maxPrice" th:text="${maxPrice} / 2"></div>
-<!-- >>>>>>> 91782612ca445ec508cd620fb66e02b2006fd3ef -->
 										</div>
 									</div>
 								</div>

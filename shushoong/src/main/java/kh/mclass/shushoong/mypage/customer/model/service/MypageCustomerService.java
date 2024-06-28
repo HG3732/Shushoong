@@ -20,13 +20,10 @@ public class MypageCustomerService {
 	}
 
 	// 비밀번호 체크
-	public boolean pwdCheck(String userId, String userPwd) {
-		MemberDto member;
-		String realPassword = member.getUserPwd();
-		boolean matches = encoder.matches(checkPassword, realPassword);
-		return realPassword;
+	public String pwdChecking(String userId) {
+		return mypageRepository.pwdChecking(userId);
 	}
-
+	
 	// 비밀번호 재설정
 	public String resetPwd(MemberDto dto) {
 		dto.setUserPwd(bcrypt.encode(dto.getUserPwd()));

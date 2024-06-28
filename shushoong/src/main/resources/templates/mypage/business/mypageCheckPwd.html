@@ -57,6 +57,18 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
 	<script>
+		$(loadedHandler);
+		function loadedHandler() {
+			$(".submitBtn").on("click", pwdCheckHandler);
+		}
+
+		function pwdCheckHandler() {
+
+			var userPwd = $("#userPwd").val();
+			if (userPwd.trim() === "") {
+				alert("비밀번호를 입력해 주세요.");
+			}
+		}
 	</script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html
+xmlns:th="http://www.thymeleaf.org">
 <head>
 <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoo40WSHtW0JekF2N6b0Tm1DHbifYiSOg&loading=async&callback=initMap"></script>
@@ -17,7 +18,7 @@
 </head>
 <body onload="initialize()">
 
-
+<h1 th:text="${a1}"></h1>
 <h1>구글맵 시험</h1>
 	
 <div id="map" style="width: 900px; height: 800px;"></div>

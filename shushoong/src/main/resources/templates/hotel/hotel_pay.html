@@ -338,27 +338,24 @@ xmlns:th="http://www.thymeleaf.org">
 	<div class="wrap-footer">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
-	
+	<form id="aaa">
+	</form>
 <script>
 
 $(loadedHandler);
 
 function loadedHandler(){
-	
+
 	$('#check1').on("click", allAgreeCheckHandler);
 	$('.arrow').on("click", arrowDownClickHandler);
 	$('input[value=agree]').on("click", checkAllEscHandler);
 	
 	$('.final_pay').on("click", payHandler);
-	
-
 }
 
 </script>
 <script th:src="@{/js/hotel/hotel_pay.js}"
 		type="text/javascript">
 </script>
-
-	
 </body>
 </html>

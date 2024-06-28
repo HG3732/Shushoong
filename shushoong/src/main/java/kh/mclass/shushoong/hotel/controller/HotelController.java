@@ -19,8 +19,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -28,6 +31,8 @@ import com.google.gson.JsonSyntaxException;
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes2;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
@@ -37,7 +42,6 @@ import lombok.RequiredArgsConstructor;
 //@Configuration
 //@PropertySource("classpath:/keyfiles/apikey.properties")
 @Controller
-@RequiredArgsConstructor
 public class HotelController {
 
 	@Autowired
@@ -53,7 +57,8 @@ public class HotelController {
 		@Value("${portone.secret.key}")
 		private String secretKey;
 	
-	private final Gson gson;
+	@Autowired
+	private Gson gson;
 
 		
 	@GetMapping("/hotel/main")
@@ -86,6 +91,7 @@ public class HotelController {
 		session.setAttribute("checkIn", checkIn);
 		session.setAttribute("checkOut", checkOut);
 		session.setAttribute("adult", adult);
+		System.out.println("adult >>>>>>>>>>>>>>>>>>>>>>>>>> "+adult);
 		session.setAttribute("child", child);
 		session.setAttribute("room", room);
 		System.out.println("session.nation : "+(String)session.getAttribute("nation"));
@@ -319,7 +325,19 @@ public class HotelController {
 
 	@PostMapping("/hotel/payment")
 	@ResponseBody
-	public int hotelPayment(String paymentId, String hotelPrice, String[] reservationData) throws IOException, InterruptedException{
+	public int hotelPayment(
+//			String paymentId, 
+//			String reservationData
+			@RequestBody HotelReserveDtoRes reservationData 
+			, HotelReserveDtoRes2 resultDTO
+			) throws IOException, InterruptedException{
+//		System.out.println(reservationData);
+//		System.out.println(reservationData.getHotelReserveCode());
+		String paymentId = reservationData.getHotelReserveCode();
+		//HotelReserveDtoRes2 reservationData2  = new HotelReserveDtoRes2( reservationData.getHotelName())..paym
+		resultDTO.setHotelName("aaa");
+		System.out.println(resultDTO);
+		
 //		ajax로 보내지는 데이터 () 안에 작성
 		HttpRequest request = HttpRequest.newBuilder()
 			    .uri(URI.create("https://api.portone.io/payments/" + paymentId + "?storeId=" + storeId))
@@ -330,38 +348,60 @@ public class HotelController {
 			    .build();
 			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 			System.out.println(response.body());
-		
+			
 			// 결제 단건 조회 응답
 			Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
 			System.out.println("responseBody >>>>>>>>> "+responseBody.toString());
 			
+			// 응답 중 결제 금액 세부 정보 항목 추출
 			// 응답 중 결제 금액 세부 정보 항목 추출
 			Map<String, Object> amount = gson.fromJson(gson.toJson(responseBody.get("amount")), Map.class);
 			System.out.println("amount >>>>>>>>> "+amount);
 			// 그 중 지불된 금액
 			double paid = (double) amount.get("paid");
 			
-//			int result;
-//			// 결제 금액과 지불된 금액이 같다면
-//			if(Double.parseDouble(hotelPrice) == paid) {
-//				Map<String, Object> map = new HashMap<>();
-//				map.put("memEmail", principal.getName());
-//				map.put("buyId", buyId);
-//				List<String> list = new ArrayList<>();
-//				for(int i = 0; i < items.length; i++) {
-//					list.add(items[i]);
-//				}
-//				map.put("list", list);
-//				result = storeService.pay(map);
-//				return result;
-//			}else {
-//				return result = 0;
-//			}
 			
-		return 0;
+//			for(int i = 0; i < reservationData.length; i++) {
+//				int result;
+//				// 결제 금액과 지불된 금액이 같다면
+//				if(Double.parseDouble(hotelPrice) == paid) {
+//					Map<String, Object> map = new HashMap<>();
+//					map.put("hotelReserveCode", r);
+//					map.put("residenceNameKo", residenceNameKo);
+//					map.put("residenceNameEng", residenceNameEng);
+//					map.put("residenceGender", residenceGender);
+//					map.put("residencePhone", residencePhone);
+//					map.put("residenceEmail", residenceEmail);
+//					map.put("reserveCheckIn", reserveCheckIn);
+//					map.put("reserveCheckOut", reserveCheckOut);
+//					map.put("userId", userId);
+//					map.put("roomCap", roomCap);
+//					map.put("hotelCode", hotelCode);
+//					map.put("roomCat", roomCat);
+//					map.put("roomAtt", roomAtt);
+//					result = service.hotelReserve(map);
+//					return result;
+//				}else {
+//					return result = 0;
+//				}
+//		}	
+			
+//		return resultDTO;
+		return 1;
 			
 	}
-	
+//	@PostMapping("/hotel/aapost")
+//	public String aaa2( Model model, RedirectAttributes rttr, String hotelReserveCode) {
+//		// hotelReserveCode -- service -- repository...
+//		rttr.addFlashAttribute("a1", hotelReserveCode);
+//		return "redirect:/hotel/aaget";
+//	}
+	@GetMapping("/hotel/aaget")
+	public String aaa3( Model model, String hotelReserveCode) {
+		//db join 
+		model.addAttribute("a1", hotelReserveCode);
+		return "map";
+	}
 
 	//지역, 인원수 선택 안한채로 hotel_list를 url에 직접 입력하여 진입할 경우 예외처리  
 //	@ExceptionHandler(Exception.class)

@@ -97,6 +97,14 @@ public class HotelService {
 		return hotelRepository.selectReviewOverall(hotelCode);
 	}
 	
-	
+	//호텔 예매 내역
+//	public List<Map<String, Object>> hotelReserve(String memEmail){
+//		return hotelRepository.buy(memEmail);
+//	}
+//
+//	호텔 주문 정보
+//	public Map<String, Object> buyInfo(String memEmail) {
+//		return hotelRepository.buyInfo(memEmail);
+//	}
 
 }

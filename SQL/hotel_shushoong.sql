@@ -343,3 +343,28 @@ insert into hotel_reserve values(
 insert into pay values(
     #{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{moneyCat}, #{payStatus}, #{hotelReserveCode}, {airlineReserveCode}
 );
+
+
+-- 일일 초기화용 PL/SQL 프로시저와 스케줄링 한꺼번에 작성
+BEGIN
+    -- 일일 초기화용 PL/SQL 프로시저 생성
+    EXECUTE IMMEDIATE '
+    CREATE OR REPLACE PROCEDURE reset_sequence_daily IS
+        l_sequence_value NUMBER;
+    BEGIN
+        l_sequence_value := 1; -- 원하는 시작 값으로 설정
+        EXECUTE IMMEDIATE ''ALTER SEQUENCE SHOONG.SEQ_APPROVE_NO RESTART WITH '' || l_sequence_value;
+        COMMIT;
+    END reset_sequence_daily;';
+
+    -- DBMS_SCHEDULER를 이용한 스케줄링
+    DBMS_SCHEDULER.create_job (
+        job_name        => '',
+        job_type        => 'PLSQL_BLOCK',
+        job_action      => 'BEGIN reset_sequence_daily; END;',
+        start_date      => TRUNC(SYSDATE) + 1,
+        repeat_interval => 'FREQ=DAILY; BYHOUR=0; BYMINUTE=0; BYSECOND=0',
+        enabled         => TRUE
+    );
+END;
+/

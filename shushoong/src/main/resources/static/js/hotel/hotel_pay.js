@@ -54,8 +54,9 @@ async function payHandler(){
     const year = now.getFullYear();
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const day = String(now.getDate()).padStart(2, '0');
+	const time = now.getSeconds();
 
-    const currentTime = year + month + day;	
+    const currentTime = year + month + day + time;	
 	var residenceNameKo = $('#name').val(); //투숙객명
 	var residenceNameEng = $('#last_name').val() + $('#first_name').val();
 	var residenceGender = $('input[name=gender]:checked').val();
@@ -105,8 +106,12 @@ async function payHandler(){
 		hotelName : hotelName,
 		hotelPrice : hotelPrice,
 		hotelReserveCode : hotelReserveCode,
+		
 	}
 
+	// reservationData 객체를 JSON 문자열로 변환
+	let reservationDataString = JSON.stringify(reservationData);
+	
 	const response = await PortOne.requestPayment({
 			storeId : storeId, 
 			paymentId : hotelReserveCode,
@@ -123,22 +128,26 @@ async function payHandler(){
 			// 오류 발생
 				console.log('결제 오류');
 		} else {
+			if(response.paymentId != hotelReserveCode){
+				alert("aaa");
+				return;
+			}
 			// 결제 검증 - 위에서 선언한거를 데이터로 보냄(결제 정보 외 것들)
 			$.ajax({
 				url : "/shushoong/hotel/payment",
 				type : "post",
-				data : { //이건 내가 마음ㅇ대로 이름 지을 수 있음 - 호텔정보들 여기로 보내기
-					paymentId : response.paymentId,
-					hotelPrice : hotelPrice,
-					reservationData : reservationData
-				},
-				error : ajaxErrorHandler,
-				success : async function(data) {
+				contentType: "application/json" ,
+			    data: reservationDataString, 
+				error:function(request, status, error){
+						alert("결제 실패!!!!!!!!!!!!!");
+					},
+				dataType: "json",
+				success : function(data) {
 					if (data == 1) {
+						location.href = "/shushoong/hotel/aaget?hotelReserveCode="+hotelReserveCode;
 						return;
 					} else {
-						alert("결제에 실패하셨습니다. 메인페이지로 돌아갑니다.");
-						location.href = "shushoong/main";
+						alert("결제 금액과 지불 금액이 일치하지 않거나 알 수 없는 오류가 발생했습니다.");
 						return;
 					}
 				}

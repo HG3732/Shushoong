@@ -42,8 +42,13 @@ public interface HotelRepository {
 	//위에꺼 토대로 얘가 배치됨 - 게시글 관련 데이터까지 뽑는거
 	public Integer selectTotalPageCount(String hotelCode);	
 	
-	
 	//호텔 상세페이지 전체평균리뷰
 	public List<HotelReviewOverallDtoRes> selectReviewOverall(String hotelCode);
+	
+	// 호텔 예매 내역
+//	public List<Map<String, Object>> hotelReserve(String memEmail);
+//
+//	호텔 주문 정보
+//	public Map<String, Object> buyInfo(String memEmail);
 	
 }

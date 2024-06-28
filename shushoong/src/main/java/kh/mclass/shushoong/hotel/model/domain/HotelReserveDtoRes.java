@@ -24,5 +24,4 @@ public class HotelReserveDtoRes {
 	private String hotelCode;
 	private String roomCat;
 	private String roomAtt;
-	
 }

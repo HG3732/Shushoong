@@ -218,7 +218,7 @@ div#depart_accoding_wrap{
 
  							/* 날짜 */
 #date_accoding{
-	left: 798px;
+	/* left: 798px; */
 	margin-top: -24px;
     width: 500px;
     height: auto;

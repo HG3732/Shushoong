@@ -55,7 +55,7 @@ public class MyPageCustomerController {
 	// 마이페이지 항공 리스트 페이지로 이동
 	@GetMapping("/mypage/reserved/airline/list")
 	public String getMethodName() {
-		return "/customer/mypage/mypageCustomerReservedAlirlineList";
+		return "mypage/customer/mypageCustomerReservedAlirlineList";
 	}
 	
 }

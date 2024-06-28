@@ -11,7 +11,7 @@ public interface MypageCustomerRepository {
 	public MemberDto selectOne(String userId);
 	
 	// 비밀번호 체크
-	public int pwdCheck(String userId, String userPwd);
+	public String pwdChecking(String userId);
 	
 	// 비밀번호 재설정
 	public String resetPwd(MemberDto dto);

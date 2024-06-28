@@ -261,6 +261,10 @@ public class AirlineController {
 	}
 	
 	
+	@GetMapping("/airline/customer/reserve/pay/success")
+	public String paySuccess() {
+		return "airline/airline_pay_success";
+	}
 	
 	
 }

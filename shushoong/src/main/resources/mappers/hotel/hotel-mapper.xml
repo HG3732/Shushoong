@@ -162,15 +162,24 @@
 	</select>
 
 	<!-- 결제 -->
-<!-- 	<insert id="insertHotelReserve"  parameterType="map">
-		insert into hotel_reserve values(
-		    #{hotelReserveCode}, #{roomCat}, #{hotelCode}, #{roomCap}, #{roomAtt}, #{residenceEmail}, #{residenceNameKo}, #{residenceNameEng},
-		    #{residenceGender}, #{hotelReserveCode}, #{residenceCheckIn}, #{residenceCheckOut}, #{userId}, #{residencePhone}, #{residenceBirth}
-		)
-	</insert> -->
-	
+	<insert id="inserthotelReserveInfo" parameterType="map">
+	    insert all
+	    <foreach collection="request" item="req">
+	        into hotel_reserve (
+	            hotel_Reserve_Code, room_Cat, hotel_code, room_cap, room_att, residence_Email, 
+	            residence_Name_Ko, residence_Name_Eng, residence_gender, request, 
+	            reserve_Check_In, reserve_Check_Out, user_Id, residence_Phone, residence_birth
+	        ) values (
+	            #{hotelReserveCode}, #{roomCat}, #{hotelCode}, #{roomCap}, #{roomAtt}, #{residenceEmail}, 
+	            #{residenceNameKo}, #{residenceNameEng}, #{residenceGender}, #{req}, 
+	            #{reserveCheckIn}, #{reserveCheckOut}, #{userId}, #{residencePhone}, #{residenceBirth}
+	        )
+	    </foreach>
+	        select * from dual
+	 </insert>
+
 	<!-- 결제 완료시  -->
-<!-- 	<insert id="insertHotelPay">
+<!-- 	<insert id="insertPayInfo">
 		insert into pay values(
     		#{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{moneyCat}, #{payStatus}, #{hotelReserveCode}, {airlineReserveCode}
 		)

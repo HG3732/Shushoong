@@ -9,7 +9,7 @@
 		SELECT USER_PWD FROM MEMBER WHERE USER_ID=#{userId}
 	</select>
 	
-	<update id="setCustomerInfo">
+	<update id="resetInfo">
 		UPDATE MEMBER SET USER_PWD=#{userPwd}, EMAIL_RECEIVE=#{emailReceive}, MSG_RECEIVE=#{msgReceive}  WHERE USER_ID=#{userId}
 	</update>
 </mapper>

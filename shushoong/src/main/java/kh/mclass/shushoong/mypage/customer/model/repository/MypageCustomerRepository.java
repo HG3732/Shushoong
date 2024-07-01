@@ -1,5 +1,7 @@
 package kh.mclass.shushoong.mypage.customer.model.repository;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
@@ -14,6 +16,6 @@ public interface MypageCustomerRepository {
 	public String pwdChecking(String userId);
 	
 	// 비밀번호 재설정
-	public String resetPwd(MemberDto dto);
+	public int resetInfo(Map<String, Object> paramMap);
 
 }

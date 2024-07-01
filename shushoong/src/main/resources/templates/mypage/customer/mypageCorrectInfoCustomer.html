@@ -69,10 +69,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<div class="checkSelection">
 								<div class="choice">
 									<div class="smsMarketing">
-										<input type="checkbox" name="usingAgree" id="snsagree" th:checked="${dto.msgReceive == '1' ? 'true' : 'false'}"><span class="on">SMS 수신</span>
+										<input type="checkbox" name="usingAgree" id="msgReceive" th:checked="${dto.msgReceive == '1' ? 'true' : 'false'}"><span class="on">SMS 수신</span>
 									</div>
 									<div class="emailMarketing">
-										<input type="checkbox" name="usingAgree" id="emailagree" th:checked="${emailReceive == '1' ? 'true' : 'false'}"><span class="on">이메일 수신</span>
+										<input type="checkbox" name="usingAgree" id="emailReceive" th:checked="${emailReceive == '1' ? 'true' : 'false'}"><span class="on">이메일 수신</span>
 									</div>
 								</div>
 							</div>
@@ -143,22 +143,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		</div>
 	</div>
 	
-	<script>
-		$(loadedHandler);
-		
-		function loadedHandler() {
-			$(".btn.secession").on("click", deleteAccHandler);
-			$(".pop-btn.cancle").on("click", cancleHandler);
-			$(".close_btn").on("click", cancleHandler)
-		}
-		
-		function deleteAccHandler() {
-			$("#popup").hide().fadeIn();
-		}
-		
-		function cancleHandler() {
-			$("#popup").fadeOut();
-		}
-	</script>
+	<script th:src="@{/js/mypage/customer/mypageCustomerCorrectInfo.js}" type="text/javascript"></script>
 </body>
 </html>

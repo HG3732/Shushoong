@@ -1,5 +1,28 @@
 @charset "UTF-8";
 
+.wrapper {
+	position: relative;
+}
+
+.background-modal {
+	position:absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0, .5);
+	z-index: 3;
+	display: none;
+}
+
+.background-modal .wrap-modal {
+	width: 500px;
+	height: 500px;
+	margin: 300px auto;
+	background-color: white;
+	border: 3px solid var(--color_blue_1);
+	border-radius: 20px;
+	text-align: center;
+}
+
 input, input:focus, textarea, textarea:focus {
 	outline: none !important;
 	box-shadow: none !important;
@@ -289,29 +312,31 @@ section .userInformation {
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
+	gap: 24px;
 }
 
 section .joinDate-content, .userId-content, .userEmail-content,
 	.userStatus-content, .purchaseProduct-content, .faqId-content {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
-section .userInformation>label {
+/* section .userInformation>label {
 	display: inline-block;
 	text-align: center;
 	width: 100px;
 	font-weight: bold;
 	margin-left: 10px;
 	margin-bottom: 20px;
-}
+} */
 
 section .joinDate-content>label {
 	display: inline-block;
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	/* margin: 0 20px 20px 10px; */
 }
 
 section .userId-content>label {
@@ -319,7 +344,7 @@ section .userId-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	/* margin: 0 20px 20px 10px; */
 }
 
 section .userEmail-content>label {
@@ -327,7 +352,7 @@ section .userEmail-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	/* margin: 0 20px 20px 10px; */
 }
 
 section .userStatus-content>label {
@@ -335,7 +360,7 @@ section .userStatus-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	/* margin: 0 20px 20px 10px; */
 }
 
 section .purchaseProduct-content>label {
@@ -343,13 +368,27 @@ section .purchaseProduct-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	/* margin: 0 20px 20px 10px; */
 }
 
 section .purchaseProduct {
 	display: flex;
-	flex-direction: column;
-	margin-bottom: 20px;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+section .purchaseProduct .payList {
+	margin-left: 30px;
+	background-color: var(--color_blue_2);
+	border: none;
+	border-radius: 10px;
+	padding: 5px 10px;
+}
+
+section .purchaseProduct .payList:hover {
+	background-color: var(--color_blue_1);
+	color: white;
 }
 
 section .faqId-content>label {
@@ -357,7 +396,7 @@ section .faqId-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	/* margin: 0 20px 20px 10px; */
 }
 
 section .btn.container {

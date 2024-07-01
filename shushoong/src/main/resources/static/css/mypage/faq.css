@@ -1,0 +1,53 @@
+section .onlineQnAList {
+	margin-bottom: 100px;
+}
+
+section .viewAllList {
+	display: flex;
+	justify-content: right;
+}
+
+section .QnA-grid {
+	height: 40px;
+	font-size: 13px;
+	font-weight: bold;
+	border-top: 2px solid #006AFF;
+	border-bottom: 2px solid #006AFF;
+	background-color: #BCEFFF;
+	display: grid;
+	grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
+	align-items: center;
+	text-align: center;
+}
+
+section .QnA-content {
+	height: 40px;
+	font-size: 11px;
+	font-weight: bold;
+	border-bottom: 1px solid #006AFF;
+	margin-bottom: 10px;
+	display: grid;
+	grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
+	align-items: center;
+	text-align: center;
+}
+
+section .search {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+}
+
+section .searchQnAList {
+	border: none;
+	border-radius: 20px;
+	width: 60px;
+	height: 30px;
+	background-color: var(--color_blue_1);
+	cursor: pointer;
+	color: white;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: SOYOMapleRegularTTF;
+}

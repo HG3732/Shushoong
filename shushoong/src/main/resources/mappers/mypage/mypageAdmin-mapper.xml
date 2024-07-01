@@ -66,6 +66,15 @@
 		 </if>
 	</select>
 	
+	<!-- 장기 미사용 유저 전부 정지 -->
+	<update id="updateAllLock" parameterType="String">
+		update member set user_status = '0' where latest_login &lt; add_months(sysdate, -12)
+		<if test="keyword != null and keyword !='' ">
+		 	<bind name="keyword2" value="'%' + keyword + '%'" />
+		 		AND USER_ID LIKE #{keyword2}
+		 </if>
+	</update>
+	
 	<!-- 장기 미사용 회원 마지막 로그인으로부터 경과 시간 조회 -->
 	<select id="selectUseTerm" parameterType="string" resultType="int">
 		select to_number(trunc(sysdate - latest_login)) as term from member WHERE USER_ID=#{userId}

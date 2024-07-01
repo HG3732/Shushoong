@@ -226,7 +226,11 @@ public class AirlineController {
 		String adult = (String) session.getAttribute("adult");
 		String child = (String) session.getAttribute("child");
 		String baby = (String) session.getAttribute("baby");
+		md.addAttribute("adult", adult);
+		md.addAttribute("child", child);
+		md.addAttribute("baby", baby);
 		md.addAttribute("airlineCodeReturn", airlineCodeReturn);
+		
 		
 		log.info("어른 adult: {}, 소아 child: {}, 유아 baby {}, 왕복 항공코드 {}, 오는편 항공코드{}, 편도 항공코드{}", adult, child, baby,airlineCode2,airlineCodeReturn,airlineCode2);
 		

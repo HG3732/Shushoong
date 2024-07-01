@@ -10,13 +10,14 @@ import lombok.Data;
 @Data
 @Component
 public class HotelReserveCompleteDtoRes {
+	private String hotelName;
 	private String hotelReserveCode;
+	private String residenceNameKo;
 	private String reserveCheckIn;
 	private String reserveCheckOut;
 	private String roomCatDesc;
 	private String roomAttDesc;
 	private List<String> request;
-	private String residenceNameKo;
 	private String hotelPrice;
 	
 }

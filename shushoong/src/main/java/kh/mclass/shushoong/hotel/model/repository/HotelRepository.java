@@ -49,6 +49,9 @@ public interface HotelRepository {
 	// 호텔 예매 내역
 	public int inserthotelReserveInfo(Map<String, Object> map);
 
+	// 요청사항 저장
+	public int insertHotelRequestItems(String hotelReserveCode, List<Integer> requests);
+
 //	호텔 주문 정보
 //	public Map<String, Object> insertPayInfo(String memEmail);
 	

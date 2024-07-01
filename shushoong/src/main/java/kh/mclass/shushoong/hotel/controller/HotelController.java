@@ -32,7 +32,7 @@ import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes;
-import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes2;
+import kh.mclass.shushoong.hotel.model.domain.HotelReserveCompleteDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
@@ -308,6 +308,7 @@ public class HotelController {
 		
 		//session 에 담겨있는 checkIn, checkOut 정보 model 에 담아서 html 페이지로 뿌리기
 		model.addAttribute("checkIn", session.getAttribute("checkIn"));
+		//이거는 내가 정해놓은 이름에 session값을 넣는것이기 때문에 이 이름에 대한 자료형이 정해진게 없어서 session이 어떤 자료형이든 그냥 들어갈 수 있음
 		model.addAttribute("checkOut", session.getAttribute("checkOut"));
 		model.addAttribute("userId", session.getAttribute("userId"));
 		model.addAttribute("adult", session.getAttribute("adult"));
@@ -326,17 +327,20 @@ public class HotelController {
 	@PostMapping("/hotel/payment")
 	@ResponseBody
 	public int hotelPayment(
-//			String paymentId, 
-//			String reservationData
+			HttpSession session,
 			@RequestBody HotelReserveDtoRes reservationData 
-			, HotelReserveDtoRes2 resultDTO
+			, HotelReserveCompleteDtoRes reserveCompletedto
+			//요청파라미터에 적으면 함수 내에서 새로 new해서 객체를 만들지 않아도 됨
 			) throws IOException, InterruptedException{
-//		System.out.println(reservationData);
-//		System.out.println(reservationData.getHotelReserveCode());
 		String paymentId = reservationData.getHotelReserveCode();
-		//HotelReserveDtoRes2 reservationData2  = new HotelReserveDtoRes2( reservationData.getHotelName())..paym
-		resultDTO.setHotelName("aaa");
-		System.out.println(resultDTO);
+		//HotelReserveDtoRes2 reservationData2  = new HotelReserveDtoRes2( reservationData.getHotelName())..
+		reserveCompletedto.setHotelReserveCode(reservationData.getHotelReserveCode());
+		reserveCompletedto.setReserveCheckIn((String) session.getAttribute("checkIn"));
+		//얘는 객체에 있는 필드명인데 그 필드명은 자료형이 정해져있기 때문에 session에는 아무 자료형이나 들어갈수 있기 때문에
+		//까보기 전까지 어떤 자료형인지 모르는데 깠을 때 필드명의 자료형과 같아야하기 때문에 다운캐스팅 필요함
+		reserveCompletedto.setReserveCheckOut((String) session.getAttribute("checkOut"));
+		reserveCompletedto.setHotelReserveCode( reservationData.getHotelReserveCode());
+		System.out.println(reserveCompletedto);
 		
 //		ajax로 보내지는 데이터 () 안에 작성
 		HttpRequest request = HttpRequest.newBuilder()
@@ -385,17 +389,10 @@ public class HotelController {
 //					return result = 0;
 //				}
 //		}	
-			
-//		return resultDTO;
-		return 1;
-			
+
+		return 1;	
 	}
-//	@PostMapping("/hotel/aapost")
-//	public String aaa2( Model model, RedirectAttributes rttr, String hotelReserveCode) {
-//		// hotelReserveCode -- service -- repository...
-//		rttr.addFlashAttribute("a1", hotelReserveCode);
-//		return "redirect:/hotel/aaget";
-//	}
+
 	@GetMapping("/hotel/aaget")
 	public String aaa3( Model model, String hotelReserveCode) {
 		//db join 

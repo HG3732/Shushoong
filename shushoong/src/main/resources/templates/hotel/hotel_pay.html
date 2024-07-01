@@ -46,6 +46,9 @@ xmlns:th="http://www.thymeleaf.org">
 					<input type="hidden" th:value="${roomCap}" class="room_cap">
 					<input type="hidden" th:value="${hotelCode}" class="hotel_code">
 					<input type="hidden" th:value="${roomCat}" class="room_cat">
+					<input type="hidden" readonly th:value="${roomAtt}" class="room_att">
+					<input type="hidden" readonly th:value="${storeId}" class="store_id">
+					<input type="hidden" readonly th:value="${channelKey}" class="channel_key">
 					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';" th:text="${hotel}" class="hotel_name"></p>
 					<table class="reserve_info">
 						<thead>
@@ -68,11 +71,7 @@ xmlns:th="http://www.thymeleaf.org">
 								<th>객실정보</th>
 								<td>
 									<input type="text" readonly th:value="${roomCatDesc}" onfocus="this.blur()" style=" border: none; width: 80px;" class="room_cat_desc">,
-									<input type="text" readonly th:value="${roomAttDesc}" onfocus="this.blur()" style="border: none;" class="room_att">
-									<input type="hidden" readonly th:value="${roomAtt}">
-									<input type="hidden" readonly th:value="${roomCat}">
-									<input type="hidden" readonly th:value="${storeId}" class="store_id">
-									<input type="hidden" readonly th:value="${channelKey}" class="channel_key">
+									<input type="text" readonly th:value="${roomAttDesc}" onfocus="this.blur()" style="border: none;" class="room_att_desc">
 								</td>
 							</tr>
 						</tbody>

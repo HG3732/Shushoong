@@ -76,6 +76,7 @@ async function payHandler(){
 	var hotelCode = $('.hotel_code').val();
 	var roomCat = $('.room_cat').val();
 	var roomAtt = $('.room_att').val();
+	var roomAttDesc = $('.room_att_desc').val();
 
 	var roomCatDesc = $('.room_cat_desc').val();
 	var hotelName = $('.hotel_name').text();
@@ -99,8 +100,9 @@ async function payHandler(){
 		userId : userId,
 		roomCap : roomCap,
 		hotelCode : hotelCode,
-		roomCat : roomCat,
 		roomAtt : roomAtt,
+		roomCat : roomCat,
+		roomAttDesc : roomAttDesc,
 		/*위에는 예약으로, 아래는 예약완료됐을때 띄워주기*/
 		roomCatDesc : roomCatDesc,
 		hotelName : hotelName,
@@ -111,6 +113,8 @@ async function payHandler(){
 
 	// reservationData 객체를 JSON 문자열로 변환
 	let reservationDataString = JSON.stringify(reservationData);
+	
+	console.log(roomAtt);
 	
 	const response = await PortOne.requestPayment({
 			storeId : storeId, 
@@ -129,7 +133,7 @@ async function payHandler(){
 				console.log('결제 오류');
 		} else {
 			if(response.paymentId != hotelReserveCode){
-				alert("aaa");
+				alert("예약번호 다름. 다시 해");
 				return;
 			}
 			// 결제 검증 - 위에서 선언한거를 데이터로 보냄(결제 정보 외 것들)
@@ -139,7 +143,7 @@ async function payHandler(){
 				contentType: "application/json" ,
 			    data: reservationDataString, 
 				error:function(request, status, error){
-						alert("결제 실패!!!!!!!!!!!!!");
+						alert("결제 실패!!!!!!!!!!!!! 돌아가!!!!!!!!!!!");
 					},
 				dataType: "json",
 				success : function(data) {

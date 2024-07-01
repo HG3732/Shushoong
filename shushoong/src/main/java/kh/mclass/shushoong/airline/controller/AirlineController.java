@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.mail.Session;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
@@ -244,10 +245,15 @@ public class AirlineController {
 	@PostMapping("/airline/input/reserverInfo")
 	public int customerInfo(
 			@RequestParam("phone_number") String phone_number,
-			@RequestParam("reserver_email") String reserver_email			
+			@RequestParam("reserver_email") String reserver_email,			
+			HttpSession session
 			) {
+		String userId = (String) session.getAttribute("userId");
+		
+		
+		
 		int result = 0;
-		System.out.println("!@#$%^%^&2311322312132213              :       "+phone_number+reserver_email);
+		System.out.println("!@#$%^%^&2311322312132213              :       "+userId+phone_number+reserver_email);
 		 result = service.insertReserverInfo(phone_number,reserver_email);
 		return result;
 	}

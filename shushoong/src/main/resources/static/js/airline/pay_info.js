@@ -1,7 +1,7 @@
 	
 	function adultNum(){
-			const urlParams = new URL(location.href).searchParams;
-			const adult = urlParams.get('adult');
+			var adult = $("#adult_val").val();
+			
 			var htmlVal = '';
 			
 			for(var  i = 0; i < adult; i++){
@@ -116,8 +116,8 @@
 		
 		
 		function childNum(){
-			const urlParams = new URL(location.href).searchParams;
-			const child = urlParams.get('child');
+			var child = $("#child_val").val();
+			
 			var htmlVal = '';
 			
 			for(var  i = 0; i < child; i++){
@@ -229,8 +229,8 @@
 		}
 		
 		function babyNum(){
-			const urlParams = new URL(location.href).searchParams;
-			const baby = urlParams.get('baby');
+			var baby = $("#baby_val").val();
+			console.log(baby);
 			var htmlVal = '';
 			
 			$(".babyNum").text(baby);   /*별개의 내용*/

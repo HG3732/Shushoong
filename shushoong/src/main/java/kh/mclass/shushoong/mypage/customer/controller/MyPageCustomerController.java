@@ -111,4 +111,10 @@ public class MyPageCustomerController {
 		return "mypage/customer/mypageCustomerReservedAlirlineList";
 	}
 	
+	// 마이페이지 공지사항
+	@GetMapping("/mypage/notice")
+	public String customerNotice () {
+		return "mypage/customer/mypageNotice";
+	}
+	
 }

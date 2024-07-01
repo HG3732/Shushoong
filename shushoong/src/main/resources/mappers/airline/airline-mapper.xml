@@ -69,7 +69,7 @@
     
     <insert id="insertReserverInfo" >
     	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL)
-    		VALUES ('357596' , 'ex1' , #{phoneNum} , #{email} )
+    		VALUES ('TO_CHAR(SYSDATE,'YYMIDDMM')||SEQ_AIRC.nextval FROM DUAL' , 'ex1' , #{phoneNum} , #{email} )
     </insert>
     
     <update id="insertPassengerInfo" parameterType="map" useGeneratedKeys="false" >

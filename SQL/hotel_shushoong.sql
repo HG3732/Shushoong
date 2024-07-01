@@ -368,3 +368,15 @@ BEGIN
     );
 END;
 /
+
+desc hotel_reserve;
+commit;
+
+select * from hotel_request;
+
+insert all into hotel_request values (0, '없음')
+        into hotel_request values (1, '오션뷰')
+        into hotel_request values (2, '마운틴뷰')
+        into hotel_request values (3, '시티뷰')
+        into hotel_request values (4, '기타')
+        select * from dual;

@@ -14,6 +14,7 @@ public class HotelReserveDtoRes {
 	private String residenceNameKo;
 	private String residenceNameEng;
 	private String residenceGender;
+	private String residenceBirth;
 	private String residencePhone;
 	private String residenceEmail;
 	private List<String> request;

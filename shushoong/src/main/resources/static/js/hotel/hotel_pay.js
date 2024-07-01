@@ -60,12 +60,13 @@ async function payHandler(){
 	var residenceNameKo = $('#name').val(); //투숙객명
 	var residenceNameEng = $('#last_name').val() + $('#first_name').val();
 	var residenceGender = $('input[name=gender]:checked').val();
+	var residenceBirth = $('#birthday').val();
 	var residencePhone = $('#phone').val();
 	var residenceEmail = $('#email').val();
 	
 	var requestItems= [];
 	var request = $('.require_check').children().children('input[name="checkbox"]:checked').each(function() {
-                    // 값을 배열에 추가합니다.
+                    // 값을 배열에 추가
                     requestItems.push($(this).val());
 					});
 					
@@ -94,6 +95,7 @@ async function payHandler(){
 		residenceGender : residenceGender,
 		residencePhone : residencePhone,
 		residenceEmail : residenceEmail,
+		residenceBirth : residenceBirth,
 		request : requestItems,
 		reserveCheckIn : reserveCheckIn,
 		reserveCheckOut : reserveCheckOut,
@@ -102,14 +104,16 @@ async function payHandler(){
 		hotelCode : hotelCode,
 		roomAtt : roomAtt,
 		roomCat : roomCat,
+		hotelReserveCode : hotelReserveCode
+		/*위에는 예약으로, 아래는 예약완료됐을때 띄워주기*/	
+	}
+	
+	const receipt = {
 		roomAttDesc : roomAttDesc,
-		/*위에는 예약으로, 아래는 예약완료됐을때 띄워주기*/
 		roomCatDesc : roomCatDesc,
 		hotelName : hotelName,
-		hotelPrice : hotelPrice,
-		hotelReserveCode : hotelReserveCode,
-		
-	}
+		hotelPrice : hotelPrice	
+	};
 
 	// reservationData 객체를 JSON 문자열로 변환
 	let reservationDataString = JSON.stringify(reservationData);
@@ -136,9 +140,10 @@ async function payHandler(){
 				alert("예약번호 다름. 다시 해");
 				return;
 			}
+			
 			// 결제 검증 - 위에서 선언한거를 데이터로 보냄(결제 정보 외 것들)
 			$.ajax({
-				url : "/shushoong/hotel/payment",
+				url : `/shushoong/hotel/payment?roomAttDesc=${encodeURIComponent(receipt.roomAttDesc)}&roomCatDesc=${encodeURIComponent(receipt.roomCatDesc)}&hotelName=${encodeURIComponent(receipt.hotelName)}&hotelPrice=${encodeURIComponent(receipt.hotelPrice)}`,
 				type : "post",
 				contentType: "application/json" ,
 			    data: reservationDataString, 
@@ -148,7 +153,7 @@ async function payHandler(){
 				dataType: "json",
 				success : function(data) {
 					if (data == 1) {
-						location.href = "/shushoong/hotel/aaget?hotelReserveCode="+hotelReserveCode;
+						location.href = "/shushoong/hotel/customer/reserve/pay/success?hotelReserveCode="+hotelReserveCode;
 						return;
 					} else {
 						alert("결제 금액과 지불 금액이 일치하지 않거나 알 수 없는 오류가 발생했습니다.");

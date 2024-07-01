@@ -22,11 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
@@ -315,11 +312,6 @@ public class HotelController {
 		model.addAttribute("child", session.getAttribute("child"));
 		model.addAttribute("nation", session.getAttribute("nation"));
 		model.addAttribute("room", session.getAttribute("room"));
-		//이미 session 안에 이 위에 정보들 있는데 굳이 화면에 값 출력해서 결제페이지 이동할 떄 가지고 가야하나? 그냥 session 불러서 넣으면 안되나?
-		
-		
-		
-		System.out.println(roomCap + "=========================");
 		
 		return "hotel/hotel_pay";
 	}
@@ -328,20 +320,36 @@ public class HotelController {
 	@ResponseBody
 	public int hotelPayment(
 			HttpSession session,
-			@RequestBody HotelReserveDtoRes reservationData 
+			@RequestBody HotelReserveDtoRes reservationData
+			//requestbody 쓰면 json 형태로 보냈을 때 알아서 dto 에 있는 이름과 데이터 매칭해서 넣어줌 
 			, HotelReserveCompleteDtoRes reserveCompletedto
+			,@RequestParam String roomAttDesc
+			,@RequestParam String roomCatDesc
+			,@RequestParam String hotelName
+			,@RequestParam String hotelPrice
 			//요청파라미터에 적으면 함수 내에서 새로 new해서 객체를 만들지 않아도 됨
 			) throws IOException, InterruptedException{
+		
+		System.out.println("reservationData : " + reservationData);
+		System.out.println("roomAttDesc : " + roomAttDesc);
+		System.out.println("roomCatDesc : " + roomCatDesc);
+		System.out.println("hotelName : " + hotelName);
+		System.out.println("hotelPrice : " + hotelPrice);
 		String paymentId = reservationData.getHotelReserveCode();
 		//HotelReserveDtoRes2 reservationData2  = new HotelReserveDtoRes2( reservationData.getHotelName())..
+		//위에 이걸 안해도 됨
 		reserveCompletedto.setHotelReserveCode(reservationData.getHotelReserveCode());
+		reserveCompletedto.setResidenceNameKo(reservationData.getResidenceNameKo());
+		reserveCompletedto.setRequest(reservationData.getRequest());
+		reserveCompletedto.setRoomAttDesc(roomAttDesc);
+		reserveCompletedto.setRoomCatDesc(roomCatDesc);
+		reserveCompletedto.setHotelName(hotelName);
+		reserveCompletedto.setHotelPrice(hotelPrice);
 		reserveCompletedto.setReserveCheckIn((String) session.getAttribute("checkIn"));
 		//얘는 객체에 있는 필드명인데 그 필드명은 자료형이 정해져있기 때문에 session에는 아무 자료형이나 들어갈수 있기 때문에
 		//까보기 전까지 어떤 자료형인지 모르는데 깠을 때 필드명의 자료형과 같아야하기 때문에 다운캐스팅 필요함
-		reserveCompletedto.setReserveCheckOut((String) session.getAttribute("checkOut"));
-		reserveCompletedto.setHotelReserveCode( reservationData.getHotelReserveCode());
-		System.out.println(reserveCompletedto);
-		
+		reserveCompletedto.setReserveCheckOut((String) session.getAttribute("checkOut"));		
+
 //		ajax로 보내지는 데이터 () 안에 작성
 		HttpRequest request = HttpRequest.newBuilder()
 			    .uri(URI.create("https://api.portone.io/payments/" + paymentId + "?storeId=" + storeId))
@@ -364,40 +372,48 @@ public class HotelController {
 			// 그 중 지불된 금액
 			double paid = (double) amount.get("paid");
 			
+				int result;
+				// 결제 금액과 지불된 금액이 같다면
+				if(Double.parseDouble(hotelPrice) == paid) {
+					Map<String, Object> map = new HashMap<>();
+					map.put("hotelReserveCode", reservationData.getHotelReserveCode());
+					map.put("residenceNameKo", reservationData.getResidenceNameKo());
+					map.put("residenceNameEng", reservationData.getResidenceNameEng());
+					map.put("residenceGender", reservationData.getResidenceGender());
+					map.put("residencePhone", reservationData.getResidencePhone());
+					map.put("residenceEmail", reservationData.getResidenceEmail());
+					map.put("reserveCheckIn", reservationData.getReserveCheckIn());
+					map.put("reserveCheckOut", reservationData.getReserveCheckOut());
+					map.put("userId", reservationData.getUserId());
+					map.put("roomCap", reservationData.getRoomCap());
+					map.put("hotelCode", reservationData.getHotelCode());
+					map.put("roomCat", reservationData.getRoomCat());
+					map.put("roomAtt", reservationData.getRoomAtt());
+					map.put("request", reservationData.getRequest());
+					result = service.inserthotelReserveInfo(map);
+					System.out.println("====================" + reservationData.getRequest());
+					
+					return result;
+				}else {
+					return result = 0;
+				}
 			
-//			for(int i = 0; i < reservationData.length; i++) {
-//				int result;
-//				// 결제 금액과 지불된 금액이 같다면
-//				if(Double.parseDouble(hotelPrice) == paid) {
-//					Map<String, Object> map = new HashMap<>();
-//					map.put("hotelReserveCode", r);
-//					map.put("residenceNameKo", residenceNameKo);
-//					map.put("residenceNameEng", residenceNameEng);
-//					map.put("residenceGender", residenceGender);
-//					map.put("residencePhone", residencePhone);
-//					map.put("residenceEmail", residenceEmail);
-//					map.put("reserveCheckIn", reserveCheckIn);
-//					map.put("reserveCheckOut", reserveCheckOut);
-//					map.put("userId", userId);
-//					map.put("roomCap", roomCap);
-//					map.put("hotelCode", hotelCode);
-//					map.put("roomCat", roomCat);
-//					map.put("roomAtt", roomAtt);
-//					result = service.hotelReserve(map);
-//					return result;
-//				}else {
-//					return result = 0;
-//				}
-//		}	
-
-		return 1;	
 	}
+	
+	@GetMapping("/hotel/customer/reserve/pay/success")
+	public String hotelComplete(HttpSession session, Model model, String hotelReserveCode, HotelReserveCompleteDtoRes reserveCompletedto) {
+		
+		model.addAttribute("hotelReserveCode", hotelReserveCode);
+		model.addAttribute("residenceNameKo", reserveCompletedto.getResidenceNameKo());
+		model.addAttribute("hotelName", reserveCompletedto.getHotelName());
+		model.addAttribute("checkIn", session.getAttribute("checkIn"));
+		model.addAttribute("checkOut", session.getAttribute("checkOut"));
+		model.addAttribute("roomCatDesc", reserveCompletedto.getRoomCatDesc());
+		model.addAttribute("roomAttDesc", reserveCompletedto.getRoomAttDesc());
+		model.addAttribute("request", reserveCompletedto.getRequest());
+		model.addAttribute("hotelPrice", reserveCompletedto.getHotelPrice());
 
-	@GetMapping("/hotel/aaget")
-	public String aaa3( Model model, String hotelReserveCode) {
-		//db join 
-		model.addAttribute("a1", hotelReserveCode);
-		return "map";
+		return "hotel/hotel_pay_success";
 	}
 
 	//지역, 인원수 선택 안한채로 hotel_list를 url에 직접 입력하여 진입할 경우 예외처리  

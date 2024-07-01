@@ -1,6 +1,7 @@
 package kh.mclass.shushoong.hotel.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -46,9 +47,9 @@ public interface HotelRepository {
 	public List<HotelReviewOverallDtoRes> selectReviewOverall(String hotelCode);
 	
 	// 호텔 예매 내역
-//	public List<Map<String, Object>> hotelReserve(String memEmail);
-//
+	public int inserthotelReserveInfo(Map<String, Object> map);
+
 //	호텔 주문 정보
-//	public Map<String, Object> buyInfo(String memEmail);
+//	public Map<String, Object> insertPayInfo(String memEmail);
 	
 }

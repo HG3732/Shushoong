@@ -39,8 +39,8 @@
 							<div class="customerlogin-section">
 								<form id="frm-post" th:action="@{/login}" method="post">
 									<div class="loginInfo">
-										<input type="text" name="userId" placeholder="아이디" autofocus>
-										<input type="password" name="userPwd" placeholder="비밀번호">
+										<input type="text" name="userId" id="userId" placeholder="아이디" autofocus>
+										<input type="password" name="userPwd" id="userPwd" placeholder="비밀번호">
 									</div>
 									<div class="login-check">
 										<input type="checkbox" name="idsaved"> 아이디 저장
@@ -84,8 +84,8 @@
 							<div class="businesslogin-section">
 								<form id="frm-post" th:action="@{/login}" method="post">
 									<div class="loginInfo">
-										<input type="text" name="userId" placeholder="아이디" autofocus>
-										<input type="password" name="userPwd" placeholder="비밀번호">
+										<input type="text" name="userId" id="userId" placeholder="아이디" autofocus>
+										<input type="password" name="userPwd" id="userPwd" placeholder="비밀번호">
 									</div>
 									<small th:text="${exception}"></small>
 									<div class="login-check">

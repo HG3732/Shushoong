@@ -101,7 +101,12 @@ public class HotelService {
 	public int inserthotelReserveInfo(Map<String, Object> map){
 		return hotelRepository.inserthotelReserveInfo(map);
 	}
-//
+
+	//요청사항 따로 추가
+	 public int insertHotelRequestItems(String hotelReserveCode, List<Integer> requests) {
+		 return hotelRepository.insertHotelRequestItems(hotelReserveCode, requests);
+	 }
+	
 //	호텔 주문 정보
 //	public Map<String, Object> insertPayInfo(String memEmail) {
 //		return hotelRepository.insertPayInfo(memEmail);

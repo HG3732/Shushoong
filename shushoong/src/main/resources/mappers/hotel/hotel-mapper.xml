@@ -161,22 +161,22 @@
 		where hotel_code = #{hotelCode} and room_cap &gt;= #{people}
 	</select>
 
-	<!-- 결제 -->
+	<!-- 예약 -->
 	<insert id="inserthotelReserveInfo" parameterType="map">
-	    insert all
-	    <foreach collection="request" item="req">
-	        into hotel_reserve (
-	            hotel_Reserve_Code, room_Cat, hotel_code, room_cap, room_att, residence_Email, 
-	            residence_Name_Ko, residence_Name_Eng, residence_gender, request, 
-	            reserve_Check_In, reserve_Check_Out, user_Id, residence_Phone, residence_birth
-	        ) values (
-	            #{hotelReserveCode}, #{roomCat}, #{hotelCode}, #{roomCap}, #{roomAtt}, #{residenceEmail}, 
-	            #{residenceNameKo}, #{residenceNameEng}, #{residenceGender}, #{req}, 
-	            #{reserveCheckIn}, #{reserveCheckOut}, #{userId}, #{residencePhone}, #{residenceBirth}
-	        )
+	    INSERT INTO hotel_reserve 
+	        (hotel_reserve_code, residence_name_ko, residence_name_en, residence_gender, residence_birth, residence_phone, residence_email, reserve_check_in, reserve_check_out, user_id, room_cap, hotel_code, room_cat, room_att)
+	    VALUES 
+	        (#{hotelReserveCode}, #{residenceNameKo}, #{residenceNameEn}, #{residenceGender}, #{residenceBirth}, #{residencePhone}, #{residenceEmail}, #{reserveCheckIn}, #{reserveCheckOut}, #{userId}, #{roomCap}, #{hotelCode}, #{roomCat}, #{roomAtt})
+	</insert>
+
+	<!-- 요청사항 따로 저장 -->
+	<insert id="insertHotelRequestItems" parameterType="map">
+	    INSERT all
+	    <foreach collection="requests" item="request" separator=" ">
+	        into reserve_request values(#{hotelReserveCode}, #{request})
 	    </foreach>
-	        select * from dual
-	 </insert>
+	    select * from dual
+	</insert>
 
 	<!-- 결제 완료시  -->
 <!-- 	<insert id="insertPayInfo">

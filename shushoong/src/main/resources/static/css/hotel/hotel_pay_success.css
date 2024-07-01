@@ -1,0 +1,243 @@
+@charset "UTF-8";
+
+.wrap-main{
+	width: 960px;
+    margin: 0 auto;
+}
+
+.hotel_reserve_count{
+	display: flex;
+	margin-top: 50px;
+	justify-content: space-around;
+}
+
+.no_1{
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 50px;
+	background-color: var(--color_blue_1);
+	color: white;
+	text-align: center;
+	margin-left: 8px;
+}
+
+.no_2{
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 50px;
+	background-color: var(--color_blue_1);
+	color: white;
+	text-align: center;
+}
+
+.no_3{
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 50px;
+	background-color: var(--color_blue_1);
+	color: white;	
+	text-align: center;
+	margin-right: 8px;
+	font-family: 'SOYOMapleBoldTTF';
+}
+
+.hotel_reserve_write{
+	display: flex;
+	margin-top: 10px;
+	justify-content: space-around;
+}
+
+.hotel_name{
+	margin: 80px 0 30px 130px;
+	font-family: 'SOYOMapleBoldTTF';
+	font-size: var(--font1);
+	
+}
+
+.grid_wrap{
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-auto-rows: minmax(45px, auto);
+	align-items: center;
+	margin-top: 30px;
+	width: 700px;
+	border-top: 2px solid #006AFF;
+	border-bottom: 2px solid #006AFF;
+	margin: 0 auto;
+}
+
+.reserve_code{
+	grid-column: 1/ 2;
+	grid-row: 1/ 2;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.p{
+	position: absolute;
+	transform: translate(10px, 90%);
+	font-family: 'SOYOMapleBoldTTF';
+}
+
+.hotel_code{
+	grid-column: 2 / 6;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);
+	vertical-align: middle;
+}
+
+.code_num {
+    position: absolute;
+    transform: translate(20px, 15px);
+}
+
+.check_in_out{
+	grid-column: 1/ 2;
+	grid-row: 2/ 3;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.check_in_out_time{
+	grid-column: 2 / 6;
+	grid-row: 2/ 3;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);		
+}
+
+.time{
+	position: absolute;
+    transform: translate(20px, 15px);
+}
+
+.room{
+	grid-column: 1/ 2;
+	grid-row: 3/ 4;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.room_info{
+	grid-column: 2 / 6;
+	grid-row: 3/ 4;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);	
+}
+
+.room_att_cat{
+	position: absolute;
+    transform: translate(20px, 15px);	
+}
+
+.request{
+	grid-column: 1/ 2;
+	grid-row: 4/ 5;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);	
+}
+
+.request_info{
+	grid-column: 2 / 6;
+	grid-row: 4/ 5;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);		
+}
+
+.request_detail{
+	position: absolute;
+    transform: translate(20px, 15px);		
+}
+
+.reserve_name{
+	grid-column: 1/ 2;
+	grid-row: 5/ 6;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);	
+}
+
+.resident{
+	grid-column: 2 / 6;
+	grid-row: 5/ 6;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);		
+}
+
+.ko{
+	position: absolute;
+    transform: translate(20px, 15px);		
+}
+
+.pay{
+	grid-column: 1/ 2;
+	grid-row: 6/ 7;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-right: 1px solid var(--color_blue_1);	
+}
+
+.payment{
+	grid-column: 2 / 6;
+	grid-row: 6/ 7;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.totalpay{
+	position: absolute;
+    transform: translate(20px, 15px);		
+}
+
+.btn{
+	margin-top: 60px;
+	text-align: center;
+}
+
+.reserve_btn{
+	padding: 15px 40px;
+	background-color: var(--color_blue_2);
+	border: none;
+	border-radius: 20px;
+	font-size: var(--font4);
+}
+
+.reserve_btn:hover{
+	cursor: pointer;
+	background-color: var(--color_blue_1);
+	color: white;
+}

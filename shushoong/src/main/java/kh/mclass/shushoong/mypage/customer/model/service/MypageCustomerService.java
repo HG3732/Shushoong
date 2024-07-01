@@ -1,5 +1,7 @@
 package kh.mclass.shushoong.mypage.customer.model.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,8 +27,7 @@ public class MypageCustomerService {
 	}
 	
 	// 비밀번호 재설정
-	public String resetPwd(MemberDto dto) {
-		dto.setUserPwd(bcrypt.encode(dto.getUserPwd()));
-		return mypageRepository.resetPwd(dto);
+	public int resetInfo(Map<String, Object> paramMap) {
+		return mypageRepository.resetInfo(paramMap);
 	}
 }

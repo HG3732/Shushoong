@@ -1,6 +1,7 @@
 package kh.mclass.shushoong.mypage.customer.controller;
 
 import java.security.Principal;
+import java.util.Map;
 
 import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,34 @@ public class MyPageCustomerController {
 		MemberDto dto = repository.selectOne(userId);
 		modelMap.addAttribute("dto",dto);
 		return "mypage/customer/mypageCorrectInfoCustomer";
+	}
+	
+	@PostMapping("/changeInfo.ajax")
+	public String changePwd(@RequestParam("userPwd") String userPwd,
+							@RequestParam("emailReceive") String emailReceive,
+							@RequestParam("msgReceive") String msgReceive,
+							Principal principal, RedirectAttributes rttr,
+							@RequestParam Map<String, Object> paramMap) {
+
+		String userId = principal.getName();
+		paramMap.put("userPwd", encoder.encode(userPwd));
+		paramMap.put("userId", userId);
+		paramMap.put("emailReceive", emailReceive);
+		paramMap.put("msgReceive", msgReceive);
+		
+		int result = service.resetInfo(paramMap);
+		
+		String message = null;
+		
+		if(result > 0) {
+			message = "변경사항이 변경되었습니다.";
+			
+		} else {
+			message = "변경에 실패했습니다.";
+		}
+		
+		rttr.addFlashAttribute("message", message);
+		return "redirect:/business/my/information";
 	}
 	
 	// 마이페이지 항공 리스트 페이지로 이동

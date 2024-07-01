@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.business.model.repository.MypageBusinessRepository;
 import kh.mclass.shushoong.mypage.business.model.service.MypageBusinessService;
@@ -66,13 +67,26 @@ public class MypageBusinessController {
 
 	// 비밀번호 변경(암호화)
 	@PostMapping("/changePwd.ajax")
-	public String changePwd(@RequestParam("userId") String userID, @RequestParam("userPwd") String userPwd,
-			MemberDto dto) {
+	public String changePwd(@RequestParam("userPwd") String userPwd, 
+							Principal principal, RedirectAttributes rttr,
+							@RequestParam Map<String, Object> paramMap) {
 
-		dto.setUserId(userID);
-		service.resetPwd(dto);
-
-		return "redirect:/my/information";
+		String userId = principal.getName();
+		paramMap.put("userPwd", encoder.encode(userPwd));
+		paramMap.put("userId", userId);
+		int result = service.resetPwd(paramMap);
+		
+		String message = null;
+		
+		if(result > 0) {
+			message = "비밀번호가 변경되었습니다.";
+			
+		} else {
+			message = "비밀번호 변경에 실패했습니다.";
+		}
+		
+		rttr.addFlashAttribute("message", message);
+		return "redirect:/business/my/information";
 	}
 
 	// 사업장 관리 페이지 이동

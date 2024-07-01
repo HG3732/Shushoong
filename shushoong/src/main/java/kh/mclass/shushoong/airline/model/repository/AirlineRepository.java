@@ -15,7 +15,7 @@ public interface AirlineRepository {
 	// 항공 리스트
 	List<AirlineInfoDto> selectAllList(String departLoc, String arrivalLoc, String departDate, String arrivalDate);
 	// 왕복 오는 항공편
-	List<AirlineInfoDto> selectOne(String airlineCode);
+	AirlineInfoDto selectOne(String airlineCode);
 	// 사이드 바 시간대 
 	List<AirlineInfoDto> selectOptions(
 			String departLoc, String arrivalLoc, 

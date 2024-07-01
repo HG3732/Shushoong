@@ -22,7 +22,7 @@ public class AirlineService {
 		return airlineRepository.selectAllList(departLoc, arrivalLoc, departDate, arrivalDate);
 	}
 	// 왕복 오는 항공편
-	public List<AirlineInfoDto> getSelectOne(String airlineCode){
+	public AirlineInfoDto getSelectOne(String airlineCode){
 		System.out.println("Service - flightNo : " + airlineCode);
 		
 		return airlineRepository.selectOne(airlineCode);

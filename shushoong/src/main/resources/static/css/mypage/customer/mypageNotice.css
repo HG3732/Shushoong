@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+.section-notice {
+	width: 960px;
+    float: left;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.section-notice .notice-h1{
+	margin-top: 60px;
+	text-align: center;
+}
+
+/* 공지사항 리스트 */
+section .onlineQnAList {
+	margin-bottom: 100px;
+}
+
+section .viewAllList {
+	display: flex;
+	justify-content: right;
+}
+
+section .QnA-grid {
+	height: 40px;
+	font-size: 13px;
+	font-weight: bold;
+	border-top: 2px solid #006AFF;
+	border-bottom: 2px solid #006AFF;
+	background-color: #BCEFFF;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	align-items: center;
+	text-align: center;
+}
+.section-notice .QnA-grid .th-no{
+	text-align: left;
+    margin-left: 50px;
+}
+.section-notice QnA-grid .th-no{
+	
+}
+.section-notice QnA-grid .th-no{
+	
+}
+
+section .QnA-content {
+	height: 40px;
+	font-size: 11px;
+	font-weight: bold;
+	border-bottom: 1px solid #006AFF;
+	margin-bottom: 10px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	align-items: center;
+	text-align: center;
+}
+
+section .viewQnAList {
+	border: none;
+	border-radius: 20px;
+	width: 90px;
+	height: 40px;
+	background-color: #006AFF;
+	cursor: pointer;
+	color: white;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: SOYOMapleRegularTTF;
+}

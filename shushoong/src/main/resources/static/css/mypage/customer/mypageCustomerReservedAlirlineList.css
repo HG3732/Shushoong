@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 div.main_section{
-	width : 960px; 
+	width : 920px; 
     float: left;
     box-sizing: border-box;
     padding: 20px;
@@ -25,11 +25,11 @@ button.display_list_button{
 	border: none;
 }
 button#reserved_btn{
-	border-top: 3px solid var(--color_gray_4);
+	border-top: 3px solid var(--color_blue_1);
 }
 button#canceled_btn{
-	border-left: 3px solid var(--color_gray_4);
-	border-bottom: 3px solid var(--color_gray_4);
+	border-left: 3px solid var(--color_blue_1);
+	border-bottom: 3px solid var(--color_blue_1);
 }
 							/* 예약 list section */
 div.list_wrap,div.list_wrap{
@@ -42,13 +42,13 @@ div.list_wrap > div,div.list_wrap > div{
 
 /* 첫번째 열 */
 div.list_wrap > div:first-child,div.list_wrap > div:first-child{
-	height: 50px;
+	height: 70px;
 	border-top: 3px solid 	var(--color_blue_1);
-	line-height: 50px;
+	line-height: 70px;
 }
 /* 두번째 열 */
 div.list_wrap > div:last-child,div.list_wrap > div:last-child{
-	height: 110px;
+	height: 150px;
 	border-top: 1px solid 	var(--color_blue_1);
 	border-bottom: 3px solid 	var(--color_blue_1);
 }
@@ -64,16 +64,16 @@ div.list_wrap > div > div:last-child,div.list_wrap > div > div:last-child{
 }
 /* 두번째 행, 첫번째 열 */
 div.list_wrap > div:last-child > div:first-child,div.list_wrap > div:last-child > div:first-child{
-	line-height : 50px;
+	line-height : 70px;
 }
 /* 두번째 행, 두번째 열 */
 div.list_wrap > div:last-child > div:last-child,div.list_wrap > div:last-child > div:last-child{
-	line-height : 30px;
+	line-height : 35px;
 }
 /* 두번째 행, 두번째열 의 div의 첫번째열 */
 div.list_wrap > div:last-child > div:last-child > div:first-child,div.list_wrap > div:last-child > div:last-child > div:first-child{
 	display: flex;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 /* 두번째 행, 두번째열 의 div의 첫번째열 두번째 행*/
 div.list_wrap > div:last-child > div:last-child > div:first-child > div,div.list_wrap > div:last-child > div:last-child > div:first-child > div{
@@ -83,7 +83,7 @@ div.list_wrap > div:last-child > div:last-child > div:first-child > div,div.list
 div.list_wrap > div:last-child > div:last-child > div:last-child,div.list_wrap > div:last-child > div:last-child > div:last-child{
 	display: flex;
 }
-
+/* 두번째 행, 두번째열 의 div의 마지막열 이미지,div */
 div.list_wrap > div:last-child > div:last-child > div:first-child > img,div.list_wrap > div:last-child > div:last-child > div:first-child > img{
 	width: 30px;
 	height : 30px;

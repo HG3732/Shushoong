@@ -42,7 +42,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	
 
 				<div class="hotel_name">
-					<p>호텔 그레이서리 신주쿠</p>
+					<p th:text="${hotelName}"></p>
 				</div>
 					
 				<div class="grid_wrap">
@@ -56,31 +56,31 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<p class="p">체크인/체크아웃</p>
 					</div>						
 					<div class="check_in_out_time">
-						<div class="time">2024.07.01 ~ 2024.07.03</div>
+						<div class="time" th:text="${checkIn} + ' ~ ' + ${checkOut}"></div>
 					</div>
 					<div class="room">
 						<p class="p">객실 정보</p>
 					</div>
 					<div class="room_info">
-						<div class="room_att_cat">스탠다드 룸, 시티뷰</div>
+						<div class="room_att_cat" th:text="${roomCatDesc} + ', ' + ${roomAttDesc}"></div>
 					</div>								
 					<div class="request">
 						<p class="p">요청 사항</p>
 					</div>
 					<div class="request_info">
-						<div class="request_detail">트윈, 금연실</div>
+						<div class="request_detail" th:text="${request}"></div>
 					</div>						
 					<div class="reserve_name">
 						<p class="p">투숙객 성명</p>
 					</div>
 					<div class="resident">
-						<div class="ko">송채원</div>
+						<div class="ko" th:text="${residenceNameKo}"></div>
 					</div>							
 					<div class="pay">
 						<P class="p">금액</P>
 					</div>
 					<div class="payment">
-						<div class="totalpay">KRW 123,456</div>
+						<div class="totalpay" th:text="${hotelPrice}"></div>
 					</div>
 				</div>
 				

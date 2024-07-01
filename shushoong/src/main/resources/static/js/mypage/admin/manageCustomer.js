@@ -133,7 +133,7 @@ function sleeperViewHandler(thisElement) {
 }
 
 //sleeper 회원 정지
-function lockAccountHandler(thisElement) {
+function lockAccountHandler2(thisElement) {
 	var id = $(thisElement).parent('.btn.container').data("targetid");
 	$.ajax({
 		url: "/shushoong/admin/manager/customer/lockAccount.ajax",
@@ -161,7 +161,7 @@ function lockAccountHandler(thisElement) {
 }
 
 //sleeper 회원 정지 해제
-function unlockAccountHandler(thisElement) {
+function unlockAccountHandler2(thisElement) {
 	var id = $(thisElement).parent('.btn.container').data("targetid");
 	$.ajax({
 		url: "/shushoong/admin/manager/customer/unlockAccount.ajax",

@@ -99,11 +99,8 @@ public class MypageAdminController {
 	
 	//일괄 정지(list 데이터에 ""가 붙어서 인코딩해야하므로 Get대신 Post를 사용함)
 	@PostMapping("/manager/customer/allLock.ajax")
-	public String allLock(Model model, @RequestBody List<String> sleeperList) {
-		System.out.println("controller List : " + sleeperList);
-		for(String sleeperId : sleeperList) {
-			service.updateLockAccount(sleeperId);
-		}
+	public String allLock(Model model, String keyword) {
+			service.updateAllLock(keyword);
 		return "mypage/admin/manageCustomer";
 	}
 	
@@ -117,6 +114,11 @@ public class MypageAdminController {
 	@GetMapping("/manager/product")
 	public String manageProduct() {
 		return "mypage/admin/manageProduct";
+	}
+	
+	@GetMapping("/support/notice/list")
+	public String faq() {
+		return "mypage/faq";
 	}
 	
 	@GetMapping ("/hotel/test")

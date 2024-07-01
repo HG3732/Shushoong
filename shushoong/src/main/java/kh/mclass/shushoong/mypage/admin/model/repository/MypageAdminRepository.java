@@ -39,6 +39,8 @@ public interface MypageAdminRepository {
 	//장기 미사용 계정 검색
 	public List<String> selectDormantAccount(String keyword);
 	
+	public int updateAllLock(String keyword);
+	
 	//마지막 로그인으로부터 경과시간 조회
 	public int selectUseTerm(String id);
 }

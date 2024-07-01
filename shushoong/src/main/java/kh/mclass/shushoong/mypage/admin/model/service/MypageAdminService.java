@@ -50,6 +50,10 @@ public class MypageAdminService {
 		return mypageAdminRepository.selectDormantAccount(keyword);
 	}
 	
+	public int updateAllLock(String keyword) {
+		return mypageAdminRepository.updateAllLock(keyword);
+	}
+	
 	public int selectUseTerm(String id) {
 		return mypageAdminRepository.selectUseTerm(id);
 	}

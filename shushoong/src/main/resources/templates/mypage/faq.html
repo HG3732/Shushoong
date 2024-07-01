@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/admin/mypageAdminAside.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/faq.css}" rel="stylesheet" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>1:1 문의</title>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-aside">
+				<aside>
+					<div th:replace="~{mypage/admin/mypageAdminAside :: Aside}"></div>
+				</aside>
+			</div>
+			<div class="wrap-section">
+				<section>
+					<div class="onlineQnAList">
+						<div class="content-title">1:1 문의 현황</div>
+						<div class="QnA-grid">
+							<div>번호</div>
+							<div>문의제목</div>
+							<div>카테고리</div>
+							<div>문의자</div>
+							<div>등록일자</div>
+						</div>
+						<div th:each="faqList : ${latestFaq}" class="QnA-content">
+							<div th:text="${faqList.FAQ_ID}"></div>
+							<div th:text="${faqList.ASK_TITLE}"></div>
+							<div th:text="${faqList.QUEST_CAT_DESC}"></div>
+							<div th:text="${faqList.USER_ID}"></div>
+							<div th:text="${faqList.ASK_DATE}"></div>
+						</div>
+						<div class="search">
+							<input type="text" class="searchKeyword" name="keyword"><button type="button" class="searchQnAList">검색</button>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+		<div th:replace="~{common/footer :: Footer}"></div>
+	</div>
+</body>
+	<script th:src='@{/js/mypage/admin/manageCustomer.js}'></script>
+</html>

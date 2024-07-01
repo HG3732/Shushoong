@@ -369,14 +369,42 @@ BEGIN
 END;
 /
 
-desc hotel_reserve;
+desc reserve_request;
 commit;
 
 select * from hotel_request;
 
-insert all into hotel_request values (0, '없음')
-        into hotel_request values (1, '오션뷰')
-        into hotel_request values (2, '마운틴뷰')
-        into hotel_request values (3, '시티뷰')
-        into hotel_request values (4, '기타')
+insert all into hotel_request values (0, '싱글')
+        into hotel_request values (1, '트윈')
+        into hotel_request values (2, '더블')
+        into hotel_request values (3, '금연실')
+        into hotel_request values (4, '흡연실')
+        into hotel_request values (5, '고층')  
         select * from dual;
+
+select * from reserve_request;
+
+
+select * from hotel_reserve;
+desc hotel_reserve;
+
+delete from hotel_review
+where hotel_reserve_code = '2024070132OS0010';
+
+delete from hotel_reserve
+where hotel_reserve_code = '20240701162OS0020';
+
+alter table hotel_reserve
+modify residence_gender varchar2(3);
+
+select * from reserve_request;
+202406262OS001S01
+
+delete from reserve_request
+where hotel_reserve_code = '20240701162OS0020';
+
+select *
+from
+(select * from hotel_reserve
+    join reserve_request using(hotel_reserve_code))
+    right join hotel_request using(request);

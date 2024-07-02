@@ -66,9 +66,10 @@ END;
 
 select (sysdate - year) from dual;
 
-
+-- 1년이상 로그인 안한 유저들 조회
 select add_months(sysdate, -12) from dual;
 select * from member where latest_login < add_months(sysdate, -12);
 select to_number(trunc(sysdate - latest_login)) from member;
 
-select * from service_center;
+-- 1:1문의 뷰
+select quest_cat_desc, faq_id, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center join faq_cat using (faq_id) join faq_cat_desc using(quest_cat);

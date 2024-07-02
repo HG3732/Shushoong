@@ -17,4 +17,8 @@ public class OnlineQnAService {
 	public List<OnlineQnADto> selectAllList(String category, String keyword, String questCatCategory) {
 		return serviceCenterRepository.selectAllList(category, keyword, questCatCategory);
 	};
+	
+	public OnlineQnADto selectOneQna(String faqId) {
+		return serviceCenterRepository.selectOneQna(faqId);
+	}
 }

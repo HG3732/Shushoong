@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
 import lombok.RequiredArgsConstructor;
@@ -14,15 +15,21 @@ public class ServiceCenterController {
 	@Autowired
 	private OnlineQnAService service;
 	
-	@GetMapping("/support/notice/list")
+	@GetMapping("/support/qna/list")
 	public String qnaList(Model model, String category, String keyword, String questCat) {
 		model.addAttribute("result", service.selectAllList(category, keyword, questCat));
 		return "servicecenter/onlineQnAlist";
 	}
 	
 	@GetMapping("/support/notice/search.ajax")
-	public String searchQna(Model model, String category, String keyword, String questCatCategory) {
+	public String searchQnA(Model model, String category, String keyword, String questCatCategory) {
 		model.addAttribute("result", service.selectAllList(category, keyword, questCatCategory));
 		return "servicecenter/QnAlist";
+	}
+	
+	@GetMapping("/support/qna/view/{faqId}")
+	public String viewQnA(Model model, @PathVariable("faqId") String faqId) {
+		model.addAttribute("result", service.selectOneQna(faqId));
+		return "servicecenter/viewQnA";
 	}
 }

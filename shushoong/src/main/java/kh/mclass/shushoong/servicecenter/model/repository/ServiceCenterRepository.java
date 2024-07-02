@@ -10,4 +10,7 @@ import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
 public interface ServiceCenterRepository {
 	//1:1 문의 검색
 	public List<OnlineQnADto> selectAllList(String category, String keyword, String questCatCategory);
+	
+	//1:1 문의 보기
+	public OnlineQnADto selectOneQna(String faqId);
 }

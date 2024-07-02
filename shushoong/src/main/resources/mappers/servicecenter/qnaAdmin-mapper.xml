@@ -26,4 +26,13 @@
 		 	</if>
 	 	</if>
 	</select>
+	
+	<!-- 1:1 문의 보기 -->
+	<select id="selectOneQna" parameterType="String" resultType="OnlineQnADto">
+		select quest_cat_desc, faq_id, user_id, ask_title, ask_content, ask_date, ans_content, ans_time 
+		from service_center 
+		join faq_cat using (faq_id) 
+		join faq_cat_desc using(quest_cat)
+		where faq_id = #{faqId}
+	</select>
 </mapper>

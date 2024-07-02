@@ -111,6 +111,12 @@ public class MyPageCustomerController {
 		return "mypage/customer/mypageCustomerReservedHotelList";
 	}
 	
+	// 마이페이지 호텔 예매내역 하나 선택
+	@GetMapping("/mypage/reserved/hotel")
+	public String selectOneHotel() {
+		return "mypage/customer/mypageCustomerReservedHotel";
+	}
+	
 	// 마이페이지 항공 리스트 페이지로 이동
 	@GetMapping("/mypage/reserved/airline/list")
 	public String getMethodName() {

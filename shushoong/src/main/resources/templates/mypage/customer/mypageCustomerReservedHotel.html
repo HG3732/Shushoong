@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerReservedHotel.css}" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>슈슝</title>
+</head>
+<body>
+
+<div class="wrapper">
+	<div class="wrap-header">
+		<header>
+				<div th:replace="~{common/header :: Header}"></div>
+			<div class="hrline">
+				<hr>
+			</div>
+		</header>
+	</div>
+	
+	<div class="wrap-body">
+		<div class="wrap-aside">
+			<aside>
+				<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+			</aside>
+		</div>
+		
+		<div class="main_section">	
+					
+			<div class="reserved_list">
+				<div class="reserve_code">
+					<p class="p">예약번호</p>
+				</div>
+				<div class="hotel_code">
+					<div class="code_num"></div>
+				</div>
+				<div class="check_in_out">
+					<p class="p">체크인/체크아웃</p>
+				</div>						
+				<div class="check_in_out_time">
+					<div class="time"></div>
+				</div>
+				<div class="room">
+					<p class="p">객실 정보</p>
+				</div>
+				<div class="room_info">
+					<div class="room_att_cat"></div>
+				</div>								
+				<div class="request">
+					<p class="p">요청 사항</p>
+				</div>
+				<div class="request_info">
+					<div class="request_detail"></div>
+				</div>						
+				<div class="reserve_name">
+					<p class="p">투숙객 성명</p>
+				</div>
+				<div class="resident">
+					<div class="ko"></div>
+				</div>							
+				<div class="pay">
+					<P class="p">금액</P>
+				</div>
+				<div class="payment">
+					<div class="totalpay"></div>
+				</div>						
+			</div>
+
+			<div class="btn">
+				<button type="button" class="reserve_btn">취소하기</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+	
+<div class="wrap-footer">
+ 		<div th:replace="~{common/footer :: Footer}"></div> 
+</div>
+	
+<script>
+
+$(loadedHandler)
+
+function loadedHandler(){
+}
+</script>
+
+	
+</body>
+</html>

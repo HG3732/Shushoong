@@ -13,4 +13,7 @@ public interface ServiceCenterRepository {
 	
 	//1:1 문의 보기
 	public OnlineQnADto selectOneQna(String faqId);
+	
+	//1:1 문의 답변 작성
+	public int updateAnswer(String faqId, String ansContent);
 }

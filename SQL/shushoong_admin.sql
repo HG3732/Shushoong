@@ -73,3 +73,7 @@ select to_number(trunc(sysdate - latest_login)) from member;
 
 -- 1:1문의 뷰
 select quest_cat_desc, faq_id, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center join faq_cat using (faq_id) join faq_cat_desc using(quest_cat);
+
+update service_center
+set ans_time = sysdate, ans_content = '이렇게 하면 된다고 47번째 말씀드립니다.'
+where faq_id = '47';

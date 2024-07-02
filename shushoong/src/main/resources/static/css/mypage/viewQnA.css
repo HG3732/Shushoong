@@ -41,7 +41,7 @@
 	border: 3px solid var(--color_blue_1);
 	border-radius: 20px;
 	padding: 20px;
-	margin: 30px;
+	margin: 30px 30px 15px 30px;
 }
 
 .wrap-comment .ask-date {
@@ -50,4 +50,32 @@
 
 .wrap-comment .ask-content {
 	margin: 10px;
+}
+
+.write-answer {
+	display: none;
+	resize: none;
+	border: none;
+}
+
+.write-answer:focus {
+	outline: none;
+}
+
+.wrap-writeAnswer {
+	display:flex;
+	justify-content: end;
+	padding-right: 30px;
+}
+
+.wrap-writeAnswer .btn {
+	background-color: var(--color_blue_2);
+	padding: 10px;
+	border: none;
+	border-radius: 10px;
+}
+
+.wrap-writeAnswer .btn:hover {
+	background-color: var(--color_blue_1);
+	color: white;
 }

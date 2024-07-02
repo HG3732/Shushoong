@@ -21,4 +21,8 @@ public class OnlineQnAService {
 	public OnlineQnADto selectOneQna(String faqId) {
 		return serviceCenterRepository.selectOneQna(faqId);
 	}
+	
+	public int updateAnswer(String faqId, String ansContent) {
+		return serviceCenterRepository.updateAnswer(faqId, ansContent);
+	}
 }

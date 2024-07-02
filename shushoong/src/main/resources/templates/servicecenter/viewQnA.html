@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/core.css}" rel="stylesheet" />
@@ -56,9 +57,16 @@
 			</div>
 			<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
 			<th:block th:if="${result.ansTime == null or result.ansTime == ''}">
-				<div class="wrap-comment">
-					<div class="no-content">문의 확인 중 입니다. 빠른 시일 내로 답변 드리겠습니다.</div>
-				</div>
+				<form method='post' action='/shushoong/support/qna/write/answer'>
+					<input type="hidden" name="faqId" th:value="${result.faqId}">
+					<div class="wrap-comment">
+						<div class="no-content">문의 확인 중 입니다. 빠른 시일 내로 답변 드리겠습니다.</div>
+						<textarea name="ansContent" cols="110" rows="30" class="write-answer"></textarea>
+					</div>
+					<div class="wrap-writeAnswer">
+						<button type="button" class="btn btn-write-answer">답변하기</button>
+					</div>
+				</form>
 			</th:block>
 			<th:block th:unless="${result.ansTime == null or result.ansTime == ''}">
 				<div class="wrap-comment">
@@ -66,7 +74,6 @@
 					<div class="ask-content" th:text="${result.ansContent}"></div>
 				</div>
 			</th:block>
-			<div></div>
 		</div>
 	</div>
 	</div>
@@ -74,4 +81,5 @@
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
 </body>
+<script th:src='@{/js/mypage/admin/viewQnA.js}'></script>
 </html>

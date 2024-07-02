@@ -35,4 +35,10 @@
 		join faq_cat_desc using(quest_cat)
 		where faq_id = #{faqId}
 	</select>
+	
+	<!-- 1:1 문의 작성 -->
+	<update id="updateAnswer" parameterType="hashMap">
+		update service_center set ans_time = sysdate, ans_content = #{ansContent}
+		where faq_id = #{faqId}
+	</update>
 </mapper>

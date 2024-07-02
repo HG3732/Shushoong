@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.airline.controller;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -217,6 +218,8 @@ public class AirlineController {
 	// 항공 메인 페이지
     @GetMapping("/airline/main")
     public String airlineMain() {
+
+    	
         return "airline/airline_main"; // 폼이 있는 페이지로 이동
     }
 	
@@ -277,6 +280,7 @@ public class AirlineController {
 			HttpSession session
 			) {
 		String userId = (String) session.getAttribute("userId");
+		
 		
 		
 		

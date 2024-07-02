@@ -2,6 +2,13 @@ section .onlineQnAList {
 	margin-bottom: 100px;
 }
 
+.content-title {
+	margin: 20px;
+	text-align: center;
+	font-weight: 900;
+	font-size: 20px;
+}
+
 section .viewAllList {
 	display: flex;
 	justify-content: right;
@@ -37,6 +44,7 @@ section .search {
 	flex-direction: row;
 	justify-content: center;
 	gap: 10px;
+	margin: 20px;
 }
 
 section .searchQnAList {
@@ -50,4 +58,8 @@ section .searchQnAList {
 	font-size: 13px;
 	font-weight: bold;
 	font-family: SOYOMapleRegularTTF;
+}
+
+section .questCat-category {
+	display: none;
 }

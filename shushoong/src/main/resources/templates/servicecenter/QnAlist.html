@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="QnAlist" id="wrap-QnAlist">
+	<div class="QnA-content" th:each="faqList : ${result}">
+		<div th:text="${faqList.faqId}"></div>
+		<div th:text="${faqList.askTitle}"></div>
+		<div th:text="${faqList.questCatDesc}"></div>
+		<div th:text="${faqList.userId}"></div>
+		<div th:text="${faqList.askDate}"></div>
+	</div>
+</div>
+</html>

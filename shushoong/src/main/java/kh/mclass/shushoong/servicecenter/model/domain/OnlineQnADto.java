@@ -1,5 +1,7 @@
 package kh.mclass.shushoong.servicecenter.model.domain;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -9,9 +11,11 @@ import lombok.Data;
 public class OnlineQnADto {
 	private String faqId;
 	private String userId;
+	private String questCatDesc;
 	private String askTitle;
 	private String askContent;
 	private String askDate;
 	private String ansContent;
 	private String ansTime;
+	private List<String> fileId;
 }

@@ -7,6 +7,7 @@
 			<span th:text="${air.departLoc}" class="select-info-departLoc" name="departLoc"></span> 
 			<span th:text="${air.arrivalLoc}" class="select-info-arrivalLoc" name="arrivalLoc"></span> 
 			<span th:text="${air.airlineCode}" class="select-info-airlineCode" name="airlineCode"></span>
+			<span th:text="${air.seatPrice}" class="select-info-seatPrice" name="seatPrice"></span>
 		</div>
 		
 		<div class="seat-count">
@@ -24,8 +25,7 @@
 				<div class="airinfo depart-info">
 					<div th:text="${air.departDate}" class="info date"></div>
 					<div th:text="${air.departTime}" class="info time">이륙 시간</div>
-					<div th:text="${air.departLoc}" class="info loc depart"
-						id="info-departLoc" th:value="${air.departLoc}"></div>
+					<div th:text="${air.departLoc}" class="info loc depart" id="info-departLoc" th:value="${air.departLoc}"></div>
 				</div>
 				<div class="arrow">
 					<div class="via-count">
@@ -33,14 +33,12 @@
 					</div>
 					<img th:src="@{/images/airline_via.png}" alt="">
 					<div th:text="${air.flightTime}" class="flytime">비행 시간</div>
-					<div hidden th:text="${air.flightNo}" id="info-airlineCode"
-						class=""></div>
+					<div hidden th:text="${air.flightNo}" id="info-airlineCode" class=""></div>
 				</div>
 				<div class="airinfo arr-info">
 					<div th:text="${air.arrivalDate}" class="info date">도착 일자</div>
 					<div th:text="${air.arrivalTime}" class="info time">착륙 시간</div>
-					<div th:text="${air.arrivalLoc}" class="info loc arrival"
-						id="info-arrivalLoc"></div>
+					<div th:text="${air.arrivalLoc}" class="info loc arrival" id="info-arrivalLoc"></div>
 				</div>
 
 				<div class="nop">
@@ -59,7 +57,6 @@
 						<div class="ticket-price" th:if="${ticketType} == 1">
 							<span
 								th:text="${#numbers.formatInteger(T(java.lang.Integer).parseInt(air.seatPrice) / 2, 3, 'COMMA') + '원'}"></span>
-
 						</div>
 						<div class="ticket-btn">
 							<button class="ticketinfo-btn" type="button">

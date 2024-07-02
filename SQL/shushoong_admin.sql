@@ -70,3 +70,5 @@ select (sysdate - year) from dual;
 select add_months(sysdate, -12) from dual;
 select * from member where latest_login < add_months(sysdate, -12);
 select to_number(trunc(sysdate - latest_login)) from member;
+
+select * from service_center;

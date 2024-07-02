@@ -116,11 +116,6 @@ public class MypageAdminController {
 		return "mypage/admin/manageProduct";
 	}
 	
-	@GetMapping("/support/notice/list")
-	public String faq() {
-		return "mypage/faq";
-	}
-	
 	@GetMapping ("/hotel/test")
 	public String test() {
 		return "modal/hotelInformation";

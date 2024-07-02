@@ -35,6 +35,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		
 		<div class="main_section">	
 					
+					
+			<div class="hotel_name">
+				<p>호텔 이름</p>
+			</div>
+					
 			<div class="reserved_list">
 				<div class="reserve_code">
 					<p class="p">예약번호</p>
@@ -78,6 +83,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<button type="button" class="reserve_btn">취소하기</button>
 			</div>
 
+			<div id="modal" class="modal_overlay">
+	            <div class="modal_window">
+	            	<button type="button" class="esc">X</button>
+	            	<p style="text-align: center">정말 취소하시겠습니까?</p>
+	            	
+	            	<div class="btn_wrap">
+	            		<button type="button" class="yes">네</button>
+	            		<button type="button" class="no">아니오</button>
+	            	</div>
+	            </div>
+           	</div>
+
+
 		</div>
 	</div>
 </div>
@@ -91,7 +109,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 $(loadedHandler)
 
 function loadedHandler(){
+	
+	$('.reserve_btn').on('click', reserveCancelHandler);
+	$('.esc').on('click', escHandler);
 }
+
+function reserveCancelHandler(){
+	$('#modal').css("display", 'block');
+}
+
+function escHandler(){
+	$('#modal').css("display", 'none');
+}
+
 </script>
 
 	

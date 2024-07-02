@@ -100,6 +100,7 @@
 										<input class="baggage" id="adult_40kg${i}" type="radio" name="adult_baggage_size${i}" value="4">
 									</label>
 									<input type="hidden" name="baggage_size" value="1">
+									<input type="hidden" name="reserve_code" >
 								</div>
 							</div>
 						</div>
@@ -216,6 +217,7 @@
 										<input class="baggage" id="child_40kg${i}" type="radio" name="child_baggage_size${i}" value="4">
 									</label>
 									<input type="hidden" name="baggage_size" value="1">
+									<input type="hidden" name="reserve_code" >
 
 								</div>
 							</div>
@@ -297,6 +299,7 @@
 										<input type="text" placeholder="만료 날짜" name="expiration_date">
 									</div>
 									<input type="hidden" name="baggage_size" value="1">
+									<input type="hidden" name="reserve_code" >
 								</div>
 							</div>
 						</div>

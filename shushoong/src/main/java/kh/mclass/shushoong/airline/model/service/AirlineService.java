@@ -51,12 +51,16 @@ public class AirlineService {
 //		
 //	}
 	
-	public int insertReserverInfo(String phoneNum,String email) {
+	public int insertReserverInfo(String resName, String phoneNum,String email) {
 		
-		return airlineRepository.insertReserverInfo(phoneNum, email);
+		return airlineRepository.insertReserverInfo(resName,phoneNum, email);
 		
 		
 	}
+	public String selectResCode(String resName,String phoneNum, String email) {
+		return airlineRepository.selectResCode(resName,phoneNum,email);
+	}
+	
 	
 	public int insertPassengerInfo(List<Map<String, Object>> passengerList) {
 		return airlineRepository.insertPassengerInfo(passengerList);

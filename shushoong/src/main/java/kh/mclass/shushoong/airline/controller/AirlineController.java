@@ -234,9 +234,11 @@ public class AirlineController {
 	@PostMapping("/airline/customer/reserve/pay")
 	public String airlinePay(HttpSession session, Model md,
 			String airlineCodeDirect,
-			String airlineCodeReturn
+			String airlineCodeReturn,
+			Principal principal
 							) {
 		System.out.println("예약페이지 컨트롤러");
+		log.info("principal: {}",principal);
 		String airlineCode2 = (String) session.getAttribute("airlineCode");
 		String adult = (String) session.getAttribute("adult");
 		String child = (String) session.getAttribute("child");
@@ -245,7 +247,10 @@ public class AirlineController {
 		md.addAttribute("child", child);
 		md.addAttribute("baby", baby);
 		md.addAttribute("airlineCodeReturn", airlineCodeReturn);
-		
+		if(principal != null) {
+			String userId = principal.getName();
+			md.addAttribute("userId",userId);
+		}
 		
 		log.info("어른 adult: {}, 소아 child: {}, 유아 baby {}, 왕복 항공코드 {}, 오는편 항공코드{}, 편도 항공코드{}", adult, child, baby,airlineCode2,airlineCodeReturn,airlineCode2);
 		
@@ -258,20 +263,31 @@ public class AirlineController {
 	@ResponseBody
 	@PostMapping("/airline/input/reserverInfo")
 	public int customerInfo(
+			@RequestParam("reserver_name") String reserver_name,
 			@RequestParam("phone_number") String phone_number,
-			@RequestParam("reserver_email") String reserver_email,			
-			HttpSession session
+			@RequestParam("reserver_email") String reserver_email		
 			) {
-		String userId = (String) session.getAttribute("userId");
-		
 		
 		
 		
 		int result = 0;
-		System.out.println("!@#$%^%^&2311322312132213              :       "+userId+phone_number+reserver_email);
-		 result = service.insertReserverInfo(phone_number,reserver_email);
+		System.out.println("!@#$%^%^&2311322312132213              :       "+reserver_name+phone_number+reserver_email);
+		 result = service.insertReserverInfo(reserver_name,phone_number,reserver_email);
 		return result;
 	}
+	
+	@ResponseBody
+	@PostMapping("/airline/select/resCode")
+	public String selectResCode(
+			@RequestParam("reserver_name") String reserver_name,
+			@RequestParam("phone_number") String phone_number,
+			@RequestParam("reserver_email") String reserver_email	
+			) {
+		String result = null;
+		result = service.selectResCode(reserver_name,phone_number,reserver_email);
+		return result;
+	}
+	
 	
 	@ResponseBody
 	@PostMapping("/airline/input/passengerInfo")
@@ -279,6 +295,7 @@ public class AirlineController {
 			@RequestBody List<Map<String, Object>> param
 			) {
 		int result = 0;
+		
 		System.out.println("21416547sdafdsaf6677daafdsfasdadsfsafd : "+ param);
 		result = service.insertPassengerInfo(param);
 		return result;

@@ -1,5 +1,48 @@
 @charset "UTF-8";
 
+								/* require login section */
+section.require_login_section{
+	width: 960px;
+	margin: 100px auto;
+	
+}
+
+div.require_login_wrap{
+	border: 5px solid var(--color_blue_1);
+	width: 500px;
+	height: 500px;
+	margin : auto;
+	border-radius: 100px;
+}
+
+div.require_login_wrap>img{
+	width : 250px;
+	height : 250px;
+	margin: 5px 115px;
+}
+
+div.require_login_wrap>div:nth-child(2){
+	width : 300px;
+	margin : 10px auto;
+	font-size: 20px;
+}
+div.require_login_wrap>div:nth-child(3){
+}
+
+a.redirect_to_main , a.redirect_to_login{
+	border: 1px solid var(--color_blue_1);
+	text-align:center;
+	height : 50px;
+	line-height:50px;
+	display: block;
+	width: 350px;
+	margin : 20px auto;
+}
+a.redirect_to_main:hover , a.redirect_to_login:hover{
+	background-color: var(--color_blue_1);
+	color : white;
+}
+
 								/* process section */
 
 section.reserve_process{
@@ -547,4 +590,6 @@ button.info_submit_btn:hover {
 input , label,button{
 	cursor: pointer;
 }
-			
+
+
+								/* footer */

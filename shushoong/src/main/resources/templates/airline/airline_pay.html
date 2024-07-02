@@ -28,7 +28,18 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		<div class="wrap-body">
 			<div class="wrap-">
 			<!-- 여기부터 작성 -->
-			
+			<th:block th:if="${#authorization.expr('isAnonymous()')}">
+				<section class="require_login_section">
+					<div class="require_login_wrap">
+						<img alt="경고창" th:src="@{/images/warning.png}">
+						<div>로그인이 필요한 페이지 입니다.</div>
+						<div>
+							<a class="redirect_to_main" href="javascript:history.back();">이전 페이지로 이동</a>
+							<a class="redirect_to_login" th:href="@{/login}">로그인 페이지로 이동</a>
+						</div>
+					</div>
+				</section>
+			</th:block>
 			<th:block th:if="${#authorization.expr('isAuthenticated()')}">
 					<section class="reserve_process">
 						<div>
@@ -51,7 +62,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 							<div class="reserver_info_flex">
 								<div>
 									<div>이름</div>
-									<div><input type="text" name="reserver_name" readonly="readonly" placeholder="이름이 공백일 경우 F5버튼을 눌러주세요"></div>
+									<div><input type="text" name="reserver_name" readonly="readonly" placeholder="이름이 공백일 경우 F5버튼을 눌러주세요" th:value="${userId}"></div>
 								</div>
 								<div>
 									<div>휴대전화번호</div>
@@ -301,6 +312,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 				url:"/shushoong/airline/input/reserverInfo",
 				type : "POST",
 				data:{
+					reserver_name :	$("[name=reserver_name]").val(),
 					phone_number :	$("[name=reserver_phone_number]").val()
 					,reserver_email :	$("[name=reserver_email]").val()
 		    	 },
@@ -309,7 +321,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 					console.log(result);
 					if(result == 1){
 						console.log("성공성공성공");
-						passengerInfoInsertFunction();
+						getResCodeFunction();
+						
 					}else{
 						alert("데이터 리스트 값 insert 실패");
 					}
@@ -321,7 +334,42 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		       });
 		}
 		
-		$("button#passenger_info_insert").on("click",passengerInfoInsertFunction);
+		function getResCodeFunction(){
+			$.ajax({
+				url:"/shushoong/airline/select/resCode",
+				type : "POST",
+				data:{
+					reserver_name :	$("[name=reserver_name]").val(),
+					phone_number :	$("[name=reserver_phone_number]").val()
+					,reserver_email :	$("[name=reserver_email]").val()
+		    	 },
+				
+				success: function(result){
+					console.log(result);
+					if(result != null){
+						console.log("성공성공성공2222");
+						insertResCodeHandler(result);
+						
+						
+// 						passengerInfoInsertFunction();
+					}else{
+						alert("데이터 리스트 값 insert 실패");
+					}
+				},
+				 error: function(errorThrown) {
+			            console.log("일단 여기 표기")
+// 			            alert("데이터 리스트 값 insert 실패");
+			        }
+		       });
+		}
+		
+		
+		function insertResCodeHandler(result){
+			$("#reserve_code").each(function(){
+				$(this).val(result);
+			});
+		}
+		
 		
 		function passengerInfoInsertFunction(){
 			var passengerInfo = [];

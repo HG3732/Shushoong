@@ -25,7 +25,9 @@ public interface AirlineRepository {
 			);
 	Integer getMaxPrice(String departLoc, String arrivalLoc);
 	
-	int insertReserverInfo(String phoneNum,String email);
+	int insertReserverInfo(String resName,String phoneNum,String email);
+	
+	String selectResCode(String resName,String phoneNum,String email);
 	
 	int insertPassengerInfo(List<Map<String, Object>> passengerList);
 }

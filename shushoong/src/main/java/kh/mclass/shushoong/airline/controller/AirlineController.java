@@ -211,6 +211,7 @@ public class AirlineController {
 		session.setAttribute("arrivalDate", arrivalDate);
 		session.setAttribute("adult", adult);
 		session.setAttribute("child", child);
+		session.setAttribute("baby", baby);
 		session.setAttribute("seatGrade", seatGrade);
 		session.setAttribute("ticketType", ticketType);
 		return "redirect:/airline/list";

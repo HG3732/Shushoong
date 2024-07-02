@@ -3,6 +3,7 @@ package kh.mclass.shushoong.airline.controller;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.ibatis.annotations.Arg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,18 @@ public class AirlineController {
 	// 항공 목록 
 	@GetMapping("/airline/list")
 	public String airlineInfo(
+//			String departLoc2,
+//			String arrivalLoc2,
+//			String departDate2,
+//			String arrivalDate2,
+//			String adult2,
+//			String child2,
+//			String baby2,
+//			String seatGrade2,
+//			String ticketType2,
 			HttpSession session,
 			Model md) {
+		
 		
 		String departLoc = (String) session.getAttribute("departLoc");
 		String arrivalLoc = (String) session.getAttribute("arrivalLoc");
@@ -49,6 +60,14 @@ public class AirlineController {
 		String baby = (String) session.getAttribute("baby");
 		String ticketType = (String) session.getAttribute("ticketType");
 		
+//		session.setAttribute("departLoc", departLoc2);
+//		session.setAttribute("arrivalLoc", arrivalLoc2);
+//		session.setAttribute("departDate", departDate2);
+//		session.setAttribute("arrivalDate", arrivalDate2);
+//		session.setAttribute("adult", adult2);
+//		session.setAttribute("child", child2);
+//		session.setAttribute("seatGrade", seatGrade2);
+//		session.setAttribute("ticketType", ticketType2);
 		System.out.println(" ==== 컨트롤러 세션 값 ====");
 		System.out.println("ticketType : " + ticketType + "adult : " + adult + "child : " + child + "baby : " + baby );
 		
@@ -86,7 +105,6 @@ public class AirlineController {
 			HttpSession session,
 			Model md) {
 		
-		
 		session.setAttribute("airlineCode", airlineCode);
 		String departLoc = (String) session.getAttribute("arrivalLoc");
 		String arrivalLoc = (String) session.getAttribute("departLoc");
@@ -95,14 +113,12 @@ public class AirlineController {
 		String airlineCode2 = (String) session.getAttribute("airlineCode");
 		
 		System.out.println("선택된 항공 코드 : " +  airlineCode2);
-		
 		System.out.println("에어 오는편 컨트롤러");
 		log.info("항공 오는 편 departLoc: {}, arrivalLoc: {}", departLoc, arrivalLoc);
 		
 		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate);
-		
 		// 선택한 항공
-		List<AirlineInfoDto> selectOneAirline = service.getSelectOne(airlineCode2);
+		AirlineInfoDto selectOneAirline = service.getSelectOne(airlineCode2);
 		log.info("선택된 항공 코드 : ", airlineCode2);
 		System.out.println("선택된 항공 코드 : " +  airlineCode2);
 		
@@ -114,6 +130,14 @@ public class AirlineController {
 		md.addAttribute("airlineReturnData", airlineReturnData);
 		md.addAttribute("maxPrice", maxPrice);
 		log.debug("Return controller 왕복편 data : {}", airlineReturnData);
+		
+		// 3만원~6만원 사이의 랜덤 수
+        Random random = new Random();
+        for (AirlineInfoDto air : airlineReturnData) {
+            int randomPrice = 30000 + random.nextInt(30001); // 30000에서 60000 사이의 랜덤 값
+            air.setSeatRandomPrice(randomPrice);
+        }
+
 		
 		return "airline/airline_list_return";
 	}
@@ -168,6 +192,7 @@ public class AirlineController {
 			){
 		String departLoc = (String) session.getAttribute("arrivalLoc");
 		String arrivalLoc = (String) session.getAttribute("departLoc");
+		String airlineCode2 = (String) session.getAttribute("airlineCode");
 		
 		System.out.println("컨트롤러 목록 정렬");
 		System.out.println("출발지 : " + departLoc);
@@ -176,9 +201,11 @@ public class AirlineController {
 		System.out.println("경유 타입 : " + viaType);
 		System.out.println("가격 최댓 값 : " + maxPrice);
 		
+		AirlineInfoDto selectOneAirline = service.getSelectOne(airlineCode2);
 		List<AirlineInfoDto> SortData = service.getAirlineSideTime(
 				departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice
 				);
+		md.addAttribute("selectOneAirline", selectOneAirline);
 		md.addAttribute("airlineReturnData", SortData);
 		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc);
 		md.addAttribute("maxPrice", maxPrice2);

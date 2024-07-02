@@ -58,7 +58,7 @@ async function payHandler(){
 
     const currentTime = year + month + day + time;	
 	var residenceNameKo = $('#name').val(); //투숙객명
-	var residenceNameEng = $('#last_name').val() + $('#first_name').val();
+	var residenceNameEn = $('#last_name').val() + $('#first_name').val();
 	var residenceGender = $('input[name=gender]:checked').val();
 	var residenceBirth = $('#birthday').val();
 	var residencePhone = $('#phone').val();
@@ -91,12 +91,11 @@ async function payHandler(){
 
 	let reservationData = {
 		residenceNameKo : residenceNameKo,
-		residenceNameEng : residenceNameEng, 
+		residenceNameEn : residenceNameEn, 
 		residenceGender : residenceGender,
 		residencePhone : residencePhone,
 		residenceEmail : residenceEmail,
 		residenceBirth : residenceBirth,
-		request : requestItems,
 		reserveCheckIn : reserveCheckIn,
 		reserveCheckOut : reserveCheckOut,
 		userId : userId,
@@ -118,7 +117,7 @@ async function payHandler(){
 	// reservationData 객체를 JSON 문자열로 변환
 	let reservationDataString = JSON.stringify(reservationData);
 	
-	console.log(roomAtt);
+	console.log(residenceBirth);
 	
 	const response = await PortOne.requestPayment({
 			storeId : storeId, 
@@ -143,7 +142,7 @@ async function payHandler(){
 			
 			// 결제 검증 - 위에서 선언한거를 데이터로 보냄(결제 정보 외 것들)
 			$.ajax({
-				url : `/shushoong/hotel/payment?roomAttDesc=${encodeURIComponent(receipt.roomAttDesc)}&roomCatDesc=${encodeURIComponent(receipt.roomCatDesc)}&hotelName=${encodeURIComponent(receipt.hotelName)}&hotelPrice=${encodeURIComponent(receipt.hotelPrice)}`,
+				url : `/shushoong/hotel/payment?roomAttDesc=${encodeURIComponent(receipt.roomAttDesc)}&roomCatDesc=${encodeURIComponent(receipt.roomCatDesc)}&hotelName=${encodeURIComponent(receipt.hotelName)}&hotelPrice=${encodeURIComponent(receipt.hotelPrice)}&requestItems=${encodeURIComponent(requestItems.join(','))}`,
 				type : "post",
 				contentType: "application/json" ,
 			    data: reservationDataString, 

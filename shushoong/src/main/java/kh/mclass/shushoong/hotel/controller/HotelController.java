@@ -8,6 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -326,7 +327,8 @@ public class HotelController {
 			,@RequestParam String roomAttDesc
 			,@RequestParam String roomCatDesc
 			,@RequestParam String hotelName
-			,@RequestParam String hotelPrice
+			,@RequestParam String hotelPrice,
+			@RequestParam String requestItems
 			//요청파라미터에 적으면 함수 내에서 새로 new해서 객체를 만들지 않아도 됨
 			) throws IOException, InterruptedException{
 		
@@ -340,16 +342,17 @@ public class HotelController {
 		//위에 이걸 안해도 됨
 		reserveCompletedto.setHotelReserveCode(reservationData.getHotelReserveCode());
 		reserveCompletedto.setResidenceNameKo(reservationData.getResidenceNameKo());
-		reserveCompletedto.setRequest(reservationData.getRequest());
 		reserveCompletedto.setRoomAttDesc(roomAttDesc);
 		reserveCompletedto.setRoomCatDesc(roomCatDesc);
 		reserveCompletedto.setHotelName(hotelName);
 		reserveCompletedto.setHotelPrice(hotelPrice);
-		reserveCompletedto.setReserveCheckIn((String) session.getAttribute("checkIn"));
-		//얘는 객체에 있는 필드명인데 그 필드명은 자료형이 정해져있기 때문에 session에는 아무 자료형이나 들어갈수 있기 때문에
-		//까보기 전까지 어떤 자료형인지 모르는데 깠을 때 필드명의 자료형과 같아야하기 때문에 다운캐스팅 필요함
-		reserveCompletedto.setReserveCheckOut((String) session.getAttribute("checkOut"));		
+//		reserveCompletedto.setReserveCheckIn((String) session.getAttribute("checkIn"));
+//		//얘는 객체에 있는 필드명인데 그 필드명은 자료형이 정해져있기 때문에 session에는 아무 자료형이나 들어갈수 있기 때문에
+//		//까보기 전까지 어떤 자료형인지 모르는데 깠을 때 필드명의 자료형과 같아야하기 때문에 다운캐스팅 필요함
+//		reserveCompletedto.setReserveCheckOut((String) session.getAttribute("checkOut"));		
 
+		 session.setAttribute("reserveCompletedto", reserveCompletedto);
+		
 //		ajax로 보내지는 데이터 () 안에 작성
 		HttpRequest request = HttpRequest.newBuilder()
 			    .uri(URI.create("https://api.portone.io/payments/" + paymentId + "?storeId=" + storeId))
@@ -378,8 +381,9 @@ public class HotelController {
 					Map<String, Object> map = new HashMap<>();
 					map.put("hotelReserveCode", reservationData.getHotelReserveCode());
 					map.put("residenceNameKo", reservationData.getResidenceNameKo());
-					map.put("residenceNameEng", reservationData.getResidenceNameEng());
+					map.put("residenceNameEn", reservationData.getResidenceNameEn());
 					map.put("residenceGender", reservationData.getResidenceGender());
+					map.put("residenceBirth", reservationData.getResidenceBirth());
 					map.put("residencePhone", reservationData.getResidencePhone());
 					map.put("residenceEmail", reservationData.getResidenceEmail());
 					map.put("reserveCheckIn", reservationData.getReserveCheckIn());
@@ -389,29 +393,71 @@ public class HotelController {
 					map.put("hotelCode", reservationData.getHotelCode());
 					map.put("roomCat", reservationData.getRoomCat());
 					map.put("roomAtt", reservationData.getRoomAtt());
-					map.put("request", reservationData.getRequest());
 					result = service.inserthotelReserveInfo(map);
-					System.out.println("====================" + reservationData.getRequest());
 					
+					if (requestItems != null && !requestItems.isEmpty()) {
+					    String[] requestItemsArray = requestItems.split(",");
+					    List<Integer> requests = new ArrayList<>();
+					    //db에 저장할거
+					    List<String> requestStrings = new ArrayList<>();
+					    //HotelReserveCompleteDtoRes에만 저장할것
+
+					    for (String item : requestItemsArray) {
+					        switch (item) {
+					            case "싱글":
+					                requests.add(0);
+					                requestStrings.add("싱글");
+					                break;
+					            case "트윈":
+					                requests.add(1);
+					                requestStrings.add("트윈");
+					                break;
+					            case "더블":
+					                requests.add(2);
+					                requestStrings.add("더블");
+					                break;
+					            case "금연실":
+					                requests.add(3);
+					                requestStrings.add("금연실");
+					                break;
+					            case "흡연실":
+					                requests.add(4);
+					                requestStrings.add("흡연실");
+					                break;
+					            case "고층":
+					                requests.add(5);
+					                requestStrings.add("고층");
+					                break;
+					            default:
+					        }
+					    }
+
+					    service.insertHotelRequestItems(reservationData.getHotelReserveCode(), requests);
+					    reserveCompletedto.setRequest(requestStrings); // requestStrings를 사용하여 DTO에 설정
+					}
 					return result;
-				}else {
-					return result = 0;
-				}
+					
+					} else {
+					    return result = 0;
+					}
 			
 	}
 	
 	@GetMapping("/hotel/customer/reserve/pay/success")
-	public String hotelComplete(HttpSession session, Model model, String hotelReserveCode, HotelReserveCompleteDtoRes reserveCompletedto) {
+	public String hotelComplete(HttpSession session, Model model, String hotelReserveCode) {
+		
+		HotelReserveCompleteDtoRes reserveCompletedto = (HotelReserveCompleteDtoRes) session.getAttribute("reserveCompletedto");
+		//세션에서 reserveCompletedto 객체를 가져옴
 		
 		model.addAttribute("hotelReserveCode", hotelReserveCode);
-		model.addAttribute("residenceNameKo", reserveCompletedto.getResidenceNameKo());
-		model.addAttribute("hotelName", reserveCompletedto.getHotelName());
+	    model.addAttribute("residenceNameKo", reserveCompletedto.getResidenceNameKo());
+	    model.addAttribute("hotelName", reserveCompletedto.getHotelName());
 		model.addAttribute("checkIn", session.getAttribute("checkIn"));
 		model.addAttribute("checkOut", session.getAttribute("checkOut"));
-		model.addAttribute("roomCatDesc", reserveCompletedto.getRoomCatDesc());
-		model.addAttribute("roomAttDesc", reserveCompletedto.getRoomAttDesc());
-		model.addAttribute("request", reserveCompletedto.getRequest());
-		model.addAttribute("hotelPrice", reserveCompletedto.getHotelPrice());
+	    model.addAttribute("roomCatDesc", reserveCompletedto.getRoomCatDesc());
+	    model.addAttribute("roomAttDesc", reserveCompletedto.getRoomAttDesc());
+	    model.addAttribute("request", reserveCompletedto.getRequest());
+	    model.addAttribute("hotelPrice", reserveCompletedto.getHotelPrice());
 
 		return "hotel/hotel_pay_success";
 	}

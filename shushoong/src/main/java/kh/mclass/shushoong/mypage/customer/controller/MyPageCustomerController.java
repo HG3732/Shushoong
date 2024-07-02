@@ -105,6 +105,12 @@ public class MyPageCustomerController {
 		return "redirect:/business/my/information";
 	}
 	
+	// 마이페이지 호텔 리스트 페이지로 이동
+	@GetMapping("/mypage/reserved/hotel/list")
+	public String hotelReserve() {
+		return "mypage/customer/mypageCustomerReservedHotelList";
+	}
+	
 	// 마이페이지 항공 리스트 페이지로 이동
 	@GetMapping("/mypage/reserved/airline/list")
 	public String getMethodName() {

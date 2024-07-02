@@ -31,23 +31,30 @@
 			<div class="wrap-section">
 				<section>
 					<div class="onlineQnAList">
-						<div class="content-title">1:1 문의 현황</div>
+						<div class="content-title">1:1 문의</div>
 						<div class="QnA-grid">
 							<div>번호</div>
 							<div>문의제목</div>
-							<div>카테고리</div>
+							<div>문의 분류</div>
 							<div>문의자</div>
 							<div>등록일자</div>
 						</div>
-						<div th:each="faqList : ${latestFaq}" class="QnA-content">
-							<div th:text="${faqList.FAQ_ID}"></div>
-							<div th:text="${faqList.ASK_TITLE}"></div>
-							<div th:text="${faqList.QUEST_CAT_DESC}"></div>
-							<div th:text="${faqList.USER_ID}"></div>
-							<div th:text="${faqList.ASK_DATE}"></div>
-						</div>
+						<div th:replace="~{servicecenter/QnAlist :: QnAlist}"></div>
 						<div class="search">
-							<input type="text" class="searchKeyword" name="keyword"><button type="button" class="searchQnAList">검색</button>
+							<select class="category" name="category">
+								<option value="faqId">번호</option>
+								<option value="askTitle">제목</option>
+								<option value="questCat">문의 분류</option>
+								<option value="userId">문의자</option>
+							</select>
+							<input type="text" class="searchKeyword" name="keyword">
+							<select class="questCat-category" name="questCatCategory">
+								<option value="1">개인정보문의</option>
+								<option value="2">상품관련</option>
+								<option value="3">결제</option>
+								<option value="4">기타</option>
+							</select>
+							<button type="button" class="searchQnAList">검색</button>
 						</div>
 					</div>
 				</section>
@@ -58,5 +65,5 @@
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
 </body>
-	<script th:src='@{/js/mypage/admin/manageCustomer.js}'></script>
+	<script th:src='@{/js/mypage/faq.js}'></script>
 </html>

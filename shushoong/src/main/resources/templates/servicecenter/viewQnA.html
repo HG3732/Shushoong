@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/admin/mypageAdminAside.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/viewQnA.css}" rel="stylesheet" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>1:1문의 자세히 보기</title>
+</head>
+<body>
+<div class="wrapper">
+	<div class="wrap-header">
+		<header>
+				<div th:replace="~{common/header :: Header}"></div>
+			<div class="hrline">
+				<hr>
+			</div>
+		</header>
+	</div>
+	<div class="wrap-body">
+		<div class="wrap-aside">
+			<aside>
+				<div th:replace="~{mypage/admin/mypageAdminAside :: Aside}"></div>
+			</aside>
+		</div>
+		<div class="wrap-board">
+			<div class="qna-head">
+				<div class="qna-title" th:text="${result.faqId + '.' + result.askTitle}"></div>
+				<div class="ask-date" th:text="${result.askDate}"></div>
+			</div>
+			<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
+			<div class="qna-main">
+				<div class="qna-"></div>
+				<div class="qna-category" th:text="${result.questCatDesc}"></div>
+				<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
+				<div class="qna-userId" th:text="${'작성자 : ' + result.userId}"></div>
+				<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
+				<th:block th:if="${result.fileId == null or #list.isEmpty(result.fileId)}">
+					<div class="qna-file">
+						<div>첨부파일이 없습니다.</div>
+					</div>
+				</th:block>
+				<th:block th:unless="${result.fileId == null or #list.isEmpty(result.fileId)}">
+					<div class="qna-file">
+						<div>첨부파일</div>
+						<div>첨부파일 경로...</div>
+					</div>
+				</th:block>
+				<hr style="border: none; border-bottom: 1px solid var(--color_blue_1);">
+				<div class="qna-content" th:text="${result.askContent}"></div>
+			</div>
+			<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
+			<th:block th:if="${result.ansTime == null or result.ansTime == ''}">
+				<div class="wrap-comment">
+					<div class="no-content">문의 확인 중 입니다. 빠른 시일 내로 답변 드리겠습니다.</div>
+				</div>
+			</th:block>
+			<th:block th:unless="${result.ansTime == null or result.ansTime == ''}">
+				<div class="wrap-comment">
+					<div class="ask-date" th:text="${result.ansTime}"></div>
+					<div class="ask-content" th:text="${result.ansContent}"></div>
+				</div>
+			</th:block>
+			<div></div>
+		</div>
+	</div>
+	</div>
+	<div class="wrap-footer">
+		<div th:replace="~{common/footer :: Footer}"></div>
+	</div>
+</body>
+</html>

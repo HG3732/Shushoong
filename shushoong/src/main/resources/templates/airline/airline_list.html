@@ -242,18 +242,18 @@ div#people_lineup_sit_accoding{
 							<div hidden="">
 								<span th:text="${air.departLoc}" id="select-info-departLoc" name="departLoc"></span> 
 								<span th:text="${air.arrivalLoc}" id="select-info-arrivalLoc" name="arrivalLoc"></span>
-								<span th:text="${air.airlineCode}" id="select-info-airlineCode" name="airlineCode"></span>
+								<!-- <span th:text="${air.airlineCode}" id="select-info-airlineCode" name="airlineCode"></span>
+								<span th:text="${air.seatPrice}" id="select-info-seatPrice" name="seatPrice"></span> -->
 							</div>
-							
 						</div>
 						<div class="airline-info-container">
 							<form id="frm-airinfo" hidden>
-								<input type="hidden" id="departLoc" name="departLoc"> <input
-									type="hidden" id="arrivalLoc" name="arrivalLoc"> <input
-									type="hidden" id="airlineCode" name="airlineCode">
+								<input type="hidden" id="departLoc" name="departLoc"> 
+								<input type="hidden" id="arrivalLoc" name="arrivalLoc"> 
+								<input type="hidden" id="airlineCode" name="airlineCode">
+								<input type="hidden" id="seatPrice" name="seatPrice">
 							</form>
 							<div th:replace="~{airline/airline_list_section :: airlineList}"></div>
-
 						</div>
 					</div>
 				</div>

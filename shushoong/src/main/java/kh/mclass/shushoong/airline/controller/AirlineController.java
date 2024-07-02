@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.airline.controller;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -38,15 +39,6 @@ public class AirlineController {
 	// 항공 목록 
 	@GetMapping("/airline/list")
 	public String airlineInfo(
-//			String departLoc2,
-//			String arrivalLoc2,
-//			String departDate2,
-//			String arrivalDate2,
-//			String adult2,
-//			String child2,
-//			String baby2,
-//			String seatGrade2,
-//			String ticketType2,
 			HttpSession session,
 			Model md) {
 		
@@ -60,14 +52,6 @@ public class AirlineController {
 		String baby = (String) session.getAttribute("baby");
 		String ticketType = (String) session.getAttribute("ticketType");
 		
-//		session.setAttribute("departLoc", departLoc2);
-//		session.setAttribute("arrivalLoc", arrivalLoc2);
-//		session.setAttribute("departDate", departDate2);
-//		session.setAttribute("arrivalDate", arrivalDate2);
-//		session.setAttribute("adult", adult2);
-//		session.setAttribute("child", child2);
-//		session.setAttribute("seatGrade", seatGrade2);
-//		session.setAttribute("ticketType", ticketType2);
 		System.out.println(" ==== 컨트롤러 세션 값 ====");
 		System.out.println("ticketType : " + ticketType + "adult : " + adult + "child : " + child + "baby : " + baby );
 		
@@ -217,6 +201,8 @@ public class AirlineController {
 	// 항공 메인 페이지
     @GetMapping("/airline/main")
     public String airlineMain() {
+
+    	
         return "airline/airline_main"; // 폼이 있는 페이지로 이동
     }
 	
@@ -277,6 +263,7 @@ public class AirlineController {
 			HttpSession session
 			) {
 		String userId = (String) session.getAttribute("userId");
+		
 		
 		
 		

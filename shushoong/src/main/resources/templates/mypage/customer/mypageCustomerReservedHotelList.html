@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerReservedHotelList.css}" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>슈슝</title>
+</head>
+<body>
+
+<div class="wrapper">
+	<div class="wrap-header">
+		<header>
+				<div th:replace="~{common/header :: Header}"></div>
+			<div class="hrline">
+				<hr>
+			</div>
+		</header>
+	</div>
+	
+	<div class="wrap-body">
+		<div class="wrap-aside">
+			<aside>
+				<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+			</aside>
+		</div>
+		
+		<div class="main_section">
+			<div class="list_bar">
+				<div class="btn_wrap">
+					<button class="display_list_button" id="reserved_btn"> 완료된 예약</button>
+					<button class="display_list_button" id="canceled_btn"> 취소된 예약</button>
+				</div>
+			</div>		
+					
+			<div class="reserved_list">
+				<div class="reserve_code">
+					<p class="p">예약번호</p>
+				</div>
+				<div class="hotel_code">
+					<div class="code_num"></div>
+				</div>
+				<div class="check_in_out">
+					<p class="p">숙소명</p>
+				</div>						
+				<div class="check_in_out_time">
+					<div class="time"></div>
+				</div>
+				<div class="room">
+					<p class="p">객실 정보</p>
+				</div>
+				<div class="room_info">
+					<div class="room_att_cat"></div>
+				</div>								
+			</div>
+			
+			<div class="reserved_list">
+				<div class="reserve_code">
+					<p class="p">예약번호</p>
+				</div>
+				<div class="hotel_code">
+					<div class="code_num"></div>
+				</div>
+				<div class="check_in_out">
+					<p class="p">숙소명</p>
+				</div>						
+				<div class="check_in_out_time">
+					<div class="time"></div>
+				</div>
+				<div class="room">
+					<p class="p">객실 정보</p>
+				</div>
+				<div class="room_info">
+					<div class="room_att_cat"></div>
+				</div>								
+			</div>
+			
+			
+			<div class="canceled_list">
+				<div class="reserve_code">
+					<p class="p">예약번호</p>
+				</div>
+				<div class="hotel_code">
+					<div class="code_num"></div>
+				</div>
+				<div class="check_in_out">
+					<p class="p">숙소명</p>
+				</div>						
+				<div class="check_in_out_time">
+					<div class="time"></div>
+				</div>
+				<div class="room">
+					<p class="p">객실 정보</p>
+				</div>
+				<div class="room_info">
+					<div class="room_att_cat"></div>
+				</div>				
+			</div>
+		</div>
+	</div>
+</div>
+	
+<div class="wrap-footer">
+ 		<div th:replace="~{common/footer :: Footer}"></div> 
+</div>
+	
+<script>
+
+$(loadedHandler)
+
+function loadedHandler(){
+	
+    $(".reserved_list").css({
+        "visibility": "visible",
+        "position": "relative",
+        "top": "0"
+    });
+    $(".canceled_list").css({
+        "visibility": "hidden",
+        "position": "absolute",
+        "top": "-9999px"
+    });
+    
+	$("#reserved_btn").on("click",reserveHandler);
+	
+	$("#canceled_btn").on("click",cancelHandler);
+}
+
+function reserveHandler(){
+	
+	 $(".reserved_list").css({
+	        "visibility": "visible",
+	        "position": "relative",
+	        "top": "0"
+	    });
+	    $(".canceled_list").css({
+	        "visibility": "hidden",
+	        "position": "absolute",
+	        "top": "-9999px"
+	    });
+	    
+	$("#canceled_btn").css("border-top","none").css("border-bottom","3px solid var(--color_blue_1)");
+	$("#reserved_btn").css("border-bottom","none").css("border-top","3px solid var(--color_blue_1)");
+}
+
+function cancelHandler(){
+	
+    $(".reserved_list").css({
+        "visibility": "hidden",
+        "position": "absolute",
+        "top": "-9999px"
+    });
+    $(".canceled_list").css({
+        "visibility": "visible",
+        "position": "relative",
+        "top": "0"
+    });
+	
+	
+	$("#reserved_btn").css("border-top","none").css("border-bottom","3px solid var(--color_blue_1)");
+	$("#canceled_btn").css("border-bottom","none").css("border-top","3px solid var(--color_blue_1)");
+}
+
+</script>
+
+	
+</body>
+</html>

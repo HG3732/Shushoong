@@ -30,4 +30,6 @@ public interface AirlineRepository {
 	String selectResCode(String resName,String phoneNum,String email);
 	
 	int insertPassengerInfo(List<Map<String, Object>> passengerList);
+	
+	char selectOneDomesticFunction(String airlineCode);
 }

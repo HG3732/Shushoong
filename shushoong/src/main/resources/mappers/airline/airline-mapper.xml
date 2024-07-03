@@ -96,6 +96,11 @@
    		</foreach>
     </update>
     
+    <select id="selectOneDomesticFunction" resultType="char">
+    	SELECT DOMESTIC_FLIGHTS
+    		FROM AIRLINE_INFO
+    			WHERE AIRLINE_CODE = #{airlineCode};
+    </select>
 		   	
 	
 </mapper>

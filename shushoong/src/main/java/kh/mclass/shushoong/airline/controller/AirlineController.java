@@ -276,14 +276,14 @@ public class AirlineController {
 		        Principal principal,
 		        String airlineCodeReturn) {
 			
-		
-			System.out.println("예약페이지 컨트롤러");
+			char domestic = service.selectOneDomesticFunction(airlineCode);
 			
 			md.addAttribute("adult", adult);
 			md.addAttribute("child", child);
 			md.addAttribute("baby", baby);
 			md.addAttribute("airlineCodeReturn", airlineCodeReturn);
-		
+			md.addAttribute("domestic",domestic);
+			
 			if(principal != null) {
 				String userId = principal.getName();
 				md.addAttribute("userId",userId);

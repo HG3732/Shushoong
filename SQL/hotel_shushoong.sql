@@ -389,10 +389,10 @@ select * from hotel_reserve;
 desc hotel_reserve;
 
 delete from hotel_review
-where hotel_reserve_code = '2024070132OS0010';
+where hotel_reserve_code = '20240702402OS0010';
 
 delete from hotel_reserve
-where hotel_reserve_code = '20240701162OS0020';
+where hotel_reserve_code = '20240702402OS0010';
 
 alter table hotel_reserve
 modify residence_gender varchar2(3);
@@ -401,7 +401,7 @@ select * from reserve_request;
 202406262OS001S01
 
 delete from reserve_request
-where hotel_reserve_code = '20240701162OS0020';
+where hotel_reserve_code = '20240702402OS0010';
 
 select *
 from
@@ -420,3 +420,24 @@ from
     select * from hotel_reserve;
     
     desc hotel_reserve;
+    
+select hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price
+from hotel_reserve 
+    join hotel using(hotel_code) 
+    join hotel_room_att using(room_att) 
+    join hotel_room_cat using(room_cat) 
+    join hotel_room using (hotel_code)
+where user_id = 'customer' and hotel_reserve_code = '20240703552OS0020';
+    
+update hotel_reserve
+set user_id = 'customer'
+where hotel_reserve_code = '20240703552OS0020';
+
+select * from hotel_room;
+
+
+select hotel_name, hotel_reserve_code from hotel_reserve 
+join hotel using(hotel_code) 
+join hotel_room_att using(room_att) 
+join hotel_room_cat using(room_cat) 
+where user_id = 'customer' and hotel_reserve_code = '20240703552OS0020';

@@ -19,6 +19,12 @@ public interface MemberRepository {
 
 	// 로그인 기록
 	public int log(Map<String, Object> map);
+	
+	// 로그인 ID를 갖는 객체가 존재하는지 => 존재하면 true 리턴 (ID 중복 검사 시 필요)
+    boolean existsByLoginId(String loginId);
+
+	// 로그인 ID를 갖는 객체 반환
+    MemberDto findByLoginId(String loginId);
 
 	// 회원가입
 	public Integer join(MemberDto memberDto);

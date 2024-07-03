@@ -38,6 +38,10 @@ public class MemberService {
 	public int log(Map<String, Object> map) {
 		return memberRepository.log(map);
 	}
+	
+	public boolean checkLoginIdDuplicate(String loginId){
+        return memberRepository.existsByLoginId(loginId);
+    }
 
 	// 아이디 중복 여부
 	public int idCheck(String userId) {

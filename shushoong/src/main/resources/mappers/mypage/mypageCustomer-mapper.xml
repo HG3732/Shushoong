@@ -22,13 +22,13 @@
 	</select>
 	
 	<select id="selectOneReservedHotelList" parameterType="hashmap" resultType="hashmap">
-	    select hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price 
-	    from hotel_reserve
-	        join hotel using(hotel_code)
-	        join hotel_room_att using(room_att)
-	        join hotel_room_cat using(room_cat)
-	        join hotel_room using(room_cap)
-	    where user_id = #{userId} and hotel_reserve_code = #{hotelReserveCode}
+select hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko 
+	    from hotel_reserve hr
+	        join hotel h on hr.hotel_code = h.hotel_code 
+	        join hotel_room_att hra on hr.room_att = hra.room_att
+	        join hotel_room_cat hrc on hr.room_cat = hrc.room_cat
+	        join hotel_room hm on hr.room_cap = hm.room_cap
+	    where user_id = #{userId} and hotel_reserve_code = #{hotelReserveCode} and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att
 	</select>
 	
 </mapper>

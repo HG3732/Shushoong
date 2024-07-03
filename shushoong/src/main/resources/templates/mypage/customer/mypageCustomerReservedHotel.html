@@ -40,30 +40,30 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<p>호텔 이름</p>
 			</div>
 					
-			<div class="reserved_list">
+			<div class="reserved_list" th:each="reserveList : ${reserveList}">
 				<div class="reserve_code">
 					<p class="p">예약번호</p>
 				</div>
 				<div class="hotel_code">
-					<div class="code_num"></div>
+					<div class="code_num" th:text="${reservelist.HOTEL_RESERVE_CODE}"></div>
 				</div>
 				<div class="check_in_out">
 					<p class="p">체크인/체크아웃</p>
 				</div>						
 				<div class="check_in_out_time">
-					<div class="time"></div>
+					<div class="time" th:utext="${reservelist.RESERVE_CHECK_IN} + ' ~ ' + ${reservelist.RESERVE_CHECK_OUT}"></div>
 				</div>
 				<div class="room">
 					<p class="p">객실 정보</p>
 				</div>
 				<div class="room_info">
-					<div class="room_att_cat"></div>
+					<div class="room_att_cat" th:utext="${reservelist.ROOM_CAT_DESC} + ' ~ ' + ${reservelist.ROOM_ATT_DESC}"></div>
 				</div>								
 				<div class="request">
 					<p class="p">요청 사항</p>
 				</div>
 				<div class="request_info">
-					<div class="request_detail"></div>
+					<div class="request_detail" ></div>
 				</div>						
 				<div class="reserve_name">
 					<p class="p">투숙객 성명</p>
@@ -75,7 +75,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					<P class="p">금액</P>
 				</div>
 				<div class="payment">
-					<div class="totalpay"></div>
+					<div class="totalpay" th:text="${reservelist.HOTEL_PRICE}"></div>
 				</div>						
 			</div>
 

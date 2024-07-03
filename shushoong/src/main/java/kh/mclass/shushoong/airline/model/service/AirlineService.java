@@ -51,6 +51,10 @@ public class AirlineService {
 //		
 //	}
 	
+	public char selectOneDomesticFunction(String airlineCode) {
+		return airlineRepository.selectOneDomesticFunction(airlineCode);
+	};
+	
 	public int insertReserverInfo(String resName, String phoneNum,String email) {
 		
 		return airlineRepository.insertReserverInfo(resName,phoneNum, email);

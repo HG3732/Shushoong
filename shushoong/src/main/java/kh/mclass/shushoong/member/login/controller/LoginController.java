@@ -1,10 +1,15 @@
 package kh.mclass.shushoong.member.login.controller;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+import kh.mclass.shushoong.member.model.domain.MemberDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +20,8 @@ public class LoginController {
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
 	public String login(@RequestParam(value = "error", required = false)String error, 
-						Model model) {
+						Model model, String remember,  HttpServletResponse response,
+						Principal principal) {
 		
 		String message="";
 		
@@ -38,6 +44,18 @@ public class LoginController {
 				break;
 			}
 		}
+		
+		if (remember == null) {
+            remember = "";
+        }
+		
+		if (remember.equals("on")) {
+            Cookie cookie = new Cookie("remember", principal.getName());
+            response.addCookie(cookie);
+        } else {
+            Cookie cookie = new Cookie("remember", "");
+            response.addCookie(cookie);
+        }
 		
         model.addAttribute("message", message);
 		return "member/login";

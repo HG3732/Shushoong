@@ -4,8 +4,8 @@
 	<!-- <input type="hidden" id="update-maxprice" th:value="${maxPrice}"> -->
 	<div th:each="air : ${airlineData}" class="airline-info">
 		<div hidden="">
-			<span th:text="${air.departLoc}" class="select-info-departLoc" name="departLoc"></span> 
-			<span th:text="${air.arrivalLoc}" class="select-info-arrivalLoc" name="arrivalLoc"></span> 
+			<!-- <span th:text="${air.departLoc}" class="select-info-departLoc" name="departLoc"></span> 
+			<span th:text="${air.arrivalLoc}" class="select-info-arrivalLoc" name="arrivalLoc"></span> --> 
 			<span th:text="${air.airlineCode}" class="select-info-airlineCode" name="airlineCode"></span>
 			<span th:text="${air.seatPrice}" class="select-info-seatPrice" name="seatPrice"></span>
 		</div>

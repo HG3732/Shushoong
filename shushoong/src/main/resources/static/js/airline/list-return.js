@@ -14,7 +14,6 @@ function clickedShowReturnBtn() {
 		$('#arrivalLoc').val(departLoc);
 		$('#airlineCode').val(airlineCode);
 		
-		// 설정된 폼 데이터
         console.log('doGet Data:', {
             departLoc: $('#departLoc').val(),
             arrivalLoc: $('#arrivalLoc').val(),

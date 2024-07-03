@@ -80,6 +80,7 @@ xmlns:th="http://www.thymeleaf.org">
 					<!-- 투숙객 정보 -->
 					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">투숙객 정보</p>
 					<div class="party">
+						<input type="hidden" name="people" th:value="${'성인 ' + adult + ', 아동 ' + child}" class="people">
 						<span>객실 </span><span th:text="${room}"></span>개, 
 						<span>성인 </span><span th:text="${adult}"></span>명, 
 						<span>아동 </span><span th:text="${child}"></span>명

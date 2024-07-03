@@ -164,9 +164,9 @@
 	<!-- 예약 -->
 	<insert id="inserthotelReserveInfo" parameterType="map">
 	    INSERT INTO hotel_reserve 
-	        (hotel_reserve_code, residence_name_ko, residence_name_en, residence_gender, residence_birth, residence_phone, residence_email, reserve_check_in, reserve_check_out, user_id, room_cap, hotel_code, room_cat, room_att)
+	        (hotel_reserve_code, residence_name_ko, residence_name_en, residence_gender, residence_birth, residence_phone, residence_email, reserve_check_in, reserve_check_out, user_id, room_cap, hotel_code, room_cat, room_att, residence_num)
 	    VALUES 
-	        (#{hotelReserveCode}, #{residenceNameKo}, #{residenceNameEn}, #{residenceGender}, #{residenceBirth}, #{residencePhone}, #{residenceEmail}, #{reserveCheckIn}, #{reserveCheckOut}, #{userId}, #{roomCap}, #{hotelCode}, #{roomCat}, #{roomAtt})
+	        (#{hotelReserveCode}, #{residenceNameKo}, #{residenceNameEn}, #{residenceGender}, #{residenceBirth}, #{residencePhone}, #{residenceEmail}, #{reserveCheckIn}, #{reserveCheckOut}, #{userId}, #{roomCap}, #{hotelCode}, #{roomCat}, #{roomAtt}, #{people})
 	</insert>
 
 	<!-- 요청사항 따로 저장 -->

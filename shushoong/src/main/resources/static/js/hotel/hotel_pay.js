@@ -87,7 +87,7 @@ async function payHandler(){
 	
 	var hotelReserveCode = currentTime + hotelCode + roomCat; //sysdate + hotelCode + room_cat
 	var orderName = hotelName + ' ' + roomCatDesc;
-
+	var people = $('.people').val();
 
 	let reservationData = {
 		residenceNameKo : residenceNameKo,
@@ -103,8 +103,9 @@ async function payHandler(){
 		hotelCode : hotelCode,
 		roomAtt : roomAtt,
 		roomCat : roomCat,
-		hotelReserveCode : hotelReserveCode
-		/*위에는 예약으로, 아래는 예약완료됐을때 띄워주기*/	
+		hotelReserveCode : hotelReserveCode,
+		/*위에는 예약으로, 아래는 예약완료됐을때 띄워주기*/
+		people : people	
 	}
 	
 	const receipt = {

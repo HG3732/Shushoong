@@ -393,6 +393,7 @@ public class HotelController {
 					map.put("hotelCode", reservationData.getHotelCode());
 					map.put("roomCat", reservationData.getRoomCat());
 					map.put("roomAtt", reservationData.getRoomAtt());
+					map.put("people", reservationData.getPeople());
 					result = service.inserthotelReserveInfo(map);
 					
 					if (requestItems != null && !requestItems.isEmpty()) {

@@ -2,6 +2,7 @@ function getSelectOptionsReturn() {
 	var viaType = "direct";
 	var departLoc = $('#select-info-departLoc-out').text();
 	var arrivalLoc = $('#select-info-arrivalLoc-out').text();
+	var airlineCode = $('#select-info-airlineCode-out').text();
 	
 	$('#showlist').on('change', updateTimeRange);
 	$('#price-input-right').on('click', updateTimeRange);
@@ -39,7 +40,9 @@ function getSelectOptionsReturn() {
 		// 도착
 		var arrivalTimeLeftVal = $('#arrival-left-timeval').text()/*.split(':')[0]*/;
 		var arrivalTimeRightVal = $('#arrival-right-timeval').text()/*.split(':')[0]*/;
-
+	
+		
+		console.log('비행기 편명 : ', airlineCode);
 		console.log('출발지 : ', departLoc);
 		console.log('도착지 : ', arrivalLoc);
 		console.log('도착지', arrivalLoc);
@@ -54,8 +57,9 @@ function getSelectOptionsReturn() {
 			url: "/shushoong/airline/list_select_options_return/ajax",
 			method: "get",
 			data: {
-				departLoc: departLoc,
-				arrivalLoc: arrivalLoc,
+				airlineCode : airlineCode,
+				departLoc: arrivalLoc,
+				arrivalLoc: departLoc,
 				departTimeLeft: departTimeLeftVal,
 				deaprtTimeRight: departTimeRightVal,
 				arrivalTimeLeft: arrivalTimeLeftVal,

@@ -85,7 +85,6 @@
 		    INTO passenger_info (AIRLINE_RESERVE_CODE,LAST_NAME, FIRST_NAME, GENDER, BIRTH, NATION, BAGGAGE, PASSPORT_CODE)
 	    		VALUES(
 	    			#{item.reserve_code},
-	    			#{item.passport_num},
 	    			#{item.passenger_lastName},
 	    			#{item.passenger_firstName},
 	    			#{item.passenger_gender},

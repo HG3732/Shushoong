@@ -273,8 +273,21 @@ public class AirlineController {
 		        @RequestParam String child,
 		        @RequestParam String baby,
 		        @RequestParam String airlineCode,
+		        Principal principal,
 		        String airlineCodeReturn) {
-		    System.out.println("예약페이지 컨트롤러");
+			
+		
+			System.out.println("예약페이지 컨트롤러");
+			md.addAttribute("adult", adult);
+			md.addAttribute("child", child);
+			md.addAttribute("baby", baby);
+			md.addAttribute("airlineCodeReturn", airlineCodeReturn);
+		
+			if(principal != null) {
+				String userId = principal.getName();
+				md.addAttribute("userId",userId);
+			}
+		
 
 		    log.info("어른 adult: {}, 소아 child: {}, 유아 baby {}, 가는편 항공코드{}, 오는편 항공코드{}", adult, child, baby, airlineCode, airlineCodeReturn);
 		    System.out.println("어른 수: " + adult);

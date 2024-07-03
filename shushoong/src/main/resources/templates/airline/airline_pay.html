@@ -323,6 +323,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 						console.log("성공성공성공");
 						getResCodeFunction();
 						
+						passengerInfoInsertFunction();
 					}else{
 						alert("데이터 리스트 값 insert 실패");
 					}
@@ -351,7 +352,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 						insertResCodeHandler(result);
 						
 						
-// 						passengerInfoInsertFunction();
+						
 					}else{
 						alert("데이터 리스트 값 insert 실패");
 					}
@@ -365,8 +366,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		
 		
 		function insertResCodeHandler(result){
-			$("#reserve_code").each(function(){
+			$("input[name=reserve_code]").each(function(){
 				$(this).val(result);
+				console.log($(this).val());
 			});
 		}
 		
@@ -376,6 +378,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			var i;
 			for(i = 0 ; i< $("[name=passenger_firstName]").length; i++){
 				var infoObj = new Object();
+ 				infoObj.resCode = $("[name=reserve_code]").eq(i).val();
 				infoObj.passenger_gender = $("[name=passenger_gender]").eq(i).val();
 				infoObj.passenger_firstName = $("[name=passenger_firstName]").eq(i).val();
 				infoObj.passenger_lastName = $("[name=passenger_lastName]").eq(i).val();
@@ -384,7 +387,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 				infoObj.baggage_size = $("[name=baggage_size]").eq(i).val();
 				infoObj.passport_num = $("[name=passport_num]").eq(i).val();
 // 				infoObj.expiration_date = $("[name=expiration_date]").eq(i).val();
- 				infoObj.resCode = $("[name=resCode]").eq(i).val();
 		
 				passengerInfo.push(infoObj);
 			}

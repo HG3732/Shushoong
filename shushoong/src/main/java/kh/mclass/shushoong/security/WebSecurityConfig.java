@@ -14,6 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import kh.mclass.shushoong.config.AuthSuccessHandler;
 import kh.mclass.shushoong.config.AuthenticationFailureHandler;
+import kh.mclass.shushoong.member.model.service.CustomOAuth2UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -36,6 +37,7 @@ public class WebSecurityConfig {
 		.headers((headers) -> headers
 				.addHeaderWriter(new XFrameOptionsHeaderWriter(
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
+//		.userService(CustomOAuth2UserService)
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
 				.successHandler(authSuccessHandler)
@@ -46,6 +48,7 @@ public class WebSecurityConfig {
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/home")
 				.invalidateHttpSession(true));
+		
 		
 		return http.build();
 	}

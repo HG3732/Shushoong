@@ -51,7 +51,11 @@ public class AirlineService {
 //		
 //	}
 	
-	public char selectOneDomesticFunction(String airlineCode) {
+	public Character selectOneDomesticFunction(String airlineCode) {
+		return airlineRepository.selectOneDomesticFunction(airlineCode);
+	};
+	
+	public Character selectOneReturnDomesticFunction(String airlineCode) {
 		return airlineRepository.selectOneDomesticFunction(airlineCode);
 	};
 	

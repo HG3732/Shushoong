@@ -101,6 +101,12 @@
     		FROM AIRLINE_INFO
     			WHERE AIRLINE_CODE = #{airlineCode}
     </select>
+    
+    <select id="selectOneReturnDomesticFunction" resultType="char">
+    	SELECT DOMESTIC_FLIGHTS
+    		FROM AIRLINE_INFO
+    			WHERE AIRLINE_CODE = #{airlineCode}
+    </select>
 		   	
 	<select id="selectOneAirlineInfo" resultType="AirlineInfoDto">
 		SELECT * 

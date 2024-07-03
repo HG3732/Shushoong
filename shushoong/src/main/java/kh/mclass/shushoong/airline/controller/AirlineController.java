@@ -204,54 +204,65 @@ public class AirlineController {
 			@RequestParam String arrivalDateReturn, 
 			@RequestParam String airlineCodeReturn, 
 			@RequestParam String airlineCode, 
+			//@RequestParam String ticketPrice,
 			Principal principal
 			) {
 		
-		char domestic = service.selectOneDomesticFunction(airlineCode);
+		// 왕복일 시 
+		if (airlineCodeReturn != null && !airlineCodeReturn.equals("")) {
+			System.out.println("오는 비행기 항공코드 : " + airlineCodeReturn);
+			Character dommesticReturn = service.selectOneReturnDomesticFunction(airlineCodeReturn);
+			AirlineInfoDto airlineInfoReturn = service.selectOneAirlineInfo(airlineCodeReturn);
+			md.addAttribute("airlineInfoReturn",airlineInfoReturn);
+			md.addAttribute("airlineCodeReturn", airlineCodeReturn);
+			md.addAttribute("dommesticReturn",dommesticReturn);
+			
+			System.out.println(airlineInfoReturn);
+			if(airlineInfoReturn==null) {
+				md.addAttribute("ticketType",1);
+				md.addAttribute("airlineName","");
+				md.addAttribute("airlineCode","");
+				md.addAttribute("departDate","");
+				md.addAttribute("departTime","");
+				md.addAttribute("departLoc","");
+				md.addAttribute("arrivalDate","");
+				md.addAttribute("arrivalLoc","");
+				md.addAttribute("arrivaldate","");
+			}else if(airlineInfoReturn!=null) {
+				md.addAttribute("ticketType",2);
+				md.addAttribute("airlineName",airlineInfoReturn.getAirlineName());
+				md.addAttribute("airlineCode",airlineInfoReturn.getAirlineCode());
+				md.addAttribute("departDate",airlineInfoReturn.getDepartDate());
+				md.addAttribute("departTime",airlineInfoReturn.getDepartTime());
+				md.addAttribute("departLoc",airlineInfoReturn.getDepartLoc());
+				md.addAttribute("arrivalDate",airlineInfoReturn.getArrivalDate());
+				md.addAttribute("arrivalLoc",airlineInfoReturn.getArrivalLoc());
+				md.addAttribute("arrivaldate",airlineInfoReturn.getArrivalDate());
+			}
+		}
+		
+		System.out.println("가는 비행기 항공코드 : " + airlineCode);
+		Character domestic = service.selectOneDomesticFunction(airlineCode);
 		AirlineInfoDto airlineInfo = service.selectOneAirlineInfo(airlineCode);
-		AirlineInfoDto airlineInfoReturn = service.selectOneAirlineInfo(airlineCodeReturn);
 		log.info("어른 adult: {}, 소아 child: {}, 유아 baby {}, 가는편 항공코드{}, 오는편 항공코드{}, domestic:{}", adult, child, baby, airlineCode, airlineCodeReturn,domestic);
 		
 		md.addAttribute("adult", adult);
 		md.addAttribute("child", child);
 		md.addAttribute("baby", baby);
-		md.addAttribute("airlineCodeReturn", airlineCodeReturn);
 		md.addAttribute("airlineCode",airlineCode);
 		md.addAttribute("domestic",domestic);
 		md.addAttribute("airlineInfo",airlineInfo);
-		md.addAttribute("airlineInfoReturn",airlineInfoReturn);
 		if(principal != null) {
 			String userId = principal.getName();
 			md.addAttribute("userId",userId);
 		}
 
-		System.out.println(airlineInfoReturn);
-		if(airlineInfoReturn==null) {
-			md.addAttribute("ticketType",1);
-			md.addAttribute("airlineName","");
-			md.addAttribute("airlineCode","");
-			md.addAttribute("departDate","");
-			md.addAttribute("departTime","");
-			md.addAttribute("departLoc","");
-			md.addAttribute("arrivalDate","");
-			md.addAttribute("arrivalLoc","");
-			md.addAttribute("arrivaldate","");
-		}else if(airlineInfoReturn!=null) {
-			md.addAttribute("ticketType",2);
-			md.addAttribute("airlineName",airlineInfoReturn.getAirlineName());
-			md.addAttribute("airlineCode",airlineInfoReturn.getAirlineCode());
-			md.addAttribute("departDate",airlineInfoReturn.getDepartDate());
-			md.addAttribute("departTime",airlineInfoReturn.getDepartTime());
-			md.addAttribute("departLoc",airlineInfoReturn.getDepartLoc());
-			md.addAttribute("arrivalDate",airlineInfoReturn.getArrivalDate());
-			md.addAttribute("arrivalLoc",airlineInfoReturn.getArrivalLoc());
-			md.addAttribute("arrivaldate",airlineInfoReturn.getArrivalDate());
-		}
-		
 	    System.out.println("어른 수: " + adult);
 	    System.out.println("소아 수: " + child);
 	    System.out.println("유아 수: " + baby);
-return "airline/airline_pay";
+	    
+	    return "airline/airline_pay";
+	    
 }
 
 	// 항공에서 받는 값

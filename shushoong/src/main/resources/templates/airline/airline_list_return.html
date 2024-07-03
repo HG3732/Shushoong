@@ -327,10 +327,28 @@ div#people_lineup_sit_accoding{
 								<!-- <span th:text="${airlineReturnData[0].arrivalLoc}"></span>행 항공편을 선택하세요 -->
 							</p>
 						</div>
+						<div hidden th:each="air : ${airlineReturnData}">
+							<div hidden="">
+								<span th:text="${air.departLoc}" id="select-info-departLoc" name="departLoc"></span> 
+								<span th:text="${air.arrivalLoc}" id="select-info-arrivalLoc" name="arrivalLoc"></span>
+							</div>
+						</div>
 						<div class="airlineReturn-container">
 							<form id="frm-return" hidden>
-								<input type="hidden" id="departLoc" name="departLocReturn"> 
-								<input type="hidden" id="arrivalLoc" name="arrivalLocReturn"> 
+								<input type="hidden" id="adult" name="adult" th:value="${adult}"> 
+								<input type="hidden" id="child" name="child" th:value="${child}"> 
+								<input type="hidden" id="baby" name="baby" th:value="${baby}">
+								<input type="hidden" id="ticketType" name="ticketType" th:value="${ticketType}">
+								<input type="hidden" id="departLoc" name="departLoc"> 
+								<input type="hidden" id="arrivalLoc" name="arrivalLoc"> 
+								<input type="hidden" id="departDate" name="departDate"> 
+								<input type="hidden" id="arrivalDate" name="arrivalDate"> 
+								<input type="hidden" id="airlineCode" name="airlineCode">
+								
+								<input type="hidden" id="departLocReturn" name="departLocReturn"> 
+								<input type="hidden" id="arrivalLocReturn" name="arrivalLocReturn"> 
+								<input type="hidden" id="departDateReturn" name="departDateReturn"> 
+								<input type="hidden" id="arrivalDateReturn" name="arrivalDateReturn">
 								<input type="hidden" id="airlineCodeReturn" name="airlineCodeReturn"> 
 							</form>
 							<div

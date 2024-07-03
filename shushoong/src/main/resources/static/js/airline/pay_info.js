@@ -52,7 +52,7 @@
 										</select>
 									</div>
 								</div>
-								<div>
+								<div class="passport_info_wrap">
 									<div>
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
@@ -169,7 +169,7 @@
 										</select>
 									</div>
 								</div>
-								<div>
+								<div class="passport_info_wrap">
 									<div>
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
@@ -285,7 +285,7 @@
 										</select>
 									</div>
 								</div>
-								<div>
+								<div class="passport_info_wrap">
 									<div>
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
@@ -456,6 +456,22 @@
 			});
 		}
 		
+		
+//		                   국내선일경우 passport 관련 정보 display 시키는 옵션
+		function passportDisplayFunction(){
+		if($("#domestic_val").val()=='O'){
+			$(".passport_info_wrap").each(function (){
+				$(this).css("display","none");
+			});
+		}else if($("#domestic_val").val()=='I'){
+			$(".passport_info_wrap").each(function (){
+				$(this).css("display","flex");
+			});
+		}else{
+			console.log("표시는 되어 있지만 passport 가 오류나서 보이고 있습니다.")
+		}
+		
+	}
 		
 		
 		

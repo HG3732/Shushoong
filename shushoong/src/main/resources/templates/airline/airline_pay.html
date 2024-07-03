@@ -225,38 +225,62 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 										<div class="final_check_info">
 											<div>
 												<div class="final_check_lineup">
-													성인 : <div class="adultNum"></div>
-													, 아동 : <div class="childNum"></div>
-													, 유아 : <div class="babyNum"></div>
+													성인 : <div class="adultNum" th:text="${adult}"></div>
+													, 아동 : <div class="childNum" th:text="${child}"></div>
+													, 유아 : <div class="babyNum" th:text="${baby}"></div>
 												</div>
-												<div class="airlineCode">
-												
-												</div>
+												<div class="airlineCode" th:text="${airlineInfo.airlineName}"></div>
 											</div>
 											<div>
-												<div class="flightNo">
-												
-												</div>
+												<div class="flightNo" th:text="${airlineCode}"></div>
 												<div>출발 : </div>
-												<div class="date_time_local">
-													<div class="date_time">
-														<div class="departDate"></div>
-														<div class="departTime"></div>
+												<div class="date_time_local" >
+													<div class="date_time" >
+														<div class="departDate" th:text="${airlineInfo.departDate}"></div>
+														<div class="departTime" th:text="${airlineInfo.departTime}"></div>
 													</div>
-													
-													<div class="departLoc">
-													
-													</div>
+													<div class="departLoc" th:text="${airlineInfo.departLoc}"></div>
 												</div>
 												<div>도착 : </div>
 												<div class="date_time_local">
 													<div class="date_time">
-														<div class="arrivalDate"></div>
-														<div class="arrivalTime"></div>
+														<div class="arrivalDate" th:text="${airlineInfo.arrivalDate}"></div>
+														<div class="arrivalTime" th:text="${airlineInfo.arrivalTime}"></div>
 													</div>
-													<div class="arrivalLoc">
-													
+													<div class="arrivalLoc" th:text="${airlineInfo.arrivalLoc}"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									
+									<div class="final_check_info_list" th:if="${ticketType}==2">
+										<div class="final_check_info">
+											<div>
+												<div class="final_check_lineup">
+													성인 : <div class="adultNum" th:text="${adult}"></div>
+													, 아동 : <div class="childNum" th:text="${child}"></div>
+													, 유아 : <div class="babyNum" th:text="${baby}"></div>
+												</div>
+												<div class="airlineCode" th:text="${airlineName}"></div>
+											</div>
+											<div>
+												<div class="flightNo" th:text="${airlineCodeReturn}"></div>
+												<div>출발 : </div>
+												<div class="date_time_local" >
+													<div class="date_time" >
+														<div class="departDate" th:text="${departDate}"></div>
+														<div class="departTime" th:text="${departTime}"></div>
 													</div>
+													<div class="departLoc" th:text="${departLoc}"></div>
+												</div>
+												<div>도착 : </div>
+												<div class="date_time_local">
+													<div class="date_time">
+														<div class="arrivalDate" th:text="${arrivalDate}"></div>
+														<div class="arrivalTime" th:text="${arrivalTime}"></div>
+													</div>
+													<div class="arrivalLoc" th:text="${arrivalLoc}"></div>
 												</div>
 											</div>
 										</div>
@@ -279,6 +303,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			<input type="hidden" th:value="${adult}" id="adult_val">
 			<input type="hidden" th:value="${child}" id="child_val">
 			<input type="hidden" th:value="${baby}" id="baby_val">
+			<input type="hidden" th:value="${domestic}" id="domestic_val">
 		</section>
 	</th:block>	
 	<div class="wrap-footer">
@@ -296,11 +321,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			adultNum();
 			childNum();
 			babyNum();
-			payCheckInfo();
+// 			payCheckInfo();
 			$("input[type='radio'].passenger_gender").change(radioGenderInputValueFunction);
 			$("input[type='radio'].baggage").change(raidoBaggageInputValueFunction);
 			$("input[type='radio'].baggage").change(totalValueFunction);
-			
+			passportDisplayFunction();
 
 		}
 		$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
@@ -409,7 +434,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		       });
 			
 		}
-			
+	
 
 		$('#check1').on("click", allAgreeCheckHandler);
 		$('.arrow').on("click", arrowDownClickHandler);

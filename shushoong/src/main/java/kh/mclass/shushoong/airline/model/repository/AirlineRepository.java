@@ -32,4 +32,6 @@ public interface AirlineRepository {
 	int insertPassengerInfo(List<Map<String, Object>> passengerList);
 	
 	char selectOneDomesticFunction(String airlineCode);
+	
+	public AirlineInfoDto selectOneAirlineInfo(String airlineCode);
 }

@@ -99,8 +99,13 @@
     <select id="selectOneDomesticFunction" resultType="char">
     	SELECT DOMESTIC_FLIGHTS
     		FROM AIRLINE_INFO
-    			WHERE AIRLINE_CODE = #{airlineCode};
+    			WHERE AIRLINE_CODE = #{airlineCode}
     </select>
 		   	
+	<select id="selectOneAirlineInfo" resultType="AirlineInfoDto">
+		SELECT * 
+			FROM AIRLINE_INFO
+				WHERE AIRLINE_CODE = #{airlineCode}
+	</select>
 	
 </mapper>

@@ -69,4 +69,8 @@ public class AirlineService {
 	public int insertPassengerInfo(List<Map<String, Object>> passengerList) {
 		return airlineRepository.insertPassengerInfo(passengerList);
 	}
+	
+	public AirlineInfoDto selectOneAirlineInfo(String airlineCode) {
+		return airlineRepository.selectOneAirlineInfo(airlineCode);
+	}
 }

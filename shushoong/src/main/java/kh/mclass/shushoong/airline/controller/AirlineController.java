@@ -278,6 +278,7 @@ public class AirlineController {
 			
 		
 			System.out.println("예약페이지 컨트롤러");
+			
 			md.addAttribute("adult", adult);
 			md.addAttribute("child", child);
 			md.addAttribute("baby", baby);

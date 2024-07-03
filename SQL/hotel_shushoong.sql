@@ -369,6 +369,10 @@ BEGIN
 END;
 /
 
+
+
+-------------------------------마이페이지 호텔 예약 관련
+
 desc reserve_request;
 commit;
 
@@ -388,14 +392,16 @@ select * from reserve_request;
 select * from hotel_reserve;
 desc hotel_reserve;
 
+commit;
+
 delete from hotel_review
-where hotel_reserve_code = '20240702402OS0010';
+where hotel_reserve_code = '20240703572OS0010';
 
 delete from hotel_reserve
-where hotel_reserve_code = '20240702402OS0010';
+where hotel_reserve_code = '20240703522OS0010';
 
 alter table hotel_reserve
-modify residence_gender varchar2(3);
+modify requests number(2);
 
 select * from reserve_request;
 202406262OS001S01
@@ -449,19 +455,24 @@ select * from hotel_reserve where hotel_reserve_code = '20240703552OS0020';
 desc hotel_room;
 desc hotel_reserve;
 
-select hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko
+select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko
 from hotel_reserve hr
     join hotel h on hr.hotel_code = h.hotel_code 
     join hotel_room_att hra on hr.room_att = hra.room_att
     join hotel_room_cat hrc on hr.room_cat = hrc.room_cat
     join hotel_room hm on hr.room_cap = hm.room_cap
-where user_id = 'customer' and hotel_reserve_code = '20240703552OS0020' and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att;
+    join reserve_request rr on hr.hotel_reserve_code = rr.hotel_reserve_code
+where user_id = 'customer' and hr.hotel_reserve_code = '20240703552OS0020' and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att;
+
+desc hotel_reserve;
+
+select * from hotel_reserve;
 
 
 CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_CUSTOMER_RESERVE" (
-    hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko
+    hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko, user_id
 ) AS 
-SELECT hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko
+SELECT hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko, user_id
 FROM hotel_reserve hr
         join hotel h on hr.hotel_code = h.hotel_code 
         join hotel_room_att hra on hr.room_att = hra.room_att
@@ -470,15 +481,19 @@ FROM hotel_reserve hr
 ;
 
 
-
-
-
-commit;
-desc V_CUSTOMER_RESERVE;
-select *  from V_CUSTOMER_RESERVE
-where where user_id = 'customer' and hotel_reserve_code = '20240703552OS0020';
-
 update hotel_reserve
 set user_id = 'customer' where hotel_reserve_code = '20240701112OS0013';
 
 -- 기준점을 수용인원으로 잡아서 hotel에 있는 모든 방의 수용인원만 비교해서 
+select * from hotel_request;
+
+
+commit;
+
+drop table reserve_request;
+
+alter table hotel_reserve
+modify requests number(3);
+
+alter table hotel_reserve
+rename column requests to request_sum;

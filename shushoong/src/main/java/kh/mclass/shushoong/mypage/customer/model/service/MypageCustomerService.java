@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.mypage.customer.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,15 @@ public class MypageCustomerService {
 	// 비밀번호 재설정
 	public int resetInfo(Map<String, Object> paramMap) {
 		return mypageRepository.resetInfo(paramMap);
+	}
+	
+	public List<Map<String, String>> selectReservedHotelList(String userId) {
+		//호텔 예약 정보에 나오는 여러개의 정보를 map으로 묶는데 한 사람이 호텔을 여러개 결제하면 이 map이 여러개 있을 수 있기 때문에 list로 감싸기
+		return mypageRepository.selectReservedHotelList(userId);
+	}
+	
+	public Map<String, String> selectOneReservedHotelList(String userId, String hotelReserveCode) {
+		//예매내역 상세는 예매 한개에 대한 내용이므로 map 하나만 있어도 뭐..
+		return mypageRepository.selectOneReservedHotelList(userId, hotelReserveCode);
 	}
 }

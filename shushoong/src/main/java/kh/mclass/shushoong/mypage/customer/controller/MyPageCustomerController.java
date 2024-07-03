@@ -7,6 +7,7 @@ import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -105,22 +106,32 @@ public class MyPageCustomerController {
 		return "redirect:/business/my/information";
 	}
 	
-	// 마이페이지 호텔 리스트 페이지로 이동
-	@GetMapping("/mypage/reserved/hotel/list")
-	public String hotelReserve() {
-		return "mypage/customer/mypageCustomerReservedHotelList";
-	}
-	
-	// 마이페이지 호텔 예매내역 하나 선택
-	@GetMapping("/mypage/reserved/hotel")
-	public String selectOneHotel() {
-		return "mypage/customer/mypageCustomerReservedHotel";
-	}
-	
 	// 마이페이지 항공 리스트 페이지로 이동
 	@GetMapping("/mypage/reserved/airline/list")
 	public String getMethodName() {
 		return "mypage/customer/mypageCustomerReservedAlirlineList";
+	}
+	
+	// 마이페이지 호텔 리스트 페이지로 이동
+	@GetMapping("/mypage/reserved/hotel/list")
+	public String hotelReserve(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//security로 userId 불러오기
+		String userId = authentication.getName();
+		model.addAttribute("userId", userId);
+		model.addAttribute("reserveList", service.selectReservedHotelList(userId));
+		//service에서 불러온 값 변수 선언 따로 안하고 바로 model 에 넣기
+		
+		return "mypage/customer/mypageCustomerReservedHotelList";
+	}
+	
+	// 마이페이지 호텔 예매내역 하나 선택
+	@PostMapping("/mypage/reserved/hotel")
+	public String selectOneHotel(Model model, String userId, String hotelReserveCode) {
+		//input 태그에 있는 name 여기에 씀
+		
+		model.addAttribute("reserveList", service.selectOneReservedHotelList(userId, hotelReserveCode));
+		return "mypage/customer/mypageCustomerReservedHotel";
 	}
 	
 	// 마이페이지 공지사항

@@ -408,3 +408,15 @@ from
 (select * from hotel_reserve
     join reserve_request using(hotel_reserve_code))
     right join hotel_request using(request);
+    
+    select hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price 
+    from hotel_reserve
+        join hotel using(hotel_code)
+        join hotel_room_att using(room_att)
+        join hotel_room_cat using(room_cat)
+        join hotel_room using(room_cap)
+    ;
+    
+    select * from hotel_reserve;
+    
+    desc hotel_reserve;

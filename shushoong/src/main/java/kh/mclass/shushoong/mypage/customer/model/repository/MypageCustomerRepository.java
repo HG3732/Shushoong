@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.mypage.customer.model.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -17,5 +18,9 @@ public interface MypageCustomerRepository {
 	
 	// 비밀번호 재설정
 	public int resetInfo(Map<String, Object> paramMap);
+	
+	public List<Map<String, String>> selectReservedHotelList(String userId);
+	
+	public Map<String, String> selectOneReservedHotelList(String userId, String hotelReserveCode);
 
 }

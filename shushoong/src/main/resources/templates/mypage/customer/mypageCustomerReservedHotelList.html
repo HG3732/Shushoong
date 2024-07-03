@@ -41,28 +41,28 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 			</div>		
 			
-			<form id="frm-reserve" method="post" action="/shushoong/customer/mypage/reserved/hotel">
-				<input type="hidden" name="userId" class="userId" th:value="${userId}"/>
-				<div class="reserved_list" th:each="reservelist : ${reserveList}">
-				<input type="hidden" name="hotelReserveCode" th:value="${reservelist.HOTEL_RESERVE_CODE}"/>
-					<div class="y reserve_code">
-						<div class="p">예약번호</div>
-						<div class="code_num"  th:text="${reservelist.HOTEL_RESERVE_CODE}"></div>
-					</div>
-					<div class="y check_in_out">
-						<div class="p">숙소명</div>
-						<div class="check_in_out_time">
-							<div class="time" th:text="${reservelist.HOTEL_NAME}"></div>
-							<div class="time" th:utext="${reservelist.RESERVE_CHECK_IN} + ' ~ ' + ${reservelist.RESERVE_CHECK_OUT}"></div>
+			<div class="reserved_list" th:each="reservelist : ${reserveList}">
+				<form class="frm-reserve" method="post" action="/shushoong/customer/mypage/reserved/hotel">
+					<input type="hidden" name="userId" class="userId" th:value="${userId}"/>
+					<input type="hidden" name="hotelReserveCode" th:value="${reservelist.HOTEL_RESERVE_CODE}"/>
+						<div class="y reserve_code">
+							<div class="p">예약번호</div>
+							<div class="code_num"  th:text="${reservelist.HOTEL_RESERVE_CODE}"></div>
 						</div>
-					</div>						
-					<div class="y room">
-						<div class="p">객실 정보</div>
-						<div class="room_att_cat" th:utext="${reservelist.ROOM_CAT_DESC} + ' ~ ' + ${reservelist.ROOM_ATT_DESC}"></div>
-					</div>								
-				</div>
-				<button type="submit" onclick="viewReserve(this)">상세 내역 확인</button>
-			</form>
+						<div class="y check_in_out">
+							<div class="p">숙소명</div>
+							<div class="check_in_out_time">
+								<div class="time" th:text="${reservelist.HOTEL_NAME}"></div>
+								<div class="time" th:utext="${reservelist.RESERVE_CHECK_IN} + ' ~ ' + ${reservelist.RESERVE_CHECK_OUT}"></div>
+							</div>
+						</div>						
+						<div class="y room">
+							<div class="p">객실 정보</div>
+							<div class="room_att_cat" th:utext="${reservelist.ROOM_CAT_DESC} + ' ~ ' + ${reservelist.ROOM_ATT_DESC}"></div>
+						</div>								
+					<button type="submit" onclick="viewReserve(this)">상세 내역 확인</button>
+				</form>
+			</div>
 
 			
 			<div class="canceled_list">

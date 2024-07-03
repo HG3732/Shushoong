@@ -433,6 +433,7 @@ update hotel_reserve
 set user_id = 'customer'
 where hotel_reserve_code = '20240703552OS0020';
 
+
 select * from hotel_room;
 
 
@@ -441,3 +442,43 @@ join hotel using(hotel_code)
 join hotel_room_att using(room_att) 
 join hotel_room_cat using(room_cat) 
 where user_id = 'customer' and hotel_reserve_code = '20240703552OS0020';
+
+
+select hotel_name from hotel_room room join hotel_reserve res on room.room_cap = res.room_cap join hotel h on h.hotel_code = room.hotel_code where res.hotel_reserve_code = '20240703552OS0020' and room.room_cat = res.room_cat and room.hotel_code = res.hotel_code and room.room_att = res.room_att;
+select * from hotel_reserve where hotel_reserve_code = '20240703552OS0020';
+desc hotel_room;
+desc hotel_reserve;
+
+select hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko
+from hotel_reserve hr
+    join hotel h on hr.hotel_code = h.hotel_code 
+    join hotel_room_att hra on hr.room_att = hra.room_att
+    join hotel_room_cat hrc on hr.room_cat = hrc.room_cat
+    join hotel_room hm on hr.room_cap = hm.room_cap
+where user_id = 'customer' and hotel_reserve_code = '20240703552OS0020' and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att;
+
+
+CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_CUSTOMER_RESERVE" (
+    hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko
+) AS 
+SELECT hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko
+FROM hotel_reserve hr
+        join hotel h on hr.hotel_code = h.hotel_code 
+        join hotel_room_att hra on hr.room_att = hra.room_att
+        join hotel_room_cat hrc on hr.room_cat = hrc.room_cat
+        join hotel_room hm on hr.room_cap = hm.room_cap
+;
+
+
+
+
+
+commit;
+desc V_CUSTOMER_RESERVE;
+select *  from V_CUSTOMER_RESERVE
+where where user_id = 'customer' and hotel_reserve_code = '20240703552OS0020';
+
+update hotel_reserve
+set user_id = 'customer' where hotel_reserve_code = '20240701112OS0013';
+
+-- 기준점을 수용인원으로 잡아서 hotel에 있는 모든 방의 수용인원만 비교해서 

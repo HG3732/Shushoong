@@ -4,6 +4,7 @@
 	width: 960px;
     margin: 0 auto;
     margin-top: 50px;
+    margin-bottom: 70px;
 }
 
 .list_bar{
@@ -45,33 +46,37 @@ button.display_list_button{
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	margin: 50px 0 0 130px;
+	margin: 80px 0 0 130px;
 	width: 700px;
 	border-top: 3px solid var(--color_blue_1);
 	border-bottom: 3px solid var(--color_blue_1);
 }
 
-.reserved_list .y {
+.y {
 	display:flex;
 	flex-direction: row;
 	gap: 10px;
 }
 
-.reserved_list .y:not(:first-child) {
+.y:not(:first-child) {
 	border-top: 1px solid var(--color_blue_1);
 }
 
-.reserved_list .y > div:first-child {
+.y > div:first-child {
 	padding: 5px;
 	align-content:center;
 	flex-basis: 20%;
 	background-color: var(--color_blue_2);
 }
 
-.reserved_list .y > div:last-child {
-	padding: 5px;
+.y > div:last-child {
+	padding: 10px;
 	align-content:center;
 	flex-basis: 80%;
+}
+
+.p{
+	 font-family: 'SOYOMapleBoldTTF'; 
 }
 
 .check_in_out_time{
@@ -81,12 +86,11 @@ button.display_list_button{
 }
 
 .canceled_list{
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	grid-auto-rows: minmax(45px, auto);
-	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 	margin: 50px 0 0 130px;
 	width: 700px;
-	border-top: 2px solid #006AFF;
-	border-bottom: 2px solid #006AFF;
+	border-top: 3px solid var(--color_blue_1);
+	border-bottom: 3px solid var(--color_blue_1);
 }

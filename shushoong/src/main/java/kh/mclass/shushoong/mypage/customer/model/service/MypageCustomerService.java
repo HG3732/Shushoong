@@ -39,7 +39,7 @@ public class MypageCustomerService {
 	}
 	
 	//호텔 예약 상세정보
-	public Map<String, String> selectOneReservedHotelList(String userId, String hotelReserveCode) {
+	public Map<String, Object> selectOneReservedHotelList(String userId, String hotelReserveCode) {
 		//예매내역 상세는 예매 한개에 대한 내용이므로 map 하나만 있어도 뭐..
 		return mypageRepository.selectOneReservedHotelList(userId, hotelReserveCode);
 	}

@@ -1,8 +1,17 @@
-$.ajax({
-	error: function() {
-		alert("입력하신 정보를 다시 확인해 주세요.");
-		$("#userPwd").val('');
-		$("#userId").val('');
+$(loadedHanlder)
+
+function loadedHandler() {
+	$(".btn.login").on("click", loginHandler);
+}
+
+function loginHandler() {
+	if ($("#userId").val() == "") {
+		alert("이름을 입력해 주세요.");
 		return false;
 	}
-})
+	
+	if ($("#userPwd").val() == "") {
+		alert("비밀번호를 입력해 주세요.");
+		return false;
+	}
+}

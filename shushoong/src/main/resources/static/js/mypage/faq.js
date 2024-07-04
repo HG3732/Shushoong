@@ -1,3 +1,7 @@
+let precategory = null;
+let preQuestCatCategory = null;
+let preKeyword = null;
+
 $(loadedHandler);
 
 function loadedHandler() {
@@ -6,21 +10,37 @@ function loadedHandler() {
 }
 
 function searchHandler() {
-	var category = $('.category option:selected').val();
-	var questCatCategory = null;
-	var keyword = null;
-	if(category == 'questCat'){
-		questCatCategory = $('.questCat-category option:selected').val();
+	precategory = $('.category option:selected').val();
+	if(precategory == 'questCat'){
+		preQuestCatCategory = $('.questCat-category option:selected').val();
 	} else {
-		keyword = $('.searchKeyword').val();		
+		preKeyword = $('.searchKeyword').val();		
 	}
-	console.log(questCatCategory);
+	
 	$.ajax({
 		url:"/shushoong/support/notice/search.ajax",
 		method: "get",
-		data: { category : category,
-			keyword : keyword,
-			questCatCategory : questCatCategory},
+		data: { category : precategory,
+				keyword : preKeyword,
+				questCatCategory : preQuestCatCategory},
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	}).done(function(response) {
+		$('#wrap-QnAlist').replaceWith(response);
+	})
+}
+
+function goPage(thisElement) {
+	var currentPageNum = $(thisElement).data('targetpage');
+	console.log(currentPageNum);
+	$.ajax({
+		url:"/shushoong/support/notice/search.ajax",
+		method: "get",
+		data: { category : precategory,
+				keyword : preKeyword,
+				questCatCategory : preQuestCatCategory,
+				pageNum : currentPageNum},
 		error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
 			}

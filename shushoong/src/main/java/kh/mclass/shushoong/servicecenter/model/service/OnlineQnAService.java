@@ -1,7 +1,10 @@
 package kh.mclass.shushoong.servicecenter.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
@@ -14,9 +17,18 @@ public class OnlineQnAService {
 	
 	private final ServiceCenterRepository serviceCenterRepository;
 	
-	public List<OnlineQnADto> selectAllList(String category, String keyword, String questCatCategory) {
-		return serviceCenterRepository.selectAllList(category, keyword, questCatCategory);
+	public List<OnlineQnADto> selectAllList(int pageSize, int pageBlockSize, int currentPageNum, String category, String keyword, String questCatCategory) {
+
+		int offset = (currentPageNum - 1) * pageSize;
+		
+		RowBounds rowBounds = new RowBounds(offset, pageSize);
+		
+		return serviceCenterRepository.selectAllList(pageSize, pageBlockSize, currentPageNum, category, keyword, questCatCategory, rowBounds);
 	};
+	
+	public int selectTotalCount(String category, String keyword) {
+		return serviceCenterRepository.selectTotalCount(category, keyword);
+	}
 	
 	public OnlineQnADto selectOneQna(String faqId) {
 		return serviceCenterRepository.selectOneQna(faqId);

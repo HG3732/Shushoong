@@ -9,12 +9,28 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<div th:text="${faqList.faqId}"></div>
 		</th:block>
 		<th:block th:unless="${faqList.ansTime == null}">
-			<div th:text="${faqList.faqId + ' 답변완료'}" style="color:blue"></div>
+			<div th:text="${faqList.faqId + '(답변완료)'}"></div>
 		</th:block>
 		<div th:text="${faqList.askTitle}"></div>
 		<div th:text="${faqList.questCatDesc}"></div>
 		<div th:text="${faqList.userId}"></div>
 		<div th:text="${faqList.askDate}"></div>
 	</a>
+	<div class="wrap-pageNum">
+		<th:block th:if="${startPageNum > 1}">
+			<button type="button" class="btn-page gopage" th:data-targetpage="${startPageNum - 1}" onclick="goPage(this)">&lt;</button>
+		</th:block>
+		<div class="wrap-page" th:each="item : ${#numbers.sequence(startPageNum, endPageNum)}">
+			<th:block th:if="${currentPageNum == item}">
+				<button type="button" class="gopage" th:text="${item}" th:href="@{/support/qna/list/{page}(page=${item})}" disabled></button>
+			</th:block>
+			<th:block th:unless="${currentPageNum == item}">
+				<button type="button" class="btn-page gopage" th:text="${item}" th:data-targetpage="${item}" onclick="goPage(this)"></button>
+			</th:block>
+		</div>
+		<th:block th:if="${endPageNum < totalPageCount}">
+			<button type="button" class="btn-page gopage" th:data-targetpage="${endPageNum + 1}" onclick="goPage(this)">&gt;</button>
+		</th:block>
+	</div>
 </div>
 </html>

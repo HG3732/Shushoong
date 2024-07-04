@@ -139,30 +139,14 @@ xmlns:th="http://www.thymeleaf.org">
 					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF'; margin-bottom: 10px;">요청사항</p>
 					<hr style="border: 2px solid #006AFF; margin-top: 5px;"></hr>
 					<div class="require_check">
-						<div class="single">
-							<input type="checkbox" id="box1" value="싱글" name="checkbox"><label for="box1"></label>
-							<div class="img_next_word">싱글</div>
+					
+						<div th:each="item, itemState : ${hotelRequestList}" class="hotel_request">
+							<input type="checkbox" th:id="'box-'+${itemState.count}" th:value="${item.REQUEST}" name="checkbox"><label th:for="'box-'+${itemState.count}"></label>
+							<div class="img_next_word" th:text="${item.REQUEST_DESC}"></div>
 						</div>
-						<div class="twin">
-							<input type="checkbox" id="box2" value="트윈" name="checkbox"><label for="box2"></label>
-							<div class="img_next_word">트윈</div>
-						</div>
-						<div class="double">
-							<input type="checkbox" id="box3" value="더블" name="checkbox"><label for="box3"></label>
-							<div class="img_next_word">더블</div>
-						</div>
-						<div class="non_smoking">
-							<input type="checkbox" id="box4" value="금연실" name="checkbox"><label for="box4"></label>
-							<div class="img_next_word">금연실</div>
-						</div>
-						<div class="smoking">
-							<input type="checkbox" id="box5" value="흡연실" name="checkbox"><label for="box5"></label>
-							<div class="img_next_word">흡연실</div>
-						</div>
-						<div class="skyview">
-							<input type="checkbox" id="box6" value="고층" name="checkbox"><label for="box6"></label>
-							<div class="img_next_word">고층</div>
-						</div>
+						<!-- box는 고정 문자값으로 checkbox 가 여러개 있을때 box 와 데이터를 더해서 각 체크박스의 id를 고유하게 만드는 것 -->
+						<!-- dto에 안담고 바로 mapper에서 꺼낸 값 오는것이기 때문에 대문자로 다 써야함 -->
+						
 					</div>
 					<hr style="border: 0; height: 1px; background: #006AFF;"></hr>
 					<p style="margin-top: 10px; font-size: var(--font4); font-family: 'SOYOMapleRegularTTF'; color: var(--color_gray_2);">

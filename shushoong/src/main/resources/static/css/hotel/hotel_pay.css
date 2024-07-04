@@ -145,7 +145,11 @@ input[type=tel]{
 	font-size: var(--font3);
 }
 
-.single{
+.hotel_request {
+	display: flex;
+	align-items: center; 
+}
+/* .single{
 	display: flex;
 	align-items: center; 
 }
@@ -175,7 +179,7 @@ input[type=tel]{
 .skyview{
 	display: flex;
 	align-items: center; 
-}
+} */
 
 input[type=checkbox]{ 
 	display:none; 

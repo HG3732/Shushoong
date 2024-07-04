@@ -4,7 +4,7 @@ function loadedHandler() {
 	$(".btn.save").on("click", saveInfoHandler);
 	$(".btn.secession").on("click", deleteAccHandler);
 	$(".pop-btn.cancle").on("click", cancleHandler);
-	$(".close_btn").on("click", cancleHandler)
+	$(".close_btn").on("click", cancleHandler);
 }
 
 function saveInfoHandler() {

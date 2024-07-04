@@ -8,8 +8,8 @@ import lombok.Data;
 @Component
 public class SNSLoginDto {
 	private String userId;
-	private String SNSType;
-	private String SNSName;
-	private String SNSEmail;
-	private String SNSConnecteDate;
+	private String snsType;
+	private String snsName;
+	private String snsEmail;
+	private String snsConnecteDate;
 }

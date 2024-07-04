@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/ACPage.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>권한이 없는 사용자 입니다.</title>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-section">
+				<section>
+					<div class="container">
+						<div class="AC-header">
+							<img th:src="@{/images/접근제한.png}" alt="제한" width="100px" height="100px">
+						</div>
+						<div class="AC-section">
+							<div class="AC-content">접근할 수 없는 페이지 입니다.</div>
+							<div class="AC-annotation">이 페이지에 접근할 수 있는 권한이 없습니다.</div>
+							<button type="button" class="backBtn" th:onclick="|location.href='@{/home}'|">메인으로</button>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+		<div th:replace="~{common/footer :: Footer}"></div>
+	</div>
+</body>
+</html>

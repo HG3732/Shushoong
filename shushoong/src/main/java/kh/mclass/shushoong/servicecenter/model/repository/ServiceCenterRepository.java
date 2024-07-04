@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
 import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
 
 @Mapper
@@ -16,4 +17,10 @@ public interface ServiceCenterRepository {
 	
 	//1:1 문의 답변 작성
 	public int updateAnswer(String faqId, String ansContent);
+	
+	
+	
+	// 공지사항
+	List<NoticeDto> selectAllList(String noticeId);
+	
 }

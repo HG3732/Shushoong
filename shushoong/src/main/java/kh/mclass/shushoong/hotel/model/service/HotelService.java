@@ -10,6 +10,7 @@ import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.repository.HotelRepository;
 import lombok.RequiredArgsConstructor;
@@ -97,15 +98,15 @@ public class HotelService {
 		return hotelRepository.selectReviewOverall(hotelCode);
 	}
 	
-	//호텔 예매 내역
-	public int inserthotelReserveInfo(Map<String, Object> map){
-		return hotelRepository.inserthotelReserveInfo(map);
+	//호텔 요청사항 조회
+	public List<Map<String, String>> hotelRequestAll(){
+		return hotelRepository.hotelRequestAll();
 	}
-
-	//요청사항 따로 추가
-	 public int insertHotelRequestItems(String hotelReserveCode, List<Integer> requests) {
-		 return hotelRepository.insertHotelRequestItems(hotelReserveCode, requests);
-	 }
+	
+	//호텔 예매 내역
+	public int inserthotelReserveInfo(HotelReserveDtoRes resDto){
+		return hotelRepository.inserthotelReserveInfo(resDto);
+	}
 	
 //	호텔 주문 정보
 //	public Map<String, Object> insertPayInfo(String memEmail) {

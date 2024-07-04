@@ -9,6 +9,7 @@ import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 
 @Mapper
@@ -46,11 +47,11 @@ public interface HotelRepository {
 	//호텔 상세페이지 전체평균리뷰
 	public List<HotelReviewOverallDtoRes> selectReviewOverall(String hotelCode);
 	
-	// 호텔 예매 내역
-	public int inserthotelReserveInfo(Map<String, Object> map);
+	//호텔 요청사항 조회
+	public List<Map<String, String>> hotelRequestAll();
 
-	// 요청사항 저장
-	public int insertHotelRequestItems(String hotelReserveCode, List<Integer> requests);
+	// 호텔 예매 내역
+	public int inserthotelReserveInfo(HotelReserveDtoRes resDto);
 
 //	호텔 주문 정보
 //	public Map<String, Object> insertPayInfo(String memEmail);

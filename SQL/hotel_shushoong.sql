@@ -373,26 +373,6 @@ END;
 
 -------------------------------마이페이지 호텔 예약 관련
 
-desc reserve_request;
-commit;
-
-select * from hotel_request;
-
-insert all into hotel_request values (0, '싱글')
-        into hotel_request values (1, '트윈')
-        into hotel_request values (2, '더블')
-        into hotel_request values (3, '금연실')
-        into hotel_request values (4, '흡연실')
-        into hotel_request values (5, '고층')  
-        select * from dual;
-
-select * from reserve_request;
-
-
-select * from hotel_reserve;
-desc hotel_reserve;
-
-commit;
 
 delete from hotel_review
 where hotel_reserve_code = '2024070432OS0013';
@@ -435,21 +415,7 @@ set user_id = 'customer'
 where hotel_reserve_code = '20240703552OS0020';
 
 
-select * from hotel_room;
-
-
-select hotel_name, hotel_reserve_code from hotel_reserve 
-join hotel using(hotel_code) 
-join hotel_room_att using(room_att) 
-join hotel_room_cat using(room_cat) 
-where user_id = 'customer' and hotel_reserve_code = '20240703552OS0020';
-
-
-select hotel_name from hotel_room room join hotel_reserve res on room.room_cap = res.room_cap join hotel h on h.hotel_code = room.hotel_code where res.hotel_reserve_code = '20240703552OS0020' and room.room_cat = res.room_cat and room.hotel_code = res.hotel_code and room.room_att = res.room_att;
-select * from hotel_reserve where hotel_reserve_code = '20240703552OS0020';
-desc hotel_room;
-desc hotel_reserve;
-
+--예약 내역 하나만 조회하기
 select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko
 from hotel_reserve hr
     join hotel h on hr.hotel_code = h.hotel_code 
@@ -464,6 +430,7 @@ desc hotel_reserve;
 select * from hotel_reserve;
 
 
+--view 테이블 만들어서 예약 상세 뽑아내기
 CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_CUSTOMER_RESERVE" (
     hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko, user_id
 ) AS 
@@ -477,7 +444,7 @@ FROM hotel_reserve hr
 
 
 update hotel_reserve
-set user_id = 'customer' where hotel_reserve_code = '20240701112OS0013';
+set request_sum = '3' where hotel_reserve_code = '20240701112OS0013';
 
 -- 기준점을 수용인원으로 잡아서 hotel에 있는 모든 방의 수용인원만 비교해서 
 select * from hotel_request;
@@ -492,3 +459,15 @@ modify requests number(3);
 
 alter table hotel_reserve
 rename column requests to request_sum;
+
+select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko, request_sum
+from hotel_reserve hr
+    join hotel h on hr.hotel_code = h.hotel_code 
+    join hotel_room_att hra on hr.room_att = hra.room_att
+    join hotel_room_cat hrc on hr.room_cat = hrc.room_cat
+    join hotel_room hm on hr.room_cap = hm.room_cap
+where user_id = 'customer' and hr.hotel_reserve_code = '20240703552OS0020' and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att;
+
+desc hotel_reserve;
+
+select * from hotel_reserve;

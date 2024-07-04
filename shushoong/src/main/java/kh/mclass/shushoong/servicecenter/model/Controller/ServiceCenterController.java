@@ -48,6 +48,7 @@ public class ServiceCenterController {
 	
 	@GetMapping("/support/notice/search.ajax")
 	public String searchQnA(Model model, String pageNum, String category, String keyword, String questCatCategory) {
+		System.out.println("pageNum = " + pageNum);
 		if(pageNum != null && !pageNum.equals("")) {
 			try {
 				currentPageNum = Integer.parseInt(pageNum);
@@ -55,6 +56,17 @@ public class ServiceCenterController {
 				e.printStackTrace();
 			}
 		}
+		
+		int totalCount = service.selectTotalCount(category, keyword);
+		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+		
+		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+		
+		model.addAttribute("currentPageNum", currentPageNum);
+		model.addAttribute("totalPageCount", totalPageCount);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
 		model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, category, keyword, questCatCategory));
 		return "servicecenter/QnAlist";
 	}

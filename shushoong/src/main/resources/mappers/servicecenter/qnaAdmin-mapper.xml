@@ -25,6 +25,7 @@
 		 		WHERE QUEST_CAT = #{questCatCategory}
 		 	</if>
 	 	</if>
+	 	order by faq_id desc
 	</select>
 	
 	<!-- 1:1문의 글 갯수(페이징용) -->

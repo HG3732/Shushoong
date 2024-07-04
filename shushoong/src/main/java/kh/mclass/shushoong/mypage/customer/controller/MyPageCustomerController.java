@@ -1,6 +1,9 @@
 package kh.mclass.shushoong.mypage.customer.controller;
 
+import java.math.BigDecimal;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.catalina.startup.ClassLoaderFactory.Repository;
@@ -130,7 +133,51 @@ public class MyPageCustomerController {
 	public String selectOneHotel(Model model, String userId, String hotelReserveCode) {
 		//input 태그에 있는 name 여기에 씀
 		
+		 Map<String, Object> reservationDetails = service.selectOneReservedHotelList(userId, hotelReserveCode);
+		 
+	        if (reservationDetails != null && !reservationDetails.isEmpty()) {
+	            // 'requestSum' 값을 Double로 변환하여 사용
+	        	Integer requestNum = ((BigDecimal) reservationDetails.get("REQUEST_SUM")).intValue();
+	        	//oracle 데이터베이스의 NUMBER(3) 타입은 최대 3자리의 정수를 표현할 수 있는 숫자형 데이터 타입이라서 
+	        	//Java에서는 이를 BigDecimal 또는 Integer로 처리해야함
+	        	
+	        	String requestSumStr = "";
+	        	//String requestSumStr = requestNum.toString(); -> 이렇게 쓰니까 당연히 숫자가 들어가지...
+	        	
+	        	if ( (requestNum & 1) != 0) {
+	        		requestSumStr += "싱글, ";
+		        } 
+		        if ((requestNum & 2) != 0) {
+		        	requestSumStr += "트윈, ";
+		        } 
+		        if ((requestNum & 4) != 0) {
+		        	requestSumStr += "더블, ";
+		        }
+		        if ((requestNum & 8 ) != 0) {
+		        	requestSumStr += "금연실, ";
+		        }
+		        if ((requestNum & 16) != 0) {
+		        	requestSumStr += "흡연실, ";
+		        }
+		        if ((requestNum & 32) != 0) {
+		        	requestSumStr += "고층, ";
+		        }
+
+		        if(!requestSumStr.isEmpty()) {
+		        	//requestDesc 가 비어있지 않다면..
+		        	
+		        	requestSumStr = requestSumStr.substring(0, requestSumStr.length() - 2);
+		        	//0 은 index를 나타냄
+		        	//-2 는 쉼표와 공백 제거하기 위해 빼기
+		        }
+		        	
+		        model.addAttribute("requestDesc", requestSumStr);
+	        } else {
+	            
+	        }
+		
 		model.addAttribute("reserveList", service.selectOneReservedHotelList(userId, hotelReserveCode));
+		
 		return "mypage/customer/mypageCustomerReservedHotel";
 	}
 	

@@ -50,7 +50,7 @@ public class WebSecurityConfig {
 				.passwordParameter("userPwd"))
 		.logout((logout) -> logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/")
+				.logoutSuccessUrl("/home")
 				.invalidateHttpSession(true))
 		.exceptionHandling((exceptionHandling -> exceptionHandling
 				.accessDeniedPage("/error/redirect")));

@@ -9,11 +9,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<div th:text="${faqList.faqId}"></div>
 		</th:block>
 		<th:block th:unless="${faqList.ansTime == null}">
-<<<<<<< Updated upstream
-			<div th:text="${faqList.faqId + ' 답변완료'}" style="color:blue"></div>
-=======
 			<div th:text="${faqList.faqId + '(답변완료)'}"></div>
->>>>>>> Stashed changes
 		</th:block>
 		<div th:text="${faqList.askTitle}"></div>
 		<div th:text="${faqList.questCatDesc}"></div>

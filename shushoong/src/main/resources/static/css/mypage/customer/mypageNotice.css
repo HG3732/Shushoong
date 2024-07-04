@@ -15,6 +15,7 @@
 
 /* 공지사항 리스트 */
 section .onlineQnAList {
+    margin-top: 40px;
 	margin-bottom: 100px;
 }
 
@@ -53,6 +54,10 @@ section .notice-list {
 	grid-template-columns: 1fr 3fr 3fr;
 	align-items: center;
 	text-align: center;
+}
+
+section .notice-list .td-title{
+	text-align: left;
 }
 
 section .viewQnAList {

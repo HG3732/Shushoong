@@ -54,11 +54,26 @@ section .search {
 	margin: 20px;
 }
 
-section .searchKeyword {
+section .search-bar{
+	position: relative;
+}
+
+section .search-bar .searchKeyword {
 	width:300px;
 	height: 30px;
-	border: 1px solid  #006AFF;
+	border: 1px solid var(--color_blue_2);
 	border-radius: 10px;
+	padding: 0 10px;
+}
+section .search-bar img {
+	position: absolute;
+	top: 25%;
+    left: 92%;
+}
+
+section .searchKeyword:focus {
+	outline-color: var(--color_blue_1);
+	outline-width: 3px;
 }
 
 section .questCat-category{

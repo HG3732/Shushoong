@@ -175,7 +175,6 @@ section .userName-content {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	height: 220px;
 }
 
 section .userName {
@@ -235,12 +234,21 @@ section .viewQnAList {
 	border-radius: 20px;
 	width: 90px;
 	height: 40px;
-	background-color: #006AFF;
+	background-color: var(--color_blue_2);
+	color: black;
 	cursor: pointer;
-	color: white;
 	font-size: 13px;
 	font-weight: bold;
 	font-family: SOYOMapleRegularTTF;
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+section .viewQnAList:hover {
+	background-color: #006AFF;
+	color: white;
 }
 
 section .manageStopCustomer {
@@ -317,21 +325,12 @@ section .joinDate-content, .userId-content, .userEmail-content,
 	align-items: center;
 }
 
-/* section .userInformation>label {
-	display: inline-block;
-	text-align: center;
-	width: 100px;
-	font-weight: bold;
-	margin-left: 10px;
-	margin-bottom: 20px;
-} */
 section .joinDate-content>label {
 	display: inline-block;
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
 	margin-right: 5px;
-	/* margin: 0 20px 20px 10px; */
 }
 
 section .userId-content>label {
@@ -340,7 +339,6 @@ section .userId-content>label {
 	width: 100px;
 	font-weight: bold;
 	margin-right: 5px;
-	/* margin: 0 20px 20px 10px; */
 }
 
 section .userEmail-content>label {
@@ -349,7 +347,6 @@ section .userEmail-content>label {
 	width: 100px;
 	font-weight: bold;
 	margin-right: 5px;
-	/* margin: 0 20px 20px 10px; */
 }
 
 section .userStatus-content>label {
@@ -358,7 +355,6 @@ section .userStatus-content>label {
 	width: 100px;
 	font-weight: bold;
 	margin-right: 5px;
-	/* margin: 0 20px 20px 10px; */
 }
 
 section .purchaseProduct-content>label {
@@ -367,7 +363,6 @@ section .purchaseProduct-content>label {
 	width: 100px;
 	font-weight: bold;
 	margin-right: 5px;
-	/* margin: 0 20px 20px 10px; */
 }
 
 section .purchaseProduct {
@@ -396,7 +391,6 @@ section .faqId-content>label {
 	width: 100px;
 	font-weight: bold;
 	margin-right: 5px;
-	/* margin: 0 20px 20px 10px; */
 }
 
 section .btn.container {

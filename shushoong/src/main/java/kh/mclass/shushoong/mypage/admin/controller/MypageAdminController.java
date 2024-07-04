@@ -110,10 +110,16 @@ public class MypageAdminController {
 		return "mypage/admin/manageBusiness";
 	}
 
-	// 등록 상품 관리 페이지로 이동
+	//사업장 관리 페이지로 이동
 	@GetMapping("/manager/product")
 	public String manageProduct() {
 		return "mypage/admin/manageProduct";
+	}
+	
+	@PostMapping("/manager/product/searchHotel.ajax")
+	public String searchProduct(Model model, String keyword) {
+		model.addAttribute("result", service.selectProduct(keyword));
+		return "mypage/admin/manageproduct/productList";
 	}
 	
 	@GetMapping ("/hotel/test")

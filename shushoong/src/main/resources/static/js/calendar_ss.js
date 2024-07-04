@@ -36,7 +36,6 @@ function createCalendar(){
 					select_status = 1;
 				} else {
 					date2 = new Date(info.dateStr); 
-					console.log(date1 < date2);
 					if(date1 <= date2) {
 						$('.check-out-date').text(year + "년" + month + "월" + day + "일");
 						$('.check-out').val(year + "년" + month + "월" + day + "일");

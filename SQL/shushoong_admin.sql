@@ -77,3 +77,11 @@ select quest_cat_desc, faq_id, user_id, ask_title, ask_content, ask_date, ans_co
 update service_center
 set ans_time = sysdate, ans_content = '이렇게 하면 된다고 47번째 말씀드립니다.'
 where faq_id = '47';
+
+desc hotel;
+desc business_member;
+select * from hotel join business_member using(business_num);
+select hotel_code, h.hotel_name, hotel_eng, hotel_address, hotel_call, hotel_check_in, hotel_check_out,
+			hotel_policy, hotel_intro, hotel_pcount, hotel_loc_cat, business_num, hotel_safety, user_id
+			from hotel h join business_member bm using (business_num)
+			where h.hotel_name like '%스%';

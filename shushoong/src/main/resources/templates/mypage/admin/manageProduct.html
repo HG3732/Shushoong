@@ -8,6 +8,7 @@
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/mypage/admin/mypageAdminAside.css}" rel="stylesheet" />
 	<link th:href="@{/css/mypage/admin/manageProduct.css}" rel="stylesheet" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>[관리자모드] 슈슝::사업장 관리</title>
 </head>
@@ -34,27 +35,14 @@
 							사업장 검색
 						</div>
 						<div class="header-section">
-							<input type="text" id="hotelName" class="searchInput" placeholder="호텔 검색">
+							<input type="text" id="productName" class="searchInput" placeholder="호텔 검색">
 							<img class="absolute" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" width="20px" height="20px">
 						</div>
-						<div class="btn hotelList">
-							<button type="button" class="hotelSearch">검색</button>
+						<div class="btn productList">
+							<button type="button" class="productSearch">검색</button>
 						</div>
 					</div>
-					<div class="content-section">
-						<div class="hotelList">
-							<div class="listHeader-grid">
-								<div>상품명</div>
-								<div>상세페이지</div>
-								<div>등록일자</div>
-							</div>
-							<div class="hotelList-grid">
-								<div>제주도호텔</div>
-								<div>http:// www.shushoong.com/hotel,list/123577</div>
-								<div>2023-11-01</div>
-							</div>
-						</div>
-					</div>
+					<div th:replace="~{mypage/admin/manageproduct/productList :: productList}"></div>
 				</section>
 			</div>
 		</div>
@@ -63,4 +51,5 @@
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
 </body>
+<script th:src='@{/js/mypage/admin/manageProduct.js}'></script>
 </html>

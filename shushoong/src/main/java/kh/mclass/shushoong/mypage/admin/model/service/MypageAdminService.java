@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
+import kh.mclass.shushoong.mypage.admin.model.domain.ProductDtoRes;
 import kh.mclass.shushoong.mypage.admin.model.repository.MypageAdminRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -56,5 +57,9 @@ public class MypageAdminService {
 	
 	public int selectUseTerm(String id) {
 		return mypageAdminRepository.selectUseTerm(id);
+	}
+	
+	public List<ProductDtoRes> selectProduct(String keyword) {
+		return mypageAdminRepository.selectProduct(keyword);
 	}
 }

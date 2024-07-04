@@ -27,16 +27,8 @@ public class ServiceCenterController {
 	int pageBlockSize = 3;
 	int currentPageNum = 1;
 	
-	@GetMapping("/support/qna/list/{page}")
-	public String qnaList(Model model ,@PathVariable("page") String pageNum, String category, String keyword, String questCat) {
-		System.out.println("PathVariable pageNum : " + pageNum);
-		if(pageNum != null && !pageNum.equals("")) {
-			try {
-				currentPageNum = Integer.parseInt(pageNum);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-		}
+	@GetMapping("/support/qna/list")
+	public String qnaList(Model model, String category, String keyword, String questCat) {
 		
 		int totalCount = service.selectTotalCount(category, keyword);
 		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;

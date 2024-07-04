@@ -64,15 +64,20 @@
 							<div>문의자</div>
 							<div>등록일자</div>
 						</div>
-						<div th:each="faqList : ${latestFaq}" class="QnA-content">
-							<div th:text="${faqList.FAQ_ID}"></div>
+						<a th:each="faqList : ${latestFaq}" class="QnA-content" th:href="@{/support/qna/view/{faqId}(faqId=${faqList.FAQ_ID})}">
+							<th:block th:if="${faqList.ANS_TIME == null or faqList.ANS_TIME == ''}">
+								<div th:text="${faqList.FAQ_ID}"></div>
+							</th:block>
+							<th:block th:unless="${faqList.ANS_TIME == null or faqList.ANS_TIME == ''}">
+								<div th:text="${faqList.FAQ_ID} + '(답변완료)'"></div>
+							</th:block>
 							<div th:text="${faqList.ASK_TITLE}"></div>
 							<div th:text="${faqList.QUEST_CAT_DESC}"></div>
 							<div th:text="${faqList.USER_ID}"></div>
 							<div th:text="${faqList.ASK_DATE}"></div>
-						</div>
+						</a>
 						<div class="viewAllList">
-							<button type="button" class="viewQnAList">전체보기</button>
+							<a class="viewQnAList" th:href="@{/support/qna/list/1}">전체보기</a>
 						</div>
 					</div>
 					

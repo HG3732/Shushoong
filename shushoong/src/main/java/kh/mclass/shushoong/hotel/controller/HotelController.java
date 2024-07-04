@@ -15,6 +15,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,7 +65,12 @@ public class HotelController {
 	public String hotelMain(Model model, HttpSession session) {
 		List<HotelDtoRes> hotHotelList = service.selectHotHotelList();
 		model.addAttribute("hotHotelList", hotHotelList);
-		session.setAttribute("userId", "ex1");
+		/* session.setAttribute("userId", "ex1"); */
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("유저 아이디 : " + authentication.getName());
+        System.out.println("유저 등급 : " + authentication.getAuthorities());
+        
 		return "hotel/hotel_main";
 	}
 	

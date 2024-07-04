@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
+import kh.mclass.shushoong.mypage.admin.model.domain.ProductDtoRes;
 
 @Mapper
 public interface MypageAdminRepository {
@@ -43,4 +44,9 @@ public interface MypageAdminRepository {
 	
 	//마지막 로그인으로부터 경과시간 조회
 	public int selectUseTerm(String id);
+	
+	
+	
+	//사업장 검색
+	public List<ProductDtoRes> selectProduct(String keyword);
 }

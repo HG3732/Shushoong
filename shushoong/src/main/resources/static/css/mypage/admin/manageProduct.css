@@ -48,7 +48,7 @@ section .header-section > img {
 	left: 85%;
 }
 
-section .hotelSearch {
+section .productSearch {
 	background-color: #006AFF;
 	width: 130px;
 	height: 40px;
@@ -69,7 +69,7 @@ section .content-section {
 
 section .listHeader-grid {
 	display: grid;
-	grid-template-columns: 2fr 5fr 2fr;
+	grid-template-columns: 2fr 3fr 2fr 5fr;
 	align-items: center;
     text-align: center;
 	
@@ -80,13 +80,20 @@ section .listHeader-grid {
 	background-color:#BCEFFF;
 }
 
-section .hotelList-grid {
+section .productList-grid {
 	display: grid;
-	grid-template-columns: 2fr 5fr 2fr;
+	grid-template-columns: 2fr 3fr 2fr 5fr;
 	align-items: center;
     text-align: center;
     
     height: 40px;
 	font-size: 13px;
 	border-bottom: 1px solid #006AFF;
+}
+
+section .noContent {
+	text-align: center;
+	margin: 50px;
+	font-size: 20px;
+	font-weight: 900;
 }

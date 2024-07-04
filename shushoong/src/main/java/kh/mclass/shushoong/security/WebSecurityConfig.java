@@ -43,21 +43,24 @@ public class WebSecurityConfig {
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
 				.loginPage("/admin/manager/login")
+				.defaultSuccessUrl("/")
 				.successHandler(authSuccessHandler)
 				.failureHandler(authFailureHandler)
 				.usernameParameter("userId")
 				.passwordParameter("userPwd"))
 		.logout((logout) -> logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/home")
-				.invalidateHttpSession(true));
+				.logoutSuccessUrl("/")
+				.invalidateHttpSession(true))
+		.exceptionHandling((exceptionHandling -> exceptionHandling
+				.accessDeniedPage("/error/redirect")));
 		
 		return http.build();
 	}
 	
 	// 비밀번호 암호화
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
+	BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	

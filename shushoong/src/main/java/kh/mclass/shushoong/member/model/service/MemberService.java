@@ -19,7 +19,6 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
-	private final PasswordEncoder passwordEncoder;
 	
 	public List<MemberDto> selectAllList() {
 		return memberRepository.selectAllList();
@@ -35,8 +34,8 @@ public class MemberService {
 	}
 
 	// 로그인 기록
-	public int log(Map<String, Object> map) {
-		return memberRepository.log(map);
+	public int loginLog(Map<String, Object> map) {
+		return memberRepository.loginLog(map);
 	}
 	
 	public boolean checkLoginIdDuplicate(String loginId){

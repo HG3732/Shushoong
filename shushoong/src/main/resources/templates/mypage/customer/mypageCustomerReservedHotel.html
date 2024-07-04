@@ -57,19 +57,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					<p class="p">객실 정보</p>
 				</div>
 				<div class="room_info">
-					<div class="room_att_cat" th:utext="${reserveList.ROOM_CAT_DESC} + ' ~ ' + ${reserveList.ROOM_ATT_DESC}"></div>
+					<div class="room_att_cat" th:utext="${reserveList.ROOM_CAT_DESC} + ', ' + ${reserveList.ROOM_ATT_DESC}"></div>
 				</div>								
 				<div class="request">
 					<p class="p">요청 사항</p>
 				</div>
 				<div class="request_info">
-					<div class="request_detail" ></div>
+					<div class="request_detail" th:text="${requestDesc}"></div>
 				</div>						
 				<div class="reserve_name">
 					<p class="p">투숙객 성명</p>
 				</div>
 				<div class="resident">
-					<div class="ko"></div>
+					<div class="ko" th:text="${reserveList.RESIDENCE_NAME_KO}"></div>
 				</div>							
 				<div class="pay">
 					<P class="p">금액</P>

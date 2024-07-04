@@ -7,7 +7,7 @@
 			<!-- <span th:text="${air.departLoc}" class="select-info-departLoc" name="departLoc"></span> 
 			<span th:text="${air.arrivalLoc}" class="select-info-arrivalLoc" name="arrivalLoc"></span> --> 
 			<span th:text="${air.airlineCode}" class="select-info-airlineCode" name="airlineCode"></span>
-			<span th:text="${air.seatPrice}" class="select-info-seatPrice" name="seatPrice"></span>
+			<!-- <span th:text="${air.seatPrice}" class="select-info-seatPrice" name="seatPrice"></span> -->
 		</div>
 		
 		<div class="seat-count">
@@ -50,12 +50,12 @@
 					<div class="airticket">
 						<!-- 왕복일 시 -->
 						<div class="ticket-price" th:if="${ticketType} != 1">
-							<div
-								th:text="${#numbers.formatInteger(air.seatPrice, 3, 'COMMA') + '원'}"></div>
+							<span class="seat-price"
+								th:text="${#numbers.formatInteger(air.seatPrice, 3, 'COMMA') + '원'}"></span>
 						</div>
 						<!-- 편도일 시 = 티켓 값 / 2 -->
 						<div class="ticket-price" th:if="${ticketType} == 1">
-							<span
+							<span class="seat-price"
 								th:text="${#numbers.formatInteger(T(java.lang.Integer).parseInt(air.seatPrice) / 2, 3, 'COMMA') + '원'}"></span>
 						</div>
 						<div class="ticket-btn">

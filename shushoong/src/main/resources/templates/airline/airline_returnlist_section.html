@@ -46,10 +46,10 @@
 						<!-- 왕복일 시 -->
 						<div class="ticket-price" th:if="${selectOneAirline.airlineName} == ${air.airlineName}">
 <!-- 							<div th:text="${#numbers.formatInteger(air.seatPrice, 3, 'COMMA') + '원'}"></div> -->
-							<div>0 원</div>
+							<span class="seat-price-return">0 원</span>
 						</div>
 						<div class="ticket-price" th:if="${selectOneAirline.airlineName} != ${air.airlineName}">	
-							 <div th:text=" '+ ' + ${#numbers.formatInteger(air.seatRandomPrice, 3, 'COMMA') + '원'}"></div>
+							 <span> + </span> <span class="seat-price-return" th:text=" ${#numbers.formatInteger(air.seatRandomPrice, 3, 'COMMA') + '원'}"></span>
 						</div>
 						<div class="ticket-btn">
 							<button class="ticketinfo-btn" type="button">

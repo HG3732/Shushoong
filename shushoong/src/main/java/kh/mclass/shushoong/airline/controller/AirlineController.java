@@ -188,7 +188,7 @@ public class AirlineController {
 
 	// 항공 메인 페이지
 	@PostMapping("/airline/customer/reserve/pay")
-
+	
 	public String airlinePay(Model md, 
 			@RequestParam String adult,
 			@RequestParam String child,
@@ -197,14 +197,16 @@ public class AirlineController {
 			@RequestParam String departLoc, 
 			@RequestParam String arrivalLoc, 
 			@RequestParam String departDate, 
-			@RequestParam String arrivalDate, 
+			@RequestParam String arrivalDate,
+			@RequestParam String seatPrice,
+			// return 붙은 param은 돌아오는 항공 편
 			@RequestParam String departLocReturn, 
 			@RequestParam String arrivalLocReturn, 
 			@RequestParam String departDateReturn, 
 			@RequestParam String arrivalDateReturn, 
 			@RequestParam String airlineCodeReturn, 
 			@RequestParam String airlineCode, 
-			//@RequestParam String ticketPrice,
+			@RequestParam String seatPriceReturn,
 			Principal principal
 			) {
 		
@@ -214,9 +216,9 @@ public class AirlineController {
 			Character dommesticReturn = service.selectOneReturnDomesticFunction(airlineCodeReturn);
 			AirlineInfoDto airlineInfoReturn = service.selectOneAirlineInfo(airlineCodeReturn);
 			md.addAttribute("airlineInfoReturn",airlineInfoReturn);
-			md.addAttribute("airlineCodeReturn", airlineCodeReturn);
 			md.addAttribute("dommesticReturn",dommesticReturn);
 			
+			// 이 부분 가는 편, 오는 편 구분 짓기 위해서 오는편은 뒤에 Return 붙여주세용 
 			System.out.println(airlineInfoReturn);
 			if(airlineInfoReturn==null) {
 				md.addAttribute("ticketType",1);
@@ -244,7 +246,6 @@ public class AirlineController {
 		System.out.println("가는 비행기 항공코드 : " + airlineCode);
 		Character domestic = service.selectOneDomesticFunction(airlineCode);
 		AirlineInfoDto airlineInfo = service.selectOneAirlineInfo(airlineCode);
-		log.info("어른 adult: {}, 소아 child: {}, 유아 baby {}, 가는편 항공코드{}, 오는편 항공코드{}, domestic:{}", adult, child, baby, airlineCode, airlineCodeReturn,domestic);
 		
 		md.addAttribute("adult", adult);
 		md.addAttribute("child", child);
@@ -260,6 +261,12 @@ public class AirlineController {
 	    System.out.println("어른 수: " + adult);
 	    System.out.println("소아 수: " + child);
 	    System.out.println("유아 수: " + baby);
+	    System.out.println("편도(1)왕복(2): " + ticketType);
+	    System.out.println("Domestic: " + domestic);
+	    System.out.println("가는 편 항공코드: " + airlineCode);
+	    System.out.println("오는 편 항공코드: " + airlineCodeReturn);
+	    System.out.println("가는 편 티켓 값: " + seatPrice);
+	    System.out.println("오는 편 티켓 값: " + seatPriceReturn);
 	    
 	    return "airline/airline_pay";
 	    

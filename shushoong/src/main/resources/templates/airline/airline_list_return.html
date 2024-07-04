@@ -97,7 +97,21 @@ div#people_lineup_sit_accoding{
 			<div class="container">
 			
 			<div th:replace="~{airline/airline_searchbar :: searchbar}"></div>
-			
+			<div hidden>
+				<form action="/shushoong/airline/main" method="post">
+					<input type="text" name="ticketType" id="hidden_ticket_type" 	value="1" 	readonly="readonly" required="required">
+					<input type="text" name="departLoc" id="hidden_depart_value" 				readonly="readonly" required="required">
+					<input type="text" name="arrivalLoc" id="hidden_arrival_value"		 	readonly="readonly" required="required">
+					<input type="text" name="departDate" id="hidden_depart_date" 				readonly="readonly" required="required">
+					<input type="text" name="arrivalDate" id="hidden_arrival_date" 				readonly="readonly" required="required">
+					<input type="text" name="adult" id="hidden_adult" 				value="1" 	readonly="readonly" required="required">
+					<input type="text" name="child" id="hidden_child" 				value="0"	readonly="readonly" required="required">
+					<input type="text" name="baby" id="hidden_baby" 					value="0"	readonly="readonly" required="required">
+					<input type="text" name="seatGrade" id="hidden_seat_grade" 			value="3"	readonly="readonly" required="required">
+					<input type="submit" id="hidden_submit">
+					<!-- checkpoint -->
+				</form>					
+				</div>
 				<div class="flex-container">
 					<div class="sidebar">
 						<div class="time-list">
@@ -274,7 +288,7 @@ div#people_lineup_sit_accoding{
 
 												<div class="airticket">
 													<div class="ticket-price">
-														<div th:text="${#numbers.formatInteger(air.seatPrice, 3, 'COMMA') + '원'}"></div>
+														<span class="seat-price" th:text="${#numbers.formatInteger(air.seatPrice, 3, 'COMMA') + '원'}"></span>
 													</div>
 												</div>
 											</div>
@@ -339,6 +353,8 @@ div#people_lineup_sit_accoding{
 								<input type="hidden" id="child" name="child" th:value="${child}"> 
 								<input type="hidden" id="baby" name="baby" th:value="${baby}">
 								<input type="hidden" id="ticketType" name="ticketType" th:value="${ticketType}">
+								<input type="hidden" id="seatPrice" name="seatPrice">
+								<input type="hidden" id="seatPriceReturn" name="seatPriceReturn">
 								<input type="hidden" id="departLoc" name="departLoc"> 
 								<input type="hidden" id="arrivalLoc" name="arrivalLoc"> 
 								<input type="hidden" id="departDate" name="departDate"> 

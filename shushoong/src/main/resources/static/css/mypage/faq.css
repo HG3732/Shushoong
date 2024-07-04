@@ -14,6 +14,10 @@ section .viewAllList {
 	justify-content: right;
 }
 
+section .QnAContainer {
+	margin-bottom: 10px;
+}
+
 section .QnA-grid {
 	height: 40px;
 	font-size: 13px;
@@ -32,7 +36,6 @@ section .QnA-content {
 	font-size: 11px;
 	font-weight: bold;
 	border-bottom: 1px solid #006AFF;
-	margin-bottom: 10px;
 	display: grid;
 	grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
 	align-items: center;
@@ -45,6 +48,19 @@ section .search {
 	justify-content: center;
 	gap: 10px;
 	margin: 20px;
+}
+
+section .searchKeyword {
+	width:300px;
+	height: 30px;
+	border: 1px solid  #006AFF;
+	border-radius: 10px;
+}
+
+section .questCat-category{
+	width: 300px;
+	border: 1px solid  #006AFF;
+	border-radius: 10px;
 }
 
 section .searchQnAList {

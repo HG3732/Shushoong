@@ -3,7 +3,7 @@
 xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<div th:fragment="QnAlist" id="wrap-QnAlist">
+<div th:fragment="QnAlist" id="wrap-QnAlist" class="QnAContainer">
 	<a class="QnA-content" th:each="faqList : ${result}" th:href="@{/support/qna/view/{faqId}(faqId=${faqList.faqId})}">
 		<th:block th:if="${faqList.ansTime == null}">
 			<div th:text="${faqList.faqId}"></div>

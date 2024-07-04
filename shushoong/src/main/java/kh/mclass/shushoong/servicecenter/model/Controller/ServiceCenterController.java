@@ -150,6 +150,7 @@ public class ServiceCenterController {
 		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
 		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
 		
+//		System.out.println(" " + );
 		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum);
 		md.addAttribute("currentPageNum", currentPageNum);
 		md.addAttribute("totalPageCount", totalPageCount);
@@ -158,5 +159,18 @@ public class ServiceCenterController {
 		md.addAttribute("noticeDto", noticeDto);
 		return "servicecenter/notice_section";
 	}
+	
+	// 공지사항 작성
+	@GetMapping("/support/notice/write")
+	public String getNoticeWrite (Model md) {
+		return "servicecenter/notice_write";
+	}
+	
+	@PostMapping("/support/notice/write")
+	public String PostNoticeWrite (Model md) {
+		
+		return "redirect:/support/notice/list";
+	}
+	
 	
 }

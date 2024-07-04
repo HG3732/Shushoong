@@ -8,11 +8,10 @@
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 <link th:href="@{/css/mypage/customer/mypageCustomerAside.css}"
 	rel="stylesheet" />
-<link th:href="@{/css/mypage/customer/mypageNotice.css}"
-	rel="stylesheet" />
+<link th:href="@{/css/mypage/customer/mypageNoticeWrite.css}" rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
-<title>슈슝::공지사항</title>
+<title>슈슝::공지사항 작성</title>
 </head>
 <body>
 	<div class="wrapper">
@@ -31,14 +30,23 @@
 				</aside>
 			</div>
 
-			<div class="section-notice">
-				<section>
-					<h1 class="notice-h1">공지사항</h1>
-					<div th:replace="~{servicecenter/notice_section :: noticeList}"></div>
-
-				</section>
+			<div class="wrap-write">
+				<h1>공지사항 작성</h1>
+				<table>
+					<tr>
+						<th>제목</th>
+						<td>제목임당</td>
+					</tr>
+					<tr>
+						<th>카테고리</th>
+						<td>카테고리임당</td>
+					</tr>
+					<tr>
+						<th>첨부파일</th>
+						<td> <input type="file"></td>
+					</tr>
+				</table>
 			</div>
-
 		</div>
 	</div>
 	<div class="wrap-footer">

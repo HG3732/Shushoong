@@ -14,7 +14,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import kh.mclass.shushoong.config.AuthSuccessHandler;
 import kh.mclass.shushoong.config.AuthenticationFailureHandler;
-import kh.mclass.shushoong.member.model.service.CustomOAuth2UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -25,19 +24,22 @@ public class WebSecurityConfig {
 	
 	@Autowired
 	AuthenticationFailureHandler authFailureHandler;
-	
+		
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
 		http
 		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+//				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
+//				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
+//				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
+				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+				)
 		.csrf((csrf) -> csrf
 				.disable())
 		.headers((headers) -> headers
 				.addHeaderWriter(new XFrameOptionsHeaderWriter(
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-//		.userService(CustomOAuth2UserService)
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
 				.loginPage("/admin/manager/login")
@@ -49,7 +51,6 @@ public class WebSecurityConfig {
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/home")
 				.invalidateHttpSession(true));
-		
 		
 		return http.build();
 	}

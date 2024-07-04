@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+section .container {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items:center;
+	text-align: center;
+}
+
+section .AC-header {
+	margin: 200px 0 30px 0;
+}
+
+section .AC-content {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	color: red;
+}
+
+section .AC-annotation {
+	font-size: 15px;
+	margin-bottom: 50px;
+	color: gray;
+}
+
+section .backBtn {
+	border: none;
+	border-radius: 20px;
+	width: 110px;
+	height: 40px;
+	background-color: #006AFF;
+	cursor: pointer;
+	/* 	글자서식 */
+	color: white;
+	font-family: SOYOMapleRegularTTF;
+	font-size: 15px;
+	font-weight: bold;
+}

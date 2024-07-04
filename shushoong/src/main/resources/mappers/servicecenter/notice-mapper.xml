@@ -4,6 +4,8 @@
 <select id="selectNoticeAllList" parameterType="map" resultType="NoticeDto">
 	select * from notice_board order by notice_id desc
 </select>
-
+<select id="selectNoticeTotalCount" parameterType="hashMap" resultType="int">
+	select count (*) from notice_board
+</select>
 
 </mapper>

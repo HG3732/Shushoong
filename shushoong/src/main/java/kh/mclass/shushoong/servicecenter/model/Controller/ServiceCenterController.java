@@ -92,14 +92,71 @@ public class ServiceCenterController {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 마이페이지 공지사항
-	@GetMapping("/support/notice/list")
-	public String customerNotice (Model md) {
-		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(null);
+	@GetMapping("/support/notice/list/{page}")
+	public String noticeList (Model md, @PathVariable("page")
+			String pageNum) {
+		System.out.println("리스트 컨트롤러 pageNum : " + pageNum);
+		if (pageNum != null && !pageNum.equals("")) {
+			try {
+				currentPageNum = Integer.parseInt(pageNum);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("리스트 컨트롤러 currentPageNum : " + currentPageNum);
+		
+		int totalCount = noticeService.selectTotalCount();
+		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+		
+		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+		
+		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum);
+		md.addAttribute("currentPageNum", currentPageNum);
+		md.addAttribute("totalPageCount", totalPageCount);
+		md.addAttribute("startPageNum", startPageNum);
+		md.addAttribute("endPageNum", endPageNum);
 		md.addAttribute("noticeDto", noticeDto);
 		return "servicecenter/notice";
 	}
 	
-	
+	@GetMapping("/support/notice/list.ajax")
+	public String noticeListAjax (Model md,
+	String pageNum) {
+		System.out.println("ajax 컨트롤러 pageNum : " + pageNum);
+		if (pageNum != null && !pageNum.equals("")) {
+			try {
+				currentPageNum = Integer.parseInt(pageNum);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("ajax 컨트롤러 currentPageNum : " + currentPageNum);
+		int totalCount = noticeService.selectTotalCount();
+		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+		
+		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+		
+		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum);
+		md.addAttribute("currentPageNum", currentPageNum);
+		md.addAttribute("totalPageCount", totalPageCount);
+		md.addAttribute("startPageNum", startPageNum);
+		md.addAttribute("endPageNum", endPageNum);
+		md.addAttribute("noticeDto", noticeDto);
+		return "servicecenter/notice_section";
+	}
 	
 }

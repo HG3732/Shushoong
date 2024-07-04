@@ -32,7 +32,7 @@ section .QnA-grid {
 	border-bottom: 2px solid #006AFF;
 	background-color: #BCEFFF;
 	display: grid;
-	grid-template-columns: 1fr 3fr 3fr;
+	grid-template-columns: 1fr 2fr 3fr;
 	align-items: center;
 	text-align: center;
 }
@@ -42,6 +42,7 @@ section .QnA-grid {
 }
 .section-notice .QnA-grid .th-title{
 	text-align: left;
+	margin-left: 80px;
 }
 
 section .notice-list {
@@ -51,14 +52,20 @@ section .notice-list {
 	border-bottom: 1px solid #006AFF;
 	margin-bottom: 10px;
 	display: grid;
-	grid-template-columns: 1fr 3fr 3fr;
+	grid-template-columns: 1fr 2fr 3fr;
 	align-items: center;
 	text-align: center;
+}
+section .notice-list .td-no{
+	text-align: left;
+    margin-left: 50px;
 }
 
 section .notice-list .td-title{
 	text-align: left;
+	margin-left: 80px;
 }
+
 
 section .viewQnAList {
 	border: none;
@@ -71,4 +78,28 @@ section .viewQnAList {
 	font-size: 13px;
 	font-weight: bold;
 	font-family: SOYOMapleRegularTTF;
+}
+
+section .wrap-pageNum {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+	align-items: center;
+	margin: 20px;
+	font-family: SOYOMapleRegularTTF;
+}
+
+section .wrap-pageNum .gopage {
+	border:none;
+	border-radius: 20px;
+	padding: 5px 9px;
+	background-color: var(--color_blue_2);
+	color: black;
+}
+
+section .wrap-pageNum .btn-page:hover {
+	background-color: var(--color_blue_1);
+	color: white;
+	cursor: pointer;
 }

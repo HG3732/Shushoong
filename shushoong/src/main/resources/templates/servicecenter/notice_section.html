@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	
+<div th:fragment="noticeList" id="notice-list-container" class="onlineQnAList">
+	<div class="QnA-grid">
+		<div class="th-no">번호</div>
+		<div class="th-title">제목</div>
+		<div class="th-writedate">작성일</div>
+	</div>
+	<div th:each="notice : ${noticeDto}" class="notice-list">
+		<div class="td-no" th:text="${notice.noticeId}"></div>
+		<div class="td-title" th:text="${notice.noticeTitle}"></div>
+		<div class="td-writedate" th:text="${notice.noticeTime}"></div>
+	</div>
+	<div class="viewAllList">
+		<button type="button" class="viewQnAList">전체보기</button>
+	</div>
+</div>
+</body>
+</html>

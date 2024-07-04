@@ -9,7 +9,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<div th:text="${faqList.faqId}"></div>
 		</th:block>
 		<th:block th:unless="${faqList.ansTime == null}">
-			<div th:text="${faqList.faqId + ' 답변완료'}"></div>
+			<div th:text="${faqList.faqId + ' 답변완료'}" style="color:blue"></div>
 		</th:block>
 		<div th:text="${faqList.askTitle}"></div>
 		<div th:text="${faqList.questCatDesc}"></div>

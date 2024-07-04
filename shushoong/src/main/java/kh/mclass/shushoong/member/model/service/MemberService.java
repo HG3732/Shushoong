@@ -41,7 +41,7 @@ public class MemberService {
 	
 	public boolean checkLoginIdDuplicate(String loginId){
         return memberRepository.existsByLoginId(loginId);
-    }
+    } 
 
 	// 아이디 중복 여부
 	public int idCheck(String userId) {

@@ -1,5 +1,7 @@
 package kh.mclass.shushoong.servicecenter.model.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,12 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
+import kh.mclass.shushoong.servicecenter.model.service.NoticeService;
 import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 public class ServiceCenterController {
-
+	
+	@Autowired
+	private NoticeService noticeService;
+	
 	@Autowired
 	private OnlineQnAService service;
 	
@@ -86,8 +93,10 @@ public class ServiceCenterController {
 	
 	
 	// 마이페이지 공지사항
-	@GetMapping("/servicecenter/notice")
-	public String customerNotice () {
+	@GetMapping("/support/notice/list")
+	public String customerNotice (Model md) {
+		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(null);
+		md.addAttribute("noticeDto", noticeDto);
 		return "servicecenter/notice";
 	}
 	

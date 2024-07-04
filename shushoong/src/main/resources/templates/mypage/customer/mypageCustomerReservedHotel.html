@@ -75,7 +75,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					<P class="p">금액</P>
 				</div>
 				<div class="payment">
-					<div class="totalpay" th:text="${reserveList.HOTEL_PRICE}"></div>
+					<div class="totalpay" th:text="${#numbers.formatInteger(reserveList.HOTEL_PRICE, 3, 'COMMA')} + '원'"></div>
+					
 				</div>						
 			</div>
 

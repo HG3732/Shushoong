@@ -21,6 +21,6 @@ public interface ServiceCenterRepository {
 	
 	
 	// 공지사항
-	List<NoticeDto> selectAllList(String noticeId);
+	List<NoticeDto> selectNoticeAllList(String noticeId);
 	
 }

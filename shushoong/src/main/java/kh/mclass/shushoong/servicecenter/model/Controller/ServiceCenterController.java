@@ -42,16 +42,6 @@ public class ServiceCenterController {
 	}
 	
 	
-	// 공지사항
-	@GetMapping("/support/notice/list")
-	public String noticeList(Model md, String noticeId) {
-		return "servicecenter/notice";
-	}
-	
-	
-	
-	
-	
 	// 마이페이지 공지사항
 	@GetMapping("/servicecenter/notice")
 	public String customerNotice () {

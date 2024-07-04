@@ -64,12 +64,12 @@ async function payHandler(){
 	var residencePhone = $('#phone').val();
 	var residenceEmail = $('#email').val();
 	
-	var requestItems= [];
-	var request = $('.require_check').children().children('input[name="checkbox"]:checked').each(function() {
-                    // 값을 배열에 추가
-                    requestItems.push($(this).val());
-					});
-					
+	var requestSum= 0;
+	$('.require_check').children().children('input[name="checkbox"]:checked').each(function() {
+        // val가 1,2,4,8, 비트 마스킹 값이므로 +더하기하면됨.
+        requestSum += ($(this).val() * 1);
+        //문자가 숫자로 인식
+		});
 	var reserveCheckIn = $('#check_in').val();
 	var reserveCheckOut = $('#check_out').val();
 	var userId = $('.user_id').val();
@@ -105,7 +105,8 @@ async function payHandler(){
 		roomCat : roomCat,
 		hotelReserveCode : hotelReserveCode,
 		/*위에는 예약으로, 아래는 예약완료됐을때 띄워주기*/
-		people : people	
+		people : people,
+		requestSum : requestSum		
 	}
 	
 	const receipt = {
@@ -143,7 +144,7 @@ async function payHandler(){
 			
 			// 결제 검증 - 위에서 선언한거를 데이터로 보냄(결제 정보 외 것들)
 			$.ajax({
-				url : `/shushoong/hotel/payment?roomAttDesc=${encodeURIComponent(receipt.roomAttDesc)}&roomCatDesc=${encodeURIComponent(receipt.roomCatDesc)}&hotelName=${encodeURIComponent(receipt.hotelName)}&hotelPrice=${encodeURIComponent(receipt.hotelPrice)}&requestItems=${encodeURIComponent(requestItems.join(','))}`,
+				url : `/shushoong/hotel/payment?roomAttDesc=${encodeURIComponent(receipt.roomAttDesc)}&roomCatDesc=${encodeURIComponent(receipt.roomCatDesc)}&hotelName=${encodeURIComponent(receipt.hotelName)}&hotelPrice=${encodeURIComponent(receipt.hotelPrice)}`,
 				type : "post",
 				contentType: "application/json" ,
 			    data: reservationDataString, 

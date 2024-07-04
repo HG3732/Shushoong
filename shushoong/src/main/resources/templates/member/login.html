@@ -39,11 +39,11 @@
 							<div class="customerlogin-section">
 								<form id="frm-post" th:action="@{/login}" method="post">
 									<div class="loginInfo">
-										<input type="text" name="userId" id="userId" placeholder="아이디" autofocus>
+										<input type="text" name="userId" id="userId"  placeholder="아이디" autofocus>
 										<input type="password" name="userPwd" id="userPwd" placeholder="비밀번호">
 									</div>
 									<div class="login-check">
-										<input type="checkbox" name="idsaved" value="${remember}" > 아이디 저장
+										<input type="checkbox" name="idsaved" > 아이디 저장
 									</div>
 									<div class="loginBtn">
 										<button type="submit" class="btn login">로그인</button>

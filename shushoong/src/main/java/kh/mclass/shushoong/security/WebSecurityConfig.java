@@ -14,6 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import kh.mclass.shushoong.config.AuthSuccessHandler;
 import kh.mclass.shushoong.config.AuthenticationFailureHandler;
+import kh.mclass.shushoong.member.model.service.MemberSecurityService;
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +25,9 @@ public class WebSecurityConfig {
 	
 	@Autowired
 	AuthenticationFailureHandler authFailureHandler;
+	
+	@Autowired
+	MemberSecurityService securityService;
 		
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -48,6 +52,12 @@ public class WebSecurityConfig {
 				.failureHandler(authFailureHandler)
 				.usernameParameter("userId")
 				.passwordParameter("userPwd"))
+		.rememberMe((rememberMe -> rememberMe
+//				.key("uniqueAndSecret")
+				.rememberMeParameter("remember")
+				.tokenValiditySeconds(3600)
+				.alwaysRemember(false)
+				.userDetailsService(securityService)))
 		.logout((logout) -> logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/home")

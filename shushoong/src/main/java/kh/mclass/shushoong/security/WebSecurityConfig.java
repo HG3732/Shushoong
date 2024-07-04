@@ -40,6 +40,7 @@ public class WebSecurityConfig {
 //		.userService(CustomOAuth2UserService)
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
+				.loginPage("/admin/manager/login")
 				.successHandler(authSuccessHandler)
 				.failureHandler(authFailureHandler)
 				.usernameParameter("userId")

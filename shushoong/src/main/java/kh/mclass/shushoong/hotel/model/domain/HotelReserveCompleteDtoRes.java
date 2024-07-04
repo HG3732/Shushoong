@@ -17,7 +17,8 @@ public class HotelReserveCompleteDtoRes {
 	private String reserveCheckOut;
 	private String roomCatDesc;
 	private String roomAttDesc;
-	private List<String> request;
 	private String hotelPrice;
+	private Integer requestSum;
+	private String requestDesc;
 	
 }

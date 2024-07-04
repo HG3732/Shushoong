@@ -25,4 +25,6 @@ public class HotelReserveDtoRes {
 	private String roomCat;
 	private String roomAtt;
 	private String people;
+	private Integer requestSum;
+
 }

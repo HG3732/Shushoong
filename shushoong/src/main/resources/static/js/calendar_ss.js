@@ -3,7 +3,7 @@ let calendar;
 let today = new Date();
 let today_year = today.getFullYear(); // 년도
 let today_month = (today.getMonth() + 1) < 10 ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1);  // 월
-let today_day = today.getDate();  // 날짜
+let today_day = (today.getDate()) < 10 ? '0' + (today.getDate()) : (today.getDate() + 1);  // 날짜
 now = `${today_year}${today_month}${today_day}`;
 
 function createCalendar(){

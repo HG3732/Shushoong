@@ -395,19 +395,14 @@ desc hotel_reserve;
 commit;
 
 delete from hotel_review
-where hotel_reserve_code = '20240703572OS0010';
+where hotel_reserve_code = '2024070432OS0013';
 
 delete from hotel_reserve
-where hotel_reserve_code = '20240703522OS0010';
+where hotel_reserve_code = '20240703172OS0020';
 
 alter table hotel_reserve
 modify requests number(2);
 
-select * from reserve_request;
-202406262OS001S01
-
-delete from reserve_request
-where hotel_reserve_code = '20240702402OS0010';
 
 select *
 from

@@ -42,6 +42,10 @@ section .QnA-content {
 	text-align: center;
 }
 
+section .QnA-content:last-child {
+	border-bottom: 3px solid #006AFF;
+}
+
 section .search {
 	display: flex;
 	flex-direction: row;
@@ -78,4 +82,24 @@ section .searchQnAList {
 
 section .questCat-category {
 	display: none;
+}
+
+section .wrap-pageNum {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+}
+
+section .wrap-pageNum a {
+	border:none;
+	border-radius: 20px;
+	padding: 5px 9px;
+	background-color: var(--color_blue_2);
+	color: black;
+}
+
+section .wrap-pageNum a:hover {
+	background-color: var(--color_blue_1);
+	color: white;
 }

@@ -3,6 +3,7 @@ package kh.mclass.shushoong.servicecenter.model.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
 import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
@@ -10,7 +11,10 @@ import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
 @Mapper
 public interface ServiceCenterRepository {
 	//1:1 문의 검색
-	public List<OnlineQnADto> selectAllList(String category, String keyword, String questCatCategory);
+	public List<OnlineQnADto> selectAllList(int pageSize, int pageBlockSize, int currentPageNum, String category, String keyword, String questCatCategory, RowBounds rowBounds);
+	
+	//1:1 문의 글 갯수(페이징용)
+	public int selectTotalCount(String category, String keyword);
 	
 	//1:1 문의 보기
 	public OnlineQnADto selectOneQna(String faqId);

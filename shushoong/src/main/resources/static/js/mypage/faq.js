@@ -14,7 +14,6 @@ function searchHandler() {
 	} else {
 		keyword = $('.searchKeyword').val();		
 	}
-	console.log(questCatCategory);
 	$.ajax({
 		url:"/shushoong/support/notice/search.ajax",
 		method: "get",

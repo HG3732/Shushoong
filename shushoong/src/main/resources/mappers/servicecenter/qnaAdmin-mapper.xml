@@ -27,6 +27,32 @@
 	 	</if>
 	</select>
 	
+	<!-- 1:1문의 글 갯수(페이징용) -->
+	<select id="selectTotalCount" parameterType="hashMap" resultType="int">
+		select count(*) from service_center 
+			join faq_cat using (faq_id) 
+			join faq_cat_desc using(quest_cat)
+		<if test="category != null and category !='' ">
+			<if test="keyword != null and keyword !='' ">
+			 	<bind name="keyword3" value="'%' + keyword + '%'" />
+				 <choose>
+				 	<when test="category.equals('faqId')">
+				 		WHERE FAQ_ID LIKE #{keyword3}
+				 	</when>
+				 	<when test="category.equals('askTitle')">
+				 		WHERE ASK_TITLE LIKE #{keyword3}
+				 	</when>
+				 	<when test="category.equals('userId')">
+				 		WHERE USER_ID LIKE #{keyword3}
+				 	</when>
+				 </choose>
+			 </if>
+	 	 	<if test="category.equals('questCat')">
+		 		WHERE QUEST_CAT = #{questCatCategory}
+		 	</if>
+	 	</if>
+	</select>
+	
 	<!-- 1:1 문의 보기 -->
 	<select id="selectOneQna" parameterType="String" resultType="OnlineQnADto">
 		select quest_cat_desc, faq_id, user_id, ask_title, ask_content, ask_date, ans_content, ans_time 

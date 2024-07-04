@@ -9,12 +9,33 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<div th:text="${faqList.faqId}"></div>
 		</th:block>
 		<th:block th:unless="${faqList.ansTime == null}">
+<<<<<<< Updated upstream
 			<div th:text="${faqList.faqId + ' 답변완료'}" style="color:blue"></div>
+=======
+			<div th:text="${faqList.faqId + '(답변완료)'}"></div>
+>>>>>>> Stashed changes
 		</th:block>
 		<div th:text="${faqList.askTitle}"></div>
 		<div th:text="${faqList.questCatDesc}"></div>
 		<div th:text="${faqList.userId}"></div>
 		<div th:text="${faqList.askDate}"></div>
 	</a>
+	<div th:text="'totalPageCount : ' + ${totalPageCount}"></div>
+	<div class="wrap-pageNum">
+		<th:block th:if="${startPageNum > 1}">
+			<a class="gopage" th:href="@{/support/qna/list/{page}(page=${startPageNum-1})}">&lt;</a>
+		</th:block>
+		<div th:each="item : ${#numbers.sequence(startPageNum, endPageNum)}">
+			<th:block th:if="${currentPageNum == item}">
+				<div class="gopage" th:text="${item}" th:href="@{/support/qna/list/{page}(page=${item})}"></div>
+			</th:block>
+			<th:block th:unless="${currentPageNum == item}">
+				<a class="gopage" th:text="${item}" th:href="@{/support/qna/list/{page}(page=${item})}"></a>
+			</th:block>
+		</div>
+		<th:block th:if="${endPageNum < totalPageCount}">
+			<a class="gopage" th:href="@{/support/qna/list/{page}(page=${endPageNum+1})}">&gt;</a>
+		</th:block>
+	</div>
 </div>
 </html>

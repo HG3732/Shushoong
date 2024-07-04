@@ -141,6 +141,8 @@ xmlns:th="http://www.thymeleaf.org">
 					<div class="require_check">
 					
 						<div th:each="item, itemState : ${hotelRequestList}" class="hotel_request">
+						<!-- item: 실제 반복되는 요소, itemState: 반복문의 각 항목에 대한 추가 정보를 제공 -->
+						<!-- itemState는 index, count, size 등 요소 제공 -->
 							<input type="checkbox" th:id="'box-'+${itemState.count}" th:value="${item.REQUEST}" name="checkbox"><label th:for="'box-'+${itemState.count}"></label>
 							<div class="img_next_word" th:text="${item.REQUEST_DESC}"></div>
 						</div>

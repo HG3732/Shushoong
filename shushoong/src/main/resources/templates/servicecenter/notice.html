@@ -40,7 +40,7 @@
 							<div class="th-title">제목</div>
 							<div class="th-writedate">작성일</div>
 						</div>
-						<div th:each="faqList : ${latestFaq}" class="QnA-content">
+						<div th:each="faqList : ${latestFaq}" class="notice-list">
 							<div th:text="${faqList.FAQ_ID}"></div>
 							<div th:text="${faqList.ASK_TITLE}"></div>
 							<div th:text="${faqList.QUEST_CAT_DESC}"></div>

@@ -99,18 +99,26 @@ $(loadedHandler)
 
 function loadedHandler(){
     
+	$('.reserved_list').css('display', 'block');
+	$('.canceled_list').css('display', 'none');
+	
 	$("#reserved_btn").on("click",reserveHandler);
 	
 	$("#canceled_btn").on("click",cancelHandler);
 }
 
 function reserveHandler(){
-	    
+	
+	$('.reserved_list').css('display', 'block');
+	$('.canceled_list').css('display', 'none');
 	$("#canceled_btn").css("border-top","none").css("border-bottom","3px solid var(--color_blue_1)");
 	$("#reserved_btn").css("border-bottom","none").css("border-top","3px solid var(--color_blue_1)");
 }
 
 function cancelHandler(){
+	
+	$('.reserved_list').css('display', 'none');
+	$('.canceled_list').css('display', 'block');
 	
 	$("#reserved_btn").css("border-top","none").css("border-bottom","3px solid var(--color_blue_1)");
 	$("#canceled_btn").css("border-bottom","none").css("border-top","3px solid var(--color_blue_1)");

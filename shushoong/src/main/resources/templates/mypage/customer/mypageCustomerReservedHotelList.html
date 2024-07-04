@@ -41,51 +41,50 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 			</div>		
 			
-			<div class="reserved_list" th:each="reservelist : ${reserveList}">
-				<form class="frm-reserve" method="post" action="/shushoong/customer/mypage/reserved/hotel">
-					<input type="hidden" name="userId" class="userId" th:value="${userId}"/>
-					<input type="hidden" name="hotelReserveCode" th:value="${reservelist.HOTEL_RESERVE_CODE}"/>
-						<div class="y reserve_code">
-							<div class="p">예약번호</div>
-							<div class="code_num"  th:text="${reservelist.HOTEL_RESERVE_CODE}"></div>
+			<a th:each="reservelist : ${reserveList}" class="reserve_wrap" th:href="@{/customer/mypage/reserved/hotel/{userId}/{hotelReserveCode}(userId=${userId},hotelReserveCode=${reservelist.HOTEL_RESERVE_CODE})}">
+				<input type="hidden" name="userId" class="userId" th:value="${userId}"/>
+				<input type="hidden" name="hotelReserveCode" th:value="${reservelist.HOTEL_RESERVE_CODE}"/>
+				<div class="reserved_list">	
+					<div class="y reserve_code">
+						<div class="p">예약번호</div>
+						<div class="code_num"  th:text="${reservelist.HOTEL_RESERVE_CODE}"></div>
+					</div>
+					<div class="y check_in_out">
+						<div class="p">숙소명</div>
+						<div class="check_in_out_time">
+							<div class="time" th:text="${reservelist.HOTEL_NAME}"></div>
+							<div class="time" th:utext="${reservelist.RESERVE_CHECK_IN} + ' ~ ' + ${reservelist.RESERVE_CHECK_OUT}" style="font-size: var(--font4);"></div>
 						</div>
-						<div class="y check_in_out">
-							<div class="p">숙소명</div>
-							<div class="check_in_out_time">
-								<div class="time" th:text="${reservelist.HOTEL_NAME}"></div>
-								<div class="time" th:utext="${reservelist.RESERVE_CHECK_IN} + ' ~ ' + ${reservelist.RESERVE_CHECK_OUT}"></div>
-							</div>
-						</div>						
-						<div class="y room">
-							<div class="p">객실 정보</div>
-							<div class="room_att_cat" th:utext="${reservelist.ROOM_CAT_DESC} + ' ~ ' + ${reservelist.ROOM_ATT_DESC}"></div>
-						</div>								
-					<button type="submit" onclick="viewReserve(this)">상세 내역 확인</button>
-				</form>
-			</div>
-
+					</div>						
+					<div class="y room">
+						<div class="p">객실 정보</div>
+						<div class="room_att_cat" th:utext="${reservelist.ROOM_CAT_DESC} + ', ' + ${reservelist.ROOM_ATT_DESC}"></div>
+					</div>
+				</div>
+			</a>
 			
-			<div class="canceled_list">
-				<div class="reserve_code">
-					<p class="p">예약번호</p>
+			<a class="cancel_wrap">
+				<div class="canceled_list">
+					<input type="hidden"/>
+					<input type="hidden" />
+					<div class="y reserve_code">
+						<div class="p">예약번호</div>
+						<div class="code_num"></div>
+					</div>
+					<div class="y check_in_out">
+						<div class="p">숙소명</div>
+						<div class="check_in_out_time">
+							<div class="time"></div>
+							<div class="time"></div>
+						</div>
+					</div>						
+					<div class="y room">
+						<div class="p">객실 정보</div>
+						<div class="room_att_cat" ></div>
+					</div>										
 				</div>
-				<div class="hotel_code">
-					<div class="code_num"></div>
-				</div>
-				<div class="check_in_out">
-					<p class="p">숙소명</p>
-				</div>						
-				<div class="check_in_out_time">
-					<div class="time"></div>
-				</div>
-				<div class="room">
-					<p class="p">객실 정보</p>
-				</div>
-				<div class="room_info">
-					<div class="room_att_cat"></div>
-				</div>				
-			</div>
-		</div>
+			</a>
+
 	</div>
 </div>
 	
@@ -99,8 +98,8 @@ $(loadedHandler)
 
 function loadedHandler(){
     
-	$('.reserved_list').css('display', 'block');
-	$('.canceled_list').css('display', 'none');
+	$('.reserve_wrap').css('display', 'block');
+	$('.cancel_wrap').css('display', 'none');
 	
 	$("#reserved_btn").on("click",reserveHandler);
 	
@@ -109,16 +108,16 @@ function loadedHandler(){
 
 function reserveHandler(){
 	
-	$('.reserved_list').css('display', 'block');
-	$('.canceled_list').css('display', 'none');
+	$('.reserve_wrap').css('display', 'block');
+	$('.cancel_wrap').css('display', 'none');
 	$("#canceled_btn").css("border-top","none").css("border-bottom","3px solid var(--color_blue_1)");
 	$("#reserved_btn").css("border-bottom","none").css("border-top","3px solid var(--color_blue_1)");
 }
 
 function cancelHandler(){
 	
-	$('.reserved_list').css('display', 'none');
-	$('.canceled_list').css('display', 'block');
+	$('.reserve_wrap').css('display', 'none');
+	$('.cancel_wrap').css('display', 'block');
 	
 	$("#reserved_btn").css("border-top","none").css("border-bottom","3px solid var(--color_blue_1)");
 	$("#canceled_btn").css("border-bottom","none").css("border-top","3px solid var(--color_blue_1)");

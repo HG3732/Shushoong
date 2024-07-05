@@ -44,6 +44,11 @@ function likeHandler(thisElement){
 	return false;
 }
 
+function loginHandler() {
+	alert("로그인을 하셔야 좋아요할 수 있습니다.");
+	return location.href(`\${#httpServletRequest.getContextPath()}` + "/login");
+}
+
 /* const inputLeft = document.getElementById("input-left"); */
 let inputRight = document.getElementById("input-right");
 /* const circleLeft = document.querySelector(".slider > .circle.left"); */

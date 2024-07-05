@@ -63,13 +63,11 @@ public class HotelController {
 	
 	@Autowired
 	private Gson gson;
-
-		
+	
 	@GetMapping("/hotel/main")
 	public String hotelMain(Model model, HttpSession session) {
 		List<HotelDtoRes> hotHotelList = service.selectHotHotelList();
 		model.addAttribute("hotHotelList", hotHotelList);
-		/* session.setAttribute("userId", "ex1"); */
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("유저 아이디 : " + authentication.getName());
@@ -88,7 +86,8 @@ public class HotelController {
 		Integer maxPrice = service.selectMaxRoomlPrice(loc, people, null);
 		
 		//좋아요 여부 검색
-		String userId = (String)session.getAttribute("userId");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId = authentication.getName();
 		List<String> likeList = service.selectLikeHotelList(loc, userId);
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 //		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
@@ -121,7 +120,8 @@ public class HotelController {
 		List<HotelDtoRes> result = service.selectAllHotelList(loccode, people, keyword, maxPrice, sortBy, sortTo);
 		Integer maxPrice2 = service.selectMaxRoomlPrice(loccode, people, keyword);
 		//session의 이름이 43행에 있는 List와 같아야 덮어쓰기됨, 다를 경우 기존 List + 새 List 출력
-		String userId = (String)session.getAttribute("userId");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId = authentication.getName();
 		List<String> likeList = service.selectLikeHotelList(loccode, userId);
 		model.addAttribute("hotelList", result);
 		model.addAttribute("maxPrice", maxPrice2);
@@ -143,7 +143,8 @@ public class HotelController {
 		List<HotelDtoRes> result = service.selectAllHotelList(loccode, people, keyword, maxPrice, sortBy, sortTo);
 		Integer maxPrice2 = service.selectMaxRoomlPrice(loccode, people, keyword);
 		//session의 이름이 43행에 있는 List와 같아야 덮어쓰기됨, 다를 경우 기존 List + 새 List 출력
-		String userId = (String)session.getAttribute("userId");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId = authentication.getName();
 		List<String> likeList = service.selectLikeHotelList(loccode, userId);
 		model.addAttribute("hotelList", result);
 		model.addAttribute("maxPrice", maxPrice2);
@@ -153,17 +154,24 @@ public class HotelController {
 	
 	//좋아요 테이블에 추가
 	@GetMapping("/hotel/like/insert.ajax")
-	public String insertHotelLike(Model model, HttpSession session, String hotelCode) {
-		String userId = (String)session.getAttribute("userId");
-		Integer result = service.insertHotelLike(userId, hotelCode);
-		model.addAttribute("result", result);
-		return "hotel/hotel_list_section";
+	public String insertHotelLike(Model model, String hotelCode) {
+		
+		if(SecurityContextHolder.getContext().getAuthentication() != null) {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String userId = authentication.getName();
+			Integer result = service.insertHotelLike(userId, hotelCode);
+			model.addAttribute("result", result);
+			return "hotel/hotel_list_section";
+		} else {
+			return "member/login";
+		}
 	}
 	
 	//좋아요 테이블에서 삭제
 		@GetMapping("/hotel/like/delete.ajax")
-		public String deleteHotelLike(Model model, HttpSession session, String hotelCode) {
-			String userId = (String)session.getAttribute("userId");
+		public String deleteHotelLike(Model model, String hotelCode) {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String userId = authentication.getName();
 			Integer result = service.deleteHotelLike(userId, hotelCode);
 			model.addAttribute("result", result);
 			return "hotel/hotel_list_section";

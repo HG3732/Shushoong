@@ -55,7 +55,7 @@ public class MypageAdminController {
 	@GetMapping("/manager/customer/viewQna.ajax")
 	public String viewOnesNotice(Model model, String id) {
 		model.addAttribute("latestFaq", service.selectOneLatestFaq(id));
-		return "mypage/admin/managecustomer/userNotice";
+		return "mypage/admin/managecustomer/userQnaList";
 	}
 	
 	

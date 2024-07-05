@@ -24,7 +24,7 @@ function memberSearchHandler() {
 	});
 }
 
-/* 회원 아이디 클릭 시 세부 정보 확인 */
+/* 회원 아이디 클릭 시 세부 정보 확인 + 문의내역 3개 조회 */
 function memberViewHandler(thisElement) {
 	var id = $(thisElement).data("userid");
 	
@@ -39,6 +39,19 @@ function memberViewHandler(thisElement) {
 	//success함수 대체
 	.done(function(response){
 		$("#viewmember").replaceWith(response);
+	});
+	
+	$.ajax({
+		url: "/shushoong/admin/manager/customer/viewQna.ajax",
+		method: "get",
+		data: { id : id },
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	})
+	//success함수 대체
+	.done(function(response){
+		$("#userqna").replaceWith(response);
 	});
 }
 

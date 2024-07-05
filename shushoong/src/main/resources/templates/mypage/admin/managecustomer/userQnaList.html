@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+	<div th:fragment="qna" id="userqna">
+		<th:block th:if="${latestFaq} == null">
+			<div>해당 유저의 문의가 없습니다.</div>
+		</th:block>
+		<th:block th:unless="${latestFaq} == null">
+			<a th:each="faqList : ${latestFaq}" class="QnA-content" th:href="@{/support/qna/view/{faqId}(faqId=${faqList.FAQ_ID})}">
+				<th:block th:if="${faqList.ANS_TIME == null or faqList.ANS_TIME == ''}">
+					<div th:text="${faqList.FAQ_ID}"></div>
+				</th:block>
+				<th:block th:unless="${faqList.ANS_TIME == null or faqList.ANS_TIME == ''}">
+					<div th:text="${faqList.FAQ_ID} + '(답변완료)'"></div>
+				</th:block>
+				<div th:text="${faqList.ASK_TITLE}"></div>
+				<div th:text="${faqList.QUEST_CAT_DESC}"></div>
+				<div th:text="${faqList.USER_ID}"></div>
+				<div th:text="${faqList.ASK_DATE}"></div>
+			</a>
+		</th:block>
+	</div>
+</html>

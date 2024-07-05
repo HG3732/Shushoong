@@ -51,6 +51,14 @@ public class MypageAdminController {
 		return "mypage/admin/managecustomer/customerList";
 	}
 	
+	//해당 회원의 1:1문의 내역 최신순 3개 조회
+	@GetMapping("/manager/customer/viewQna.ajax")
+	public String viewOnesNotice(Model model, String id) {
+		model.addAttribute("latestFaq", service.selectOneLatestFaq(id));
+		return "mypage/admin/managecustomer/userNotice";
+	}
+	
+	
 	//회원 세부 정보 조회 ajax
 	@GetMapping("/manager/customer/viewMember.ajax")
 	public String viewMember(Model model, String id) {

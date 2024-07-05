@@ -49,15 +49,18 @@
 
 					<div class="airticket">
 						<!-- 왕복일 시 -->
-						<div class="ticket-price" th:if="${ticketType} != 1">
+<!-- 						<div class="ticket-price" th:if="${ticketType} != 1"> -->
+						<div class="ticket-price">
 							<span class="seat-price"
 								th:text="${#numbers.formatInteger(air.seatPrice, 3, 'COMMA') + '원'}"></span>
 						</div>
-						<!-- 편도일 시 = 티켓 값 / 2 -->
+<!-- 						
+						편도일 시 = 티켓 값 / 2
 						<div class="ticket-price" th:if="${ticketType} == 1">
 							<span class="seat-price"
 								th:text="${#numbers.formatInteger(T(java.lang.Integer).parseInt(air.seatPrice) / 2, 3, 'COMMA') + '원'}"></span>
 						</div>
+ -->						
 						<div class="ticket-btn">
 							<button class="ticketinfo-btn" type="button">
 								<img class="price-img-btn" alt=""

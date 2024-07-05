@@ -2,6 +2,9 @@ function getSelectOptions() {
 	var viaType = "direct";
 	var departLoc = $('#select-info-departLoc').text();
 	var arrivalLoc = $('#select-info-arrivalLoc').text();
+	var ticketType = $('#select-info-ticketType').text();
+	
+	console.log('티켓타입 : ', ticketType);
 
 	$('#showlist').on('change', updateTimeRange);
 	$('#price-input-right').on('click', updateTimeRange); // 가격 사이드 바
@@ -47,6 +50,7 @@ function getSelectOptions() {
 		console.log('LEFT 도착 시간대 : ', arrivalTimeLeftVal);
 		console.log('RIGHT 도착 시간대 : ', arrivalTimeRightVal);
 		console.log('가격 최댓 값 : ' , maxPrice);
+		console.log('편도/왕복 : ' , ticketType)
 
 		$.ajax({
 			url: "/shushoong/airline/list_select_options/ajax",
@@ -60,7 +64,8 @@ function getSelectOptions() {
 				arrivalTimeRight: arrivalTimeRightVal,
 				selectType: selectType,
 				viaType: viaType,
-				maxPrice: maxPrice
+				maxPrice: maxPrice,
+				ticketType : ticketType
 			},
 			/*
 			success: function(response) {

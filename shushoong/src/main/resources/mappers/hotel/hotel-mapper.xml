@@ -178,13 +178,11 @@
 	        #{hotelCode}, #{roomCat}, #{roomAtt}, #{people}, #{requestSum})
 	</insert>
 
-	<!-- 결제 완료시  -->
-<!-- 	<insert id="insertPayInfo">
+	<!-- 결제 완료 직전  -->
+	<insert id="insertPayInfo" parameterType="PayDto">
 		insert into pay values(
-    		#{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{moneyCat}, #{payStatus}, #{hotelReserveCode}, {airlineReserveCode}
+    		#{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{currency}, 'yet', null, null
 		)
-	</insert> -->	
-	
-	
+	</insert>	
 	
 </mapper>

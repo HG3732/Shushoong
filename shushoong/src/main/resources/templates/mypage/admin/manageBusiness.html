@@ -42,52 +42,15 @@
 									<img class="absolute" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" width="20px" height="20px">
 									<button type="button" class="idSearch">검색</button>
 								</div>
-								<div class="article-body">
-									<div class="userName-content">
-										<div class="userName" id="userName">aaaa</div>
-									</div>
-								</div>
+								<div th:replace="~{mypage/admin/managemember/customerList :: memberlist}"></div>
 							</div>
 						</div>
 
 						<div class="businessInformation">
 							<div class="content-title">사업자 회원 목록</div>
 							<div class="content-body">
-								<div class="article-title2">테스트 이름</div>
-								<div class="article-body">
-									<div class="userInformation">
-										<div class="joinDate-content">
-											<label for="joinDate">가입일</label>
-											<div class="joinDate" id="joinDate">2010.10.10</div>
-										</div>
-										<div class="userId-content">
-											<label for="userId">아이디</label>
-											<div class="userId" id="userId">aaaa</div>
-										</div>
-										<div class="userEmail-content">
-											<label for="userEmail">이메일</label>
-											<div class="userEmail" id="userEmail">aaa@aaa</div>
-										</div>
-										<div class="userStatus-content">
-											<label for="userStatus">상태</label>
-											<div class="userStatus" id="userStatus">정지</div>
-										</div>
-										<div class="registrationProduct-content">
-											<label for="registrationProduct">등록한 상품</label>
-											<div class="registrationProduct">
-												<div class="registrationProduct" id="registrationProduct">asdasdasd</div>
-											</div>
-										</div>
-										<div class="faqId-content">
-											<label for="faqId">1:1 문의 건수</label>
-											<div class="faqId" id="faqId">1건</div>
-										</div>
-									</div>
-									<div class="btn container">
-										<button type="button" class="stopBtn">이용정지</button>
-										<button type="button" class="stopCancleBtn">이용정지 해제</button>
-									</div>
-								</div>
+								<div class="article-title2">세부 정보</div>
+								<div th:replace="~{mypage/admin/managemember/viewMember :: viewMember}"></div>
 							</div>
 						</div>
 					</div>
@@ -205,4 +168,5 @@
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
 </body>
+<script th:src='@{/js/mypage/admin/manageBusiness.js}'></script>
 </html>

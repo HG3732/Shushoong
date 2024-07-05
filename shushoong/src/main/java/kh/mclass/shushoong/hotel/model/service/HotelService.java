@@ -13,6 +13,7 @@ import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.repository.HotelRepository;
+import kh.mclass.shushoong.payment.PayDto;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -108,9 +109,14 @@ public class HotelService {
 		return hotelRepository.inserthotelReserveInfo(resDto);
 	}
 	
-//	호텔 주문 정보
-//	public Map<String, Object> insertPayInfo(String memEmail) {
-//		return hotelRepository.insertPayInfo(memEmail);
-//	}
+//	결제 정보
+	public int insertPayInfo(PayDto paydto) {
+		return hotelRepository.insertPayInfo(paydto);
+	}
 
+	//결제 정보 수정
+	public int updatePayInfo(String hotelReserveCode, String approveNo){
+		return hotelRepository.updatePayInfo(hotelReserveCode, approveNo);
+	}
+	
 }

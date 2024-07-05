@@ -13,7 +13,7 @@ function memberSearchHandler() {
 	keyword = $('#userId1').val();
 	
 	$.ajax({
-		url:"/shushoong/admin/manager/customer/searchMember.ajax",
+		url:"/shushoong/admin/manager/business/searchMember.ajax",
 		method: "get",
 		data: {keyword : keyword},
 		error: function(xhr, status, error) {
@@ -29,7 +29,7 @@ function memberViewHandler(thisElement) {
 	var id = $(thisElement).data("userid");
 	
 	$.ajax({
-		url: "/shushoong/admin/manager/customer/viewMember.ajax",
+		url: "/shushoong/admin/manager/business/viewMember.ajax",
 		method: "get",
 		data: { id : id },
 		error: function(xhr, status, error) {

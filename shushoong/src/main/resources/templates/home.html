@@ -42,7 +42,7 @@ $(loadedHandler)
 				<div class="discount-hotel-title">지금 할인하는 호텔</div>
 				<div class="discount-hotel-list">
 					<div class="list-wrapper" >
-						<a class="discount-hotel" th:each="discounthotel : ${discounthotelList}" th:href="'/shushoong/hotel/view?hotelCode=' + ${discounthotel.hotelCode}">
+						<a class="discount-hotel" th:each="discounthotel : ${discounthotelList}" th:href="@{/hotel/view/{code}(code = ${discounthotel.hotelCode})}">
 							<div class="discount-hotel-pic"><img th:src="${discounthotel.hotelPic}" alt="a" style="display: block;"/></div>
 							<div class="discount-hotel-info">
 								<div class="discount-hotel-name" th:text="${discounthotel.hotelName}">호텔이름</div>
@@ -65,21 +65,31 @@ $(loadedHandler)
 			<div class="wrap-recommend">
 				<div class="recommend-title">지금 추천하는 여행지</div>
 				<div class="recommended-loc">
-					<a class="korea" th:style="'background-image: url(' + @{/images/instancefolder/20230713_201311.jpg} + ');'" href="http://localhost:8080/shushoong/hotel/list?loc=2OS&room=1&adult=2&child=0"><div>제주</div></a>
-					<a class="china" th:style="'background-image: url(' + @{/images/instancefolder/1696570529586.jpg} + ');'" href="http://localhost:8080/shushoong/hotel/list?loc=2OS&room=1&adult=2&child=0"><div>북경</div></a>
-					<a class="japan" th:style="'background-image: url(' + @{/images/instancefolder/20231010_171349.jpg} + ');'" href="http://localhost:8080/shushoong/hotel/list?loc=2OS&room=1&adult=2&child=0"><div>오사카</div></a>
-					<a class="usa" th:style="'background-image: url(' + @{/images/instancefolder/hu_1431618317_6832524860.jpg} + ');'" href="http://localhost:8080/shushoong/hotel/list?loc=2OS&room=1&adult=2&child=0"><div>하와이</div></a>
+					<a class="korea" th:style="'background-image: url(' + @{/images/instancefolder/20230713_201311.jpg} + ');'" th:href="@{/hotel/list?loc=2OS&room=1&adult=2&child=0}"><div>제주</div></a>
+					<a class="china" th:style="'background-image: url(' + @{/images/instancefolder/1696570529586.jpg} + ');'" th:href="@{/hotel/list?loc=2OS&room=1&adult=2&child=0}"><div>북경</div></a>
+					<a class="japan" th:style="'background-image: url(' + @{/images/instancefolder/20231010_171349.jpg} + ');'" th:href="@{/hotel/list?loc=2OS&room=1&adult=2&child=0}"><div>오사카</div></a>
+					<a class="usa" th:style="'background-image: url(' + @{/images/instancefolder/hu_1431618317_6832524860.jpg} + ');'" th:href="@{/hotel/list?loc=2OS&room=1&adult=2&child=0}"><div>하와이</div></a>
 				</div>
 			</div>
 			<div class="wrap-review">
 				<div class="review-title">여행 후기</div>
-				<div class="review-content">
-					<div class="review-detail" th:data-hotelCode="${latestReview.hotelCode}">
-						<div class="detail-title" th:text="${latestReview.reviewTitle}"></div>
-						<div class="detail-content" th:text="${latestReview.reviewComment}"></div>
+				<th:block th:if="${latestReview == null}">
+					<div class="review-content">
+						<div class="review-detail">
+							<div>최근 등록된 리뷰가 없습니다.</div>
+						</div>
+						<div class="pic">등록된 사진이 없습니다.</div>
+					</div>	
+				</th:block>
+				<th:block th:unless="${latestReview == null}">
+					<div class="review-content">
+						<div class="review-detail" th:data-hotelCode="${latestReview.hotelCode}">
+							<div class="detail-title" th:text="${latestReview.reviewTitle}"></div>
+							<div class="detail-content" th:text="${latestReview.reviewComment}"></div>
+						</div>
+						<div class="pic" th:style="'background-image: url(' + ${latestReview.hotelPicture} + ');'"></div>
 					</div>
-					<div class="pic" th:style="'background-image: url(' + ${latestReview.hotelPicture} + ');'"></div>
-				</div>
+				</th:block>
 			</div>
 			<div class="wrap-customer-service">
 				<div class="trip-service">

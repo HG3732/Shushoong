@@ -1,9 +1,11 @@
 package kh.mclass.shushoong.airline.controller;
 
 import java.security.Principal;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,28 +35,40 @@ public class AirlineController {
 			@RequestParam String child, @RequestParam String baby, @RequestParam String ticketType, Model md) {
 
 		System.out.println(" ==== 항목 리스트 데이터 값 ====");
-		System.out.println("departLoc : "  +  departLoc + ",arrivalLoc" + arrivalLoc + "ticketType : " + ticketType + ",adult : " + adult + ",child : " + child + ",baby : " + baby);
+		System.out.println("departLoc : "  +  departLoc + ",arrivalLoc : " + arrivalLoc + "ticketType : " + ticketType + ",adult : " + adult + ",child : " + child + ",baby : " + baby);
 
 		System.out.println("=========");
 		log.info("!!!Received departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc + ", departDate: " + departDate
 				+ ", arrivalDate: " + arrivalDate);
 
 		if (departLoc != null && arrivalLoc != null) {
-			List<AirlineInfoDto> airlineData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate);
-
+			List<AirlineInfoDto> airlineData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate, ticketType);
+			
+			
 			System.out.println("컨트롤러 airline data: " + airlineData);
-			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc);
-
-			if (ticketType.equals("1")) {
-				maxPrice = maxPrice / 2;
-				maxPrice = (int) Math.floor(maxPrice);
-			}
-
-			System.out.println(adult);
-			System.out.println(child);
-			System.out.println(baby);
-			System.out.println(departLoc);
-			System.out.println(arrivalLoc);
+			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
+			
+//			if (ticketType.equals("1")) {
+//				System.out.println("편도");
+//				maxPrice = maxPrice / 2;
+//				maxPrice = (int) Math.floor(maxPrice);
+//				
+//	            airlineData.forEach(dto -> {
+//	                int seatPrice = Integer.parseInt(dto.getSeatPrice());
+//	                int halvedSeatPrice = seatPrice / 2;
+//	                dto.setSeatPrice(String.valueOf(halvedSeatPrice));
+//	                
+//	                System.out.println("편도 비행기 값 : " + dto.getSeatPrice());
+//	                
+//		        });
+//			}
+			
+			System.out.println("maxPrice : " + maxPrice);
+			System.out.println("adult : " + adult);
+			System.out.println("child : " + child);
+			System.out.println("baby : " + baby);
+			System.out.println("departLoc : " + departLoc);
+			System.out.println("arrivalLoc : " + arrivalLoc);
 
 			md.addAttribute("departLoc", departLoc);
 			md.addAttribute("arrivalLoc", arrivalLoc);
@@ -86,9 +100,9 @@ public class AirlineController {
 		System.out.println(" ==== 항목 리스트 데이터 값 ====");
 		System.out.println("departLoc : "  +  departLoc + ",arrivalLoc" + arrivalLoc + "ticketType : " + ticketType + ",adult : " + adult + ",child : " + child + ",baby : " + baby);
 
-		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate);
+		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate, ticketType);
 		AirlineInfoDto selectOneAirline = service.getSelectOne(airlineCode);
-		Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc);
+		Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 		// 모델에 데이터를 추가하여 뷰로 전달
 		md.addAttribute("airlineCode", airlineCode);
 		md.addAttribute("selectOneAirline", selectOneAirline);
@@ -109,7 +123,7 @@ public class AirlineController {
 	// @ResponseBody
 	public String airlineSelectOptions(String departLoc, String arrivalLoc, String departTimeLeft,
 			String deaprtTimeRight, String arrivalTimeLeft, String arrivalTimeRight, String selectType, String viaType,
-			String maxPrice, Model md) {
+			String maxPrice, String ticketType, Model md) {
 
 		System.out.println("컨트롤러 목록 정렬");
 		System.out.println("출발지 : " + departLoc);
@@ -117,11 +131,12 @@ public class AirlineController {
 		System.out.println("정렬 타입 : " + selectType);
 		System.out.println("경유 타입 : " + viaType);
 		System.out.println("가격 최댓 값 : " + maxPrice);
+		System.out.println("왕복/편도 : " + ticketType);
 
 		List<AirlineInfoDto> SortData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft,
-				deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice);
+				deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType);
 		md.addAttribute("airlineData", SortData);
-		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc);
+		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 		md.addAttribute("maxPrice", maxPrice2);
 		log.debug("컨트롤러 디버깅 : " + SortData);
 
@@ -133,7 +148,7 @@ public class AirlineController {
 	// @ResponseBody
 	public String airlineReturnSelectOptions(String airlineCode, String departLoc, String arrivalLoc,
 			String departTimeLeft, String deaprtTimeRight, String arrivalTimeLeft, String arrivalTimeRight,
-			String selectType, String viaType, String maxPrice, Model md) {
+			String selectType, String viaType, String maxPrice, String ticketType, Model md) {
 
 		System.out.println("컨트롤러 목록 정렬");
 		System.out.println("뱅기 편명 : " + airlineCode);
@@ -145,11 +160,11 @@ public class AirlineController {
 
 		AirlineInfoDto selectOneAirline = service.getSelectOne(airlineCode);
 		List<AirlineInfoDto> SortData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft,
-				deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice);
+				deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType);
 		System.out.println("항공사 이름: " + selectOneAirline.getAirlineName());
 		md.addAttribute("selectOneAirline", selectOneAirline);
 		md.addAttribute("airlineReturnData", SortData);
-		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc);
+		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 		md.addAttribute("maxPrice", maxPrice2);
 		log.debug("컨트롤러 디버깅 : " + SortData);
 

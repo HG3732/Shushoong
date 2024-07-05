@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j2;
 @Mapper
 public interface AirlineRepository {
 	// 항공 리스트
-	List<AirlineInfoDto> selectAllList(String departLoc, String arrivalLoc, String departDate, String arrivalDate);
+	List<AirlineInfoDto> selectAllList(String departLoc, String arrivalLoc, String departDate, String arrivalDate, String ticketType);
 	// 왕복 오는 항공편
 	AirlineInfoDto selectOne(String airlineCode);
 	// 사이드 바 시간대 
@@ -21,9 +21,9 @@ public interface AirlineRepository {
 			String departLoc, String arrivalLoc, 
 			String departTimeLeft, String departTimeRight,
 			String arrivalTimeLeft, String arrivalTimeRight, 
-			String selectType, String viaType, String maxPrice
+			String selectType, String viaType, String maxPrice, String ticketType
 			);
-	Integer getMaxPrice(String departLoc, String arrivalLoc);
+	Integer getMaxPrice(String departLoc, String arrivalLoc, String ticketType);
 	
 	int insertReserverInfo(String resName,String phoneNum,String email);
 	

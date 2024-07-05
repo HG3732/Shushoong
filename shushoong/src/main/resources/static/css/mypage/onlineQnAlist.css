@@ -54,6 +54,15 @@ section .search {
 	margin: 20px;
 }
 
+section .search .category {
+	border: 1px solid var(--color_blue_2);
+	border-radius: 10px;
+}
+
+section .search .category:focus {
+	border: 3px solid var(--color_blue_1);
+}
+
 section .search-bar{
 	position: relative;
 }

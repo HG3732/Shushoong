@@ -24,7 +24,7 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-aside">
-				<aside>
+	R			<aside>
 					<div th:replace="~{mypage/admin/mypageAdminAside :: Aside}"></div>
 				</aside>
 			</div>
@@ -37,13 +37,13 @@ xmlns:th="http://www.thymeleaf.org">
 						안녕하세요, 관리자님! 이곳은 관리자 전용 공간이에요. 
 					</div>
 					<div class="section-image">
-						<a th:href="@{/customer/my/information}">
+						<a th:href="@{/admin/manager/customer}">
 							<div class="editInfo">
 								<img th:src="@{/images/일반사람.png}" alt="개인회원 관리" width="150px" height="150px">
 								<div class="tail">개인회원 관리</div>
 							</div>
 						</a>
-						<a href="#">
+						<a th:href="@{/admin/manager/business}">
 							<div class="reservationHotel">
 								<img th:src="@{/images/회사원.png}" alt="사업자 회원 관리" width="150px" height="150px">
 								<div class="tail">사업자 회원 관리</div>
@@ -57,14 +57,14 @@ xmlns:th="http://www.thymeleaf.org">
 							<div>제목</div>
 							<div>작성일</div>
 						</div>
-						<div class="notice-content">
-							<div>1</div>
-							<div>서버 점검 예정</div>
-							<div>2020-02-02</div>
+						<div th:each="notice : ${notice}" class="notice-content">
+							<div th:text="${notice.NOTICE_ID}"></div>
+							<div th:text="${notice.NOTICE_TITLE}"></div>
+							<div th:text="${notice.NOTICE_TIME}"></div>
 						</div>
-						<div class="viewAllList">
+						<a class="viewAllList" th:href="@{/support/notice/list/1}">
 							<button type="button" class="viewNoticeList">전체보기</button>
-						</div>
+						</a>
 					</div>
 					<div class="onlineQnAList">
 						<div class="onlineQnAList-title">문의 현황</div>
@@ -74,15 +74,15 @@ xmlns:th="http://www.thymeleaf.org">
 							<div>카테고리</div>
 							<div>등록일자</div>
 						</div>
-						<div class="QnA-content">
-							<div>1</div>
-							<div>결제가 진짜 개판이네요</div>
-							<div>결제/환불</div>
-							<div>2020-08-09</div>
+						<div th:each="qna : ${qna}" class="QnA-content">
+							<div th:text="${qna.FAQ_ID}"></div>
+							<div th:text="${qna.ASK_TITLE}"></div>
+							<div th:text="${qna.QUEST_CAT_DESC}"></div>
+							<div th:text="${qna.ASK_DATE}"></div>
 						</div>
-						<div class="viewAllList">
+						<a class="viewAllList" th:href="@{/support/qna/list}">
 							<button type="button" class="viewQnAList">전체보기</button>
-						</div>
+						</a>
 					</div>
 				</section>
 			</div>

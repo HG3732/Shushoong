@@ -25,12 +25,22 @@
 						<div class="userStatus" id="userStatus">정상</div>
 					</th:block>
 				</div>
-				<div class="purchaseProduct-content">
-					<label for="purchaseProduct">결제 건수</label>
-					<div class="purchaseProduct">
-						<div class="productName" id="productName" th:text="${userHotelPayInfo + userFlyPayInfo}"></div><button type="button" class="payList">조회</button>
+				<th:block th:if="${userInfo.userGrade.equals('customer')}">
+					<div class="purchaseProduct-content">
+						<label for="purchaseProduct">결제 건수</label>
+						<div class="purchaseProduct">
+							<div class="productName" id="productName" th:text="${userHotelPayInfo + userFlyPayInfo}"></div><button type="button" class="payList">조회</button>
+						</div>
 					</div>
-				</div>
+				</th:block>
+				<th:block th:if="${userInfo.userGrade.equals('business')}">
+					<div class="registrationProduct-content">
+						<label for="registrationProduct">등록한 상품</label>
+						<div class="registrationProduct">
+							<button class="registrationProduct" id="registrationProduct" th:data-userid="${userInfo.userId}">상품 조회</button>
+						</div>
+					</div>
+				</th:block>
 				<div class="faqId-content">
 					<label for="faqId">1:1 문의 건수</label>
 					<div class="faqId" id="faqId" th:text="${faqCount} + '건'"></div>

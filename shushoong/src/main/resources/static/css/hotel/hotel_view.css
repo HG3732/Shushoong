@@ -130,6 +130,24 @@ p{
 	text-align: center;
 }
 
+.a_btn{
+	font-family: 'SOYOMapleRegularTTF';
+	font-size: var(--font4);
+	border: none;
+	background-color: var(--color_blue_2);
+	border-radius: 10px;
+	padding: 7px;
+	text-align: center;
+}
+
+.a_btn:hover{
+	cursor:pointer;
+	font-family: 'SOYOMapleBoldTTF';
+	background-color: var(--color_blue_1);
+	color: white;	
+}
+
+
 .btn_reserve{
 	font-family: 'SOYOMapleRegularTTF';
 	border: none;

@@ -85,7 +85,17 @@ xmlns:th="http://www.thymeleaf.org">
 											<div class="amount_num">
 												<strong th:text="${#numbers.formatInteger(room.hotelPrice, 3, 'COMMA')}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong>원
 											</div>
-											<button type="submit" class="btn_reserve" >예약하기</button>
+											<th:block th:if="${#authorization.expr('isAnonymous()')}">
+												<a th:href="@{/login}" class="a_btn">예약하기</a>
+											</th:block>
+											<th:block th:if="${#authorization.expr('isAuthenticated()')}">
+												<th:block th:if="${#authorization.expression('hasAnyAuthority(''customer'')')}">
+													<button type="submit" class="btn_reserve" >예약하기</button>
+												</th:block>
+												<th:block th:unless="${#authorization.expression('hasAnyAuthority(''customer'')')}">
+													<a th:href="@{/home}" class="a_btn">예약하기</a>
+												</th:block>
+											</th:block>
 											<div style="grid-column: 1/9">
 												<hr style="border: 1px solid #F1F1F1;" >
 											</div>

@@ -32,7 +32,7 @@
 	</select>
 	
 	<select id="selectListInterestedHotel" resultType="HotelDtoRes">
-		SELECT*
+		SELECT  hotel.hotel_code,hotel.hotel_name
 			FROM hotel_like join hotel ON hotel_like.hotel_code=hotel.hotel_code
 				where hotel_like.user_id = #{userId}
 	</select>

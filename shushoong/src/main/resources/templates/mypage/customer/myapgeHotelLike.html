@@ -8,6 +8,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+	
+	
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
@@ -25,6 +28,21 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<div class="wrap-body">
 			<div class="wrap-">
 			<!-- 여기부터 작성 -->
+				<div class="wrap-aside">
+					<aside>
+						<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+					</aside>
+				</div>
+				<section class="interested_section">
+					<div>좋아요 누른 호텔</div>
+					<div class="interested_list_wrap">
+						<a class="hot-hotel" th:each="hotelList : ${hotelList}" th:href="'/shushoong/hotel/view?hotelCode=' + ${hotelList.hotelCode}">
+							<div class="hot-hotel-pic"><img th:src="${hotelList.hotelPic}" alt="a"/></div>
+							<div class="hot-hotel-name" th:text="${hotelList.hotelName}" style="display: block;">호텔이름</div>
+						</a>
+					</div>
+				</section>
+				
 			
 			</div>
 		</div>

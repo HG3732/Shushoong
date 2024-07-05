@@ -200,9 +200,9 @@ public class MyPageCustomerController {
 		String userId = principal.getName();
 		
 		List<HotelDtoRes> hotelList = service.selectListInterestedHotel(userId);
-		md.addAttribute(hotelList);
+		md.addAttribute("hotelList",hotelList);
 		
-		return "/mypage/customer/hotelLike";
+		return "mypage/customer/myapgeHotelLike";
 	}
 
 	

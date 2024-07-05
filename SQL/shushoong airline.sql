@@ -59,7 +59,7 @@ PASSPORT_CODE) VALUES( '1238', '영문성5', '영문이름5', 'M', '2024-06-27',
 SELECT * FROM SEAT_GRADE;
 SELECT * FROM (SELECT * FROM (SELECT * FROM SEAT_GRADE OVER(PARTITION BY SEAT_PRICE ORDER BY DESC) JOIN AIRLINE_INFO ON airline_info.airline_code=seat_grade.airline_code)  ORDER BY SEAT_PRICE ASC) WHERE ROWNUM <= 6;
 
-SELECT * FROM SEAT_GRADE (SLEECT SEAT_GRADE OVER(PARTITION BY SEAT_PRICE ORDER BY DESC));
+SELECT * FROM (SELECT * FROM SEAT_GRADE OVER(PARTITION BY SEAT_PRICE));
 select * from member;
 
 SELECT
@@ -81,5 +81,18 @@ FROM hotel_like;
 insert into HOTEL_LIKE values('customer','2OS005');
 commit;
 
-SELECT* FROM hotel_like join hotel ON hotel_like.hotel_code=hotel.hotel_code where hotel_like.user_id 
+select * from hotel_pic;
+
+SELECT hotel.hotel_code,hotel.hotel_name FROM hotel_like join hotel ON hotel_like.hotel_code=hotel.hotel_code where hotel_like.user_id 
 = 'customer' ;
+
+SELECT ROW_NUMBER() OVER(PARTITION BY hotel_pic.hotel_code ORDER BY hiredate DESC) AS rn from hotel_pic where rn = 1;
+
+SELECT x.hotel_code,x.hotel_name , z.hotel_picture
+FROM hotel x
+    join hotel_like y ON x.hotel_code=y.hotel_code 
+    join hotel_pic z on x.hotel_code = z.hotel_code 
+        WHERE y.user_id = 'customer'
+;
+
+

@@ -1,4 +1,4 @@
-$(loadedHanlder)
+$(loadedHandler);
 
 function loadedHandler() {
 	$(".btn.login").on("click", loginHandler);
@@ -6,7 +6,7 @@ function loadedHandler() {
 
 function loginHandler() {
 	if ($("#userId").val() == "") {
-		alert("이름을 입력해 주세요.");
+		alert("아이디를 입력해 주세요.");
 		return false;
 	}
 	
@@ -14,4 +14,5 @@ function loginHandler() {
 		alert("비밀번호를 입력해 주세요.");
 		return false;
 	}
+	
 }

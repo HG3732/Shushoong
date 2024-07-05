@@ -5,18 +5,25 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!-- section 부분 -->
 	<div class="hotel_list" id="realHotelList" th:fragment="hotellistsection">
 		<a class="hotel" th:each="hotel : ${hotelList}" th:data-hotelcode="${hotel.hotelCode}" th:href="@{/hotel/view/{hotelCode}(hotelCode=${hotel.hotelCode})}">
-			<div class="hotel_pic" th:style="'background-image: url(' + ${hotel.hotelPic} + '); background-size: cover;'">
-				<th:block th:if="${!likeList.contains(hotel.hotelCode)}">
-					<div class="hotel_like" >
-						<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart" onclick="return likeHandler(this);">
-					</div>
-				</th:block>
-				<th:block th:if="${likeList.contains(hotel.hotelCode)}">
-					<div class="hotel_like">
-						<img th:src="@{/images/heart_color.png}" alt="좋아요" style="width:40px;" class="heart" onclick="return likeHandler(this);">
-					</div>
-				</th:block>
-			</div>
+				<div class="hotel_pic" th:style="'background-image: url(' + ${hotel.hotelPic} + '); background-size: cover;'">
+					<th:block th:if="${#authorization.expr('isAnonymous()')}">
+						<div class="hotel_like" >
+							<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart" onclick="return loginHandler();">
+						</div>
+					</th:block>
+					<th:block th:unless="${#authorization.expr('isAnonymous()')}">
+						<th:block th:if="${!likeList.contains(hotel.hotelCode)}">
+							<div class="hotel_like" >
+								<img th:src="@{/images/heart.png}" alt="좋아요" style="width:40px;" class="heart" onclick="return likeHandler(this);">
+							</div>
+						</th:block>
+						<th:block th:if="${likeList.contains(hotel.hotelCode)}">
+							<div class="hotel_like">
+								<img th:src="@{/images/heart_color.png}" alt="좋아요" style="width:40px;" class="heart" onclick="return likeHandler(this);">
+							</div>
+						</th:block>
+					</th:block>
+				</div>
 			<div class="hotel_attr">
 				<div class="hotel_kr" th:text="${hotel.hotelName}"></div>
 				<div class="hotel_eng" th:text="${hotel.hotelEng}"></div>

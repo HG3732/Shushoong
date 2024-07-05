@@ -41,14 +41,12 @@ p{
 	display: flex;
 	column-gap: 30px;
 	margin-bottom: 30px;
-	
 }
 
 .pic{
 	margin: auto;
     width: 230px;
     height: 200px;
-    border: 1px solid black;
     margin-left: 10px;
 }
 
@@ -69,7 +67,18 @@ p{
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
 	align-items: center;
-	
+}
+
+.room_choose > a:hover {
+	background-color: var(--color_blue_2);
+}
+
+.hotel_info > a:hover {
+	background-color: var(--color_blue_2);
+}
+
+.hotel_review > a:hover {
+	background-color: var(--color_blue_2);
 }
 
 .calendar{
@@ -272,6 +281,7 @@ p{
 }
 
 .wrap_info > .section > div:nth-child(1) {
+	font-family: 'SOYOMapleBoldTTF';
 	flex-basis: 200px;
 }
 

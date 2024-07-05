@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 
 @Mapper
@@ -24,5 +25,7 @@ public interface MypageCustomerRepository {
 	
 	//호텔 예약 상세정보
 	public Map<String, Object> selectOneReservedHotelList(String userId, String hotelReserveCode);
+	
+	public List<HotelDtoRes> selectListInterestedHotel(String userId);
 
 }

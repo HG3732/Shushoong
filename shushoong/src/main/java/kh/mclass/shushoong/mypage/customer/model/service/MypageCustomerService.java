@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
 
@@ -43,4 +44,8 @@ public class MypageCustomerService {
 		//예매내역 상세는 예매 한개에 대한 내용이므로 map 하나만 있어도 뭐..
 		return mypageRepository.selectOneReservedHotelList(userId, hotelReserveCode);
 	}
+	
+	public List<HotelDtoRes> selectListInterestedHotel(String userId){
+	
+		return mypageRepository.selectListInterestedHotel(userId);
 }

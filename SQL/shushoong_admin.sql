@@ -88,6 +88,8 @@ select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE, ANS_TIME from (
             join faq_cat_desc using(quest_cat)
 			where rownum <= 3 and user_id = 'ex1';
             
-            SELECT USER_ID, USER_NAME, USER_EMAIL, to_char(JOIN_DATE) as JOIN_DATE, USER_STATUS FROM MEMBER;
-            
-            select * from member;
+desc hotel;
+desc hotel_facility;
+desc hotel_room;
+select * from hotel order by hotel_code;
+select * from hotel_room;

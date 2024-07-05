@@ -30,7 +30,9 @@ public class MypageAdminController {
 
 	// 마이페이지 메인 페이지로 이동
 	@GetMapping("/manager/home")
-	public String managerHome() {
+	public String managerHome(Model model) {
+		model.addAttribute("notice", service.selectLatestNotice());
+		model.addAttribute("qna", service.selectLatestFaq());
 		return "mypage/admin/mypageAdminHome";
 	}
 	

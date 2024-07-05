@@ -5,7 +5,25 @@
 	<select id="login" parameterType="string" resultType="MemberDto">
 		SELECT USER_ID, USER_NAME, USER_PWD, USER_EMAIL, USER_GRADE, USER_STATUS, JOIN_DATE, EMAIL_RECEIVE, MSG_RECEIVE, LATEST_LOGIN FROM MEMBER  WHERE USER_ID=#{userId} 
 	</select>
+
+<!-- 관리자 홈 -->	
+	<!-- 최근 3개의 공지사항 출력 -->
+	<select id="selectLatestNotice" resultType="hashmap">
+		select notice_id, notice_title, notice_content, notice_time, user_id from (
+			select * 
+			from notice_board order by notice_time desc) where rownum &lt; 4
+	</select>
 	
+	<!-- 최근 3개의 문의사항 출력 -->
+	<select id="selectLatestFaq" resultType="hashmap">
+		select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE, ANS_TIME from (
+			select faq_id, quest_cat, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center
+            join faq_cat using(faq_id) order by ask_date desc)
+            join faq_cat_desc using(quest_cat)
+			where rownum &lt;= 3
+	</select>
+	
+<!-- 일반 회원 관리 -->
 	<!-- 유저 아이디 키워드로 검색 시 조건에 맞는 회원 리스트 출력 -->
 	<select id="selectAllList" parameterType="string" resultType="String">
 		SELECT USER_ID FROM MEMBER WHERE NOT USER_GRADE='ADMIN'
@@ -48,13 +66,13 @@
 		update member set user_status = '1' where user_id = #{id}
 	</update>
 	
-	<!-- 문의 내역 최신 3건 조회 -->
-	<select id="selectLatestFaq" resultType="hashmap">
+	<!-- 해당 유저의 문의 내역 최신 3건 조회 -->
+	<select id="selectOneLatestFaq" parameterType="String" resultType="hashmap">
 		select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE, ANS_TIME from (
 			select faq_id, quest_cat, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center
             join faq_cat using(faq_id) order by ask_date desc)
             join faq_cat_desc using(quest_cat)
-			where rownum &lt;= 3
+			where rownum &lt;= 3 and user_id = #{id}
 	</select>
 
 	<!-- 1년 이상 로그인 안한 유저 조회 -->
@@ -79,7 +97,9 @@
 	<select id="selectUseTerm" parameterType="string" resultType="int">
 		select to_number(trunc(sysdate - latest_login)) as term from member WHERE NOT USER_GRADE='ADMIN' and USER_ID=#{userId}
 	</select>
-	
+
+
+<!-- 사업장 관리 -->
 	<!-- 관리자의 사업장 검색 -->
 	<select id="selectProduct" parameterType="string" resultType="ProductDtoRes">
 		<bind name="keyword4" value="'%' + keyword + '%'" />

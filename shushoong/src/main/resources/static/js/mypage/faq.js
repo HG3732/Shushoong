@@ -52,10 +52,10 @@ function goPage(thisElement) {
 function toggleCategory() {
 	if($('.category option:selected').val() == 'questCat') {
 		$('.questCat-category').css('display', 'block');
-		$('.searchKeyword').css('display', 'none');
+		$('.search-bar').css('display', 'none');
 	} else {
 		$('.questCat-category').css('display', 'none');
-		$('.searchKeyword').css('display', 'block');
+		$('.search-bar').css('display', 'block');
 	}
 }
 

@@ -73,13 +73,23 @@ $(loadedHandler)
 			</div>
 			<div class="wrap-review">
 				<div class="review-title">여행 후기</div>
-				<div class="review-content">
-					<div class="review-detail" th:data-hotelCode="${latestReview.hotelCode}">
-						<div class="detail-title" th:text="${latestReview.reviewTitle}"></div>
-						<div class="detail-content" th:text="${latestReview.reviewComment}"></div>
+				<th:block th:if="${latestReview == null}">
+					<div class="review-content">
+						<div class="review-detail">
+							<div>최근 등록된 리뷰가 없습니다.</div>
+						</div>
+						<div class="pic">등록된 사진이 없습니다.</div>
+					</div>	
+				</th:block>
+				<th:block th:unless="${latestReview == null}">
+					<div class="review-content">
+						<div class="review-detail" th:data-hotelCode="${latestReview.hotelCode}">
+							<div class="detail-title" th:text="${latestReview.reviewTitle}"></div>
+							<div class="detail-content" th:text="${latestReview.reviewComment}"></div>
+						</div>
+						<div class="pic" th:style="'background-image: url(' + ${latestReview.hotelPicture} + ');'"></div>
 					</div>
-					<div class="pic" th:style="'background-image: url(' + ${latestReview.hotelPicture} + ');'"></div>
-				</div>
+				</th:block>
 			</div>
 			<div class="wrap-customer-service">
 				<div class="trip-service">

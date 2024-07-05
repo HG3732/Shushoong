@@ -16,6 +16,14 @@ public class MypageAdminService {
 
 	private final MypageAdminRepository mypageAdminRepository;
 	
+	public List<Map<String, Object>> selectLatestNotice() {
+		return mypageAdminRepository.selectLatestNotice();
+	}
+	
+	public List<Map<String, String>> selectLatestFaq() {
+		return mypageAdminRepository.selectLatestFaq();
+	};
+	
 	public List<String> selectAllList(String keyword) {
 		return mypageAdminRepository.selectAllList(keyword);
 	}
@@ -43,8 +51,8 @@ public class MypageAdminService {
 		return mypageAdminRepository.updateUnlockAccount(id);
 	}
 	
-	public List<Map<String, String>> selectLatestFaq() {
-		return mypageAdminRepository.selectLatestFaq();
+	public List<Map<String, String>> selectOneLatestFaq(String id) {
+		return mypageAdminRepository.selectOneLatestFaq(id);
 	};
 	
 	public List<String> selectDormantAccount(String keyword) {

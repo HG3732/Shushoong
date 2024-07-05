@@ -11,6 +11,12 @@ import kh.mclass.shushoong.mypage.admin.model.domain.ProductDtoRes;
 @Mapper
 public interface MypageAdminRepository {
 	
+	//최신 공지사항 3개 출력
+	public List<Map<String, Object>> selectLatestNotice();
+	
+	//최신 1:1문의 3개 출력
+	public List<Map<String, String>> selectLatestFaq();
+	
 	//회원 아이디 키워드로 검색
 	public List<String> selectAllList(String keyword);
 		
@@ -34,8 +40,8 @@ public interface MypageAdminRepository {
 	public int updateLockAccount(String id);
 	public int updateUnlockAccount(String id);
 	
-	//1:1문의내역 최근 3개 조회
-	public List<Map<String, String>> selectLatestFaq();
+	//해당 유저의 1:1문의내역 최근 3개 조회
+	public List<Map<String, String>> selectOneLatestFaq(String id);
 	
 	//장기 미사용 계정 검색
 	public List<String> selectDormantAccount(String keyword);

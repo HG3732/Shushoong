@@ -27,5 +27,7 @@ public interface MypageCustomerRepository {
 	public Map<String, Object> selectOneReservedHotelList(String userId, String hotelReserveCode);
 	
 	public List<HotelDtoRes> selectListInterestedHotel(String userId);
+	
+	public int deleteHotelLiked(String hotelCode);
 
 }

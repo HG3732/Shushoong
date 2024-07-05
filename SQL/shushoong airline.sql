@@ -78,7 +78,7 @@ SELECT
     *
 FROM hotel_like;
 
-insert into HOTEL_LIKE values('customer','2OS005');
+insert into HOTEL_LIKE values('customer','2OS001');
 commit;
 
 select * from hotel_pic;
@@ -94,4 +94,9 @@ FROM hotel x
     join (select * from (SELECT hotel_pic.*,ROW_NUMBER() OVER(PARTITION BY hotel_pic.hotel_code ORDER BY hotel_pic.hotel_picture DESC) rn from hotel_pic) where rn = 1) z on x.hotel_code = z.hotel_code 
         WHERE y.user_id = 'customer'
 ;
+
+SELECT x.hotel_code,x.hotel_name , z.hotel_picture as hotel_pic FROM hotel x join hotel_like y ON x.hotel_code=y.hotel_code 
+join (select * from (SELECT hotel_pic.*,ROW_NUMBER() OVER(PARTITION BY hotel_pic.hotel_code 
+ORDER BY hotel_pic.hotel_picture DESC) rn from hotel_pic) where rn = 1) z on x.hotel_code = 
+z.hotel_code WHERE y.user_id = 'customer' ;
 

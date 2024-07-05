@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +34,8 @@ import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerReposi
 import kh.mclass.shushoong.mypage.customer.model.service.MypageCustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("/customer")
@@ -204,6 +207,16 @@ public class MyPageCustomerController {
 		
 		return "mypage/customer/myapgeHotelLike";
 	}
+	
+	@ResponseBody
+	@PostMapping("/mypage/hotel/interested/delete")
+	public int postMethodName(@RequestParam String hotelCode) {
+		int result =0;
+		result = service.deleteHotelLiked(hotelCode);
+		System.out.println("result : "+result);
+		return result;
+	}
+	
 
 	
 }

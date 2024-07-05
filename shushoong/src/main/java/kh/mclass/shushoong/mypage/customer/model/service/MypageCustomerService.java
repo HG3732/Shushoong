@@ -49,5 +49,8 @@ public class MypageCustomerService {
 		
 		return mypageRepository.selectListInterestedHotel(userId);
 	}
+	public int deleteHotelLiked(String hotelCode) {
+		return mypageRepository.deleteHotelLiked(hotelCode);
+	}
 	
 }

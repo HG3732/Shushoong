@@ -40,7 +40,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					<div class="interested_list_wrap">
 						<div class="liked_hotel" th:each="hotelList : ${hotelList}" th:href="@{/hotel/view/{hotelCode}(hotelCode=${hotelList.hotelCode})}">
 							<div class="hot-hotel-pic"><img class="hotel_img" th:src="${hotelList.hotelPic}" alt="a" /><button th:value="${hotelList.hotelCode}" class="heart_check">♥</button> </div>
-							<div class="hot-hotel-name" th:text="${hotelList.hotelName}">호텔이름</div>
+							<div id="${hotelList.hotelCode}" class="hot-hotel-name" th:text="${hotelList.hotelName}">호텔이름</div>
 						</div>
 					</div>
 				</section>
@@ -75,12 +75,37 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		 $(".commit_ask").css("display","block");
 	 });
 	 $("button#delete_value").on("click",function(){
-		
+		 deleteHotelLikedFunction();
 	 });
 	 $("button#cancel_delete").on("click",function(){
 		 $(".commit_ask").css("display","none");
+		 $("[name=hidden_hotelcode_val]").val("");
 	 });
 	 
+	 function deleteHotelLikedFunction(){
+	
+			$.ajax({
+				url:"/shushoong/customer/mypage/hotel/interested/delete",
+				type : "POST",
+				data:{
+					hotelCode :	$("[name=hidden_hotelcode_val]").val(),
+		    	 },
+				
+				success: function(result){
+					if(result == 1){
+						console.log("success");
+						$(".commit_ask").css("display","none");
+						
+					}else{
+						console.log("fail");
+					}
+					$("div.interested_list_wrap").load(location.href + "div.interested_list_wrap");
+				},
+				 error: function(errorThrown) {
+			            console.log("일단 여기 표기")
+			        }
+		       });
+		}
 	 
 	</script>
 </body>

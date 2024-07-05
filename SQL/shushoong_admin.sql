@@ -78,5 +78,16 @@ update service_center
 set ans_time = sysdate, ans_content = '이렇게 하면 된다고 47번째 말씀드립니다.'
 where faq_id = '47';
 
+--최근 등록된 공지사항 3개 조회
 select * from (
 select notice_id, notice_title, notice_content, notice_time, user_id from notice_board order by notice_time desc) where rownum < 4;
+
+select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE, ANS_TIME from (
+			select faq_id, quest_cat, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center
+            join faq_cat using(faq_id) order by ask_date desc)
+            join faq_cat_desc using(quest_cat)
+			where rownum <= 3 and user_id = 'ex1';
+            
+            SELECT USER_ID, USER_NAME, USER_EMAIL, to_char(JOIN_DATE) as JOIN_DATE, USER_STATUS FROM MEMBER;
+            
+            select * from member;

@@ -164,7 +164,7 @@ function loadedHandler() {
 				<div class="hot-hotel-title">가장 많이 찾은 호텔</div>
 				<div class="hot-hotel-list">
 					<div class="list-wrapper" >
-						<a class="hot-hotel" th:each="hothotel : ${hotHotelList}" th:href="'/shushoong/hotel/view?hotelCode=' + ${hothotel.hotelCode}">
+						<a class="hot-hotel" th:each="hothotel : ${hotHotelList}" th:href="@{/hotel/view/{hotelCode}(hotelCode=${hothotel.hotelCode})}">
 							<div class="hot-hotel-pic"><img th:src="${hothotel.hotelPic}" alt="a" style="display: block;"/></div>
 							<div class="hot-hotel-info">
 								<div class="hot-hotel-name" th:text="${hothotel.hotelName}">호텔이름</div>

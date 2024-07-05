@@ -61,7 +61,7 @@ public class JoinController {
         }
 		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mi:ss");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		
 		Date now = new Date();
 		String joinDate = sdf1.format(now);
@@ -99,7 +99,7 @@ public class JoinController {
         }
 		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mi:ss");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		
 		Date now = new Date();
 		String joinDate = sdf1.format(now);

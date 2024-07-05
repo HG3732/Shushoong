@@ -1,5 +1,5 @@
 function getSelectOptions() {
-	var viaType = "direct";
+	// var viaType = "direct";
 	var departLoc = $('#select-info-departLoc').text();
 	var arrivalLoc = $('#select-info-arrivalLoc').text();
 	var ticketType = $('#select-info-ticketType').text();
@@ -8,6 +8,23 @@ function getSelectOptions() {
 
 	$('#showlist').on('change', updateTimeRange);
 	$('#price-input-right').on('click', updateTimeRange); // 가격 사이드 바
+	
+    $('.direct-btn').on('change', function() {
+        if (this.id === 'direct-btn' && this.checked) {
+            $('#layover-btn').prop('checked', false);
+            $('#viaType').val($(this).val());
+        } else if (this.id === 'layover-btn' && this.checked) {
+            $('#direct-btn').prop('checked', false);
+            $('#viaType').val($(this).val());
+        } else {
+            $('#viaType').val('');
+        }
+        console.log('Selected value: ', $('#viaType').val());
+        updateTimeRange();
+	});
+
+
+/*	
 	$('.direct-btn').on('click', function() {
 		viaType = $(this).val();
 		$('#viaType').val(viaType);
@@ -20,7 +37,7 @@ function getSelectOptions() {
 		$('#viaType').val(viaType);
 		console.log('direct-btn.val: ', $('#viaType').val());
 		updateTimeRange();
-	});
+	*/
 	// 시간대 
 	function updateTimeRange() {
 	
@@ -41,6 +58,10 @@ function getSelectOptions() {
 		var arrivalTimeLeftVal = $('#arrival-left-timeval').text()/*.split(':')[0]*/;
 		var arrivalTimeRightVal = $('#arrival-right-timeval').text()/*.split(':')[0]*/;
 		// 가격대
+		
+		// 직항/경유
+        var viaType = $('#viaType').val();
+
 
 		console.log('출발지 : ', departLoc);
 		console.log('도착지 : ', arrivalLoc);

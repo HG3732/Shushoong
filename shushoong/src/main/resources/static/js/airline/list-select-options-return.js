@@ -6,18 +6,19 @@ function getSelectOptionsReturn() {
 	
 	$('#showlist').on('change', updateTimeRange);
 	$('#price-input-right').on('click', updateTimeRange);
-	$('.direct-btn').on('click', function() {
-		viaType = $(this).val();
-		$('#viaType').val(viaType);
-		console.log('direct-btn.val: ', $('#viaType').val());
-		updateTimeRange();
-	});
-
-	$('.layover-btn').on('click', function() {
-		viaType = $(this).val();
-		$('#viaType').val(viaType);
-		console.log('direct-btn.val: ', $('#viaType').val());
-		updateTimeRange();
+	
+    $('.direct-btn').on('change', function() {
+        if (this.id === 'direct-btn' && this.checked) {
+            $('#layover-btn').prop('checked', false);
+            $('#viaType').val($(this).val());
+        } else if (this.id === 'layover-btn' && this.checked) {
+            $('#direct-btn').prop('checked', false);
+            $('#viaType').val($(this).val());
+        } else {
+            $('#viaType').val('');
+        }
+        console.log('Selected value: ', $('#viaType').val());
+        updateTimeRange();
 	});
 
 	// 시간대

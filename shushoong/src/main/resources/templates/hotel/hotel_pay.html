@@ -34,7 +34,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<div class="no_3">3</div>
 					</div>
 					<div class="hotel_reserve_write">
-						<div class="first">예약하기</div>
+						<div class="first" style="font-family: 'SOYOMapleBoldTTF';">예약하기</div>
 						<div class="second">결제</div>
 						<div class="third">에약완료</div>
 					</div>
@@ -88,18 +88,6 @@ xmlns:th="http://www.thymeleaf.org">
 						<table class="customer_info">
 							<thead>
 								<tr class="c_first" style="border-top: 3px solid #006AFF;">
-									<th>성명</th>
-									<td>
-										<input type="text" class="reserve_text" style="width: 300px;" id="name">
-									</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="c_second"  style="border-top: 1px solid #006AFF;">
-									<th>생년월일</th>
-									<td>
-										<input type="text" class="reserve_text" style="width: 300px;" id="birthday">
-									</td>
 									<th>성별</th>
 									<td style="display: flex; vertical-align: middle; justify-content: space-evenly;" >
 										<div class="gender_man">
@@ -112,24 +100,36 @@ xmlns:th="http://www.thymeleaf.org">
 										</div>
 									</td>
 								</tr>
+							</thead>
+							<tbody>
+								<tr class="c_second"  style="border-top: 1px solid #006AFF;">
+									<th>성명</th>
+									<td>
+										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="name">
+									</td>
+									<th>생년월일</th>
+									<td>
+										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="birthday">
+									</td>
+								</tr>
 								<tr class="c_third" style="border-top: 1px solid #006AFF; ">
 									<th>영문 성</th>
 									<td>
-										<input type="text" class="reserve_text" style="width: 300px;" id="last_name">
+										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="last_name">
 									</td>
 									<th>영문 이름</th>
 									<td>
-										<input type="text" class="reserve_text" style="width: 300px;" id="first_name">
+										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="first_name">
 									</td>
 								</tr>
 								<tr class="c_fourth" style="border-top: 1px solid #006AFF; border-bottom: 3px solid #006AFF;">
 									<th>휴대폰 번호</th>
 									<td>
-										<input type="tel" class="reserve_text" style="width: 300px;" id="phone">
+										<input type="tel" class="reserve_text" style="width: 300px; padding-left: 10px;" id="phone">
 									</td>
 									<th>이메일</th>
 									<td>
-										<input type="text" class="reserve_text" style="width: 300px;" id="email">
+										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="email">
 									</td>
 								</tr>
 							</tbody>

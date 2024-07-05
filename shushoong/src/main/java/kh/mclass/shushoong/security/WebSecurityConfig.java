@@ -46,7 +46,7 @@ public class WebSecurityConfig {
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
-				.loginPage("/admin/manager/login")
+//				.loginPage("/admin/manager/login")
 				.defaultSuccessUrl("/")
 				.successHandler(authSuccessHandler)
 				.failureHandler(authFailureHandler)

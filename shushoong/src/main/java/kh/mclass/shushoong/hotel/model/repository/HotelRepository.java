@@ -11,6 +11,7 @@ import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
+import kh.mclass.shushoong.payment.PayDto;
 
 @Mapper
 public interface HotelRepository {
@@ -53,7 +54,7 @@ public interface HotelRepository {
 	// 호텔 예매 내역
 	public int inserthotelReserveInfo(HotelReserveDtoRes resDto);
 
-//	호텔 주문 정보
-//	public Map<String, Object> insertPayInfo(String memEmail);
+	//결제 정보
+	public PayDto insertPayInfo(PayDto paydto);
 	
 }

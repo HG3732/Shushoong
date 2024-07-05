@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
@@ -37,6 +40,7 @@ import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
+import kh.mclass.shushoong.payment.PayDto;
 import lombok.RequiredArgsConstructor;
 
 //@Configuration
@@ -346,13 +350,6 @@ public class HotelController {
 		reserveCompletedto.setResidenceNameKo(reservationData.getResidenceNameKo());
 		reserveCompletedto.setRequestSum(reservationData.getRequestSum());
 		int requestSum = reservationData.getRequestSum();
-		System.out.println(requestSum);
-		System.out.println(requestSum & 1);
-		System.out.println(requestSum & 2);
-		System.out.println(requestSum & 4);
-		System.out.println(requestSum & 8);
-		System.out.println(requestSum & 16);
-		System.out.println(requestSum & 32);
 		
 		String requestDesc = "";
 		List<String> requestStrings = new ArrayList<String>();
@@ -384,9 +381,6 @@ public class HotelController {
 	        //ex. 싱글과 금연실 선택했는데 싱글에서 걸려버리면 금연실은 평가되지 않고 그냥 싱글만 출력됨
 	        
         reserveCompletedto.setRequestDesc(requestDesc);
-        System.out.println("========requestStrings===");
-        System.out.println(requestStrings);
-        System.out.println(requestDesc);
         
         if(!requestDesc.isEmpty()) {
         	//requestDesc 가 비어있지 않다면..
@@ -409,14 +403,51 @@ public class HotelController {
 		
 		// 결제 단건 조회 응답
 		Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
-		System.out.println("responseBody >>>>>>>>> "+responseBody.toString());
+		System.out.println("responseBody ==================  "+responseBody.toString());
 		
 		// 응답 중 결제 금액 세부 정보 항목 추출
 		Map<String, Object> amount = gson.fromJson(gson.toJson(responseBody.get("amount")), Map.class);
-		System.out.println("amount >>>>>>>>> "+amount);
+		System.out.println("amount ======================  "+amount);
 		// 그 중 지불된 금액
 		double paid = (double) amount.get("paid");
 		
+		PayDto paydto = new PayDto();
+		
+		//PAY 테이블에 저장할 데이터 꺼내는 방식
+		String approveNo = (String) responseBody.get("transactionId"); //승인번호
+																			
+		String cardNumStr = (String) responseBody.get("pgResponse"); //카드번호
+		//결제사가 pgResponse 안에 있어서 json으로 바꾼 다음에 바로 꺼내기(string은 이렇게 꺼내기 못함)
+			try {
+				JSONObject jsonObj = new JSONObject(cardNumStr);
+				String cardNum = jsonObj.getString("CardNo");
+				//json은 map형태라서 get으로 key이름으로 값 꺼내기 가능
+				paydto.setCardNum(cardNum);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
+		String reserveCorperStr = (String) responseBody.get("pgResponse"); //결제사
+			try {
+				JSONObject jsonObj = new JSONObject(reserveCorperStr);
+				String reserveCorper = jsonObj.getString("CardName");
+				paydto.setReserveCorper(reserveCorper);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		String currency = (String) responseBody.get("currency");//화폐종류
+		String payPrice = reserveCompletedto.getHotelPrice(); //가격
+		String payStatus = (String) responseBody.get("status"); //결제 상태
+		String hotelReserveCode = reserveCompletedto.getHotelReserveCode();//예약코드	
+		
+		paydto.setApproveNo(approveNo);
+		paydto.setCurrency(currency);
+		paydto.setPayPrice(payPrice);
+		paydto.setPayStatus(payStatus);
+		paydto.setHotelReserveCode(hotelReserveCode);
+		
+		service.insertPayInfo(paydto);
 		
 		session.setAttribute("reserveCompletedto", reserveCompletedto);
 		// 결제 금액과 지불된 금액이 같다면
@@ -425,6 +456,8 @@ public class HotelController {
 		} else {
 		    return 0;
 		}
+
+		
 	}
 
 	@GetMapping("/hotel/customer/reserve/pay/success")

@@ -11,7 +11,7 @@ public class PayDto {
 	private String reserveCorper;
 	private String cardNum;
 	private String payPrice;
-	private String moneyCat;
+	private String currency;
 	private String payStatus;
 	private String hotelReserveCode;
 	private String airlineReserveCode;

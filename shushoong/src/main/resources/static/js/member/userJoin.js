@@ -163,6 +163,18 @@ function joinCustomer() {
 // 아이디 체크 이벤트
 function idCheckHandler() {
 	var userId = $('#userId').val();
+	
+	if ($("#userId").val() == "") {
+		alert("아이디를 입력해 주세요.");
+		return false;
+	}
+	
+	if (id_text.test($("#userId").val()) == false) {
+		$('.test_Idok').css("display", "none");
+		$('.test_IDexception2').css("display", "inline-block");
+		$('.test_IDexception').css("display", "none");
+		return false;
+	}
 
 	$.ajax({
 		url: '/shushoong/idcheck.ajax',

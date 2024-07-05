@@ -79,6 +79,9 @@
         AND DEPART_LOC LIKE #{departLoc}
         AND ARRIVAL_LOC LIKE #{arrivalLoc}
     	<choose>
+    		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('')">
+    			ORDER BY FLIGHT_TIME
+    		</when>
     		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('direct')">
     			AND VIA_COUNT = 0 ORDER BY FLIGHT_TIME
     		</when>

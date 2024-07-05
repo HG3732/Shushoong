@@ -491,7 +491,6 @@ DROP COLUMN APPROVE_NO;
 
 select * from pay;
 
-SELECT * FROM HOTEL_REVIEW;
 
 COMMIT;
 
@@ -499,4 +498,11 @@ INSERT INTO PAY VALUES ('01907d46-d70f-e9b8-6729-86d02c13239c', '카카오머니
 'YET', NULL, NULL
     
 );
-DESC PAY;
+
+select * from PAY;
+
+Update pay
+set pay_status = 'paid', hotel_reserve_code = '20240704132OS0022'
+where approve_no = '01907d46-d70f-e9b8-6729-86d02c13';
+    
+

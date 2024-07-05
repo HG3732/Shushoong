@@ -110,8 +110,13 @@ public class HotelService {
 	}
 	
 //	결제 정보
-	public PayDto insertPayInfo(PayDto paydto) {
+	public int insertPayInfo(PayDto paydto) {
 		return hotelRepository.insertPayInfo(paydto);
 	}
 
+	//결제 정보 수정
+	public int updatePayInfo(String hotelReserveCode, String approveNo){
+		return hotelRepository.updatePayInfo(hotelReserveCode, approveNo);
+	}
+	
 }

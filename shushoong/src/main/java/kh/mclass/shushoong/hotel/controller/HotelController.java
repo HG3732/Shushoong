@@ -319,7 +319,10 @@ public class HotelController {
 		model.addAttribute("checkIn", session.getAttribute("checkIn"));
 		//이거는 내가 정해놓은 이름에 session값을 넣는것이기 때문에 이 이름에 대한 자료형이 정해진게 없어서 session이 어떤 자료형이든 그냥 들어갈 수 있음
 		model.addAttribute("checkOut", session.getAttribute("checkOut"));
-		model.addAttribute("userId", session.getAttribute("userId"));
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("userId", authentication.getName());
+		
 		model.addAttribute("adult", session.getAttribute("adult"));
 		model.addAttribute("child", session.getAttribute("child"));
 		model.addAttribute("nation", session.getAttribute("nation"));
@@ -438,18 +441,19 @@ public class HotelController {
 			
 		String currency = (String) responseBody.get("currency");//화폐종류
 		String payPrice = reserveCompletedto.getHotelPrice(); //가격
-		String payStatus = (String) responseBody.get("status"); //결제 상태
+//		String payStatus = (String) responseBody.get("status"); //결제 상태
 		String hotelReserveCode = reserveCompletedto.getHotelReserveCode();//예약코드	
 		
 		paydto.setApproveNo(approveNo);
 		paydto.setCurrency(currency);
 		paydto.setPayPrice(payPrice);
-		paydto.setPayStatus(payStatus);
+//		paydto.setPayStatus(payStatus);
 		paydto.setHotelReserveCode(hotelReserveCode);
 		
 		service.insertPayInfo(paydto);
 		
 		session.setAttribute("reserveCompletedto", reserveCompletedto);
+		session.setAttribute("approveNo", approveNo);
 		// 결제 금액과 지불된 금액이 같다면
 		if(Double.parseDouble(reserveCompletedto.getHotelPrice()) == paid) {
 			return service.inserthotelReserveInfo(reservationData);
@@ -465,7 +469,9 @@ public class HotelController {
 		
 		HotelReserveCompleteDtoRes reserveCompletedto = (HotelReserveCompleteDtoRes) session.getAttribute("reserveCompletedto");
 		//세션에서 reserveCompletedto 객체를 가져옴
-		System.out.println(reserveCompletedto);
+		
+		String approveNo = (String)session.getAttribute("approveNo");
+		service.updatePayInfo(hotelReserveCode, approveNo);
 		
 		model.addAttribute("hotelReserveCode", hotelReserveCode);
 	    model.addAttribute("residenceNameKo", reserveCompletedto.getResidenceNameKo());

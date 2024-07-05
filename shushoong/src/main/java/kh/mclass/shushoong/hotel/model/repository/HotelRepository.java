@@ -54,7 +54,10 @@ public interface HotelRepository {
 	// 호텔 예매 내역
 	public int inserthotelReserveInfo(HotelReserveDtoRes resDto);
 
-	//결제 정보
-	public PayDto insertPayInfo(PayDto paydto);
+	//결제 정보 저장
+	public int insertPayInfo(PayDto paydto);
+	
+	//결제 정보 수정
+	public int updatePayInfo(String hotelReserveCode, String approveNo);
 	
 }

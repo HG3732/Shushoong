@@ -85,8 +85,10 @@ insert all
     into hotel_room values (2, 5, 1, '2OS005', 755678, 0, 3)
     into hotel_room values (3, 5, 0, '2OS005', 856789, 30, 2)
     select * from dual;
-
-
+select * from hotel order by hotel_code;
+select * from hotel_pic order by hotel_code;
+select * from hotel_facility order by hotel_code;
+delete from hotel where hotel_code='0JJ001';
 --호텔 예약 예시 추가 구문
 INSERT all
     INTO hotel_reserve VALUES ('202404122OS001S01', 0, '2OS001', 2, 0, 'ex1', 'ex1@gmail.com', 'ex1', 'ex1', 'M', '고층', '20240412', '20240415', 'ex1')

@@ -50,9 +50,15 @@ xmlns:th="http://www.thymeleaf.org">
 				<!-- 객실정보 -->
 				<div class="hotel_info_all">
 					<div class="info_list">
-						<div class="room_choose"><a href="#hotel_room_list">객실선택</a></div>
-						<div class="hotel_info"><a href="#wrap_hotel_info">호텔정보</a></div>
-						<div class="hotel_review"><a href="#wrap_hotel_review">호텔후기</a></div>
+						<div class="room_choose">
+							<a href="#hotel_room_list">객실선택</a>
+						</div>
+						<div class="hotel_info">
+							<a href="#wrap_hotel_info">호텔정보</a>
+						</div>
+						<div class="hotel_review">
+							<a href="#wrap_hotel_review">호텔후기</a>
+						</div>
 						<div class="calendar">
 							<img th:src="@{/images/calendar.png}" alt="오른쪽 화살표" class="cal_pic" style="width:30px;">
 							<button type="button" class="cal_btn" style="vertical-align: middle;"><span th:text="${checkIn}"></span> ~ <span th:text="${checkOut}"></span></button>

@@ -2,7 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kh.mclass.shushoong.airline.model.repository.AirlineRepository">
 	<select id="selectAllList" parameterType="String" resultType="AirlineInfoDto">
-		SELECT * FROM AIRLINE_INFO a 
+		<choose>
+			<when test="ticketType == 1">
+			select a.*, TRUNC(s.seat_price / 2) as seat_price, s.seat_grade, s.airline_code, s.seat_total, s.seat_reserved, s.child_price, s.toddler_price 
+			</when>
+			<otherwise>
+			SELECT *	
+			</otherwise>
+		</choose>
+		FROM AIRLINE_INFO a 
 		JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
 		WHERE DEPART_LOC LIKE #{departLoc} 
 		AND ARRIVAL_LOC LIKE #{arrivalLoc}
@@ -10,12 +18,20 @@
 	</select>
 	
 	<select id="getMaxPrice" parameterType="map" resultType="Integer">
-	    SELECT MAX(s.SEAT_PRICE) AS maxPrice
+	    <choose>
+	        <when test="ticketType == 1">
+	            SELECT (MAX(s.SEAT_PRICE) / 2) AS maxPrice
+	        </when>
+	        <otherwise>
+	            SELECT MAX(s.SEAT_PRICE) AS maxPrice
+	        </otherwise>
+	    </choose>
 	    FROM AIRLINE_INFO a
 	    JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
 	    WHERE a.DEPART_LOC = #{departLoc} 
 	    AND a.ARRIVAL_LOC = #{arrivalLoc}
 	</select>
+
 	
 	<select id="selectOne" parameterType="String" resultType="AirlineInfoDto">
 		SELECT * FROM AIRLINE_INFO a
@@ -28,14 +44,37 @@
 	</select>
 	
     <select id="selectOptions" parameterType="map" resultType="AirlineInfoDto">
-        SELECT * FROM AIRLINE_INFO a
-        JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE  
+   		<choose>
+		<when test="ticketType == 1">
+		SELECT * FROM (
+    	SELECT 
+        a.*, TRUNC(s.seat_price / 2) AS seat_price, s.seat_grade, s.seat_total, s.seat_reserved, s.child_price, s.toddler_price
+        FROM AIRLINE_INFO a
+        JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
+		)        
+		</when>
+		<otherwise>
+		SELECT *
+        FROM AIRLINE_INFO a
+        JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE	
+		</otherwise>
+		</choose>
         WHERE TO_DATE(DEPART_TIME, 'HH24:MI') 
         BETWEEN TO_DATE(#{departTimeLeft}, 'HH24:MI') 
         AND TO_DATE(#{departTimeRight}, 'HH24:MI')
         AND TO_DATE (ARRIVAL_TIME, 'HH24:MI')
       	BETWEEN TO_DATE(#{arrivalTimeLeft}, 'HH24:MI')
       	AND TO_DATE(#{arrivalTimeRight}, 'HH24:MI')
+      	<!-- 
+      	<choose>
+      		<when test="ticketType == 1">
+        AND SEAT_PRICE BETWEEN 0 AND (#{maxPrice} * 2)
+        	</when>
+   	      	<otherwise>
+        AND SEAT_PRICE BETWEEN 0 AND #{maxPrice}
+        	</otherwise>
+        </choose>
+         -->
         AND SEAT_PRICE BETWEEN 0 AND #{maxPrice}
         AND DEPART_LOC LIKE #{departLoc}
         AND ARRIVAL_LOC LIKE #{arrivalLoc}

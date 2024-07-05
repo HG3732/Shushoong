@@ -10,7 +10,15 @@
 .wrap-write h1{
 	text-align: center;
 }
+.write-table{
+	width: 920px;
+}
 
-th{
-	color: red;
+.write-table th{
+	background-color: red;
+	float: left;
+}
+
+.write-table td{
+/* 	margin-left: 30px; */
 }

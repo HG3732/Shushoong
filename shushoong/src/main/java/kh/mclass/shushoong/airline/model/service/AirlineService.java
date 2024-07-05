@@ -16,10 +16,10 @@ public class AirlineService {
 	@Autowired
 	private AirlineRepository airlineRepository;
 	// 항공 목록
-	public List<AirlineInfoDto> getAirlineInfo(String departLoc, String arrivalLoc, String departDate, String arrivalDate){
+	public List<AirlineInfoDto> getAirlineInfo(String departLoc, String arrivalLoc, String departDate, String arrivalDate, String ticketType){
 		System.out.println("Service - departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc + ", departDate: " + departDate + ", arrivalDate: " + arrivalDate);
 		
-		return airlineRepository.selectAllList(departLoc, arrivalLoc, departDate, arrivalDate);
+		return airlineRepository.selectAllList(departLoc, arrivalLoc, departDate, arrivalDate, ticketType);
 	}
 	// 왕복 오는 항공편
 	public AirlineInfoDto getSelectOne(String airlineCode){
@@ -32,16 +32,16 @@ public class AirlineService {
 			String departLoc, String arrivalLoc, 
 			String departTimeLeft, String departTimeRight, 
 			String arrivalTimeLeft, String arrivalTimeRight, 
-			String selectType, String viaType, String maxPrice){
+			String selectType, String viaType, String maxPrice, String ticketType){
 		System.out.println("서비스 사이드바 출발");
 		
 		return airlineRepository.selectOptions(
-				departLoc, arrivalLoc, departTimeLeft, departTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice);
+				departLoc, arrivalLoc, departTimeLeft, departTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType);
 	}
 	
-	public Integer getMaxPrice(String departLoc, String arrivalLoc){
+	public Integer getMaxPrice(String departLoc, String arrivalLoc, String ticketType){
 		
-		return airlineRepository.getMaxPrice(departLoc, arrivalLoc);
+		return airlineRepository.getMaxPrice(departLoc, arrivalLoc, ticketType);
 	}
 	
 //	// 항공 목록 셀렉트 바

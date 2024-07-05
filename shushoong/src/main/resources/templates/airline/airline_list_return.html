@@ -198,21 +198,20 @@ div#people_lineup_sit_accoding{
 								<p>직항/경유</p>
 							</div>
 							<div class="layover-select">
+							
 								<label>
-									<button type="button" class="direct-btn zero" id="direct-btn"
-										value="direct">
+									<input type="checkbox" class="direct-btn" id="direct-btn" value="direct">
+										<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-direct">
 										<img alt="" th:src="@{/images/bluecheck.png}" id="blue-direct">
-										<img alt="" th:src="@{/images/skybluecheck.png}"
-											id="sky-direct">
-									</button> <span>직항</span>
-								</label> <label>
-									<button type="button" class="direct-btn one" id="layover-btn"
-										value="layover">
-										<img alt="" th:src="@{/images/skybluecheck.png}"
-											id="sky-layover"> <img alt=""
-											th:src="@{/images/bluecheck.png}" id="blue-layover">
-									</button> <span>경유</span>
+									<span>직항</span>
+								</label> 
+								<label>
+									<input type="checkbox" class="direct-btn" id="layover-btn" value="layover">
+										<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-layover">
+										<img alt="" th:src="@{/images/bluecheck.png}" id="blue-layover">
+									 <span>경유</span>
 								</label>
+								
 							</div>
 							<form class="layover-frm" hidden>
 								<input type="hidden" id="viaType" name="viaType">

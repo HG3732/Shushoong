@@ -100,7 +100,7 @@
 							<span th:text="${air.airlineName}">항공사 명</span>
 						</div>
 						<div>
-							<span>좌석등급 항공편명</span>
+							<span th:text="${air.seatGrade} +''+ ${air.airlineCode}">좌석등급 항공편명</span>
 						</div>
 						<span th:text="${air.arrivalLoc}">도착지</span>
 					</div>

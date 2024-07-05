@@ -79,9 +79,6 @@
         AND DEPART_LOC LIKE #{departLoc}
         AND ARRIVAL_LOC LIKE #{arrivalLoc}
     	<choose>
-    		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('')">
-    			ORDER BY FLIGHT_TIME
-    		</when>
     		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('direct')">
     			AND VIA_COUNT = 0 ORDER BY FLIGHT_TIME
     		</when>
@@ -151,11 +148,9 @@
     </select>
 		   	
 	<select id="selectOneAirlineInfo" resultType="AirlineInfoDto">
-		SELECT x.hotel_code,x.hotel_name , z.hotel_picture
-FROM hotel x
-    join hotel_like y ON x.hotel_code=y.hotel_code 
-    join (select * from (SELECT hotel_pic.*,ROW_NUMBER() OVER(PARTITION BY hotel_pic.hotel_code ORDER BY hotel_pic.hotel_picture DESC) rn from hotel_pic) where rn = 1) z on x.hotel_code = z.hotel_code 
-        WHERE y.user_id = #{airlineCode}
+		SELECT * 
+			FROM AIRLINE_INFO
+				WHERE AIRLINE_CODE = #{airlineCode}
 	</select>
 	
 </mapper>

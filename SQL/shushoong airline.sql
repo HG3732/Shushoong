@@ -86,13 +86,12 @@ select * from hotel_pic;
 SELECT hotel.hotel_code,hotel.hotel_name FROM hotel_like join hotel ON hotel_like.hotel_code=hotel.hotel_code where hotel_like.user_id 
 = 'customer' ;
 
-SELECT ROW_NUMBER() OVER(PARTITION BY hotel_pic.hotel_code ORDER BY hiredate DESC) AS rn from hotel_pic where rn = 1;
+(select * from (SELECT hotel_pic.*,ROW_NUMBER() OVER(PARTITION BY hotel_pic.hotel_code ORDER BY hotel_pic.hotel_picture DESC) rn from hotel_pic) where rn = 1);
 
 SELECT x.hotel_code,x.hotel_name , z.hotel_picture
 FROM hotel x
     join hotel_like y ON x.hotel_code=y.hotel_code 
-    join hotel_pic z on x.hotel_code = z.hotel_code 
+    join (select * from (SELECT hotel_pic.*,ROW_NUMBER() OVER(PARTITION BY hotel_pic.hotel_code ORDER BY hotel_pic.hotel_picture DESC) rn from hotel_pic) where rn = 1) z on x.hotel_code = z.hotel_code 
         WHERE y.user_id = 'customer'
 ;
-
 

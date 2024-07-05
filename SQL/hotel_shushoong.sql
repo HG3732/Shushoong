@@ -381,7 +381,16 @@ delete from hotel_reserve
 where hotel_reserve_code = '20240703172OS0020';
 
 alter table hotel_reserve
-modify requests number(2);
+modify RESIDENCE_BIRTH varchar2(20);
+
+UPDATE hotel_reserve
+SET RESIDENCE_BIRTH = 010101;
+
+ALTER TABLE hotel_reserve
+ADD (RESIDENCE_BIRTH varchar2(10));
+
+commit;
+
 
 
 select *
@@ -471,3 +480,23 @@ where user_id = 'customer' and hr.hotel_reserve_code = '20240703552OS0020' and h
 desc hotel_reserve;
 
 select * from hotel_reserve;
+
+desc pay;
+
+alter table pay
+modify APPROVE_NO varchar2(70);
+
+ALTER TABLE PAY
+DROP COLUMN APPROVE_NO;
+
+select * from pay;
+
+SELECT * FROM HOTEL_REVIEW;
+
+COMMIT;
+
+INSERT INTO PAY VALUES ('01907d46-d70f-e9b8-6729-86d02c13239c', '카카오머니', '****', '100', 'KRW', 
+'YET', NULL, NULL
+    
+);
+DESC PAY;

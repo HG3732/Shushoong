@@ -60,3 +60,19 @@ SELECT * FROM SEAT_GRADE;
 SELECT * FROM (SELECT * FROM (SELECT * FROM SEAT_GRADE OVER(PARTITION BY SEAT_PRICE ORDER BY DESC) JOIN AIRLINE_INFO ON airline_info.airline_code=seat_grade.airline_code)  ORDER BY SEAT_PRICE ASC) WHERE ROWNUM <= 6;
 
 SELECT * FROM SEAT_GRADE (SLEECT SEAT_GRADE OVER(PARTITION BY SEAT_PRICE ORDER BY DESC));
+select * from member;
+
+SELECT
+    *
+FROM hotel_like join hotel ON hotel_like.hotel_code=hotel.hotel_code
+where hotel_like.user_id = 'ex1';
+
+SELECT
+    *
+FROM hotel;
+
+SELECT
+    *
+FROM member;
+insert into table HOTEL_LIKE values('customer','2OS001');
+commit;

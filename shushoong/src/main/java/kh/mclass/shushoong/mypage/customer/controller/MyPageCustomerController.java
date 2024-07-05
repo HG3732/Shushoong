@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
+import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
 import kh.mclass.shushoong.mypage.customer.model.service.MypageCustomerService;
@@ -191,6 +192,16 @@ public class MyPageCustomerController {
 			}
 	}
 	
+	@GetMapping("/mypage/hotel/interested")
+	public String interestedPage(
+			Principal principal
+			) {
+		String userId = principal.getName();
+		
+		List<HotelDtoRes> hotelList = service.selectListInterestedHotel(userId);
+		
+		return "/mypage/customer/hotelLike";
+	}
 
 	
 }

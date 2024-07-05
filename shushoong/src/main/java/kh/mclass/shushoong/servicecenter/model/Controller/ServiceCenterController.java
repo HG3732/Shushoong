@@ -76,7 +76,7 @@ public class ServiceCenterController {
 		return "servicecenter/viewQnA";
 	}
 	
-	@PostMapping("/support/qna/write/answer")
+	@PostMapping("/support/qna/write/answer.ajax")
 	public String writeQnAanswer(Model model, String faqId, String ansContent) {
 		service.updateAnswer(faqId, ansContent);
 		model.addAttribute("result", service.selectOneQna(faqId));

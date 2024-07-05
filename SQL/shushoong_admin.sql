@@ -84,12 +84,13 @@ select notice_id, notice_title, notice_content, notice_time, user_id from notice
 
 select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE, ANS_TIME from (
 			select faq_id, quest_cat, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center
-            join faq_cat using(faq_id) order by ask_date desc)
+            join faq_cat using(faq_id) where user_id = 'ex1' order by ask_date desc)
             join faq_cat_desc using(quest_cat)
 			where rownum <= 3 and user_id = 'ex1';
-            
-desc hotel;
-desc hotel_facility;
-desc hotel_room;
-select * from hotel order by hotel_code;
-select * from hotel_room;
+        
+
+select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE, ANS_TIME from (
+			select faq_id, quest_cat, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center
+            join faq_cat using(faq_id) where user_id = 'ex1' order by ask_date desc)
+            join faq_cat_desc using(quest_cat)
+			where rownum <= 3;

@@ -8,6 +8,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageHotelLike.css}" rel="stylesheet" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	
+	
 <meta charset="UTF-8">
 <title>슈슝</title>
 </head>
@@ -25,6 +30,35 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<div class="wrap-body">
 			<div class="wrap-">
 			<!-- 여기부터 작성 -->
+				<div class="wrap-aside">
+					<aside>
+						<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+					</aside>
+				</div>
+				<section class="interested_section">
+					<div>좋아요 누른 호텔</div>
+					<div class="interested_list_wrap">
+						<div class="liked_hotel" th:each="hotelList : ${hotelList}" th:href="@{/hotel/view/{hotelCode}(hotelCode=${hotelList.hotelCode})}">
+							<div class="hot-hotel-pic"><img class="hotel_img" th:src="${hotelList.hotelPic}" alt="a" /><button th:value="${hotelList.hotelCode}" class="heart_check">♥</button> </div>
+							<div class="hot-hotel-name" th:text="${hotelList.hotelName}">호텔이름</div>
+						</div>
+					</div>
+				</section>
+				
+				<section class="commit_ask">
+					<div class="commit_ask_wrap">
+						<img class="warning_msg_img" alt="경고창" th:src="@{/images/warning.png}">
+						<div class="warning_msg">삭제 버튼을 누르시면 마이페이지에서 보실수 없게 됩니다</div>
+						<div class="choose_btn">
+							<button id="delete_value">삭제하기</button>
+							<button id="cancel_delete">취소</button>
+						</div>
+					</div>
+				</section>
+				
+				<section class="hidden_class">
+					<input type="text" name="hidden_hotelcode_val">
+				</section>	
 			
 			</div>
 		</div>
@@ -33,5 +67,21 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
 	
+	
+	<script>
+	 $("button.heart_check").on("click",function(){
+		 console.log($(this).val());
+		 $("[name=hidden_hotelcode_val]").val($(this).val());
+		 $(".commit_ask").css("display","block");
+	 });
+	 $("button#delete_value").on("click",function(){
+		
+	 });
+	 $("button#cancel_delete").on("click",function(){
+		 $(".commit_ask").css("display","none");
+	 });
+	 
+	 
+	</script>
 </body>
 </html>

@@ -35,7 +35,7 @@
 	
 	<!-- 회원 한명의 세부 정보 조회 -->
 	<select id="selectOne" parameterType="string" resultType="MemberDto">
-		SELECT USER_ID, USER_NAME, USER_EMAIL, to_char(JOIN_DATE) as JOIN_DATE, USER_STATUS FROM MEMBER WHERE USER_ID=#{userId}
+		SELECT USER_ID, USER_NAME, USER_EMAIL, to_char(JOIN_DATE) as JOIN_DATE, USER_STATUS, USER_GRADE FROM MEMBER WHERE USER_ID=#{userId}
 	</select>
 	
 	<!-- 회원의 결제 내역 조회 -->

@@ -46,6 +46,8 @@ public class MypageCustomerService {
 	}
 	
 	public List<HotelDtoRes> selectListInterestedHotel(String userId){
-	
+		
 		return mypageRepository.selectListInterestedHotel(userId);
+	}
+	
 }

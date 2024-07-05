@@ -194,11 +194,13 @@ public class MyPageCustomerController {
 	
 	@GetMapping("/mypage/hotel/interested")
 	public String interestedPage(
-			Principal principal
+			Principal principal,
+			Model md
 			) {
 		String userId = principal.getName();
 		
 		List<HotelDtoRes> hotelList = service.selectListInterestedHotel(userId);
+		md.addAttribute(hotelList);
 		
 		return "/mypage/customer/hotelLike";
 	}

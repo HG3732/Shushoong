@@ -65,7 +65,7 @@ select * from member;
 SELECT
     *
 FROM hotel_like join hotel ON hotel_like.hotel_code=hotel.hotel_code
-where hotel_like.user_id = 'ex1';
+where hotel_like.user_id = 'customer';
 
 SELECT
     *
@@ -74,5 +74,12 @@ FROM hotel;
 SELECT
     *
 FROM member;
-insert into table HOTEL_LIKE values('customer','2OS001');
+SELECT
+    *
+FROM hotel_like;
+
+insert into HOTEL_LIKE values('customer','2OS005');
 commit;
+
+SELECT* FROM hotel_like join hotel ON hotel_like.hotel_code=hotel.hotel_code where hotel_like.user_id 
+= 'customer' ;

@@ -31,8 +31,9 @@
 		where user_id = #{userId} and hr.hotel_reserve_code = #{hotelReserveCode} and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att
 	</select>
 	
-	<select id="selectListInterestedHotel" resultType="List">
-		FROM hotel_like join hotel ON hotel_like.hotel_code=hotel.hotel_code
-			where hotel_like.user_id = #{userId}
+	<select id="selectListInterestedHotel" resultType="HotelDtoRes">
+		SELECT*
+			FROM hotel_like join hotel ON hotel_like.hotel_code=hotel.hotel_code
+				where hotel_like.user_id = #{userId}
 	</select>
 </mapper>

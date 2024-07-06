@@ -89,6 +89,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	            	
 	            	<div class="btn_wrap">
 	            		<button type="button" class="yes">네</button>
+	            		<input type="hidden" th:value="${reserveList.APPROVE_NO}" class="approve_no">
 	            		<button type="button" class="no">아니오</button>
 	            	</div>
 	            </div>
@@ -111,11 +112,11 @@ function loadedHandler(){
 	
 	$('.reserve_btn').on('click', reserveCancelHandler);
 	$('.esc').on('click', escHandler);
-	$('.yes').on('click', refundHandler);
+	$('.yes').on('click', cancelHandler);
 }
 
 </script>
-<script th:src="@{/js/mypage/customer/mypageCustomerReservedHotelList.js}"
+<script th:src="@{/js/mypage/customer/mypageCustomerReservedHotel.js}"
 		type="text/javascript">
 </script>
 

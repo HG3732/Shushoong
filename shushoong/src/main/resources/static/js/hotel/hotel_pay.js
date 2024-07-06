@@ -78,7 +78,6 @@ function arrowDownClickHandler(){
 		$(this).parents().eq(1).next().hide();
 	}
 
-	 validateForm();
 }
 
 /*전체동의*/

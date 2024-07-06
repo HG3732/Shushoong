@@ -26,6 +26,10 @@ public interface MypageCustomerRepository {
 	//호텔 예약 상세정보
 	public Map<String, Object> selectOneReservedHotelList(String userId, String hotelReserveCode);
 	
+	//호텔 예약 취소
+	public int cancelHotelReserve(String paymentId);
+	
+	//숙소 좋아요
 	public List<HotelDtoRes> selectListInterestedHotel(String userId);
 	
 	public int deleteHotelLiked(String hotelCode);

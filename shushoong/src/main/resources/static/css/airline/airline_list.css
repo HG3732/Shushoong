@@ -292,6 +292,7 @@ input[type="range"]::-webkit-slider-thumb {
 #blue-layover:hover{
 	content: url("../../images/bluecheck.png");
 }	
+/* 
 .layover-list .layover-select #direct-btn #blue-direct:hover{
 	content: url("../../images/bluecheck.png");
 }
@@ -304,7 +305,7 @@ input[type="range"]::-webkit-slider-thumb {
 .layover-list .layover-select #layover-btn #blue-layover:hover{
 	content: url("../../images/bluecheck.png");
 }
-
+ */
 body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.layover-list > form > div.layover-select > label:nth-child(2){
 	margin-right: 20px;
 }
@@ -555,10 +556,20 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
 	justify-content: space-between;
 	padding: 20px;
 }
+.contain-select-info .flex-select-info .date-select-info .detail-date{
+	font-weight: bold;
+}
+.contain-select-info .flex-select-info .date-select-info .detail-flightTime{
+	font-size: 15px;
+	}
 
 .contain-select-info.open {
     display: block;
     margin-top: 10px; /* 적절한 간격을 설정 */
+}
+
+.contain-select-info .loc-select-info .detail-loc{
+	font-weight: bold;
 }
 
 .contain-select-info > div > div.date-select-info > div:nth-child(1) > div:nth-child(2){

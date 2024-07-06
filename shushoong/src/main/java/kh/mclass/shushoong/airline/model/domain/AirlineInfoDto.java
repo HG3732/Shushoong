@@ -11,7 +11,7 @@ public class AirlineInfoDto {
 	private int ticketType; //편도=1 왕복=2
 	private int child;//소아 인수
 	private int baby;//유아 인수
-	private int seatGrade;//좌석 등급 1=일등급 2=비즈니스 3=이코노미
+	private String seatGrade;//좌석 등급 1=일등급 2=비즈니스 3=이코노미
 	
 	private String airlineCode; // 운항 코드
 	private String flightNo; // 항공편명

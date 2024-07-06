@@ -1,6 +1,7 @@
 function clickedTicketInfo() {
 	$(".ticketinfo-btn").on("click", function() {
 		console.log("티켓 상세 정보 눌림");
+		console.log('좌석 등급' , $('#select-seatGrade').text().trim());
         // 클릭한 버튼이 속한 .airline-info 요소 찾기
         var airlineInfoElement = $(this).closest('.airline-info');
 

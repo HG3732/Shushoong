@@ -14,6 +14,7 @@
 		JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
 		WHERE DEPART_LOC LIKE #{departLoc} 
 		AND ARRIVAL_LOC LIKE #{arrivalLoc}
+		AND SEAT_GRADE = #{seatGrade}
     	ORDER BY SEAT_PRICE
 	</select>
 	
@@ -76,6 +77,46 @@
         </choose>
          -->
         AND SEAT_PRICE BETWEEN 0 AND #{maxPrice}
+        AND DEPART_LOC LIKE #{departLoc}
+        AND ARRIVAL_LOC LIKE #{arrivalLoc}
+    	<choose>
+    		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY FLIGHT_TIME
+    		</when>
+    		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY FLIGHT_TIME
+    		</when>
+    		 <when test="selectType != null and selectType.equals('flytime-long') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY FLIGHT_TIME DESC
+    		</when>
+    		 <when test="selectType != null and selectType.equals('flytime-long') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY FLIGHT_TIME DESC
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-cheap') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY SEAT_PRICE
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-cheap') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY SEAT_PRICE
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-expensive') and viaType.equals('direct')">
+    			AND VIA_COUNT = 0 ORDER BY SEAT_PRICE DESC
+    		</when>
+    		 <when test="selectType != null and selectType.equals('price-expensive') and viaType.equals('layover')">
+    			AND VIA_COUNT = 1 ORDER BY SEAT_PRICE DESC
+    		</when>
+        </choose>
+    </select>
+    <!-- 돌아오는 비행기 -->
+    <select id="selectOptionsReturn" parameterType="map" resultType="AirlineInfoDto">
+		SELECT *
+        FROM AIRLINE_INFO a
+        JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE	
+        WHERE TO_DATE(DEPART_TIME, 'HH24:MI') 
+        BETWEEN TO_DATE(#{departTimeLeft}, 'HH24:MI') 
+        AND TO_DATE(#{departTimeRight}, 'HH24:MI')
+        AND TO_DATE (ARRIVAL_TIME, 'HH24:MI')
+      	BETWEEN TO_DATE(#{arrivalTimeLeft}, 'HH24:MI')
+      	AND TO_DATE(#{arrivalTimeRight}, 'HH24:MI')
         AND DEPART_LOC LIKE #{departLoc}
         AND ARRIVAL_LOC LIKE #{arrivalLoc}
     	<choose>

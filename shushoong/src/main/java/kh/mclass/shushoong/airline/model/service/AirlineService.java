@@ -16,10 +16,10 @@ public class AirlineService {
 	@Autowired
 	private AirlineRepository airlineRepository;
 	// 항공 목록
-	public List<AirlineInfoDto> getAirlineInfo(String departLoc, String arrivalLoc, String departDate, String arrivalDate, String ticketType){
+	public List<AirlineInfoDto> getAirlineInfo(String departLoc, String arrivalLoc, String departDate, String arrivalDate, String ticketType, String seatGrade){
 		System.out.println("Service - departLoc: " + departLoc + ", arrivalLoc: " + arrivalLoc + ", departDate: " + departDate + ", arrivalDate: " + arrivalDate);
 		
-		return airlineRepository.selectAllList(departLoc, arrivalLoc, departDate, arrivalDate, ticketType);
+		return airlineRepository.selectAllList(departLoc, arrivalLoc, departDate, arrivalDate, ticketType, seatGrade);
 	}
 	// 왕복 오는 항공편
 	public AirlineInfoDto getSelectOne(String airlineCode){
@@ -32,11 +32,21 @@ public class AirlineService {
 			String departLoc, String arrivalLoc, 
 			String departTimeLeft, String departTimeRight, 
 			String arrivalTimeLeft, String arrivalTimeRight, 
-			String selectType, String viaType, String maxPrice, String ticketType){
+			String selectType, String viaType, String maxPrice, String ticketType, String seatGrade){
 		System.out.println("서비스 사이드바 출발");
 		
 		return airlineRepository.selectOptions(
-				departLoc, arrivalLoc, departTimeLeft, departTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType);
+				departLoc, arrivalLoc, departTimeLeft, departTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType, seatGrade);
+	}
+	public List<AirlineInfoDto> getAirlineSideTimeReturn(
+			String departLoc, String arrivalLoc, 
+			String departTimeLeft, String departTimeRight, 
+			String arrivalTimeLeft, String arrivalTimeRight, 
+			String selectType, String viaType, String ticketType, String seatGrade){
+		System.out.println("서비스 사이드바 출발");
+		
+		return airlineRepository.selectOptionsReturn(
+				departLoc, arrivalLoc, departTimeLeft, departTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, ticketType, seatGrade);
 	}
 	
 	public Integer getMaxPrice(String departLoc, String arrivalLoc, String ticketType){

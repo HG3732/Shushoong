@@ -112,7 +112,7 @@ div#people_lineup_sit_accoding{
 						<!-- checkpoint -->
 					</form>					
 				</div>
-				
+				<div hidden id="select-info-seatGrade" th:text="${seatGrade}"></div>
 				<div class="flex-container">
 					<div class="sidebar">
 						<div class="time-list">
@@ -199,22 +199,6 @@ div#people_lineup_sit_accoding{
 								<p>직항/경유</p>
 							</div>
 							<div class="layover-select">
-							<!-- 
-								<label>
-									<button type="button" class="direct-btn zero" id="direct-btn" value="direct">
-										<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-direct">
-										<img alt="" th:src="@{/images/bluecheck.png}" id="blue-direct">
-									</button>
-									<span>직항</span>
-								</label> 
-								<label>
-									<button type="button" class="direct-btn one" id="layover-btn" value="layover">
-										<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-layover">
-										<img alt="" th:src="@{/images/bluecheck.png}" id="blue-layover">
-									</button>	
-									 <span>경유</span>
-								</label>
-								 -->
 								<label>
 									<input type="checkbox" class="direct-btn" id="direct-btn" value="direct">
 										<img alt="" th:src="@{/images/skybluecheck.png}" id="sky-direct">

@@ -76,18 +76,18 @@
 					<div class="date-select-info">
 						<div>
 							<div>
-								<span th:text="${air.departDate}">07월18일</span>
+								<span class="detail-date depart" th:text="${air.departDate}">07월18일</span>
 							</div>
 							<div>
 								<span th:text="${air.departTime}">14:40</span>
 							</div>
 						</div>
 						<div>
-							<span th:text="${air.flightTime}">비행 시간</span>
+							<span class="detail-flightTime" th:text="${air.flightTime}">비행 시간</span>
 						</div>
 						<div>
 							<div>
-								<span th:text="${air.arrivalDate}">07월18일</span>
+								<span class="detail-date arrival" th:text="${air.arrivalDate}">07월18일</span>
 							</div>
 							<div>
 								<span th:text="${air.departTime}">10:20</span>
@@ -95,14 +95,14 @@
 						</div>
 					</div>
 					<div class="loc-select-info">
-						<span th:text="${air.departLoc}">출발지</span>
+						<span class="detail-loc depart" th:text="${air.departLoc}">출발지</span>
 						<div>
 							<span th:text="${air.airlineName}">항공사 명</span>
 						</div>
 						<div>
-							<span th:text="${air.seatGrade} +''+ ${air.airlineCode}">좌석등급 항공편명</span>
+							<span id="select-seatGrade" th:text="${air.seatGrade}"></span> &nbsp <span th:text="${air.airlineCode}" ></span>
 						</div>
-						<span th:text="${air.arrivalLoc}">도착지</span>
+						<span class="detail-loc arrival" th:text="${air.arrivalLoc}">도착지</span>
 					</div>
 
 					<div class="btn-select-info" th:if="${ticketType} != 1">

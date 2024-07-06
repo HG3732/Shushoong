@@ -23,21 +23,25 @@ function getSelectOptions() {
         updateTimeRange();
 	});
 
-
-/*	
-	$('.direct-btn').on('click', function() {
-		viaType = $(this).val();
-		$('#viaType').val(viaType);
-		console.log('direct-btn.val: ', $('#viaType').val());
-		updateTimeRange();
-	});
-
-	$('.layover-btn').on('click', function() {
-		viaType = $(this).val();
-		$('#viaType').val(viaType);
-		console.log('direct-btn.val: ', $('#viaType').val());
-		updateTimeRange();
-	*/
+    var seatGradeText  = $('#select-info-seatGrade').text().trim(); // 요소의 텍스트 값을 가져옵니다
+	console.log('좌석 등급' , $('#select-info-seatGrade').text().trim());
+    var seatGrade; // seatGrade 변수 선언
+    
+    switch (seatGradeText) {
+        case 'First Class':
+            seatGrade = 1;
+            break;
+        case 'Business Class':
+            seatGrade = 2;
+            break;
+        case 'Economy Class':
+            seatGrade = 3;
+            break;
+        default:
+            console.log('알 수 없는 등급');
+    }
+    
+	console.log('좌석 등급 숫자로 변환' , seatGrade);
 	// 시간대 
 	function updateTimeRange() {
 	
@@ -62,7 +66,6 @@ function getSelectOptions() {
 		// 직항/경유
         var viaType = $('#viaType').val();
 
-
 		console.log('출발지 : ', departLoc);
 		console.log('도착지 : ', arrivalLoc);
 		console.log('정렬 순서', selectType);
@@ -72,6 +75,7 @@ function getSelectOptions() {
 		console.log('RIGHT 도착 시간대 : ', arrivalTimeRightVal);
 		console.log('가격 최댓 값 : ' , maxPrice);
 		console.log('편도/왕복 : ' , ticketType)
+		console.log('좌석등급 : ' , seatGrade)
 
 		$.ajax({
 			url: "/shushoong/airline/list_select_options/ajax",
@@ -86,7 +90,8 @@ function getSelectOptions() {
 				selectType: selectType,
 				viaType: viaType,
 				maxPrice: maxPrice,
-				ticketType : ticketType
+				ticketType : ticketType,
+				seatGrade: seatGrade
 			},
 			/*
 			success: function(response) {

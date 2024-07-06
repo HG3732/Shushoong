@@ -509,3 +509,32 @@ where user_id = 'customer' and hr.hotel_reserve_code = '20240703552OS0020' and h
 desc hotel_reserve;
 
 select * from hotel_reserve;
+
+
+select * from pay where hotel_reserve_code = '20240706412KT0032';
+
+select * from hotel_reserve
+    join pay using (hotel_reserve_c);
+    
+select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, 
+        p.pay_price as hotel_price, residence_name_ko, request_sum, approve_no
+from hotel_reserve hr
+    join hotel h on hr.hotel_code = h.hotel_code 
+    join hotel_room_att hra on hr.room_att = hra.room_att
+    join hotel_room_cat hrc on hr.room_cat = hrc.room_cat
+    join hotel_room hm on hr.room_cap = hm.room_cap
+    join pay p on hr.hotel_reserve_code = p.hotel_reserve_code
+where user_id = 'singasong' and hr.hotel_reserve_code = '20240706412KT0032' and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att;
+
+
+delete from pay where hotel_reserve_code='20240707342KT0021';
+
+delete from hotel_reserve where hotel_reserve_code='20240707342KT0021';
+
+commit;
+
+select * from hotel_reserve;
+
+desc pay;
+
+select * from pay;

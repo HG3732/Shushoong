@@ -45,10 +45,16 @@ public class MypageCustomerService {
 		return mypageRepository.selectOneReservedHotelList(userId, hotelReserveCode);
 	}
 	
+	//호첼 예약 취소
+	public int cancelHotelReserve(String paymentId) {
+		return mypageRepository.cancelHotelReserve(paymentId);
+	}
+	
+	//좋아요
 	public List<HotelDtoRes> selectListInterestedHotel(String userId){
-		
 		return mypageRepository.selectListInterestedHotel(userId);
 	}
+	
 	public int deleteHotelLiked(String hotelCode) {
 		return mypageRepository.deleteHotelLiked(hotelCode);
 	}

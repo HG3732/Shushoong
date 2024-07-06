@@ -1,13 +1,20 @@
 package kh.mclass.shushoong.mypage.customer.controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +34,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.servlet.http.HttpServletRequest;
+import com.google.gson.Gson;
+
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
@@ -45,6 +53,19 @@ public class MyPageCustomerController {
 	
 	@Autowired
 	private MypageCustomerRepository repository;
+	
+	//PortOne
+	@Value("${portone.store.key}")
+	private String storeId;
+
+	@Value("${portone.channel.key}")
+	private String channelKey;
+	
+	@Value("${portone.secret.key}")
+	private String secretKey;
+	
+	@Autowired
+	private Gson gson;
 	
 	private final MypageCustomerService service;
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
@@ -194,6 +215,44 @@ public class MyPageCustomerController {
 	
 			}
 	}
+	
+	@PostMapping("/mypage/reserved/hotel/cancel")
+	@ResponseBody
+	public int cancelHotel(String paymentId) throws IOException, InterruptedException {
+		Map<String, Object> requestBody = new HashMap<>();
+		requestBody.put("reason", "고객 요청으로 결제 취소");
+
+		// 결제 취소 API 호출
+		HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://api.portone.io/payments/"+paymentId+"/cancel"))
+			    .header("Content-Type", "application/json")
+			    .header("Authorization", "PortOne " + secretKey)
+			    .method("POST", HttpRequest.BodyPublishers.ofString(gson.toJson(requestBody)))
+			    .build();
+		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+		Map<String, Object> responseMap = gson.fromJson(response.body(), Map.class);
+
+		System.out.println(response.body() + "=================");
+		
+		Map<String, Object> cancellation = gson.fromJson(gson.toJson(responseMap.get("cancellation")), Map.class);
+
+		String status = (String) cancellation.get("status");
+		int result;
+		// 결제 취소 완료 상태면 결제 내역 테이블에서 삭제
+		if(status != null) {
+			if(status.equals("SUCCEEDED")) {
+				result = service.cancelHotelReserve(paymentId);
+				return result;
+			}else {
+				return 0;
+			}
+		}else {
+			return 0;
+		}
+	}
+
+	
 	
 	@GetMapping("/mypage/hotel/interested")
 	public String interestedPage(

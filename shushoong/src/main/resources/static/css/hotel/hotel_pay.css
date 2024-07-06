@@ -68,7 +68,7 @@ table{
 
 
 input[type=text]{
-	border: 1px solid #006AFF;
+	border: 1px solid var(--color_blue_2);
 	font-size: var(--font3);
 }
 
@@ -77,8 +77,18 @@ input[type=text]:foucs{
 	font-size: var(--font3);
 }
 
+input[type=email]{
+	border: 1px solid var(--color_blue_2);
+	font-size: var(--font3);
+}
+
+input[type=email]:foucs{
+	outline: none;
+	font-size: var(--font3);
+}
+
 input[type=tel]{
-	border: 1px solid #006AFF;
+	border: 1px solid var(--color_blue_2);
 	font-size: var(--font3);
 }
 
@@ -100,6 +110,12 @@ input[type=tel]{
 	font-size: var(--font3);
 	width: 350px;
 	padding-left: 10px;
+}
+
+.error-message{
+	font-size: var(--font5);
+	color: red;
+	margin: 5px;
 }
 
 .reserve_text {
@@ -190,13 +206,14 @@ input[type=checkbox] + label {
     width: 20px;
 	height: 20px;
     background-repeat: no-repeat;
-    background-image: url("../../images/skybluecheck.png");
+    background-color: var(--color_blue_2);
 	background-size: 100%;
+	border-radius: 50px;
 }
 	
 input[type=checkbox]:checked + label { 
-		background-image: url("../../images/bluecheck.png");
-		border: none;
+	background-image: url("../../images/bluecheck.png");
+	border: none;
 }
 
 .agreement{
@@ -279,8 +296,9 @@ input[type=radio] + label{
     width: 20px;
 	height: 20px;
     background-repeat: no-repeat;
-    background-image: url("../../images/skybluecheck.png");
+    background-color: var(--color_blue_2);
 	background-size: 100%;
+	border-radius: 50px;
 
 }
 
@@ -324,54 +342,6 @@ input[type="radio"]:checked + label{
 	justify-content: space-between;
 	font-size: var(--font4);
 	margin-top: 10px;
-}
-
-.mileage_wrap{
- 	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	margin-top: 30px;
-	
-}
-
-.mileage_wrap > input[type=text] {
-	border: none; 
-	background-color: var(--color_gray_3); 
-	border-radius: 20px;
-	width: 120px;
-	font-size: var(--font4);
-	padding:5px;
-	margin-left: 20px;
-}
-
-.mileage_wrap > input[type=text]:focus{
-	outline: none;
-	font-size: var(--font4);
-}
-
-
-.use_all{
-	border-radius: 20px;
-	border: none;
-	font-size: var(--font4);
-	background-color: var(--color_gray_3);
-	padding: 5px;
-	margin-left: 5px;
-}
-
-.use_all:hover{
-	cursor:pointer;
-	padding: 5px;
-	border-radius: 20px;
-	border: none;
-	font-size: var(--font4);
-	margin-left: 5px;
-}
-
-.left{
-	margin-top: 5px;
-	text-align: end;
-	font-size: var(--font4);
 }
 
 .exchange_info{

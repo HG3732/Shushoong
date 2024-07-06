@@ -105,31 +105,37 @@ xmlns:th="http://www.thymeleaf.org">
 								<tr class="c_second"  style="border-top: 1px solid #006AFF;">
 									<th>성명</th>
 									<td>
-										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="name">
+										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="name" required placeholder="이름 입력">
+										<div id="nameError" class="error-message"></div>
 									</td>
 									<th>생년월일</th>
 									<td>
-										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="birthday">
+										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="birthday" required placeholder="ex. 951221">
+										<div id="birthdayError" class="error-message"></div>
 									</td>
 								</tr>
 								<tr class="c_third" style="border-top: 1px solid #006AFF; ">
 									<th>영문 성</th>
 									<td>
-										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="last_name">
+										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="last_name" required placeholder="ex. SONG">
+										<div id="last_name_Error" class="error-message"></div>
 									</td>
 									<th>영문 이름</th>
 									<td>
-										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="first_name">
+										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="first_name" required placeholder="ex. SHUSHOONG">
+										<div id="first_name_Error" class="error-message"></div>
 									</td>
 								</tr>
 								<tr class="c_fourth" style="border-top: 1px solid #006AFF; border-bottom: 3px solid #006AFF;">
 									<th>휴대폰 번호</th>
 									<td>
-										<input type="tel" class="reserve_text" style="width: 300px; padding-left: 10px;" id="phone">
+										<input type="tel" class="reserve_text" style="width: 300px; padding-left: 10px;" id="phone" required placeholder="ex. 01012345678">
+										<div id="phoneError" class="error-message"></div>
 									</td>
 									<th>이메일</th>
 									<td>
-										<input type="text" class="reserve_text" style="width: 300px; padding-left: 10px;" id="email">
+										<input type="email" class="reserve_text" style="width: 300px; padding-left: 10px;" id="email" required placeholder="ex. hihihi@shushoong.com">
+										<div id="emailError" class="error-message"></div>
 									</td>
 								</tr>
 							</tbody>
@@ -260,10 +266,10 @@ xmlns:th="http://www.thymeleaf.org">
 							<p class="class_info">마케팅 수신동의</p>
 							<p class="option" style="color: blue;">(선택)</p>
 							<div class="radio_wrap">
-								<input type="radio" name="policy_5" value="agree" id="radio_agree5" class="agree_radio">
+								<input type="radio" name="option_1" value="agree" id="radio_agree5" class="agree_radio">
 									<label for="radio_agree5" style="display: inline-block;"></label>
 									<div style="margin-right: 20px;">동의합니다</div>
-								<input type="radio" name="policy_5" value="disagree" id="radio_disagree5"  class="disagree_radio">
+								<input type="radio" name="option_1" value="disagree" id="radio_disagree5"  class="disagree_radio">
 									<label for="radio_disagree5"></label>
 									<div>동의하지 않습니다</div>
 								<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">	
@@ -297,19 +303,8 @@ xmlns:th="http://www.thymeleaf.org">
 								<div class="headcount">성인 2, 아동 0</div>
 								<div class="exchange">JPY(83,953)</div>
 							</div>
-							<div class="mileage_wrap">
-								<p style="font-size: var(--font4);">마일리지</p>
-								<button type="button" class="use_all">전액사용</button>
-								<input type="text">
-								<p style="font-size: var(--font4);">원</p>
-							</div>
-							<div class="left">
-								<p>잔액: 1000원</p>
-							</div>
 							<div class="exchange_info">
 								<div class="apply_exchange">* 적용 환율 JPY=8.8301(2024.05.23) 기준</div>
-								<div class="mileage_save">슈슝투어 마일리지 741 적립</div>
-								<div class="mileage_guide">호텔은 대표 투숙객1인 에게 마일리지 적립이 됩니다.</div>
 							</div>						
 						</div>
 					</div>
@@ -332,11 +327,22 @@ $(loadedHandler);
 
 function loadedHandler(){
 
+	$('.final_pay').prop('disabled', true);
+    
+	/* 유효성 검사 */
+    $('#name').on("keyup", nameHandler);
+    $('#birthday').on("keyup", birthdayHandler);
+    $('#last_name').on("keyup", lastNameHandler);
+    $('#first_name').on("keyup", firstNameHandler);
+    $('#phone').on("keyup", phoneHandler);
+    $('#email').on("keyup", emailHandler);
+    
 	$('#check1').on("click", allAgreeCheckHandler);
 	$('.arrow').on("click", arrowDownClickHandler);
 	$('input[value=agree]').on("click", checkAllEscHandler);
-	
 	$('.final_pay').on("click", payHandler);
+	
+	
 }
 
 </script>

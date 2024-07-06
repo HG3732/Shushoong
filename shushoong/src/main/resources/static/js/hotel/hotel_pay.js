@@ -1,3 +1,67 @@
+/*유효성 체크*/
+function nameHandler(){
+	var name = $(this).val().trim();
+	var regName = /^[가-힣]+$/
+		if (!regName.test(name)) {
+			$('#nameError').text('한글 이름만 입력하세요.');
+		} else {
+			$('#nameError').text('');
+		}
+
+}
+
+function birthdayHandler(){
+	var birthday = $(this).val().trim();
+    var regBirthday = /^[0-9]{6}$/;
+	    if (!regBirthday.test(birthday)) {
+			$('#birthdayError').text('6자리 숫자만 입력가능합니다.');
+	    } else {
+			$('#birthdayError').text('');
+	    }
+	   
+}
+
+function lastNameHandler(){
+	var last_name  = $(this).val().trim();
+     var regLastName = /^[a-zA-Z]+$/;
+	    if (!regLastName.test(last_name)) {
+			$('#last_name_Error').text('알파벳만 입력하세요.');
+	    } else {
+			$('#last_name_Error').text('');
+	    }
+}
+
+function firstNameHandler(){
+	var first_name  = $(this).val().trim();
+    var regFirstName = /^[a-zA-Z]+$/;
+	    if (!regFirstName.test(first_name)) {
+			$('#first_name_Error').text('알파벳만 입력하세요.');
+	    } else {
+			$('#first_name_Error').text('');
+	    }
+
+}
+
+function phoneHandler(){
+	var phone  = $(this).val().trim();
+    var regPhone = /^[0-9]*$/;
+	    if (!regPhone.test(phone)) {
+			$('#phoneError').text('번호만 입력해주세요.');
+	    } else {
+			$('#phoneError').text('');
+	    }	
+}
+
+function emailHandler(){
+	var email  = $(this).val().trim();
+    var regEmail =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+	    if (!regEmail.test(email)) {
+	  		$('#emailError').text('이메일 형식에 맞춰주세요.');     
+	    } else {
+			$('#emailError').text('');
+	    }		
+}
+
 /*약관 상세보기*/
 function arrowDownClickHandler(){
 	console.log($(this).parents().eq(1).next());
@@ -14,6 +78,7 @@ function arrowDownClickHandler(){
 		$(this).parents().eq(1).next().hide();
 	}
 
+	 validateForm();
 }
 
 /*전체동의*/
@@ -25,7 +90,6 @@ function allAgreeCheckHandler(){
 		} else {
 			$('.disagree_radio').prop('checked', true);
 		}
-
 }
 
 /*동의합니다 개별 체크 다 누를 시 전체동의 선택되게 하기*/
@@ -44,9 +108,11 @@ function checkAllEscHandler(){
 	} else {
 		$('#check1').prop('checked', false);
 	}
+
 }
 
 async function payHandler(){
+
 	const storeId = $('.store_id').val();
 	const channelKey = $('.channel_key').val();
 	

@@ -341,8 +341,40 @@ insert into hotel_reserve values(
 );
 
 insert into pay values(
-    #{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{moneyCat}, #{payStatus}, #{hotelReserveCode}, {airlineReserveCode}
+    #{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{currency}, #{payStatus}, #{hotelReserveCode}, {airlineReserveCode}
 );
+
+
+desc pay;
+
+alter table pay
+modify APPROVE_NO varchar2(70);
+
+ALTER TABLE PAY
+DROP COLUMN APPROVE_NO;
+
+select * from pay;
+
+
+COMMIT;
+
+INSERT INTO PAY VALUES ('01907d46-d70f-e9b8-6729-86d02c13239c', '카카오머니', '****', '100', 'KRW', 
+'YET', NULL, NULL
+    
+);
+
+select * from PAY;
+
+Update pay
+set pay_status = 'paid', hotel_reserve_code = '20240704132OS0022'
+where approve_no = '01907d46-d70f-e9b8-6729-86d02c13';
+    
+    
+desc hotel_room_att;
+
+select * from hotel_room_cat;
+
+
 
 
 -- 일일 초기화용 PL/SQL 프로시저와 스케줄링 한꺼번에 작성
@@ -368,6 +400,7 @@ BEGIN
     );
 END;
 /
+
 
 
 
@@ -439,7 +472,7 @@ desc hotel_reserve;
 select * from hotel_reserve;
 
 
---view 테이블 만들어서 예약 상세 뽑아내기
+--view 테이블 만들어서 예약 상세 뽑아내기-------------- 필요 없음
 CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SHOONG". "V_CUSTOMER_RESERVE" (
     hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, hotel_price, residence_name_ko, user_id
 ) AS 
@@ -454,10 +487,6 @@ FROM hotel_reserve hr
 
 update hotel_reserve
 set request_sum = '3' where hotel_reserve_code = '20240701112OS0013';
-
--- 기준점을 수용인원으로 잡아서 hotel에 있는 모든 방의 수용인원만 비교해서 
-select * from hotel_request;
-
 
 commit;
 
@@ -480,29 +509,3 @@ where user_id = 'customer' and hr.hotel_reserve_code = '20240703552OS0020' and h
 desc hotel_reserve;
 
 select * from hotel_reserve;
-
-desc pay;
-
-alter table pay
-modify APPROVE_NO varchar2(70);
-
-ALTER TABLE PAY
-DROP COLUMN APPROVE_NO;
-
-select * from pay;
-
-
-COMMIT;
-
-INSERT INTO PAY VALUES ('01907d46-d70f-e9b8-6729-86d02c13239c', '카카오머니', '****', '100', 'KRW', 
-'YET', NULL, NULL
-    
-);
-
-select * from PAY;
-
-Update pay
-set pay_status = 'paid', hotel_reserve_code = '20240704132OS0022'
-where approve_no = '01907d46-d70f-e9b8-6729-86d02c13';
-    
-

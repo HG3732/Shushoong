@@ -33,9 +33,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			</aside>
 		</div>
 		
-		<div class="main_section">	
-					
-					
+		<div class="main_section">				
 			<div class="hotel_name">
 				<p>호텔 이름</p>
 			</div>
@@ -113,16 +111,12 @@ function loadedHandler(){
 	
 	$('.reserve_btn').on('click', reserveCancelHandler);
 	$('.esc').on('click', escHandler);
+	$('.yes').on('click', refundHandler);
 }
 
-function reserveCancelHandler(){
-	$('#modal').css("display", 'block');
-}
-
-function escHandler(){
-	$('#modal').css("display", 'none');
-}
-
+</script>
+<script th:src="@{/js/mypage/customer/mypageCustomerReservedHotelList.js}"
+		type="text/javascript">
 </script>
 
 	

@@ -1,0 +1,53 @@
+ @charset "UTF-8";
+.wrap-write{
+	width: 960px;
+    float: left;
+    box-sizing: border-box;
+    padding: 20px;
+    /* display: flex; */
+    /* flex-direction: column; */
+}
+.wrap-write hr{
+   border: 0;
+   height: 5px;
+   background: #006AFF;
+}
+.wrap-write h1{
+	text-align: center;
+}
+.write-table .th{
+	width: 120px;
+	height: 40px;
+	background-color: #BCEFFF;
+	text-align: center;
+	align-content: center;
+}
+.write-table .input{
+	margin-left: 30px;	
+	text-align: center;
+	align-content: center;
+	}
+.write-table{
+	display: flex;
+	flex-direction: column;
+}
+.write-table .write-title{
+	display: flex;
+	flex-direction: row;
+}
+.write-table .write-cat{
+	display: flex;
+	flex-direction: row;
+}
+.write-table .write-file{
+	display: flex;
+	flex-direction: row;
+}
+.wrap-write .input-content{
+	padding: 20px;
+}
+.wrap-write .input-content textarea{
+	width: 100%;
+	resize: none;
+}
+

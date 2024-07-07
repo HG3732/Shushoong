@@ -34,9 +34,9 @@ public class WebSecurityConfig {
 		
 		http
 		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-//				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
-//				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
-//				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
+				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
+				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
+				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
 				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 				)
 		.csrf((csrf) -> csrf
@@ -46,7 +46,7 @@ public class WebSecurityConfig {
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
-//				.loginPage("/admin/manager/login")
+//				.loginPage("/manager/login")
 				.defaultSuccessUrl("/")
 				.successHandler(authSuccessHandler)
 				.failureHandler(authFailureHandler)

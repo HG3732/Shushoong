@@ -16,13 +16,18 @@
 		UPDATE MEMBER SET LATEST_LOGIN=TO_DATE(#{latestLogin},'YYYY-MM-DD HH:MI:SS') WHERE USER_ID=#{userId}
 	</update>
 	
+	<select id="authCheck" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE USER_ID=#{userId} AND USER_PWD=#{userPwd} AND USER_GRADE=#{userGrade}
+	</select>
+	
 	<select id="idCheck" parameterType="string" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{userId} 
 	</select>
 	
 	<select id="accountCheck" parameterType="string" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
-		WHERE USER_NAME=#{userId} AND USER_EMAIL=#{userEmail} AND USER_GRADE=#{userGrade}
+		WHERE USER_NAME=#{userName} AND USER_EMAIL=#{userEmail} AND USER_GRADE=#{userGrade}
 	</select>
 	
 	<select id="findId" resultType="String">

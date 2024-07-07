@@ -1,5 +1,7 @@
 package kh.mclass.shushoong.servicecenter.model.Controller;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.mail.Multipart;
+import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
+import kh.mclass.shushoong.servicecenter.model.domain.NoticeFileDto;
 import kh.mclass.shushoong.servicecenter.model.service.NoticeService;
 import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
 import lombok.RequiredArgsConstructor;
@@ -96,8 +103,8 @@ public class ServiceCenterController {
 	
 	
 	// 마이페이지 공지사항
-	@GetMapping("/support/notice/list/{page}")
-	public String noticeList (Model md, @PathVariable("page")
+	@GetMapping("/support/notice/list")
+	public String noticeList (Model md,
 			String pageNum) {
 		System.out.println("리스트 컨트롤러 pageNum : " + pageNum);
 		if (pageNum != null && !pageNum.equals("")) {
@@ -159,10 +166,49 @@ public class ServiceCenterController {
 	}
 	
 	@PostMapping("/support/notice/write")
-	public String PostNoticeWrite (Model md) {
+	public String PostNoticeWrite (// RedirectAttributes rd, 
+			String noticeTitle, String noticeContent, MultipartFile noticeFile, String noticeCategory,
+			HttpSession session, Principal principal
+			) {
+		System.out.println("공지 작성 포스트 컨트롤러");
+		System.out.println("noticeTitle : " + noticeTitle);
+		System.out.println("noticeContent : " + noticeContent);
+		System.out.println("noticeFile : " + noticeFile);
+		System.out.println("noticeCategory : " + noticeCategory);
 		
+		session.getAttribute("principal" + principal);
+		
+	    NoticeDto dto = new NoticeDto();
+	    dto.setNoticeTitle(noticeTitle);
+	    dto.setNoticeContent(noticeContent);
+	    // noticeFile과 noticeCategory가 NoticeDto에 있는 경우 설정
+	    dto.setNoticeCategory(noticeCategory);
+//	    dto.setUserId("defaultUserId"); // 예시로 설정, 실제 사용자의 ID로 설정 필요
+//	    dto.setUserGrade("defaultUserGrade"); // 예시로 설정, 실제 사용자의 Grade로 설정 필요
+	    
+        List<NoticeFileDto> fileId = new ArrayList<>();
+        if (noticeFile != null && !noticeFile.isEmpty()) {
+            NoticeFileDto fileDto = new NoticeFileDto();
+            fileDto.setOriginalFilename(noticeFile.getOriginalFilename());
+            fileDto.setSavedFilePathName("/uploads/" + noticeFile.getOriginalFilename()); // 예시 경로, 실제 업로드 경로에 맞게 수정 필요
+            fileId.add(fileDto);
+        }
+        dto.setFileId(fileId);
+	    
+	    int insertNotice = noticeService.insertNotice(dto);
+		
+//		rd.addAttribute("noticeTitle", noticeTitle);
+//		rd.addAttribute("noticeContent", noticeContent);
+//		rd.addAttribute("noticeFile", noticeFile);
+//		rd.addAttribute("noticeCategory", noticeCategory);
 		return "redirect:/support/notice/list";
 	}
 	
+	@GetMapping("/support/notice/view/{noticeId}")
+	public String viewNotice(Model md, @PathVariable("noticeId") String noticeId) {
+		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
+		return "servicecenter/notice_view";
+	}
+
 	
 }

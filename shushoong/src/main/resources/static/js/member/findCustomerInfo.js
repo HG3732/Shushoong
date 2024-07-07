@@ -3,7 +3,7 @@ function loadedHanlder() {
 	$(".btn.emailSend").on("click", emailSendHandler);
 	$(".btn.emailCheck").on("click", emailCheckHandler);
 	$(".btn.findId").on("click", findIdValidation);
-	$(".btn.findPwd").on("click",findPwdValidation);
+	$(".btn.findPwd").on("click", findPwdValidation);
 }
 
 var code_success = '';
@@ -43,12 +43,12 @@ function findIdValidation() {
 		alert("이메일 인증을 해 주세요.");
 		return false;
 	}
-	
+
 	findIdCheckHandler();
 }
 
 function findPwdValidation() {
-	if ($("#userId").val() == "") {
+	if ($("#userName").val() == "") {
 		alert("이름을 입력해 주세요.");
 		return false;
 	}
@@ -69,7 +69,7 @@ function resetPwdCheckHandler() {
 	var userId = $("#userId").val();
 	var userEmail = $("#userEmail").val();
 	var userGrade = "customer";
-	
+
 	$.ajax({
 		url: '/shushoong/find/customer/id.ajax',
 		type: 'post',
@@ -78,7 +78,7 @@ function resetPwdCheckHandler() {
 			if (result == 0) {
 				alert("등록하신 정보와 일치하는지 다시 한 번 확인해 주세요.");
 			} else {
-				window.open('/shushoong/reset/password', '비밀번호 초기화','width=500px height=500px, loaction=no, status=no scrollbars=none');
+				window.open('/shushoong/reset/password', '비밀번호 초기화', 'width=500px height=500px, loaction=no, status=no scrollbars=none');
 			}
 		}
 	})
@@ -96,10 +96,11 @@ function emailSendHandler() {
 			'userEmail': userEmail
 		}),
 		success: function(request, status, error) {
-			alert(userEmail + "로 인증번호가 전송되었습니다.");
+			alert("요청하신 이메일로 인증번호를 전송했습니다.")
 		},
 		error: function(request, status, error) {
-			alert("잘못된 이메일 형식입니다.");
+			alert("유효하지 않은 이메일 입니다.")
+			return false;
 		}
 	})
 }
@@ -116,12 +117,12 @@ function emailCheckHandler() {
 			'code': code
 		}),
 		success: function(request, status, error) {
-			alert("인증이 완료되었습니다.");
+			alert("이메일 인증에 성공했습니다.")
 			code_success = 1;
-
 		},
 		error: function(request, status, error) {
-			alert("유효한 코드가 아닙니다.");
+			alert("유효하지 않은 코드입니다.")
+			return false;
 			code_success = 0;
 		}
 	})

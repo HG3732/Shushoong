@@ -7,5 +7,21 @@
 <select id="selectNoticeTotalCount" parameterType="hashMap" resultType="int">
 	select count (*) from notice_board
 </select>
-
+<insert id="insertNotice" parameterType="NoticeDto">
+	<choose>
+		<when test="noticeCategory == 1">
+		insert into notice_board values(
+		SEQ_NOTICE_ID.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, 'business'
+		)
+		</when>
+		<otherwise>
+			insert into notice_board values(
+			SEQ_NOTICE_ID_2.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, 'business'
+			)
+		</otherwise>
+	</choose>
+</insert>
+<select id="selectOneNotice" parameterType="String" resultType="noticeDto">
+	select * from notice_board where notice_id = #{noticeId}
+</select>
 </mapper>

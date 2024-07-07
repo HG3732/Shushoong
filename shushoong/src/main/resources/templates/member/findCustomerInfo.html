@@ -46,11 +46,11 @@ xmlns:th="http://www.thymeleaf.org">
 											<label for="userName">이름</label>
 											<input type="text" name="userName" id="userName" class="longinput" placeholder="이름" autofocus>
 											<label for="userEmail">이메일</label>
-											<input type="text" name="userEmail" id="userEmail" class="shortinput" placeholder="이메일">
-											<button type="button" class="btn emailSend">인증번호 전송</button>
+											<input type="text" name="userEmail1" id="userEmail1" class="shortinput" placeholder="이메일">
+											<button type="button" class="btn emailSend1">인증번호 전송</button>
 											<label for="emailCheck">인증번호</label>
-											<input type="text" name="code" id="code" class="shortinput" placeholder="인증번호">
-											<button type="button" class="btn emailCheck">인증확인</button>
+											<input type="text" name="code1" id="code1" class="shortinput" placeholder="인증번호">
+											<button type="button" class="btn emailCheck1">인증확인</button>
 									</div>
 									<div class="searchIdCustomer">
 										<button type="button" class="btn findId">아이디 찾기</button>
@@ -61,16 +61,16 @@ xmlns:th="http://www.thymeleaf.org">
 								<form id="frm-post" th:action="@{/find/customer}" method="post">
 									<div class="findInfo">
 										<label for="userId">아이디</label>
-										<input type="text" name="userId" class="longinput" placeholder="아이디" autofocus>
+										<input type="text" name="userId" id="userId" class="longinput" placeholder="아이디" autofocus>
 										<label for="userEmail">이메일</label>
-										<input type="text" id="userEmail" name="userEmail" class="shortinput" placeholder="이메일" inputmode="email">
-										<button type="button" class="btn emailCheck">인증번호 전송</button>
+										<input type="text" name="userEmail2" id="userEmail2" class="shortinput" placeholder="이메일">
+										<button type="button" class="btn emailSend2">인증번호 전송</button>
 										<label for="emailCheck">인증번호</label>
-										<input type="text" name="code" id="code" class="shortinput" placeholder="인증번호">
-										<button type="button" class="btn emailCheck">인증확인</button>
+										<input type="text" name="code2" id="code2" class="shortinput" placeholder="인증번호">
+										<button type="button" class="btn emailCheck2">인증확인</button>
 									</div>
 									<div class="searchPwdCustomer">
-										<button type="submit" class="btn findPwd">비밀번호 찾기</button>
+										<button type="button" class="btn findPwd">비밀번호 찾기</button>
 									</div>
 								</form>
 							</div>

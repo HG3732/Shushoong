@@ -1,7 +1,9 @@
 $(loadedHanlder);
 function loadedHanlder() {
-	$(".btn.emailSend").on("click", emailSendHandler);
-	$(".btn.emailCheck").on("click", emailCheckHandler);
+	$(".btn.emailSend1").on("click", idEmailSendHandler);
+	$(".btn.emailCheck1").on("click", idEmailCheckHandler);
+	$(".btn.emailSend2").on("click", PwdEmailSendHandler);
+	$(".btn.emailCheck2").on("click", PwdEmailCheckHandler);
 	$(".btn.findId").on("click", findIdValidation);
 	$(".btn.findPwd").on("click",findPwdValidation);
 }
@@ -10,7 +12,7 @@ var code_success = '';
 
 function findIdCheckHandler() {
 	var userName = $("#userName").val();
-	var userEmail = $("#userEmail").val();
+	var userEmail = $("#userEmail1").val();
 	var userGrade = "business";
 
 	$.ajax({
@@ -34,7 +36,7 @@ function findIdValidation() {
 		return false;
 	}
 
-	if ($("#userEmail").val() == "") {
+	if ($("#userEmail1").val() == "") {
 		alert("이메일을 입력해 주세요.");
 		return false;
 	}
@@ -53,7 +55,7 @@ function findPwdValidation() {
 		return false;
 	}
 
-	if ($("#userEmail").val() == "") {
+	if ($("#userEmail2").val() == "") {
 		alert("이메일을 입력해 주세요.");
 		return false;
 	}
@@ -67,13 +69,13 @@ function findPwdValidation() {
 
 function resetPwdCheckHandler() {
 	var userId = $("#userId").val();
-	var userEmail = $("#userEmail").val();
+	var userEmail = $("#userEmail2").val();
 	var userGrade = "business";
 	
 	$.ajax({
 		url: '/shushoong/find/business/id.ajax',
 		type: 'post',
-		data: { userName: userName, userEmail: userEmail, userGrade: userGrade },
+		data: { userId: userId, userEmail: userEmail, userGrade: userGrade },
 		success: function(result) {
 			if (result == 0) {
 				alert("등록하신 정보와 일치하는지 다시 한 번 확인해 주세요.");
@@ -85,8 +87,8 @@ function resetPwdCheckHandler() {
 }
 
 // 이메일 전송 이벤트
-function emailSendHandler() {
-	var userEmail = $("#userEmail").val();
+function idEmailSendHandler() {
+	var userEmail = $("#userEmail1").val();
 
 	$.ajax({
 		type: "post",
@@ -106,8 +108,8 @@ function emailSendHandler() {
 }
 
 // 이메일 체크 이벤트
-function emailCheckHandler() {
-	var code = $("#code").val();
+function idEmailCheckHandler() {
+	var code = $("#code1").val();
 
 	$.ajax({
 		type: "post",
@@ -119,10 +121,53 @@ function emailCheckHandler() {
 		success: function(request, status, error) {
 			alert("인증이 완료되었습니다.");
 			code_success = 1;
-
 		},
 		error: function(request, status, error) {
-			alert("유효한 코드가 아닙니다.");
+			alert("유효하지 않은 코드입니다.")
+			return false;
+			code_success = 0;
+		}
+	})
+}
+
+// 비밀번호 찾기 이메일 전송 이벤트
+function PwdEmailSendHandler() {
+	var userEmail = $("#userEmail2").val();
+
+	$.ajax({
+		type: "post",
+		url: "/shushoong/v2/verify-email",
+		contentType: 'application/json;',
+		data: JSON.stringify({
+			'userEmail': userEmail
+		}),
+		success: function(request, status, error) {
+			alert(userEmail + "로 인증번호가 전송되었습니다.");
+		},
+		error: function(request, status, error) {
+			alert("잘못된 이메일 형식입니다.");
+			return false;
+		}
+	})
+}
+
+// 비밀번호 찾기 이메일 체크 이벤트
+function PwdEmailCheckHandler() {
+	var code = $("#code2").val();
+
+	$.ajax({
+		type: "post",
+		url: "/shushoong/verification-code",
+		contentType: 'application/json;',
+		data: JSON.stringify({
+			'code': code
+		}),
+		success: function(request, status, error) {
+			alert("인증이 완료되었습니다.");
+			code_success = 1;
+		},
+		error: function(request, status, error) {
+			alert("유효하지 않은 코드입니다.")
 			return false;
 			code_success = 0;
 		}

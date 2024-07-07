@@ -137,7 +137,7 @@ section .findInfo>label {
 	font-weight: bold;
 }
 
-section .btn.emailSend, .btn.emailCheck {
+section .btn.emailSend1, .btn.emailCheck1, .btn.emailSend2, .btn.emailCheck2 {
 	/* 	버튼서식 */
 	border: none;
 	border-radius: 20px;

@@ -251,6 +251,13 @@ section .viewQnAList:hover {
 	color: white;
 }
 
+section .no-qna {
+    text-align: center;
+    margin: 50px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
 section .manageStopCustomer {
 	display: flex;
 	justify-content: space-around;

@@ -66,7 +66,7 @@
 						</div>
 						<div th:replace="~{mypage/admin/managemember/userQnaList :: qna}"></div>
 						<div class="viewAllList">
-							<a class="viewQnAList" th:href="@{/support/qna/list/1}">전체보기</a>
+							<a class="viewQnAList" th:href="@{/support/qna/list}">전체보기</a>
 						</div>
 					</div>
 					
@@ -95,7 +95,7 @@
 						</div>
 	
 						<div class="customerInformation">
-							<div class="content-title">장기 미접속 회원 목록</div>
+							<div class="content-title">장기 미접속 회원</div>
 							<div class="content-body">
 								<div class="article-title2">세부 정보</div>
 								<div th:replace="~{mypage/admin/managemember/viewSleeper :: viewSleeper}"></div>

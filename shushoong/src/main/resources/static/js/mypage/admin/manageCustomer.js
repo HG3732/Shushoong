@@ -117,13 +117,13 @@ function sleeperSearchHandler() {
 	
 	$.ajax({
 		url:"/shushoong/admin/manager/customer/searchSleeper.ajax",
-		method: "get",
+		method: "post",
 		data: {keyword : keyword},
 		error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
 			}
 	}).done(function(response) {
-		$('#sleeperlist').replaceWith(response);
+		$('.secessionUserList').replaceWith(response);
 	});
 }
 

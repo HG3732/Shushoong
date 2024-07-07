@@ -6,7 +6,7 @@
 			<div class="listHeader-grid">
 				<div>사업자 번호</div>
 				<div>상품명</div>
-				<div>사업자명</div>
+				<div>사업자 아이디</div>
 				<div>관리 번호</div>
 			</div>
 			<th:block th:if="${result == null or #lists.isEmpty(result)}">
@@ -19,6 +19,22 @@
 						<div th:text="${productlist.userId}"></div>
 						<div th:text="${productlist.hotelCode}"></div>
 					</a>
+				<div class="wrap-pageNum">
+					<th:block th:if="${startPageNum > 1}">
+						<button type="button" class="btn-page gopage" th:data-targetpage="${startPageNum - 1}" onclick="goPage(this)">&lt;</button>
+					</th:block>
+					<div class="wrap-page" th:each="item : ${#numbers.sequence(startPageNum, endPageNum)}">
+						<th:block th:if="${currentPageNum == item}">
+							<button type="button" class="gopage current" th:text="${item}" th:href="@{/support/qna/list/{page}(page=${item})}" disabled></button>
+						</th:block>
+						<th:block th:unless="${currentPageNum == item}">
+							<button type="button" class="btn-page gopage" th:text="${item}" th:data-targetpage="${item}" onclick="goPage(this)"></button>
+						</th:block>
+					</div>
+					<th:block th:if="${endPageNum < totalPageCount}">
+						<button type="button" class="btn-page gopage" th:data-targetpage="${endPageNum + 1}" onclick="goPage(this)">&gt;</button>
+					</th:block>
+				</div>
 			</th:block>
 		</div>
 	</div>

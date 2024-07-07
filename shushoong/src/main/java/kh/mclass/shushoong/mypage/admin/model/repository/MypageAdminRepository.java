@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.admin.model.domain.ProductDtoRes;
@@ -60,5 +61,8 @@ public interface MypageAdminRepository {
 	
 	
 	//사업장 검색
-	public List<ProductDtoRes> selectProduct(String keyword);
+	public List<ProductDtoRes> selectProduct(int pageSize, int pageBlockSize, int currentPageNum, String category, String keyword, RowBounds rowbounds);
+	
+	//상품 갯수
+	public int selectAllProductCount(String category, String keyword);
 }

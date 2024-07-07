@@ -18,6 +18,26 @@ section .header-title {
 	margin: 30px 0 20px 0;
 }
 
+section .wrap-productSearch {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+section .category {
+	border: 1px solid var(--color_blue_2);
+	border-radius: 20px;
+	font-size: 15px;
+	padding: 10px;
+}
+
+section .category:focus {
+	outline-color: var(--color_blue_1);
+	outline-width: 3px;
+}
+
 section .header-section {
 	position: relative;
 }
@@ -35,7 +55,6 @@ section .searchInput {
 	/* 	배치서식 */
 	display: flex;
 	flex-direction: column;
-	margin: 10px 10px 0 10px;
 }
 
 section .searchInput:focus {
@@ -44,8 +63,8 @@ section .searchInput:focus {
 
 section .header-section > img {
 	position: absolute;
-	top: 40%;
-	left: 85%;
+    top: 25%;
+    left: 89%;
 }
 
 section .productSearch {
@@ -59,8 +78,6 @@ section .productSearch {
 	font-size: 15px;
 	font-weight: bold;
 	cursor: pointer;
-	
-	margin: 20px 0 30px 0;
 }
 
 section .content-section {
@@ -96,4 +113,28 @@ section .noContent {
 	margin: 50px;
 	font-size: 20px;
 	font-weight: 900;
+}
+
+section .wrap-pageNum {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+	align-items: center;
+	margin: 20px;
+	font-family: SOYOMapleRegularTTF;
+}
+
+section .wrap-pageNum .gopage {
+	border:none;
+	border-radius: 20px;
+	padding: 5px 9px;
+	background-color: var(--color_blue_2);
+	color: black;
+	cursor: pointer;
+}
+
+section .wrap-pageNum .current {
+	background-color: var(--color_blue_1);
+	color: white;
 }

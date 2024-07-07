@@ -64,28 +64,31 @@ insert all into hotel_room_cat values (0, '스탠다드 룸')
         
 --호텔 방 예시 추가 구문
 insert all
-    into hotel_room values (0, 2, 0, '2OS001', 123456, 10, 4)
-    into hotel_room values (1, 2, 1, '2OS001', 234567, 0, 3)
-    into hotel_room values (2, 4, 3, '2OS001', 345678, 20, 2)
-    into hotel_room values (3, 4, 2, '2OS001', 456789, 10, 2)
-    into hotel_room values (0, 2, 0, '2OS002', 143456, 10, 4)
-    into hotel_room values (1, 2, 2, '2OS002', 254567, 0, 2)
-    into hotel_room values (2, 4, 1, '2OS002', 365678, 0, 1)
-    into hotel_room values (3, 4, 0, '2OS002', 476789, 0, 3)
-    into hotel_room values (0, 2, 2, '2OS003', 343456, 0, 2)
-    into hotel_room values (1, 2, 3, '2OS003', 454567, 0, 4)
-    into hotel_room values (2, 4, 2, '2OS003', 565678, 0, 2)
-    into hotel_room values (3, 5, 4, '2OS003', 676789, 10, 1)
-    into hotel_room values (0, 2, 1, '2OS004', 1043456, 0, 5)
-    into hotel_room values (1, 2, 4, '2OS004', 2054567, 0, 5)
-    into hotel_room values (2, 4, 3, '2OS004', 3065678, 0, 4)
-    into hotel_room values (3, 4, 1, '2OS004', 4076789, 10, 5)
-    into hotel_room values (0, 2, 2, '2OS005', 553456, 20, 2)
-    into hotel_room values (1, 3, 3, '2OS005', 654567, 0, 1)
-    into hotel_room values (2, 5, 1, '2OS005', 755678, 0, 3)
-    into hotel_room values (3, 5, 0, '2OS005', 856789, 30, 2)
+    into hotel_room values (0, 2, 0, '3NY001', 123456, 10, 4)
+    into hotel_room values (1, 2, 1, '3NY001', 234567, 0, 3)
+    into hotel_room values (2, 4, 3, '3NY001', 345678, 20, 2)
+    into hotel_room values (3, 4, 2, '3NY001', 456789, 10, 2)
+    into hotel_room values (0, 2, 0, '3NY002', 143456, 10, 4)
+    into hotel_room values (1, 2, 2, '3NY002', 254567, 0, 2)
+    into hotel_room values (2, 4, 1, '3NY002', 365678, 0, 1)
+    into hotel_room values (3, 4, 0, '3NY002', 476789, 0, 3)
+    into hotel_room values (0, 2, 2, '3NY003', 343456, 0, 2)
+    into hotel_room values (1, 2, 3, '3NY003', 454567, 0, 4)
+    into hotel_room values (2, 4, 2, '3NY003', 565678, 0, 2)
+    into hotel_room values (3, 5, 4, '3NY003', 676789, 10, 1)
+    into hotel_room values (0, 2, 1, '3NY004', 1043456, 0, 5)
+    into hotel_room values (1, 2, 4, '3NY004', 2054567, 0, 5)
+    into hotel_room values (2, 4, 3, '3NY004', 3065678, 0, 4)
+    into hotel_room values (3, 4, 1, '3NY004', 4076789, 10, 5)
+    into hotel_room values (0, 2, 2, '3NY005', 553456, 20, 2)
+    into hotel_room values (1, 3, 3, '3NY005', 654567, 0, 1)
+    into hotel_room values (2, 5, 1, '3NY005', 755678, 0, 3)
+    into hotel_room values (3, 5, 0, '3NY005', 856789, 30, 2)
     select * from dual;
-select * from hotel order by hotel_code;
+    commit;
+    select * from v_hotel_list order by hotel_code;
+select distinct substr(hotel_code, 1, 3) from hotel;
+select * from hotel_room order by hotel_code;
 select * from hotel_pic order by hotel_code;
 select * from hotel_facility order by hotel_code;
 delete from hotel where hotel_code='0JJ001';
@@ -297,9 +300,9 @@ from hotel_review hrv right join hotel h on substr(hrv.hotel_reserve_code, 9, 6)
 from hotel_pic hp, hotel h, 
 (select h.hotel_code, round((avg(hotel_facility) + avg(hotel_clean) + avg(hotel_conven) + avg(hotel_kind))/4, 1) as avg_score, count(substr(hrv.hotel_reserve_code, 9, 6)) as review_num
 from hotel_review hrv right join hotel h on substr(hrv.hotel_reserve_code, 9, 6) = h.hotel_code group by h.hotel_code) hotel_review2,
-(select t1.*, t2.min_price from hotel_room t1 join (select hotel_code, min(hotel_price) min_price from hotel_room where room_count > 0 group by hotel_code, room_cap) t2 on t1.hotel_code = t2.hotel_code and t1.hotel_price = t2.min_price) hrm
+(select t1.*, t2.min_price from hotel_room t1 join (select hotel_code, min(hotel_price) min_price from hotel_room where room_count > 0 group by hotel_code) t2 on t1.hotel_code = t2.hotel_code and t1.hotel_price = t2.min_price) hrm
 
-where hp.hotel_code = h.hotel_code and hp.hotel_code = hotel_review2.hotel_code and hp.hotel_code = hrm.hotel_code
+where hp.hotel_code = h.hotel_code and hp.hotel_code = hotel_review2.hotel_code and hp.hotel_code = hrm.hotel_code order by hotel_code
 ;
 
 select * from v_hotel_list;

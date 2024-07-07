@@ -34,12 +34,20 @@
 						<div class="header-title">
 							사업장 검색
 						</div>
-						<div class="header-section">
-							<input type="text" id="productName" class="searchInput" placeholder="호텔 검색">
-							<img class="absolute" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" width="20px" height="20px">
-						</div>
-						<div class="btn productList">
-							<button type="button" class="productSearch">검색</button>
+						<div class="wrap-productSearch">
+							<select class="category" name="category">
+								<option value="businessNum">사업자 번호</option>
+								<option value="hotelName">상품명</option>
+								<option value="userId">사업자 아이디</option>
+								<option value="hotelCode">관리번호</option>
+							</select>
+							<div class="header-section">
+								<input type="text" id="productName" class="searchInput" placeholder="호텔 검색">
+								<img class="absolute" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" width="20px" height="20px">
+							</div>
+							<div class="btn productList">
+								<button type="button" class="productSearch">검색</button>
+							</div>
 						</div>
 					</div>
 					<div th:replace="~{mypage/admin/manageproduct/productList :: productList}"></div>

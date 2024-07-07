@@ -9,6 +9,7 @@
 <link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 <link th:href="@{/css/mypage/admin/adminLogin.css}" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>슈슝::관리자 로그인</title>
 </head>
@@ -29,7 +30,7 @@
 						<img th:src="@{/images/logo.png}" alt="로고">
 					</div>
 					<div class="login-title">
-						비밀번호 재설정
+						관리자 로그인
 					</div>
 					<div class="main">
 						<div class="adminlogin-section">
@@ -38,9 +39,8 @@
 									<input type="text" name="userId" placeholder="아이디" autofocus>
 									<input type="password" name="pwdCheck" placeholder="비밀번호 확인">
 								</div>
-								<small th:text="${exception}"></small>
 								<div class="loginBtn">
-									<button type="submit" class="btn login">비밀번호 변경</button>
+									<button type="submit" class="btn login">관리자 로그인</button>
 								</div>
 							</form>
 						</div>
@@ -52,5 +52,25 @@
 	<div class="wrap-footer">
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
+	<script>
+		$(loadedHandler);
+	
+		function loadedHandler() {
+			$(".btn.login").on("click", loginHandler);
+		}
+	
+		function loginHandler() {
+			if ($("#userId").val() == "") {
+				alert("아이디를 입력해 주세요.");
+				return false;
+			}
+			
+			if ($("#userPwd").val() == "") {
+				alert("비밀번호를 입력해 주세요.");
+				return false;
+			}
+			
+		}
+	</script>
 </body>
 </html>

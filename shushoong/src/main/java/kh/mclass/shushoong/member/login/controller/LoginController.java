@@ -2,21 +2,39 @@ package kh.mclass.shushoong.member.login.controller;
 
 import java.security.Principal;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
+import kh.mclass.shushoong.member.model.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
-
+	
+	@Autowired
+	private final MemberService memberservice;
+	
+	// 관리자 로그인
+	@GetMapping("/manager/login")
+	public String managerLogin() {
+		return "mypage/admin/adminLogin";
+	}
+	
+	@PostMapping("/auth/check.ajax")
+	public int authCheck() {
+		int cnt = 0;
+		return cnt;
+	}
+	
 	// 로그인 페이지로 이동
 	@GetMapping("/login")
 	public String login(@RequestParam(value = "error", required = false)String error, 

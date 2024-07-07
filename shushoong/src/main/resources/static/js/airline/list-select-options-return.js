@@ -4,24 +4,9 @@ function getSelectOptionsReturn() {
 	var arrivalLoc = $('#select-info-arrivalLoc-out').text();
 	var airlineCode = $('#select-info-airlineCode-out').text();
 	
-    var seatGradeText  = $('#select-seatGrade').text().trim(); // 요소의 텍스트 값을 가져옵니다
-	console.log('좌석 등급' + $('#select-seatGrade').text().trim());
-    var seatGrade; // seatGrade 변수 선언
+    var seatGrade = $('#select-info-seatGrade').text().trim(); // 요소의 텍스트 값을 가져옵니다
+	console.log('좌석 등급' + seatGrade);
     
-    switch (seatGradeText) {
-        case 'First Class':
-            seatGrade = 1;
-            break;
-        case 'Business Class':
-            seatGrade = 2;
-            break;
-        case 'Economy Class':
-            seatGrade = 3;
-            break;
-        default:
-            console.log('알 수 없는 등급');
-    }
-	
 	$('#showlist').on('change', updateTimeRange);
 	// $('#price-input-right').on('click', updateTimeRange);
 	

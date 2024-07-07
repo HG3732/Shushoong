@@ -126,6 +126,7 @@ public class AirlineController {
 		md.addAttribute("airlineCode", airlineCode);
 		md.addAttribute("selectOneAirline", selectOneAirline);
 		md.addAttribute("airlineReturnData", airlineReturnData);
+		md.addAttribute("seatGrade", seatGrade);
 //		md.addAttribute("maxPrice", maxPrice);
 
 		// 각 항공편에 대해 30000에서 60000 사이의 랜덤 가격을 설정
@@ -202,6 +203,7 @@ public class AirlineController {
 		System.out.println("항공사 이름: " + selectOneAirline.getAirlineName());
 		md.addAttribute("selectOneAirline", selectOneAirline);
 		md.addAttribute("airlineReturnData", SortData);
+		md.addAttribute("seatGrade", seatGrade);
 //		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 //		md.addAttribute("maxPrice", maxPrice2);
 		log.debug("컨트롤러 디버깅 : " + SortData);

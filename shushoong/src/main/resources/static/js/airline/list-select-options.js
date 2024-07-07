@@ -23,10 +23,10 @@ function getSelectOptions() {
         updateTimeRange();
 	});
 
-    var seatGradeText  = $('#select-info-seatGrade').text().trim(); // 요소의 텍스트 값을 가져옵니다
+    var seatGrade  = $('#select-info-seatGrade').text().trim(); // 요소의 텍스트 값을 가져옵니다
 	console.log('좌석 등급' , $('#select-info-seatGrade').text().trim());
-    var seatGrade; // seatGrade 변수 선언
-    
+    //var seatGrade; // seatGrade 변수 선언
+/*    
     switch (seatGradeText) {
         case 'First Class':
             seatGrade = 1;
@@ -40,7 +40,7 @@ function getSelectOptions() {
         default:
             console.log('알 수 없는 등급');
     }
-    
+    */
 	console.log('좌석 등급 숫자로 변환' , seatGrade);
 	// 시간대 
 	function updateTimeRange() {

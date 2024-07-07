@@ -66,19 +66,10 @@
         AND TO_DATE (ARRIVAL_TIME, 'HH24:MI')
       	BETWEEN TO_DATE(#{arrivalTimeLeft}, 'HH24:MI')
       	AND TO_DATE(#{arrivalTimeRight}, 'HH24:MI')
-      	<!-- 
-      	<choose>
-      		<when test="ticketType == 1">
-        AND SEAT_PRICE BETWEEN 0 AND (#{maxPrice} * 2)
-        	</when>
-   	      	<otherwise>
-        AND SEAT_PRICE BETWEEN 0 AND #{maxPrice}
-        	</otherwise>
-        </choose>
-         -->
         AND SEAT_PRICE BETWEEN 0 AND #{maxPrice}
         AND DEPART_LOC LIKE #{departLoc}
         AND ARRIVAL_LOC LIKE #{arrivalLoc}
+        AND SEAT_GRADE = #{seatGrade}
     	<choose>
     		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('direct')">
     			AND VIA_COUNT = 0 ORDER BY FLIGHT_TIME
@@ -119,6 +110,7 @@
       	AND TO_DATE(#{arrivalTimeRight}, 'HH24:MI')
         AND DEPART_LOC LIKE #{departLoc}
         AND ARRIVAL_LOC LIKE #{arrivalLoc}
+        AND SEAT_GRADE = #{seatGrade}
     	<choose>
     		<when test="selectType != null and selectType.equals('flytime-low') and viaType.equals('direct')">
     			AND VIA_COUNT = 0 ORDER BY FLIGHT_TIME

@@ -13,7 +13,10 @@
    background: #006AFF;
 }
 .wrap-write h1{
+	margin: 20px;
 	text-align: center;
+	font-weight: 900;
+    font-size: 20px;
 }
 .write-table .th{
 	width: 120px;
@@ -21,12 +24,14 @@
 	background-color: #BCEFFF;
 	text-align: center;
 	align-content: center;
+	
 }
 .write-table .input{
+	width: 500px;
 	margin-left: 30px;	
-	text-align: center;
 	align-content: center;
-	}
+	float: left;
+}
 .write-table{
 	display: flex;
 	flex-direction: column;
@@ -35,19 +40,52 @@
 	display: flex;
 	flex-direction: row;
 }
+.write-table .write-title input{
+	width: 300px;
+	border-radius: 10px;
+    border: 1px solid #006AFF;
+    padding-left: 10px;
+    height: 65%;
+}
 .write-table .write-cat{
 	display: flex;
 	flex-direction: row;
 }
+.write-table .write-cat select{
+	border-radius: 10px;
+	height: 65%;
+
+	}
 .write-table .write-file{
 	display: flex;
 	flex-direction: row;
 }
+.write-table .write-file input{
+	height: 65%;
+}
+
 .wrap-write .input-content{
 	padding: 20px;
 }
 .wrap-write .input-content textarea{
+	border: 3px solid #006AFF;
+	border-radius: 10px;
 	width: 100%;
 	resize: none;
 }
+.notice-btn{
+	text-align: center;
+}
+.notice-btn .notice-ok{
+	background-color: #BCEFFF;
+    width: 101px;
+    height: 35px;
+    border: none;
+    border-radius: 15px;
+}
 
+.notice-btn .notice-ok:hover{
+	background-color: #006AFF;
+	cursor: pointer;
+	color: white;
+	}

@@ -8,13 +8,15 @@
 		<div class="th-title">제목</div>
 		<div class="th-writedate">작성일</div>
 	</div>
-	<div th:each="notice : ${noticeDto}" class="notice-list">
-		 <a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
-		 <div class="td-no" th:text="${notice.noticeId}"></div></a>
-		 <a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
-		<div class="td-title" th:text="${notice.noticeTitle}"></div></a>
-		<a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
-		<div class="td-writedate" th:text="${notice.noticeTime}"></div></a>
+		<div th:each="notice : ${noticeDto}">
+	  <div th:if="${notice.userId} == 'business' and ${notice.noticeId} >= 1000" class="notice-list">
+			 <a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
+			 <div class="td-no" th:text="${notice.noticeId}"></div></a>
+			 <a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
+			<div class="td-title" th:text="${notice.noticeTitle}"></div></a>
+			<a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
+			<div class="td-writedate" th:text="${notice.noticeTime}"></div></a>
+		</div>
 	</div>
 	<!-- 
 	<div class="viewAllList">

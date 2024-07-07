@@ -176,15 +176,13 @@ public class ServiceCenterController {
 		System.out.println("noticeFile : " + noticeFile);
 		System.out.println("noticeCategory : " + noticeCategory);
 		
-		session.getAttribute("principal" + principal);
-		
 	    NoticeDto dto = new NoticeDto();
 	    dto.setNoticeTitle(noticeTitle);
 	    dto.setNoticeContent(noticeContent);
 	    // noticeFile과 noticeCategory가 NoticeDto에 있는 경우 설정
 	    dto.setNoticeCategory(noticeCategory);
-//	    dto.setUserId("defaultUserId"); // 예시로 설정, 실제 사용자의 ID로 설정 필요
-//	    dto.setUserGrade("defaultUserGrade"); // 예시로 설정, 실제 사용자의 Grade로 설정 필요
+//	    dto.setUserId("defaultUserId"); 
+//	    dto.setNoticeCategory("defaultUserGrade"); 
 	    
         List<NoticeFileDto> fileId = new ArrayList<>();
         if (noticeFile != null && !noticeFile.isEmpty()) {
@@ -206,6 +204,7 @@ public class ServiceCenterController {
 	
 	@GetMapping("/support/notice/view/{noticeId}")
 	public String viewNotice(Model md, @PathVariable("noticeId") String noticeId) {
+//		String userId
 		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
 		return "servicecenter/notice_view";
 	}

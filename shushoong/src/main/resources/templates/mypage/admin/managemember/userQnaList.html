@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 </head>
 	<div th:fragment="qna" id="userqna">
-		<th:block th:if="${latestFaq} == null">
-			<div>해당 유저의 문의가 없습니다.</div>
+		<th:block th:if="${latestFaq == null or latestFaq.size() == 0}">
+			<div class="no-qna">해당 유저의 문의가 없습니다.</div>
 		</th:block>
-		<th:block th:unless="${latestFaq} == null">
+		<th:block th:unless="${latestFaq == null or latestFaq.size() == 0}">
 			<a th:each="faqList : ${latestFaq}" class="QnA-content" th:href="@{/support/qna/view/{faqId}(faqId=${faqList.FAQ_ID})}">
 				<th:block th:if="${faqList.ANS_TIME == null or faqList.ANS_TIME == ''}">
 					<div th:text="${faqList.FAQ_ID}"></div>

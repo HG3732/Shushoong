@@ -18,7 +18,7 @@ public interface MypageAdminRepository {
 	public List<Map<String, String>> selectLatestFaq();
 	
 	//회원 아이디 키워드로 검색
-	public List<String> selectAllList(String keyword);
+	public List<String> selectAllList(String keyword, int memCat);
 		
 	//회원 키워드 검색 시 조건에 맞는 회원 수 카운트(페이징용)
 	public Integer selectTotalCount(String keyword);
@@ -43,8 +43,11 @@ public interface MypageAdminRepository {
 	//해당 유저의 1:1문의내역 최근 3개 조회
 	public List<Map<String, String>> selectOneLatestFaq(String id);
 	
+	//상품 미등록 계정 검색
+	public List<String> selectNoSaleAccount(String keyword);
+	
 	//장기 미사용 계정 검색
-	public List<String> selectDormantAccount(String keyword);
+	public List<String> selectDormantAccount(String keyword, int memCat);
 	
 	public int updateAllLock(String keyword);
 	

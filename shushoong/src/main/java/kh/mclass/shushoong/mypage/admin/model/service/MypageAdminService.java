@@ -24,8 +24,9 @@ public class MypageAdminService {
 		return mypageAdminRepository.selectLatestFaq();
 	};
 	
-	public List<String> selectAllList(String keyword) {
-		return mypageAdminRepository.selectAllList(keyword);
+	public List<String> selectAllList(String keyword, int memCat) {
+		System.out.println("service : "+memCat);
+		return mypageAdminRepository.selectAllList(keyword, memCat);
 	}
 	
 	public MemberDto selectOne(String id) {
@@ -55,8 +56,12 @@ public class MypageAdminService {
 		return mypageAdminRepository.selectOneLatestFaq(id);
 	};
 	
-	public List<String> selectDormantAccount(String keyword) {
-		return mypageAdminRepository.selectDormantAccount(keyword);
+	public List<String> selectNoSaleAccount(String keyword) {
+		return mypageAdminRepository.selectNoSaleAccount(keyword);
+	}
+	
+	public List<String> selectDormantAccount(String keyword, int memCat) {
+		return mypageAdminRepository.selectDormantAccount(keyword, memCat);
 	}
 	
 	public int updateAllLock(String keyword) {

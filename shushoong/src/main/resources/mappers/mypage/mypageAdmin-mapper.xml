@@ -25,8 +25,16 @@
 	
 <!-- 일반 회원 관리 -->
 	<!-- 유저 아이디 키워드로 검색 시 조건에 맞는 회원 리스트 출력 -->
-	<select id="selectAllList" parameterType="string" resultType="String">
-		SELECT USER_ID FROM MEMBER WHERE USER_GRADE='customer'
+	<select id="selectAllList" parameterType="hashmap" resultType="String">
+		SELECT USER_ID FROM MEMBER
+		<choose>
+			<when test="memCat == 0">
+				WHERE USER_GRADE='customer'
+			</when>
+			<when test="memCat == 1">
+				WHERE USER_GRADE='business'
+			</when>
+		</choose>
 		<if test="keyword != null and keyword !='' ">
 		 	<bind name="keyword3" value="'%' + keyword + '%'" />
 		 		AND USER_ID LIKE #{keyword3}
@@ -75,9 +83,26 @@
 			where rownum &lt;= 3 and user_id = #{id}
 	</select>
 
+	<!-- 상품 미등록 계정 검색 -->
+	<select id="selectNoSaleAccount" parameterType="string" resultType="string">
+		select user_id
+		    from (select user_id, count(user_id) count 
+		    	from member left join business_member using(user_id) where  user_grade='business' group by user_id)
+		    where count = 1
+	</select>
+
 	<!-- 1년 이상 로그인 안한 유저 조회 -->
 	<select id="selectDormantAccount" parameterType="string" resultType="string">
-		select user_id from member where USER_GRADE='customer' and latest_login &lt; add_months(sysdate, -12)
+		select user_id from member 
+		<choose>
+			<when test="memCat == 0">
+				WHERE USER_GRADE='customer'
+			</when>
+			<when test="memCat == 1">
+				WHERE USER_GRADE='business'
+			</when>
+		</choose>
+		and latest_login &lt; add_months(sysdate, -12)
 		<if test="keyword != null and keyword !='' ">
 		 	<bind name="keyword2" value="'%' + keyword + '%'" />
 		 		AND USER_ID LIKE #{keyword2}
@@ -99,7 +124,7 @@
 	</select>
 
 
-<!-- 사업장 관리 -->
+<!-- 사업자 회원 관리 -->
 	<!-- 관리자의 사업장 검색 -->
 	<select id="selectProduct" parameterType="string" resultType="ProductDtoRes">
 		<bind name="keyword4" value="'%' + keyword + '%'" />

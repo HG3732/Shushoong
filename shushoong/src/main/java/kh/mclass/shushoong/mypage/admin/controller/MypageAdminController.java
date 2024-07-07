@@ -44,7 +44,8 @@ public class MypageAdminController {
 	//회원 검색 ajax
 	@GetMapping("/manager/customer/searchMember.ajax")
 	public String searchMember(Model model, String keyword) {
-		model.addAttribute("result", service.selectAllList(keyword));
+		int memCat = 0;
+		model.addAttribute("result", service.selectAllList(keyword, memCat));
 		return "mypage/admin/managemember/customerList";
 	}
 	
@@ -89,9 +90,10 @@ public class MypageAdminController {
 	}
 	
 	//장기 미사용 계정 검색
-	@GetMapping("/manager/customer/searchSleeper.ajax")
+	@PostMapping("/manager/customer/searchSleeper.ajax")
 	public String searchSleeper(Model model, String keyword) {
-		model.addAttribute("result", service.selectDormantAccount(keyword));
+		int memCat = 0;
+		model.addAttribute("result", service.selectDormantAccount(keyword, memCat));
 		return "mypage/admin/managemember/sleeperList";
 	}
 	
@@ -121,7 +123,8 @@ public class MypageAdminController {
 	//회원 검색 ajax
 	@GetMapping("/manager/business/searchMember.ajax")
 	public String searchBusiness(Model model, String keyword) {
-		model.addAttribute("result", service.selectAllList(keyword));
+		int memCat = 1;
+		model.addAttribute("result", service.selectAllList(keyword, memCat));
 		return "mypage/admin/managemember/customerList";
 	}
 	
@@ -132,6 +135,21 @@ public class MypageAdminController {
 		
 		model.addAttribute("faqCount", service.selectFAQCount(id));
 		return "mypage/admin/managemember/viewMember";
+	}
+	
+	//상품 미등록 계정 검색
+	@PostMapping("/manager/business/searchNosale.ajax")
+	public String searchNosaler(Model model, String keyword) {
+		model.addAttribute("result", service.selectNoSaleAccount(keyword));
+		return "mypage/admin/managemember/sleeperList";
+	}
+	
+	//장기 미사용 계정 검색
+	@PostMapping("/manager/business/searchSleeper.ajax")
+	public String searchBusinessSleeper(Model model, String keyword) {
+		int memCat = 1;
+		model.addAttribute("result", service.selectDormantAccount(keyword, memCat));
+		return "mypage/admin/managemember/sleeperList";
 	}
 
 	//사업장 관리 페이지로 이동

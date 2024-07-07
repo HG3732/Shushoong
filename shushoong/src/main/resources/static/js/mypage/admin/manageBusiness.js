@@ -3,14 +3,16 @@ var keyword = null;
 $(loadedHandler);
 
 function loadedHandler() {
-	$('.idSearch1').on('click', memberSearchHandler);
-	$('.idSearch2').on('click', sleeperSearchHandler);
+	$('.search1').on('click', memberSearchHandler);
+	$('.search2').on('click', noSalerSearchHandler);
+	$('.search3').on('click', sleeperSearchHandler);
 	$('.allstopBtn').on('click', allLockHandler);
 }
 
 /* 회원 아이디 키워드로 검색 */
 function memberSearchHandler() {
 	keyword = $('#userId1').val();
+	console.log(keyword);
 	
 	$.ajax({
 		url:"/shushoong/admin/manager/business/searchMember.ajax",
@@ -111,19 +113,35 @@ function unlockAccountHandler(thisElement) {
 	});
 }
 
-/* 장기 미접속 회원 아이디 키워드로 검색 */
-function sleeperSearchHandler() {
+/* 상품 미등록 회원 아이디 키워드로 검색 */
+function noSalerSearchHandler() {
 	keyword = $('#userId2').val();
 	
 	$.ajax({
-		url:"/shushoong/admin/manager/customer/searchSleeper.ajax",
-		method: "get",
+		url:"/shushoong/admin/manager/business/searchNosale.ajax",
+		method: "post",
 		data: {keyword : keyword},
 		error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
 			}
 	}).done(function(response) {
-		$('#sleeperlist').replaceWith(response);
+		$('.secessionUserList').eq(0).replaceWith(response);
+	});
+}
+
+/* 장기 미접속 회원 아이디 키워드로 검색 */
+function sleeperSearchHandler() {
+	keyword = $('#userId3').val();
+	
+	$.ajax({
+		url:"/shushoong/admin/manager/business/searchSleeper.ajax",
+		method: "post",
+		data: {keyword : keyword},
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	}).done(function(response) {
+		$('.secessionUserList').eq(1).replaceWith(response);
 	});
 }
 

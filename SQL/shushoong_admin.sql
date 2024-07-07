@@ -88,9 +88,6 @@ select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE, ANS_TIME from (
             join faq_cat_desc using(quest_cat)
 			where rownum <= 3 and user_id = 'ex1';
         
-
-select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE, ANS_TIME from (
-			select faq_id, quest_cat, user_id, ask_title, ask_content, ask_date, ans_content, ans_time from service_center
-            join faq_cat using(faq_id) where user_id = 'ex1' order by ask_date desc)
-            join faq_cat_desc using(quest_cat)
-			where rownum <= 3;
+select user_id
+    from (select user_id, count(user_id) count from member left join business_member using(user_id) where  user_grade='business' group by user_id)
+    where count = 1;

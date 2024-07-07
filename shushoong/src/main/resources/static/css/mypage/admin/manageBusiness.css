@@ -164,6 +164,16 @@ section .userName-content {
 
 section .userName {
 	margin: 5px;
+	padding: 5px;
+	background-color: var(--color_blue_2);
+	border: none;
+	border-radius: 10px;
+	height: fit-content;
+}
+
+section .userName:hover {
+	background-color: var(--color_blue_1);
+	color: white;
 }
 
 section .businessInformation:nth-child(2)>.article-title {
@@ -209,13 +219,30 @@ section .viewQnAList {
 	border-radius: 20px;
 	width: 90px;
 	height: 40px;
-	background-color: #006AFF;
+	background-color: var(--color_blue_2);
+	color: black;
 	cursor: pointer;
-	color: white;
 	font-size: 13px;
 	font-weight: bold;
 	font-family: SOYOMapleRegularTTF;
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
+
+section .viewQnAList:hover {
+	background-color: #006AFF;
+	color: white;
+}
+
+section .no-qna {
+    text-align: center;
+    margin: 50px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
 
 section .manageStopBusiness {
 	display: flex;
@@ -299,8 +326,9 @@ section .secessionUserList, .stopUserList {
 	flex-direction: row;
 	flex-wrap: wrap;
 	padding: 10px;
-	height: 186px;
+	height: 205px;
 	overflow-y: auto;
+
 }
 
 
@@ -313,12 +341,14 @@ section .userInformation {
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
+	gap: 24px;
 }
 
 section .joinDate-content, .userId-content, .userEmail-content,
-	.userStatus-content, .registrationProduct-content, .faqId-content {
+	.userStatus-content, .registrationProduct-content, .faqId-content, .purchaseProduct-content {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
 section .userInformation>label {
@@ -335,7 +365,7 @@ section .joinDate-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	margin-right: 5px;
 }
 
 section .userId-content>label {
@@ -343,7 +373,7 @@ section .userId-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	margin-right: 5px;
 }
 
 section .userEmail-content>label {
@@ -351,7 +381,7 @@ section .userEmail-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	margin-right: 5px;
 }
 
 section .userStatus-content>label {
@@ -359,7 +389,14 @@ section .userStatus-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	margin-right: 5px;
+}
+
+section .purchaseProduct-content>label {
+	display: inline-block;
+	text-align: left;
+	width: 100px;
+	font-weight: bold;
 }
 
 section .registrationProduct-content>label {
@@ -367,13 +404,36 @@ section .registrationProduct-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
+	margin-right: 5px;
 }
 
 section .registrationProduct {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 20px;
+}
+
+section .purchaseProduct {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+section .productName {
+	padding-left: 5px;	
+}
+
+section .purchaseProduct .payList {
+	margin-left: 30px;
+	background-color: var(--color_blue_2);
+	border: none;
+	border-radius: 10px;
+	padding: 5px 10px;
+}
+
+section .purchaseProduct .payList:hover {
+	background-color: var(--color_blue_1);
+	color: white;
 }
 
 section .faqId-content>label {
@@ -381,7 +441,6 @@ section .faqId-content>label {
 	text-align: left;
 	width: 100px;
 	font-weight: bold;
-	margin: 0 20px 20px 10px;
 }
 
 section .btn.container {
@@ -401,8 +460,6 @@ section .stopBtn {
 	font-size: 15px;
 	font-weight: bold;
 	cursor: pointer;
-	
-	margin-right: 5px;
 }
 
 section .stopCancleBtn {
@@ -416,8 +473,6 @@ section .stopCancleBtn {
 	font-size: 15px;
 	font-weight: bold;
 	cursor: pointer;
-	
-	margin-left: 5px;
 }
 
 section .stopCancleBtn:hover {
@@ -436,6 +491,4 @@ section .allstopBtn {
 	font-size: 15px;
 	font-weight: bold;
 	cursor: pointer;
-	
-	margin: 20px 0 30px 0;
 }

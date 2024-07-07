@@ -22,12 +22,6 @@ public class MypageAdminController {
 	int pageBlockSize = 5;
 	int currentPageNum = 1;
 	
-	// 관리자 로그인
-	@GetMapping("/manager/login")
-	public String managerLogin() {
-		return "mypage/admin/adminLogin";
-	}
-
 	// 마이페이지 메인 페이지로 이동
 	@GetMapping("/manager/home")
 	public String managerHome(Model model) {

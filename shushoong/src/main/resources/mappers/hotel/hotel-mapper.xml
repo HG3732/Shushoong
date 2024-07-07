@@ -63,7 +63,7 @@
 	<!-- 호텔 최고가(슬라이드바 표시용) -->
 	<select id="selectMaxRoomlPrice" parameterType="hashmap" resultType="Integer">
             	select max(hotel_price) from V_hotel_list
-            	where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap &gt;= #{people}
+            	where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap = #{people}
             <if test="keyword != null and keyword !='' ">
 	        	<bind name="keyword2" value="'%' + keyword + '%'"/>
 	        	and hotel_name LIKE #{keyword2}

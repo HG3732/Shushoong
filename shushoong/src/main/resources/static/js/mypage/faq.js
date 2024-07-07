@@ -9,6 +9,7 @@ function loadedHandler() {
 	$('.category').on('change', toggleCategory);
 }
 
+//문의 검색
 function searchHandler() {
 	precategory = $('.category option:selected').val();
 	if(precategory == 'questCat'){
@@ -31,6 +32,7 @@ function searchHandler() {
 	})
 }
 
+//페이지 이동
 function goPage(thisElement) {
 	var currentPageNum = $(thisElement).data('targetpage');
 	$.ajax({

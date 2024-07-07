@@ -7,6 +7,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -69,9 +72,9 @@ public class HotelController {
 		List<HotelDtoRes> hotHotelList = service.selectHotHotelList();
 		model.addAttribute("hotHotelList", hotHotelList);
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("유저 아이디 : " + authentication.getName());
-        System.out.println("유저 등급 : " + authentication.getAuthorities());
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        System.out.println("유저 아이디 : " + authentication.getName());
+//        System.out.println("유저 등급 : " + authentication.getAuthorities());
         
 		return "hotel/hotel_main";
 	}
@@ -184,14 +187,28 @@ public class HotelController {
 		System.out.println("=========호텔코드=======" + hotelCode);
 		//호텔 상세정보들 출력
 		
-		//list에서 들고온 checkIn, checkOut 정보 다시 session 에 담아서 hotelview페이지에 뿌리기 
-		model.addAttribute("checkIn", session.getAttribute("checkIn"));
-		model.addAttribute("checkOut", session.getAttribute("checkOut"));
-		model.addAttribute("adult", session.getAttribute("adult"));		
-		model.addAttribute("child", session.getAttribute("child"));
-		model.addAttribute("room", session.getAttribute("room"));
+		if(session.getAttribute("checkIn") == null || session.getAttribute("checkIn") == "") {
+			LocalDateTime now = LocalDateTime.now();
+			String year = String.valueOf(now.getYear());
+			String month = String.valueOf(now.getMonth());
+			String day = String.valueOf(now.getDayOfMonth());
+			model.addAttribute("checkIn", year + "년" + month + "월" + day + "일");
+			model.addAttribute("checkOut", year + "년" + month + "월" + day + "일");
+			model.addAttribute("adult", 2);		
+			model.addAttribute("child", 0);
+			model.addAttribute("room", 1);
+		}
 		
-		String people = null;
+		else {
+		//list에서 들고온 checkIn, checkOut 정보 다시 session 에 담아서 hotelview페이지에 뿌리기 
+			model.addAttribute("checkIn", session.getAttribute("checkIn"));
+			model.addAttribute("checkOut", session.getAttribute("checkOut"));
+			model.addAttribute("adult", session.getAttribute("adult"));		
+			model.addAttribute("child", session.getAttribute("child"));
+			model.addAttribute("room", session.getAttribute("room"));
+		}
+		
+		String people = "2";
 		String adult = (String) session.getAttribute("adult");
 		String child = (String) session.getAttribute("child");
 		Integer adult1 = Integer.parseInt(adult);

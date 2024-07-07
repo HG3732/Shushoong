@@ -3,6 +3,7 @@ package kh.mclass.shushoong.mypage.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.member.model.domain.MemberDto;
@@ -56,6 +57,7 @@ public class MypageAdminService {
 		return mypageAdminRepository.selectOneLatestFaq(id);
 	};
 	
+	
 	public int selectProductCount(String id) {
 		return mypageAdminRepository.selectProductCount(id);
 	}
@@ -76,7 +78,15 @@ public class MypageAdminService {
 		return mypageAdminRepository.selectUseTerm(id);
 	}
 	
-	public List<ProductDtoRes> selectProduct(String keyword) {
-		return mypageAdminRepository.selectProduct(keyword);
+	public int selectAllProductCount(String category, String keyword) {
+		return mypageAdminRepository.selectAllProductCount(category, keyword);
 	}
-}
+	
+	public List<ProductDtoRes> selectProduct(int pageSize, int pageBlockSize, int currentPageNum, String category, String keyword) {
+		
+		int offset = (currentPageNum - 1) * pageSize;
+		
+		RowBounds rowBounds = new RowBounds(offset, pageSize);
+		
+		return mypageAdminRepository.selectProduct(pageSize, pageBlockSize, currentPageNum, category, keyword, rowBounds);	}
+	}

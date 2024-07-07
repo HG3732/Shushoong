@@ -1,3 +1,6 @@
+let precategory = null;
+let prekeyword = null;
+
 $(loadedHandler);
 
 function loadedHandler() {
@@ -5,16 +8,36 @@ function loadedHandler() {
 }
 
 function hotelSearchHandler() {
-	var keyword = $('#productName').val();
+	precategory = $('.category option:selected').val();
+	prekeyword = $('#productName').val();
 	
 	$.ajax({
-		url:"/shushoong/admin/manager/product/searchHotel.ajax",
+		url:"/shushoong/admin/manager/product/searchProduct.ajax",
 		method: "post",
-		data: {keyword : keyword},
+		data: { category : precategory,
+				keyword : prekeyword},
 		error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
 			}
 	}).done(function(response) {
 		$('#productList').replaceWith(response);
 	});
+}
+
+//페이지 이동
+function goPage(thisElement) {
+	var currentPageNum = $(thisElement).data('targetpage');
+	
+	$.ajax({
+		url:"/shushoong/admin/manager/product/searchProduct.ajax",
+		method: "post",
+		data: { category : precategory,
+				keyword : prekeyword,
+				currentPage : currentPageNum},
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	}).done(function(response) {
+		$('#productList').replaceWith(response);
+	})
 }

@@ -31,6 +31,13 @@ section .QnA-grid {
 	text-align: center;
 }
 
+section .no-QnA{
+	text-align: center;
+    padding: 50px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
 section .QnA-content {
 	height: 40px;
 	font-size: 11px;
@@ -124,10 +131,10 @@ section .wrap-pageNum .gopage {
 	padding: 5px 9px;
 	background-color: var(--color_blue_2);
 	color: black;
+	cursor: pointer;
 }
 
-section .wrap-pageNum .btn-page:hover {
+section .wrap-pageNum .current {
 	background-color: var(--color_blue_1);
 	color: white;
-	cursor: pointer;
 }

@@ -47,7 +47,7 @@ public class ServiceCenterController {
 	
 	@GetMapping("/support/notice/search.ajax")
 	public String searchQnA(Model model, String pageNum, String category, String keyword, String questCatCategory) {
-		System.out.println("pageNum = " + pageNum);
+		currentPageNum = 1;
 		if(pageNum != null && !pageNum.equals("")) {
 			try {
 				currentPageNum = Integer.parseInt(pageNum);

@@ -33,7 +33,6 @@ function searchHandler() {
 
 function goPage(thisElement) {
 	var currentPageNum = $(thisElement).data('targetpage');
-	console.log(currentPageNum);
 	$.ajax({
 		url:"/shushoong/support/notice/search.ajax",
 		method: "get",

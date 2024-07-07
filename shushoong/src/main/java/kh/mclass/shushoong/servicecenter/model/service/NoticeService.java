@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
+import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
 import kh.mclass.shushoong.servicecenter.model.repository.ServiceCenterRepository;
 
 @Service
@@ -24,4 +25,14 @@ public class NoticeService {
 	public int selectTotalCount() {
 		return repository.selectNoticeTotalCount();
 	}
+	
+	public int insertNotice(NoticeDto noticeDto) {
+		return repository.insertNotice(noticeDto);
+	}
+	
+	
+	public NoticeDto selectOneNotice(String noticeId) {
+		return repository.selectOneNotice(noticeId);
+	}
+	
 }

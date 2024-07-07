@@ -25,28 +25,10 @@ function getSelectOptions() {
 
     var seatGrade  = $('#select-info-seatGrade').text().trim(); // 요소의 텍스트 값을 가져옵니다
 	console.log('좌석 등급' , $('#select-info-seatGrade').text().trim());
-    //var seatGrade; // seatGrade 변수 선언
-/*    
-    switch (seatGradeText) {
-        case 'First Class':
-            seatGrade = 1;
-            break;
-        case 'Business Class':
-            seatGrade = 2;
-            break;
-        case 'Economy Class':
-            seatGrade = 3;
-            break;
-        default:
-            console.log('알 수 없는 등급');
-    }
-    */
 	console.log('좌석 등급 숫자로 변환' , seatGrade);
 	// 시간대 
 	function updateTimeRange() {
 	
-		// var departLoc = $('#select-info-departLoc-out').text();
-		// var arrivalLoc = $('#select-info-arrivalLoc-out').text();
 		var selectType = $('#showlist').val();
 		console.log('셀렉트바 active');
 		console.log('정렬 순서', selectType);
@@ -93,19 +75,7 @@ function getSelectOptions() {
 				ticketType : ticketType,
 				seatGrade: seatGrade
 			},
-			/*
-			success: function(response) {
-				console.log('Ajax Success', response);
-				if (response.length == 0) {
-					// alert('해당 조건을 일치하는 항공권이 없습니다.')
-					// location.reload(true); 새로고침
-					noAirlineList(response);
-				} else {
-					// updateAirlineList(response);
-					
-				}
-			},
-			*/
+
 			error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
 			}

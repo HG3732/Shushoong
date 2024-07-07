@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
+import kh.mclass.shushoong.servicecenter.model.domain.NoticeFileDto;
 import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
 
 @Mapper
@@ -27,7 +28,12 @@ public interface ServiceCenterRepository {
 	// 공지사항
 	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb);
 	
-	public int selectNoticeTotalCount();
+	int selectNoticeTotalCount();
+	
+	// 공지사항 작성
+    int insertNotice(NoticeDto noticeDto);
+    int insertNoticeFile(NoticeFileDto noticeFileDto);
+    NoticeDto selectOneNotice(String noticeId);
 		
 	
 }

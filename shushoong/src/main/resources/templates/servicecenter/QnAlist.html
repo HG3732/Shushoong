@@ -4,25 +4,29 @@ xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:fragment="QnAlist" id="wrap-QnAlist" class="QnAContainer">
-	<a class="QnA-content" th:each="faqList : ${result}" th:href="@{/support/qna/view/{faqId}(faqId=${faqList.faqId})}">
-		<th:block th:if="${faqList.ansTime == null}">
-			<div th:text="${faqList.faqId}"></div>
-		</th:block>
-		<th:block th:unless="${faqList.ansTime == null}">
-			<div th:text="${faqList.faqId + '(답변완료)'}"></div>
-		</th:block>
-		<div th:text="${faqList.askTitle}"></div>
-		<div th:text="${faqList.questCatDesc}"></div>
-		<div th:text="${faqList.userId}"></div>
-		<div th:text="${faqList.askDate}"></div>
-	</a>
+	<th:block th:if="${result == null or result.size() == 0}">
+		<div class="no-QnA">조건에 맞는 문의가 없습니다.</div>
+	</th:block>
+	<th:block th:unless="${result == null or result.size() == 0}">
+		<a class="QnA-content" th:each="faqList : ${result}" th:href="@{/support/qna/view/{faqId}(faqId=${faqList.faqId})}">
+			<th:block th:if="${faqList.ansTime == null}">
+				<div th:text="${faqList.faqId}"></div>
+			</th:block>
+			<th:block th:unless="${faqList.ansTime == null}">
+				<div th:text="${faqList.faqId + '(답변완료)'}"></div>
+			</th:block>
+			<div th:text="${faqList.askTitle}"></div>
+			<div th:text="${faqList.questCatDesc}"></div>
+			<div th:text="${faqList.userId}"></div>
+			<div th:text="${faqList.askDate}"></div>
+		</a>
 	<div class="wrap-pageNum">
 		<th:block th:if="${startPageNum > 1}">
 			<button type="button" class="btn-page gopage" th:data-targetpage="${startPageNum - 1}" onclick="goPage(this)">&lt;</button>
 		</th:block>
 		<div class="wrap-page" th:each="item : ${#numbers.sequence(startPageNum, endPageNum)}">
 			<th:block th:if="${currentPageNum == item}">
-				<button type="button" class="gopage" th:text="${item}" th:href="@{/support/qna/list/{page}(page=${item})}" disabled></button>
+				<button type="button" class="gopage current" th:text="${item}" th:href="@{/support/qna/list/{page}(page=${item})}" disabled></button>
 			</th:block>
 			<th:block th:unless="${currentPageNum == item}">
 				<button type="button" class="btn-page gopage" th:text="${item}" th:data-targetpage="${item}" onclick="goPage(this)"></button>
@@ -32,5 +36,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<button type="button" class="btn-page gopage" th:data-targetpage="${endPageNum + 1}" onclick="goPage(this)">&gt;</button>
 		</th:block>
 	</div>
+	</th:block>
 </div>
 </html>

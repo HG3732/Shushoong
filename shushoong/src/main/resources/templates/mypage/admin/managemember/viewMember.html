@@ -35,9 +35,10 @@
 				</th:block>
 				<th:block th:if="${userInfo.userGrade.equals('business')}">
 					<div class="registrationProduct-content">
-						<label for="registrationProduct">등록한 상품</label>
+						<label for="registrationProduct">등록한 상품 수</label>
 						<div class="registrationProduct">
-							<button class="registrationProduct" id="registrationProduct" th:data-userid="${userInfo.userId}">상품 조회</button>
+							<div th:text="${productcount}"></div>
+							<button class="btn-registrationProduct" id="registrationProduct" th:data-userid="${userInfo.userId}">상품 조회</button>
 						</div>
 					</div>
 				</th:block>

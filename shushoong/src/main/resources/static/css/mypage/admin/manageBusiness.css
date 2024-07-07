@@ -407,9 +407,19 @@ section .registrationProduct-content>label {
 	margin-right: 5px;
 }
 
-section .registrationProduct {
+section .registrationProduct{
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 15px;
+}
+
+section #registrationProduct {
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    background: var(--color_blue_2);
 }
 
 section .purchaseProduct {

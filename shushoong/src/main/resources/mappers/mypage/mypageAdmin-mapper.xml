@@ -82,6 +82,14 @@
             join faq_cat_desc using(quest_cat)
 			where rownum &lt;= 3 and user_id = #{id}
 	</select>
+	
+	<!-- 사업자 회원 등록한 상품 갯수 조회 -->
+	<select id="selectProductCount" parameterType="String" resultType="int">
+		select count(business_num) count from business_member a
+		    right join (select * from member where user_grade = 'business') using (user_id)
+		    where user_id = #{id}
+		    group by user_id
+	</select>
 
 	<!-- 상품 미등록 계정 검색 -->
 	<select id="selectNoSaleAccount" parameterType="string" resultType="string">

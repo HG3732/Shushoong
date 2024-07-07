@@ -87,7 +87,13 @@ select FAQ_ID, ASK_TITLE, QUEST_CAT_DESC, USER_ID, ASK_DATE, ANS_TIME from (
             join faq_cat using(faq_id) where user_id = 'ex1' order by ask_date desc)
             join faq_cat_desc using(quest_cat)
 			where rownum <= 3 and user_id = 'ex1';
-        
+
+--사업자 회원 등록한 상품 건수 조회
+select  user_id, count(business_num) from business_member a
+    right join (select * from member where user_grade = 'business') using (user_id)
+    group by user_id;
+
+--상품 미등록 사업자 회원 조회
 select user_id
     from (select user_id, count(user_id) count from member left join business_member using(user_id) where  user_grade='business' group by user_id)
     where count = 1;

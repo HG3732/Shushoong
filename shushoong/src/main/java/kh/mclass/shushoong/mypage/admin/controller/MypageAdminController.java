@@ -132,7 +132,7 @@ public class MypageAdminController {
 	@GetMapping("/manager/business/viewMember.ajax")
 	public String viewBusiness(Model model, String id) {
 		model.addAttribute("userInfo", service.selectOne(id));
-		
+		model.addAttribute("productcount", service.selectProductCount(id));
 		model.addAttribute("faqCount", service.selectFAQCount(id));
 		return "mypage/admin/managemember/viewMember";
 	}

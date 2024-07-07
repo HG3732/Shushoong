@@ -43,6 +43,9 @@ public interface MypageAdminRepository {
 	//해당 유저의 1:1문의내역 최근 3개 조회
 	public List<Map<String, String>> selectOneLatestFaq(String id);
 	
+	//상품 등록 갯수 조회
+	public int selectProductCount(String id);
+	
 	//상품 미등록 계정 검색
 	public List<String> selectNoSaleAccount(String keyword);
 	

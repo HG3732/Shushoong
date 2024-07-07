@@ -56,6 +56,10 @@ public class MypageAdminService {
 		return mypageAdminRepository.selectOneLatestFaq(id);
 	};
 	
+	public int selectProductCount(String id) {
+		return mypageAdminRepository.selectProductCount(id);
+	}
+	
 	public List<String> selectNoSaleAccount(String keyword) {
 		return mypageAdminRepository.selectNoSaleAccount(keyword);
 	}

@@ -39,4 +39,8 @@ public class NoticeService {
 		return repository.updateNotice(noticeId);
 	}
 	
+	public int deleteNotice(String noticeId) {
+		return repository.deleteNotice(noticeId);
+	}
+	
 }

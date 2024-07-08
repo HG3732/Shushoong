@@ -18,7 +18,21 @@ function clickedDeleteBtn(){
 		});
 		
 		$('.delete-ok').on('click', function(){
-			alert('삭제해줄겡')
+			//alert('삭제해줄겡');
+		var noticeId = $('#noticeId').text().trim();
+		console.log('글번호', noticeId);
+        var $form = $('#frm-notice-update');
+        $form.empty(); 
+        $('<input>').attr({
+            type: 'hidden',
+            name: 'noticeId',
+            value: noticeId
+        }).appendTo($form);
+
+        $form.attr('method', 'POST');
+        $form.attr('action', '/shushoong/support/notice/delete');
+        $form.submit();
+
 		});
 	});
 }

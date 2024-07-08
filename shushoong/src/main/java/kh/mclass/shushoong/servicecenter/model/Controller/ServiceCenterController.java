@@ -22,6 +22,9 @@ import kh.mclass.shushoong.servicecenter.model.domain.NoticeFileDto;
 import kh.mclass.shushoong.servicecenter.model.service.NoticeService;
 import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class ServiceCenterController {
@@ -139,34 +142,43 @@ public class ServiceCenterController {
 	@GetMapping("/support/notice/list")
 	public String noticeList (Model md,
 			String pageNum) {
-		System.out.println("리스트 컨트롤러 pageNum : " + pageNum);
-		if (pageNum != null && !pageNum.equals("")) {
-			try {
-				currentPageNum = Integer.parseInt(pageNum);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
+		
+			SecurityContextHolder.getContext().getAuthentication();
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String userId = authentication.getName();
+			// 로그인 검사
+			if (!userId.equals("anonymousUser")) {
+			System.out.println("로그인된 유저 아이디 : " + userId);
+			
+			System.out.println("리스트 컨트롤러 pageNum : " + pageNum);
+			if (pageNum != null && !pageNum.equals("")) {
+				try {
+					currentPageNum = Integer.parseInt(pageNum);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
 			}
+			System.out.println("리스트 컨트롤러 currentPageNum : " + currentPageNum);
+			
+			int totalCount = noticeService.selectTotalCount();
+			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+			
+			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+			
+			
+			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userId);
+			md.addAttribute("currentPageNum", currentPageNum);
+			md.addAttribute("totalPageCount", totalPageCount);
+			md.addAttribute("startPageNum", startPageNum);
+			md.addAttribute("endPageNum", endPageNum);
+			md.addAttribute("noticeDto", noticeDto);
+			md.addAttribute("loginUserId", userId);
+			return "servicecenter/notice";
+		} else {
+			return "member/login";
 		}
-		System.out.println("리스트 컨트롤러 currentPageNum : " + currentPageNum);
-		
-		int totalCount = noticeService.selectTotalCount();
-		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
-		
-		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
-		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
-		
-		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String userId = authentication.getName();
-		
-		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userId);
-		md.addAttribute("currentPageNum", currentPageNum);
-		md.addAttribute("totalPageCount", totalPageCount);
-		md.addAttribute("startPageNum", startPageNum);
-		md.addAttribute("endPageNum", endPageNum);
-		md.addAttribute("noticeDto", noticeDto);
-		md.addAttribute("loginUserId", userId);
-		return "servicecenter/notice";
+
 	}
 	
 	@GetMapping("/support/notice/list.ajax")
@@ -301,6 +313,13 @@ public class ServiceCenterController {
 		return "servicecenter/notice_view";
 	}
 	
+	@PostMapping("/support/notice/delete")
+	public String deleteNotice(@RequestParam String noticeId) {
+		System.out.println("삭제될 할 글 번호 : " + noticeId);
+		noticeService.deleteNotice(noticeId);
+		
+		return "redirect:/support/notice/list";
+	}
 	
 	
 }

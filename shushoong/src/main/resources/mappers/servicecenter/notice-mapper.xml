@@ -5,10 +5,10 @@
 	select * from notice_board 
   	<choose>
 		<when test="userId == 'customer'">
-			where notice_id &lt;= 1000
+			where notice_id like '1%'
 		</when>
 		<when test="userId == 'business'">
-			where notice_id &gt; 1000
+			where notice_id like '2%'
 		</when>
 	</choose>
 	order by notice_id desc
@@ -25,7 +25,7 @@
 		</when>
 		<when test="noticeCategory != 1">
 			insert into notice_board values(
-			2||SEQ_NOTICE_ID_2.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
+			2||SEQ_NOTICE_ID.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
 			)
 		</when>
 	</choose>
@@ -49,4 +49,7 @@
 	</choose>
 	 -->
 </update>
+<delete id="deleteNotice" parameterType="hashMap">
+	delete notice_board where notice_id = #{noticeId}
+</delete>
 </mapper>

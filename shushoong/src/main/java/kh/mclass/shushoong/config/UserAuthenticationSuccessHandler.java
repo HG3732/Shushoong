@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Component
 @Slf4j
-public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler  {
+public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler  {
 	
 	private RequestCache requestCache = new HttpSessionRequestCache();
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

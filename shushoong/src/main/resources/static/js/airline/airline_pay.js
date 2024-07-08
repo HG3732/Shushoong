@@ -390,6 +390,7 @@
 			sum = Number(result)+Number(basePrice)+Number(basePriceReturn);
 			
 			$(".total_value").val(sum);
+			refreshNumberCommaHandler();
 		}
 		
 		function radioGenderInputValueFunction(){

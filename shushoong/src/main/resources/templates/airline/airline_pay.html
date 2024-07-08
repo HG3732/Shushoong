@@ -219,7 +219,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 								<div class="paycheck_info">
 									<div class="total_cost">
 										<div class="how_much">총 상품 금액</div>
-										<div class="total_num"><input type="text" i class="total_value" readonly="readonly" th:value="${seatPrice}+${seatGradeReturn}"> 원</div>
+										<div class="total_num"><input type="text" id="number" class="total_value" readonly="readonly" th:value="${seatPrice}+${seatGradeReturn}"> 원</div>
 									</div>
 <!-- 									th:value="${#numbers.formatInteger((${seatPrice}+${seatGradeReturn}), 3, 'COMMA') + '원'}" -->
 									<div class="final_check_info_list">
@@ -330,7 +330,17 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			$("input[type='radio'].baggage").change(totalValueFunction);
 			passportDisplayFunction();
 			
+		
+			refreshNumberCommaHandler();
 		}
+		
+		function refreshNumberCommaHandler(){
+			var money = $('input#number').val();
+			var money2 = money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			$('input#number').val(money2);
+			
+		}
+		
 		$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
 		
 		//예약자 정보

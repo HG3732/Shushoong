@@ -60,13 +60,12 @@ public class WebSecurityConfig {
 				.failureHandler(authFailureHandler)
 				.usernameParameter("userId")
 				.passwordParameter("userPwd"))
-		.formLogin((formLogin) -> formLogin
-				.loginPage("/login/admin")
-				.loginProcessingUrl("/login/admin")
-				.successHandler(adminAuthSuccessHandler)
-				.failureHandler(adminAuthFailureHandler)
-				.usernameParameter("userId")
-				.passwordParameter("userPwd"))
+//		.formLogin((formLogin) -> formLogin
+//				.loginPage("/login/admin")
+//				.successHandler(adminAuthSuccessHandler)
+//				.failureHandler(adminAuthFailureHandler)
+//				.usernameParameter("userId")
+//				.passwordParameter("userPwd"))
 		.rememberMe((rememberMe -> rememberMe
 //				.key("uniqueAndSecret")
 				.rememberMeParameter("remember")

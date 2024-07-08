@@ -63,7 +63,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 			</a>
 			
-			<a class="cancel_wrap" th:each="cancellist : ${cancelList}">
+			<a class="cancel_wrap" th:each="cancellist : ${cancelList}" th:href="@{/customer/mypage/cancel/hotel/{userId}/{hotelReserveCode}(userId=${userId},hotelReserveCode=${cancellist.HOTEL_RESERVE_CODE})}">
 				<div class="canceled_list">
 				<input type="hidden" name="userId" class="userId" th:value="${userId}"/>
 				<input type="hidden" name="hotelReserveCode" th:value="${cancellist.HOTEL_RESERVE_CODE}"/>

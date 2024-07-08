@@ -27,7 +27,10 @@ public interface MypageCustomerRepository {
 	public List<Map<String, String>> selectCancelHotelList(String userId);
 	
 	//호텔 예약 상세정보
-	public Map<String, Object> selectOneReservedHotelList(String userId, String hotelReserveCode);
+	public Map<String, Object> selectOneReservedHotel(String userId, String hotelReserveCode);
+	
+	//호텔 취소 상세정보
+	public Map<String, Object> selectOneCancelHotel(String userId, String hotelReserveCode);
 	
 	//호텔 예약 취소
 	public int cancelHotelReserve(String paymentId);

@@ -34,6 +34,7 @@ public interface ServiceCenterRepository {
     int insertNotice(NoticeDto noticeDto);
     int insertNoticeFile(NoticeFileDto noticeFileDto);
     NoticeDto selectOneNotice(String noticeId);
+    int updateNotice(String noticeId);
 		
 	
 }

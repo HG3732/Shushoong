@@ -77,10 +77,19 @@ FROM member;
 SELECT
     *
 FROM hotel_like;
-
-insert into HOTEL_LIKE values('customer','2OS001');
+delete from hotel_like where user_id= 'customer';
+insert all
+    into HOTEL_LIKE(user_id,hotel_code) values('customer','2OS001')
+    into HOTEL_LIKE(user_id,hotel_code) values('customer','2OS002')
+    into HOTEL_LIKE(user_id,hotel_code) values('customer','2OS003')
+    into HOTEL_LIKE(user_id,hotel_code) values('customer','2OS004')
+    into HOTEL_LIKE(user_id,hotel_code) values('customer','2OS005')
+        SELECT * FROM DUAL; 
 commit;
-
+SELECT x.hotel_code,x.hotel_name , z.hotel_picture as hotel_pic FROM hotel x join hotel_like 
+y ON x.hotel_code=y.hotel_code join (select * from (SELECT hotel_pic.*,ROW_NUMBER() OVER(PARTITION 
+BY hotel_pic.hotel_code ORDER BY hotel_pic.hotel_picture DESC) rn from hotel_pic) where rn 
+= 1) z on x.hotel_code = z.hotel_code WHERE y.user_id = 'customer' ;
 select * from hotel_pic;
 
 SELECT hotel.hotel_code,hotel.hotel_name FROM hotel_like join hotel ON hotel_like.hotel_code=hotel.hotel_code where hotel_like.user_id 

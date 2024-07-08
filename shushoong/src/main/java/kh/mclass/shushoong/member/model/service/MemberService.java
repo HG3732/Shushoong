@@ -19,7 +19,7 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
-	
+
 	public List<MemberDto> selectAllList() {
 		return memberRepository.selectAllList();
 	}
@@ -37,10 +37,10 @@ public class MemberService {
 	public int loginLog(Map<String, Object> map) {
 		return memberRepository.loginLog(map);
 	}
-	
-	public boolean checkLoginIdDuplicate(String loginId){
-        return memberRepository.existsByLoginId(loginId);
-    } 
+
+	public boolean checkLoginIdDuplicate(String loginId) {
+		return memberRepository.existsByLoginId(loginId);
+	}
 
 	// 아이디 중복 여부
 	public int idCheck(String userId) {
@@ -68,7 +68,7 @@ public class MemberService {
 	}
 
 	// 비밀번호 재설정
-	public String setPwd(Map<String, Object> map) {
-		return memberRepository.resetPwd(map);
+	public int resetPwd(Map<String, Object> paraMap) {
+		return memberRepository.resetPwd(paraMap);
 	}
 }

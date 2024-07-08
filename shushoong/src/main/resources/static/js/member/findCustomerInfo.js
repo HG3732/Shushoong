@@ -50,7 +50,7 @@ function findIdValidation() {
 }
 
 function findPwdValidation() {
-	if ($("#userName").val() == "") {
+	if ($("#userId").val() == "") {
 		alert("이름을 입력해 주세요.");
 		return false;
 	}
@@ -73,7 +73,7 @@ function resetPwdCheckHandler() {
 	var userGrade = "customer";
 
 	$.ajax({
-		url: '/shushoong/find/customer/id.ajax',
+		url: '/shushoong/find/customer/pwd.ajax',
 		type: 'post',
 		data: { userId: userId, userEmail: userEmail, userGrade: userGrade },
 		success: function(result) {

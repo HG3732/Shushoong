@@ -2,7 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kh.mclass.shushoong.servicecenter.model.repository.ServiceCenterRepository">
 <select id="selectNoticeAllList" parameterType="map" resultType="NoticeDto">
-	select * from notice_board order by notice_id desc
+	select * from notice_board 
+  	<choose>
+		<when test="userId == 'customer'">
+			where notice_id &lt;= 1000
+		</when>
+		<when test="userId == 'business'">
+			where notice_id &gt; 1000
+		</when>
+	</choose>
+	order by notice_id desc
 </select>
 <select id="selectNoticeTotalCount" parameterType="hashMap" resultType="int">
 	select count (*) from notice_board
@@ -10,15 +19,15 @@
 <insert id="insertNotice" parameterType="NoticeDto">
 	<choose>
 		<when test="noticeCategory == 1">
-		insert into notice_board values(
-		SEQ_NOTICE_ID.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, 'business'
-		)
-		</when>
-		<otherwise>
 			insert into notice_board values(
-			SEQ_NOTICE_ID_2.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, 'business'
+			SEQ_NOTICE_ID.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
 			)
-		</otherwise>
+		</when>
+		<when test="noticeCategory != 1">
+			insert into notice_board values(
+			SEQ_NOTICE_ID_2.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
+			)
+		</when>
 	</choose>
 </insert>
 <select id="selectOneNotice" parameterType="String" resultType="noticeDto">

@@ -16,10 +16,10 @@ public class NoticeService {
 	@Autowired
 	private ServiceCenterRepository repository;
 	
-	public List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum) {
+	public List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, String userId) {
 		int offset = (currentPageNum - 1) * pageSize;
 		RowBounds rb = new RowBounds(offset, pageSize); 
-		return repository.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,rb);
+		return repository.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,rb,userId);
 	}
 	
 	public int selectTotalCount() {

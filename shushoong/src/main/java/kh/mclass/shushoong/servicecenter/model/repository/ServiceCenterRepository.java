@@ -12,10 +12,10 @@ import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
 @Mapper
 public interface ServiceCenterRepository {
 	//1:1 문의 검색
-	public List<OnlineQnADto> selectAllList(int pageSize, int pageBlockSize, int currentPageNum, String category, String keyword, String questCatCategory, RowBounds rowBounds);
+	public List<OnlineQnADto> selectAllList(int pageSize, int pageBlockSize, int currentPageNum, String id, String category, String keyword, String questCatCategory, RowBounds rowBounds);
 	
 	//1:1 문의 글 갯수(페이징용)
-	public int selectTotalCount(String category, String keyword);
+	public int selectTotalCount(String id, String category, String keyword);
 	
 	//1:1 문의 보기
 	public OnlineQnADto selectOneQna(String faqId);

@@ -26,5 +26,6 @@ public class HotelReserveDtoRes {
 	private String roomAtt;
 	private String people;
 	private Integer requestSum;
+	private Integer reviewAvailable;
 
 }

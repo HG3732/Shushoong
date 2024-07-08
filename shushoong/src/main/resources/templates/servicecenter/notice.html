@@ -34,6 +34,7 @@
 			<div class="section-notice">
 				<section>
 					<h1 class="notice-h1">공지사항</h1>
+					<form><div id="loginUserId" th:value="${loginUserId}"></div></form>
 					<div th:replace="~{servicecenter/notice_section :: noticeList}"></div>
 
 				</section>
@@ -68,6 +69,13 @@
 			$('#notice-list-container').replaceWith(response);
 		})
 	}
+	 
+	 $('.viewQnAList').on('click', function(){
+		console.log('글작성 버튼 눌림');
+		
+		
+	 });
+	 
 	</script>
 </body>
 </html>

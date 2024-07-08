@@ -18,6 +18,10 @@
 	font-weight: 900;
     font-size: 20px;
 }
+.wrap-write .rmfqjsgh {
+	font-weight: bold;
+    font-size: 20px;
+}
 .write-table .th{
 	width: 120px;
 	height: 40px;
@@ -68,6 +72,7 @@
 	padding: 20px;
 }
 .wrap-write .input-content textarea{
+	padding: 20px;
 	border: 3px solid #006AFF;
 	border-radius: 10px;
 	width: 100%;

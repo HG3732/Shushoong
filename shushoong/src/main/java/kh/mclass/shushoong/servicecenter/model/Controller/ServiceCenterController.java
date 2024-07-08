@@ -43,7 +43,7 @@ public class ServiceCenterController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		if(authentication.getAuthorities().toString().contains("admin")) {
-			int totalCount = service.selectTotalCount(null, category, keyword);
+			int totalCount = service.selectTotalCount(null, category, keyword, questCat);
 			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, null, category, keyword, questCat));
 			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
 			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
@@ -55,7 +55,7 @@ public class ServiceCenterController {
 			model.addAttribute("endPageNum", endPageNum);
 		} else {
 			String loginId = authentication.getName();
-			int totalCount = service.selectTotalCount(loginId, category, keyword);
+			int totalCount = service.selectTotalCount(loginId, category, keyword, questCat);
 			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, loginId, category, keyword, questCat));
 			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
 			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
@@ -84,7 +84,7 @@ public class ServiceCenterController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		if(authentication.getAuthorities().toString().contains("admin")) {
-			int totalCount = service.selectTotalCount(null, category, keyword);
+			int totalCount = service.selectTotalCount(null, category, keyword, questCatCategory);
 			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, null, category, keyword, questCatCategory));
 			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
 			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
@@ -96,7 +96,7 @@ public class ServiceCenterController {
 			model.addAttribute("endPageNum", endPageNum);
 		} else {
 			String loginId = authentication.getName();
-			int totalCount = service.selectTotalCount(loginId, category, keyword);
+			int totalCount = service.selectTotalCount(loginId, category, keyword, questCatCategory);
 			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, loginId, category, keyword, questCatCategory));
 			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
 			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
@@ -165,7 +165,7 @@ public class ServiceCenterController {
 		md.addAttribute("startPageNum", startPageNum);
 		md.addAttribute("endPageNum", endPageNum);
 		md.addAttribute("noticeDto", noticeDto);
-		md.addAttribute("userId", userId);
+		md.addAttribute("loginUserId", userId);
 		return "servicecenter/notice";
 	}
 	
@@ -206,7 +206,7 @@ public class ServiceCenterController {
 	
 	@PostMapping("/support/notice/write")
 	public String PostNoticeWrite (// RedirectAttributes rd, 
-			String noticeTitle, String noticeContent, MultipartFile noticeFile, String noticeCategory,
+			String noticeTitle, String noticeContent, MultipartFile fileId, String noticeCategory,
 			Model md
 			) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -216,7 +216,7 @@ public class ServiceCenterController {
 		System.out.println("공지 작성 포스트 컨트롤러");
 		System.out.println("noticeTitle : " + noticeTitle);
 		System.out.println("noticeContent : " + noticeContent);
-		System.out.println("noticeFile : " + noticeFile);
+		System.out.println("noticeFile : " + fileId);
 		System.out.println("noticeCategory : " + noticeCategory);
 		
 	    NoticeDto dto = new NoticeDto();
@@ -227,14 +227,14 @@ public class ServiceCenterController {
 	    dto.setUserId(userId); 
 //	    dto.setNoticeCategory("defaultUserGrade"); 
 	    md.addAttribute("loginUserId", userId);
-        List<NoticeFileDto> fileId = new ArrayList<>();
-        if (noticeFile != null && !noticeFile.isEmpty()) {
+        List<NoticeFileDto> fileId2 = new ArrayList<>();
+        if (fileId != null && !fileId.isEmpty()) {
             NoticeFileDto fileDto = new NoticeFileDto();
-            fileDto.setOriginalFilename(noticeFile.getOriginalFilename());
-            fileDto.setSavedFilePathName("/uploads/" + noticeFile.getOriginalFilename()); // 예시 경로, 실제 업로드 경로에 맞게 수정 필요
-            fileId.add(fileDto);
+            fileDto.setOriginalFilename(fileId.getOriginalFilename());
+            fileDto.setSavedFilePathName("/uploads/" + fileId.getOriginalFilename()); // 예시 경로, 실제 업로드 경로에 맞게 수정 필요
+            fileId2.add(fileDto);
         }
-        dto.setFileId(fileId);
+        dto.setFileId(fileId2);
 	    
 	    int insertNotice = noticeService.insertNotice(dto);
 		
@@ -245,12 +245,62 @@ public class ServiceCenterController {
 		return "redirect:/support/notice/list";
 	}
 	
+	// 공지사항 수정
+	@GetMapping("/support/notice/update/{noticeId}")
+	public String getNoticeUpdate (Model md, @PathVariable("noticeId") String noticeId) {
+		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
+		return "servicecenter/notice_update";
+	}
+	
+	@PostMapping("/support/notice/update")
+	public String postNoticeUpdate (// RedirectAttributes rd, 
+			String noticeTitle, String noticeContent, MultipartFile fileId, String noticeCategory,
+			String noticeId, Model md
+			) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId = authentication.getName();
+		
+		System.out.println("유저 아이디 : " + userId);
+		System.out.println("공지 작성 포스트 컨트롤러");
+		System.out.println("noticeTitle : " + noticeTitle);
+		System.out.println("noticeContent : " + noticeContent);
+		System.out.println("noticeFile : " + fileId);
+		System.out.println("noticeCategory : " + noticeCategory);
+		
+		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
+		
+	    NoticeDto dto = new NoticeDto();
+	    dto.setNoticeTitle(noticeTitle);
+	    dto.setNoticeContent(noticeContent);
+	    // noticeFile과 noticeCategory가 NoticeDto에 있는 경우 설정
+	    dto.setNoticeCategory(noticeCategory);
+	    dto.setUserId(userId); 
+//	    dto.setNoticeCategory("defaultUserGrade"); 
+	    md.addAttribute("loginUserId", userId);
+        List<NoticeFileDto> fileId2 = new ArrayList<>();
+        if (fileId != null && !fileId.isEmpty()) {
+            NoticeFileDto fileDto = new NoticeFileDto();
+            fileDto.setOriginalFilename(fileId.getOriginalFilename());
+            fileDto.setSavedFilePathName("/uploads/" + fileId.getOriginalFilename()); // 예시 경로, 실제 업로드 경로에 맞게 수정 필요
+            fileId2.add(fileDto);
+        }
+        dto.setFileId(fileId2);
+	    
+	    int updateNotice = noticeService.updateNotice(noticeId);
+		
+		return "redirect:/support/notice/list";
+	}
+	
 	@GetMapping("/support/notice/view/{noticeId}")
 	public String viewNotice(Model md, @PathVariable("noticeId") String noticeId) {
 //		String userId
 		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId = authentication.getName();
+		md.addAttribute("loginUserId", userId);
 		return "servicecenter/notice_view";
 	}
-
+	
+	
 	
 }

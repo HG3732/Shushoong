@@ -35,4 +35,8 @@ public class NoticeService {
 		return repository.selectOneNotice(noticeId);
 	}
 	
+	public int updateNotice(String noticeId) {
+		return repository.updateNotice(noticeId);
+	}
+	
 }

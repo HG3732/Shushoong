@@ -20,12 +20,12 @@
 	<choose>
 		<when test="noticeCategory == 1">
 			insert into notice_board values(
-			SEQ_NOTICE_ID.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
+			1||SEQ_NOTICE_ID.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
 			)
 		</when>
 		<when test="noticeCategory != 1">
 			insert into notice_board values(
-			SEQ_NOTICE_ID_2.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
+			2||SEQ_NOTICE_ID_2.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
 			)
 		</when>
 	</choose>
@@ -33,4 +33,20 @@
 <select id="selectOneNotice" parameterType="String" resultType="noticeDto">
 	select * from notice_board where notice_id = #{noticeId}
 </select>
+<update id="updateNotice" parameterType="hashMap">
+			update notice_board set notice_time = sysdate, notice_title = #{noticeTitle}, 
+			notice_content=#{noticeContent} where notice_id = #{noticeId}
+			<!-- 
+	<choose>
+		<when test="noticeCategory == 1">
+			update notice_board set notice_time = sysdate, notice_title = #{noticeTitle}, 
+			notice_content=#{noticeContent} where notice_id = #{noticeId}	
+		</when>
+		<when test="noticeCategory != 1">	
+			update notice_board set notice_time = sysdate, notice_title = #{noticeTitle}, 
+			notice_content=#{noticeContent} where notice_id = #{noticeId}
+		</when>
+	</choose>
+	 -->
+</update>
 </mapper>

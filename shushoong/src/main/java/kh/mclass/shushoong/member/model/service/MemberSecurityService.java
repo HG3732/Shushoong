@@ -2,10 +2,8 @@ package kh.mclass.shushoong.member.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -28,7 +26,7 @@ public class MemberSecurityService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		log.debug("membersecurityservice ==============");
+		log.debug("membersecurityservice ========	======");
 		
 		
 		Optional<MemberDto> loginDtoOp = Optional.ofNullable(memberRepository.login(userId));

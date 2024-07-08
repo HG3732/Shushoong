@@ -17,6 +17,7 @@ import kh.mclass.shushoong.config.UserAuthenticationSuccessHandler;
 import kh.mclass.shushoong.config.AdminAuthenticationFailureHandler;
 import kh.mclass.shushoong.config.AdminAuthenticationSuccessHandler;
 import kh.mclass.shushoong.config.UserAuthenticationFailureHandler;
+import kh.mclass.shushoong.member.model.service.CustomAuthenticationFilter;
 import kh.mclass.shushoong.member.model.service.MemberSecurityService;
 
 @Configuration

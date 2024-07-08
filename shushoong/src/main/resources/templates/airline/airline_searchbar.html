@@ -2,7 +2,7 @@
 <html
 xmlns:th="http://www.thymeleaf.org" 
 >
-<head>
+
 </head>
 <body>
 	<div class="searchbar" th:fragment="searchbar">
@@ -70,8 +70,8 @@ xmlns:th="http://www.thymeleaf.org"
 			</section>
 			
 			<section class="according_section">
-				<div class="one_way_accoding">
-					<div id="depart_accoding" class="according">
+				<div class="one_way_accoding"  id="fouc">
+					<div id="depart_accoding" class="according" >
 						<div class="accoding_title">출발지</div>
 						<div id="depart_accoding_wrap">
 							<div class="depart_nation">
@@ -126,7 +126,7 @@ xmlns:th="http://www.thymeleaf.org"
 							</div>
 							
 						</div>
-						</div>
+					</div>
 					
 					<div id="arrival_accoding" class="according">
 						<div class="accoding_title">도착지</div>
@@ -171,18 +171,20 @@ xmlns:th="http://www.thymeleaf.org"
 							<button id="YOW" class="arrival_accoding_value pointer">오타와</button>
 						</div>
 					</div>
-					
+				</div>
 					<div id="date_accoding" class="according">
 						<button id="depart_date">가는날</button>
 						<button id="arrival_date">오는날</button>
 						<button id="btn_return_depart_date">가는날 설정 변경</button>
 						
-						<div>
+						<div class="wrap-date-box">
 							<div id='calendar'></div>
 						</div>
-  
+	 
 					</div>
-					
+				
+				
+				<div id="fouc">	
 					<div id="people_lineup_sit_accoding" class="according">
 						<div class="people_lineup">
 							<div id="adult">

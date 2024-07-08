@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.servicecenter.model.Controller;
 
+import java.io.File;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,7 +141,7 @@ public class ServiceCenterController {
 	
 	// 마이페이지 공지사항
 	@GetMapping("/support/notice/list")
-	public String noticeList (Model md,
+	public String noticeList (Model md, String noticeCategory,
 			String pageNum) {
 		
 			SecurityContextHolder.getContext().getAuthentication();
@@ -167,7 +168,7 @@ public class ServiceCenterController {
 			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
 			
 			
-			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userId);
+			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userId,noticeCategory);
 			md.addAttribute("currentPageNum", currentPageNum);
 			md.addAttribute("totalPageCount", totalPageCount);
 			md.addAttribute("startPageNum", startPageNum);
@@ -182,7 +183,7 @@ public class ServiceCenterController {
 	}
 	
 	@GetMapping("/support/notice/list.ajax")
-	public String noticeListAjax (Model md,
+	public String noticeListAjax (Model md, String noticeCategory,
 	String pageNum) {
 		System.out.println("ajax 컨트롤러 pageNum : " + pageNum);
 		if (pageNum != null && !pageNum.equals("")) {
@@ -201,12 +202,13 @@ public class ServiceCenterController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId = authentication.getName();
-		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userId);
+		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userId,noticeCategory);
 		md.addAttribute("currentPageNum", currentPageNum);
 		md.addAttribute("totalPageCount", totalPageCount);
 		md.addAttribute("startPageNum", startPageNum);
 		md.addAttribute("endPageNum", endPageNum);
 		md.addAttribute("noticeDto", noticeDto);
+		md.addAttribute("loginUserId", userId);
 		return "servicecenter/notice_section";
 	}
 	
@@ -217,8 +219,8 @@ public class ServiceCenterController {
 	}
 	
 	@PostMapping("/support/notice/write")
-	public String PostNoticeWrite (// RedirectAttributes rd, 
-			String noticeTitle, String noticeContent, MultipartFile fileId, String noticeCategory,
+	public String PostNoticeWrite (@RequestParam("noticeFile") MultipartFile multipartFile, 
+			String noticeTitle, String noticeContent,  String noticeCategory,
 			Model md
 			) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -228,32 +230,22 @@ public class ServiceCenterController {
 		System.out.println("공지 작성 포스트 컨트롤러");
 		System.out.println("noticeTitle : " + noticeTitle);
 		System.out.println("noticeContent : " + noticeContent);
-		System.out.println("noticeFile : " + fileId);
+		System.out.println("noticeFile : " + multipartFile);
 		System.out.println("noticeCategory : " + noticeCategory);
 		
 	    NoticeDto dto = new NoticeDto();
 	    dto.setNoticeTitle(noticeTitle);
 	    dto.setNoticeContent(noticeContent);
-	    // noticeFile과 noticeCategory가 NoticeDto에 있는 경우 설정
 	    dto.setNoticeCategory(noticeCategory);
 	    dto.setUserId(userId); 
-//	    dto.setNoticeCategory("defaultUserGrade"); 
 	    md.addAttribute("loginUserId", userId);
-        List<NoticeFileDto> fileId2 = new ArrayList<>();
-        if (fileId != null && !fileId.isEmpty()) {
-            NoticeFileDto fileDto = new NoticeFileDto();
-            fileDto.setOriginalFilename(fileId.getOriginalFilename());
-            fileDto.setSavedFilePathName("/uploads/" + fileId.getOriginalFilename()); // 예시 경로, 실제 업로드 경로에 맞게 수정 필요
-            fileId2.add(fileDto);
-        }
-        dto.setFileId(fileId2);
 	    
 	    int insertNotice = noticeService.insertNotice(dto);
+	    
+	    // 파일 첨부 해야함..
+	    if (!multipartFile.isEmpty()) {
+		}
 		
-//		rd.addAttribute("noticeTitle", noticeTitle);
-//		rd.addAttribute("noticeContent", noticeContent);
-//		rd.addAttribute("noticeFile", noticeFile);
-//		rd.addAttribute("noticeCategory", noticeCategory);
 		return "redirect:/support/notice/list";
 	}
 	
@@ -266,7 +258,7 @@ public class ServiceCenterController {
 	
 	@PostMapping("/support/notice/update")
 	public String postNoticeUpdate (// RedirectAttributes rd, 
-			String noticeTitle, String noticeContent, MultipartFile fileId, String noticeCategory,
+			String noticeTitle, String noticeContent, MultipartFile noticeFile, String noticeCategory,
 			String noticeId, Model md
 			) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -276,7 +268,7 @@ public class ServiceCenterController {
 		System.out.println("공지 작성 포스트 컨트롤러");
 		System.out.println("noticeTitle : " + noticeTitle);
 		System.out.println("noticeContent : " + noticeContent);
-		System.out.println("noticeFile : " + fileId);
+		System.out.println("noticeFile : " + noticeFile);
 		System.out.println("noticeCategory : " + noticeCategory);
 		
 		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
@@ -290,15 +282,15 @@ public class ServiceCenterController {
 //	    dto.setNoticeCategory("defaultUserGrade"); 
 	    md.addAttribute("loginUserId", userId);
         List<NoticeFileDto> fileId2 = new ArrayList<>();
-        if (fileId != null && !fileId.isEmpty()) {
+        if (noticeFile != null && !noticeFile.isEmpty()) {
             NoticeFileDto fileDto = new NoticeFileDto();
-            fileDto.setOriginalFilename(fileId.getOriginalFilename());
-            fileDto.setSavedFilePathName("/uploads/" + fileId.getOriginalFilename()); // 예시 경로, 실제 업로드 경로에 맞게 수정 필요
+            fileDto.setOriginalFilename(noticeFile.getOriginalFilename());
+            fileDto.setSavedFilePathName("/uploads/" + noticeFile.getOriginalFilename()); // 예시 경로, 실제 업로드 경로에 맞게 수정 필요
             fileId2.add(fileDto);
+            int updateNotice = noticeService.updateNotice(noticeId);
         }
         dto.setFileId(fileId2);
 	    
-	    int updateNotice = noticeService.updateNotice(noticeId);
 		
 		return "redirect:/support/notice/list";
 	}

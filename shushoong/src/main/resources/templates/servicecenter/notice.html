@@ -34,6 +34,14 @@
 			<div class="section-notice">
 				<section>
 					<h1 class="notice-h1">공지사항</h1>
+					<div>
+					<form id="select-cat" action="">
+						<select class="catVal">
+							<option value="1">회원</option>
+							<option value="2">사업자</option>
+						</select>
+					</form>
+					</div>
 					<form><div id="loginUserId" th:value="${loginUserId}"></div></form>
 					<div th:replace="~{servicecenter/notice_section :: noticeList}"></div>
 
@@ -47,13 +55,11 @@
 	</div>
 	
 	<script type="text/javascript">
-	/* 
 	$(loadeadHandler);
 	
 	function loadeadHandler() {
-		goPage();
+		selectCat();
 	}
-	 */
 	function goPage(thisElement) {
 		console.log($(this));
 		var currentPageNum = $(thisElement).data('targetpage');
@@ -73,9 +79,26 @@
 	 $('.viewQnAList').on('click', function(){
 		console.log('글작성 버튼 눌림');
 		
-		
 	 });
 	 
+	    function selectCat() {
+	        $('.catVal').on('change', function() {
+	        	console.log('에작 실행');
+	            var noticeCategory = $('.catVal').val();
+	            var form = $('#select-cat');
+	            
+	            $.ajax({
+	                url: "/shushoong/support/notice/list.ajax",
+	                method: "get",
+	                data: {noticeCategory: noticeCategory},
+	                error: function(xhr, status, error) {
+	                    console.log('AJAX 실패:', error);
+	                }
+	            }).done(function(response) {
+	                $('#notice-list-container').replaceWith(response);
+	            });
+	        });
+	    }
 	</script>
 </body>
 </html>

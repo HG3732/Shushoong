@@ -26,7 +26,7 @@ public interface ServiceCenterRepository {
 	
 	
 	// 공지사항
-	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userId);
+	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userId, String noticeCategory);
 	
 	int selectNoticeTotalCount();
 	

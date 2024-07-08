@@ -7,6 +7,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -206,10 +209,40 @@ public class MyPageCustomerController {
 					}
 					
 					model.addAttribute("requestDesc", requestSumStr);
+
+			        // 예약 날짜 문자열
+			        String checkOut = (String) reservationDetails.get("RESERVE_CHECK_OUT");
+
+			        // 날짜 형식 정의
+			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일");
+				        try {
+				            // 문자열을 LocalDate 객체로 변환
+				            LocalDate checkOutDate = LocalDate.parse(checkOut, formatter);
+	
+				            // 현재 날짜 가져오기
+				            LocalDate currentDate = LocalDate.now();
+	
+				            // 두 날짜 비교
+				            if (checkOutDate.isEqual(currentDate)) {
+				                System.out.println("오늘이랑 같은 날짜");
+				            } else if (checkOutDate.isBefore(currentDate)) {
+				                System.out.println("과거 날짜");
+				            } else {
+				                System.out.println("미래 날짜");
+				            }
+				            
+				            model.addAttribute("checkOutDate",checkOutDate);
+				            model.addAttribute("currentDate", currentDate);
+				            
+				        } catch (DateTimeParseException e) {
+				            e.printStackTrace();
+				            System.out.println("Invalid date format.");
+				        }
+			        
+					
 				} else {
 					
 				}
-				
 				model.addAttribute("reserveList", service.selectOneReservedHotel(userId, hotelReserveCode));
 				
 				return "mypage/customer/mypageCustomerReservedHotel";

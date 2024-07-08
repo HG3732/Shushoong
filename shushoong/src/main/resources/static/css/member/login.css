@@ -102,7 +102,7 @@ section .loginInfo>input:focus {
 	border: 2px solid #006AFF;
 }
 
-section .btn.login {
+section .btn.customerLogin, .btn.businessLogin {
 	/* 스타일서식 */
 	width: 300px;
 	height: 40px;

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageHotelReview.css}" rel="stylesheet" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>슈슝</title>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-">
+			<!-- 여기부터 작성 -->
+				<div class="wrap-aside">
+					<aside>
+						<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+					</aside>
+				</div>
+			
+			
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+		<!-- 모달창 구현 -->
+      <div id="modal" class="modal_overlay">
+          <div class="modal_window">
+          	<form id="frm_review" th:action="@{/hotel/review/write.ajax}" method="post"> 
+          			<button type="button" class="review_esc">X</button>
+            		<div class="facility">
+            			<p style="font-size: var(--font2);">숙박시설 상태 및 시설</p>
+            			<div class="facility_stars">
+	            			<input type="radio" class="score" name="facility_score" id="facility_1" checked>
+	            				<label for="facility_1">
+	            					<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+	            				</label>
+						    <input type="radio" class="score" name="facility_score" id="facility_2">
+						    	<label for="facility_2">
+						    		<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+						    	</label>
+						    <input type="radio" class="score" name="facility_score" id="facility_3">
+						    	<label for="facility_3">
+									<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+								</label>
+						    <input type="radio" class="score" name="facility_score" id="facility_4">
+						    	<label for="facility_4">
+						    		<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+						    	</label>
+						    <input type="radio" class="score" name="facility_score" id="facility_5">
+						    	<label for="facility_5">
+						    		<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+						    	</label>
+						</div>
+					</div>		            		
+		            <div class="sanity">
+		                <p style="font-size: var(--font2);">청결 상태</p>
+		                <div class="sanity_stars">
+			                <input type="radio" class="score" name="sanity_score" id="sanity_1" checked>
+		                	<label for="sanity_1">
+		                		<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+		                	</label>
+						    <input type="radio" class="score" name="sanity_score" id="sanity_2">
+						    	<label for="sanity_2">
+						    		<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+						    	</label>
+						    <input type="radio" class="score" name="sanity_score" id="sanity_3">
+						    	<label for="sanity_3">
+						    		<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+						    	</label>
+						    <input type="radio" class="score" name="sanity_score" id="sanity_4">
+						    	<label for="sanity_4">
+						    		<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+						    	</label>
+						    <input type="radio" class="score" name="sanity_score" id="sanity_5">
+						    	<label for="sanity_5">
+						    		<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+						    	</label>
+						 </div>
+		            </div>
+	                <div class="conven">
+	                	<p style="font-size: var(--font2);">편의 시설/서비스</p>
+		                <div class="conven_stars">
+		                	<input type="radio" class="score" name="conven_score" id="conven_1" checked>
+			                	<label for="conven_1">
+			                		<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+			                	</label>
+						    <input type="radio" class="score" name="conven_score" id="conven_2">
+							    <label for="conven_2">
+							    	<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+							    </label>
+						    <input type="radio" class="score" name="conven_score" id="conven_3">
+							    <label for="conven_3">
+							    	<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+							    </label>
+						    <input type="radio" class="score" name="conven_score" id="conven_4">
+							    <label for="conven_4">
+							    	<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+							    </label>
+						    <input type="radio" class="score" name="conven_score" id="conven_5">
+							    <label for="conven_5">
+							    	<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+							    </label>
+						</div>	
+	                </div>
+	                <div class="service">
+	                	<p style="font-size: var(--font2);">직원 및 서비스</p>
+		                <div class="service_stars">
+		                	<input type="radio" class="score" name="service_score" id="service_1" checked>
+			                	<label for="service_1">
+			                		<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+			                	</label>
+						    <input type="radio" class="score" name="service_score" id="service_2">
+							    <label for="service_2">
+							    	<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+							    </label>
+						    <input type="radio" class="score" name="service_score" id="service_3">
+							    <label for="service_3">
+							    	<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+							    </label>
+						    <input type="radio" class="score" name="service_score" id="service_4">
+							    <label for="service_4">
+							    	<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+							    </label>
+						    <input type="radio" class="score" name="service_score" id="service_5">
+							    <label for="service_5">
+							    	<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width:15px;">
+							    </label>
+						</div>
+	                </div>
+
+	        <fieldset style="border: 1px solid black; padding: 15px 15px;" >
+	            <legend style="font-size: var(--font2); padding: 0 5px;">여행객 유형</legend>
+	                <select name="tourist_cat" style="padding: 5px; border: none; width: 370px;">
+	                    <option value="alone">혼자</option>
+	                    <option value="couple">커플/부부</option>
+	                    <option value="family">가족</option>
+	                    <option value="group">단체</option>
+	                    <option value="business_trip">출장</option>
+	                </select>
+	        </fieldset>   
+	        <fieldset style="border: 1px solid black; padding: 20px 15px; " >
+	            <legend style="font-size: var(--font2); padding: 0 5px;">제목</legend>
+				<input type="text" style="border: none; width: 370px;"/>
+	        </fieldset>
+	        <textarea rows="15" cols="50"></textarea>
+	        <button type="button" class="btn_submit">리뷰 삭제</button>
+	    </form> <!-- 리뷰 form  -->
+           </div>
+      </div> <!-- 모달창 끝 -->
+	
+	
+	
+	<script>
+	$(".review_esc").on("click",function(){
+		$("#modal").css("display","none");
+	})
+	</script>
+	
+	
+</body>
+</html>

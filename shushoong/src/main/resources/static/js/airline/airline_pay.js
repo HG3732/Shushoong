@@ -358,73 +358,19 @@
 			}
 		}
 		
-		function payCheckInfo(){
-			const urlParams = new URL(location.href).searchParams;
-			const adult = urlParams.get('adult');
-			const child = urlParams.get('child');
-			const baby = urlParams.get('baby');
-			const departLoc = urlParams.get('departLoc');
-			const arrivalLoc = urlParams.get('arrivalLoc');
-			const departDate = urlParams.get('departDate');
-			const arrivalDate = urlParams.get('arrivalDate');
-			/* 여기서부터  - 정확하지 않은 파라메타 값 */
-			const departTime = urlParams.get('departTime');
-			const arrivalTime = urlParams.get('arrivalTime');
-			const airlineCode = urlParams.get('airlineCode');
-			const flightNo = urlParams.get('flightNo');
-			/* 여기까지  - 정확하지 않은 파라메타 값 */
-			
-			var ticketType = urlParams.get('ticketType');
-			var htmlVal = '';
-			
-			for(var i = 0 ; i < ticketType ; i++){
-				htmlVal += `
-				<div class="final_check_info">
-									<div>
-										<div class="final_check_lineup">
-											성인 : <div class="adultNum">${adult}</div>
-											, 아동 : <div class="childNum">${child}</div>
-											, 유아 : <div class="babyNum">${adult}</div>
-										</div>
-										<div class="airlineCode">
-											${airlineCode}
-										</div>
-									</div>
-									<div>
-										<div class="flightNo">
-											${flightNo}
-										</div>
-										<div>출발 : </div>
-										<div class="date_time_local">
-											<div class="date_time">
-												<div class="departDate">${departDate}</div>
-												<div class="departTime">${departTime}</div>
-											</div>
-											
-											<div class="departLoc">
-												${departLoc}
-											</div>
-										</div>
-										<div>도착 : </div>
-										<div class="date_time_local">
-											<div class="date_time">
-												<div class="arrivalDate">${arrivalDate}</div>
-												<div class="arrivalTime">${arrivalTime}</div>
-											</div>
-											<div class="arrivalLoc">
-												${arrivalLoc}
-											</div>
-										</div>
-									</div>
-								</div>
-				
-				`;
-				$(".final_check_info_list").html(htmlVal);
-			}
-		}
+		
 		
 		function totalValueFunction(){
+			
 			var result = 0;
+			var adult = $("#adult_val").val();
+			var child = $("#child_val").val();
+			var baby = $("#baby_val").val();
+			var seatPrice = $("#seatPrice_val").val();
+			var seatPriceRetrun = $("#seatPriceReturn_val").val();
+			var sum;
+			var basePrice = Number(seatPrice*(Number(adult)+Number(child*0.75)+Number(baby*0.1)));
+			var basePriceReturn = Number(seatPriceRetrun*(Number(adult)+Number(child*0.75)+Number(baby*0.1)));
 			$(".baggage:checked").each(function(){
 				if($(this).val()==1){
 					
@@ -437,12 +383,13 @@
 				}else{
 					console.log("total value function on error")
 				}
+				
 				$(this).val();
 			});
+			console.log(basePrice);
+			sum = Number(result)+Number(basePrice)+Number(basePriceReturn);
 			
-			
-			
-			$(".total_value").val(result);
+			$(".total_value").val(sum);
 		}
 		
 		function radioGenderInputValueFunction(){

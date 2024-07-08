@@ -219,8 +219,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 								<div class="paycheck_info">
 									<div class="total_cost">
 										<div class="how_much">총 상품 금액</div>
-										<div class="total_num"><input type="text" class="total_value" readonly="readonly"> 원</div>
+										<div class="total_num"><input type="text" i class="total_value" readonly="readonly" th:value="${seatPrice}+${seatGradeReturn}"> 원</div>
 									</div>
+<!-- 									th:value="${#numbers.formatInteger((${seatPrice}+${seatGradeReturn}), 3, 'COMMA') + '원'}" -->
 									<div class="final_check_info_list">
 										<div class="final_check_info">
 											<div>
@@ -304,6 +305,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			<input type="hidden" th:value="${child}" id="child_val">
 			<input type="hidden" th:value="${baby}" id="baby_val">
 			<input type="hidden" th:value="${domestic}" id="domestic_val">
+			<input type="hidden" th:value="${seatPrice}" id="seatPrice_val">
+			<input type="hidden" th:value="${seatPriceReturn}" id="seatPriceReturn_val">
 		</section>
 	</th:block>	
 	<div class="wrap-footer">
@@ -326,7 +329,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			$("input[type='radio'].baggage").change(raidoBaggageInputValueFunction);
 			$("input[type='radio'].baggage").change(totalValueFunction);
 			passportDisplayFunction();
-
+			
 		}
 		$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
 		

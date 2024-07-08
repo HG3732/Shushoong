@@ -260,10 +260,17 @@ public class AirlineController {
 	}
 
 	@PostMapping("/airline/main")
-	public String airlineMainPost(String departLoc, String arrivalLoc, String departDate, String arrivalDate,
-			String adult, String child, String baby, String seatGrade, String ticketType,
-			// Model md
-			RedirectAttributes rd) {
+	public String airlineMainPost(String departLoc,
+			String arrivalLoc,
+			String departDate,
+			String arrivalDate,
+			String adult,
+			String child,
+			String baby,
+			String seatGrade,
+			String ticketType,
+			RedirectAttributes rd
+	) {
 		rd.addAttribute("departLoc", departLoc);
 		rd.addAttribute("arrivalLoc", arrivalLoc);
 		rd.addAttribute("departDate", departDate);
@@ -278,16 +285,30 @@ public class AirlineController {
 
 	// 항공 메인 페이지
 	@PostMapping("/airline/customer/reserve/pay")
-
-	public String airlinePay(Model md, @RequestParam String adult, @RequestParam String child,
-			@RequestParam String baby, @RequestParam String ticketType, @RequestParam String departLoc,
-			@RequestParam String arrivalLoc, @RequestParam String departDate, @RequestParam String arrivalDate,
-			@RequestParam String seatPrice, @RequestParam String seatGrade, @RequestParam String flightNo,
+	public String airlinePay(Model md,
+			@RequestParam String adult,
+			@RequestParam String child,
+			@RequestParam String baby,
+			@RequestParam String ticketType,
+			@RequestParam String departLoc,
+			@RequestParam String arrivalLoc,
+			@RequestParam String departDate,
+			@RequestParam String arrivalDate,
+			@RequestParam String seatPrice,
+			@RequestParam String seatGrade,
+			@RequestParam String flightNo,
 			// return 붙은 param은 돌아오는 항공 편
-			@RequestParam String departLocReturn, @RequestParam String arrivalLocReturn,
-			@RequestParam String departDateReturn, @RequestParam String arrivalDateReturn,
-			@RequestParam String airlineCodeReturn, @RequestParam String airlineCode,
-			@RequestParam String seatPriceReturn, @RequestParam String seatGradeReturn, String flightNoReturn ,Principal principal) {
+			@RequestParam String departLocReturn,
+			@RequestParam String arrivalLocReturn,
+			@RequestParam String departDateReturn,
+			@RequestParam String arrivalDateReturn,
+			@RequestParam String airlineCodeReturn,
+			@RequestParam String airlineCode,
+			@RequestParam String seatPriceReturn,
+			@RequestParam String seatGradeReturn,
+			String flightNoReturn,
+			Principal principal
+	) {
 
 		// 왕복일 시
 		if (airlineCodeReturn != null && !airlineCodeReturn.equals("")) {
@@ -333,6 +354,8 @@ public class AirlineController {
 		md.addAttribute("domestic", domestic);
 		md.addAttribute("airlineInfo", airlineInfo);
 		md.addAttribute("ticketType", ticketType);
+		md.addAttribute("seatPrice",seatPrice);
+		md.addAttribute("seatGradeReturn",seatPriceReturn);
 		if (principal != null) {
 			String userId = principal.getName();
 			md.addAttribute("userId", userId);

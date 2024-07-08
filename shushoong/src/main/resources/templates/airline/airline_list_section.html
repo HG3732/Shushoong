@@ -7,6 +7,7 @@
 			<!-- <span th:text="${air.departLoc}" class="select-info-departLoc" name="departLoc"></span> 
 			<span th:text="${air.arrivalLoc}" class="select-info-arrivalLoc" name="arrivalLoc"></span> --> 
 			<span th:text="${air.airlineCode}" class="select-info-airlineCode" name="airlineCode"></span>
+			<span th:text="${air.flightNo}" class="select-info-flightNo" name="flightNo"></span>
 			<!-- <span th:text="${air.seatPrice}" class="select-info-seatPrice" name="seatPrice"></span> -->
 		</div>
 		
@@ -91,7 +92,7 @@
 							<span th:text="${air.airlineName}">항공사 명</span>
 						</div>
 						<div>
-							<span id="select-seatGrade" th:text="${air.seatGrade}"></span> &nbsp <span th:text="${air.airlineCode}" ></span>
+							<span id="select-seatGrade" th:text="${air.seatGrade}"></span> &nbsp <span th:text="${air.flightNo}" ></span>
 						</div>
 						<span class="detail-loc arrival" th:text="${air.arrivalLoc}">도착지</span>
 					</div>
@@ -115,6 +116,7 @@
 	$(document).ready(function() {
 		clickedTicketInfo();
 		clickedShowReturnBtn();
+		clickedReserveBtn();
 	});
 </script>
 </html>

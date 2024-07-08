@@ -72,6 +72,7 @@ public class AirlineController {
 			System.out.println("departLoc : " + departLoc);
 			System.out.println("arrivalLoc : " + arrivalLoc);
 			System.out.println("seatGrade : " + seatGrade);
+			System.out.println("ticketType: " + ticketType);
 
 			md.addAttribute("departLoc", departLoc);
 			md.addAttribute("arrivalLoc", arrivalLoc);
@@ -93,7 +94,7 @@ public class AirlineController {
 	public String listReturn(Model md, @RequestParam String seatGrade, @RequestParam String departLoc,
 			@RequestParam String arrivalLoc, @RequestParam String departDate, @RequestParam String arrivalDate,
 			@RequestParam String adult, @RequestParam String child, @RequestParam String baby,
-			@RequestParam String ticketType, @RequestParam String airlineCode) {
+			@RequestParam String ticketType, @RequestParam String airlineCode, String flightNo) {
 
 		System.out.println(" ==== 항목 리스트 데이터 값 ====");
 		System.out.println("departLoc : " + departLoc + ",arrivalLoc" + arrivalLoc + "ticketType : " + ticketType
@@ -123,10 +124,15 @@ public class AirlineController {
 		
 //		Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 		// 모델에 데이터를 추가하여 뷰로 전달
+		md.addAttribute("flightNo", flightNo);
 		md.addAttribute("airlineCode", airlineCode);
 		md.addAttribute("selectOneAirline", selectOneAirline);
 		md.addAttribute("airlineReturnData", airlineReturnData);
 		md.addAttribute("seatGrade", seatGrade);
+		md.addAttribute("adult", adult);
+		md.addAttribute("child", child);
+		md.addAttribute("baby", baby);
+		md.addAttribute("ticketType", ticketType);
 //		md.addAttribute("maxPrice", maxPrice);
 
 		// 각 항공편에 대해 30000에서 60000 사이의 랜덤 가격을 설정
@@ -143,7 +149,8 @@ public class AirlineController {
 	// @ResponseBody
 	public String airlineSelectOptions(String seatGrade, String departLoc, String arrivalLoc, String departTimeLeft,
 			String deaprtTimeRight, String arrivalTimeLeft, String arrivalTimeRight, String selectType, String viaType,
-			String maxPrice, String ticketType, Model md) {
+			String maxPrice, String ticketType,
+			String adult, String child, String baby, Model md) {
 		
 		System.out.println("컨트롤러 목록 정렬");
 		System.out.println("출발지 : " + departLoc);
@@ -153,7 +160,16 @@ public class AirlineController {
 		System.out.println("가격 최댓 값 : " + maxPrice);
 		System.out.println("왕복/편도 : " + ticketType);
 		System.out.println("좌석등급: " + seatGrade);
+		System.out.println("adult: " + adult);
+		System.out.println("child: " + child);
+		System.out.println("baby: " + baby);
+		System.out.println("ticketType: " + ticketType);
 
+		md.addAttribute("adult", adult);
+		md.addAttribute("child", child);
+		md.addAttribute("baby", baby);
+		md.addAttribute("ticketType", ticketType);
+		
 		List<AirlineInfoDto> SortData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft,
 				deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType,
 				seatGrade);
@@ -195,6 +211,7 @@ public class AirlineController {
 		System.out.println("도착지 : " + arrivalLoc);
 		System.out.println("정렬 타입 : " + selectType);
 		System.out.println("경유 타입 : " + viaType);
+		System.out.println("ticketType: " + ticketType);
 //		System.out.println("가격 최댓 값 : " + maxPrice);
 
 		AirlineInfoDto selectOneAirline = service.getSelectOne(airlineCode);
@@ -204,6 +221,7 @@ public class AirlineController {
 		md.addAttribute("selectOneAirline", selectOneAirline);
 		md.addAttribute("airlineReturnData", SortData);
 		md.addAttribute("seatGrade", seatGrade);
+		md.addAttribute("ticketType" + ticketType);
 //		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 //		md.addAttribute("maxPrice", maxPrice2);
 		log.debug("컨트롤러 디버깅 : " + SortData);
@@ -264,12 +282,12 @@ public class AirlineController {
 	public String airlinePay(Model md, @RequestParam String adult, @RequestParam String child,
 			@RequestParam String baby, @RequestParam String ticketType, @RequestParam String departLoc,
 			@RequestParam String arrivalLoc, @RequestParam String departDate, @RequestParam String arrivalDate,
-			@RequestParam String seatPrice,
+			@RequestParam String seatPrice, @RequestParam String seatGrade, @RequestParam String flightNo,
 			// return 붙은 param은 돌아오는 항공 편
 			@RequestParam String departLocReturn, @RequestParam String arrivalLocReturn,
 			@RequestParam String departDateReturn, @RequestParam String arrivalDateReturn,
 			@RequestParam String airlineCodeReturn, @RequestParam String airlineCode,
-			@RequestParam String seatPriceReturn, Principal principal) {
+			@RequestParam String seatPriceReturn, @RequestParam String seatGradeReturn, String flightNoReturn ,Principal principal) {
 
 		// 왕복일 시
 		if (airlineCodeReturn != null && !airlineCodeReturn.equals("")) {
@@ -314,6 +332,7 @@ public class AirlineController {
 		md.addAttribute("airlineCode", airlineCode);
 		md.addAttribute("domestic", domestic);
 		md.addAttribute("airlineInfo", airlineInfo);
+		md.addAttribute("ticketType", ticketType);
 		if (principal != null) {
 			String userId = principal.getName();
 			md.addAttribute("userId", userId);
@@ -326,8 +345,12 @@ public class AirlineController {
 		System.out.println("Domestic: " + domestic);
 		System.out.println("가는 편 항공코드: " + airlineCode);
 		System.out.println("오는 편 항공코드: " + airlineCodeReturn);
+		System.out.println("가는 편 flightNO: " + flightNo);
+		System.out.println("오는 편 flightNoReturn: " + flightNoReturn);
 		System.out.println("가는 편 티켓 값: " + seatPrice);
 		System.out.println("오는 편 티켓 값: " + seatPriceReturn);
+		System.out.println("좌석 등급 : " + seatGrade);
+		System.out.println("리턴 좌석 등급 : " + seatGradeReturn);
 
 		return "airline/airline_pay";
 

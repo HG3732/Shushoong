@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -122,12 +124,17 @@ public class ServiceCenterController {
 		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
 		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
 		
-		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum);
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId = authentication.getName();
+		
+		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userId);
 		md.addAttribute("currentPageNum", currentPageNum);
 		md.addAttribute("totalPageCount", totalPageCount);
 		md.addAttribute("startPageNum", startPageNum);
 		md.addAttribute("endPageNum", endPageNum);
 		md.addAttribute("noticeDto", noticeDto);
+		md.addAttribute("userId", userId);
 		return "servicecenter/notice";
 	}
 	
@@ -149,8 +156,9 @@ public class ServiceCenterController {
 		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
 		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
 		
-//		System.out.println(" " + );
-		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId = authentication.getName();
+		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userId);
 		md.addAttribute("currentPageNum", currentPageNum);
 		md.addAttribute("totalPageCount", totalPageCount);
 		md.addAttribute("startPageNum", startPageNum);
@@ -168,8 +176,12 @@ public class ServiceCenterController {
 	@PostMapping("/support/notice/write")
 	public String PostNoticeWrite (// RedirectAttributes rd, 
 			String noticeTitle, String noticeContent, MultipartFile noticeFile, String noticeCategory,
-			HttpSession session, Principal principal
+			Model md
 			) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId = authentication.getName();
+		
+		System.out.println("유저 아이디 : " + userId);
 		System.out.println("공지 작성 포스트 컨트롤러");
 		System.out.println("noticeTitle : " + noticeTitle);
 		System.out.println("noticeContent : " + noticeContent);
@@ -181,9 +193,9 @@ public class ServiceCenterController {
 	    dto.setNoticeContent(noticeContent);
 	    // noticeFile과 noticeCategory가 NoticeDto에 있는 경우 설정
 	    dto.setNoticeCategory(noticeCategory);
-//	    dto.setUserId("defaultUserId"); 
+	    dto.setUserId(userId); 
 //	    dto.setNoticeCategory("defaultUserGrade"); 
-	    
+	    md.addAttribute("loginUserId", userId);
         List<NoticeFileDto> fileId = new ArrayList<>();
         if (noticeFile != null && !noticeFile.isEmpty()) {
             NoticeFileDto fileDto = new NoticeFileDto();

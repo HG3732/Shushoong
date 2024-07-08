@@ -8,6 +8,7 @@
 			<span th:text="${air.departLoc}" class="select-info-departLoc-out" name="departLocReturn"></span>
 			<span th:text="${air.arrivalLoc}" class="select-info-arrivalLoc-out" name="arrivalLocReturn"></span> 
 			<span th:text="${air.airlineCode}" class="select-info-airlineCode-out" name="airlineCodeReturn"></span>
+			<span th:text="${air.flightNo}" class="select-info-flightNo-out" name="flightNoReturn"></span>
 		</div>
 		<div class="seat-count">
 			<div class="airline-flex">
@@ -106,6 +107,7 @@
 	$(document).ready(function() {
 		// getSelectOptionsReturn();
 		clickedTicketInfo(); // 티켓 상세 정보
+		clickedReturnReserve();
 	});
 </script>
 

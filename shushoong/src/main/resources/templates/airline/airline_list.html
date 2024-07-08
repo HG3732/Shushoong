@@ -246,11 +246,12 @@ div#people_lineup_sit_accoding{
 						</div>
 						<div class="airline-info-container">
 							<form id="frm-airinfo" hidden>
-								<input type="hidden" id="frm-seatGrade" name="seatGrade" th:value="${seatGrade}"> 
+								<input type="hidden" id="frm-seatGrade" name="seatGrade" th:value="${seatGrade}">
+								<input type="hidden" id="frm-seatGrade" name="seatGradeReturn" th:value="${seatGrade}"> 
 								<input type="hidden" id="adult" name="adult" th:value="${adult}"> 
 								<input type="hidden" id="child" name="child" th:value="${child}"> 
 								<input type="hidden" id="baby" name="baby" th:value="${baby}">
-								<input type="hidden" id="ticketType" name="ticketType">
+								<input type="hidden" id="ticketType" name="ticketType" th:value="${ticketType}">
 								<input type="hidden" id="seatPrice" name="seatPrice">
 								<input type="hidden" id="seatPriceReturn" name="seatPriceReturn">
 								<input type="hidden" id="departLoc" name="departLoc"> 
@@ -258,12 +259,15 @@ div#people_lineup_sit_accoding{
 								<input type="hidden" id="departDate" name="departDate"> 
 								<input type="hidden" id="arrivalDate" name="arrivalDate"> 
 								<input type="hidden" id="airlineCode" name="airlineCode">
+								<input type="hidden" id="flightNo" name="flightNo">
 								
 								<input type="hidden" id="departLocReturn" name="departLocReturn"> 
 								<input type="hidden" id="arrivalLocReturn" name="arrivalLocReturn"> 
 								<input type="hidden" id="departDateReturn" name="departDateReturn"> 
 								<input type="hidden" id="arrivalDateReturn" name="arrivalDateReturn">
 								<input type="hidden" id="airlineCodeReturn" name="airlineCodeReturn"> 
+								<input type="hidden" id="flightNoReturn" name="flightNoReturn"> 
+								
 							</form>
 							<div th:replace="~{airline/airline_list_section :: airlineList}"></div>
 						</div>

@@ -11,18 +11,33 @@ section.interested_section > div:first-child{
 	text-align: center;
 	font-size: 20px;
 	font-weight: bolder;
+	margin-top: 10px;
 }
 
-div.liked_hotel{
-	width: 180px;
+.interested_list_wrap{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-top: 50px;
+	border-top : 3px solid var(--color_blue_1);
+	border-bottom : 3px solid var(--color_blue_1);
+	padding-bottom: 50px;
+	margin-bottom: 50px;
+
+}
+
+a.liked_hotel{
+	width: 175px;
 	margin-left: 40px;
 	float: left;
+	margin-top: 30px;
+	
 }
 
 
 img.hotel_img{
 	width: 180px;
-	height: 150px;
+	height: 120px;
 }
 
 button.heart_check{
@@ -30,8 +45,18 @@ button.heart_check{
 	width: 30px;
 	height: 30px;
 	border-radius: 15px;
-	margin-left: -40px;
-	margin-top: 110px;
+	margin-left: 140px;
+	margin-top: -40px;
+	border: none;
+	background: none;
+}
+
+img.heart_img{
+	position : absolute;
+	width: 30px;
+	height: 30px;
+	margin-top :-14px;
+	margin-left:-15px; 
 }
 
 div.hot-hotel-name{

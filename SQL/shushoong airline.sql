@@ -57,7 +57,6 @@ PASSPORT_CODE) VALUES( '1238', '영문성5', '영문이름5', 'M', '2024-06-27',
 
 
 SELECT * FROM SEAT_GRADE;
-SELECT * FROM (SELECT * FROM (SELECT * FROM SEAT_GRADE OVER(PARTITION BY SEAT_PRICE ORDER BY DESC) JOIN AIRLINE_INFO ON airline_info.airline_code=seat_grade.airline_code)  ORDER BY SEAT_PRICE ASC) WHERE ROWNUM <= 6;
 
 SELECT * FROM (SELECT * FROM SEAT_GRADE OVER(PARTITION BY SEAT_PRICE));
 select * from member;
@@ -113,3 +112,18 @@ z.hotel_code WHERE y.user_id = 'customer' ;
 select*from hotel_review;
 SELECT * FROM hotel_review WHERE user_id = 'ex1';
 select * from HOTEL_REVIEW where USER_ID = 'ex1';
+select * from hotel_review where user_id = 'ex1'; 
+select * from hotel;
+select* from hotel_like;
+
+select * from HOTEL_REVIEW;
+INSERT ALL 
+    INTO HOTEL_REVIEW VALUES (770, '202404122OS001S01', 0, '2OS001', 2, 0, '좋아용 ㅎㅎ', '굿굿 ㅎㅎ', 5, 3, 5, 5, 1)
+    INTO HOTEL_REVIEW VALUES (771, '202405122OS001S01', 1, '2OS001', 2, 1, '좋아용 ㅎㅎ', '굿~ ㅎㅎ', 4, 3, 4, 3, 2)
+    INTO HOTEL_REVIEW VALUES (772, '202406122OS001S01', 2, '2OS001', 4, 3, '안좋아용 ㅎㅎ', '안굿 ㅎㅎ', 2, 1, 2, 0, 3)
+    INTO HOTEL_REVIEW VALUES (773, '202304122OS001S02', 0, '2OS002', 2, 0, '좋아용 ㅎㅎ', '굿 ㅎㅎㅎㅎ', 4, 3, 3, 3, 2)
+    INTO HOTEL_REVIEW VALUES (774, '202305122OS001S02', 2, '2OS002', 4, 1, '덜좋아용 ㅎㅎ', '덜굿 ㅎㅎ', 2, 3, 4, 3, 2)
+    INTO HOTEL_REVIEW VALUES (775, '202306122OS001S02', 3, '2OS002', 4, 0, '넘좋아용 ㅎㅎ', '아주 굿 ㅎㅎ', 5, 5, 5, 5, 3)
+    INTO HOTEL_REVIEW VALUES (70, '198204122OS001S03', 1, '2OS003', 2, 3, '좋아유', '굿이랑께',5, 3, 5, 5, 1)
+    INTO HOTEL_REVIEW VALUES (71, '198205122OS001S03', 2, '2OS003', 4, 2, '썩 좋지않소', '장사 이런식으로 계속하면 주인장 당신은 죽소', 2, 1, 0, 2, 2)
+    select * from dual;

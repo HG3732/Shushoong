@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 
 @Mapper
@@ -39,5 +40,7 @@ public interface MypageCustomerRepository {
 	public List<HotelDtoRes> selectListInterestedHotel(String userId);
 	
 	public int deleteHotelLiked(String hotelCode);
+	
+	public List<HotelReviewDto> selectListHotelReview(String userId);
 
 }

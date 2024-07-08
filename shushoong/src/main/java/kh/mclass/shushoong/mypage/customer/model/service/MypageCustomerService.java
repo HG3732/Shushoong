@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
 
@@ -71,4 +72,7 @@ public class MypageCustomerService {
 		return mypageRepository.deleteHotelLiked(hotelCode);
 	}
 	
+	public List<HotelReviewDto> selectListHotelReview(String userId) {
+		return mypageRepository.selectListHotelReview(userId);
+	}
 }

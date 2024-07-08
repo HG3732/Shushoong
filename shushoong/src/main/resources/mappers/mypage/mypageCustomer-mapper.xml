@@ -77,4 +77,8 @@
 	<delete id="deleteHotelLiked">
 		delete from HOTEL_LIKE where hotel_code = #{hotelCode}
 	</delete>
+	
+	<select id="selectListHotelReview" parameterType="HotelReviewDto">
+		SELECT * FROM hotel_review WHERE user_id = 'ex1';
+	</select>
 </mapper>

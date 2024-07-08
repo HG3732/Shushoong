@@ -40,6 +40,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
 import kh.mclass.shushoong.mypage.customer.model.service.MypageCustomerService;
@@ -379,10 +380,11 @@ public class MyPageCustomerController {
 			Principal principal,
 			Model md
 		) {
+		String userId = principal.getName();
+		List<HotelReviewDto> hotelReviewList = service.selectListHotelReview(userId);
+		md.addAttribute("hotelReviewList",hotelReviewList);
 		
-		
-		
-			return "mypage/customer/mypageHotelReview";
+		return "mypage/customer/mypageHotelReview";
 	}
 	
 	

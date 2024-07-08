@@ -99,13 +99,17 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					}else{
 						console.log("fail");
 					}
-					$("div.interested_list_wrap").load(location.href + "div.interested_list_wrap");
+					refreshListFunction();
 				},
 				 error: function(errorThrown) {
 			            console.log("일단 여기 표기")
 			        }
 		       });
 		}
+	 
+	 function refreshListFunction(){
+		 
+	 }
 	 
 	</script>
 </body>

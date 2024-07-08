@@ -369,10 +369,21 @@ public class MyPageCustomerController {
 	public int postMethodName(@RequestParam String hotelCode) {
 		int result =0;
 		result = service.deleteHotelLiked(hotelCode);
+		
 		System.out.println("result : "+result);
 		return result;
 	}
 	
-
+	@GetMapping("/mypage/hotel/review")
+	public String hotelReview(
+			Principal principal,
+			Model md
+		) {
+		
+		
+		
+			return "mypage/customer/mypageHotelReview";
+	}
+	
 	
 }

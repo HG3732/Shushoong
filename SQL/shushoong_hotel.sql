@@ -360,4 +360,32 @@ select * from hotel_room where hotel_code = '2OS001' order by room_cap;
 
 select max(hotel_price) from V_hotel_list where SUBSTR(hotel_code, 1, 3) = '2OS' and room_cap >= '4';
 
---
+--예약한 호텔의 체크아웃 날짜가 지나면 리뷰 작성 가능하게 만드는 트리거
+CREATE OR REPLACE PROCEDURE update_review_available_procedure IS
+BEGIN
+    UPDATE hotel_reserve hr
+    SET hr.REVIEW_AVAILABLE = 1
+    WHERE EXISTS (
+        SELECT 1
+        FROM pay p
+        WHERE p.HOTEL_RESERVE_CODE = hr.HOTEL_RESERVE_CODE
+          AND p.PAY_STATUS = 'paid'
+    )
+    AND TO_DATE(hr.RESERVE_CHECK_OUT, 'YYYY"년"MM"월"DD"일"') <= SYSDATE;
+
+    COMMIT;
+END;
+/
+
+-- 위 트리거의 스케쥴러 작성 (1시간마다 작동)
+BEGIN
+    DBMS_SCHEDULER.create_job (
+        job_name        => 'update_review_available_job',
+        job_type        => 'PLSQL_BLOCK',
+        job_action      => 'BEGIN update_review_available_procedure; END;',
+        start_date      => SYSTIMESTAMP,
+        repeat_interval => 'FREQ=HOURLY; INTERVAL=1',
+        enabled         => TRUE
+    );
+END;
+/

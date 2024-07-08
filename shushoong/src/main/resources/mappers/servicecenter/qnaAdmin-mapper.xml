@@ -6,25 +6,28 @@
 		select * from service_center 
 			join faq_cat using (faq_id) 
 			join faq_cat_desc using(quest_cat)
-		<if test="category != null and category !='' ">
-			<if test="keyword != null and keyword !='' ">
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="id != null and id !=''">
+				USER_ID = #{id}
+			</if>
+			<if test="category != null and category !='' and keyword != null and keyword !='' ">
 			 	<bind name="keyword3" value="'%' + keyword + '%'" />
 				 <choose>
 				 	<when test="category.equals('faqId')">
-				 		WHERE FAQ_ID LIKE #{keyword3}
+				 		AND FAQ_ID LIKE #{keyword3}
 				 	</when>
 				 	<when test="category.equals('askTitle')">
-				 		WHERE ASK_TITLE LIKE #{keyword3}
+				 		AND ASK_TITLE LIKE #{keyword3}
 				 	</when>
 				 	<when test="category.equals('userId')">
-				 		WHERE USER_ID LIKE #{keyword3}
+				 		AND USER_ID LIKE #{keyword3}
 				 	</when>
 				 </choose>
-			 </if>
-	 	 	<if test="category.equals('questCat')">
-		 		WHERE QUEST_CAT = #{questCatCategory}
+			</if>
+	 	 	<if test="category != null and category.equals('questCat')">
+		 		AND QUEST_CAT = #{questCatCategory}
 		 	</if>
-	 	</if>
+	 	</trim>
 	 	order by faq_id desc
 	</select>
 	
@@ -33,25 +36,28 @@
 		select count(*) from service_center 
 			join faq_cat using (faq_id) 
 			join faq_cat_desc using(quest_cat)
-		<if test="category != null and category !='' ">
-			<if test="keyword != null and keyword !='' ">
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="id != null and id !=''">
+				USER_ID = #{id}
+			</if>
+			<if test="category != null and category !='' and keyword != null and keyword !='' ">
 			 	<bind name="keyword3" value="'%' + keyword + '%'" />
 				 <choose>
 				 	<when test="category.equals('faqId')">
-				 		WHERE FAQ_ID LIKE #{keyword3}
+				 		AND FAQ_ID LIKE #{keyword3}
 				 	</when>
 				 	<when test="category.equals('askTitle')">
-				 		WHERE ASK_TITLE LIKE #{keyword3}
+				 		AND ASK_TITLE LIKE #{keyword3}
 				 	</when>
 				 	<when test="category.equals('userId')">
-				 		WHERE USER_ID LIKE #{keyword3}
+				 		AND USER_ID LIKE #{keyword3}
 				 	</when>
 				 </choose>
-			 </if>
-	 	 	<if test="category.equals('questCat')">
-		 		WHERE QUEST_CAT = #{questCatCategory}
+			</if>
+	 	 	<if test="category != null and category.equals('questCat')">
+		 		AND QUEST_CAT = #{questCatCategory}
 		 	</if>
-	 	</if>
+	 	</trim>
 	</select>
 	
 	<!-- 1:1 문의 보기 -->

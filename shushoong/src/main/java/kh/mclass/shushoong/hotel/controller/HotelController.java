@@ -72,9 +72,9 @@ public class HotelController {
 		List<HotelDtoRes> hotHotelList = service.selectHotHotelList();
 		model.addAttribute("hotHotelList", hotHotelList);
 		
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        System.out.println("유저 아이디 : " + authentication.getName());
-//        System.out.println("유저 등급 : " + authentication.getAuthorities());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("유저 아이디 : " + authentication.getName());
+        System.out.println("유저 등급 : " + authentication.getAuthorities());
         
 		return "hotel/hotel_main";
 	}
@@ -209,11 +209,14 @@ public class HotelController {
 		}
 		
 		String people = "2";
-		String adult = (String) session.getAttribute("adult");
-		String child = (String) session.getAttribute("child");
-		Integer adult1 = Integer.parseInt(adult);
-		Integer child1 = Integer.parseInt(child);
-		people = String.valueOf(child1+adult1);
+		
+		if(session.getAttribute("adult") != null && session.getAttribute("adult") != "") {
+			String adult = (String) session.getAttribute("adult");
+			String child = (String) session.getAttribute("child");
+			Integer adult1 = Integer.parseInt(adult);
+			Integer child1 = Integer.parseInt(child);
+			people = String.valueOf(child1+adult1);
+		}
 		//session에 담긴 정보는 string 으로 뽑을 수 있기 때문에 위에서 integer로 session에 넣었기 때문에 session 에서 꺼낼 때 string으로 뽑아주고 그 다음에 integer로 다시 변환해주기
 		
 		System.out.println(people + "=======================");

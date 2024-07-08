@@ -79,6 +79,6 @@
 	</delete>
 	
 	<select id="selectListHotelReview" parameterType="HotelReviewDto">
-		SELECT * FROM hotel_review WHERE user_id = 'ex1';
+		select * from HOTEL_REVIEW where USER_ID = 'ex1'
 	</select>
 </mapper>

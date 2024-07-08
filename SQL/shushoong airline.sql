@@ -109,3 +109,7 @@ join (select * from (SELECT hotel_pic.*,ROW_NUMBER() OVER(PARTITION BY hotel_pic
 ORDER BY hotel_pic.hotel_picture DESC) rn from hotel_pic) where rn = 1) z on x.hotel_code = 
 z.hotel_code WHERE y.user_id = 'customer' ;
 
+
+select*from hotel_review;
+SELECT * FROM hotel_review WHERE user_id = 'ex1';
+select * from HOTEL_REVIEW where USER_ID = 'ex1';

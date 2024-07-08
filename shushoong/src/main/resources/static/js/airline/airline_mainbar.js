@@ -210,6 +210,8 @@
 			
 			/* 인원 설정하는 펑션 - minus */
 		$("button#minus").on("click",function(){
+			console.log(Number($("#hidden_adult").val())+Number($("#hidden_child").val()));
+			
 			if(Number($(this).next().text()) < 1){
 				alert("인원은 0명 이하로 입력하실 수 없습니다.");
 			}else if(Number($("div#adult").children("div").text()) == Number($("div#baby").children("div").text())){
@@ -220,7 +222,11 @@
 				}
 			}else if(Number($("div#adult").children("div").text()) < Number($("div#baby").children("div").text())){
 				alert("유아는 좌석이 따로 배정되지 않으므로, \n성인보다 많이 탑승할 수 없습니다.");
-			}else{
+			}
+			else if(Number($("#hidden_adult").val())+Number($("#hidden_child").val()) == 1){
+				alert("성인/청소년중 하나는 1 이상이어야 합니다.");
+			}
+			else{
 			$(this).next().text(Number($(this).next().text())-1);
 			}
 		});
@@ -244,12 +250,13 @@
 		 	if($(this).parent().attr("id")=="adult"){
 		 		$("#hidden_adult").val($("#adult_value").text());}
 			else if($(this).parent().attr("id")=="child"){
-				$("#hidden_child").val($("#child_value").text());			}
+				$("#hidden_child").val($("#child_value").text());}
 			else if($(this).parent().attr("id")=="baby"){
 		 		$("#hidden_baby").val($("#baby_value").text());}
 			else if($(this).parent().attr("class")=="sit"){
-				$("#hidden_seat_grade").val($(this).attr("id"));
-			} 
+				$("#hidden_seat_grade").val($(this).attr("id"));}
+		
+				
 			$("div#people_lineup_text").each(function(){
 				$(this).text(
 				$("#"+$("#hidden_seat_grade").val()).text() +"/"+
@@ -261,7 +268,7 @@
 		 	
 		}
 		
-		
+		$("#hidden_adult").val()
 		
 		
 		

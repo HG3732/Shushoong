@@ -19,12 +19,12 @@ public interface MemberRepository {
 
 	// 로그인 기록
 	public int loginLog(Map<String, Object> map);
-	
+
 	// 로그인 ID를 갖는 객체가 존재하는지 => 존재하면 true 리턴 (ID 중복 검사 시 필요)
-    boolean existsByLoginId(String loginId);
+	boolean existsByLoginId(String loginId);
 
 	// 로그인 ID를 갖는 객체 반환
-    MemberDto findByLoginId(String loginId);
+	MemberDto findByLoginId(String loginId);
 
 	// 회원가입
 	public Integer join(MemberDto memberDto);
@@ -34,14 +34,14 @@ public interface MemberRepository {
 
 	// 비밀번호 찾기
 	public int findPwd(String userId, String userEmail, String userGrade);
-		
-	// 계정 체크 
+
+	// 계정 체크
 	public String accountCheck(String userName, String userEmail, String userGrade);
 
 	// 아이디 중복 확인
 	public int idCheck(String userId);
 
 	// 비밀번호 재설정
-	public String resetPwd(Map<String, Object> map);
+	public int resetPwd(Map<String, Object> paraMap);
 
 }

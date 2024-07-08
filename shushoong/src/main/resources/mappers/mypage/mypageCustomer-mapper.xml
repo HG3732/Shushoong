@@ -15,15 +15,27 @@
 	
 	<!-- 호텔 예약내역 리스트 -->
 	<select id="selectReservedHotelList" parameterType="String" resultType="hashmap">
-	    select hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc from hotel_reserve
+	    select hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc 
+	    	from hotel_reserve
         	join hotel using(hotel_code)
         	join hotel_room_att using(room_att)
         	join hotel_room_cat using(room_cat)
-        where user_id = #{userId}
+        	join pay using(hotel_reserve_code)
+        where user_id = #{userId} and pay_status = 'paid'
+	</select>
+	
+ 	<select id="selectCancelHotelList" parameterType="String" resultType="hashmap">
+	    select hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc 
+	    	from hotel_reserve
+        	join hotel using(hotel_code)
+        	join hotel_room_att using(room_att)
+        	join hotel_room_cat using(room_cat)
+        	join pay using(hotel_reserve_code)
+        where user_id = #{userId} and pay_status = 'cancel'
 	</select>
 	
 	<!-- 호텔 예약 상세정보 -->
-	<select id="selectOneReservedHotelList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectOneReservedHotel" parameterType="hashmap" resultType="hashmap">
    		select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, 
    				residence_num, p.pay_price as hotel_price, residence_name_ko, request_sum, approve_no
 		from hotel_reserve hr
@@ -34,6 +46,19 @@
     		join pay p on hr.hotel_reserve_code = p.hotel_reserve_code
 		where user_id = #{userId} and hr.hotel_reserve_code = #{hotelReserveCode} and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att
 	</select>
+	
+	<select id="selectOneCancelHotel" parameterType="hashmap" resultType="hashmap">
+   		select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, 
+   				residence_num, p.pay_price as hotel_price, residence_name_ko, request_sum, approve_no
+		from hotel_reserve hr
+		    join hotel h on hr.hotel_code = h.hotel_code 
+		    join hotel_room_att hra on hr.room_att = hra.room_att
+		    join hotel_room_cat hrc on hr.room_cat = hrc.room_cat
+		    join hotel_room hm on hr.room_cap = hm.room_cap
+    		join pay p on hr.hotel_reserve_code = p.hotel_reserve_code
+		where user_id = #{userId} and hr.hotel_reserve_code = #{hotelReserveCode} and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att
+	</select>
+	
 	
 	<!-- 호텔 예약 취소 -->
 	<update id="cancelHotelReserve" parameterType="String" >

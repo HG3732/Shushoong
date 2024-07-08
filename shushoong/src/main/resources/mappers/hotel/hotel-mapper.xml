@@ -171,11 +171,11 @@
 	    INSERT INTO hotel_reserve 
 	        (hotel_reserve_code, residence_name_ko, residence_name_en, residence_gender, residence_birth,
 	         residence_phone, residence_email, reserve_check_in, reserve_check_out, user_id, room_cap, 
-	         hotel_code, room_cat, room_att, residence_num, request_Sum)
+	         hotel_code, room_cat, room_att, residence_num, request_Sum, review_available)
 	    VALUES 
 	        (#{hotelReserveCode}, #{residenceNameKo}, #{residenceNameEn}, #{residenceGender}, #{residenceBirth}, 
 	        #{residencePhone}, #{residenceEmail}, #{reserveCheckIn}, #{reserveCheckOut}, #{userId}, #{roomCap}, 
-	        #{hotelCode}, #{roomCat}, #{roomAtt}, #{people}, #{requestSum})
+	        #{hotelCode}, #{roomCat}, #{roomAtt}, #{people}, #{requestSum}, '0')
 	</insert>
 
 	<!-- 결제 완료 직전  -->

@@ -36,11 +36,11 @@
 		</div>
 	</div>
 	 -->
-	<!-- 
-	<div class="viewAllList">
-		<button type="button" class="viewQnAList">전체보기</button>
+	
+	<div class="viewAllList" th:if="${loginUserId} == 'admin'">
+		<a th:href="@{/support/notice/write}"><button type="button" class="viewQnAList">작성하기</button></a>
 	</div>
-	 -->
+	
 	<div class="wrap-pageNum">
 		<th:block th:if="${startPageNum > 1}">
 			<button type="button" class="btn-page gopage" th:data-targetpage="${startPageNum - 1}" onclick="goPage(this)">&lt;</button>

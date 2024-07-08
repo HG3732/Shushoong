@@ -9,7 +9,7 @@
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 <link th:href="@{/css/mypage/admin/mypageAdminAside.css}"
 	rel="stylesheet" />
-<link th:href="@{/css/mypage/viewQnA.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/mypageNoticeView.css}" rel="stylesheet" />
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
@@ -31,22 +31,26 @@
 					<div th:replace="~{mypage/admin/mypageAdminAside :: Aside}"></div>
 				</aside>
 			</div>
+			<form id="frm-notice-update" action="" hidden="">
+				<div th:text="${noticeDto.noticeId}" id="noticeId" name="noticeId"></div>
+				<div th:text="${noticeDto.noticeTitle}" id="noticeTitle" name="noticeTitle"></div>
+				<div th:value="${noticeDto.FileId}" id="fileId" name="fileId"></div>
+				<div th:text="${noticeDto.noticeContent}" id="noticeContent" name="noticeContent"></div>
+			</form>
 			<div class="wrap-board">
 				<div class="qna-head">
 					<div class="qna-title"
 						th:text="${noticeDto.noticeId + '.' + noticeDto.noticeTitle}"></div>
 					<div class="ask-date" th:text="${noticeDto.noticeTime}"></div>
 				</div>
-				<hr
-					style="border: none; border-bottom: 3px solid var(--color_blue_1);">
+				<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
 				<div class="qna-main">
 					<div class="qna-"></div>
-					<div class="qna-category" th:text="${noticeDto.noticeCategory}"></div>
-					<hr
-						style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
+					<div class="qna-category" th:if="${noticeDto.noticeId} > 1000">사업자 공지사항</div>
+					<div class="qna-category" th:if="${noticeDto.noticeId} <= 1000">회원 공지사항</div>
+					<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
 					<div class="qna-userId" th:text="${'작성자 : ' + noticeDto.userId}"></div>
-					<hr
-						style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
+					<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
 					<th:block
 						th:if="${noticeDto.fileId == null or #list.isEmpty(noticeDto.fileId)}">
 						<div class="qna-file">
@@ -60,16 +64,36 @@
 							<div>첨부파일 경로...</div>
 						</div>
 					</th:block>
-					<hr
-						style="border: none; border-bottom: 1px solid var(--color_blue_1);">
+					<hr style="border: none; border-bottom: 1px solid var(--color_blue_1);"/>
+					<div class="update-box" th:if="${loginUserId} == 'admin'">
+						<div class="update-btn"><button type="button">수정하기</button></div>
+						<div class="delete-btn"><button type="button">삭제하기</button></div>
+					</div>
 					<div class="qna-content" th:text="${noticeDto.noticeContent}"></div>
 				</div>
 			</div>
+			<div id="modal" class="modal_overlay">
+	            <div class="modal_window">
+	            	<p style="text-align: center; margin-top:40px;">정말 취소하시겠습니까?</p>
+	            	<div class="btn_wrap">
+	            		<button type="button" class="delete-ok">네</button>
+	            		<button type="button" class="delete-no">아니오</button>
+	            	</div>
+	            </div>
+           	</div>
 		</div>
 	</div>
 	<div class="wrap-footer">
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
 </body>
+	<script type="text/javascript">
+		$(loadeadHandler);
+		function loadeadHandler() {
+			clickedUpdateBtn();
+			clickedDeleteBtn();
+		}
+	</script>		
 <script th:src='@{/js/mypage/admin/viewQnA.js}'></script>
+<script th:src="@{/js/servicecenter/notice-update.js}" type="text/javascript" ></script>
 </html>

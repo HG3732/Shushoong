@@ -32,13 +32,13 @@
 
 			<div class="wrap-write">
 				<h1>공지사항 작성</h1>
-				
+				<div class="rmfqjsgh" th:text="${noticeDto.noticeId}"></div>
 				<hr>
 					<div class="write-table">
 						<div class="write-title">
 							<div class="th title">제목</div>
 							<div class="input title">
-								<input class="titleVal" type="text">
+								<input class="titleVal" type="text" th:value="${noticeDto.noticeTitle}">
 							</div>
 						</div>
 						<div class="write-cat">
@@ -53,13 +53,13 @@
 						<div class="write-file">
 							<div class="th file">첨부파일</div>
 							<div class="input file">
-								<input type="file" class="fileVal">
+								<input type="file" class="fileVal" th:text="${noticeDto.fileId}">
 							</div>
 						</div>
 
 					</div>
 					<div class="input-content">
-						<textarea class="content-textarea" rows="15 " cols=""></textarea>
+						<textarea class="content-textarea" rows="15 " cols="" th:text="${noticeDto.noticeContent}"></textarea>
 					</div>
 					<hr>
 					

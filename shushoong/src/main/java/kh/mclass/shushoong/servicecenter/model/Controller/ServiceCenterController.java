@@ -43,7 +43,7 @@ public class ServiceCenterController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		if(authentication.getAuthorities().toString().contains("admin")) {
-			int totalCount = service.selectTotalCount(null, category, keyword);
+			int totalCount = service.selectTotalCount(null, category, keyword, questCat);
 			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, null, category, keyword, questCat));
 			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
 			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
@@ -55,7 +55,7 @@ public class ServiceCenterController {
 			model.addAttribute("endPageNum", endPageNum);
 		} else {
 			String loginId = authentication.getName();
-			int totalCount = service.selectTotalCount(loginId, category, keyword);
+			int totalCount = service.selectTotalCount(loginId, category, keyword, questCat);
 			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, loginId, category, keyword, questCat));
 			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
 			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
@@ -84,7 +84,7 @@ public class ServiceCenterController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		if(authentication.getAuthorities().toString().contains("admin")) {
-			int totalCount = service.selectTotalCount(null, category, keyword);
+			int totalCount = service.selectTotalCount(null, category, keyword, questCatCategory);
 			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, null, category, keyword, questCatCategory));
 			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
 			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
@@ -96,7 +96,7 @@ public class ServiceCenterController {
 			model.addAttribute("endPageNum", endPageNum);
 		} else {
 			String loginId = authentication.getName();
-			int totalCount = service.selectTotalCount(loginId, category, keyword);
+			int totalCount = service.selectTotalCount(loginId, category, keyword, questCatCategory);
 			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, loginId, category, keyword, questCatCategory));
 			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
 			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;

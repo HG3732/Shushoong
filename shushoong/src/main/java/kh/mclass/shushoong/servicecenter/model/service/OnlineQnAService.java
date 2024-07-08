@@ -26,8 +26,8 @@ public class OnlineQnAService {
 		return serviceCenterRepository.selectAllList(pageSize, pageBlockSize, currentPageNum, id, category, keyword, questCatCategory, rowBounds);
 	};
 	
-	public int selectTotalCount(String id, String category, String keyword) {
-		return serviceCenterRepository.selectTotalCount(id, category, keyword);
+	public int selectTotalCount(String id, String category, String keyword, String questCatCategory) {
+		return serviceCenterRepository.selectTotalCount(id, category, keyword, questCatCategory);
 	}
 	
 	public OnlineQnADto selectOneQna(String faqId) {

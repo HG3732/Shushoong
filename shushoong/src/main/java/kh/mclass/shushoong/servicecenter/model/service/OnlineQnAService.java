@@ -17,17 +17,17 @@ public class OnlineQnAService {
 	
 	private final ServiceCenterRepository serviceCenterRepository;
 	
-	public List<OnlineQnADto> selectAllList(int pageSize, int pageBlockSize, int currentPageNum, String category, String keyword, String questCatCategory) {
+	public List<OnlineQnADto> selectAllList(int pageSize, int pageBlockSize, int currentPageNum, String id, String category, String keyword, String questCatCategory) {
 
 		int offset = (currentPageNum - 1) * pageSize;
 		
 		RowBounds rowBounds = new RowBounds(offset, pageSize);
 		
-		return serviceCenterRepository.selectAllList(pageSize, pageBlockSize, currentPageNum, category, keyword, questCatCategory, rowBounds);
+		return serviceCenterRepository.selectAllList(pageSize, pageBlockSize, currentPageNum, id, category, keyword, questCatCategory, rowBounds);
 	};
 	
-	public int selectTotalCount(String category, String keyword) {
-		return serviceCenterRepository.selectTotalCount(category, keyword);
+	public int selectTotalCount(String id, String category, String keyword) {
+		return serviceCenterRepository.selectTotalCount(id, category, keyword);
 	}
 	
 	public OnlineQnADto selectOneQna(String faqId) {

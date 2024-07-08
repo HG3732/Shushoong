@@ -32,6 +32,7 @@ public class ServiceCenterController {
 	@Autowired
 	private OnlineQnAService service;
 	
+	
 	int pageSize = 10;
 	int pageBlockSize = 3;
 	int currentPageNum = 1;
@@ -39,18 +40,33 @@ public class ServiceCenterController {
 	@GetMapping("/support/qna/list")
 	public String qnaList(Model model, String category, String keyword, String questCat) {
 		
-		int totalCount = service.selectTotalCount(category, keyword);
-		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
-		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+		if(authentication.getAuthorities().toString().contains("admin")) {
+			int totalCount = service.selectTotalCount(null, category, keyword);
+			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, null, category, keyword, questCat));
+			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+			
+			model.addAttribute("currentPageNum", currentPageNum);
+			model.addAttribute("totalPageCount", totalPageCount);
+			model.addAttribute("startPageNum", startPageNum);
+			model.addAttribute("endPageNum", endPageNum);
+		} else {
+			String loginId = authentication.getName();
+			int totalCount = service.selectTotalCount(loginId, category, keyword);
+			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, loginId, category, keyword, questCat));
+			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+			
+			model.addAttribute("currentPageNum", currentPageNum);
+			model.addAttribute("totalPageCount", totalPageCount);
+			model.addAttribute("startPageNum", startPageNum);
+			model.addAttribute("endPageNum", endPageNum);
+		}
 		
-		
-		model.addAttribute("currentPageNum", currentPageNum);
-		model.addAttribute("totalPageCount", totalPageCount);
-		model.addAttribute("startPageNum", startPageNum);
-		model.addAttribute("endPageNum", endPageNum);
-		model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, category, keyword, questCat));
 		return "servicecenter/onlineQnAlist";
 	}
 	
@@ -65,17 +81,32 @@ public class ServiceCenterController {
 			}
 		}
 		
-		int totalCount = service.selectTotalCount(category, keyword);
-		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
-		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
-		
-		model.addAttribute("currentPageNum", currentPageNum);
-		model.addAttribute("totalPageCount", totalPageCount);
-		model.addAttribute("startPageNum", startPageNum);
-		model.addAttribute("endPageNum", endPageNum);
-		model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, category, keyword, questCatCategory));
+		if(authentication.getAuthorities().toString().contains("admin")) {
+			int totalCount = service.selectTotalCount(null, category, keyword);
+			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, null, category, keyword, questCatCategory));
+			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+			
+			model.addAttribute("currentPageNum", currentPageNum);
+			model.addAttribute("totalPageCount", totalPageCount);
+			model.addAttribute("startPageNum", startPageNum);
+			model.addAttribute("endPageNum", endPageNum);
+		} else {
+			String loginId = authentication.getName();
+			int totalCount = service.selectTotalCount(loginId, category, keyword);
+			model.addAttribute("result", service.selectAllList(pageSize, pageBlockSize, currentPageNum, loginId, category, keyword, questCatCategory));
+			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+			
+			model.addAttribute("currentPageNum", currentPageNum);
+			model.addAttribute("totalPageCount", totalPageCount);
+			model.addAttribute("startPageNum", startPageNum);
+			model.addAttribute("endPageNum", endPageNum);
+		}
 		return "servicecenter/QnAlist";
 	}
 	

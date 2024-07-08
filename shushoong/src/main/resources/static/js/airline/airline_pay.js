@@ -457,7 +457,7 @@
 		}
 		
 		
-//		                   국내선일경우 passport 관련 정보 display 시키는 옵션
+//		국내선일경우 passport 관련 정보 display 시키는 옵션
 		function passportDisplayFunction(){
 		if($("#domestic_val").val()=='O'){
 			$(".passport_info_wrap").each(function (){

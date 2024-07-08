@@ -77,7 +77,7 @@ function resetPwdCheckHandler() {
 		type: 'post',
 		data: { userId: userId, userEmail: userEmail, userGrade: userGrade },
 		success: function(result) {
-			if (result == 0) {
+			if (cnt == 0) {
 				alert("등록하신 정보와 일치하는지 다시 한 번 확인해 주세요.");
 			} else {
 				window.open('/shushoong/reset/password', '비밀번호 초기화', 'width=500px height=500px, loaction=no, status=no scrollbars=none');

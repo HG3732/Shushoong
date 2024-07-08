@@ -1,12 +1,14 @@
 package kh.mclass.shushoong.config;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Component;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.member.model.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +38,7 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		
+		MemberDto dto;
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date now = new Date();
 		String loginDate = sdf2.format(now);
@@ -44,11 +47,24 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		UserDetails userDetails = (UserDetails) principal;
 		String userId = userDetails.getUsername();
 		
+		// 로그인 기록 
 		Map<String, Object> map = new HashMap<>();
 		map.put("userId", userId);
 		map.put("latestLogin", loginDate);
 		
 		memberService.loginLog(map);
+		
+//		// 계정잠금 확인
+//		String error;
+//		AuthenticationException exception;
+//		if(exception instanceof AuthenticationException) {
+//			error = "AuthenticationException";
+//		}
+//		error = URLEncoder.encode(error, "UTF-8");
+////		if(dto.getUserStatus() == 1) {
+////			setDefaultFailureUrl("/login?error=true&exception="+error);
+////		}
+//		
 		
 		setDefaultTargetUrl("/home");
 		SavedRequest savedRequest = requestCache.getRequest(request, response);

@@ -1,11 +1,10 @@
 /*  모달창 */
 function reserveCancelHandler(){
-	$('#modal').css("display", 'block');
-	
+	$('#modal_esc').css("display", 'block');
 }
 
 function escHandler(){
-	$('#modal').css("display", 'none');
+	$('#modal_esc').css("display", 'none');
 }
 
 /* 결제 취소하기 */
@@ -34,3 +33,29 @@ function cancelHandler(){
 	});
 	
 }
+
+/* 리뷰 작성 */
+function reviewWriteHandler(){
+	$('#modal_review').css("display", 'block');
+		
+}
+
+function reviewEscHandler(){
+	$('#modal_review').css("display", 'none');
+ 	$('.score').prevAll().children().attr("src", "/shushoong/images/star.png").css('width', '15px;');
+ 	$('.score').next().children().attr("src", "/shushoong/images/star.png").css('width', '15px;');
+	
+}
+
+function checkScoreHandler() {
+	
+	console.log(this);
+	console.log($(this).children());
+	
+	/* 한번 별을 초기화 */
+ 	$(this).siblings().children().attr("src", "/shushoong/images/star.png").css('width', '15px;');
+ 	
+ 	$(this).prevAll().children().attr("src", "/shushoong/images/star_line.png").css('width', '15px;');
+  	$(this).next().children().attr("src", "/shushoong/images/star_line.png").css('width', '15px;');
+
+ }

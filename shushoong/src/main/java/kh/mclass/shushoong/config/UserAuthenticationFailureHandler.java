@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler{
+public class UserAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler{
 	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,

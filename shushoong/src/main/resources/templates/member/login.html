@@ -38,6 +38,7 @@
 						<div class="content">
 							<div class="customerlogin-section">
 								<form id="frm-post" th:action="@{/login}" method="post">
+									<input type="hidden" name="userGrade" value="customer"/>
 									<div class="loginInfo">
 										<input type="text" name="userId" id="userId"  placeholder="아이디" autofocus>
 										<input type="password" name="userPwd" id="userPwd" placeholder="비밀번호">
@@ -46,11 +47,8 @@
 										<input type="checkbox" name="idsaved" th:value="${remember}"> 아이디 저장
 									</div>
 									<div class="loginBtn">
-										<button type="submit" class="btn login">로그인</button>
+										<button type="submit" class="btn customerLogin">로그인</button>
 									</div>
-									<div th:if="${error}">
-		           						<p style="color:red; font-size: 10px" th:text="${exception}"></p>
-		        					</div>
 									<div class="login-function">
 										<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a> 
 										<a th:href="@{/account/find}"><div class="findInfoBtn">아이디/비밀번호 찾기</div></a>
@@ -83,6 +81,7 @@
 							</div>
 							<div class="businesslogin-section">
 								<form id="frm-post" th:action="@{/login}" method="post">
+									<input type="hidden" name="userGrade" value="business"/>
 									<div class="loginInfo">
 										<input type="text" name="userId" id="userId" placeholder="아이디" autofocus>
 										<input type="password" name="userPwd" id="userPwd" placeholder="비밀번호">
@@ -93,7 +92,7 @@
 										저장
 									</div>
 									<div class="loginBtn">
-										<button type="submit" class="btn login">로그인</button>
+										<button type="submit" class="btn businessLogin">로그인</button>
 									</div>
 									<div class="login-function">
 										<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a> 

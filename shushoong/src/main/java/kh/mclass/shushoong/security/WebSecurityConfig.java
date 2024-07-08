@@ -9,11 +9,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import kh.mclass.shushoong.config.AuthSuccessHandler;
-import kh.mclass.shushoong.config.AuthenticationFailureHandler;
+import kh.mclass.shushoong.config.UserAuthenticationSuccessHandler;
+import kh.mclass.shushoong.config.AdminAuthenticationFailureHandler;
+import kh.mclass.shushoong.config.AdminAuthenticationSuccessHandler;
+import kh.mclass.shushoong.config.UserAuthenticationFailureHandler;
 import kh.mclass.shushoong.member.model.service.MemberSecurityService;
 
 @Configuration
@@ -21,10 +24,16 @@ import kh.mclass.shushoong.member.model.service.MemberSecurityService;
 public class WebSecurityConfig {
 	
 	@Autowired
-	AuthSuccessHandler authSuccessHandler;
+	UserAuthenticationSuccessHandler authSuccessHandler;
 	
 	@Autowired
-	AuthenticationFailureHandler authFailureHandler;
+	UserAuthenticationFailureHandler authFailureHandler;
+	
+	@Autowired
+	AdminAuthenticationSuccessHandler adminAuthSuccessHandler;
+	
+	@Autowired
+	AdminAuthenticationFailureHandler adminAuthFailureHandler;
 	
 	@Autowired
 	MemberSecurityService securityService;
@@ -46,12 +55,17 @@ public class WebSecurityConfig {
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
-//				.loginPage("/manager/login")
 				.defaultSuccessUrl("/")
 				.successHandler(authSuccessHandler)
 				.failureHandler(authFailureHandler)
 				.usernameParameter("userId")
 				.passwordParameter("userPwd"))
+//		.formLogin((formLogin) -> formLogin
+//				.loginPage("/login/admin")
+//				.successHandler(adminAuthSuccessHandler)
+//				.failureHandler(adminAuthFailureHandler)
+//				.usernameParameter("userId")
+//				.passwordParameter("userPwd"))
 		.rememberMe((rememberMe -> rememberMe
 //				.key("uniqueAndSecret")
 				.rememberMeParameter("remember")
@@ -74,8 +88,4 @@ public class WebSecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 	
-	@Bean
-	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-		return authenticationConfiguration.getAuthenticationManager();
-	}
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -123,11 +125,15 @@ public class ServiceCenterController {
 		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
 		
 		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum);
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId = authentication.getName();
 		md.addAttribute("currentPageNum", currentPageNum);
 		md.addAttribute("totalPageCount", totalPageCount);
 		md.addAttribute("startPageNum", startPageNum);
 		md.addAttribute("endPageNum", endPageNum);
 		md.addAttribute("noticeDto", noticeDto);
+		md.addAttribute("userId", userId);
 		return "servicecenter/notice";
 	}
 	

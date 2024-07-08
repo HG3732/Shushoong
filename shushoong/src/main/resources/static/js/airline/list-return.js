@@ -6,6 +6,10 @@ function clickedShowReturnBtn() {
 		var departLoc = $('#select-info-departLoc').text().trim();
 		var arrivalLoc = $('#select-info-arrivalLoc').text().trim();
 		var airlineCode= $(this).closest('.airline-info').find('.select-info-airlineCode').text().trim();
+		var flightNo= $(this).closest('.airline-info').find('.select-info-flightNo').text().trim();
+		var adult = $('.airline-info-container').find('#adult').val();
+		var child = $('.airline-info-container').find('#child').val();
+		var baby = $('.airline-info-container').find('#baby').val();
 		
 		var seatPrice = seatPriceStr.replace(/,/g, '').replace('원', '');
 		
@@ -13,16 +17,22 @@ function clickedShowReturnBtn() {
 		console.log('Depart Loc:', departLoc);
 		console.log('Arrival Loc:', arrivalLoc);
 		console.log('airlineCode:', airlineCode);
+		console.log('flightNo:', flightNo);
+		console.log('adult:', adult);
+		console.log('child:', child);
+		console.log('baby:', baby);
 		
 		$('#seatPrice').val(seatPrice);
 		$('#departLoc').val(arrivalLoc);
 		$('#arrivalLoc').val(departLoc);
 		$('#airlineCode').val(airlineCode);
+		$('#flightNo').val(flightNo);
 		
         console.log('doGet Data:', {
             departLoc: $('#departLoc').val(),
             arrivalLoc: $('#arrivalLoc').val(),
             airlineCode: $('#airlineCode').val(),
+            flightNo: $('#flightNo').val(),
             seatPrice: $('#seatPrice').val()
         });
 		

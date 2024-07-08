@@ -3,6 +3,9 @@ function getSelectOptions() {
 	var departLoc = $('#select-info-departLoc').text();
 	var arrivalLoc = $('#select-info-arrivalLoc').text();
 	var ticketType = $('#select-info-ticketType').text();
+	var adult = $('.airline-info-container').find('#adult').val();
+	var child = $('.airline-info-container').find('#child').val();
+	var baby = $('.airline-info-container').find('#baby').val();
 	
 	console.log('티켓타입 : ', ticketType);
 
@@ -47,7 +50,8 @@ function getSelectOptions() {
 		
 		// 직항/경유
         var viaType = $('#viaType').val();
-
+	
+		
 		console.log('출발지 : ', departLoc);
 		console.log('도착지 : ', arrivalLoc);
 		console.log('정렬 순서', selectType);
@@ -63,6 +67,9 @@ function getSelectOptions() {
 			url: "/shushoong/airline/list_select_options/ajax",
 			method: "get",
 			data: {
+				adult: adult,
+				child: child,
+				baby: baby,
 				departLoc: departLoc,
 				arrivalLoc: arrivalLoc,
 				departTimeLeft: departTimeLeftVal,
@@ -89,13 +96,6 @@ function getSelectOptions() {
 	$('#depart-input-right').on('click', updateTimeRange);
 	$('#arr-input-left').on('click', updateTimeRange);
 	$('#arr-input-right').on('click', updateTimeRange);
-}
-function noAirlineList() {
-	$('.airline-info-container').empty(); // 기존 목록 초기화
-	var airlineEmpty = `
-	<div class="empty-list">해당 조건에 일치하는 항공권이 없습니다.</div>
-	`;
-	$('.airline-info-container').html(airlineEmpty);
 }
 /*
 	clickedTicketInfo();

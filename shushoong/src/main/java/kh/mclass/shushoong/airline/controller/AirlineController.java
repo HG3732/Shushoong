@@ -72,6 +72,7 @@ public class AirlineController {
 			System.out.println("departLoc : " + departLoc);
 			System.out.println("arrivalLoc : " + arrivalLoc);
 			System.out.println("seatGrade : " + seatGrade);
+			System.out.println("ticketType: " + ticketType);
 
 			md.addAttribute("departLoc", departLoc);
 			md.addAttribute("arrivalLoc", arrivalLoc);
@@ -131,6 +132,7 @@ public class AirlineController {
 		md.addAttribute("adult", adult);
 		md.addAttribute("child", child);
 		md.addAttribute("baby", baby);
+		md.addAttribute("ticketType", ticketType);
 //		md.addAttribute("maxPrice", maxPrice);
 
 		// 각 항공편에 대해 30000에서 60000 사이의 랜덤 가격을 설정
@@ -161,10 +163,12 @@ public class AirlineController {
 		System.out.println("adult: " + adult);
 		System.out.println("child: " + child);
 		System.out.println("baby: " + baby);
+		System.out.println("ticketType: " + ticketType);
 
 		md.addAttribute("adult", adult);
 		md.addAttribute("child", child);
 		md.addAttribute("baby", baby);
+		md.addAttribute("ticketType", ticketType);
 		
 		List<AirlineInfoDto> SortData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft,
 				deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType,
@@ -207,6 +211,7 @@ public class AirlineController {
 		System.out.println("도착지 : " + arrivalLoc);
 		System.out.println("정렬 타입 : " + selectType);
 		System.out.println("경유 타입 : " + viaType);
+		System.out.println("ticketType: " + ticketType);
 //		System.out.println("가격 최댓 값 : " + maxPrice);
 
 		AirlineInfoDto selectOneAirline = service.getSelectOne(airlineCode);
@@ -216,6 +221,7 @@ public class AirlineController {
 		md.addAttribute("selectOneAirline", selectOneAirline);
 		md.addAttribute("airlineReturnData", SortData);
 		md.addAttribute("seatGrade", seatGrade);
+		md.addAttribute("ticketType" + ticketType);
 //		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 //		md.addAttribute("maxPrice", maxPrice2);
 		log.debug("컨트롤러 디버깅 : " + SortData);
@@ -326,6 +332,7 @@ public class AirlineController {
 		md.addAttribute("airlineCode", airlineCode);
 		md.addAttribute("domestic", domestic);
 		md.addAttribute("airlineInfo", airlineInfo);
+		md.addAttribute("ticketType", ticketType);
 		if (principal != null) {
 			String userId = principal.getName();
 			md.addAttribute("userId", userId);

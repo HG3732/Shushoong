@@ -1,6 +1,3 @@
-
-
-
 /*===========방 전체부기 눌렀을 때 나머지 방들 출력하는 함수============*/
 function showAllRoomHandler(){
 	$(".roomlist:gt(2)").show();

@@ -150,6 +150,7 @@ public class MyPageCustomerController {
 		model.addAttribute("userId", userId);
 		model.addAttribute("reserveList", service.selectReservedHotelList(userId));
 		//service에서 불러온 값 변수 선언 따로 안하고 바로 model 에 넣기
+		model.addAttribute("cancelList", service.selectCancelHotelList(userId));
 		
 		return "mypage/customer/mypageCustomerReservedHotelList";
 	}

@@ -524,7 +524,8 @@ from hotel_reserve hr
     join hotel_room_cat hrc on hr.room_cat = hrc.room_cat
     join hotel_room hm on hr.room_cap = hm.room_cap
     join pay p on hr.hotel_reserve_code = p.hotel_reserve_code
-where user_id = 'singasong' and hr.hotel_reserve_code = '20240706412KT0032' and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att;
+where user_id = 'singasong' and hr.hotel_reserve_code = '20240708140JJ0020' and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att
+        and pay_status = 'paid';
 
 
 delete from pay where hotel_reserve_code='20240707342KT0021';

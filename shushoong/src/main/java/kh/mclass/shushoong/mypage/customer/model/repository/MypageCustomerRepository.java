@@ -23,6 +23,9 @@ public interface MypageCustomerRepository {
 	//호텔 예약 리스트
 	public List<Map<String, String>> selectReservedHotelList(String userId);
 	
+	//호텔 취소 리스트
+	public List<Map<String, String>> selectCancelHotelList(String userId);
+	
 	//호텔 예약 상세정보
 	public Map<String, Object> selectOneReservedHotelList(String userId, String hotelReserveCode);
 	

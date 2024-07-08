@@ -17,27 +17,7 @@
 			<div class="td-writedate" th:text="${notice.noticeTime}"></div></a>
 	</div>
 	
-<!-- 	
-  		<div th:if="${userId} == 'business' and ${notice.noticeId} > 1000" class="notice-list">
-			 <a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
-			 <div class="td-no" th:text="${notice.noticeId}"></div></a>
-			 <a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
-			<div class="td-title" th:text="${notice.noticeTitle}"></div></a>
-			<a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
-			<div class="td-writedate" th:text="${notice.noticeTime}"></div></a>
-		</div>
-  		<div th:if="${userId} == 'customer' and ${notice.noticeId} <= 1000" class="notice-list">
-			 <a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
-			 <div class="td-no" th:text="${notice.noticeId}"></div></a>
-			 <a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
-			<div class="td-title" th:text="${notice.noticeTitle}"></div></a>
-			<a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}">
-			<div class="td-writedate" th:text="${notice.noticeTime}"></div></a>
-		</div>
-	</div>
-	 -->
-	
-	<div class="viewAllList" th:if="${loginUserId} == 'admin'">
+	<div class="viewAllList" th:if="${userGrade} == 'admin'">
 		<a th:href="@{/support/notice/write}"><button type="button" class="viewQnAList">작성하기</button></a>
 	</div>
 	

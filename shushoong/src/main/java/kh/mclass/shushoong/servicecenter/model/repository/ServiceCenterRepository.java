@@ -26,15 +26,15 @@ public interface ServiceCenterRepository {
 	
 	
 	// 공지사항
-	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userId, String noticeCategory);
+	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userGrade);
 	
-	int selectNoticeTotalCount();
+	int selectNoticeTotalCount(String userGrade);
 	
 	// 공지사항 작성
     int insertNotice(NoticeDto noticeDto);
     int insertNoticeFile(NoticeFileDto noticeFileDto);
     NoticeDto selectOneNotice(String noticeId);
-    int updateNotice(String noticeId);
+    int updateNotice(NoticeDto noticeDto);
     int deleteNotice(String noticeId);
 		
 	

@@ -15,5 +15,6 @@ public class NoticeDto {
 	private String noticeTime;
 	private String userId;
 	private String noticeCategory;
+	private String userGrade;
 	List<NoticeFileDto> fileId;
 }

@@ -6,8 +6,9 @@
 <link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
-<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}"
-	rel="stylesheet" />
+<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/business/mypageBusinessAside.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/admin/mypageAdminAside.css}" rel="stylesheet" />
 <link th:href="@{/css/mypage/mypageNotice.css}"
 	rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -26,15 +27,21 @@
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-aside">
-				<aside>
+				<aside th:if="${userGrade} == 'customer'">
 					<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+				</aside>
+				<aside th:if="${userGrade} == 'business'">
+					<div th:replace="~{mypage/business/mypageBusinessAside :: Aside}"></div>
+				</aside>
+				<aside th:if="${userGrade} == 'admin'">
+					<div th:replace="~{mypage/admin/mypageAdminAside :: Aside}"></div>
 				</aside>
 			</div>
 
 			<div class="section-notice">
 				<section>
 					<h1 class="notice-h1">공지사항</h1>
-					<div>
+					<div th:if="${userGrade} == 'admin'">
 					<form id="select-cat" action="">
 						<select class="catVal">
 							<option value="1">회원</option>
@@ -42,7 +49,7 @@
 						</select>
 					</form>
 					</div>
-					<form><div id="loginUserId" th:value="${loginUserId}"></div></form>
+					<form><div id="userGrade" th:value="${userGrade}"></div></form>
 					<div th:replace="~{servicecenter/notice_section :: noticeList}"></div>
 
 				</section>
@@ -62,17 +69,23 @@
 	}
 	function goPage(thisElement) {
 		console.log($(this));
+		
 		var currentPageNum = $(thisElement).data('targetpage');
+		//var noticeCategory = $('.select-cat').val();
 		console.log(currentPageNum);
+		//console.log(noticeCategory);
 		$.ajax({
 			url:"/shushoong/support/notice/list.ajax",
 			method: "get",
-			data: { pageNum : currentPageNum},
+			data: { pageNum : currentPageNum
+					//noticeCategory: noticeCategory 	
+			},
 			error: function(xhr, status, error) {
 					console.log('AJAX 실패:', error);
 				}
 		}).done(function(response) {
 			$('#notice-list-container').replaceWith(response);
+			
 		})
 	}
 	 
@@ -80,7 +93,6 @@
 		console.log('글작성 버튼 눌림');
 		
 	 });
-	 
 	    function selectCat() {
 	        $('.catVal').on('change', function() {
 	        	console.log('에작 실행');
@@ -90,7 +102,9 @@
 	            $.ajax({
 	                url: "/shushoong/support/notice/list.ajax",
 	                method: "get",
-	                data: {noticeCategory: noticeCategory},
+	                data: {
+	                	noticeCategory: noticeCategory
+	                	},
 	                error: function(xhr, status, error) {
 	                    console.log('AJAX 실패:', error);
 	                }

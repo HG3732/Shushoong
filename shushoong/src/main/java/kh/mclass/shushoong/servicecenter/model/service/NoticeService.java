@@ -17,14 +17,14 @@ public class NoticeService {
 	@Autowired
 	private ServiceCenterRepository repository;
 	
-	public List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, String userId, String noticeCategory) {
+	public List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, String userGrade) {
 		int offset = (currentPageNum - 1) * pageSize;
 		RowBounds rb = new RowBounds(offset, pageSize); 
-		return repository.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,rb,userId,noticeCategory);
+		return repository.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,rb,userGrade);
 	}
 	
-	public int selectTotalCount() {
-		return repository.selectNoticeTotalCount();
+	public int selectTotalCount(String  userGrade) {
+		return repository.selectNoticeTotalCount(userGrade);
 	}
 	
 	public int insertNotice(NoticeDto noticeDto) {
@@ -39,8 +39,8 @@ public class NoticeService {
 		return repository.selectOneNotice(noticeId);
 	}
 	
-	public int updateNotice(String noticeId) {
-		return repository.updateNotice(noticeId);
+	public int updateNotice(NoticeDto noticeDto) {
+		return repository.updateNotice(noticeDto);
 	}
 	
 	public int deleteNotice(String noticeId) {

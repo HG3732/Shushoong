@@ -4,23 +4,42 @@
 <select id="selectNoticeAllList" parameterType="map" resultType="NoticeDto">
 	select * from notice_board 
   	<choose>
-		<when test="userId == 'admin' and noticeCategory == 1">
+  		<when test="userGrade == 'admin'">
+			order by notice_time desc
+		</when>
+<!-- 		
+		<when test="userGrade == 'admin'">
 			where notice_id like '1%'
+			order by notice_id desc
 		</when>
-		<when test="userId == 'admin' and noticeCategory == 2">
+		<when test="userGrade == 'admin' ">
 			where notice_id like '2%'
+			order by notice_id desc
 		</when>
-		<when test="userId == 'customer'">
+		 -->
+		<when test="userGrade == 'customer' and noticeCategory = null ">
 			where notice_id like '1%'
+			order by notice_id desc
 		</when>
-		<when test="userId == 'business'">
+		<when test="userGrade == 'business' and noticeCategory = null ">
 			where notice_id like '2%'
+			order by notice_id desc
 		</when>
 	</choose>
-	order by notice_id desc
+	
 </select>
 <select id="selectNoticeTotalCount" parameterType="hashMap" resultType="int">
-	select count (*) from notice_board
+	<choose>
+		<when test="userGrade == 'customer'">
+			select count (*) from notice_board where notice_id like '1%' 
+		</when>
+		<when test="userGrade == 'business'">
+			select count (*) from notice_board where notice_id like '2%' 
+		</when>
+		<when test="userGrade == 'admin'">
+			select count (*) from notice_board  
+		</when>
+	</choose>
 </select>
 <insert id="insertNotice" parameterType="NoticeDto">
 	<choose>
@@ -46,7 +65,7 @@
 </select>
 <update id="updateNotice" parameterType="hashMap">
 			update notice_board set notice_time = sysdate, notice_title = #{noticeTitle}, 
-			notice_content=#{noticeContent} where notice_id = #{noticeId}
+			notice_content = #{noticeContent} where notice_id = #{noticeId}
 			<!-- 
 	<choose>
 		<when test="noticeCategory == 1">

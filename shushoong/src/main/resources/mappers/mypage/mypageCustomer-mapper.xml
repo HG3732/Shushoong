@@ -51,7 +51,7 @@
 	<!-- 호텔 취소 상세정보 -->
 	<select id="selectOneCancelHotel" parameterType="hashmap" resultType="hashmap">
    		select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, 
-   				residence_num, p.pay_price as hotel_price, residence_name_ko, request_sum, approve_no
+   				residence_num, p.pay_price as hotel_price, residence_name_ko, request_sum, approve_no, review_available
 		from hotel_reserve hr
 		    join hotel h on hr.hotel_code = h.hotel_code 
 		    join hotel_room_att hra on hr.room_att = hra.room_att

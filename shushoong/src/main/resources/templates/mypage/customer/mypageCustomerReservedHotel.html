@@ -78,16 +78,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>						
 			</div>
 
-			<th:block th:if="${checkOutDate.isBefore(currentDate) && reserveList.REVIEW_AVAILABLE == 1}">
-				<div class="btn">
-					<button type="button" class="review_btn">리뷰 작성</button>
-				</div>
-			</th:block>
-			<th:block th:unless="${checkOutDate.isBefore(currentDate)}">
-				<div class="btn">
-					<button type="button" class="reserve_btn">취소하기</button>
-				</div>
-			</th:block>
+			
+			<div class="btn">
+				<input type="hidden" th:value="${checkOutDate}" class="check_out_date">	
+				<input type="hidden" th:value="${currentDate}" class="current-date">	
+				<input type="hidden" th:value="${reserveList.REVIEW_AVAILABLE}" class="review_available">	
+			</div>
+
 
 			<div id="modal_esc" class="modal_overlay">
 	            <div class="modal_window">
@@ -243,6 +240,16 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 $(loadedHandler)
 
 function loadedHandler(){
+	
+	var currentDate = $(".current_date").val();
+	var checkOutDate = $(".check_out_date").val();
+	var review = $(".review_available").val();
+	
+	if(checkOutDate < currentDate && review === "1"){
+		$('.btn').append(`<button type="button" class="review_btn">리뷰 작성</button>`);
+	} else {
+		$('.btn').append(`<button type="button" class="reserve_btn">취소하기</button>`);
+	}
 	
 	/* 예약 취소 */
 	$('.reserve_btn').on('click', reserveCancelHandler);

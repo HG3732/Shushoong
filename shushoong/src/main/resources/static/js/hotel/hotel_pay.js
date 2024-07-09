@@ -150,7 +150,9 @@ async function payHandler(){
 	var hotelPriceStr = '100';
 	var hotelPrice = parseInt(hotelPriceStr, 10);
 	
-	var hotelReserveCode = currentTime + hotelCode + roomCat; //sysdate + hotelCode + room_cat
+	var hotelReserveCode = currentTime + hotelCode + roomCat + roomAtt; //sysdate + hotelCode + room_cat
+	console.log(hotelReserveCode + "=========================================");
+	
 	var orderName = hotelName + ' ' + roomCatDesc;
 	var people = $('.people').val();
 
@@ -213,16 +215,18 @@ async function payHandler(){
 				type : "post",
 				contentType: "application/json" ,
 			    data: reservationDataString, 
-				error:function(request, status, error){
-						alert("결제 실패!!!!!!!!!!!!! 돌아가!!!!!!!!!!!");
-					},
+				error:function (request, status, error){
+	alert("code: "+request.status + "\n" + "message: " 
+			+ request.responseText + "\n"
+			+ "error: "+error);
+},
 				dataType: "json",
 				success : function(data) {
-					if (data == 1) {
-						location.href = "/shushoong/hotel/customer/reserve/pay/success?hotelReserveCode="+hotelReserveCode;
-						return;
-					} else {
+					if (Number(data) === 0) {
 						alert("결제 금액과 지불 금액이 일치하지 않거나 알 수 없는 오류가 발생했습니다.");
+						return;
+					} else if (data){
+						location.href = "/shushoong/hotel/customer/reserve/pay/success";
 						return;
 					}
 				}

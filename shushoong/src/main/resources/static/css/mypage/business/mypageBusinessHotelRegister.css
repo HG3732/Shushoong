@@ -14,6 +14,23 @@
 	align-self: center;
 }
 
+input[type="file"] {
+	margin-left: 10px;
+	padding: 5px;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    border: none;
+    background-color: var(--color_blue_2);
+    font-size: 12px;
+    padding: 5px;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+	background-color: var(--color_blue_1);
+	color: white;
+}
+
 .grid_wrap{
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
@@ -47,7 +64,9 @@
 	position: relative;
 	width: 100%;
 	height: 100%;
-	border-bottom: 1px solid var(--color_blue_1);	
+	border-bottom: 1px solid var(--color_blue_1);
+	display: flex;
+    align-items: center;	
 }
 
 .register_btn {
@@ -83,7 +102,9 @@
 	position: relative;
 	width: 100%;
 	height: 100%;
-	border-bottom: 1px solid var(--color_blue_1);		
+	border-bottom: 1px solid var(--color_blue_1);
+    display: flex;
+    align-items: center;		
 }
 
 .license_btn{
@@ -149,9 +170,59 @@
     border-radius: 10px;
 }
 
-.checkin_time{
+.hotel_pic_box {
 	grid-column: 1/ 3;
 	grid-row: 5/ 6;
+	width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color_blue_2);
+    border-bottom: 1px solid var(--color_blue_1);
+    border-right: 1px solid var(--color_blue_1);
+}
+
+.hotel_pic_box > *{
+    line-height: 3px;
+}
+
+.hotel_pic_div {
+	grid-column: 3/ 8;
+	grid-row: 5/ 6;
+	width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+	border-bottom: 1px solid var(--color_blue_1);
+}
+
+.thumbnail-box {
+	width: 100%;
+    height: 100%;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	overflow-x: auto;
+	padding-left: 10px;
+}
+
+.thumbnail {
+	width: 170px;
+	height: 100%;
+	border: 1px solid black;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	flex: 0 0 auto;
+}
+
+.checkin_time{
+	grid-column: 1/ 3;
+	grid-row: 6/ 7;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -167,7 +238,7 @@
 
 .input_checkin_div {
 	grid-column: 3 / 8;
-	grid-row: 5/ 6;
+	grid-row: 6/ 7;
     position: relative;
     width: 100%;
     height: 50px;
@@ -183,7 +254,7 @@
 
 .checkout_time{
 	grid-column: 1/ 3;
-	grid-row: 6/ 7;
+	grid-row: 7/ 8;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -199,7 +270,7 @@
 
 .input_checkout_div {
 	grid-column: 3 / 8;
-	grid-row: 6/ 7;
+	grid-row: 7/ 8;
     position: relative;
     width: 100%;
     height: 50px;
@@ -215,7 +286,7 @@
 
 .room_intro{
 	grid-column: 1/ 3;
-	grid-row: 7/ 8;
+	grid-row: 8/ 9;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -230,7 +301,7 @@
 }
 .room_text_div{
 	grid-column: 3 / 8;
-	grid-row: 7/ 8;
+	grid-row: 8/ 9;
     position: relative;
 	width: 100%;
 	height: 170px;
@@ -246,7 +317,7 @@
 
 .room_cat{
 	grid-column: 1/ 3;
-	grid-row: 8/ 9;
+	grid-row: 9/ 10;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -262,7 +333,7 @@
 
 .select_option{
 	grid-column: 3/ 8;
-	grid-row: 8/ 9;
+	grid-row: 9/ 10;
     width: 100%;
     height: 100%;
 	border-bottom: 1px solid var(--color_blue_1);
@@ -290,7 +361,7 @@
 }
 .category{
 	grid-column: 1/ 3;
-	grid-row: 8/ 9;
+	grid-row: 9/ 10;
 	margin: 0 10px;
 }
 
@@ -307,9 +378,15 @@
 	border-radius: 10px;
 }
 
+.input_roomprice{
+	height: 30px;
+	border-radius: 10px;
+	margin: 10px;
+}
+
 .facility{
 	grid-column: 1/ 3;
-	grid-row: 9/ 10;
+	grid-row: 10/ 11;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -325,7 +402,7 @@
 
 .facility_check{
 	grid-column: 3/ 8;
-	grid-row: 9/ 10;
+	grid-row: 10/ 11;
 	display: flex;
 	flex-wrap: wrap;
     width: 100%;
@@ -401,7 +478,7 @@ input[type=checkbox]:checked + label {
 
 .policy{
 	grid-column: 1/ 3;
-	grid-row: 10/ 11;
+	grid-row: 11/ 12;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -417,7 +494,7 @@ input[type=checkbox]:checked + label {
 
 .policy_text_div {
     grid-column: 3 / 8;
-	grid-row: 10/ 11;
+	grid-row: 11/ 12;
     position: relative;
     width: 100%;
     height: 170px;
@@ -433,7 +510,7 @@ input[type=checkbox]:checked + label {
 
 .safety{
 	grid-column: 1/ 3;
-	grid-row: 11/ 12;	
+	grid-row: 12/ 13;	
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -448,7 +525,7 @@ input[type=checkbox]:checked + label {
 
 .safety_textarea{
     grid-column: 3 / 8;
-	grid-row: 11/ 12;
+	grid-row: 12/ 13;	
 	resize: none;
     margin: 20px;
     border-radius: 10px;		

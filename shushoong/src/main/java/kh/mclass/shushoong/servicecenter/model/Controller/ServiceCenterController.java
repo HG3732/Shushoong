@@ -22,6 +22,7 @@ import jakarta.mail.Multipart;
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeFileDto;
+import kh.mclass.shushoong.servicecenter.model.domain.NoticeFileWriteDto;
 import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
 import kh.mclass.shushoong.servicecenter.model.service.NoticeService;
 import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
@@ -376,6 +377,20 @@ public class ServiceCenterController {
 	            noticeFile.transferTo(saveFile);
 	            
 	            // NoticeFileDto 객체에 파일 정보 저장
+	            
+//	            writeDto를 하나 더 만들어봄 noticeDto의 fileId 값이 추출되지 않아서.. 하지만 쓸모없는걸로..
+//	            List<NoticeFileWriteDto> noticeFileDto = new ArrayList<NoticeFileWriteDto>();
+//	            String fileCategory = noticeCategory;
+//	            String originalFilename = noticeFile.getOriginalFilename();
+//	            String savedFilePathName = saveFile.getAbsolutePath();
+//	            
+//	            System.out.println("noticeCategory" + noticeCategory);
+//	            System.out.println("originalFilename" + originalFilename);
+//	            System.out.println("savedFilePathName" + savedFilePathName);
+//	            
+//	            NoticeFileWriteDto fileDto = new NoticeFileWriteDto(originalFilename, savedFilePathName, fileCategory);
+//	            noticeFileDto.add(fileDto);
+	            
 	            NoticeFileDto noticeFileDto = new NoticeFileDto();
 //	            noticeFileDto.setNoticeId(String.valueOf(insertNoticeId)); // 알맞은 noticeId 설정
 	            noticeFileDto.setNoticeCategory(noticeCategory);

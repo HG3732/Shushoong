@@ -22,7 +22,9 @@ public interface ServiceCenterRepository {
 	
 	//1:1 문의 답변 작성
 	public int updateAnswer(String faqId, String ansContent);
-	
+	// 문의 작성
+	int insertQna(OnlineQnADto onlineQnaDto);
+	int insertQnaCat(OnlineQnADto onlineQnaDto);
 	
 	
 	// 공지사항

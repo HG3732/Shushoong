@@ -11,6 +11,7 @@ import lombok.Data;
 public class OnlineQnADto {
 	private String faqId;
 	private String userId;
+	private String questCat;
 	private String questCatDesc;
 	private String askTitle;
 	private String askContent;

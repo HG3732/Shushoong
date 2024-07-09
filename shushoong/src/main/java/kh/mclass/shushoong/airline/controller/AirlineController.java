@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.mail.Session;
+import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
 import kh.mclass.shushoong.airline.model.service.AirlineService;
@@ -387,9 +387,11 @@ public class AirlineController {
 
 	@ResponseBody
 	@PostMapping("/airline/input/reserverInfo")
-	public int customerInfo(@RequestBody AirlineReserverInfoDto reserverInfo) {
+	public int customerInfo(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session) {
 		
 		int result = service.insertReserverInfo(reserverInfo);
+		
+		session.setAttribute("airlineReserveCode", reserverInfo.getAirlineReserveCode());
 		
 		return result;
 	}
@@ -397,10 +399,12 @@ public class AirlineController {
 	
 	@ResponseBody
 	@PostMapping("/airline/select/resCode")
-	public String selectResCode(@RequestParam("reserver_name") String reserver_name,
-			@RequestParam("phone_number") String phone_number, @RequestParam("reserver_email") String reserver_email) {
-		String result = null;
-		result = service.selectResCode(reserver_name, phone_number, reserver_email);
+	public String selectResCode(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session) {
+		
+		session.getAttribute("airlineReserveCode");
+		
+		String result = service.selectResCode(reserverInfo);	
+		
 		return result;
 	}
 

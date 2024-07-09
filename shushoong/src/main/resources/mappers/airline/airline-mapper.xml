@@ -144,7 +144,7 @@
     		VALUES (#{airlineReserveCode}||SEQ_AIRC.nextval , #{userId} , #{reservePhone} , #{reserveEmail}, default )
     </insert>
 	    
-    <select id="selectResCode" resultType="String">
+    <select id="selectResCode" parameterType="AirlineReserverInfoDto" resultType="String">
 	    SELECT AIRLINE_RESERVE_CODE
 		FROM (
 	    	SELECT AIRLINE_RESERVE_CODE 

@@ -76,8 +76,8 @@ public class AirlineService {
 		
 		
 	}
-	public String selectResCode(String resName,String phoneNum, String email) {
-		return airlineRepository.selectResCode(resName,phoneNum,email);
+	public String selectResCode(AirlineReserverInfoDto reserverInfo) {
+		return airlineRepository.selectResCode(reserverInfo);
 	}
 	
 	

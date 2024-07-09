@@ -424,17 +424,17 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	var length = airline_reserve_code_str.length;
 
 	// 마지막 4자리를 추출
-	var airline_reserve_code = currentTime + airline_reserve_code_str.slice(length - 4);
+	var airlineReserveCode = currentTime + airline_reserve_code_str.slice(length - 4);
 
-	var user_id =	$("[name=reserver_name]").val();
-	var reserve_phone =	$("[name=reserver_phone_number]").val();
-	var reserve_email = $("[name=reserver_email]").val();
+	var userId = $("[name=reserver_name]").val();
+	var reservePhone =	$("[name=reserver_phone_number]").val();
+	var reserveEmail = $("[name=reserver_email]").val();
 	
 	var reserverInfo = {
-			airline_reserve_code : airline_reserve_code,
-			user_id: user_id,
-			reserve_phone : reserve_phone,
-			reserve_email : reserve_email
+			airlineReserveCode : airlineReserveCode,
+			userId: userId,
+			reservePhone : reservePhone,
+			reserveEmail : reserveEmail
 	};
 		
 		function reserverInfoInsertFunction(){

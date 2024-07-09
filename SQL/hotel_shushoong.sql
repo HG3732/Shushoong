@@ -403,26 +403,148 @@ END;
 
 
 
+CREATE OR REPLACE TRIGGER trg_room_count
+AFTER INSERT ON hotel_reserve
+FOR EACH ROW
+DECLARE
+    v_room_count NUMBER;
+BEGIN
+    -- hotel_reserve 테이블에 새로운 예약이 추가될 때마다 실행됩니다.
 
+    -- 방 번호를 부여하기 위해 hotel_room 테이블에서 사용 가능한 가장 큰 방 번호를 가져옵니다.
+    SELECT MAX(room_number)
+    INTO v_room_count
+    FROM hotel_room
+    WHERE room_count > 0
+    AND NOT EXISTS (
+        SELECT 1
+        FROM hotel_reserve
+        WHERE hotel_room.room_number = hotel_reserve.room_number
+        AND hotel_reserve.hotel_reserve_code = :NEW.hotel_reserve_code
+    );
+
+    -- 가져온 방 번호를 hotel_reserve 테이블에 업데이트합니다.
+    UPDATE hotel_reserve
+    SET room_count = v_room_count
+    WHERE hotel_reserve_code = :NEW.hotel_reserve_code;
+
+    -- hotel_room 테이블에서 해당 방의 개수를 하나 줄입니다.
+    UPDATE hotel_room
+    SET room_count = room_count - 1
+    WHERE room_count = v_room_count;
+    
+    -- 예약 테이블에서 예약된 방의 개수를 체크하여 해당하는 방의 개수를 감소합니다.
+END;
+/
+
+CREATE OR REPLACE TRIGGER trg_room_number_and_count
+BEFORE INSERT ON hotel_reserve
+FOR EACH ROW
+DECLARE
+    v_hotel_reserve_code VARCHAR2(20);
+BEGIN
+    -- 호텔 예약 코드와 방 번호를 결합하여 호텔 예약 코드 업데이트
+    SELECT :NEW.hotel_reserve_code || TO_CHAR(MAX(ROOM_CAT) + 1)
+    INTO v_hotel_reserve_code
+    FROM hotel_reserve
+    WHERE ROOM_CAT IS NOT NULL
+      AND ROOM_CAT > 0
+      AND HOTEL_CODE = :NEW.HOTEL_CODE
+      AND ROOM_CAT = :NEW.ROOM_CAT;
+
+    :NEW.hotel_reserve_code := v_hotel_reserve_code;
+
+    -- hotel_room 테이블에서 해당 방 번호의 room_count를 감소시킵니다.
+    UPDATE hotel_room
+    SET room_count = room_count - 1
+    WHERE ROOM_CAT = :NEW.ROOM_CAT
+      AND HOTEL_CODE = :NEW.HOTEL_CODE
+      AND room_count > 0;
+
+END;
+/
+
+CREATE OR REPLACE TRIGGER trg_room_reservation
+AFTER INSERT ON hotel_reserve
+REFERENCING NEW AS NEW
+FOR EACH ROW
+DECLARE
+    v_room_number NUMBER;
+BEGIN
+    -- 호텔 예약 코드 뒤에 붙일 방 번호를 찾습니다.
+    SELECT COALESCE(MAX(TO_NUMBER(SUBSTR(hotel_reserve_code, LENGTH(:NEW.hotel_reserve_code) + 1))), 0) + 1
+    INTO v_room_number
+    FROM hotel_reserve
+    WHERE HOTEL_CODE = :NEW.HOTEL_CODE
+      AND ROOM_CAT = :NEW.ROOM_CAT
+      AND ROOM_ATT = :NEW.ROOM_ATT;
+
+    -- hotel_reserve_code 뒤에 방 번호를 붙여 업데이트
+--    :NEW.hotel_reserve_code := :NEW.hotel_reserve_code || v_room_number;
+    UPDATE HOTEL_RESERVE SET HOTEL_RESERVE_CODE = :NEW.HOTEL_RESERVE_CODE || V_ROOM_NUMBER WHERE HOTEL_CODE = :NEW.HOTEL_CODE
+      AND ROOM_CAT = :NEW.ROOM_CAT
+      AND ROOM_ATT = :NEW.ROOM_ATT;
+
+    -- hotel_room 테이블에서 해당 방 번호의 room_count를 감소시킵니다.
+--    UPDATE hotel_room
+--    SET room_count = room_count - 1
+--    WHERE ROOM_CAT = :OLD.ROOM_CAT
+--      AND ROOM_ATT = :OLD.ROOM_ATT
+--      AND HOTEL_CODE = :OLD.HOTEL_CODE
+--      AND room_count > 0;
+END;
+/
+DROP TRIGGER trg_room_reservation;
+
+commit;
+
+select '56' || 5 from  dual;
+CREATE SEQUENCE  "SHOONG"."SEQ_HOTEL_RESERVE"  MINVALUE 1 MAXVALUE 999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  CYCLE  NOKEEP  NOSCALE  GLOBAL ;
+
+select * from hotel_reserve;
+
+select * from hotel_room where hotel_code = '2OS001';
+
+select * from hotel_reserve;
+
+select * from pay;
+where hotel_reserve_code = '20240708292KT002005';
+
+select * from hotel_room
+where hotel_code = '2KT003';
 -------------------------------마이페이지 호텔 예약 관련
 
 
 delete from hotel_review
-where hotel_reserve_code = '2024070432OS0013';
+where hotel_reserve_code = '20240705562OS0012';
 
 delete from hotel_reserve
-where hotel_reserve_code = '20240703172OS0020';
+where hotel_reserve_code = '20240708182KT00311';
+
+delete from pay
+where hotel_reserve_code = '20240708182KT00311';
+
+commit;
+
+delete from pay
+where approve_no = '01909218-029b-dcce-ead9-0442f447815a';
 
 alter table hotel_reserve
 modify RESIDENCE_BIRTH varchar2(20);
 
 UPDATE hotel_reserve
-SET RESIDENCE_BIRTH = 010101;
+SET reserve_check_out = '2024년7월8일'
+WHERE HOTEL_RESERVE_CODE = '20240709262KT0040122';
+
+
+select * from hotel_review;
 
 ALTER TABLE hotel_reserve
 ADD (RESIDENCE_BIRTH varchar2(10));
 
 commit;
+
+select * from pay;
 
 
 
@@ -517,7 +639,7 @@ select * from hotel_reserve
     join pay using (hotel_reserve_c);
     
 select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, residence_num, 
-        p.pay_price as hotel_price, residence_name_ko, request_sum, approve_no
+        p.pay_price as hotel_price, residence_name_ko, request_sum, approve_no, review_available
 from hotel_reserve hr
     join hotel h on hr.hotel_code = h.hotel_code 
     join hotel_room_att hra on hr.room_att = hra.room_att
@@ -534,8 +656,30 @@ delete from hotel_reserve where hotel_reserve_code='20240707342KT0021';
 
 commit;
 
-select * from hotel_reserve;
+select * from hotel_reserve where hotel_reserve_code = '20240708140JJ0020';
+
+update hotel_reserve
+set reserve_check_out = '2024년07월03일' 
+where hotel_reserve_code = '20240708140JJ0020';
 
 desc pay;
 
 select * from pay;
+
+------------------------------------------------항공 결제 관련
+
+select * from passenger_info;
+
+select * from AIRLINE_RESERVE_INFO;
+
+            
+SELECT AIRLINE_RESERVE_CODE
+FROM (
+    SELECT AIRLINE_RESERVE_CODE
+    FROM AIRLINE_RESERVE_INFO
+    WHERE USER_ID = 'singasong'
+    AND RESERVE_PHONE = '01012345678'
+    AND RESERVE_EMAIL = 'sss@naver.com'
+    ORDER BY RESERVE_DATE DESC
+)
+WHERE ROWNUM = 1;

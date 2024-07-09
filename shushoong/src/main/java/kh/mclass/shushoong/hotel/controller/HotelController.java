@@ -365,7 +365,7 @@ public class HotelController {
 
 	@PostMapping("/hotel/payment")
 	@ResponseBody
-	public String hotelPayment(RedirectAttributes fat,
+	public String hotelPayment(
 			HttpSession session,
 			@RequestBody HotelReserveDtoRes reservationData
 			//requestbody 쓰면 json 형태로 보냈을 때 알아서 dto 에 있는 이름과 데이터 매칭해서 넣어줌 

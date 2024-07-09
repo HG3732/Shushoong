@@ -94,3 +94,7 @@
 	cursor: pointer;
 	color: white;
 	}
+body > div.wrapper > div.wrap-body > div.wrap-write > div.write-table > div.write-cat > div.input.cat > input[type=text] {
+	/* border-width: 0; */
+	border: none;
+}

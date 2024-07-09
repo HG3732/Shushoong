@@ -95,14 +95,14 @@ public class FindAccountController {
 	@ResponseBody
 	public int resetPasswordBusiness(@RequestParam("userId") String userId, @RequestParam("userEmail") String userEmail,
 			@RequestParam("userGrade") String userGrade) {
-		int result = 0;
+		int cnt = 0;
 
 		try {
-			result = memberservice.findPwd(userId, userEmail, userGrade);
+			cnt = memberservice.findPwd(userId, userEmail, userGrade);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		return cnt;
 	}
 
 	@GetMapping("reset/password")
@@ -112,10 +112,10 @@ public class FindAccountController {
 
 	// 비밀번호 변경(암호화)
 	@PostMapping("/changePwd.ajax")
-	public String changePwd(@RequestParam("userPwd") String userPwd, Principal principal, RedirectAttributes rttr,
+	public String changePwd(@RequestParam("userPwd") String userPwd, RedirectAttributes rttr,
 			@RequestParam Map<String, Object> paramMap) {
-
-		String userId = principal.getName();
+		
+		String userId;
 		paramMap.put("userPwd", encoder.encode(userPwd));
 		paramMap.put("userId", userId);
 		int result = memberservice.resetPwd(paramMap);

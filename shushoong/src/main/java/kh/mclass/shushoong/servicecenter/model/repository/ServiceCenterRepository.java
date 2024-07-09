@@ -22,19 +22,23 @@ public interface ServiceCenterRepository {
 	
 	//1:1 문의 답변 작성
 	public int updateAnswer(String faqId, String ansContent);
-	
+	// 문의 작성
+	int insertQna(OnlineQnADto onlineQnaDto);
+	int insertQnaCat(OnlineQnADto onlineQnaDto);
 	
 	
 	// 공지사항
-	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userId);
+	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userGrade);
+	List<NoticeDto> selectNoticeAllListAjax(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userGrade, String noticeCategory);
 	
-	int selectNoticeTotalCount();
+	int selectNoticeTotalCount(String userGrade);
 	
 	// 공지사항 작성
     int insertNotice(NoticeDto noticeDto);
     int insertNoticeFile(NoticeFileDto noticeFileDto);
     NoticeDto selectOneNotice(String noticeId);
-    int updateNotice(String noticeId);
+    int updateNotice(NoticeDto noticeDto);
+    int deleteNotice(String noticeId);
 		
 	
 }

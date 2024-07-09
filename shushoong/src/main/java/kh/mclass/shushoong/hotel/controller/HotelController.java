@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -364,7 +365,7 @@ public class HotelController {
 
 	@PostMapping("/hotel/payment")
 	@ResponseBody
-	public int hotelPayment(
+	public String hotelPayment(RedirectAttributes fat,
 			HttpSession session,
 			@RequestBody HotelReserveDtoRes reservationData
 			//requestbody 쓰면 json 형태로 보냈을 때 알아서 dto 에 있는 이름과 데이터 매칭해서 넣어줌 
@@ -373,6 +374,8 @@ public class HotelController {
 		) throws IOException, InterruptedException{
 
 		String paymentId = reservationData.getHotelReserveCode();
+		
+		System.out.println("========================" + reserveCompletedto);
 		
 		//HotelReserveCompleteDtoRes reserveCompletedto  = new HotelReserveCompleteDtoRes();
 		//위에 파라미터에 적어서 이거 할 필요 없음
@@ -411,12 +414,12 @@ public class HotelController {
 	        //else if 하면 else로 인해서 하나 걸리면 참이 되는 조건인데 참이 되면 해당 조건에 맞는 코드 블록이 실행되고 나머지 조건들은 평가되지 않아서 더해야 할 값이 있음에도 불구하고 더하지 않음
 	        //ex. 싱글과 금연실 선택했는데 싱글에서 걸려버리면 금연실은 평가되지 않고 그냥 싱글만 출력됨
 	        
-        reserveCompletedto.setRequestDesc(requestDesc);
         
         if(!requestDesc.isEmpty()) {
         	//requestDesc 가 비어있지 않다면..
         	
         	requestDesc = requestDesc.substring(0, requestDesc.length() - 2);
+        	reserveCompletedto.setRequestDesc(requestDesc);
         	//0 은 index를 나타냄
         	//-2 는 쉼표와 공백 제거하기 위해 빼기
         }
@@ -430,7 +433,7 @@ public class HotelController {
 			    .method("GET", HttpRequest.BodyPublishers.ofString("{}"))
 			    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		System.out.println(response.body());
+		System.out.println("결제 데이터 : " + response.body());
 		
 		// 결제 단건 조회 응답
 		Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
@@ -476,25 +479,30 @@ public class HotelController {
 		paydto.setCurrency(currency);
 		paydto.setPayPrice(payPrice);
 //		paydto.setPayStatus(payStatus);
-		paydto.setHotelReserveCode(hotelReserveCode);
 		
-		service.insertPayInfo(paydto);
 		
 		session.setAttribute("reserveCompletedto", reserveCompletedto);
 		session.setAttribute("approveNo", approveNo);
 		// 결제 금액과 지불된 금액이 같다면
 		if(Double.parseDouble(reserveCompletedto.getHotelPrice()) == paid) {
-			return service.inserthotelReserveInfo(reservationData);
+			
+			int result = service.inserthotelReserveInfo(reservationData); 
+				//int a = reservationData.setHotelReserveCode(result);
+				paydto.setHotelReserveCode(reservationData.getHotelReserveCode());
+				service.insertPayInfo(paydto);
+				session.setAttribute("hotelReserveCode", paydto.getHotelReserveCode());
+			return "1";
 		} else {
-		    return 0;
+		    return "0";
 		}
 
 		
 	}
 
 	@GetMapping("/hotel/customer/reserve/pay/success")
-	public String hotelComplete(HttpSession session, Model model, String hotelReserveCode) {
-		
+	public String hotelComplete(HttpSession session, Model model) {
+		String hotelReserveCode = (String) session.getAttribute("hotelReserveCode");
+		System.out.println("hotelComplete에서 code : " + hotelReserveCode);
 		HotelReserveCompleteDtoRes reserveCompletedto = (HotelReserveCompleteDtoRes) session.getAttribute("reserveCompletedto");
 		//세션에서 reserveCompletedto 객체를 가져옴
 		

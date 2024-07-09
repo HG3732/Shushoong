@@ -11,7 +11,7 @@
 <link th:href="@{/css/mypage/mypageNoticeWrite.css}" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
-<title>슈슝::공지사항 작성</title>
+<title>슈슝::공지사항 수정</title>
 </head>
 <body>
 	<div class="wrapper">
@@ -32,7 +32,7 @@
 
 			<div class="wrap-write">
 				<h1>공지사항 작성</h1>
-				<div class="rmfqjsgh" th:text="${noticeDto.noticeId}"></div>
+				<div hidden="" class="rmfqjsgh" th:text="${noticeDto.noticeId}"></div>
 				<hr>
 					<div class="write-table">
 						<div class="write-title">
@@ -44,10 +44,13 @@
 						<div class="write-cat">
 							<div class="th cat">카테고리</div>
 							<div class="input cat">
+								<input type="text" th:value="${#strings.startsWith(noticeDto.noticeId, '1') ? '회원' : (#strings.startsWith(noticeDto.noticeId, '2') ? '사업자' : '')}" readonly>
+							<!-- 
 								<select class="catVal">
 									<option value="1">회원</option>
 									<option value="2">사업자</option>
 								</select>
+								 -->
 							</div>
 						</div>
 						<div class="write-file">
@@ -68,6 +71,7 @@
 					<input type="hidden" id="noticeContent" name="noticeContent">
 					<input type="hidden" id="noticeCategory" name="noticeCategory">
 					<input type="hidden" id="noticeFile" name="noticeFile">
+					<input type="hidden" id="noticeId" name="noticeId">
 					<input type="hidden" id="principal" name="principal" th:value="${principal}">
 				</form>
 				<div class="notice-btn">
@@ -83,26 +87,40 @@
 	<script type="text/javascript">
 		$(loadeadHandler);
 		function loadeadHandler() {
-			clickedWriteOkBtn();
+			clickedUpdateOkBtn();
 		}
-		function goPage(thisElement) {
-			console.log($(this));
-			var currentPageNum = $(thisElement).data('targetpage');
-			console.log(currentPageNum);
-			$.ajax({
-				url : "/shushoong/support/notice/list.ajax",
-				method : "get",
-				data : {
-					pageNum : currentPageNum
-				},
-				error : function(xhr, status, error) {
-					console.log('AJAX 실패:', error);
+		function clickedUpdateOkBtn(){
+			$('.notice-btn').on('click', function(){
+				console.log('수정 등록');
+				var noticeId = $('.rmfqjsgh').text();
+				var noticeTitle = $('.titleVal').val();
+				var noticeCategory = $('.catVal').val();
+				var noticeFile = $('.fileVal').val();
+				var noticeContent = $('.content-textarea').val();
+				
+				if (noticeTitle.trim() === "" || noticeContent.trim() === "") {
+				    alert('제목과 내용을 입력해주세요.');
+				    return;
 				}
-			}).done(function(response) {
-				$('#notice-list-container').replaceWith(response);
-			})
+				
+				console.log('noticeId : ', noticeId);
+				console.log('noticeTitle : ', noticeTitle);
+				console.log('noticeCategory : ', noticeCategory);
+				console.log('noticeFile : ', noticeFile);
+				console.log('noticeContent : ', noticeContent);
+				
+				$('#noticeId').val(noticeId);
+				$('#noticeTitle').val(noticeTitle);
+				$('#noticeCategory').val(noticeCategory);
+				$('#noticeFile').val(noticeFile);
+				$('#noticeContent').val(noticeContent);
+				
+				$('#frm-write').attr('method', 'POST');
+		        $('#frm-write').attr('action', '/shushoong/support/notice/update');
+		        $('#frm-write').submit();
+			});
 		}
 	</script>
-	<script th:src="@{/js/servicecenter/insert-notice.js}" type="text/javascript" ></script>
+	<script th:src="@{/js/servicecenter/notice-update.js}" type="text/javascript" ></script>
 </body>
 </html>

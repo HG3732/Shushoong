@@ -2,7 +2,9 @@ function clickedUpdateBtn(){
 	$('.update-btn').on('click', function(){
 		console.log('수정하기 버튼 클릭됨')
 		var noticeId = $('#noticeId').text().trim();
+		var noticeCategoey = $('noticeCategory').val();
 		console.log('글번호', noticeId);
+		console.log('noticeCategoey', noticeCategoey);
         $('#frm-notice-update').attr('method', 'GET');
         $('#frm-notice-update').attr('action', '/shushoong/support/notice/update/' + noticeId);
         $('#frm-notice-update').submit();
@@ -18,7 +20,21 @@ function clickedDeleteBtn(){
 		});
 		
 		$('.delete-ok').on('click', function(){
-			alert('삭제해줄겡')
+			//alert('삭제해줄겡');
+		var noticeId = $('#noticeId').text().trim();
+		console.log('글번호', noticeId);
+        var $form = $('#frm-notice-update');
+        $form.empty(); 
+        $('<input>').attr({
+            type: 'hidden',
+            name: 'noticeId',
+            value: noticeId
+        }).appendTo($form);
+
+        $form.attr('method', 'POST');
+        $form.attr('action', '/shushoong/support/notice/delete');
+        $form.submit();
+
 		});
 	});
 }

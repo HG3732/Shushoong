@@ -173,10 +173,17 @@
 	         residence_phone, residence_email, reserve_check_in, reserve_check_out, user_id, room_cap, 
 	         hotel_code, room_cat, room_att, residence_num, request_Sum, review_available)
 	    VALUES 
-	        (#{hotelReserveCode}, #{residenceNameKo}, #{residenceNameEn}, #{residenceGender}, #{residenceBirth}, 
+	        (#{hotelReserveCode}||SEQ_HOTEL_RESERVE.nextVal, #{residenceNameKo}, #{residenceNameEn}, #{residenceGender}, #{residenceBirth}, 
 	        #{residencePhone}, #{residenceEmail}, #{reserveCheckIn}, #{reserveCheckOut}, #{userId}, #{roomCap}, 
 	        #{hotelCode}, #{roomCat}, #{roomAtt}, #{people}, #{requestSum}, '0')
+		<selectKey keyProperty="hotelReserveCode" resultType="String" order="AFTER">
+			<bind name="code" value="'%' + hotelReserveCode + '%'"/>
+			select hotel_reserve_code from hotel_reserve where hotel_reserve_code like #{code}
+		</selectKey>
+	
 	</insert>
+	
+	<!--  -->
 
 	<!-- 결제 완료 직전  -->
 	<insert id="insertPayInfo" parameterType="PayDto"> 

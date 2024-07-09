@@ -10,6 +10,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/mypage/business/mypageBusinessAside.css}" rel="stylesheet" />
 	<link th:href="@{/css/mypage/business/mypageBusinessHotelRegister.css}" rel="stylesheet" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>사업장 등록</title>
 </head>
@@ -39,40 +40,134 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<p class="p">사업자 등록증</p>
 						</div>
 						<div class="div_register_btn">
-							<button type="button" class="register_btn">파일첨부</button>
+							<input type="file" name="business-regit">
 						</div>
 						<div class="license">
 							<p class="p">호텔 사업자 인허가 증명서</p>
 						</div>
 						<div class="div_license_btn">
-							<button type="button" class="license_btn">파일첨부</button>
+							<input type="file" name="business-certi">
 						</div>						
 						<div class="more_info">
 							<p class="p_more_info">그 외 시설 정보</p>
+						</div>
+						<!-- <div class="hotel_name">
+							<p class="p">호텔명</p>
+						</div>
+						<div>
+							<input type="text" name="hotelName">
+						</div>
+						<div class="hotel_eng">
+							<p class="p">호텔 영문명</p>
+						</div>
+						<div>
+							<input type="text" name="hotelEng">
+						</div>
+						<div class="hotel_address">
+							<p class="p">호텔 전화번호</p>
+						</div>
+						<div>
+							<input type="text" name="hotelCall">
+						</div>
+						<div class="hotel_loc">
+							<p class="p">위치</p>
+						</div>
+						<div>
+							<div>국가</div>
+							<select name="hotelNation" style="width:100px; height:30px; border-radius:10px;">
+								<option value="0">한국</option>
+								<option value="1">중국</option>
+								<option value="2">일본</option>
+								<option value="3">미국</option>
+							</select>
+							<select name="hotelLoc" class="korea" style="width:100px; height:30px; border-radius:10px;">
+								<option value="JJ">제주</option>
+								<option value="GN">강릉</option>
+								<option value="SE">서울</option>
+								<option value="GJ">광주</option>
+								<option value="PC">평창</option>
+								<option value="IC">인천</option>
+								<option value="SC">속초</option>
+								<option value="BS">부산</option>
+							</select>
+							<select name="hotelLoc" class="china" style="width:100px; height:30px; border-radius:10px;">
+								<option value="SH">상해</option>
+								<option value="BJ">북경</option>
+								<option value="CD">청도</option>
+								<option value="WH">위해</option>
+								<option value="GJ">광주</option>
+								<option value="DR">대련</option>
+								<option value="SA">서안</option>
+								<option value="YG">연길</option>
+								<option value="SD">성도</option>
+								<option value="JK">중경</option>
+								<option value="HB">하얼빈</option>
+								<option value="CJ">천진</option>
+								<option value="GM">곤명</option>
+								<option value="NK">남경</option>
+							</select>
+							<select name="hotelLoc" class="japan" style="width:100px; height:30px; border-radius:10px;">
+								<option value="TK">도쿄</option>
+								<option value="OS">오사카</option>
+								<option value="KT">교토</option>
+								<option value="HO">후쿠오카</option>
+								<option value="OI">오이타(유후인/벳부)</option>
+								<option value="OK">오키나와</option>
+								<option value="SP">삿포로</option>
+								<option value="NG">나고야</option>
+							</select>
+							<select name="hotelLoc" class="america" style="width:100px; height:30px; border-radius:10px;">
+								<option value="HN">호놀룰루(하와이)</option>
+								<option value="LA">LA</option>
+								<option value="NY">뉴욕</option>
+								<option value="LV">라스베가스</option>
+								<option value="SF">샌프란시스코</option>
+								<option value="SE">시애틀</option>
+								<option value="DC">워싱턴</option>
+								<option value="CH">시카고</option>
+								<option value="BO">보스톤</option>
+								<option value="MC">멕시코시티</option>
+								<option value="OR">올랜도</option>
+								<option value="CN">코나</option>
+								<option value="CE">카우아이</option>
+							</select>
+						</div>
+						<div class="hotel_address">
+							<p class="p">호텔 상세 주소</p>
+						</div> -->
+						<div>
+							<input type="text" name="hotelAddress">
 						</div>
 						<div class="hotel_intro">
 							<p class="p">호텔소개</p>
 						</div>
 						<div class="hotel_text_div">
-							<textarea class="hotel_intro_textarea" cols="73" rows="8"></textarea>
+							<textarea name="intro" class="hotel_intro_textarea" cols="73" rows="8"></textarea>
+						</div>								
+						<div class="hotel_pic_box">
+							<p class="p">호텔 사진</p>
+						</div>
+						<div class="hotel_pic_div">
+							<input type="file" accept="image/*" name="uploadpic" class="hotel_pic" multiple>
+							<div class="thumbnail-box"></div>
 						</div>								
 						<div class="checkin_time">
 							<p>체크인</p>
 						</div>
 						<div class="input_checkin_div">
-							<input type="text" class="input_checkin">
+							<input type="text" class="input_checkin" name="check_in">
 						</div>						
 						<div class="checkout_time">
 							<p>체크아웃</p>
 						</div>
 						<div class="input_checkout_div">
-							<input type="text" class="input_checkout">
+							<input type="text" class="input_checkout" name="check_out">
 						</div>							
 						<div class="room_intro">
 							<P>객실 설명</P>
 						</div>
 						<div class="room_text_div">
-							<textarea class="room_intro_textarea" cols="73" rows="8"></textarea>
+							<textarea name="room_intro" class="room_intro_textarea" cols="73" rows="8"></textarea>
 						</div>
 						<div class="room_cat">
 							<p>객실 종류</p>
@@ -80,49 +175,28 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<div class="select_option">
 							<button type="button" class="add_btn">추가</button>
 							<div class="select_wrap">
-								<select name="room_cat" class="category" style="width:100px; height:30px; border-radius:10px;">
+								<select name="room[0].roomCat" class="category" style="width:100px; height:30px; border-radius:10px;">
 									 <option value="standard">스탠다드룸</option>
 									 <option value="deluxe">디럭스룸</option>
 									 <option value="superior">슈페리어룸</option>
 									 <option value="sweet">스위트룸</option>
 									 <option value="etc">기타</option>
 								</select>
-								<select name="room_cap" class="capacity" style="width:100px; height:30px; border-radius:10px;">
-									 <option value="double">더블룸</option>
-									 <option value="triple">트리플룸</option>
-									 <option value="quad">쿼드룸</option>
-									 <option value="party">파티룸</option>
+								<select name="room[0].roomCap" class="capacity" style="width:100px; height:30px; border-radius:10px;">
+									 <option value="2">더블룸</option>
+									 <option value="3">트리플룸</option>
+									 <option value="4">쿼드룸</option>
+									 <option value="5">파티룸</option>
 								</select>
-								<select name="room_att" class="attribute" style="width:100px; height:30px; border-radius:10px;">
+								<select name="room[0].roomAtt" class="attribute" style="width:100px; height:30px; border-radius:10px;">
 									 <option value="none">없음</option>
 									 <option value="ocean">오션뷰</option>
 									 <option value="mountain">마운틴뷰</option>
 									 <option value="city">시티뷰</option>
 								</select>
-								<input type="text" placeholder="방 개수(숫자만 적어주세요)" class="input_roomnum">														
+								<input type="text" name="room[0].roomCount" placeholder="방 개수(숫자만 적어주세요)" class="input_roomnum">														
+								<input type="text" name="room[0].roomPrice" placeholder="방 가격(숫자만 적어주세요)" class="input_roomprice">														
 							</div>
-							<div class="select_wrap">
-								<select name="room_cat" class="category" style="width:100px; height:30px; border-radius:10px;">
-									 <option value="standard">스탠다드룸</option>
-									 <option value="deluxe">디럭스룸</option>
-									 <option value="superior">슈페리어룸</option>
-									 <option value="sweet">스위트룸</option>
-									 <option value="etc">기타</option>
-								</select>
-								<select name="room_cap" class="capacity" style="width:100px; height:30px; border-radius:10px;">
-									 <option value="double">더블룸</option>
-									 <option value="triple">트리플룸</option>
-									 <option value="quad">쿼드룸</option>
-									 <option value="party">파티룸</option>
-								</select>
-								<select name="room_att" class="attribute" style="width:100px; height:30px; border-radius:10px;">
-									 <option value="none">없음</option>
-									 <option value="ocean">오션뷰</option>
-									 <option value="mountain">마운틴뷰</option>
-									 <option value="city">시티뷰</option>
-								</select>
-								<input type="text" placeholder="방 개수(숫자만 적어주세요)" class="input_roomnum">													
-							</div>	
 						</div>
 						<div class="facility">
 							<p>편의시설</p>
@@ -180,6 +254,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<div class="wrap-footer">
   		<div th:replace="~{common/footer :: Footer}"></div> 
 	</div>
-	
 </body>
+<script th:src='@{/js/mypage/business/mypageBusinessHotelRegister.js}'></script>
 </html>

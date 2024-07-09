@@ -140,8 +140,8 @@
     </select>
     
     <insert id="insertReserverInfo" >
-    	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL)
-    		VALUES (TO_CHAR(SYSDATE,'YYMIDD')||SEQ_AIRC.nextval , #{resName} , #{phoneNum} , #{email} )
+    	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL, RESERVE_DATE)
+    		VALUES (TO_CHAR(SYSDATE,'YYMMDD')||SEQ_AIRC.nextval , #{resName} , #{phoneNum} , #{email}, default )
     </insert>
     
     <select id="selectResCode" resultType="String">

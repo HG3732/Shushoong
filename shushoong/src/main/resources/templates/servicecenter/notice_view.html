@@ -13,7 +13,7 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
-<title>1:1문의 자세히 보기</title>
+<title>공지사항 자세히 보기</title>
 </head>
 <body>
 	<div class="wrapper">
@@ -36,20 +36,22 @@
 				<div th:text="${noticeDto.noticeTitle}" id="noticeTitle" name="noticeTitle"></div>
 				<div th:value="${noticeDto.FileId}" id="fileId" name="fileId"></div>
 				<div th:text="${noticeDto.noticeContent}" id="noticeContent" name="noticeContent"></div>
+				<div th:value="${noticeDto.noticeCategory}" id="noticeCategory" name="noticeCategory"></div>
 			</form>
 			<div class="wrap-board">
 				<div class="qna-head">
-					<div class="qna-title"
-						th:text="${noticeDto.noticeId + '.' + noticeDto.noticeTitle}"></div>
-					<div class="ask-date" th:text="${noticeDto.noticeTime}"></div>
+					<!-- <div class="qna-title" th:text="${noticeDto.noticeId + '.' + noticeDto.noticeTitle}"></div> -->
+					<!-- <div class="ask-date" th:text="${noticeDto.noticeTime}"></div> -->
 				</div>
 				<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
 				<div class="qna-main">
-					<div class="qna-"></div>
-					<div class="qna-category" th:if="${noticeDto.noticeId} > 1000">사업자 공지사항</div>
-					<div class="qna-category" th:if="${noticeDto.noticeId} <= 1000">회원 공지사항</div>
-					<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
-					<div class="qna-userId" th:text="${'작성자 : ' + noticeDto.userId}"></div>
+					<!-- <div class="qna-"></div> -->
+					<!-- <div class="qna-category" th:if="${noticeDto.noticeId} > 1000">사업자 공지사항</div>
+					<div class="qna-category" th:if="${noticeDto.noticeId} <= 1000">회원 공지사항</div> -->
+					<div class="qna-category" th:text="${noticeDto.noticeTitle}">공지 제목</div>
+					<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);"> 
+					<div class="ask-date" th:text="${noticeDto.noticeTime}"></div>
+					<!-- <div class="qna-userId" th:text="${'작성자 : ' + noticeDto.userId}"></div> -->
 					<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
 					<th:block
 						th:if="${noticeDto.fileId == null or #list.isEmpty(noticeDto.fileId)}">
@@ -65,7 +67,7 @@
 						</div>
 					</th:block>
 					<hr style="border: none; border-bottom: 1px solid var(--color_blue_1);"/>
-					<div class="update-box" th:if="${loginUserId} == 'admin'">
+					<div class="update-box" th:if="${userGrade} == 'admin'">
 						<div class="update-btn"><button type="button">수정하기</button></div>
 						<div class="delete-btn"><button type="button">삭제하기</button></div>
 					</div>

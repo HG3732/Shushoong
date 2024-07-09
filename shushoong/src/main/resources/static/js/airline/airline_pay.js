@@ -23,20 +23,28 @@
 										<div>영문 이름</div> 
 										<div>(First Name)</div>
 									</div>
-									<div><input type="text" placeholder="이름을 영어로 입력해 주세요" name="passenger_firstName"></div>
+									<div>
+										<input type="text" placeholder="이름을 영어로 입력해 주세요" name="passenger_firstName">
+										<div class="errorJ">1~15 영어만 사용하실 수 있습니다</div>
+									</div>
 									<div>
 										<div>영문 성 </div>
 										<div>(Last Name)</div>
 									</div>
-									<div><input type="text" placeholder="성씨를 영어로 입력해 주세요" name="passenger_lastName"></div>
+									<div>
+										<input type="text" placeholder="성씨를 영어로 입력해 주세요" name="passenger_lastName">
+										<div class="errorJ">1~20 영어만 사용하실 수 있습니다</div>
+									</div>
+									
 								</div>
 								<div>
 									<div>
-										<div>생년월일 </div>
+										<div>생년월일을</div>
 										<div>(Birth)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="생년월일" name="passenger_birth">
+										<input type="text" placeholder="생년월일을 '숫자 8자'로만 입력해 주세요" name="passenger_birth">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 									<div>
 										<div>국적 </div>
@@ -57,13 +65,19 @@
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
 									</div>
-									<div><input type="text" placeholder="여권 번호" name="passport_num"></div>
+									<div>
+										<input type="text" placeholder="여권 번호를 적어주세요" name="passport_num">
+																				<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
+
+									</div>
 									<div>
 										<div>여권 만료일</div>
 										<div>(Expired Date)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="만료 날짜" name="expiration_date">
+										<input type="text" placeholder="만료 날짜를 '숫자 8자'로만 입력해 주세요" name="expiration_date">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
+
 									</div>
 								</div>
 							</div>
@@ -149,11 +163,11 @@
 								</div>
 								<div>
 									<div>
-										<div>생년월일 </div>
+										<div>생년월일을</div>
 										<div>(Birth)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="생년월일" name="passenger_birth">
+										<input type="text" placeholder="생년월일을 '숫자 8자'로만 입력해 주세요" name="passenger_birth">
 									</div>
 									<div>
 										<div>국적 </div>
@@ -174,13 +188,13 @@
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
 									</div>
-									<div><input type="text" placeholder="여권 번호" name="passport_num"></div>
+									<div><input type="text" placeholder="여권 번호를 적어주세요" name="passport_num"></div>
 									<div>
 										<div>여권 만료일</div>
 										<div>(Expired Date)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="만료 날짜" name="expiration_date">
+										<input type="text" placeholder="만료 날짜를 '숫자 8자'로만 입력해 주세요" name="expiration_date">
 									</div>
 								</div>
 							</div>
@@ -232,7 +246,6 @@
 		
 		function babyNum(){
 			var baby = $("#baby_val").val();
-			console.log(baby);
 			var htmlVal = '';
 			
 			$(".babyNum").text(baby);   /*별개의 내용*/
@@ -265,11 +278,11 @@
 								</div>
 								<div>
 									<div>
-										<div>생년월일 </div>
+										<div>생년월일</div>
 										<div>(Birth)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="생년월일" name="passenger_birth">
+										<input type="text" placeholder="생년월일을 '숫자 8자'로만 입력해 주세요" name="passenger_birth">
 									</div>
 									<div>
 										<div>국적 </div>
@@ -290,13 +303,13 @@
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
 									</div>
-									<div><input type="text" placeholder="여권 번호" name="passport_num"></div>
+									<div><input type="text" placeholder="여권 번호를 적어주세요" name="passport_num"></div>
 									<div>
 										<div>여권 만료일</div>
 										<div>(Expired Date)</div>
 									</div>
 									<div class="input_type_date">
-										<input type="text" placeholder="만료 날짜" name="expiration_date">
+										<input type="text" placeholder="만료 날짜를 '숫자 8자'로만 입력해 주세요" name="expiration_date">
 									</div>
 									<input type="hidden" name="baggage_size" value="1">
 									<input type="hidden" name="reserve_code" >
@@ -386,7 +399,6 @@
 				
 				$(this).val();
 			});
-			console.log(basePrice);
 			sum = Number(result)+Number(basePrice)+Number(basePriceReturn);
 			
 			$(".total_value").val(sum);
@@ -407,19 +419,134 @@
 		
 //		국내선일경우 passport 관련 정보 display 시키는 옵션
 		function passportDisplayFunction(){
-		if($("#domestic_val").val()=='O'){
-			$(".passport_info_wrap").each(function (){
-				$(this).css("display","none");
-			});
-		}else if($("#domestic_val").val()=='I'){
-			$(".passport_info_wrap").each(function (){
-				$(this).css("display","flex");
-			});
-		}else{
-			console.log("표시는 되어 있지만 passport 가 오류나서 보이고 있습니다.")
+			if($("#domestic_val").val()=='O'){
+				$(".passport_info_wrap").each(function (){
+					$(this).css("display","none");
+				});
+			}else if($("#domestic_val").val()=='I'){
+				$(".passport_info_wrap").each(function (){
+					$(this).css("display","flex");
+				});
+			}else{
+				console.log("표시는 되어 있지만 passport 가 오류나서 보이고 있습니다.")
+			}
+			
 		}
 		
-	}
+		
+		function refreshNumberCommaHandler(){
+			var money = $('input#number').val();
+			var money2 = money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			$('input#number').val(money2);
+			
+		}
+		
+		$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
+		
+		//예약자 정보
+		function reserverInfoInsertFunction(){
+			console.log($("[name=reserver_phone_number]").val());
+			console.log($("[name=reserver_email]").val());
+			$.ajax({
+				url:"/shushoong/airline/input/reserverInfo",
+				type : "POST",
+				data:{
+					reserver_name :	$("[name=reserver_name]").val(),
+					phone_number :	$("[name=reserver_phone_number]").val()
+					,reserver_email :	$("[name=reserver_email]").val()
+		    	 },
+				
+				success: function(result){
+					console.log(result);
+					if(result == 1){
+						console.log("성공성공성공");
+						getResCodeFunction();
+					}else{
+						alert("데이터 리스트 값 insert 실패");
+					}
+				},
+				 error: function(errorThrown) {
+			            console.log("일단 여기 표기")
+// 			            alert("데이터 리스트 값 insert 실패");
+			        }
+		       });
+		}
+		
+		//예약코드
+		function getResCodeFunction(){
+			$.ajax({
+				url:"/shushoong/airline/select/resCode",
+				type : "POST",
+				data:{
+					reserver_name :	$("[name=reserver_name]").val(),
+					phone_number :	$("[name=reserver_phone_number]").val()
+					,reserver_email :	$("[name=reserver_email]").val()
+		    	 },
+				
+				success: function(result){
+					console.log(result);
+					if(result != null){
+						console.log("성공성공성공2222");
+						insertResCodeHandler(result);	
+					}else{
+						alert("데이터 리스트 값 insert 실패");
+					}
+				},
+				 error: function(errorThrown) {
+			            console.log("일단 여기 표기")
+// 			            alert("데이터 리스트 값 insert 실패");
+			        }
+		       });
+		}
+		
+		
+		function insertResCodeHandler(result){
+			$("input[name=reserve_code]").each(function(){
+				$(this).val(result);
+				console.log($(this).val());
+			});
+			passengerInfoInsertFunction();
+		}
+		
+		//승객 정보
+		function passengerInfoInsertFunction(){
+			var passengerInfo = [];
+			var i;
+			for(i = 0 ; i< $("[name=passenger_firstName]").length; i++){
+				var infoObj = new Object();
+ 				infoObj.reserve_code = $("[name=reserve_code]").eq(i).val();
+				infoObj.passenger_gender = $("[name=passenger_gender]").eq(i).val();
+				infoObj.passenger_firstName = $("[name=passenger_firstName]").eq(i).val();
+				infoObj.passenger_lastName = $("[name=passenger_lastName]").eq(i).val();
+				infoObj.passenger_birth = $("[name=passenger_birth]").eq(i).val();
+				infoObj.passenger_nation = $("[name=passenger_nation]").eq(i).val();
+				infoObj.baggage_size = $("[name=baggage_size]").eq(i).val();
+				infoObj.passport_num = $("[name=passport_num]").eq(i).val();
+// 				infoObj.expiration_date = $("[name=expiration_date]").eq(i).val();
+		
+				passengerInfo.push(infoObj);
+			}
+			
+			$.ajax({
+				url:"/shushoong/airline/input/passengerInfo",
+				type : "POST",
+				data: JSON.stringify(passengerInfo),
+				contentType: "application/json; charset=utf-8",
+				success: function(result){
+					if(result == i){
+						location.href="/shushoong/airline/main";
+					}else{
+						alert("데이터 리스트 값 insert 실패");
+					}
+				},
+				 error: function(errorThrown) {			            
+			            alert("데이터 리스트 값 insert 실패");
+			        }
+		       });
+		}
+
+		$('#check1').on("click", allAgreeCheckHandler);
+		$('.arrow').on("click", arrowDownClickHandler);
 		
 		
 		

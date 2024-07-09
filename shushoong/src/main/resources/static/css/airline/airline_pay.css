@@ -590,6 +590,14 @@ button.info_submit_btn:hover {
 input , label,button{
 	cursor: pointer;
 }
-
+div.errorJ{
+	position: absolute;
+	font-size: 12px;
+	color: red;
+	margin-top: -33px;
+	margin-left: 15px;
+	display: none;
+	pointer-events : none;
+}
 
 								/* footer */

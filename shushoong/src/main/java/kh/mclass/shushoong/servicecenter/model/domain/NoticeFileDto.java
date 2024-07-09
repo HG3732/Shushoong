@@ -11,4 +11,5 @@ public class NoticeFileDto {
 	private String noticeId;
 	private String originalFilename;
 	private String savedFilePathName;
+	private String noticeCategory;
 }

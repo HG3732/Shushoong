@@ -1,6 +1,7 @@
 package kh.mclass.shushoong.servicecenter.model.Controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -327,7 +328,7 @@ public class ServiceCenterController {
 }
 	
 	@PostMapping("/support/notice/write")
-	public String PostNoticeWrite (String noticeFile, 
+	public String PostNoticeWrite (@RequestParam("noticeFile") MultipartFile noticeFile, 
 			String noticeTitle, String noticeContent,  String noticeCategory,
 			Model md
 			) {
@@ -353,10 +354,44 @@ public class ServiceCenterController {
 	    dto.setUserId(userId); 
 	    md.addAttribute("userGrade", userGrade);
 	    
-//	    int insertNotice = noticeService.insertNotice(dto);
+	    int insertNotice = noticeService.insertNotice(dto);
+	    
+//	    int insertNoticeId = noticeService.insertNotice(dto); // NOTICE_ID 반환
+//	    System.out.println("insertNoticeId : " + insertNoticeId);
 	    
 	    // 파일 첨부 해야함..
 	    if (!noticeFile.isEmpty()) {
+	        try {
+	            // 파일 저장 경로 설정
+	        	String saveDir = "C:/filetest"; // 실제 파일 저장 경로를 설정
+	            String savedFileName = System.currentTimeMillis() + "_" + noticeFile.getOriginalFilename();
+	            File saveFile = new File(saveDir, savedFileName);
+	            
+	            // 디렉토리가 존재하지 않으면 생성
+	            if (!saveFile.getParentFile().exists()) {
+	                saveFile.getParentFile().mkdirs();
+	            }
+	            
+	            // 파일 저장
+	            noticeFile.transferTo(saveFile);
+	            
+	            // NoticeFileDto 객체에 파일 정보 저장
+	            NoticeFileDto noticeFileDto = new NoticeFileDto();
+//	            noticeFileDto.setNoticeId(String.valueOf(insertNoticeId)); // 알맞은 noticeId 설정
+	            noticeFileDto.setNoticeCategory(noticeCategory);
+	            System.out.println("파일 카테고리 : " + noticeCategory);
+	            noticeFileDto.setOriginalFilename(noticeFile.getOriginalFilename());
+	            System.out.println("파일 오리지널 네임 : " + noticeFile.getOriginalFilename());
+	            noticeFileDto.setSavedFilePathName(saveFile.getAbsolutePath());
+	            System.out.println("파일 패스 명 : " + saveFile.getAbsolutePath());
+	            
+	            // 파일 정보 데이터베이스에 저장
+	            noticeService.insertNoticeFile(noticeFileDto);
+	            
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            System.out.println("파일 첨부 에러");
+	        }
 		}
 		
 		return "redirect:/support/notice/list";
@@ -440,6 +475,21 @@ public class ServiceCenterController {
 		if (!userGrade.equals("ROLE_ANONYMOUS")) {
 				
 			System.out.println("noticeCategory : " + noticeCategory);
+
+	        // 공지사항 정보 가져오기
+	        NoticeDto noticeDto = noticeService.selectOneNotice(noticeId);
+	        
+	        List<NoticeFileDto> fileList = noticeDto.getFileId(); // 파일 리스트 가져오기
+	        if (fileList == null) {
+	            System.out.println("파일 리스트가 NULL");
+	        } else {
+	            for (NoticeFileDto fileDto : fileList) {
+	                System.out.println("파일 아이디 : " + fileDto.getFileId());
+	                System.out.println("파일 원본 이름 : " + fileDto.getOriginalFilename());
+	                System.out.println("파일 저장 경로 : " + fileDto.getSavedFilePathName());
+	            }
+	        }
+	        
 			md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
 			md.addAttribute("userGrade", userGrade);
 			return "servicecenter/notice_view";

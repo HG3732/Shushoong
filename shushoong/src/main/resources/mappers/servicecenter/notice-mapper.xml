@@ -4,14 +4,14 @@
 <select id="selectNoticeAllList" parameterType="map" resultType="NoticeDto">
 	select * from notice_board 
   	<choose>
-  		<when test="userGrade == 'admin and noticeCategory == null'">
+  		<when test="userGrade == 'admin' ">
 			order by notice_time desc
 		</when>
-		<when test="userGrade == 'customer' and noticeCategory == null">
+		<when test="userGrade == 'customer' ">
 			where notice_id like '1%'
 			order by notice_time desc
 		</when>
-		<when test="userGrade == 'business' and noticeCategory == null">
+		<when test="userGrade == 'business' ">
 			where notice_id like '2%'
 			order by notice_time desc
 		</when>
@@ -66,7 +66,7 @@
 	<choose>
 		<when test="noticeCategory == 1">
 			insert into notice_board values(
-			1||SEQ_NOTICE_ID.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
+		 		1||SEQ_NOTICE_ID.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
 			)
 		</when>
 		<when test="noticeCategory != 1">
@@ -77,12 +77,30 @@
 	</choose>
 </insert>
 <insert id="insertNoticeFile" parameterType="NoticeFileDto">
-	insert into notice_file values(
-	#{notice_id}+1, #{notice_id}, #{originalFilename}, #{savedFilePathName}
-	)
+	<choose>
+		<when test="noticeCategory == 1">
+			insert into notice_file (
+				FILE_ID, NOTICE_ID, ORIGINAL_FILENAME, SAVED_FILE_PATH_NAME
+			)
+			values(
+				SEQ_NOTICE_FILE_ID.nextval, (1||SEQ_NOTICE_ID.nextval)-1, #{originalFilename}, #{savedFilePathName}
+			)
+		</when>
+		<when test="noticeCategory == 2">
+			insert into notice_file(
+				FILE_ID, NOTICE_ID, ORIGINAL_FILENAME, SAVED_FILE_PATH_NAME
+			)
+			values(
+				SEQ_NOTICE_FILE_ID.nextval, (2||SEQ_NOTICE_ID.nextval)-1, #{originalFilename}, #{savedFilePathName}
+			)
+		</when>
+	</choose>			
 </insert>
 <select id="selectOneNotice" parameterType="String" resultType="noticeDto">
-	select * from notice_board where notice_id = #{noticeId}
+	SELECT * 
+	FROM notice_board b 
+	JOIN notice_file  f on b.notice_id = f.notice_id 
+	where b.notice_id = #{noticeId}
 </select>
 <update id="updateNotice" parameterType="hashMap">
 			update notice_board set notice_time = sysdate, notice_title = #{noticeTitle}, 

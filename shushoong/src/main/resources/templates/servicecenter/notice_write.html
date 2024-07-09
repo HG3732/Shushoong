@@ -33,6 +33,7 @@
 			<div class="wrap-write">
 				<h1>공지사항 작성</h1>
 				
+				<form action="" id="frm-write" enctype="multipart/form-data">
 				<hr>
 					<div class="write-table">
 						<div class="write-title">
@@ -53,7 +54,7 @@
 						<div class="write-file">
 							<div class="th file">첨부파일</div>
 							<div class="input file">
-								<input type="file" class="fileVal">
+								<input type="file" class="fileVal" id="noticeFIle" name="noticeFile">
 							</div>
 						</div>
 
@@ -63,11 +64,10 @@
 					</div>
 					<hr>
 					
-				<form action="" id="frm-write">
 					<input type="hidden" id="noticeTitle" name="noticeTitle">
 					<input type="hidden" id="noticeContent" name="noticeContent">
 					<input type="hidden" id="noticeCategory" name="noticeCategory">
-					<input type="hidden" id="noticeFile" name="noticeFile">
+					<!-- <input type="hidden" id="noticeFile" name="noticeFile"> -->
 					<input type="hidden" id="principal" name="principal" th:value="${principal}">
 				</form>
 				<div class="notice-btn">

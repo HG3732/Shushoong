@@ -69,9 +69,21 @@
 		where faq_id = #{faqId}
 	</select>
 	
-	<!-- 1:1 문의 작성 -->
+	<!-- 1:1 문의 답변 작성 -->
 	<update id="updateAnswer" parameterType="hashMap">
 		update service_center set ans_time = sysdate, ans_content = #{ansContent}
 		where faq_id = #{faqId}
 	</update>
+	
+	<!-- 문의 작성 -->
+	<insert id="insertQna" parameterType="OnlineQnADto">
+		insert into service_center (FAQ_ID, USER_ID, ASK_TITLE, ASK_CONTENT, ASK_DATE) values(
+			SEQ_ASK_ID.nextval, #{userId}, #{askTitle}, #{askContent}, sysdate
+		)
+	</insert>
+	<insert id="insertQnaCat" parameterType="OnlineQnADto">
+		insert into FAQ_CAT (FAQ_ID, QUEST_CAT)values(
+			SEQ_ASK_ID.nextval -1, #{questCat}
+		)
+	</insert>
 </mapper>

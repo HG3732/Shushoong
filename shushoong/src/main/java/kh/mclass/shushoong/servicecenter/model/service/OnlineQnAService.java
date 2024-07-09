@@ -37,4 +37,11 @@ public class OnlineQnAService {
 	public int updateAnswer(String faqId, String ansContent) {
 		return serviceCenterRepository.updateAnswer(faqId, ansContent);
 	}
+	
+	public int insertQna(OnlineQnADto onlineQnaDto) {
+		return serviceCenterRepository.insertQna(onlineQnaDto);
+	}
+	public int insertQnaCat(OnlineQnADto onlineQnaDto) {
+		return serviceCenterRepository.insertQnaCat(onlineQnaDto);
+	}
 }

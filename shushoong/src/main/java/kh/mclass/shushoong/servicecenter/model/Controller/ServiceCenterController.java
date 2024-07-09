@@ -21,6 +21,7 @@ import jakarta.mail.Multipart;
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeFileDto;
+import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
 import kh.mclass.shushoong.servicecenter.model.service.NoticeService;
 import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +48,12 @@ public class ServiceCenterController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println("authentication" + authentication);
+		String userGrade = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse("anonymousUser"); // 기본값 설정
+		
+		model.addAttribute("userGrade", userGrade);
 		
 		if(authentication.getAuthorities().toString().contains("admin")) {
 			int totalCount = service.selectTotalCount(null, category, keyword, questCat);
@@ -78,6 +85,7 @@ public class ServiceCenterController {
 	
 	@GetMapping("/support/notice/search.ajax")
 	public String searchQnA(Model model, String pageNum, String category, String keyword, String questCatCategory) {
+		
 		currentPageNum = 1;
 		if(pageNum != null && !pageNum.equals("")) {
 			try {
@@ -88,6 +96,13 @@ public class ServiceCenterController {
 		}
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println("authentication" + authentication);
+		String userGrade = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse("anonymousUser"); // 기본값 설정
+		
+		model.addAttribute("userGrade", userGrade);
 		
 		if(authentication.getAuthorities().toString().contains("admin")) {
 			int totalCount = service.selectTotalCount(null, category, keyword, questCatCategory);
@@ -127,6 +142,56 @@ public class ServiceCenterController {
 		service.updateAnswer(faqId, ansContent);
 		model.addAttribute("result", service.selectOneQna(faqId));
 		return "servicecenter/viewQnA";
+	}
+	
+	// 공지사항 작성
+	@GetMapping("/support/qna/write")
+	public String getQnaWrite (Model md) {
+		SecurityContextHolder.getContext().getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId =  authentication.getName();
+		String userGrade = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse("anonymousUser"); // 기본값 설정
+		
+		md.addAttribute("userGrade",userGrade);
+		System.out.println("유저 등급 : " + userGrade);
+		return "servicecenter/writeQna";
+	}
+	
+	@PostMapping("/support/qna/write")
+	public String PostQnaWrite (String askTitle, String category,
+			String askContent, 
+			Model md
+			) {
+		SecurityContextHolder.getContext().getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId =  authentication.getName();
+		String userGrade = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse("anonymousUser"); // 기본값 설정
+		
+		System.out.println("유저 등급 : " + userGrade);
+		System.out.println("문의 작성 포스트 컨트롤러");
+		System.out.println("askTitle : " + askTitle);
+		System.out.println("category : " + category);
+		System.out.println("askContent : " + askContent);
+		
+	    OnlineQnADto dto = new OnlineQnADto();
+	    dto.setUserId(userId);
+	    dto.setAskTitle(askTitle);
+	    dto.setAskContent(askContent);
+	    dto.setQuestCat(category);
+	    md.addAttribute("userGrade", userGrade);
+
+	    int insertQna = service.insertQna(dto);
+	    int insertQnaCat = service.insertQnaCat(dto);
+	    
+	    // 파일 첨부 해야함..
+		
+		return "redirect:/support/qna/list";
 	}
 	
 	
@@ -269,61 +334,6 @@ public class ServiceCenterController {
 		md.addAttribute("noticeDto", noticeDto);
 		md.addAttribute("userGrade", userGrade);
 		
-		
-//		switch (userGrade) {
-//		
-//		case "customer": {
-////			String noticeCategory = "1";
-//			System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
-//			int totalCount = noticeService.selectTotalCount(userGrade);
-//			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
-//			
-//			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
-//			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
-//			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllListAjax(pageSize,pageBlockSize,currentPageNum,userGrade, noticeCategory);
-//			md.addAttribute("currentPageNum", currentPageNum);
-//			md.addAttribute("totalPageCount", totalPageCount);
-//			md.addAttribute("startPageNum", startPageNum);
-//			md.addAttribute("endPageNum", endPageNum);
-//			md.addAttribute("noticeDto", noticeDto);
-//			md.addAttribute("userGrade", userGrade);
-//			break;
-//		}
-//		case "business": {
-////			String noticeCategory = "2";
-//			System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
-//			int totalCount = noticeService.selectTotalCount(userGrade);
-//			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
-//			
-//			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
-//			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
-//			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllListAjax(pageSize,pageBlockSize,currentPageNum,userGrade, noticeCategory);
-//			md.addAttribute("currentPageNum", currentPageNum);
-//			md.addAttribute("totalPageCount", totalPageCount);
-//			md.addAttribute("startPageNum", startPageNum);
-//			md.addAttribute("endPageNum", endPageNum);
-//			md.addAttribute("noticeDto", noticeDto);
-//			md.addAttribute("userGrade", userGrade);
-//			break;
-//		}
-//		case "admin": {
-////			String noticeCategory = "3";
-//			System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
-//			int totalCount = noticeService.selectTotalCount(userGrade);
-//			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
-//			
-//			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
-//			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
-//			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllListAjax(pageSize,pageBlockSize,currentPageNum,userGrade, noticeCategory);
-//			md.addAttribute("currentPageNum", currentPageNum);
-//			md.addAttribute("totalPageCount", totalPageCount);
-//			md.addAttribute("startPageNum", startPageNum);
-//			md.addAttribute("endPageNum", endPageNum);
-//			md.addAttribute("noticeDto", noticeDto);
-//			md.addAttribute("userGrade", userGrade);
-//			break;
-//		}
-//	}
 		return "servicecenter/notice_section";
 	}
 	

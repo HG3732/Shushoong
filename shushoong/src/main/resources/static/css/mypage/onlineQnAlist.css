@@ -138,3 +138,19 @@ section .wrap-pageNum .current {
 	background-color: var(--color_blue_1);
 	color: white;
 }
+.qna-write{
+	width: 100%;
+	text-align: center;
+}
+.qna-write .qna-write-btn{
+	width: 100px;
+    height: 40px;
+    background-color: #BCEFFF;
+    border-radius: 10px;
+    border: none;
+}
+.qna-write .qna-write-btn:hover{
+	cursor: pointer;
+	background-color: #006AFF;
+	color: white;
+}

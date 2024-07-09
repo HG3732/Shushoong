@@ -44,10 +44,13 @@
 						<div class="write-cat">
 							<div class="th cat">카테고리</div>
 							<div class="input cat">
+								<input type="text" th:value="${#strings.startsWith(noticeDto.noticeId, '1') ? '회원' : (#strings.startsWith(noticeDto.noticeId, '2') ? '사업자' : '')}" readonly>
+							<!-- 
 								<select class="catVal">
 									<option value="1">회원</option>
 									<option value="2">사업자</option>
 								</select>
+								 -->
 							</div>
 						</div>
 						<div class="write-file">
@@ -105,7 +108,6 @@
 				console.log('noticeCategory : ', noticeCategory);
 				console.log('noticeFile : ', noticeFile);
 				console.log('noticeContent : ', noticeContent);
-				
 				
 				$('#noticeId').val(noticeId);
 				$('#noticeTitle').val(noticeTitle);

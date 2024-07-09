@@ -22,8 +22,13 @@ public class NoticeService {
 		RowBounds rb = new RowBounds(offset, pageSize); 
 		return repository.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,rb,userGrade);
 	}
+	public List<NoticeDto> selectNoticeAllListAjax(int pageSize, int pageBlockSize, int currentPageNum, String userGrade, String noticeCategory) {
+		int offset = (currentPageNum - 1) * pageSize;
+		RowBounds rb = new RowBounds(offset, pageSize); 
+		return repository.selectNoticeAllListAjax(pageSize,pageBlockSize,currentPageNum,rb,userGrade, noticeCategory);
+	}
 	
-	public int selectTotalCount(String  userGrade) {
+	public int selectTotalCount(String userGrade) {
 		return repository.selectNoticeTotalCount(userGrade);
 	}
 	

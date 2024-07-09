@@ -321,6 +321,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			
 		$(loadedHandler)
 		function loadedHandler(){
+			
 			adultNum();
 			childNum();
 			babyNum();
@@ -329,10 +330,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			$("input[type='radio'].baggage").change(raidoBaggageInputValueFunction);
 			$("input[type='radio'].baggage").change(totalValueFunction);
 			passportDisplayFunction();
-			
-		
+					
 			refreshNumberCommaHandler();
-			
+
 			$("input[name=passenger_firstName]").blur(function(){
 				$(this).val($(this).val().toUpperCase());
 				if(fistNameJ.test($(this).val())){
@@ -409,12 +409,134 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			}
 		});
 		
+	$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
+		
+	
+	const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const currentTime = year + month + day;	
+	
+	var airline_reserve_code_str = $('.flightNo').text();
+
+	// 문자열의 길이 구하기
+	var length = airline_reserve_code_str.length;
+
+	// 마지막 4자리를 추출
+	var airline_reserve_code = currentTime + airline_reserve_code_str.slice(length - 4);
+
+	var user_id =	$("[name=reserver_name]").val();
+	var reserve_phone =	$("[name=reserver_phone_number]").val();
+	var reserve_email = $("[name=reserver_email]").val();
+	
+	var reserverInfo = {
+			airline_reserve_code : airline_reserve_code,
+			user_id: user_id,
+			reserve_phone : reserve_phone,
+			reserve_email : reserve_email
+	};
+		
+		function reserverInfoInsertFunction(){
+			
+			$.ajax({
+				url:"/shushoong/airline/input/reserverInfo",
+				type : "POST",
+				contentType: "application/json" ,
+				data:{ reserveInfo: reserverInfo
+					 },
+				success: function(result){
+					console.log(result);
+					if(result == 1){
+						console.log("성공성공성공");
+						getResCodeFunction();
+					}else{
+						alert("데이터 리스트 값 insert 실패");
+					}
+				},
+				 error: function(errorThrown) {
+			            console.log("일단 여기 표기")
+// 			            alert("데이터 리스트 값 insert 실패");
+			        }
+		       });
+		}
+		
+		
+		//예약자 정보
+		function getResCodeFunction(){
+			
+			$.ajax({
+				url:"/shushoong/airline/select/resCode",
+				type : "POST",
+				data:{ reserveInfo: reserverInfo
+				 },
+		    	success: function(result){
+						console.log(result);
+						if(result == 1){
+							console.log("성공성공성공");
+							passengerInfoInsertFunction();
+						}else{
+							alert("데이터 리스트 값 insert 실패");
+						}
+					},
+					error:function (request, status, error){
+						alert("code: "+request.status + "\n" + "message: " 
+								+ request.responseText + "\n"
+								+ "error: "+error);
+					}
+			       }); 
+			
+		
+		//승객 정보
+		function passengerInfoInsertFunction(){
+			var passengerInfo = [];
+			var i;
+			for(i = 0 ; i< $("[name=passenger_firstName]").length; i++){
+				var infoObj = new Object();
+ 				infoObj.reserve_code = $("[name=reserve_code]").eq(i).val();
+				infoObj.passenger_gender = $("[name=passenger_gender]").eq(i).val();
+				infoObj.passenger_firstName = $("[name=passenger_firstName]").eq(i).val();
+				infoObj.passenger_lastName = $("[name=passenger_lastName]").eq(i).val();
+				infoObj.passenger_birth = $("[name=passenger_birth]").eq(i).val();
+				infoObj.passenger_nation = $("[name=passenger_nation]").eq(i).val();
+				infoObj.baggage_size = $("[name=baggage_size]").eq(i).val();
+				infoObj.passport_num = $("[name=passport_num]").eq(i).val();
+// 				infoObj.expiration_date = $("[name=expiration_date]").eq(i).val();
+		
+				passengerInfo.push(infoObj);
+				console.log(passengerInfo + "============");
+			}
+			
+			$.ajax({
+				url:"/shushoong/airline/input/passengerInfo",
+				type : "POST",
+				data: JSON.stringify(passengerInfo),
+				contentType: "application/json; charset=utf-8",
+				success: function(result){
+					if(result == i){
+						alert("데이터 리스트 값 insert 성공");
+						
+					}else{
+						alert("데이터 리스트 값 insert 실패");
+					}
+				},
+				error:function (request, status, error){
+					alert("code: "+request.status + "\n" + "message: " 
+							+ request.responseText + "\n"
+							+ "error: "+error);
+				}
+		       });
+		}
+
+		$('#check1').on("click", allAgreeCheckHandler);
+		$('.arrow').on("click", arrowDownClickHandler);
+		
 		
 // 		$(this).val($(this).val().toUpperCase());    대문자로 변환하는 명령어
 		
 		
 // 				<div><input type="text" name="reserver_email" placeholder="이메일 주소를 입력해 주세요"></div>
-	
+}
 	</script>
 	
 </body>

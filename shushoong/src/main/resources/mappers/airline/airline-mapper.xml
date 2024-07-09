@@ -138,18 +138,23 @@
     		</when>
         </choose>
     </select>
-    
-    <insert id="insertReserverInfo" >
-    	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL, RESERVE_DATE)
-    		VALUES (TO_CHAR(SYSDATE,'YYMMDD')||SEQ_AIRC.nextval , #{resName} , #{phoneNum} , #{email}, default )
+	
+	<insert id="insertReserverInfo" parameterType="AirlineReserverInfoDto" >
+    	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL, RESERVE_TIME)
+    		VALUES (#{airlineReserveCode}||SEQ_AIRC.nextval , #{userId} , #{reservePhone} , #{reserveEmail}, default )
     </insert>
-    
+	    
     <select id="selectResCode" resultType="String">
-    	SELECT AIRLINE_RESERVE_CODE 
-    		FROM AIRLINE_RESERVE_INFO
-    		WHERE USER_ID = #{resName}
-    		AND RESERVE_PHONE= #{phoneNum}
-    		AND RESERVE_EMAIL= #{email}
+	    SELECT AIRLINE_RESERVE_CODE
+		FROM (
+	    	SELECT AIRLINE_RESERVE_CODE 
+	    		FROM AIRLINE_RESERVE_INFO
+	    		WHERE USER_ID = #{resName}
+	    			AND RESERVE_PHONE= #{phoneNum}
+	    			AND RESERVE_EMAIL= #{email}
+	    		ORDER BY RESERVE_TIME DESC
+	    	)
+		WHERE ROWNUM = 1
     </select>
     
     <update id="insertPassengerInfo" parameterType="map" useGeneratedKeys="false" >

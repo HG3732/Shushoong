@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
+import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
 import kh.mclass.shushoong.airline.model.repository.AirlineRepository;
 
 @Service
@@ -69,9 +70,9 @@ public class AirlineService {
 		return airlineRepository.selectOneDomesticFunction(airlineCode);
 	};
 	
-	public int insertReserverInfo(String resName, String phoneNum,String email) {
+	public int insertReserverInfo(AirlineReserverInfoDto reserverInfo) {
 		
-		return airlineRepository.insertReserverInfo(resName,phoneNum, email);
+		return airlineRepository.insertReserverInfo(reserverInfo);
 		
 		
 	}

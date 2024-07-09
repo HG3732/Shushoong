@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.domain.AirlinePassengerInfoDto;
+import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
 import lombok.extern.log4j.Log4j2;
 @Mapper
 public interface AirlineRepository {
@@ -31,7 +32,7 @@ public interface AirlineRepository {
 			);
 	Integer getMaxPrice(String departLoc, String arrivalLoc, String ticketType);
 	
-	int insertReserverInfo(String resName,String phoneNum,String email);
+	int insertReserverInfo(AirlineReserverInfoDto reserverInfo);
 	
 	String selectResCode(String resName,String phoneNum,String email);
 	

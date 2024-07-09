@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 @Component
 public class AirlineReserverInfoDto {
-	private String reserverCode;
+	private String airlineReserveCode;
 	private String userId;
-	private String phoneNum;
-	private String email;
+	private String reservePhone;
+	private String reserveEmail;
 
 }

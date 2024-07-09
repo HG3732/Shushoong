@@ -28,8 +28,8 @@ public class NoticeService {
 		return repository.selectNoticeAllListAjax(pageSize,pageBlockSize,currentPageNum,rb,userGrade, noticeCategory);
 	}
 	
-	public int selectTotalCount(String userGrade) {
-		return repository.selectNoticeTotalCount(userGrade);
+	public int selectTotalCount(String userGrade, String noticeCategory) {
+		return repository.selectNoticeTotalCount(userGrade, noticeCategory);
 	}
 	
 	public int insertNotice(NoticeDto noticeDto) {

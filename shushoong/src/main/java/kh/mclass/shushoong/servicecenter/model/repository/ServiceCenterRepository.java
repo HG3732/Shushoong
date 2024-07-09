@@ -31,7 +31,7 @@ public interface ServiceCenterRepository {
 	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userGrade);
 	List<NoticeDto> selectNoticeAllListAjax(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userGrade, String noticeCategory);
 	
-	int selectNoticeTotalCount(String userGrade);
+	int selectNoticeTotalCount(String userGrade, String noticeCategory);
 	
 	// 공지사항 작성
     int insertNotice(NoticeDto noticeDto);

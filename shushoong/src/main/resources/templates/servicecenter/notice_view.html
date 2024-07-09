@@ -13,7 +13,7 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
-<title>1:1문의 자세히 보기</title>
+<title>공지사항 자세히 보기</title>
 </head>
 <body>
 	<div class="wrapper">
@@ -36,6 +36,7 @@
 				<div th:text="${noticeDto.noticeTitle}" id="noticeTitle" name="noticeTitle"></div>
 				<div th:value="${noticeDto.FileId}" id="fileId" name="fileId"></div>
 				<div th:text="${noticeDto.noticeContent}" id="noticeContent" name="noticeContent"></div>
+				<div th:value="${noticeDto.noticeCategory}" id="noticeCategory" name="noticeCategory"></div>
 			</form>
 			<div class="wrap-board">
 				<div class="qna-head">

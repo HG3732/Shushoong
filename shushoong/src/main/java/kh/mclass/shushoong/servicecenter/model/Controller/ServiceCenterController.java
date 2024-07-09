@@ -171,7 +171,7 @@ public class ServiceCenterController {
 			
 			switch (userGrade) {
 				case "customer": {
-//					String noticeCategory = "1";
+//					String noticeCategory = null;
 //					System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
 					int totalCount = noticeService.selectTotalCount(userGrade);
 					int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
@@ -187,7 +187,7 @@ public class ServiceCenterController {
 					break;
 				}
 				case "business": {
-//					String noticeCategory = "2";
+//					String noticeCategory = null;
 //					System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
 					int totalCount = noticeService.selectTotalCount(userGrade);
 					int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
@@ -204,7 +204,7 @@ public class ServiceCenterController {
 					break;
 				}
 				case "admin": {
-//					String noticeCategory = "3";
+//					String noticeCategory = null;
 //					System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
 					int totalCount = noticeService.selectTotalCount(userGrade);
 					int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
@@ -236,7 +236,6 @@ public class ServiceCenterController {
 	public String noticeListAjax (Model md, String noticeCategory,
 	String pageNum) {
 		
-		noticeCategory = null;
 		SecurityContextHolder.getContext().getAuthentication();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId =  authentication.getName();
@@ -255,59 +254,76 @@ public class ServiceCenterController {
 				e.printStackTrace();
 			}
 		}
-		switch (userGrade) {
-		case "customer": {
-//			String noticeCategory = "1";
+		
+		System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
+		int totalCount = noticeService.selectTotalCount(userGrade);
+		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+		
+		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllListAjax(pageSize,pageBlockSize,currentPageNum,userGrade, noticeCategory);
+		md.addAttribute("currentPageNum", currentPageNum);
+		md.addAttribute("totalPageCount", totalPageCount);
+		md.addAttribute("startPageNum", startPageNum);
+		md.addAttribute("endPageNum", endPageNum);
+		md.addAttribute("noticeDto", noticeDto);
+		md.addAttribute("userGrade", userGrade);
+		
+		
+//		switch (userGrade) {
+//		
+//		case "customer": {
+////			String noticeCategory = "1";
 //			System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
-			int totalCount = noticeService.selectTotalCount(userGrade);
-			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
-			
-			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
-			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
-			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userGrade);
-			md.addAttribute("currentPageNum", currentPageNum);
-			md.addAttribute("totalPageCount", totalPageCount);
-			md.addAttribute("startPageNum", startPageNum);
-			md.addAttribute("endPageNum", endPageNum);
-			md.addAttribute("noticeDto", noticeDto);
-			md.addAttribute("userGrade", userGrade);
-			break;
-		}
-		case "business": {
-//			String noticeCategory = "2";
-			System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
-			int totalCount = noticeService.selectTotalCount(userGrade);
-			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
-			
-			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
-			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
-			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userGrade);
-			md.addAttribute("currentPageNum", currentPageNum);
-			md.addAttribute("totalPageCount", totalPageCount);
-			md.addAttribute("startPageNum", startPageNum);
-			md.addAttribute("endPageNum", endPageNum);
-			md.addAttribute("noticeDto", noticeDto);
-			md.addAttribute("userGrade", userGrade);
-			break;
-		}
-		case "admin": {
-//			String noticeCategory = "3";
-			System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
-			int totalCount = noticeService.selectTotalCount(userGrade);
-			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
-			
-			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
-			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
-			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(pageSize,pageBlockSize,currentPageNum,userGrade);
-			md.addAttribute("currentPageNum", currentPageNum);
-			md.addAttribute("totalPageCount", totalPageCount);
-			md.addAttribute("startPageNum", startPageNum);
-			md.addAttribute("endPageNum", endPageNum);
-			md.addAttribute("noticeDto", noticeDto);
-			md.addAttribute("userGrade", userGrade);
-			break;
-		}
-	}
+//			int totalCount = noticeService.selectTotalCount(userGrade);
+//			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+//			
+//			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+//			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+//			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllListAjax(pageSize,pageBlockSize,currentPageNum,userGrade, noticeCategory);
+//			md.addAttribute("currentPageNum", currentPageNum);
+//			md.addAttribute("totalPageCount", totalPageCount);
+//			md.addAttribute("startPageNum", startPageNum);
+//			md.addAttribute("endPageNum", endPageNum);
+//			md.addAttribute("noticeDto", noticeDto);
+//			md.addAttribute("userGrade", userGrade);
+//			break;
+//		}
+//		case "business": {
+////			String noticeCategory = "2";
+//			System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
+//			int totalCount = noticeService.selectTotalCount(userGrade);
+//			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+//			
+//			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+//			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+//			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllListAjax(pageSize,pageBlockSize,currentPageNum,userGrade, noticeCategory);
+//			md.addAttribute("currentPageNum", currentPageNum);
+//			md.addAttribute("totalPageCount", totalPageCount);
+//			md.addAttribute("startPageNum", startPageNum);
+//			md.addAttribute("endPageNum", endPageNum);
+//			md.addAttribute("noticeDto", noticeDto);
+//			md.addAttribute("userGrade", userGrade);
+//			break;
+//		}
+//		case "admin": {
+////			String noticeCategory = "3";
+//			System.out.println("리스트 컨트롤러 noticeCategory : " + noticeCategory);
+//			int totalCount = noticeService.selectTotalCount(userGrade);
+//			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+//			
+//			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+//			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+//			List<NoticeDto> noticeDto =  noticeService.selectNoticeAllListAjax(pageSize,pageBlockSize,currentPageNum,userGrade, noticeCategory);
+//			md.addAttribute("currentPageNum", currentPageNum);
+//			md.addAttribute("totalPageCount", totalPageCount);
+//			md.addAttribute("startPageNum", startPageNum);
+//			md.addAttribute("endPageNum", endPageNum);
+//			md.addAttribute("noticeDto", noticeDto);
+//			md.addAttribute("userGrade", userGrade);
+//			break;
+//		}
+//	}
 		return "servicecenter/notice_section";
 	}
 	
@@ -355,8 +371,9 @@ public class ServiceCenterController {
 	
 	// 공지사항 수정
 	@GetMapping("/support/notice/update/{noticeId}")
-	public String getNoticeUpdate (Model md, @PathVariable("noticeId") String noticeId) {
+	public String getNoticeUpdate (Model md, @PathVariable("noticeId") String noticeId, String noticeCategory) {
 		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
+		System.out.println("noticeCategory : " + noticeCategory);
 		return "servicecenter/notice_update";
 	}
 	
@@ -403,7 +420,7 @@ public class ServiceCenterController {
 	}
 	
 	@GetMapping("/support/notice/view/{noticeId}")
-	public String viewNotice(Model md, @PathVariable("noticeId") String noticeId) {
+	public String viewNotice(Model md, @PathVariable("noticeId") String noticeId, String noticeCategory) {
 		
 		SecurityContextHolder.getContext().getAuthentication();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -414,6 +431,7 @@ public class ServiceCenterController {
                 .orElse("anonymousUser"); // 기본값 설정
 		
 		System.out.println("유저 등급 : " + userGrade);
+		System.out.println("noticeCategory : " + noticeCategory);
 		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
 		md.addAttribute("userGrade", userGrade);
 		return "servicecenter/notice_view";

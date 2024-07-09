@@ -21,15 +21,18 @@
 <select id="selectNoticeAllListAjax" parameterType="map" resultType="NoticeDto">
 	select * from notice_board 
   	<choose>
+  		<when test="userGrade == 'admin' and noticeCategory == null">
+			order by notice_time desc
+		</when>
   		<when test="userGrade == 'admin' and noticeCategory == 1">
   			where notice_id like '1%'
 			order by notice_time desc
 		</when>
 		<when test="userGrade == 'admin' and noticeCategory == 2">
 			where notice_id like '2%'
-			order by notice_id desc
+			order by notice_time desc
 		</when>
-				<when test="userGrade == 'customer' ">
+		<when test="userGrade == 'customer' ">
 			where notice_id like '1%'
 			order by notice_time desc
 		</when>

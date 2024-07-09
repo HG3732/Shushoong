@@ -77,8 +77,10 @@
 	
 	<!-- 문의 작성 -->
 	<insert id="insertQna" parameterType="OnlineQnADto">
-		insert into service_center (FAQ_ID, USER_ID, ASK_TITLE, ASK_CONTENT, ASK_DATE) values(
-			SEQ_ASK_ID.nextval, #{userId}, #{askTitle}, #{askContent}, sysdate
+		insert into service_center (
+		FAQ_ID, USER_ID, ASK_TITLE, ASK_CONTENT, ASK_DATE, ANS_CONTENT, ANS_TIME
+		) values(
+			SEQ_ASK_ID.nextval, #{userId}, #{askTitle}, #{askContent}, sysdate, null, null
 		)
 	</insert>
 	<insert id="insertQnaCat" parameterType="OnlineQnADto">

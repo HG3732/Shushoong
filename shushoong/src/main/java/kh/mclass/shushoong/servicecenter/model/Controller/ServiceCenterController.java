@@ -133,6 +133,15 @@ public class ServiceCenterController {
 	
 	@GetMapping("/support/qna/view/{faqId}")
 	public String viewQnA(Model model, @PathVariable("faqId") String faqId) {
+		SecurityContextHolder.getContext().getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId =  authentication.getName();
+		String userGrade = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse("anonymousUser"); // 기본값 설정
+		
+		model.addAttribute("userGrade",userGrade);
 		model.addAttribute("result", service.selectOneQna(faqId));
 		return "servicecenter/viewQnA";
 	}

@@ -67,53 +67,59 @@
 	function loadeadHandler() {
 		selectCat();
 	}
+	
 	function goPage(thisElement) {
-		console.log($(this));
-		
-		var currentPageNum = $(thisElement).data('targetpage');
-		//var noticeCategory = $('.select-cat').val();
-		console.log(currentPageNum);
-		//console.log(noticeCategory);
-		$.ajax({
-			url:"/shushoong/support/notice/list.ajax",
-			method: "get",
-			data: { pageNum : currentPageNum
-					//noticeCategory: noticeCategory 	
-			},
-			error: function(xhr, status, error) {
-					console.log('AJAX 실패:', error);
-				}
-		}).done(function(response) {
-			$('#notice-list-container').replaceWith(response);
-			
-		})
+	    console.log($(this));
+	    
+	    var currentPageNum = $(thisElement).data('targetpage');
+	    var noticeCategory = $('.catVal').val(); // 카테고리 값
+	    console.log(currentPageNum);
+	    console.log('noticeCategory : ', noticeCategory);
+
+	    $.ajax({
+	        url: "/shushoong/support/notice/list.ajax",
+	        method: "get",
+	        data: { 
+	            pageNum: currentPageNum,
+	            noticeCategory: noticeCategory
+	        },
+	        error: function(xhr, status, error) {
+	            console.log('AJAX 실패:', error);
+	        }
+	    }).done(function(response) {
+	        $('#notice-list-container').replaceWith(response);
+	    });
 	}
-	 
-	 $('.viewQnAList').on('click', function(){
-		console.log('글작성 버튼 눌림');
-		
-	 });
-	    function selectCat() {
-	        $('.catVal').on('change', function() {
-	        	console.log('에작 실행');
-	            var noticeCategory = $('.catVal').val();
-	            console.log('noticeCategory : ', noticeCategory);
-	            var form = $('#select-cat');
-	            
-	            $.ajax({
-	                url: "/shushoong/support/notice/list.ajax",
-	                method: "get",
-	                data: {
-	                	noticeCategory: noticeCategory
-	                	},
-	                error: function(xhr, status, error) {
-	                    console.log('AJAX 실패:', error);
-	                }
-	            }).done(function(response) {
-	                $('#notice-list-container').replaceWith(response);
-	            });
+
+	$('.viewQnAList').on('click', function() {
+	    console.log('글작성 버튼 눌림');
+	});
+
+	function selectCat() {
+	    $('.catVal').on('change', function() {
+	        console.log('에작 실행');
+	        var noticeCategory = $('.catVal').val();
+	        console.log('noticeCategory : ', noticeCategory);
+
+	        var currentPageNum = 1; // 카테고리 변경 시 첫 페이지로 이동
+	        console.log(currentPageNum);
+
+	        $.ajax({
+	            url: "/shushoong/support/notice/list.ajax",
+	            method: "get",
+	            data: { 
+	                pageNum: currentPageNum,
+	                noticeCategory: noticeCategory
+	            },
+	            error: function(xhr, status, error) {
+	                console.log('AJAX 실패:', error);
+	            }
+	        }).done(function(response) {
+	            $('#notice-list-container').replaceWith(response);
 	        });
-	    }
+	    });
+	}
+
 	</script>
 </body>
 </html>

@@ -56,8 +56,9 @@
 			$("input[name=passenger_firstName]").blur(function(){ //영문 이름
 				$(this).val($(this).val().toUpperCase());
 				if(fistNameJ.test($(this).val())){
-					
-					$(this).parent().parent().css("height","60px")
+					if(fistNameJ.test($(this).parent().parent().children().children("input[name=passenger_lastName]").val())){
+						$(this).parent().parent().css("height","60px")
+					}
 					$(this).parent().children(".errorJ").css("display","none")
 				}else{
 					
@@ -68,8 +69,9 @@
 			$("input[name=passenger_lastName]").blur(function(){ //영문 성
 				$(this).val($(this).val().toUpperCase());
 				if(lastNameJ.test($(this).val())){
-					
-					$(this).parent().parent().css("height","60px")
+					if(fistNameJ.test($(this).parent().parent().children().children("input[name=passenger_firstName]").val())){
+						$(this).parent().parent().css("height","60px")
+					}
 					$(this).parent().children(".errorJ").css("display","none")
 				}else{
 					
@@ -101,11 +103,13 @@
 
 				$(this).val($(this).val().toUpperCase());
 				if(passportJ.test($(this).val())){
-					
-					$(this).parent().parent().css("height","60px")
+					if(changedDateJ.test($(this).parent().parent().children().children("input[name=expiration_date]").val())){
+						$(this).parent().parent().css("height","60px")
+					}
 					$(this).parent().children(".errorJ").css("display","none")
+					
+					
 				}else{
-					if($(this).parent().parent().children().children(".errorJ").css("height","70px"))
 					$(this).parent().parent().css("height","70px")
 					$(this).parent().children(".errorJ").css("display","block")
 				}
@@ -116,11 +120,14 @@
 					var expiredDate = $('[name=expiration_date]').val();
 					var expiredDate2 = expiredDate.substring(0,4)+"-"+expiredDate.substring(4, 6)+ "-"+ expiredDate.substring(6, 8);
 					$('[name=expiration_date]').val(expiredDate2);
-					
-					$(this).parent().parent().css("height","60px")
+					if(passportJ.test($(this).parent().parent().children().children("input[name=passport_num]").val())){
+						$(this).parent().parent().css("height","60px")
+					}
 					$(this).parent().children(".errorJ").css("display","none")
 				}else if(changedDateJ.test($(this).val())){
-					$(this).parent().parent().css("height","60px")
+					if(passportJ.test($(this).parent().parent().children().children("input[name=passport_num]").val())){
+						$(this).parent().parent().css("height","60px")
+					}
 					$(this).parent().children(".errorJ").css("display","none")
 				}else{
 					

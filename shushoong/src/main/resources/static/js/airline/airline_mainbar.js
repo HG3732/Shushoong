@@ -49,6 +49,9 @@
 				}
 				if(accordingInfo == "depart_accoding" || accordingInfo == "arrival_accoding"){
 					document.getElementById(accordingInfo).style.display="flex";
+				}else if (accordingInfo == "date_accoding"){
+					document.getElementById(accordingInfo).style.display="block";
+					calendar.render();
 				}else{
 					document.getElementById(accordingInfo).style.display="block";
 				}

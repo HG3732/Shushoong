@@ -191,7 +191,7 @@ public class HotelController {
 		if(session.getAttribute("checkIn") == null || session.getAttribute("checkIn") == "") {
 			LocalDateTime now = LocalDateTime.now();
 			String year = String.valueOf(now.getYear());
-			String month = String.valueOf(now.getMonth());
+			String month = String.valueOf(now.getMonthValue());
 			String day = String.valueOf(now.getDayOfMonth());
 			model.addAttribute("checkIn", year + "년" + month + "월" + day + "일");
 			model.addAttribute("checkOut", year + "년" + month + "월" + day + "일");

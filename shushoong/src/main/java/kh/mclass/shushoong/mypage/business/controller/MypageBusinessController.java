@@ -1,6 +1,8 @@
 package kh.mclass.shushoong.mypage.business.controller;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReqDto;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
@@ -34,6 +39,9 @@ public class MypageBusinessController {
 
 	@Autowired
 	private MypageBusinessRepository repository;
+	
+	@Autowired
+	private Cloudinary cloudinary;
 
 	private final MypageBusinessService service;
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
@@ -106,14 +114,40 @@ public class MypageBusinessController {
 	//사업장 등록
 	@PostMapping("/my/hotel/register/submit")
 	public String submitProduct(
-//			 MultipartFile businessRegit, 
-//			 MultipartFile businessCerti, 
-//			 MultipartFile[] uploadpic,
+			 MultipartFile businessRegitFile, 
+			 MultipartFile businessCertiFile, 
+			 MultipartFile[] uploadpic,
 			HotelReqDto hotelReqDto
-			
 			) {
-
+		Map<String, Object> uploadResult;
+		try {
+			uploadResult = cloudinary.uploader().upload(businessCertiFile.getBytes(), ObjectUtils.emptyMap());
+			String businessCerti = uploadResult.get("url").toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
+		hotelReqDto.setHotelCode(hotelReqDto.getHotelNation() + hotelReqDto.getHotelLocCat());
+		//서비스 호출 + selectKey로 hotelCode update할 것
+		
+		
+		for (HotelRoomDto room : hotelReqDto.getRoomList()) {
+			room.setHotelCode(hotelReqDto.getHotelCode());
+		}
+		
+		for (String hotelFacCat : hotelReqDto.getFacilityList()) {
+			//서비스 호출, hotel_code랑 facility 따로보내야함...
+		}
+		
+		try {
+			for(MultipartFile file : uploadpic) {
+				uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+				String imageUrl = uploadResult.get("url").toString();
+				//서비스 호출, 이미지 url이랑 hotelcode 매칭할 것
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return "mypage/business/mypageBusinessHotel";
 	}

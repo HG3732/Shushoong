@@ -17,4 +17,13 @@
 		UPDATE MEMBER SET USER_PWD=#{userPwd} WHERE USER_ID=#{userId}
 	</update>
 	
+	<!-- 호텔 사업자 등록 -->
+	<insert id="insertCerti" parameterType="hashmap">
+		insert into business_member values (#{businessCerti}, #{businessRegit}, #{hotelName}, #{userId})
+	</insert>
+	
+	<!-- 호텔 등록 -->
+	<insert id="insertHotel" parameterType="HotelReqDto">
+		
+	</insert>
 </mapper>

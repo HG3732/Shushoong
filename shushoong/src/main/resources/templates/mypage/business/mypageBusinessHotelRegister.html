@@ -15,7 +15,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <title>사업장 등록</title>
 </head>
 <body>
-
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
@@ -40,13 +39,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<p class="p">사업자 등록증</p>
 						</div>
 						<div class="div_register_btn">
-							<input type="file" name="businessRegit">
+							<input type="file" name="businessRegitFile">
 						</div>
 						<div class="th license">
 							<p class="p">호텔 사업자 인허가 증명서</p>
 						</div>
 						<div class="div_license_btn">
-							<input type="file" name="businessCerti">
+							<input type="file" name="businessCertiFile">
 						</div>						
 						<div class="more_info">
 							<p class="p_more_info">그 외 시설 정보</p>
@@ -84,7 +83,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</div>
 							<div>
 								<div>지역</div>
-								<select name="hotelLoc" class="korea" style="width:100px; height:30px; border-radius:10px;">
+								<select name="hotelLocCat" class="korea" style="width:100px; height:30px; border-radius:10px;">
 									<option value="JJ" selected>제주</option>
 									<option value="GN">강릉</option>
 									<option value="SE">서울</option>
@@ -94,7 +93,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<option value="SC">속초</option>
 									<option value="BS">부산</option>
 								</select>
-								<select name="hotelLoc" class="china" style="width:100px; height:30px; border-radius:10px;">
+								<select name="hotelLocCat" class="china" style="width:100px; height:30px; border-radius:10px;" disabled>
 									<option value="SH" selected>상해</option>
 									<option value="BJ">북경</option>
 									<option value="CD">청도</option>
@@ -110,7 +109,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<option value="GM">곤명</option>
 									<option value="NK">남경</option>
 								</select>
-								<select name="hotelLoc" class="japan" style="width:100px; height:30px; border-radius:10px;">
+								<select name="hotelLocCat" class="japan" style="width:100px; height:30px; border-radius:10px;" disabled>
 									<option value="TK" selected>도쿄</option>
 									<option value="OS">오사카</option>
 									<option value="KT">교토</option>
@@ -120,7 +119,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<option value="SP">삿포로</option>
 									<option value="NG">나고야</option>
 								</select>
-								<select name="hotelLoc" class="america" style="width:100px; height:30px; border-radius:10px;">
+								<select name="hotelLocCat" class="america" style="width:100px; height:30px; border-radius:10px;" disabled>
 									<option value="HN" selected>호놀룰루(하와이)</option>
 									<option value="LA">LA</option>
 									<option value="NY">뉴욕</option>
@@ -147,7 +146,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<p class="p">호텔소개</p>
 						</div>
 						<div class="hotel_text_div">
-							<textarea name="intro" class="hotel_intro_textarea" cols="73" rows="8"></textarea>
+							<textarea name="hotelIntro" class="hotel_intro_textarea" cols="73" rows="8"></textarea>
 						</div>								
 						<div class="th hotel_pic_box">
 							<p class="p">호텔 사진</p>
@@ -160,13 +159,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<p>체크인</p>
 						</div>
 						<div class="input_checkin_div">
-							<input type="text" class="checkIn" name="check_in">
+							<input type="text" class="checkin" name="checkIn">
 						</div>						
 						<div class="th checkout_time">
 							<p>체크아웃</p>
 						</div>
 						<div class="input_checkout_div">
-							<input type="text" class="checkOut" name="check_out">
+							<input type="text" class="checkout" name="checkOut">
 						</div>							
 						<div class="th room_cat">
 							<p>객실 종류</p>
@@ -216,12 +215,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<p>유의사항</p>
 						</div>
 						<div class="policy_text_div">
-							<textarea name="policy" class="policy_textarea" cols="73" rows="8"></textarea>
+							<textarea name="hotelPolicy" class="policy_textarea" cols="73" rows="8"></textarea>
 						</div>						
 						<div class="th safety">
 							<p>위생 및 안전조치</p>
 						</div>
-							<textarea name="safety" class="safety_textarea" cols="30" rows="8"></textarea>
+							<textarea name="hotelSafety" class="safety_textarea" cols="30" rows="8"></textarea>
 					</div>
 					<input type="button" value="등록하기" class="submit_btn">
 				</form>

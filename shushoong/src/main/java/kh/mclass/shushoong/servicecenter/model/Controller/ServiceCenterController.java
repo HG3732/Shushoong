@@ -397,35 +397,6 @@ public class ServiceCenterController {
 	        System.out.println("파일 첨부 에러");
 	    }
 	    
-	    // 파일 첨부 해야함..
-//	    if (noticeFile.length != 0) {
-//	        try {
-//	            // 파일 저장 경로 설정
-//	        	Map<String, Object> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-//	        	String saveFile = uploadResult.get("url").toString();
-//	        	System.out.println("파일 패스 명 : " + saveFile);
-//	            
-//	        	
-//	            List<NoticeFileDto> noticeFiles = new ArrayList<>();
-//	            NoticeFileDto noticeFileDto = new NoticeFileDto();
-//	            noticeFileDto.setNoticeCategory(noticeCategory);
-//	            noticeFileDto.setOriginalFilename(noticeFile.getOriginalFilename());
-//	            noticeFileDto.setSavedFilePathName(saveFile);
-//	            System.out.println("파일 카테고리 : " + noticeCategory);
-//	            System.out.println("파일 오리지널 네임 : " + noticeFile.getOriginalFilename());
-//	            System.out.println("파일 패스 명 : " + saveFile);
-//	            
-//	            noticeFiles.add(noticeFileDto);
-//	            
-//	            // 파일 정보 데이터베이스에 저장
-//	            noticeService.insertNoticeFile(noticeFiles);
-//	            
-//	        } catch (IOException e) {
-//	            e.printStackTrace();
-//	            System.out.println("파일 첨부 에러");
-//	        }
-//		}
-		
 		return "redirect:/support/notice/list";
 	}
 	
@@ -442,6 +413,7 @@ public class ServiceCenterController {
 		
 		System.out.println("유저 등급 : " + userGrade);
 		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
+		md.addAttribute("noticeFileDto", noticeService.selectOneNoticeFile(noticeId));
 		System.out.println("noticeCategory : " + noticeCategory);
 		if (!userGrade.equals("ROLE_ANONYMOUS")) {
 			return "servicecenter/notice_update";

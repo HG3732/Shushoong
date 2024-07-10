@@ -445,8 +445,7 @@
 		
 		//예약자 정보
 		function reserverInfoInsertFunction(){
-			console.log($("[name=reserver_phone_number]").val());
-			console.log($("[name=reserver_email]").val());
+			
 			$.ajax({
 				url:"/shushoong/airline/input/reserverInfo",
 				type : "POST",

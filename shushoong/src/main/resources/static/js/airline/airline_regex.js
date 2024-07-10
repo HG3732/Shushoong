@@ -84,15 +84,23 @@
 			$("[name=reserver_phone_number]").blur(function(){
 				if(phoneNumJ.test($(this).val())){
 					console.log("ok");
+					$(this).parent().parent().css("height","60px")
+					$(this).parent().children(".errorJ").css("display","none")
 				}else{
-					console.log("no");
+					console.log("nooo");
+					$(this).parent().parent().css("height","70px")
+					$(this).parent().children(".errorJ").css("display","block")
 				}
 			})
 			$("[name=reserver_email]").blur(function(){
 				if(emailJ.test($(this).val())){
 					console.log("ok");
+					$(this).parent().parent().css("height","60px")
+					$(this).parent().children(".errorJ").css("display","none")
 				}else{
-					console.log("no");
+					console.log("nooo");
+					$(this).parent().parent().css("height","70px")
+					$(this).parent().children(".errorJ").css("display","block")
 				}
 			});
 	

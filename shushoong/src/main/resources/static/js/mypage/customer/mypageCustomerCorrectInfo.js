@@ -1,5 +1,4 @@
 $(loadedHandler);
-
 function loadedHandler() {
 	$(".btn.save").on("click", saveInfoHandler);
 	$(".btn.secession").on("click", deleteAccHandler);
@@ -7,25 +6,32 @@ function loadedHandler() {
 	$(".close_btn").on("click", cancleHandler);
 }
 
+// url 직접접근 차단
+$(document).ready(function() {
+	if (document.referrer == '' || document.referrer == null) {
+		document.location.href = '/shushoong/error/redirect';
+	}
+})
+
 function saveInfoHandler() {
 	var userPwd = $("#userPwd").val();
 	var passwordChk = $("#passwordChk").val();
 	var pwd_text = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
 	var emailReceive, msgReceive = null;
-	
-	if($("#msgReceive").is(':checked') == true) {
+
+	if ($("#msgReceive").is(':checked') == true) {
 		msgReceive = 1;
 	} else {
 		msgReceive = 0;
 	}
-	
-	if($("#emailReceive").is(':checked') == true) {
+
+	if ($("#emailReceive").is(':checked') == true) {
 		emailReceive = 1;
 	} else {
 		emailReceive = 0;
 	}
-	
-	if(pwd_text.test(userPwd) == false) {
+
+	if (pwd_text.test(userPwd) == false) {
 		alert("형식에 맞지 않은 비밀번호입니다.");
 		$("#userPwd").val('');
 		$("#passwordChk").val('');
@@ -39,12 +45,12 @@ function saveInfoHandler() {
 		$.ajax({
 			type: "post",
 			url: "/shushoong/business/changePwd.ajax",
-			data: {userPwd:userPwd, emailReceive:emailReceive, msgReceive:msgReceive},
-			success:function() {
+			data: { userPwd: userPwd, emailReceive: emailReceive, msgReceive: msgReceive },
+			success: function() {
 				alert("정보 변경에 성공했습니다.");
 				$("#userPwd").val('');
 				$("#passwordChk").val('');
-			}, error:function() {
+			}, error: function() {
 				alert("정보 변경에 실패했습니다.");
 				$("#userPwd").val('');
 				$("#passwordChk").val('');

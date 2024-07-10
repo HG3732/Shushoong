@@ -34,11 +34,11 @@ public class WebSecurityConfig {
 	@Autowired
 	UserAuthenticationFailureHandler authFailureHandler;
 	
-//	@Autowired
-//	AdminAuthenticationSuccessHandler adminAuthSuccessHandler;
-//	
-//	@Autowired
-//	AdminAuthenticationFailureHandler adminAuthFailureHandler;
+	@Autowired
+	AdminAuthenticationSuccessHandler adminAuthSuccessHandler;
+	
+	@Autowired
+	AdminAuthenticationFailureHandler adminAuthFailureHandler;
 	
 	@Autowired
 	MemberSecurityService securityService;
@@ -140,8 +140,8 @@ public class WebSecurityConfig {
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login/admin")
-				.successHandler(authSuccessHandler)
-				.failureHandler(authFailureHandler)
+				.successHandler(adminAuthSuccessHandler)
+				.failureHandler(adminAuthFailureHandler)
 				.usernameParameter("userId")
 				.passwordParameter("userPwd"))
 		.logout((logout) -> logout

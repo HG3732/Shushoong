@@ -346,7 +346,7 @@ div.sit > button:first-child{
 		/* 추천 section */
 	/* 인기있는 호텔 캐러셀*/
 
-.wrap-hot-hotel-list {
+.wrap-airline-recommend-list {
 	width: 960px;
 	margin: 0 auto;
 	margin-top: 200px;
@@ -359,26 +359,28 @@ div.sit > button:first-child{
 	margin-bottom: 100px;
 }
 
-.wrap-hot-hotel-list .hot-hotel-title {
+.wrap-airline-recommend-list .airline-recommend-title {
 	font-size: 20px;
 	font-weight: 900;
 }
 
-.wrap-hot-hotel-list .hot-hotel-list {
+.wrap-airline-recommend-list .airline-recommend-list {
 	width: 100%;
 	height: 300px;
 	overflow: hidden;
+	
 }
-
-.wrap-hot-hotel-list .hot-hotel-list .list-wrapper {
+a.airline-recommend{
+	transition: transform 1s;
+}
+.wrap-airline-recommend-list .airline-recommend-list .list-wrapper {
 	display: flex;
 	flex-direction: row;
 	gap: 30px;
-	transition: transform 1s;
 	width: auto;
 }
 
-.list-wrapper .hot-hotel {
+.list-wrapper .airline-recommend {
 	height: 300px;
 	flex: 0 0 300px;
 	border: 1px, solid, var(--color_gray_2);
@@ -388,49 +390,49 @@ div.sit > button:first-child{
 	justify-content: space-between;
 }
 
-.list-wrapper .hot-hotel-info {
+.list-wrapper .airline-recommend-info {
 	flex: 1 0 auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 }
 
-.list-wrapper .hot-hotel .hot-hotel-pic > img {
+.list-wrapper .airline-recommend .airline-recommend-pic > img {
 	display: block;
 	width: 100%;
 	height: 186px;
 	object-fit: cover;
 }
 
-.hot-hotel .wrap-price {
+.airline-recommend .wrap-price {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
 }
 
-.hot-hotel .wrap-price > div {
+.airline-recommend .wrap-price > div {
 	padding-right: 10px;
 	color: red;
 }
 
-.hot-hotel .wrap-price > div:last-child {
+.airline-recommend .wrap-price > div:last-child {
 	vertical-align: bottom;
 	line-height: 20px;
 }
 
-.hot-hotel .hot-hotel-name {
+.airline-recommend .airline-recommend-name {
 	text-align: left;
 	padding-left : 10px;
 }
 
 
-.hot-hotel .hot-hotel-price {
+.airline-recommend .airline-recommend-price {
 	text-align: right;
 	font-weight: 900;
 	font-size: var(--font1);
 }
 
-.wrap-hot-hotel-list .btn2 {
+.wrap-airline-recommend-list .btn2 {
 	position: absolute;
 	width: 45px;
     height: 45px;
@@ -442,19 +444,19 @@ div.sit > button:first-child{
     font-size: var(--font1);
 }
 
-.wrap-hot-hotel-list .btn2:hover {
+.wrap-airline-recommend-list .btn2:hover {
 	background-color: var(--color_blue_1);
 	color: white;
 	font-family: 'SOYOMapleBoldTTF';
 	
 }
 
-.wrap-hot-hotel-list .btn2.left {
+.wrap-airline-recommend-list .btn2.left {
 	left:-65px;
 	top: 185px;
 }
 
-.wrap-hot-hotel-list .btn2.right {
+.wrap-airline-recommend-list .btn2.right {
 	right:-65px;
 	top: 185px;
 }

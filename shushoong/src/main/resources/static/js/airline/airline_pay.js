@@ -75,7 +75,6 @@
 									<div class="input_type_date">
 										<input type="text" placeholder="만료 날짜를 '숫자 8자'로만 입력해 주세요" name="expiration_date">
 										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
-
 									</div>
 								</div>
 							</div>
@@ -203,6 +202,7 @@
 									</div>
 									<div class="input_type_date">
 										<input type="text" placeholder="만료 날짜를 '숫자 8자'로만 입력해 주세요" name="expiration_date">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 								</div>
 							</div>
@@ -328,6 +328,7 @@
 									</div>
 									<div class="input_type_date">
 										<input type="text" placeholder="만료 날짜를 '숫자 8자'로만 입력해 주세요" name="expiration_date">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 									<input type="hidden" name="baggage_size" value="1">
 									<input type="hidden" name="reserve_code" >

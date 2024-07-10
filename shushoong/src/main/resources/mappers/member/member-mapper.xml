@@ -16,6 +16,10 @@
 		UPDATE MEMBER SET LATEST_LOGIN=TO_DATE(#{latestLogin},'YYYY-MM-DD HH:MI:SS') WHERE USER_ID=#{userId}
 	</update>
 	
+	<select id="lockedCheck">
+		SELECT USER_STATUS FROM MEMBER WHERE USER_ID=#{userId} 
+	</select>
+	
 	<select id="authCheck" parameterType="string" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE USER_ID=#{userId} AND USER_PWD=#{userPwd} AND USER_GRADE=#{userGrade}

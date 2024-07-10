@@ -67,12 +67,16 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 								<div>
 									<div>휴대전화번호</div>
 									<div>
-										<input type="text" name="reserver_phone_number" placeholder="전화번호를 입력해 주세요">
+										<input type="text" name="reserver_phone_number" placeholder="전화번호를 입력해 주세요" class="reserve_phone">
+										<div class="errorJ">숫자 10~11 자리만 입력 가능합니다</div>
 									</div>
 								</div>
 								<div>
 									<div>이메일 주소</div>
-									<div><input type="text" name="reserver_email" placeholder="이메일 주소를 입력해 주세요"></div>
+									<div>
+										<input type="text" name="reserver_email" placeholder="이메일 주소를 입력해 주세요" class="reserve_email">
+										<div class="errorJ">이메일의 형식에 맞게 적어주세요</div>
+									</div>
 								</div>
 							</div>
 						</section>
@@ -317,6 +321,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	
 	<!-- airline_pay info 에 관한 js -->		
 	<script th:src="@{/js/airline/airline_pay.js}" type="text/javascript"></script>
+	<script th:src="@{/js/airline/airline_regex.js}" type="text/javascript"></script>
 	<script th:inline="javascript">
 			
 		$(loadedHandler)
@@ -332,143 +337,90 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			passportDisplayFunction();
 					
 			refreshNumberCommaHandler();
-
-			$("input[name=passenger_firstName]").blur(function(){
-				$(this).val($(this).val().toUpperCase());
-				if(fistNameJ.test($(this).val())){
-					console.log("ok");
-				}else{
-					console.log("no");
-				}
-			})
-			$("input[name=passenger_lastName]").blur(function(){
-				$(this).val($(this).val().toUpperCase());
-				if(lastNameJ.test($(this).val())){
-					console.log("ok");
-				}else{
-					console.log("no");
-				}
-			})
-		
-			$("input[name=passport_num]").blur(function(){
-				$(this).val($(this).val().toUpperCase());
-				if(passportJ.test($(this).val())){
-					console.log("ok");
-					$(this).parent().parent().css("height","60px")
-					$(this).parent().children(".errorJ").css("display","none")
-				}else{
-					console.log("nooo");
-					$(this).parent().parent().css("height","70px")
-					$(this).parent().children(".errorJ").css("display","block")
-				}
-			})
-			$("input[name=passenger_birth]").blur(function(){
-				
-				if(dateJ.test($(this).val())){
-					var birth = $('[name=passenger_birth]').val();
-					var birth2 = birth.substring(0,4)+"-"+birth.substring(4, 6)+ "-"+ birth.substring(6, 8);
-					$('[name=passenger_birth]').val(birth2);
-				}else{
-					console.log("no");
-				}
-			})
-			$("input[name=expiration_date]").blur(function(){
-				
-				if(dateJ.test($(this).val())){
-					var expiredDate = $('[name=expiration_date]').val();
-					var expiredDate2 = expiredDate.substring(0,4)+"-"+expiredDate.substring(4, 6)+ "-"+ expiredDate.substring(6, 8);
-					$('[name=expiration_date]').val(expiredDate2);
-				}else{
-					console.log("no");
-				}
-			})
+			
+			regexTestFunction();//정규 표현식 관련
+			
+			
 		}
 		
 	
 		
-		//정규 표현식
-		var fistNameJ = /^[A-Z]{1,15}$/;
-		var lastNameJ = /^[a-zA-Z]{1,20}$/;
-		var phoneNumJ = /^\d{10,11}$/;
-		var dateJ = /^[0-9]{8}$/;
-		var emailJ =  /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-		var passportJ = /^[0-9A-Z]{9}$/;
 		
-		$("[name=reserver_phone_number]").blur(function(){
-			if(phoneNumJ.test($(this).val())){
-				console.log("ok");
-			}else{
-				console.log("no");
-			}
-		})
-		$("[name=reserver_email]").blur(function(){
-			if(emailJ.test($(this).val())){
-				console.log("ok");
-			}else{
-				console.log("no");
-			}
-		});
+		
+	
 		
 	$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
 		
 	
-	const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const currentTime = year + month + day;	
-	
-	var airline_reserve_code_str = $('.flightNo').text();
 
-	// 문자열의 길이 구하기
-	var length = airline_reserve_code_str.length;
-
-	// 마지막 4자리를 추출
-	var airlineReserveCode = currentTime + airline_reserve_code_str.slice(length - 4);
-
-	var userId = $("[name=reserver_name]").val();
-	var reservePhone =	$("[name=reserver_phone_number]").val();
-	var reserveEmail = $("[name=reserver_email]").val();
-	
-	var reserverInfo = {
-			airlineReserveCode : airlineReserveCode,
-			userId: userId,
-			reservePhone : reservePhone,
-			reserveEmail : reserveEmail
-	};
+	function reserverInfoInsertFunction(){
 		
-		function reserverInfoInsertFunction(){
+		const now = new Date();
+		const year = now.getFullYear();
+		const month = String(now.getMonth() + 1).padStart(2, '0');
+		const day = String(now.getDate()).padStart(2, '0');
+		const currentTime = year + month + day;    
+
+		var airline_reserve_code_str = $('.flightNo').text();
+
+		// 문자열의 길이 구하기
+		var length = airline_reserve_code_str.length;
+
+		// 마지막 4자리를 추출
+		var airlineReserveCode = currentTime + airline_reserve_code_str.slice(length - 4);
+
+		var userId = $("[name=reserver_name]").val();
+		var reservePhone = $(".reserve_phone").val();
+		var reserveEmail = $(".reserve_email").val();
+		
+		console.log(reservePhone);
+		console.log(reserveEmail);
+		
+		var reserverInfo = {
+		    airlineReserveCode: airlineReserveCode,
+		    userId: userId,
+		    reservePhone: reservePhone,
+		    reserveEmail: reserveEmail
+		};
+		
+		console.log(reserverInfo + "reserverInfo");
+
+		var reserverInfoString = JSON.stringify(reserverInfo);
+		
+		console.log(reserverInfoString + "reserverInfoString");
+		
+		//예약자 정보 먼저 저장
+	    $.ajax({
+	        url: "/shushoong/airline/input/reserverInfo",
+	        type: "POST",
+	        contentType: "application/json",
+	        data: reserverInfoString,
+	        success: function(result){
+	            console.log(result);
+	            if(result == 1){
+	                console.log("성공성공성공");
+	                getResCodeFunction();
+	            } else {
+	                alert("데이터 리스트 값 insert 실패");
+	            }
+	        },
+	        error: function(errorThrown) {
+	            console.log("일단 여기 표기");
+	            // alert("데이터 리스트 값 insert 실패");
+	        }
+	    });
+	}
+		
+		
+	
+/* 		function getResCodeFunction(){
 			
-			$.ajax({
-				url:"/shushoong/airline/input/reserverInfo",
-				type : "POST",
-				contentType: "application/json" ,
-				data:{ reserveInfo: reserverInfo
-					 },
-				success: function(result){
-					console.log(result);
-					if(result == 1){
-						console.log("성공성공성공");
-						getResCodeFunction();
-					}else{
-						alert("데이터 리스트 값 insert 실패");
-					}
-				},
-				 error: function(errorThrown) {
-			            console.log("일단 여기 표기")
-// 			            alert("데이터 리스트 값 insert 실패");
-			        }
-		       });
-		}
-		
-		
-		//예약자 정보
-		function getResCodeFunction(){
+			console.log(result + "result=========");
 			
 			$.ajax({
 				url:"/shushoong/airline/select/resCode",
 				type : "POST",
-				data:{ reserveInfo: reserverInfo
+				data:{ reserverInfoString: reserverInfoString
 				 },
 		    	success: function(result){
 						console.log(result);
@@ -485,7 +437,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 								+ "error: "+error);
 					}
 			       }); 
-			
+			 */
 		
 		//승객 정보
 		function passengerInfoInsertFunction(){
@@ -532,11 +484,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		$('.arrow').on("click", arrowDownClickHandler);
 		
 		
-// 		$(this).val($(this).val().toUpperCase());    대문자로 변환하는 명령어
-		
-		
-// 				<div><input type="text" name="reserver_email" placeholder="이메일 주소를 입력해 주세요"></div>
-}
+
 	</script>
 	
 </body>

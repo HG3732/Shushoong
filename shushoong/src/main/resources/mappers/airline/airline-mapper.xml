@@ -142,9 +142,24 @@
 	<insert id="insertReserverInfo" parameterType="AirlineReserverInfoDto" >
     	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL, RESERVE_TIME)
     		VALUES (#{airlineReserveCode}||SEQ_AIRC.nextval , #{userId} , #{reservePhone} , #{reserveEmail}, default )
+    	<selectKey keyProperty="airlineReserveCode" resultType="String" order="AFTER">
+			<bind name="code" value="'%' + airlineReserveCode + '%'"/>
+			    SELECT AIRLINE_RESERVE_CODE
+					FROM (
+				    	SELECT AIRLINE_RESERVE_CODE 
+				    		FROM AIRLINE_RESERVE_INFO
+				    		WHERE 
+				    			airline_reserve_code like #{code}
+				    			and USER_ID = #{userId}
+				    			AND RESERVE_PHONE= #{reservePhone}
+				    			AND RESERVE_EMAIL= #{reserveEmail}
+				    		ORDER BY RESERVE_TIME DESC
+				    	)
+					WHERE ROWNUM = 1
+		</selectKey>
     </insert>
 	    
-    <select id="selectResCode" parameterType="AirlineReserverInfoDto" resultType="String">
+<!--     <select id="selectResCode" parameterType="AirlineReserverInfoDto" resultType="String">
 	    SELECT AIRLINE_RESERVE_CODE
 		FROM (
 	    	SELECT AIRLINE_RESERVE_CODE 
@@ -155,20 +170,21 @@
 	    		ORDER BY RESERVE_TIME DESC
 	    	)
 		WHERE ROWNUM = 1
-    </select>
+    </select> -->
     
     <update id="insertPassengerInfo" parameterType="map" useGeneratedKeys="false" >
    		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL" >
-		    INTO passenger_info (AIRLINE_RESERVE_CODE,LAST_NAME, FIRST_NAME, GENDER, BIRTH, NATION, BAGGAGE, PASSPORT_CODE)
+		    INTO passenger_info (AIRLINE_RESERVE_CODE,LAST_NAME, FIRST_NAME, GENDER, BIRTH, NATION, BAGGAGE, PASSPORT_CODE, PASSPORT_DATE)
 	    		VALUES(
-	    			#{item.reserve_code},
-	    			#{item.passenger_lastName},
-	    			#{item.passenger_firstName},
-	    			#{item.passenger_gender},
-	    			#{item.passenger_birth},
-	    			#{item.passenger_nation},
-	    			#{item.baggage_size},
-	    			#{item.passport_num}
+	    			#{item.airlineReserveCode},
+	    			#{item.lastName},
+	    			#{item.firstName},
+	    			#{item.gender},
+	    			#{item.birth},
+	    			#{item.nation},
+	    			#{item.baggage},
+	    			#{item.passportCode},
+	    			#{item.passportDate}  			
 	    		)
    		</foreach>
     </update>

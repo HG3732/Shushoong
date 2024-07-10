@@ -49,6 +49,11 @@
 									<div class="loginBtn">
 										<button type="submit" class="btn customerLogin">로그인</button>
 									</div>
+									<div th:if="${exception}">
+										<script th:inline="javascript" charset='UTF-8'>
+											alert([[${message}]]);
+							            </script>
+							        </div>
 									<div class="login-function">
 										<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a> 
 										<a th:href="@{/account/find}"><div class="findInfoBtn">아이디/비밀번호 찾기</div></a>

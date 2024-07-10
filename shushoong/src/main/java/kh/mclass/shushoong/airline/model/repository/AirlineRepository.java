@@ -34,7 +34,7 @@ public interface AirlineRepository {
 	
 	int insertReserverInfo(AirlineReserverInfoDto reserverInfo);
 	
-	String selectResCode(AirlineReserverInfoDto reserverInfo);
+	/* String selectResCode(AirlineReserverInfoDto reserverInfo); */
 	
 	int insertPassengerInfo(List<Map<String, Object>> passengerList);
 	

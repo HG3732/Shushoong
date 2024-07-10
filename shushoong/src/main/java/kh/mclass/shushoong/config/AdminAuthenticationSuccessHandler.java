@@ -56,6 +56,7 @@ public class AdminAuthenticationSuccessHandler extends SimpleUrlAuthenticationSu
 
 		// 사용자가 권한이 필요한 자원에 접근해 인증 예외가 발생해 인증을 처리하는 것이 아닌 경우
 		// SavedRequest 객체가 생성되지 않는다.
+		//TODO post 
 		if (savedRequest != null) {
 			String targetUrl = savedRequest.getRedirectUrl();
 			log.info("targetUrl = {}", targetUrl);

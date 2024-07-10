@@ -76,9 +76,10 @@ public class AirlineService {
 		
 		
 	}
-	public String selectResCode(AirlineReserverInfoDto reserverInfo) {
-		return airlineRepository.selectResCode(reserverInfo);
-	}
+	
+//	public String selectResCode(AirlineReserverInfoDto reserverInfo) {
+//		return airlineRepository.selectResCode(reserverInfo);
+//	}
 	
 	
 	public int insertPassengerInfo(List<Map<String, Object>> passengerList) {

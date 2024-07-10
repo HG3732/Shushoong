@@ -38,6 +38,12 @@ public class MemberService {
 		return memberRepository.loginLog(map);
 	}
 
+	// 계정 상태 체크
+	public String lockedCheck(String userId) {
+		return memberRepository.lockedCheck(userId);
+	}
+	
+	
 	public boolean checkLoginIdDuplicate(String loginId) {
 		return memberRepository.existsByLoginId(loginId);
 	}

@@ -35,11 +35,10 @@
 										<input type="text" placeholder="성씨를 영어로 입력해 주세요" name="passenger_lastName">
 										<div class="errorJ">1~20 영어만 사용하실 수 있습니다</div>
 									</div>
-									
 								</div>
 								<div>
 									<div>
-										<div>생년월일을</div>
+										<div>생년월일</div>
 										<div>(Birth)</div>
 									</div>
 									<div class="input_type_date">
@@ -67,8 +66,7 @@
 									</div>
 									<div>
 										<input type="text" placeholder="여권 번호를 적어주세요" name="passport_num">
-																				<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
-
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 									<div>
 										<div>여권 만료일</div>
@@ -77,7 +75,6 @@
 									<div class="input_type_date">
 										<input type="text" placeholder="만료 날짜를 '숫자 8자'로만 입력해 주세요" name="expiration_date">
 										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
-
 									</div>
 								</div>
 							</div>
@@ -154,20 +151,27 @@
 										<div>영문 이름</div> 
 										<div>(First Name)</div>
 									</div>
-									<div><input type="text" placeholder="여권에 적힌 이름을 영어로 입력해 주세요" name="passenger_firstName"></div>
+									<div>
+										<input type="text" placeholder="이름을 영어로 입력해 주세요" name="passenger_firstName">
+										<div class="errorJ">1~15 영어만 사용하실 수 있습니다</div>									
+									</div>
 									<div>
 										<div>영문 성 </div>
 										<div>(Last Name)</div>
 									</div>
-									<div><input type="text" placeholder="여권에 적힌 성씨를 영어로 입력해 주세요" name="passenger_lastName"></div>
+									<div>
+										<input type="text" placeholder="성씨를 영어로 입력해 주세요" name="passenger_lastName">
+										<div class="errorJ">1~20 영어만 사용하실 수 있습니다</div>
+									</div>
 								</div>
 								<div>
 									<div>
-										<div>생년월일을</div>
+										<div>생년월일</div>
 										<div>(Birth)</div>
 									</div>
 									<div class="input_type_date">
 										<input type="text" placeholder="생년월일을 '숫자 8자'로만 입력해 주세요" name="passenger_birth">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 									<div>
 										<div>국적 </div>
@@ -188,13 +192,17 @@
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
 									</div>
-									<div><input type="text" placeholder="여권 번호를 적어주세요" name="passport_num"></div>
+									<div>
+										<input type="text" placeholder="여권 번호를 적어주세요" name="passport_num">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
+									</div>
 									<div>
 										<div>여권 만료일</div>
 										<div>(Expired Date)</div>
 									</div>
 									<div class="input_type_date">
 										<input type="text" placeholder="만료 날짜를 '숫자 8자'로만 입력해 주세요" name="expiration_date">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 								</div>
 							</div>
@@ -269,12 +277,18 @@
 										<div>영문 이름</div> 
 										<div>(First Name)</div>
 									</div>
-									<div><input type="text" placeholder="여권에 적힌 이름을 영어로 입력해 주세요" name="passenger_firstName"></div>
+									<div>
+										<input type="text" placeholder="이름을 영어로 입력해 주세요" name="passenger_firstName">
+										<div class="errorJ">1~15 영어만 사용하실 수 있습니다</div>
+									</div>
 									<div>
 										<div>영문 성 </div>
 										<div>(Last Name)</div>
 									</div>
-									<div><input type="text" placeholder="여권에 적힌 성씨를 영어로 입력해 주세요" name="passenger_lastName"></div>
+									<div>
+										<input type="text" placeholder="성씨를 영어로 입력해 주세요" name="passenger_lastName">
+										<div class="errorJ">1~20 영어만 사용하실 수 있습니다</div>									
+									</div>
 								</div>
 								<div>
 									<div>
@@ -283,6 +297,7 @@
 									</div>
 									<div class="input_type_date">
 										<input type="text" placeholder="생년월일을 '숫자 8자'로만 입력해 주세요" name="passenger_birth">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 									<div>
 										<div>국적 </div>
@@ -303,13 +318,17 @@
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
 									</div>
-									<div><input type="text" placeholder="여권 번호를 적어주세요" name="passport_num"></div>
+									<div>
+										<input type="text" placeholder="여권 번호를 적어주세요" name="passport_num">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
+									</div>
 									<div>
 										<div>여권 만료일</div>
 										<div>(Expired Date)</div>
 									</div>
 									<div class="input_type_date">
 										<input type="text" placeholder="만료 날짜를 '숫자 8자'로만 입력해 주세요" name="expiration_date">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 									<input type="hidden" name="baggage_size" value="1">
 									<input type="hidden" name="reserve_code" >
@@ -445,8 +464,7 @@
 		
 		//예약자 정보
 		function reserverInfoInsertFunction(){
-			console.log($("[name=reserver_phone_number]").val());
-			console.log($("[name=reserver_email]").val());
+			
 			$.ajax({
 				url:"/shushoong/airline/input/reserverInfo",
 				type : "POST",

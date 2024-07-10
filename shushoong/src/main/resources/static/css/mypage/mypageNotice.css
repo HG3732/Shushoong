@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.catVal {
+	margin-bottom: 5px;
+}
+
 .section-notice {
 	width: 960px;
     float: left;
@@ -34,17 +38,17 @@ section .QnA-grid {
 	border-bottom: 2px solid #006AFF;
 	background-color: #BCEFFF;
 	display: grid;
-	grid-template-columns: 1fr 2fr 3fr;
+	grid-template-columns: 1fr 9fr 2fr;
 	align-items: center;
 	text-align: center;
 }
-.section-notice .QnA-grid .th-no{
-	text-align: left;
-    margin-left: 50px;
-}
+/* .section-notice .QnA-grid .th-no{ */
+/* 	text-align: left; */
+/*     margin-left: 50px; */
+/* } */
 .section-notice .QnA-grid .th-title{
-	text-align: left;
-	margin-left: 80px;
+	text-align: center;
+/* 	margin-left: 80px; */
 }
 
 section .notice-list {
@@ -53,13 +57,13 @@ section .notice-list {
 	font-weight: bold;
 	border-bottom: 1px solid #006AFF;
 	display: grid;
-	grid-template-columns: 1fr 2fr 3fr;
+	grid-template-columns: 1fr 9fr 2fr;
 	align-items: center;
 	text-align: center;
 }
 section .notice-list .td-no{
-	text-align: left;
-    margin-left: 50px;
+	text-align: center;
+/*     margin-left: 50px; */
 }
 
 section .notice-list .td-title{

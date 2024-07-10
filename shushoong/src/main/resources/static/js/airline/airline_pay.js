@@ -67,8 +67,7 @@
 									</div>
 									<div>
 										<input type="text" placeholder="여권 번호를 적어주세요" name="passport_num">
-																				<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
-
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 									<div>
 										<div>여권 만료일</div>
@@ -188,7 +187,10 @@
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
 									</div>
-									<div><input type="text" placeholder="여권 번호를 적어주세요" name="passport_num"></div>
+									<div>
+										<input type="text" placeholder="여권 번호를 적어주세요" name="passport_num">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
+									</div>
 									<div>
 										<div>여권 만료일</div>
 										<div>(Expired Date)</div>
@@ -303,7 +305,10 @@
 										<div>여권번호</div>
 										<div>(Passport Num)</div>
 									</div>
-									<div><input type="text" placeholder="여권 번호를 적어주세요" name="passport_num"></div>
+									<div>
+										<input type="text" placeholder="여권 번호를 적어주세요" name="passport_num">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
+									</div>
 									<div>
 										<div>여권 만료일</div>
 										<div>(Expired Date)</div>

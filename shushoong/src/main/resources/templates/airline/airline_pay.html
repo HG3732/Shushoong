@@ -391,8 +391,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 					var expiredDate = $('[name=expiration_date]').val();
 					var expiredDate2 = expiredDate.substring(0,4)+"-"+expiredDate.substring(4, 6)+ "-"+ expiredDate.substring(6, 8);
 					$('[name=expiration_date]').val(expiredDate2);
+					console.log("ok");
+					$(this).parent().parent().css("height","60px")
+					$(this).parent().children(".errorJ").css("display","none")
 				}else{
-					console.log("no");
+					console.log("nooo");
+					$(this).parent().parent().css("height","70px")
+					$(this).parent().children(".errorJ").css("display","block")
 				}
 			})
 		}
@@ -406,6 +411,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		var dateJ = /^[0-9]{8}$/;
 		var emailJ =  /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 		var passportJ = /^[0-9A-Z]{9}$/;
+		var changedDateJ = /^\d{4}$-\d{2}$-\d{2}$/;
 		
 		$("[name=reserver_phone_number]").blur(function(){
 			if(phoneNumJ.test($(this).val())){

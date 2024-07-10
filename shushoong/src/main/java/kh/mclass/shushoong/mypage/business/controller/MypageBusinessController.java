@@ -9,19 +9,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
+import kh.mclass.shushoong.hotel.model.domain.HotelReqDto;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.business.model.repository.MypageBusinessRepository;
 import kh.mclass.shushoong.mypage.business.model.service.MypageBusinessService;
@@ -106,17 +104,15 @@ public class MypageBusinessController {
 	}
 	
 	//사업장 등록
-	@PostMapping("/my/hotel/resgister/submit")
-	public String submitProduct(@RequestParam("business-regit") MultipartFile businessRegit, 
-			@RequestParam("business-certi") MultipartFile businessCerti, 
-			@RequestParam("intro") String intro,
-			@RequestParam("uploadpic") MultipartFile[] pics,
-			@RequestParam("check_in") String checkIn,
-			@RequestParam("check_out") String checkOut,
-			@RequestParam("room_intro") String roomIntro,
-			@ModelAttribute ("rooms") List<HotelRoomDto> rooms) {
-		
-		
+	@PostMapping("/my/hotel/register/submit")
+	public String submitProduct(
+//			 MultipartFile businessRegit, 
+//			 MultipartFile businessCerti, 
+//			 MultipartFile[] uploadpic,
+			HotelReqDto hotelReqDto
+			
+			) {
+
 		
 		
 		return "mypage/business/mypageBusinessHotel";

@@ -31,6 +31,40 @@ input[type="file"]::-webkit-file-upload-button:hover {
 	color: white;
 }
 
+.th {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+}
+
+.td {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+input[type="text"] {
+	border-radius: 10px;
+	padding: 5px 10px;
+    border: 1px solid black;
+}
+
+input[type="text"]:focus {
+	outline: none;
+}
+
+textarea {
+	padding: 10px;
+}
+
+textarea:focus {
+	outline: none;
+}
+
 .grid_wrap{
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
@@ -52,12 +86,6 @@ input[type="file"]::-webkit-file-upload-button:hover {
 	border-bottom: 1px solid var(--color_blue_1);
 	border-right: 1px solid var(--color_blue_1);
 }
-
-.p{
-	position: absolute;
-	transform: translate(10px, 90%);
-}
-
 
 .div_register_btn{
 	grid-column: 3 / 8;
@@ -138,9 +166,111 @@ input[type="file"]::-webkit-file-upload-button:hover {
 	transform: translate(350px, 90%);
 }
 
-.hotel_intro{
+.hotel_name {
 	grid-column: 1/ 3;
 	grid-row: 4/ 5;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.hotel_name_div {
+	grid-column: 3/ 8;
+	grid-row: 4/ 5;
+	width: 100%;
+	border-bottom: 1px solid var(--color_blue_1);
+}
+
+.hotel_eng {
+	grid-column: 1/ 3;
+	grid-row: 5/ 6;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.hotel_eng_div {
+	grid-column: 3/ 8;
+	grid-row: 5/ 6;
+	width: 100%;
+	border-bottom: 1px solid var(--color_blue_1);
+}
+
+.hotel_call {
+	grid-column: 1/ 3;
+	grid-row: 6/ 7;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.hotel_call_div {
+	grid-column: 3/ 8;
+	grid-row: 6/ 7;
+	width: 100%;
+	border-bottom: 1px solid var(--color_blue_1);
+}
+
+.hotel_loc {
+	grid-column: 1/ 3;
+	grid-row: 7/ 8;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.hotel_loc_div {
+	grid-column: 3/ 8;
+	grid-row: 7/ 8;
+	border-bottom: 1px solid var(--color_blue_1);
+	width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 20px;
+    gap: 20px;
+}
+
+.hotel_loc_div > div {
+	display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.china, .japan, .america {
+	display : none;
+}
+
+.hotel_address {
+	grid-column: 1/ 3;
+	grid-row: 8/ 9;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.hotel_address_div {
+	grid-column: 3/ 8;
+	grid-row: 8/ 9;
+	width: 100%;
+	border-bottom: 1px solid var(--color_blue_1);
+}
+
+.hotel_intro{
+	grid-column: 1/ 3;
+	grid-row: 9/ 10;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -149,14 +279,9 @@ input[type="file"]::-webkit-file-upload-button:hover {
 	border-right: 1px solid var(--color_blue_1);
 }
 
-.hotel_intro > p {
-	position: absolute;
-	transform: translate(10px, 75px);
-}
-
 .hotel_text_div {
     grid-column: 3 / 8;
-	grid-row: 4/ 5;
+	grid-row: 9/ 10;
     position: relative;
     width: 100%;
     height: 170px;
@@ -172,7 +297,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
 .hotel_pic_box {
 	grid-column: 1/ 3;
-	grid-row: 5/ 6;
+	grid-row: 10/ 11;
 	width: 100%;
     height: 100%;
     display: flex;
@@ -189,7 +314,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
 .hotel_pic_div {
 	grid-column: 3/ 8;
-	grid-row: 5/ 6;
+	grid-row: 10/ 11;
 	width: 100%;
     height: 250px;
     display: flex;
@@ -222,7 +347,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
 .checkin_time{
 	grid-column: 1/ 3;
-	grid-row: 6/ 7;
+	grid-row: 11/ 12;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -231,14 +356,9 @@ input[type="file"]::-webkit-file-upload-button:hover {
 	border-right: 1px solid var(--color_blue_1);	
 }
 
-.checkin_time > p {
-	position: absolute;
-	transform: translate(10px, 15px);
-}
-
 .input_checkin_div {
 	grid-column: 3 / 8;
-	grid-row: 6/ 7;
+	grid-row: 11/ 12;
     position: relative;
     width: 100%;
     height: 50px;
@@ -254,7 +374,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
 .checkout_time{
 	grid-column: 1/ 3;
-	grid-row: 7/ 8;
+	grid-row: 12/ 13;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -263,14 +383,9 @@ input[type="file"]::-webkit-file-upload-button:hover {
 	border-right: 1px solid var(--color_blue_1);
 }
 
-.checkout_time > p{
-	position: absolute;
-	transform: translate(10px, 15px);
-}
-
 .input_checkout_div {
 	grid-column: 3 / 8;
-	grid-row: 7/ 8;
+	grid-row: 12/ 13;
     position: relative;
     width: 100%;
     height: 50px;
@@ -284,9 +399,9 @@ input[type="file"]::-webkit-file-upload-button:hover {
     border-radius: 10px;    
 }
 
-.room_intro{
+/* .room_intro{
 	grid-column: 1/ 3;
-	grid-row: 8/ 9;
+	grid-row: 13/ 14;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -295,13 +410,9 @@ input[type="file"]::-webkit-file-upload-button:hover {
 	border-right: 1px solid var(--color_blue_1);
 }
 
-.room_intro > p{
-	position: absolute;
-	transform: translate(10px, 70px);
-}
 .room_text_div{
 	grid-column: 3 / 8;
-	grid-row: 8/ 9;
+	grid-row: 13/ 14;
     position: relative;
 	width: 100%;
 	height: 170px;
@@ -313,11 +424,11 @@ input[type="file"]::-webkit-file-upload-button:hover {
     transform: translate(20px, 20px);
     resize: none;
     border-radius: 10px;
-}	
+}	 */
 
 .room_cat{
 	grid-column: 1/ 3;
-	grid-row: 9/ 10;
+	grid-row: 13/ 14;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -326,14 +437,9 @@ input[type="file"]::-webkit-file-upload-button:hover {
 	border-right: 1px solid var(--color_blue_1);
 }
 
-.room_cat > p{
-	position: absolute;
-	transform: translate(10px, 80px);
-}
-
 .select_option{
 	grid-column: 3/ 8;
-	grid-row: 9/ 10;
+	grid-row: 13/ 14;
     width: 100%;
     height: 100%;
 	border-bottom: 1px solid var(--color_blue_1);
@@ -361,7 +467,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 }
 .category{
 	grid-column: 1/ 3;
-	grid-row: 9/ 10;
+	grid-row: 13/ 14;
 	margin: 0 10px;
 }
 
@@ -386,7 +492,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
 .facility{
 	grid-column: 1/ 3;
-	grid-row: 10/ 11;
+	grid-row: 14/ 15;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -395,14 +501,9 @@ input[type="file"]::-webkit-file-upload-button:hover {
 	border-right: 1px solid var(--color_blue_1);		
 }
 
-.facility > p{
-	position: absolute;
-	transform: translate(10px, 60px);
-}
-
 .facility_check{
 	grid-column: 3/ 8;
-	grid-row: 10/ 11;
+	grid-row: 14/ 15;
 	display: flex;
 	flex-wrap: wrap;
     width: 100%;
@@ -478,7 +579,7 @@ input[type=checkbox]:checked + label {
 
 .policy{
 	grid-column: 1/ 3;
-	grid-row: 11/ 12;
+	grid-row: 15/ 16;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -487,14 +588,9 @@ input[type=checkbox]:checked + label {
 	border-right: 1px solid var(--color_blue_1);			
 }
 
-.policy > p {
-	position: absolute;
-	transform: translate(10px, 70px);	
-}
-
 .policy_text_div {
     grid-column: 3 / 8;
-	grid-row: 11/ 12;
+	grid-row: 15/ 16;
     position: relative;
     width: 100%;
     height: 170px;
@@ -510,7 +606,7 @@ input[type=checkbox]:checked + label {
 
 .safety{
 	grid-column: 1/ 3;
-	grid-row: 12/ 13;	
+	grid-row: 16/ 17;	
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -518,14 +614,9 @@ input[type=checkbox]:checked + label {
 	border-right: 1px solid var(--color_blue_1);				
 }
 
-.safety > p {
-	position: absolute;
-	transform: translate(10px, 70px);	
-}
-
 .safety_textarea{
     grid-column: 3 / 8;
-	grid-row: 12/ 13;	
+	grid-row: 16/ 17;		
 	resize: none;
     margin: 20px;
     border-radius: 10px;		

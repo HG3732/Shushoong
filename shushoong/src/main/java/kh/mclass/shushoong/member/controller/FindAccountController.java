@@ -117,7 +117,7 @@ public class FindAccountController {
 		
 		String userId;
 		paramMap.put("userPwd", encoder.encode(userPwd));
-		paramMap.put("userId", userId);
+//		paramMap.put("userId", userId);
 		int result = memberservice.resetPwd(paramMap);
 
 		String message = null;

@@ -71,132 +71,22 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			<section class="recommend_section">
 				
 				
-				<div class="recomends_slides">
-					<div class="slide_head">저렴한 항공기</div>
-					<div class="slides_items">
-						
-						<a class="cheap_item" href="">
-							<div class="slides_img">사진 <div class="slides_number">1</div></div>
-							<div class="slides_name">이름</div>
-							<div class="slides_price">
-								<div class="won">원</div>
-								<div class="slides_value">~~~</div>
+				<div class="wrap-hot-hotel-list">
+				<div class="hot-hotel-title">저렴한 항공기</div>
+				<div class="hot-hotel-list">
+					<div class="list-wrapper" >
+						<a class="hot-hotel" th:each="hothotel : ${hotHotelList}" th:href="@{/hotel/view/{hotelCode}(hotelCode=${hothotel.hotelCode})}">
+							<div class="hot-hotel-pic"><img th:src="${hothotel.hotelPic}" alt="a" style="display: block;"/></div>
+							<div class="hot-hotel-info">
+								<div class="hot-hotel-name" th:text="${hothotel.hotelName}">호텔이름</div>
+								<div class="wrap-price"><div class="hot-hotel-price" th:text="${hothotel.hotelPrice}">호텔 가격</div><div>원~</div></div>
 							</div>
 						</a>
-					
-						<a class="cheap_item" href="">
-							<div class="slides_img">사진 <div class="slides_number">2</div></div>
-							<div class="slides_name">이름</div>
-							<div class="slides_price">
-								<div class="won">원</div>
-								<div class="slides_value">~~~</div>
-							</div>
-						</a>
-						
-						<a class="cheap_item" href="">
-							<div class="slides_img">사진 <div class="slides_number">3</div></div>
-							<div class="slides_name">이름</div>
-							<div class="slides_price">
-								<div class="won">원</div>
-								<div class="slides_value">~~~</div>
-							</div>
-						</a>
-					
-						<a class="cheap_item" href="">
-							<div class="slides_img">사진 <div class="slides_number">4</div></div>
-							<div class="slides_name">이름</div>
-							<div class="slides_price">
-								<div class="won">원</div>
-								<div class="slides_value">~~~</div>
-							</div>
-						</a>
-						
-						<a class="cheap_item" href="">
-							<div class="slides_img">사진 <div class="slides_number">5</div></div>
-							<div class="slides_name">이름</div>
-							<div class="slides_price">
-								<div class="slides_value">~~~</div>
-								<div class="won">원</div>
-							</div>
-						</a>
-						
-						<a class="cheap_item" href="">
-							<div class="slides_img">사진 <div class="slides_number">6</div></div>
-							<div class="slides_name">이름</div>
-							<div class="slides_price">
-								<div class="won">원</div>
-								<div class="slides_value">~~~</div>
-							</div>
-						</a>
-					
 					</div>
-					<button class="cheap_prev_btn"><</button>
-					<button class="cheap_next_btn">></button>
 				</div>
-				
-			
-				<div class="recomends_slides">
-						<div class="slide_head">빠른 항공기</div>
-						<div class="slides_items">
-							
-							<a class="fast_item" href="">
-								<div class="slides_img">사진 <div class="slides_number">1</div></div>
-								<div class="slides_name">이름</div>
-								<div class="slides_price">
-									<div class="won">원</div>
-									<div class="slides_value">~~~</div>
-								</div>
-							</a>
-						
-							<a class="fast_item" href="">
-								<div class="slides_img">사진 <div class="slides_number">2</div></div>
-								<div class="slides_name">이름</div>
-								<div class="slides_price">
-									<div class="won">원</div>
-									<div class="slides_value">~~~</div>
-								</div>
-							</a>
-							
-							<a class="fast_item" href="">
-								<div class="slides_img">사진 <div class="slides_number">3</div></div>
-								<div class="slides_name">이름</div>
-								<div class="slides_price">
-									<div class="won">원</div>
-									<div class="slides_value">~~~</div>
-								</div>
-							</a>
-						
-							<a class="fast_item" href="">
-								<div class="slides_img">사진 <div class="slides_number">4</div></div>
-								<div class="slides_name">이름</div>
-								<div class="slides_price">
-									<div class="won">원</div>
-									<div class="slides_value">~~~</div>
-								</div>
-							</a>
-							
-							<a class="fast_item" href="">
-								<div class="slides_img">사진 <div class="slides_number">5</div></div>
-								<div class="slides_name">이름</div>
-								<div class="slides_price">
-									<div class="won">원</div>
-									<div class="slides_value">~~~</div>
-								</div>
-							</a>
-							
-							<a class="fast_item" href="">
-								<div class="slides_img">사진 <div class="slides_number">6</div></div>
-								<div class="slides_name">이름</div>
-								<div class="slides_price">
-									<div class="won">원</div>
-									<div class="slides_value">~~~</div>
-								</div>
-							</a>
-						
-						</div>
-						<button class="fast_prev_btn"><</button>
-						<button class="fast_next_btn">></button>
-					</div>
+				<button type="button" class="left btn2">&lt;</button>
+				<button type="button" class="right btn2">&gt;</button>
+			</div>
 			
 			
 			</section>

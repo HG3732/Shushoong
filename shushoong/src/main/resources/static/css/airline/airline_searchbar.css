@@ -35,7 +35,7 @@ div#round_trip{
 
 div.tabcontent > *{
 	height: 40px;
-	margin: 30px 15px 20px 15px;
+	margin: 30px 0 20px 24px;
 	border-radius: 10px;
 	font-size: 15px;
 	text-align: center;

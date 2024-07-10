@@ -680,6 +680,20 @@ FROM (
     WHERE USER_ID = 'singasong'
     AND RESERVE_PHONE = '01012345678'
     AND RESERVE_EMAIL = 'sss@naver.com'
-    ORDER BY RESERVE_DATE DESC
+    ORDER BY RESERVE_TIME DESC
 )
 WHERE ROWNUM = 1;
+
+alter table AIRLINE_RESERVE_INFO
+MODIFY RESERVE_TIME TIMESTAMP default(SYSDATE);
+
+select * from AIRLINE_RESERVE_INFO;
+
+
+ select * from passenger_info;
+ 
+ desc AIRLINE_RESERVE_INFO;
+ 
+alter table passenger_info
+modify AIRLINE_RESERVE_CODE varchar2(20);
+commit;

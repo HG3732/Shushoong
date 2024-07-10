@@ -40,6 +40,7 @@ public interface ServiceCenterRepository {
     NoticeDto selectOneNotice(String noticeId);
     List<NoticeFileDto> selectOneNoticeFile(String noticeId);
     int updateNotice(NoticeDto noticeDto);
+    int updateNoticeFile(NoticeFileDto noticeFiles);
     int deleteNotice(String noticeId);
     int deleteNoticeFile(String noticeId);
 		

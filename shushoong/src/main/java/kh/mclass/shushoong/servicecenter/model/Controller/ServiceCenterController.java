@@ -270,9 +270,7 @@ public class ServiceCenterController {
 		} else {
 			return "member/login";
 		}
-
 	}
-	
 	
 	@GetMapping("/support/notice/list.ajax")
 	public String noticeListAjax (Model md, String noticeCategory,
@@ -402,7 +400,7 @@ public class ServiceCenterController {
 	
 	// 공지사항 수정
 	@GetMapping("/support/notice/update/{noticeId}")
-	public String getNoticeUpdate (Model md, @PathVariable("noticeId") String noticeId, String noticeCategory) {
+	public String getNoticeUpdate (Model md, @PathVariable("noticeId") String noticeId, String noticeCategory, String noticeTime) {
 		SecurityContextHolder.getContext().getAuthentication();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId =  authentication.getName();
@@ -412,8 +410,9 @@ public class ServiceCenterController {
                 .orElse("anonymousUser"); // 기본값 설정
 		
 		System.out.println("유저 등급 : " + userGrade);
+		List<NoticeFileDto> fileDtoList = noticeService.selectOneNoticeFile(noticeId);
 		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
-		md.addAttribute("noticeFileDto", noticeService.selectOneNoticeFile(noticeId));
+		md.addAttribute("noticeFileDto", fileDtoList);
 		System.out.println("noticeCategory : " + noticeCategory);
 		if (!userGrade.equals("ROLE_ANONYMOUS")) {
 			return "servicecenter/notice_update";
@@ -426,8 +425,9 @@ public class ServiceCenterController {
 	public String postNoticeUpdate (// RedirectAttributes rd, 
 			String noticeTitle, 
 			String noticeContent, 
-			String noticeFile,
+			@RequestParam("noticeFile") MultipartFile[] noticeFile,
 			String noticeCategory,
+			String noticeTime,
 			int noticeId, Model md
 			) {
 		SecurityContextHolder.getContext().getAuthentication();
@@ -445,10 +445,12 @@ public class ServiceCenterController {
 		System.out.println("noticeContent : " + noticeContent);
 		System.out.println("noticeFile : " + noticeFile);
 		System.out.println("noticeCategory : " + noticeCategory);
+		System.out.println("noticeTime : " + noticeTime);
 		
 //		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
 		
 	    NoticeDto dto = new NoticeDto();
+	    dto.setNoticeTime(noticeTime);
 	    dto.setNoticeTitle(noticeTitle);
 	    dto.setNoticeContent(noticeContent);
 	    dto.setNoticeId(noticeId);	    // noticeFile과 noticeCategory가 NoticeDto에 있는 경우 설정;
@@ -456,13 +458,44 @@ public class ServiceCenterController {
 //	    dto.setUserId(userId); 
 //	    dto.setNoticeCategory("defaultUserGrade"); 
 	    md.addAttribute("userGrade", userGrade);
-	    
+	    md.addAttribute("noticeFileDto", noticeService.selectOneNoticeFile(String.valueOf(noticeId)));
         int updateNotice = noticeService.updateNotice(dto);
         // 파일 첨부 해야함..
-		
+        System.out.println("파일 리스트 개수 : " + noticeFile.length);
+        try {
+//	        List<NoticeFileDto> noticeFileDtos = new ArrayList<>();
+            for (MultipartFile noticeFile2 : noticeFile) {
+                if (noticeFile2 != null && !noticeFile2.isEmpty()) {
+                    // 클라우드 서비스를 통해 파일 업로드 처리
+                    Map<String, Object> uploadResult = cloudinary.uploader().upload(noticeFile2.getBytes(), ObjectUtils.emptyMap());
+                    String savedFilePathName = uploadResult.get("url").toString();
+
+                    NoticeFileDto noticeFileDto = new NoticeFileDto();
+//    	                noticeFileDto.setNoticeId(noticeCategory)
+                    // 공지번허 앞글자만 버리기 (시퀀스 앞에 숫자로 구분 지어야함)
+                    String noticeIdStr = String.valueOf(noticeId);
+                    if (noticeIdStr.length() > 1) {
+                        noticeIdStr = noticeIdStr.substring(1);
+                    }
+                    noticeFileDto.setNoticeId(String.valueOf(noticeIdStr));
+                    noticeFileDto.setNoticeCategory(noticeCategory);
+                    noticeFileDto.setOriginalFilename(noticeFile2.getOriginalFilename());
+                    noticeFileDto.setSavedFilePathName(savedFilePathName);
+                    System.out.println("공지사항 번호 : " + dto.getNoticeId());
+                    System.out.println("파일 카테고리 : " + noticeCategory);
+                    System.out.println("파일 오리지널 명 : " + noticeFile2.getOriginalFilename());
+                    System.out.println("파일 패스 명 : " + savedFilePathName);
+                    
+                    noticeService.deleteNoticeFile(String.valueOf(noticeId));
+                    noticeService.insertNoticeFile(noticeFileDto);
+	            }
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        System.out.println("파일 첨부 에러");
+	    }
 		return "redirect:/support/notice/list";
 	}
-	
 	@GetMapping("/support/notice/view/{noticeId}")
 	public String viewNotice(Model md, @PathVariable("noticeId") String noticeId, String noticeCategory) {
 		

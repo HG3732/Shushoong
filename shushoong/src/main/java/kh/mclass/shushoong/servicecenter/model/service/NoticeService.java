@@ -41,17 +41,6 @@ public class NoticeService {
 	public int insertNoticeFile(NoticeFileDto noticeFiles) {
 		return repository.insertNoticeFile(noticeFiles);
 	}
-//	public void insertNoticeFile(List<NoticeFileDto> noticeFiles) {
-//	    repository.insertNoticeFile(noticeFiles);
-//	}
-
-//	public List<NoticeFileDto> insertNoticeFile(List<NoticeFileDto> noticeFiles) {
-//		return repository.insertNoticeFile(noticeFiles);
-//	}
-	
-//	public int insertNoticeFile2(List<NoticeFileDto> noticeFiles) {
-//		return repository.insertNoticeFile2(noticeFiles);
-//	}
 
 	public NoticeDto selectOneNotice(String noticeId) {
 		return repository.selectOneNotice(noticeId);
@@ -63,6 +52,9 @@ public class NoticeService {
 	
 	public int updateNotice(NoticeDto noticeDto) {
 		return repository.updateNotice(noticeDto);
+	}
+	public int updateNoticeFile(NoticeFileDto noticeFiles) {
+		return repository.updateNoticeFile(noticeFiles);
 	}
 	
 	public int deleteNotice(String noticeId) {

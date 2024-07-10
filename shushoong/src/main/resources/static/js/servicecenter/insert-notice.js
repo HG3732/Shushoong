@@ -17,7 +17,7 @@ function clickedWriteOkBtn(){
 		
 		$('#noticeTitle').val(noticeTitle);
 		$('#noticeCategory').val(noticeCategory);
-		$('#noticeFile').val(noticeFile);
+		//$('#noticeFile').val(noticeFile);
 		$('#noticeContent').val(noticeContent);
 		
 		$('#frm-write').attr('method', 'POST');

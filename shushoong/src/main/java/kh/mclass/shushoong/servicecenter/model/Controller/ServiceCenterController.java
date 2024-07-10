@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 
 import jakarta.mail.Multipart;
 import jakarta.servlet.http.HttpSession;
@@ -39,7 +44,8 @@ public class ServiceCenterController {
 	
 	@Autowired
 	private OnlineQnAService service;
-	
+	@Autowired
+	private Cloudinary cloudinary;
 	
 	int pageSize = 10;
 	int pageBlockSize = 3;
@@ -329,7 +335,7 @@ public class ServiceCenterController {
 }
 	
 	@PostMapping("/support/notice/write")
-	public String PostNoticeWrite (@RequestParam("noticeFile") MultipartFile noticeFile, 
+	public String PostNoticeWrite (@RequestParam("noticeFile") MultipartFile[] noticeFile, 
 			String noticeTitle, String noticeContent,  String noticeCategory,
 			Model md
 			) {
@@ -355,59 +361,70 @@ public class ServiceCenterController {
 	    dto.setUserId(userId); 
 	    md.addAttribute("userGrade", userGrade);
 	    
-	    int insertNotice = noticeService.insertNotice(dto);
+//	    int insertNotice = noticeService.insertNotice(dto);
+	    int noticeId = noticeService.insertNotice(dto);
+	    String noticeIdStr = String.valueOf(noticeId);
+	    System.out.println("공지사항 글번호 : " + noticeId);
+//	    NoticeFileDto noticeFileDto = new NoticeFileDto();
 	    
-//	    int insertNoticeId = noticeService.insertNotice(dto); // NOTICE_ID 반환
-//	    System.out.println("insertNoticeId : " + insertNoticeId);
+	    try {
+//	        List<NoticeFileDto> noticeFileDtos = new ArrayList<>();
+	        for (MultipartFile noticeFile2 : noticeFile) {
+	            if (noticeFile2 != null && !noticeFile2.isEmpty()) {
+	                // 클라우드 서비스를 통해 파일 업로드 처리
+	                Map<String, Object> uploadResult = cloudinary.uploader().upload(noticeFile2.getBytes(), ObjectUtils.emptyMap());
+	                String savedFilePathName = uploadResult.get("url").toString();
+
+	                NoticeFileDto noticeFileDto = new NoticeFileDto();
+//	                noticeFileDto.setNoticeId(noticeCategory)
+	                noticeFileDto.setNoticeId(noticeIdStr);
+	                noticeFileDto.setNoticeCategory(noticeCategory);
+	                noticeFileDto.setOriginalFilename(noticeFile2.getOriginalFilename());
+	                noticeFileDto.setSavedFilePathName(savedFilePathName);
+	                System.out.println("공지사항 번호 : " + dto.getNoticeId());
+	                System.out.println("파일 카테고리 : " + noticeCategory);
+	                System.out.println("파일 오리지널 명 : " + noticeFile2.getOriginalFilename());
+	                System.out.println("파일 패스 명 : " + savedFilePathName);
+
+//	                noticeFileDtos.add(noticeFileDto);
+	                noticeService.insertNoticeFile(noticeFileDto);
+	            }
+	        }
+
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        System.out.println("파일 첨부 에러");
+	    }
 	    
 	    // 파일 첨부 해야함..
-	    if (!noticeFile.isEmpty()) {
-	        try {
-	            // 파일 저장 경로 설정
-	        	String saveDir = "C:/filetest"; // 실제 파일 저장 경로를 설정
-	            String savedFileName = System.currentTimeMillis() + "_" + noticeFile.getOriginalFilename();
-	            File saveFile = new File(saveDir, savedFileName);
-	            
-	            // 디렉토리가 존재하지 않으면 생성
-	            if (!saveFile.getParentFile().exists()) {
-	                saveFile.getParentFile().mkdirs();
-	            }
-	            
-	            // 파일 저장
-	            noticeFile.transferTo(saveFile);
-	            
-	            // NoticeFileDto 객체에 파일 정보 저장
-	            
-//	            writeDto를 하나 더 만들어봄 noticeDto의 fileId 값이 추출되지 않아서.. 하지만 쓸모없는걸로..
-//	            List<NoticeFileWriteDto> noticeFileDto = new ArrayList<NoticeFileWriteDto>();
-//	            String fileCategory = noticeCategory;
-//	            String originalFilename = noticeFile.getOriginalFilename();
-//	            String savedFilePathName = saveFile.getAbsolutePath();
+//	    if (noticeFile.length != 0) {
+//	        try {
+//	            // 파일 저장 경로 설정
+//	        	Map<String, Object> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+//	        	String saveFile = uploadResult.get("url").toString();
+//	        	System.out.println("파일 패스 명 : " + saveFile);
 //	            
-//	            System.out.println("noticeCategory" + noticeCategory);
-//	            System.out.println("originalFilename" + originalFilename);
-//	            System.out.println("savedFilePathName" + savedFilePathName);
+//	        	
+//	            List<NoticeFileDto> noticeFiles = new ArrayList<>();
+//	            NoticeFileDto noticeFileDto = new NoticeFileDto();
+//	            noticeFileDto.setNoticeCategory(noticeCategory);
+//	            noticeFileDto.setOriginalFilename(noticeFile.getOriginalFilename());
+//	            noticeFileDto.setSavedFilePathName(saveFile);
+//	            System.out.println("파일 카테고리 : " + noticeCategory);
+//	            System.out.println("파일 오리지널 네임 : " + noticeFile.getOriginalFilename());
+//	            System.out.println("파일 패스 명 : " + saveFile);
 //	            
-//	            NoticeFileWriteDto fileDto = new NoticeFileWriteDto(originalFilename, savedFilePathName, fileCategory);
-//	            noticeFileDto.add(fileDto);
-	            
-	            NoticeFileDto noticeFileDto = new NoticeFileDto();
-//	            noticeFileDto.setNoticeId(String.valueOf(insertNoticeId)); // 알맞은 noticeId 설정
-	            noticeFileDto.setNoticeCategory(noticeCategory);
-	            System.out.println("파일 카테고리 : " + noticeCategory);
-	            noticeFileDto.setOriginalFilename(noticeFile.getOriginalFilename());
-	            System.out.println("파일 오리지널 네임 : " + noticeFile.getOriginalFilename());
-	            noticeFileDto.setSavedFilePathName(saveFile.getAbsolutePath());
-	            System.out.println("파일 패스 명 : " + saveFile.getAbsolutePath());
-	            
-	            // 파일 정보 데이터베이스에 저장
-	            noticeService.insertNoticeFile(noticeFileDto);
-	            
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	            System.out.println("파일 첨부 에러");
-	        }
-		}
+//	            noticeFiles.add(noticeFileDto);
+//	            
+//	            // 파일 정보 데이터베이스에 저장
+//	            noticeService.insertNoticeFile(noticeFiles);
+//	            
+//	        } catch (IOException e) {
+//	            e.printStackTrace();
+//	            System.out.println("파일 첨부 에러");
+//	        }
+//		}
 		
 		return "redirect:/support/notice/list";
 	}
@@ -439,7 +456,7 @@ public class ServiceCenterController {
 			String noticeContent, 
 			String noticeFile,
 			String noticeCategory,
-			String noticeId, Model md
+			int noticeId, Model md
 			) {
 		SecurityContextHolder.getContext().getAuthentication();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -462,8 +479,7 @@ public class ServiceCenterController {
 	    NoticeDto dto = new NoticeDto();
 	    dto.setNoticeTitle(noticeTitle);
 	    dto.setNoticeContent(noticeContent);
-	    dto.setNoticeId(noticeId);
-	    // noticeFile과 noticeCategory가 NoticeDto에 있는 경우 설정
+	    dto.setNoticeId(noticeId);	    // noticeFile과 noticeCategory가 NoticeDto에 있는 경우 설정;
 	    dto.setNoticeCategory(noticeCategory);
 //	    dto.setUserId(userId); 
 //	    dto.setNoticeCategory("defaultUserGrade"); 
@@ -494,18 +510,16 @@ public class ServiceCenterController {
 	        // 공지사항 정보 가져오기
 	        NoticeDto noticeDto = noticeService.selectOneNotice(noticeId);
 	        
-	        List<NoticeFileDto> fileList = noticeDto.getFileId(); // 파일 리스트 가져오기
-	        if (fileList == null) {
-	            System.out.println("파일 리스트가 NULL");
-	        } else {
-	            for (NoticeFileDto fileDto : fileList) {
-	                System.out.println("파일 아이디 : " + fileDto.getFileId());
-	                System.out.println("파일 원본 이름 : " + fileDto.getOriginalFilename());
-	                System.out.println("파일 저장 경로 : " + fileDto.getSavedFilePathName());
-	            }
+	        List<NoticeFileDto> noticeFileDtoList = noticeService.selectOneNoticeFile(noticeId);
+	        for(NoticeFileDto noticefileDto : noticeFileDtoList) {
+	        	System.out.println("파일 번호 : " + noticefileDto.getFileId());
+	        	System.out.println("파일 오리지널명 : " + noticefileDto.getOriginalFilename());
+	        	System.out.println("파일 저장 경로 : " + noticefileDto.getSavedFilePathName());
 	        }
+	        System.out.println("파일 리스트 개수 : " + noticeFileDtoList.size());
 	        
-			md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
+	        md.addAttribute("noticeFileDto", noticeFileDtoList);
+			md.addAttribute("noticeDto", noticeDto);
 			md.addAttribute("userGrade", userGrade);
 			return "servicecenter/notice_view";
 		}else {
@@ -516,6 +530,7 @@ public class ServiceCenterController {
 	@PostMapping("/support/notice/delete")
 	public String deleteNotice(@RequestParam String noticeId) {
 		System.out.println("삭제될 할 글 번호 : " + noticeId);
+		noticeService.deleteNoticeFile(noticeId);
 		noticeService.deleteNotice(noticeId);
 		
 		return "redirect:/support/notice/list";

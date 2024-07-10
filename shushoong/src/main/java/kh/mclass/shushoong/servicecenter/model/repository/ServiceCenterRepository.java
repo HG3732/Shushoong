@@ -26,7 +26,6 @@ public interface ServiceCenterRepository {
 	int insertQna(OnlineQnADto onlineQnaDto);
 	int insertQnaCat(OnlineQnADto onlineQnaDto);
 	
-	
 	// 공지사항
 	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userGrade);
 	List<NoticeDto> selectNoticeAllListAjax(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userGrade, String noticeCategory);
@@ -35,10 +34,14 @@ public interface ServiceCenterRepository {
 	
 	// 공지사항 작성
     int insertNotice(NoticeDto noticeDto);
-    int insertNoticeFile(NoticeFileDto noticeFileDto);
+    int insertNoticeFile(NoticeFileDto noticeFiles);
+//    int insertNoticeFile(List<NoticeFileDto> noticeFiles);
+//    int insertNoticeFile2(List<NoticeFileDto> noticeFiles);
     NoticeDto selectOneNotice(String noticeId);
+    List<NoticeFileDto> selectOneNoticeFile(String noticeId);
     int updateNotice(NoticeDto noticeDto);
     int deleteNotice(String noticeId);
+    int deleteNoticeFile(String noticeId);
 		
 	
 }

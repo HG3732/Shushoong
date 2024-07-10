@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Component
 public class NoticeDto {
-	private String noticeId;
+	private int noticeId;
 	private String noticeTitle;
 	private String noticeContent;
 	private String noticeTime;

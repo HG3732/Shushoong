@@ -63,44 +63,79 @@
 	</choose>
 </select>
 <insert id="insertNotice" parameterType="NoticeDto">
+    <selectKey keyProperty="noticeId" resultType="int" order="BEFORE">
+        SELECT SEQ_NOTICE_ID.nextval FROM DUAL
+    </selectKey>
 	<choose>
 		<when test="noticeCategory == 1">
 			insert into notice_board values(
-		 		1||SEQ_NOTICE_ID.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
+		 		1||#{noticeId}, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
 			)
 		</when>
 		<when test="noticeCategory != 1">
 			insert into notice_board values(
-			2||SEQ_NOTICE_ID.nextval, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
+			2||#{noticeId}, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
 			)
 		</when>
 	</choose>
 </insert>
-<insert id="insertNoticeFile" parameterType="NoticeFileDto">
-	<choose>
-		<when test="noticeCategory == 1">
-			insert into notice_file (
-				FILE_ID, NOTICE_ID, ORIGINAL_FILENAME, SAVED_FILE_PATH_NAME
-			)
-			values(
-				SEQ_NOTICE_FILE_ID.nextval, (1||SEQ_NOTICE_ID.nextval)-1, #{originalFilename}, #{savedFilePathName}
-			)
-		</when>
-		<when test="noticeCategory == 2">
-			insert into notice_file(
-				FILE_ID, NOTICE_ID, ORIGINAL_FILENAME, SAVED_FILE_PATH_NAME
-			)
-			values(
-				SEQ_NOTICE_FILE_ID.nextval, (2||SEQ_NOTICE_ID.nextval)-1, #{originalFilename}, #{savedFilePathName}
-			)
-		</when>
-	</choose>			
+<insert id="insertNoticeFile" parameterType="NoticeFileDto" >
+    <choose>
+        <when test="noticeCategory == 1">
+            insert into notice_file (
+                FILE_ID, NOTICE_ID, ORIGINAL_FILENAME, SAVED_FILE_PATH_NAME
+            )
+            values (
+                SEQ_NOTICE_FILE_ID.nextval, 1||#{noticeId}, #{originalFilename}, #{savedFilePathName}
+            )
+        </when>
+        <when test="noticeCategory == 2">
+            insert into notice_file (
+                FILE_ID, NOTICE_ID, ORIGINAL_FILENAME, SAVED_FILE_PATH_NAME
+            )
+            values (
+                SEQ_NOTICE_FILE_ID.nextval, 2||#{noticeId}, #{originalFilename}, #{savedFilePathName}
+            )
+        </when>
+    </choose>
 </insert>
+
+ <!-- 파일 인서트 리스트형식 -->
+<!--  
+<insert id="insertNoticeFile" parameterType= "java.util.List">
+    <foreach collection="list" item="file" index="index">
+        <choose>
+            <when test="file.noticeCategory == 1">
+                insert into notice_file (
+                    FILE_ID, NOTICE_ID, ORIGINAL_FILENAME, SAVED_FILE_PATH_NAME
+                )
+                values (
+                    SEQ_NOTICE_FILE_ID.nextval, (1 || SEQ_NOTICE_ID.nextval) - 1, #{file.originalFilename}, #{file.savedFilePathName}
+                )
+            </when>
+            <when test="file.noticeCategory == 2">
+                insert into notice_file (
+                    FILE_ID, NOTICE_ID, ORIGINAL_FILENAME, SAVED_FILE_PATH_NAME
+                )
+                values (
+                    SEQ_NOTICE_FILE_ID.nextval, (2 || SEQ_NOTICE_ID.nextval) - 1, #{file.originalFilename}, #{file.savedFilePathName}
+                )
+            </when>
+        </choose>			
+    </foreach>
+</insert> 
+ -->
 <select id="selectOneNotice" parameterType="String" resultType="noticeDto">
+<!-- 
 	SELECT * 
 	FROM notice_board b 
 	JOIN notice_file  f on b.notice_id = f.notice_id 
 	where b.notice_id = #{noticeId}
+	 -->
+	 select * from notice_board where notice_id = #{noticeId}
+</select>
+<select id="selectOneNoticeFile" parameterType="String" resultType="noticeFileDto">
+	 select * from notice_file where notice_id = #{noticeId}
 </select>
 <update id="updateNotice" parameterType="hashMap">
 			update notice_board set notice_time = sysdate, notice_title = #{noticeTitle}, 
@@ -120,5 +155,8 @@
 </update>
 <delete id="deleteNotice" parameterType="hashMap">
 	delete notice_board where notice_id = #{noticeId}
+</delete>
+<delete id="deleteNoticeFile" parameterType="hashMap">
+	delete notice_file where notice_id = #{noticeId}
 </delete>
 </mapper>

@@ -129,8 +129,8 @@ INSERT
     INTO HOTEL_REVIEW VALUES ('019080c8-b1fa-d8c3-d515-248c5bdbed8f','2OS003', '좋아유','아주 굿 ㅎㅎ',  'ex1',5, 3, 5, 5, 1)
     INTO HOTEL_REVIEW VALUES ('019080d3-8669-88c9-9be0-8f560b5dd157','2OS003', '썩 좋지않소', '장사 이런식으로 계속하면 주인장 당신은 죽소', 'ex1',  2, 1, 0, 2, 2)
     select * from dual;
-    
+   
   select*from seat_grade ;  
 select*from seat_grade where seat_grade = 3  order by seat_price asc;
 select * from;
-select rownum ,seat_grade.*, airline_info.* from seat_grade,(select*from seat_grade JOIN AIRLINE_INFO USING (AIRLINE_CODE) where seat_grade = 3  order by seat_price asc)where rownum <= 6;
+SELECT ROWNUM ,seat_grade.*, airline_info.* FROM seat_grade,airline_info,(SELECT*FROM seat_grade JOIN airline_info USING (airline_code) WHERE seat_grade = 3  ORDER BY seat_price ASC)WHERE ROWNUM BETWEEN 0 AND 6;

@@ -89,4 +89,8 @@ public class AirlineService {
 	public AirlineInfoDto selectOneAirlineInfo(String airlineCode) {
 		return airlineRepository.selectOneAirlineInfo(airlineCode);
 	}
+	
+	public List<AirlineInfoDto> selectListRecommenedCheap(){
+		return airlineRepository.selectListRecommenedCheap();
+	}
 }

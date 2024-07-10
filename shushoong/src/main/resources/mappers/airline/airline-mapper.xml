@@ -206,5 +206,12 @@
 			FROM AIRLINE_INFO
 				WHERE AIRLINE_CODE = #{airlineCode}
 	</select>
+	<select id="selectListRecommenedCheap" resultType="AirlineInfoDto">
+		SELECT ROWNUM ,seat_grade.*, airline_info.* 
+			FROM seat_grade,airline_info,
+				(SELECT*FROM seat_grade JOIN airline_info USING (airline_code) 
+					WHERE seat_grade = 3  ORDER BY seat_price ASC)
+						WHERE ROWNUM BETWEEN 0 AND 6
+	</select>
 	
 </mapper>

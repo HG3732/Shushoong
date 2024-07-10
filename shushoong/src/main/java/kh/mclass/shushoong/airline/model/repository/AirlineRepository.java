@@ -43,4 +43,6 @@ public interface AirlineRepository {
 	Character selectOneReturnDomesticFunction(String airlineCode);
 	
 	public AirlineInfoDto selectOneAirlineInfo(String airlineCode);
+	
+	List<AirlineInfoDto> selectListRecommenedCheap();
 }

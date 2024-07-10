@@ -258,8 +258,9 @@ public class AirlineController {
 
 	// 항공 메인 페이지
 	@GetMapping("/airline/main")
-	public String airlineMain() {
-
+	public String airlineMain(Model md) {
+		List<AirlineInfoDto> recommendList = service.selectListRecommenedCheap();
+		md.addAttribute("recommendList",recommendList);
 		return "airline/airline_main"; // 폼이 있는 페이지로 이동
 	}
 
@@ -433,6 +434,31 @@ public class AirlineController {
 
 	@GetMapping("/airline/customer/reserve/pay/success")
 	public String paySuccess() {
+		
+		
+//		if (airlineInfoReturn == null) {
+//			md.addAttribute("ticketType", 1);
+//			md.addAttribute("airlineName", "");
+//			md.addAttribute("airlineCode", "");
+//			md.addAttribute("departDate", "");
+//			md.addAttribute("departTime", "");
+//			md.addAttribute("departLoc", "");
+//			md.addAttribute("arrivalDate", "");
+//			md.addAttribute("arrivalLoc", "");
+//			md.addAttribute("arrivaldate", "");
+//		} else if (airlineInfoReturn != null) {
+//			md.addAttribute("ticketType", 2);
+//			md.addAttribute("airlineName", airlineInfoReturn.getAirlineName());
+//			md.addAttribute("airlineCode", airlineInfoReturn.getAirlineCode());
+//			md.addAttribute("departDate", airlineInfoReturn.getDepartDate());
+//			md.addAttribute("departTime", airlineInfoReturn.getDepartTime());
+//			md.addAttribute("departLoc", airlineInfoReturn.getDepartLoc());
+//			md.addAttribute("arrivalDate", airlineInfoReturn.getArrivalDate());
+//			md.addAttribute("arrivalLoc", airlineInfoReturn.getArrivalLoc());
+//			md.addAttribute("arrivaldate", airlineInfoReturn.getArrivalDate());
+//		}
+		
+		
 		return "airline/airline_pay_success";
 	}
 

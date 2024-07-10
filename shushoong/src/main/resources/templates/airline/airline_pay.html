@@ -223,7 +223,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 								<div class="paycheck_info">
 									<div class="total_cost">
 										<div class="how_much">총 상품 금액</div>
-										<div class="total_num"><input type="text" id="number" class="total_value" readonly="readonly" th:value="${seatPrice}+${seatGradeReturn}"> 원</div>
+										<div class="total_num"><input type="text" id="number" class="total_value" readonly="readonly" th:value="${seatPrice}+${seatPriceReturn}"> 원</div>
 									</div>
 <!-- 									th:value="${#numbers.formatInteger((${seatPrice}+${seatGradeReturn}), 3, 'COMMA') + '원'}" -->
 									<div class="final_check_info_list">
@@ -343,15 +343,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			
 		}
 		
-	
-		
-		
-		
-	
-		
 	$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
-		
-	
 
 	function reserverInfoInsertFunction(){
 		
@@ -382,13 +374,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		    reservePhone: reservePhone,
 		    reserveEmail: reserveEmail
 		};
-		
-		console.log(reserverInfo + "reserverInfo");
 
 		var reserverInfoString = JSON.stringify(reserverInfo);
-		
-		console.log(reserverInfoString + "reserverInfoString");
-		
+
 		//예약자 정보 먼저 저장
 	    $.ajax({
 	        url: "/shushoong/airline/input/reserverInfo",
@@ -399,7 +387,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	            console.log(result);
 	            if(result == 1){
 	                console.log("성공성공성공");
-	                getResCodeFunction();
+	                passengerInfoInsertFunction();
 	            } else {
 	                alert("데이터 리스트 값 insert 실패");
 	            }
@@ -411,52 +399,24 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	    });
 	}
 		
-		
-	
-/* 		function getResCodeFunction(){
-			
-			console.log(result + "result=========");
-			
-			$.ajax({
-				url:"/shushoong/airline/select/resCode",
-				type : "POST",
-				data:{ reserverInfoString: reserverInfoString
-				 },
-		    	success: function(result){
-						console.log(result);
-						if(result == 1){
-							console.log("성공성공성공");
-							passengerInfoInsertFunction();
-						}else{
-							alert("데이터 리스트 값 insert 실패");
-						}
-					},
-					error:function (request, status, error){
-						alert("code: "+request.status + "\n" + "message: " 
-								+ request.responseText + "\n"
-								+ "error: "+error);
-					}
-			       }); 
-			 */
-		
 		//승객 정보
 		function passengerInfoInsertFunction(){
+				 
 			var passengerInfo = [];
 			var i;
 			for(i = 0 ; i< $("[name=passenger_firstName]").length; i++){
 				var infoObj = new Object();
- 				infoObj.reserve_code = $("[name=reserve_code]").eq(i).val();
-				infoObj.passenger_gender = $("[name=passenger_gender]").eq(i).val();
-				infoObj.passenger_firstName = $("[name=passenger_firstName]").eq(i).val();
-				infoObj.passenger_lastName = $("[name=passenger_lastName]").eq(i).val();
-				infoObj.passenger_birth = $("[name=passenger_birth]").eq(i).val();
-				infoObj.passenger_nation = $("[name=passenger_nation]").eq(i).val();
-				infoObj.baggage_size = $("[name=baggage_size]").eq(i).val();
-				infoObj.passport_num = $("[name=passport_num]").eq(i).val();
-// 				infoObj.expiration_date = $("[name=expiration_date]").eq(i).val();
+ 				infoObj.airlineReserveCode = $("[name=reserve_code]").eq(i).val();
+				infoObj.gender = $("[name=passenger_gender]").eq(i).val();
+				infoObj.firstName = $("[name=passenger_firstName]").eq(i).val();
+				infoObj.lastName = $("[name=passenger_lastName]").eq(i).val();
+				infoObj.birth = $("[name=passenger_birth]").eq(i).val();
+				infoObj.nation = $("[name=passenger_nation]").eq(i).val();
+				infoObj.baggage = $("[name=baggage_size]").eq(i).val();
+				infoObj.passportCode = $("[name=passport_num]").eq(i).val();
+ 				infoObj.passportDate = $("[name=expiration_date]").eq(i).val();
 		
 				passengerInfo.push(infoObj);
-				console.log(passengerInfo + "============");
 			}
 			
 			$.ajax({

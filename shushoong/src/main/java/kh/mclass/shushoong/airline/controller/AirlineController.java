@@ -1,6 +1,7 @@
 package kh.mclass.shushoong.airline.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
+import kh.mclass.shushoong.airline.model.domain.DirectViaDto;
 import kh.mclass.shushoong.airline.model.service.AirlineService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -107,8 +111,7 @@ public class AirlineController {
 		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate,
 				ticketType, seatGrade);
 		AirlineInfoDto selectOneAirline = service.getSelectOne(airlineCode);
-		
-		
+
 		for (AirlineInfoDto airlineInfo : airlineReturnData) {
 			switch (seatGrade) {
 			case "1": {
@@ -125,7 +128,7 @@ public class AirlineController {
 			}
 			}
 		}
-		
+
 //		Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 		// 모델에 데이터를 추가하여 뷰로 전달
 		md.addAttribute("flightNo", flightNo);
@@ -153,9 +156,8 @@ public class AirlineController {
 	// @ResponseBody
 	public String airlineSelectOptions(String seatGrade, String departLoc, String arrivalLoc, String departTimeLeft,
 			String deaprtTimeRight, String arrivalTimeLeft, String arrivalTimeRight, String selectType, String viaType,
-			String maxPrice, String ticketType,
-			String adult, String child, String baby, Model md) {
-		
+			String maxPrice, String ticketType, String adult, String child, String baby, Model md) {
+
 		System.out.println("컨트롤러 목록 정렬");
 		System.out.println("출발지 : " + departLoc);
 		System.out.println("도착지 : " + arrivalLoc);
@@ -173,7 +175,7 @@ public class AirlineController {
 		md.addAttribute("child", child);
 		md.addAttribute("baby", baby);
 		md.addAttribute("ticketType", ticketType);
-		
+
 		List<AirlineInfoDto> SortData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft,
 				deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType,
 				seatGrade);
@@ -181,7 +183,7 @@ public class AirlineController {
 		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 		md.addAttribute("maxPrice", maxPrice2);
 		log.debug("컨트롤러 디버깅 : " + SortData);
-		
+
 		for (AirlineInfoDto airlineInfo : SortData) {
 			switch (seatGrade) {
 			case "1": {
@@ -229,7 +231,7 @@ public class AirlineController {
 //		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 //		md.addAttribute("maxPrice", maxPrice2);
 		log.debug("컨트롤러 디버깅 : " + SortData);
-		
+
 		for (AirlineInfoDto airlineInfo : SortData) {
 			switch (seatGrade) {
 			case "1": {
@@ -265,17 +267,8 @@ public class AirlineController {
 	}
 
 	@PostMapping("/airline/main")
-	public String airlineMainPost(String departLoc,
-			String arrivalLoc,
-			String departDate,
-			String arrivalDate,
-			String adult,
-			String child,
-			String baby,
-			String seatGrade,
-			String ticketType,
-			RedirectAttributes rd
-	) {
+	public String airlineMainPost(String departLoc, String arrivalLoc, String departDate, String arrivalDate,
+			String adult, String child, String baby, String seatGrade, String ticketType, RedirectAttributes rd) {
 		rd.addAttribute("departLoc", departLoc);
 		rd.addAttribute("arrivalLoc", arrivalLoc);
 		rd.addAttribute("departDate", departDate);
@@ -290,30 +283,16 @@ public class AirlineController {
 
 	// 항공 메인 페이지
 	@PostMapping("/airline/customer/reserve/pay")
-	public String airlinePay(Model md,
-			@RequestParam String adult,
-			@RequestParam String child,
-			@RequestParam String baby,
-			@RequestParam String ticketType,
-			@RequestParam String departLoc,
-			@RequestParam String arrivalLoc,
-			@RequestParam String departDate,
-			@RequestParam String arrivalDate,
-			@RequestParam String seatPrice,
-			@RequestParam String seatGrade,
-			@RequestParam String flightNo,
+	public String airlinePay(Model md, @RequestParam String adult, @RequestParam String child,
+			@RequestParam String baby, @RequestParam String ticketType, @RequestParam String departLoc,
+			@RequestParam String arrivalLoc, @RequestParam String departDate, @RequestParam String arrivalDate,
+			@RequestParam String seatPrice, @RequestParam String seatGrade, @RequestParam String flightNo,
 			// return 붙은 param은 돌아오는 항공 편
-			@RequestParam String departLocReturn,
-			@RequestParam String arrivalLocReturn,
-			@RequestParam String departDateReturn,
-			@RequestParam String arrivalDateReturn,
-			@RequestParam String airlineCodeReturn,
-			@RequestParam String airlineCode,
-			@RequestParam String seatPriceReturn,
-			@RequestParam String seatGradeReturn,
-			String flightNoReturn,
-			Principal principal
-	) {
+			@RequestParam String departLocReturn, @RequestParam String arrivalLocReturn,
+			@RequestParam String departDateReturn, @RequestParam String arrivalDateReturn,
+			@RequestParam String airlineCodeReturn, @RequestParam String airlineCode,
+			@RequestParam String seatPriceReturn, @RequestParam String seatGradeReturn, String flightNoReturn,
+			Principal principal, HttpSession session) {
 
 		// 왕복일 시
 		if (airlineCodeReturn != null && !airlineCodeReturn.equals("")) {
@@ -359,8 +338,16 @@ public class AirlineController {
 		md.addAttribute("domestic", domestic);
 		md.addAttribute("airlineInfo", airlineInfo);
 		md.addAttribute("ticketType", ticketType);
-		md.addAttribute("seatPrice",seatPrice);
-		md.addAttribute("seatGradeReturn",seatPriceReturn);
+		md.addAttribute("seatPrice", seatPrice);
+		md.addAttribute("seatPriceReturn", seatPriceReturn);
+		md.addAttribute("seatGrade", seatGrade);
+		md.addAttribute("seatGradeReturn", seatGradeReturn);
+		
+		session.setAttribute("seatGrade", seatGrade);
+		session.setAttribute("seatGradeReturn", seatGradeReturn);
+		session.setAttribute("airlineCode", airlineCode);
+		session.setAttribute("airlineCodeReturn", airlineCodeReturn);
+
 		if (principal != null) {
 			String userId = principal.getName();
 			md.addAttribute("userId", userId);
@@ -384,52 +371,55 @@ public class AirlineController {
 
 	}
 
-	//예약자 정보 먼저 저장
+	// 예약자 정보 먼저 저장
 	@ResponseBody
 	@PostMapping("/airline/input/reserverInfo")
-	public int customerInfo(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session) {
-	    
-		int result = service.insertReserverInfo(reserverInfo);
-	    
-	    session.setAttribute("airlineReserveCode", reserverInfo.getAirlineReserveCode());
-	    System.out.println(reserverInfo.getAirlineReserveCode() + "==========airlineCode");
-	    
-	    return result;
-	}
-	
-	
-//	@ResponseBody
-//	@PostMapping("/airline/select/resCode")
-//	public String selectResCode(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session) {
-//		
-//		session.getAttribute("airlineReserveCode");
-//		System.out.println(session.getAttribute("airlineReserveCode") + "=============seq붙은 airlineCode");
-//		
-//		String result = service.selectResCode(reserverInfo);	
-//		
-//		return result;
-//	}
+	public int customerInfo(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session, Model model) {
 
+		int result = service.insertReserverInfo(reserverInfo);
+
+		session.setAttribute("airlineReserveCode", reserverInfo.getAirlineReserveCode());
+
+		return result;
+	}
+
+//  탑승객 정보 및 직항/경유 정보 추가
 	@ResponseBody
 	@PostMapping("/airline/input/passengerInfo")
-	public int passengerInfo(@RequestBody List<Map<String, Object>> passengerList, HttpSession session, Model model) {
+	public int passengerInfo(@RequestBody List<Map<String, Object>> passengerInfo, HttpSession session, Model model, 
+			DirectViaDto directDto) {
+
 		int result = 0;
-
-        String airlineReserveCode = (String) session.getAttribute("airlineReserveCode");
-        
-		System.out.println(session.getAttribute("airlineReserveCode") + "==========바뀐 예약코드");
-		System.out.println("승객정보 : " + passengerList);
 		
-		if(passengerList != null) {	
-			for (Map<String, Object> passenger : passengerList) {
-				// 각 passenger 맵에서 값을 꺼내서 처리
-				passenger.put("airlineReserveCode", airlineReserveCode);           
-			}
-			result = service.insertPassengerInfo(passengerList);
-		}
-			
-		return result;
+		String airlineReserveCode = (String) session.getAttribute("airlineReserveCode");
+		String seatGrade = (String) session.getAttribute("seatGrade");
+		String seatGradeReturn = (String)session.getAttribute("seatGradeReturn");
+		String airlineCode = (String)session.getAttribute("airlineCode");
+		String airlineCodeReturn = (String)session.getAttribute("airlineCodeReturn");
 
+		System.out.println("==================");
+		System.out.println(seatGrade);
+		System.out.println(seatGradeReturn);
+		System.out.println(airlineCode);
+		System.out.println(airlineCodeReturn);
+		System.out.println("==================");
+
+			 
+            directDto.setAirlineReserveCode(airlineReserveCode);
+            directDto.setAirlineCode(airlineCode);
+            directDto.setSeatGrade(seatGrade);
+            
+		service.insertDirectViaDto(directDto);
+		
+
+		if (passengerInfo != null) {
+			for (Map<String, Object> passenger : passengerInfo) {
+				// 각 passenger 맵에서 값을 꺼내서 처리
+				passenger.put("airlineReserveCode", airlineReserveCode);
+			}
+			result = service.insertPassengerInfo(passengerInfo);
+		}
+		return result;
 	}
 
 	@GetMapping("/airline/customer/reserve/pay/success")

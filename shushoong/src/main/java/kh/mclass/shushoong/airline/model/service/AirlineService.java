@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
+import kh.mclass.shushoong.airline.model.domain.DirectViaDto;
 import kh.mclass.shushoong.airline.model.repository.AirlineRepository;
 
 @Service
@@ -70,20 +71,19 @@ public class AirlineService {
 		return airlineRepository.selectOneDomesticFunction(airlineCode);
 	};
 	
+//	예약자 정보 추가
 	public int insertReserverInfo(AirlineReserverInfoDto reserverInfo) {
-		
 		return airlineRepository.insertReserverInfo(reserverInfo);
-		
-		
 	}
 	
-//	public String selectResCode(AirlineReserverInfoDto reserverInfo) {
-//		return airlineRepository.selectResCode(reserverInfo);
-//	}
+//	탑승객 정보 추가
+	public int insertPassengerInfo(List<Map<String, Object>> reserveInfo) {
+		return airlineRepository.insertPassengerInfo(reserveInfo);
+	}
 	
-	
-	public int insertPassengerInfo(List<Map<String, Object>> passengerList) {
-		return airlineRepository.insertPassengerInfo(passengerList);
+//	직항, 경유 추가
+	public int insertDirectViaDto(DirectViaDto directDto) {
+		return insertDirectViaDto(directDto);
 	}
 	
 	public AirlineInfoDto selectOneAirlineInfo(String airlineCode) {

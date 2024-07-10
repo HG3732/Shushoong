@@ -32,7 +32,7 @@
 
 			<div class="wrap-write">
 			<form action="" id="frm-write" enctype="multipart/form-data">
-				<h1>공지사항 작성</h1>
+				<h1>공지사항 수정</h1>
 				<div hidden="" class="rmfqjsgh" th:text="${noticeDto.noticeId}"></div>
 				<div hidden="" class="noticeTime" th:text="${noticeDto.noticeTime}"></div>
 				<hr>
@@ -51,8 +51,12 @@
 						</div>
 						<div class="write-file">
 							<div class="th file">첨부파일</div>
-							<div class="input file" th:each="fileDto : ${noticeFileDto}">
-								<input type="file" class="fileVal" id="noticeFile" name="noticeFile" th:text="${fileDto.originalFilename}" multiple="multiple">
+							<div th:if="${noticeFileDto != null and #lists.size(noticeFileDto) > 0" class="input file" th:each="fileDto : ${noticeFileDto}">
+								<input type="file" class="fileVal" id="noticeFile" name="noticeFile" multiple="multiple">
+								<!-- <span th:text="${fileDto.originalFilename}" ></span> -->
+							</div>
+							<div class="input file">
+								<input type="file" class="fileVal" id="noticeFile" name="noticeFile" multiple="multiple">
 							</div>
 						</div>
 

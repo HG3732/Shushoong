@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeFileDto;
 import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
+import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnAFileDto;
 
 @Mapper
 public interface ServiceCenterRepository {
@@ -19,12 +20,14 @@ public interface ServiceCenterRepository {
 	
 	//1:1 문의 보기
 	public OnlineQnADto selectOneQna(String faqId);
+	List<OnlineQnAFileDto> selectOneQnaFile(String faqId);
 	
 	//1:1 문의 답변 작성
 	public int updateAnswer(String faqId, String ansContent);
 	// 문의 작성
 	int insertQna(OnlineQnADto onlineQnaDto);
 	int insertQnaCat(OnlineQnADto onlineQnaDto);
+	int insertQnaFile(OnlineQnAFileDto qnaFiles);
 	
 	// 공지사항
 	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userGrade);
@@ -35,12 +38,13 @@ public interface ServiceCenterRepository {
 	// 공지사항 작성
     int insertNotice(NoticeDto noticeDto);
     int insertNoticeFile(NoticeFileDto noticeFiles);
-//    int insertNoticeFile(List<NoticeFileDto> noticeFiles);
-//    int insertNoticeFile2(List<NoticeFileDto> noticeFiles);
+    // 공지 view
     NoticeDto selectOneNotice(String noticeId);
     List<NoticeFileDto> selectOneNoticeFile(String noticeId);
+    // 공지 update
     int updateNotice(NoticeDto noticeDto);
-    int updateNoticeFile(NoticeFileDto noticeFiles);
+//    int updateNoticeFile(NoticeFileDto noticeFiles);
+    // 공지 삭제
     int deleteNotice(String noticeId);
     int deleteNoticeFile(String noticeId);
 		

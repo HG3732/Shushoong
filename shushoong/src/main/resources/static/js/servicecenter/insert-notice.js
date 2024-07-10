@@ -25,6 +25,7 @@ function clickedWriteOkBtn() {
 		$('#frm-write').submit();
 	});
 }
+
 function selectFile() {
 	var fileInput = document.getElementById('noticeFile');
 	var fileListContainer = document.createElement('ul');

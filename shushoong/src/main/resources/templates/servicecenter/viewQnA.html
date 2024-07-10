@@ -42,27 +42,22 @@
 				<div class="qna-main">
 					<div class="qna-"></div>
 					<div class="qna-category" th:text="${result.questCatDesc}"></div>
-					<hr
-						style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
+					<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
 					<div class="qna-userId" th:text="${'작성자 : ' + result.userId}"></div>
-					<hr
-						style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
-					<div th:value="${noticeDto.fileId}"></div>
-					<!-- 				
-				<th:block th:if="${noticeFileDto.fileId == null or #strings.isEmpty(noticeFileDto.fileId)}">
-					<div class="qna-file">
-						<div>첨부파일이 없습니다.</div>
-					</div>
-				</th:block>
-				<th:block th:if="${noticeFileDto.fileId != null or !#strings.isEmpty(noticeFileDto.fileId)}">
-					<div class="qna-file">
-						<div>첨부파일</div>
-						<div>첨부파일 경로...</div>
-					</div>
-				</th:block>
-				 -->
-					<hr
-						style="border: none; border-bottom: 1px solid var(--color_blue_1);">
+					<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
+					<th:block th:if="${qnaFileDto == null or #lists.size(qnaFileDto) == 0}">
+						<div class="qna-file">
+							<div>첨부파일이 없습니다.</div>
+						</div>
+					</th:block>
+					<th:block th:if="${qnaFileDto != null and #lists.size(qnaFileDto) > 0}">
+						<div class="qna-file" th:each="fileDto : ${qnaFileDto}">
+							<div>첨부파일</div>
+						<a th:href="${fileDto.savedFilePathName}" target="_blank">
+						<div th:text="${fileDto.originalFilename}">첨부파일</div></a>
+						</div>
+					</th:block>
+					<hr style="border: none; border-bottom: 1px solid var(--color_blue_1);">
 					<div class="qna-content" th:text="${result.askContent}"></div>
 				</div>
 				<hr

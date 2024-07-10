@@ -53,9 +53,9 @@ public class NoticeService {
 	public int updateNotice(NoticeDto noticeDto) {
 		return repository.updateNotice(noticeDto);
 	}
-	public int updateNoticeFile(NoticeFileDto noticeFiles) {
-		return repository.updateNoticeFile(noticeFiles);
-	}
+//	public int updateNoticeFile(NoticeFileDto noticeFiles) {
+//		return repository.updateNoticeFile(noticeFiles);
+//	}
 	
 	public int deleteNotice(String noticeId) {
 		return repository.deleteNotice(noticeId);

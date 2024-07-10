@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Component
-public class OnlineQnAFileDtio {
+public class OnlineQnAFileDto {
 	private String fileId;
 	private String faqId;
 	private String originalFilename;

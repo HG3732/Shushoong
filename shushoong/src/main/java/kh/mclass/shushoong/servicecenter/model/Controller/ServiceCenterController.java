@@ -27,8 +27,8 @@ import jakarta.mail.Multipart;
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
 import kh.mclass.shushoong.servicecenter.model.domain.NoticeFileDto;
-import kh.mclass.shushoong.servicecenter.model.domain.NoticeFileWriteDto;
 import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
+import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnAFileDto;
 import kh.mclass.shushoong.servicecenter.model.service.NoticeService;
 import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
 import lombok.RequiredArgsConstructor;
@@ -148,9 +148,9 @@ public class ServiceCenterController {
                 .map(GrantedAuthority::getAuthority)
                 .findFirst()
                 .orElse("anonymousUser"); // 기본값 설정
-		
 		model.addAttribute("userGrade",userGrade);
 		model.addAttribute("result", service.selectOneQna(faqId));
+		model.addAttribute("qnaFileDto", service.selectOneQnaFile(faqId));
 		return "servicecenter/viewQnA";
 	}
 	
@@ -178,7 +178,7 @@ public class ServiceCenterController {
 	}
 	
 	@PostMapping("/support/qna/write")
-	public String PostQnaWrite (String askTitle, String category,
+	public String PostQnaWrite (String askTitle, String category, @RequestParam("qnaFile") MultipartFile[] qnaFile,
 			String askContent, 
 			Model md
 			) {
@@ -203,12 +203,34 @@ public class ServiceCenterController {
 	    dto.setQuestCat(category);
 	    md.addAttribute("userGrade", userGrade);
 
-	    int insertQna = service.insertQna(dto);
+	    int faqId = service.insertQna(dto);
+	    String faqIdStr = String.valueOf(faqId);
+	    System.out.println("문의 번호 : " + faqId);
 	    int insertQnaCat = service.insertQnaCat(dto);
 	    
-	    // 파일 첨부 해야함..
-		
-		return "redirect:/support/qna/list";
+	    try {
+			for(MultipartFile qnaFile2 : qnaFile) {
+				if(qnaFile2 != null && !qnaFile2.isEmpty()) {
+					Map<String, Object> uploadResult = cloudinary.uploader().upload(qnaFile2.getBytes(), ObjectUtils.emptyMap());
+					String savedFilePathName = uploadResult.get("url").toString();
+					
+					OnlineQnAFileDto fileDto = new OnlineQnAFileDto();
+					
+					fileDto.setFaqId(faqIdStr);
+					fileDto.setOriginalFilename(qnaFile2.getOriginalFilename());
+					fileDto.setSavedFilePathName(savedFilePathName);
+					
+					System.out.println("문의 글 번호 : " + faqId);
+					System.out.println("setOriginalFilename : " + qnaFile2.getOriginalFilename());
+					System.out.println("savedFilePathName : " + savedFilePathName);
+					service.insertQnaFile(fileDto);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    
+	    return "redirect:/support/qna/list";
 	}
 	
 	
@@ -445,7 +467,7 @@ public class ServiceCenterController {
 		System.out.println("noticeContent : " + noticeContent);
 		System.out.println("noticeFile : " + noticeFile);
 		System.out.println("noticeCategory : " + noticeCategory);
-		System.out.println("noticeTime : " + noticeTime);
+		System.out.println("noticeTime : " + noticeCategory);
 		
 //		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
 		

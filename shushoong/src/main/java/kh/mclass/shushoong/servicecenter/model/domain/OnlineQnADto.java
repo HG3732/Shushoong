@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Component
 public class OnlineQnADto {
-	private String faqId;
+	private int faqId;
 	private String userId;
 	private String questCat;
 	private String questCatDesc;

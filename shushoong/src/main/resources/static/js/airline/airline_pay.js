@@ -460,7 +460,7 @@
 			
 		}
 		
-		$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
+//		$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
 		
 		//예약자 정보
 		function reserverInfoInsertFunction(){

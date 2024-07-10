@@ -1,5 +1,5 @@
 	//정규 표현식
-	var fistNameJ = /^[A-Z]{1,15}$/;
+	var firstNameJ = /^[A-Z]{1,15}$/;
 	var lastNameJ = /^[a-zA-Z]{1,20}$/;
 	var phoneNumJ = /^\d{10,11}$/;
 	var dateJ = /^[0-9]{8}$/;
@@ -24,7 +24,6 @@
 						var phoneNum2 = phoneNum.substring(0,3)+"-"+phoneNum.substring(3, 6)+ "-"+ phoneNum.substring(6, 10);
 						$('[name=reserver_phone_number]').val(phoneNum2);
 					}
-					
 					$(this).parent().parent().css("height","60px")
 					$(this).parent().children(".errorJ").css("display","none")
 				}else if(changedPhoneNumJ.test($(this).val())){
@@ -55,8 +54,8 @@
 			
 			$("input[name=passenger_firstName]").blur(function(){ //영문 이름
 				$(this).val($(this).val().toUpperCase());
-				if(fistNameJ.test($(this).val())){
-					if(fistNameJ.test($(this).parent().parent().children().children("input[name=passenger_lastName]").val())){
+				if(firstNameJ.test($(this).val())){
+					if(firstNameJ.test($(this).parent().parent().children().children("input[name=passenger_lastName]").val())){
 						$(this).parent().parent().css("height","60px")
 					}
 					$(this).parent().children(".errorJ").css("display","none")
@@ -69,7 +68,7 @@
 			$("input[name=passenger_lastName]").blur(function(){ //영문 성
 				$(this).val($(this).val().toUpperCase());
 				if(lastNameJ.test($(this).val())){
-					if(fistNameJ.test($(this).parent().parent().children().children("input[name=passenger_firstName]").val())){
+					if(firstNameJ.test($(this).parent().parent().children().children("input[name=passenger_firstName]").val())){
 						$(this).parent().parent().css("height","60px")
 					}
 					$(this).parent().children(".errorJ").css("display","none")
@@ -142,6 +141,26 @@
 	}
 	
 	function submitBtnController(){
-		console.log($("input[name=expiration_date]").eq().val(1));
-		reserverInfoInsertFunction();
+		var list = Number($("#adult_val").val())+Number($("#child_val").val())+Number($("#baby_val").val());
+		console.log(list);
+		var i,j;
+		if(changedPhoneNumJ.test($('[name=reserver_phone_number]').val())){	//휴대전화번호
+			if(emailJ.test($("[name=reserver_email]").val())){//이메일 주소
+					
+			}
+		}
+		for(i=0,j=0;i<list;i++){
+			console.log(i);
+			console.log($("input[name=passenger_firstName]").eq(i).val());
+			console.log(firstNameJ.test( $("input[name=passenger_firstName]").eq(i).val()));
+		}
+				$("input[name=passenger_firstName]").each(function(){
+					console.log(this);
+//					(firstNameJ.test($("input[name=passenger_firstName]")))
+					
+				})
 	}
+				
+		
+		
+//		reserverInfoInsertFunction();

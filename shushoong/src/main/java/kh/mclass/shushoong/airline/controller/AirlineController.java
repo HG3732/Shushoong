@@ -387,10 +387,12 @@ public class AirlineController {
 	@ResponseBody
 	@PostMapping("/airline/input/reserverInfo")
 	public int customerInfo(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session) {
-	    int result = service.insertReserverInfo(reserverInfo);
+	    
+		int result = service.insertReserverInfo(reserverInfo);
 	    
 	    session.setAttribute("airlineReserveCode", reserverInfo.getAirlineReserveCode());
 	    System.out.println(reserverInfo.getAirlineReserveCode() + "==========airlineCode");
+	    
 	    return result;
 	}
 	
@@ -409,11 +411,22 @@ public class AirlineController {
 
 	@ResponseBody
 	@PostMapping("/airline/input/passengerInfo")
-	public int passengerInfo(@RequestBody List<Map<String, Object>> param) {
+	public int passengerInfo(@RequestBody List<Map<String, Object>> passengerList, HttpSession session, Model model) {
 		int result = 0;
 
-		System.out.println("21416547sdafdsaf6677daafdsfasdadsfsafd : " + param);
-		result = service.insertPassengerInfo(param);
+        String airlineReserveCode = (String) session.getAttribute("airlineReserveCode");
+        
+		System.out.println(session.getAttribute("airlineReserveCode") + "==========바뀐 예약코드");
+		System.out.println("승객정보 : " + passengerList);
+		
+		if(passengerList != null) {	
+			for (Map<String, Object> passenger : passengerList) {
+				// 각 passenger 맵에서 값을 꺼내서 처리
+				passenger.put("airlineReserveCode", airlineReserveCode);           
+			}
+			result = service.insertPassengerInfo(passengerList);
+		}
+			
 		return result;
 
 	}

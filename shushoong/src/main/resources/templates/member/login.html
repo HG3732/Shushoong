@@ -49,8 +49,13 @@
 									<div class="loginBtn">
 										<button type="submit" class="btn customerLogin">로그인</button>
 									</div>
-									<div th:if="${exception}">
-										<script th:inline="javascript" charset='UTF-8'>
+									<div th:if="${error}">
+										<script th:inline="javascript">
+											alert([[${message}]]);
+							            </script>
+							        </div>
+							        <div th:if="${exception}">
+										<script th:inline="javascript">
 											alert([[${message}]]);
 							            </script>
 							        </div>
@@ -91,7 +96,6 @@
 										<input type="text" name="userId" id="userId" placeholder="아이디" autofocus>
 										<input type="password" name="userPwd" id="userPwd" placeholder="비밀번호">
 									</div>
-									<small th:text="${exception}"></small>
 									<div class="login-check">
 										<input type="checkbox" id="idsaved" name="idsaved">아이디
 										저장

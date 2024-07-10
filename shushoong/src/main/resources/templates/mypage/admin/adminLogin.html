@@ -40,6 +40,11 @@
 									<input type="text" name="userId" id="userId" placeholder="아이디" autofocus>
 									<input type="password" name="userPwd" id="userPwd" placeholder="비밀번호 확인">
 								</div>
+								<div th:if="${exception}">
+									<script th:inline="javascript">
+										alert([[${message}]]);
+							    	</script>
+							    </div>
 								<div class="loginBtn">
 									<button type="submit" class="btn login">관리자 로그인</button>
 								</div>

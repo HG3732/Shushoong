@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -75,7 +76,7 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		// 계정잠금 확인
 		String userStatus = memberService.lockedCheck(userId);
 		if (userStatus == "0") {
-			response.sendRedirect("\"/login?error=true&exception=\"+error");
+			throw new LockedException("정지된 계정입니다.");
 		}
 
 		

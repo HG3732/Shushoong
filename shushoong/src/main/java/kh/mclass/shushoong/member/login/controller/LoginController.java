@@ -43,7 +43,7 @@ public class LoginController {
 				message = "정지된 회원입니다. 자세한 사항은 운영자에게 문의해 주세요.";
 				break;
 			default:
-				message = "알 수 없는 이유로 로그인에 실패하였습니다. 자세한 사항은 운영자에게 문의해 주세요.";
+				message = "알 수 없는 이유로 로그인에 실패하였습니다.";
 				break;
 			}
 
@@ -74,8 +74,11 @@ public class LoginController {
 			case "AuthenticationException":
 				message = "정지된 회원입니다. 자세한 사항은 운영자에게 문의해 주세요.";
 				break;
+			case "LockedException":
+				message = "정지된 회원입니다. 자세한 사항은 운영자에게 문의해 주세요.";
+				break;
 			default:
-				message = "알 수 없는 이유로 로그인에 실패하였습니다. 자세한 사항은 운영자에게 문의해 주세요.";
+				message = "로그인 위치를 확인해 주세요.";
 				break;
 			}
 

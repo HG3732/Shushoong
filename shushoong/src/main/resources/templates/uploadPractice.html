@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>슈슝</title>
+<style>
+	.thumbnail-box {
+		width: 500px;
+		height: 220px;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		overflow-x: auto;
+	}
+	.thumbnail {
+		width: 200px;
+		height: 200px;
+		border: 1px solid black;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		flex: 0 0 auto;
+	}
+</style>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="wrap-header">
+			<header>
+ 				<div th:replace="~{common/header :: Header}"></div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
+		</div>
+		<div class="wrap-body">
+			<div class="wrap-upload">
+				<form id="frm-upload" action="/shushoong/upload/file" method="post" enctype="multipart/form-data">
+					<input type="file" accept="image/*" name="uploadfiles" class="profilepicture" id="profilepicture" style="border: none;" multiple>
+					<input type="text" name="content">
+					<button type="submit" name="upload" class="upload">첨부</button>
+					<!-- <div class="thumbnail-box" th:style="'background-image: url(' + ${url} + ');'"></div> -->
+					<div class="thumbnail-box"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-footer">
+  		<div th:replace="~{common/footer :: Footer}"></div> 
+	</div>
+	
+</body>
+<script>
+$(loadedHandler);
+
+function loadedHandler() {
+    /* $(".upload").on("click", uploadHandler); */
+    $("#profilepicture").on("change", previewImage);
+}
+
+	//썸네일 미리보기
+	function previewImage(event) {
+			const files = event.target.files;
+			$('.thumbnail-box').empty(); // 기존 썸네일 초기화
+			
+			Array.from(files).forEach(file => {
+				const reader = new FileReader();
+				reader.onload = function(e) {
+					const thumbnail = $('<div class="thumbnail"></div>');
+					thumbnail.css('background-image', 'url(' + e.target.result + ')');
+					$('.thumbnail-box').append(thumbnail);
+				};
+				reader.readAsDataURL(file);
+			});
+		}
+/*
+ 	//파일 첨부
+	function uploadHandler(event) {
+		const fileInput = $("#profilepicture");
+		const files = fileInput.prop('files');
+		
+		if (files.length > 0) {
+	        const file = files[0];
+	        const formData = new FormData();
+	        formData.append('file', file);
+	
+	        $.ajax({
+	            url: '/shushoong/upload.ajax',
+	            method: 'post',
+	            data: formData,
+	            contentType: false,
+	            processData: false,
+	            error: function(error) {
+	                console.error('Error uploading file:', error);
+	            }
+	        }).done(function(response) {
+	                
+	        	})
+	        };
+	} */
+</script>
+</html>

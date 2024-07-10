@@ -337,16 +337,24 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 				$(this).val($(this).val().toUpperCase());
 				if(fistNameJ.test($(this).val())){
 					console.log("ok");
+					$(this).parent().parent().css("height","60px")
+					$(this).parent().children(".errorJ").css("display","none")
 				}else{
-					console.log("no");
+					console.log("nooo");
+					$(this).parent().parent().css("height","70px")
+					$(this).parent().children(".errorJ").css("display","block")
 				}
 			})
 			$("input[name=passenger_lastName]").blur(function(){
 				$(this).val($(this).val().toUpperCase());
 				if(lastNameJ.test($(this).val())){
 					console.log("ok");
+					$(this).parent().parent().css("height","60px")
+					$(this).parent().children(".errorJ").css("display","none")
 				}else{
-					console.log("no");
+					console.log("nooo");
+					$(this).parent().parent().css("height","70px")
+					$(this).parent().children(".errorJ").css("display","block")
 				}
 			})
 		
@@ -368,8 +376,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 					var birth = $('[name=passenger_birth]').val();
 					var birth2 = birth.substring(0,4)+"-"+birth.substring(4, 6)+ "-"+ birth.substring(6, 8);
 					$('[name=passenger_birth]').val(birth2);
+					console.log("ok");
+					$(this).parent().parent().css("height","60px")
+					$(this).parent().children(".errorJ").css("display","none")
 				}else{
-					console.log("no");
+					console.log("nooo");
+					$(this).parent().parent().css("height","70px")
+					$(this).parent().children(".errorJ").css("display","block")
 				}
 			})
 			$("input[name=expiration_date]").blur(function(){
@@ -548,7 +561,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		
 		
 // 				<div><input type="text" name="reserver_email" placeholder="이메일 주소를 입력해 주세요"></div>
-}
+// }
 	</script>
 	
 </body>

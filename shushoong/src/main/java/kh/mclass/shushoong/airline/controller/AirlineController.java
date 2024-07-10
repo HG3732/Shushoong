@@ -344,7 +344,6 @@ public class AirlineController {
 		md.addAttribute("seatGradeReturn", seatGradeReturn);
 		
 		session.setAttribute("seatGrade", seatGrade);
-		session.setAttribute("seatGradeReturn", seatGradeReturn);
 		session.setAttribute("airlineCode", airlineCode);
 		session.setAttribute("airlineCodeReturn", airlineCodeReturn);
 
@@ -393,25 +392,9 @@ public class AirlineController {
 		
 		String airlineReserveCode = (String) session.getAttribute("airlineReserveCode");
 		String seatGrade = (String) session.getAttribute("seatGrade");
-		String seatGradeReturn = (String)session.getAttribute("seatGradeReturn");
 		String airlineCode = (String)session.getAttribute("airlineCode");
 		String airlineCodeReturn = (String)session.getAttribute("airlineCodeReturn");
-
-		System.out.println("==================");
-		System.out.println(seatGrade);
-		System.out.println(seatGradeReturn);
-		System.out.println(airlineCode);
-		System.out.println(airlineCodeReturn);
-		System.out.println("==================");
-
-			 
-            directDto.setAirlineReserveCode(airlineReserveCode);
-            directDto.setAirlineCode(airlineCode);
-            directDto.setSeatGrade(seatGrade);
-            
-		service.insertDirectViaDto(directDto);
 		
-
 		if (passengerInfo != null) {
 			for (Map<String, Object> passenger : passengerInfo) {
 				// 각 passenger 맵에서 값을 꺼내서 처리
@@ -419,12 +402,28 @@ public class AirlineController {
 			}
 			result = service.insertPassengerInfo(passengerInfo);
 		}
+		
+	    // 편도인 경우
+	    if (airlineCode != null && airlineCodeReturn == null) {
+	        directDto.setAirlineReserveCode(airlineReserveCode);
+	        directDto.setAirlineCode(airlineCode);
+	        directDto.setSeatGrade(seatGrade);
+	    }
+	    
+	    // 왕복인 경우
+	    else if (airlineCode != null && airlineCodeReturn != null) {
+	        directDto.setAirlineReserveCode(airlineReserveCode);
+	        directDto.setAirlineCode(airlineCode);
+	        directDto.setAirlineCode(airlineCodeReturn);
+	    }
+		
+		service.insertDirectViaDto(directDto);
+		
 		return result;
 	}
 
 	@GetMapping("/airline/customer/reserve/pay/success")
 	public String paySuccess() {
-		
 		
 //		if (airlineInfoReturn == null) {
 //			md.addAttribute("ticketType", 1);
@@ -447,7 +446,6 @@ public class AirlineController {
 //			md.addAttribute("arrivalLoc", airlineInfoReturn.getArrivalLoc());
 //			md.addAttribute("arrivaldate", airlineInfoReturn.getArrivalDate());
 //		}
-		
 		
 		return "airline/airline_pay_success";
 	}

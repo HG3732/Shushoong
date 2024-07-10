@@ -55,7 +55,6 @@ section .notice-content {
 	font-size: 11px;
 	font-weight: bold;
 	border-bottom: 1px solid #006AFF;
-	margin-bottom: 10px;
 	
 	display: grid;
 	grid-template-columns: 1fr 4fr 2fr;
@@ -94,6 +93,7 @@ section .viewNoticeList, .viewQnAList {
 	font-size: 13px;
 	font-weight: bold;
 	font-family: SOYOMapleRegularTTF;
+	margin-top: 10px;
 }
 
 section .QnA-grid {
@@ -115,7 +115,6 @@ section .QnA-content {
 	font-size: 11px;
 	font-weight: bold;
 	border-bottom: 1px solid #006AFF;
-	margin-bottom: 10px;
 	
 	display: grid;
 	grid-template-columns: 1fr 4fr 2fr 2fr;

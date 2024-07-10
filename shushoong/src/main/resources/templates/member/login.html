@@ -37,7 +37,7 @@
 						</div>
 						<div class="content">
 							<div class="customerlogin-section">
-								<form id="frm-post" th:action="@{/login}" method="post">
+								<form id="frm-post" th:action="@{/login/customer}" method="post">
 									<input type="hidden" name="userGrade" value="customer"/>
 									<div class="loginInfo">
 										<input type="text" name="userId" id="userId"  placeholder="아이디" autofocus>
@@ -49,11 +49,6 @@
 									<div class="loginBtn">
 										<button type="submit" class="btn customerLogin">로그인</button>
 									</div>
-									<div th:if="${error}">
-										<script th:inline="javascript">
-											alert([[${message}]]);
-							            </script>
-							        </div>
 							        <div th:if="${exception}">
 										<script th:inline="javascript">
 											alert([[${message}]]);

@@ -66,7 +66,7 @@
 			}
 		
 			for(i=0; i<tablinks.length; i++){
-				tablinks[i].style.fontWeight ="0";
+				tablinks[i].style.fontWeight ="500";
 				tablinks[i].style.backgroundColor = "white";
 			}
 		
@@ -87,7 +87,7 @@
 			}
 		
 			for(i=0; i<tablinks.length; i++){
-				tablinks[i].style.fontWeight ="0";
+				tablinks[i].style.fontWeight ="500";
 				tablinks[i].style.backgroundColor = "white";
 			}
 		

@@ -5,8 +5,8 @@
 	var dateJ = /^[0-9]{8}$/;
 	var emailJ =  /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 	var passportJ = /^[0-9A-Z]{9}$/;
-	var changedDateJ = /^\d{4}$-\d{2}$-\d{2}$/;
-	var changedPhoneNumJ = /^\d{3}$-\d{3,4}$-\d{4}$/;
+	var changedDateJ = /^\d{4}-\d{2}-\d{2}$/;
+	var changedPhoneNumJ = /^\d{3}-\d{3,4}-\d{4}$/;
 
 
 	function regexTestFunction(){
@@ -15,14 +15,11 @@
 			
 			$("[name=reserver_phone_number]").blur(function(){ //휴대전화번호
 				if(phoneNumJ.test($(this).val())){
-					console.log("ok");
 					if(($(this).val()).length==11){
-						console.log("ok2");
 						var phoneNum = $('[name=reserver_phone_number]').val();
 						var phoneNum2 = phoneNum.substring(0,3)+"-"+phoneNum.substring(3, 7)+ "-"+ phoneNum.substring(7, 11);
 						$('[name=reserver_phone_number]').val(phoneNum2);
 					}else if(($(this).val()).length==10){
-						console.log("ok2");
 						var phoneNum = $('[name=reserver_phone_number]').val();
 						var phoneNum2 = phoneNum.substring(0,3)+"-"+phoneNum.substring(3, 6)+ "-"+ phoneNum.substring(6, 10);
 						$('[name=reserver_phone_number]').val(phoneNum2);
@@ -30,8 +27,10 @@
 					
 					$(this).parent().parent().css("height","60px")
 					$(this).parent().children(".errorJ").css("display","none")
-				}else if(phoneNumJ.test($(this).val())){
-					
+				}else if(changedPhoneNumJ.test($(this).val())){
+					console.log("changed ok")
+					$(this).parent().parent().css("height","60px")
+					$(this).parent().children(".errorJ").css("display","none")
 				}else{
 					
 					$(this).parent().parent().css("height","70px")
@@ -89,8 +88,11 @@
 					
 					$(this).parent().parent().css("height","60px")
 					$(this).parent().children(".errorJ").css("display","none")
+				}else if(changedDateJ.test($(this).val())){
+					console.log("changed ok")
+					$(this).parent().parent().css("height","60px")
+					$(this).parent().children(".errorJ").css("display","none")
 				}else{
-					
 					$(this).parent().parent().css("height","70px")
 					$(this).parent().children(".errorJ").css("display","block")
 				}
@@ -103,7 +105,7 @@
 					$(this).parent().parent().css("height","60px")
 					$(this).parent().children(".errorJ").css("display","none")
 				}else{
-					
+					if($(this).parent().parent().children().children(".errorJ").css("height","70px"))
 					$(this).parent().parent().css("height","70px")
 					$(this).parent().children(".errorJ").css("display","block")
 				}
@@ -117,13 +119,14 @@
 					
 					$(this).parent().parent().css("height","60px")
 					$(this).parent().children(".errorJ").css("display","none")
+				}else if(changedDateJ.test($(this).val())){
+					$(this).parent().parent().css("height","60px")
+					$(this).parent().children(".errorJ").css("display","none")
 				}else{
 					
 					$(this).parent().parent().css("height","70px")
 					$(this).parent().children(".errorJ").css("display","block")
 				}
 			})
-			
-	
 	
 	}

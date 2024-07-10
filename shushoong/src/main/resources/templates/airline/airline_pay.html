@@ -67,12 +67,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 								<div>
 									<div>휴대전화번호</div>
 									<div>
-										<input type="text" name="reserver_phone_number" placeholder="전화번호를 입력해 주세요">
+										<input type="text" name="reserver_phone_number" placeholder="전화번호를 입력해 주세요" class="reserve_phone">
 									</div>
 								</div>
 								<div>
 									<div>이메일 주소</div>
-									<div><input type="text" name="reserver_email" placeholder="이메일 주소를 입력해 주세요"></div>
+									<div><input type="text" name="reserver_email" placeholder="이메일 주소를 입력해 주세요" class="reserve_email"></div>
 								</div>
 							</div>
 						</section>
@@ -412,63 +412,75 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
 		
 	
-	const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const currentTime = year + month + day;	
-	
-	var airline_reserve_code_str = $('.flightNo').text();
 
-	// 문자열의 길이 구하기
-	var length = airline_reserve_code_str.length;
-
-	// 마지막 4자리를 추출
-	var airlineReserveCode = currentTime + airline_reserve_code_str.slice(length - 4);
-
-	var userId = $("[name=reserver_name]").val();
-	var reservePhone =	$("[name=reserver_phone_number]").val();
-	var reserveEmail = $("[name=reserver_email]").val();
-	
-	var reserverInfo = {
-			airlineReserveCode : airlineReserveCode,
-			userId: userId,
-			reservePhone : reservePhone,
-			reserveEmail : reserveEmail
-	};
+	function reserverInfoInsertFunction(){
 		
-		function reserverInfoInsertFunction(){
+		const now = new Date();
+		const year = now.getFullYear();
+		const month = String(now.getMonth() + 1).padStart(2, '0');
+		const day = String(now.getDate()).padStart(2, '0');
+		const currentTime = year + month + day;    
+
+		var airline_reserve_code_str = $('.flightNo').text();
+
+		// 문자열의 길이 구하기
+		var length = airline_reserve_code_str.length;
+
+		// 마지막 4자리를 추출
+		var airlineReserveCode = currentTime + airline_reserve_code_str.slice(length - 4);
+
+		var userId = $("[name=reserver_name]").val();
+		var reservePhone = $(".reserve_phone").val();
+		var reserveEmail = $(".reserve_email").val();
+		
+		console.log(reservePhone);
+		console.log(reserveEmail);
+		
+		var reserverInfo = {
+		    airlineReserveCode: airlineReserveCode,
+		    userId: userId,
+		    reservePhone: reservePhone,
+		    reserveEmail: reserveEmail
+		};
+		
+		console.log(reserverInfo + "reserverInfo");
+
+		var reserverInfoString = JSON.stringify(reserverInfo);
+		
+		console.log(reserverInfoString + "reserverInfoString");
+		
+		//예약자 정보 먼저 저장
+	    $.ajax({
+	        url: "/shushoong/airline/input/reserverInfo",
+	        type: "POST",
+	        contentType: "application/json",
+	        data: reserverInfoString,
+	        success: function(result){
+	            console.log(result);
+	            if(result == 1){
+	                console.log("성공성공성공");
+	                getResCodeFunction();
+	            } else {
+	                alert("데이터 리스트 값 insert 실패");
+	            }
+	        },
+	        error: function(errorThrown) {
+	            console.log("일단 여기 표기");
+	            // alert("데이터 리스트 값 insert 실패");
+	        }
+	    });
+	}
+		
+		
+	
+/* 		function getResCodeFunction(){
 			
-			$.ajax({
-				url:"/shushoong/airline/input/reserverInfo",
-				type : "POST",
-				contentType: "application/json" ,
-				data:{ reserveInfo: reserverInfo
-					 },
-				success: function(result){
-					console.log(result);
-					if(result == 1){
-						console.log("성공성공성공");
-						getResCodeFunction();
-					}else{
-						alert("데이터 리스트 값 insert 실패");
-					}
-				},
-				 error: function(errorThrown) {
-			            console.log("일단 여기 표기")
-// 			            alert("데이터 리스트 값 insert 실패");
-			        }
-		       });
-		}
-		
-		
-		//예약자 정보
-		function getResCodeFunction(){
+			console.log(result + "result=========");
 			
 			$.ajax({
 				url:"/shushoong/airline/select/resCode",
 				type : "POST",
-				data:{ reserveInfo: reserverInfo
+				data:{ reserverInfoString: reserverInfoString
 				 },
 		    	success: function(result){
 						console.log(result);
@@ -485,7 +497,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 								+ "error: "+error);
 					}
 			       }); 
-			
+			 */
 		
 		//승객 정보
 		function passengerInfoInsertFunction(){

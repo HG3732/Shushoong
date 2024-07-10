@@ -142,9 +142,24 @@
 	<insert id="insertReserverInfo" parameterType="AirlineReserverInfoDto" >
     	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL, RESERVE_TIME)
     		VALUES (#{airlineReserveCode}||SEQ_AIRC.nextval , #{userId} , #{reservePhone} , #{reserveEmail}, default )
+    	<selectKey keyProperty="airlineReserveCode" resultType="String" order="AFTER">
+			<bind name="code" value="'%' + airlineReserveCode + '%'"/>
+			    SELECT AIRLINE_RESERVE_CODE
+					FROM (
+				    	SELECT AIRLINE_RESERVE_CODE 
+				    		FROM AIRLINE_RESERVE_INFO
+				    		WHERE 
+				    			airline_reserve_code like #{code}
+				    			and USER_ID = #{userId}
+				    			AND RESERVE_PHONE= #{reservePhone}
+				    			AND RESERVE_EMAIL= #{reserveEmail}
+				    		ORDER BY RESERVE_TIME DESC
+				    	)
+					WHERE ROWNUM = 1
+		</selectKey>
     </insert>
 	    
-    <select id="selectResCode" parameterType="AirlineReserverInfoDto" resultType="String">
+<!--     <select id="selectResCode" parameterType="AirlineReserverInfoDto" resultType="String">
 	    SELECT AIRLINE_RESERVE_CODE
 		FROM (
 	    	SELECT AIRLINE_RESERVE_CODE 
@@ -155,7 +170,7 @@
 	    		ORDER BY RESERVE_TIME DESC
 	    	)
 		WHERE ROWNUM = 1
-    </select>
+    </select> -->
     
     <update id="insertPassengerInfo" parameterType="map" useGeneratedKeys="false" >
    		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL" >

@@ -383,30 +383,29 @@ public class AirlineController {
 
 	}
 
-	// 항공에서 받는 값
-
+	//예약자 정보 먼저 저장
 	@ResponseBody
 	@PostMapping("/airline/input/reserverInfo")
 	public int customerInfo(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session) {
-		
-		int result = service.insertReserverInfo(reserverInfo);
-		
-		session.setAttribute("airlineReserveCode", reserverInfo.getAirlineReserveCode());
-		
-		return result;
+	    int result = service.insertReserverInfo(reserverInfo);
+	    
+	    session.setAttribute("airlineReserveCode", reserverInfo.getAirlineReserveCode());
+	    System.out.println(reserverInfo.getAirlineReserveCode() + "==========airlineCode");
+	    return result;
 	}
 	
 	
-	@ResponseBody
-	@PostMapping("/airline/select/resCode")
-	public String selectResCode(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session) {
-		
-		session.getAttribute("airlineReserveCode");
-		
-		String result = service.selectResCode(reserverInfo);	
-		
-		return result;
-	}
+//	@ResponseBody
+//	@PostMapping("/airline/select/resCode")
+//	public String selectResCode(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session) {
+//		
+//		session.getAttribute("airlineReserveCode");
+//		System.out.println(session.getAttribute("airlineReserveCode") + "=============seq붙은 airlineCode");
+//		
+//		String result = service.selectResCode(reserverInfo);	
+//		
+//		return result;
+//	}
 
 	@ResponseBody
 	@PostMapping("/airline/input/passengerInfo")

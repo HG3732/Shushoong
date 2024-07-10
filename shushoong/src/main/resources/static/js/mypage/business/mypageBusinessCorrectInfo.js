@@ -7,6 +7,13 @@ function loadedHandler() {
 	$(".close_btn").on("click", cancleHandler);
 }
 
+// url 직접접근 차단
+$(document).ready(function() {
+	if (document.referrer == '' || document.referrer == null) {
+		document.location.href = '/shushoong/error/redirect';
+	}
+})
+
 function saveInfoHandler() {
 	var userPwd = $("#userPwd").val();
 	var passwordChk = $("#passwordChk").val();

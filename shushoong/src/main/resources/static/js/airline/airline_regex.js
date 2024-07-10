@@ -143,4 +143,5 @@
 	
 	function submitBtnController(){
 		console.log($("input[name=expiration_date]").eq().val(1));
+		reserverInfoInsertFunction();
 	}

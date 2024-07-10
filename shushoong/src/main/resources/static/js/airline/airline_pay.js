@@ -35,11 +35,10 @@
 										<input type="text" placeholder="성씨를 영어로 입력해 주세요" name="passenger_lastName">
 										<div class="errorJ">1~20 영어만 사용하실 수 있습니다</div>
 									</div>
-									
 								</div>
 								<div>
 									<div>
-										<div>생년월일을</div>
+										<div>생년월일</div>
 										<div>(Birth)</div>
 									</div>
 									<div class="input_type_date">
@@ -153,20 +152,27 @@
 										<div>영문 이름</div> 
 										<div>(First Name)</div>
 									</div>
-									<div><input type="text" placeholder="여권에 적힌 이름을 영어로 입력해 주세요" name="passenger_firstName"></div>
+									<div>
+										<input type="text" placeholder="이름을 영어로 입력해 주세요" name="passenger_firstName">
+										<div class="errorJ">1~15 영어만 사용하실 수 있습니다</div>									
+									</div>
 									<div>
 										<div>영문 성 </div>
 										<div>(Last Name)</div>
 									</div>
-									<div><input type="text" placeholder="여권에 적힌 성씨를 영어로 입력해 주세요" name="passenger_lastName"></div>
+									<div>
+										<input type="text" placeholder="성씨를 영어로 입력해 주세요" name="passenger_lastName">
+										<div class="errorJ">1~20 영어만 사용하실 수 있습니다</div>
+									</div>
 								</div>
 								<div>
 									<div>
-										<div>생년월일을</div>
+										<div>생년월일</div>
 										<div>(Birth)</div>
 									</div>
 									<div class="input_type_date">
 										<input type="text" placeholder="생년월일을 '숫자 8자'로만 입력해 주세요" name="passenger_birth">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 									<div>
 										<div>국적 </div>
@@ -271,12 +277,18 @@
 										<div>영문 이름</div> 
 										<div>(First Name)</div>
 									</div>
-									<div><input type="text" placeholder="여권에 적힌 이름을 영어로 입력해 주세요" name="passenger_firstName"></div>
+									<div>
+										<input type="text" placeholder="이름을 영어로 입력해 주세요" name="passenger_firstName">
+										<div class="errorJ">1~15 영어만 사용하실 수 있습니다</div>
+									</div>
 									<div>
 										<div>영문 성 </div>
 										<div>(Last Name)</div>
 									</div>
-									<div><input type="text" placeholder="여권에 적힌 성씨를 영어로 입력해 주세요" name="passenger_lastName"></div>
+									<div>
+										<input type="text" placeholder="성씨를 영어로 입력해 주세요" name="passenger_lastName">
+										<div class="errorJ">1~20 영어만 사용하실 수 있습니다</div>									
+									</div>
 								</div>
 								<div>
 									<div>
@@ -285,6 +297,7 @@
 									</div>
 									<div class="input_type_date">
 										<input type="text" placeholder="생년월일을 '숫자 8자'로만 입력해 주세요" name="passenger_birth">
+										<div class="errorJ">숫자 8자만 사용하실 수 있습니다</div>
 									</div>
 									<div>
 										<div>국적 </div>

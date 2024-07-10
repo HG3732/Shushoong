@@ -699,7 +699,7 @@ select * from AIRLINE_RESERVE_INFO;
  
  select * from direct_via;
  
-alter table passenger_info
+alter table direct_via
 modify AIRLINE_RESERVE_CODE varchar2(20);
 commit;
 

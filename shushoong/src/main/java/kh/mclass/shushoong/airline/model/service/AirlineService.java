@@ -83,7 +83,7 @@ public class AirlineService {
 	
 //	직항, 경유 추가
 	public int insertDirectViaDto(DirectViaDto directDto) {
-		return insertDirectViaDto(directDto);
+		return airlineRepository.insertDirectViaDto(directDto);
 	}
 	
 	public AirlineInfoDto selectOneAirlineInfo(String airlineCode) {

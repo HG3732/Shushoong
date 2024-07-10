@@ -178,12 +178,17 @@
    		</foreach>
     </insert>
     
-    <!-- 직항/경유 정보 추가 -->
-    <insert id="insertDirectViaDto"  parameterType="DirectViaDto">
-		INSERT INTO DIRECT_VIA (AIRLINE_RESERVE_CODE, SEAT_GRADE, AIRLINE_CODE)
-   		VALUES (#{airlineReserveCode} , #{seatGrade} , #{airlineCode})
-    </insert> -->
-    
+<!--      직항/경유 정보 추가 -->
+	<insert id="insertDirectViaDto" parameterType="DirectViaDto">
+	    INSERT INTO DIRECT_VIA (
+	    	AIRLINE_RESERVE_CODE, 
+	    	SEAT_GRADE, 
+	    	AIRLINE_CODE
+	    )
+	    VALUES
+	     (#{airlineReserveCode}, #{seatGrade}, #{airlineCode})
+	</insert>
+		    
     
 	<!-- 예약완료 페이지 출력할 값 -->	
 <!-- 	<select>

@@ -346,6 +346,7 @@ public class AirlineController {
 		session.setAttribute("seatGrade", seatGrade);
 		session.setAttribute("airlineCode", airlineCode);
 		session.setAttribute("airlineCodeReturn", airlineCodeReturn);
+		session.setAttribute("seatGradeReturn", seatGradeReturn);
 
 		if (principal != null) {
 			String userId = principal.getName();
@@ -385,13 +386,13 @@ public class AirlineController {
 //  탑승객 정보 및 직항/경유 정보 추가
 	@ResponseBody
 	@PostMapping("/airline/input/passengerInfo")
-	public int passengerInfo(@RequestBody List<Map<String, Object>> passengerInfo, HttpSession session, Model model, 
-			DirectViaDto directDto) {
+	public int passengerInfo(@RequestBody List<Map<String, Object>> passengerInfo, HttpSession session, Model model) {
 
 		int result = 0;
 		
 		String airlineReserveCode = (String) session.getAttribute("airlineReserveCode");
 		String seatGrade = (String) session.getAttribute("seatGrade");
+		String seatGradeReturn = (String) session.getAttribute("seatGradeReturn");
 		String airlineCode = (String)session.getAttribute("airlineCode");
 		String airlineCodeReturn = (String)session.getAttribute("airlineCodeReturn");
 		
@@ -402,22 +403,42 @@ public class AirlineController {
 			}
 			result = service.insertPassengerInfo(passengerInfo);
 		}
-		
-	    // 편도인 경우
+	
+	    // 편도 예약인 경우
 	    if (airlineCode != null && airlineCodeReturn == null) {
+	    	DirectViaDto directDto = new DirectViaDto();
 	        directDto.setAirlineReserveCode(airlineReserveCode);
 	        directDto.setAirlineCode(airlineCode);
 	        directDto.setSeatGrade(seatGrade);
+	        
+//	        directDtoList.add(directDto);
+	        service.insertDirectViaDto(directDto);
+	        
 	    }
 	    
-	    // 왕복인 경우
+	    // 왕복 예약인 경우
 	    else if (airlineCode != null && airlineCodeReturn != null) {
-	        directDto.setAirlineReserveCode(airlineReserveCode);
-	        directDto.setAirlineCode(airlineCode);
-	        directDto.setAirlineCode(airlineCodeReturn);
+	        
+	    	// 가는 항공편 정보 저장
+	    	DirectViaDto outboundDto = new DirectViaDto();
+	    	outboundDto.setAirlineReserveCode(airlineReserveCode);
+	    	outboundDto.setAirlineCode(airlineCode);
+	    	outboundDto.setSeatGrade(seatGrade);
+	        
+//	    	directDtoList.add(outboundDto);
+	    	service.insertDirectViaDto(outboundDto);
+	        
+	        // 오는 항공편 정보 저장
+	    	DirectViaDto returnDto = new DirectViaDto();
+	    	returnDto.setAirlineReserveCode(airlineReserveCode);
+	    	returnDto.setAirlineCode(airlineCodeReturn);
+	    	returnDto.setSeatGrade(seatGradeReturn);
+	        
+//	    	directDtoList.add(returnDto);
+	    	service.insertDirectViaDto(returnDto);
+	        
 	    }
 		
-		service.insertDirectViaDto(directDto);
 		
 		return result;
 	}

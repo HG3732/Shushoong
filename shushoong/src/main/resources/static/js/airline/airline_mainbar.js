@@ -51,7 +51,7 @@
 					document.getElementById(accordingInfo).style.display="flex";
 				}else if (accordingInfo == "date_accoding"){
 					document.getElementById(accordingInfo).style.display="block";
-					calendar.render();
+					renderCalendar();
 				}else{
 					document.getElementById(accordingInfo).style.display="block";
 				}
@@ -127,7 +127,8 @@
 				/* 날짜 설정하는 펑션  */
 				
 														/* 달력 api */
-	    document.addEventListener('DOMContentLoaded', function() {
+		let calendar;												
+	    function createCalendar() {
 	    	var date = new Date();
     	    var year = date.getFullYear();
     	    var month = ("0" + (1 + date.getMonth())).slice(-2);
@@ -136,7 +137,7 @@
     	    
 	    	
 			var calendarEl = document.getElementById('calendar');
-		    var calendar = new FullCalendar.Calendar(calendarEl, {
+		    calendar = new FullCalendar.Calendar(calendarEl, {
 		   		initialView: 'dayGridMonth',
 		   		selectable : true,
 		       	dateClick: function(info) {
@@ -184,9 +185,8 @@
 		       
 		       	  
 		    });
-		    calendar.render();
 	    
-	    });
+	    };
 	    
 													/* 오는날에서 가는날로 전환 */
 		$("#btn_return_depart_date").on("click",function(){
@@ -273,6 +273,11 @@
 		
 		$("#hidden_adult").val()
 		
-		
+		function renderCalendar(){
+			if(!calendar){	//달력이 아직 render가 안되있다면
+				createCalendar();
+			}
+			calendar.render();
+		}
 		
 	

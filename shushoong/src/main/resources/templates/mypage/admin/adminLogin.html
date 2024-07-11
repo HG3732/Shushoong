@@ -42,7 +42,8 @@
 								</div>
 								<div th:if="${exception}">
 									<script th:inline="javascript">
-										alert([[${message}]]);
+										var message = "[[${message}]]"
+										alert(message);
 							    	</script>
 							    </div>
 								<div class="loginBtn">

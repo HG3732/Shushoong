@@ -18,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LoginController {
 
-	@Autowired
-	private final MemberService memberservice;
 
 	// 관리자 로그인
 	@GetMapping("/login/admin")

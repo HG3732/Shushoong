@@ -40,8 +40,8 @@
 								<form id="frm-post" th:action="@{/login/customer}" method="post">
 									<input type="hidden" name="userGrade" value="customer"/>
 									<div class="loginInfo">
-										<input type="text" name="userId" id="userId"  placeholder="아이디" autofocus>
-										<input type="password" name="userPwd" id="userPwd" placeholder="비밀번호">
+										<input type="text" name="userId" id="userId1"  placeholder="아이디" autofocus>
+										<input type="password" name="userPwd" id="userPwd1" placeholder="비밀번호">
 									</div>
 									<div class="login-check">
 										<input type="checkbox" name="idsaved" th:value="${remember}"> 아이디 저장
@@ -51,7 +51,8 @@
 									</div>
 							        <div th:if="${exception}">
 										<script th:inline="javascript">
-											alert([[${message}]]);
+											var message = "[[${message}]]"
+											alert(message);
 							            </script>
 							        </div>
 									<div class="login-function">
@@ -85,16 +86,21 @@
 								</div>
 							</div>
 							<div class="businesslogin-section">
-								<form id="frm-post" th:action="@{/login}" method="post">
+								<form id="frm-post" th:action="@{/login/business}" method="post">
 									<input type="hidden" name="userGrade" value="business"/>
 									<div class="loginInfo">
 										<input type="text" name="userId" id="userId" placeholder="아이디" autofocus>
 										<input type="password" name="userPwd" id="userPwd" placeholder="비밀번호">
 									</div>
 									<div class="login-check">
-										<input type="checkbox" id="idsaved" name="idsaved">아이디
-										저장
+										<input type="checkbox" id="idsaved" name="idsaved" th:value="${remember}">아이디저장
 									</div>
+									 <div th:if="${exception}">
+										<script th:inline="javascript">
+											var message = "[[${message}]]"
+											alert(message);
+							            </script>
+							        </div>
 									<div class="loginBtn">
 										<button type="submit" class="btn businessLogin">로그인</button>
 									</div>

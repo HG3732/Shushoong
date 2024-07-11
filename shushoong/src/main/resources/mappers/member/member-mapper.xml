@@ -20,9 +20,8 @@
 		SELECT USER_STATUS FROM MEMBER WHERE USER_ID=#{userId} 
 	</select>
 	
-	<select id="authCheck" parameterType="string" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
-		WHERE USER_ID=#{userId} AND USER_PWD=#{userPwd} AND USER_GRADE=#{userGrade}
+	<select id="authCheck" parameterType="string">
+		SELECT USER_GRADE FROM MEMBER WHERE USER_ID=#{userId}
 	</select>
 	
 	<select id="idCheck" parameterType="string" resultType="int">

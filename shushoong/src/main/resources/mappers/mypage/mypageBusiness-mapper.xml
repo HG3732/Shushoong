@@ -26,7 +26,7 @@
 	<insert id="insertHotel" parameterType="HotelReqDto">
 		<bind name="code" value="hotelCode + '%'"/>
 		insert into hotel values (
-			#{hotelCode}||(select to_char(NVL(MAX(substr(hotel_code,4,3)), -1)+1, '000') from hotel where hotel_code like #{code}),
+			#{hotelCode}||(select to_char(NVL(MAX(substr(hotel_code,4,3)), -1) +1, 'FM000') from hotel where hotel_code like #{code}),
 			#{hotelName}, #{hotelEng}, #{hotelAddress}, #{hotelCall}, #{checkIn}, #{checkOut}, #{hotelPolicy},
 			#{hotelIntro}, DEFAULT, #{hotelLocCat}, #{businessCerti}, #{hotelSafety}
 			)
@@ -38,8 +38,8 @@
 	<!-- 호텔 사진 등록-->
 	<insert id="insertHotelPic" parameterType="hashMap">
     	insert all 
-	    <foreach collection="urls" item="pic" separator=",">
-	        into hotel_pic (hotel_code, hotel_pic) VALUES (#{hotelCode}, #{pic})
+	    <foreach collection="urls" item="pic" separator=" ">
+	        into hotel_pic VALUES (#{pic}, #{hotelCode})
 	    </foreach>
 	    select * from dual
 	</insert>
@@ -47,8 +47,8 @@
 	<!-- 호텔 편의 시설 등록-->
 	<insert id="insertHotelFac" parameterType="hashMap">
 		insert all 
-		<foreach collection="hotelFacs" item="fac" separator=",">
-			into hotel_facility values (#{hotelCode}, #{fac})
+		<foreach collection="hotelFacs" item="fac" separator=" ">
+			into hotel_facility values (#{fac}, #{hotelCode})
 		</foreach>
 		select * from dual
 	</insert>
@@ -56,7 +56,7 @@
 	<!-- 호텔 방 등록-->
 	<insert id="insertHotelRoom" parameterType="hashMap">
 		insert all 
-		<foreach collection="rooms" item="room" separator=",">
+		<foreach collection="rooms" item="room" separator=" ">
 			into hotel_room values (#{room.roomCat}, #{room.roomCap}, #{room.roomAtt}, #{hotelCode}, #{room.hotelPrice}, 0, #{room.roomCount})
 		</foreach>
 		select * from dual

@@ -1,7 +1,5 @@
 $(loadedHandler);
 
-let i = 0;
-
 function loadedHandler() {
     $(".hotel_pic").on("change", previewImage);
     $(".add_btn").on("click", addRoomInfo);
@@ -75,11 +73,11 @@ function ajaxErrorHandler(request, status, error) {
 		htmlVal += `
 			<div class="select_wrap">
 				<select name="roomCat" class="category" style="width:100px; height:30px; border-radius:10px;">
-					 <option value="standard">스탠다드룸</option>
-					 <option value="deluxe">디럭스룸</option>
-					 <option value="superior">슈페리어룸</option>
-					 <option value="sweet">스위트룸</option>
-					 <option value="etc">기타</option>
+					 <option value="0">스탠다드룸</option>
+					 <option value="1">디럭스룸</option>
+					 <option value="2">슈페리어룸</option>
+					 <option value="3">스위트룸</option>
+					 <option value="4">기타</option>
 				</select>
 				<select name="roomCap" class="capacity" style="width:100px; height:30px; border-radius:10px;">
 					 <option value="2">더블룸</option>
@@ -88,25 +86,22 @@ function ajaxErrorHandler(request, status, error) {
 					 <option value="5">파티룸</option>
 				</select>
 				<select name="roomAtt" class="attribute" style="width:100px; height:30px; border-radius:10px;">
-					 <option value="none">없음</option>
-					 <option value="ocean">오션뷰</option>
-					 <option value="mountain">마운틴뷰</option>
-					 <option value="city">시티뷰</option>
+					 <option value="0">없음</option>
+					 <option value="1">오션뷰</option>
+					 <option value="2">마운틴뷰</option>
+					 <option value="3">시티뷰</option>
+					 <option value="4">기타</option>
 				</select>
 				<input type="text" name="roomCount" value="1" placeholder="방 개수(숫자만 적어주세요)" class="input_roomnum">														
-				<input type="text" name="roomPrice" value="99999999" placeholder="방 가격(숫자만 적어주세요)" class="input_roomprice">														
+				<input type="text" name="hotelPrice" value="99999999" placeholder="방 가격(숫자만 적어주세요)" class="input_roomprice">														
 			</div>
 			`;
-		i++;
 		$(".select_option").append(htmlVal);
 	}
 	
 	//방 삭제
 	function deleteRoomInfo(thisElement) {
 		$(".select_wrap:last-child").remove();
-		if(i > 0){
-			i--;
-		}
 	}
 	
 	//양식 제출
@@ -115,7 +110,7 @@ function ajaxErrorHandler(request, status, error) {
 		var frmHotelData = new FormData(document.getElementById("frm_register") );
 		$(".select_wrap").each(function(idx){
 			frmHotelData.append("roomList[" + idx + "].roomCat", $(this).find("[name=roomCat").val());
-			frmHotelData.append("roomList[" + idx + "].roomPrice", $(this).find("[name=roomPrice").val());
+			frmHotelData.append("roomList[" + idx + "].hotelPrice", $(this).find("[name=hotelPrice").val());
 			frmHotelData.append("roomList[" + idx + "].roomCount", $(this).find("[name=roomCount").val());
 			frmHotelData.append("roomList[" + idx + "].roomCap", $(this).find("[name=roomCap").val());
 			frmHotelData.append("roomList[" + idx + "].roomAtt", $(this).find("[name=roomAtt").val());
@@ -130,7 +125,10 @@ function ajaxErrorHandler(request, status, error) {
 		    processData: false,
 			contentType: false,
 		    data: frmHotelData,
-		    success: function(){},
+		    success: function(){
+				alert("등록에 성공하였습니다.");
+				location.href='../hotel';
+			},
 		    error : ajaxErrorHandler
 	    });
 	}

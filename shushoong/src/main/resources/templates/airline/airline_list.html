@@ -239,8 +239,8 @@ div#people_lineup_sit_accoding{
 							<div hidden="">
 								<span th:text="${air.departLoc}" id="select-info-departLoc" name="departLoc"></span> 
 								<span th:text="${air.arrivalLoc}" id="select-info-arrivalLoc" name="arrivalLoc"></span>
-								<span th:text="${air.departDate}" id="select-info-arrivalLoc" name="departDate"></span>
-								<span th:text="${air.arrivalDate}" id="select-info-arrivalLoc" name="arrivalDate"></span>
+								<span th:text="${departDate}" id="select-info-departDate" ></span>
+								<span th:text="${arrivalDate}" id="select-info-arrivalDate" ></span>
 								<span th:text="${ticketType}" id="select-info-ticketType" name="select-info-ticketType"></span>
 							</div>
 						</div>
@@ -257,7 +257,7 @@ div#people_lineup_sit_accoding{
 								<input type="hidden" id="departLoc" name="departLoc"> 
 								<input type="hidden" id="arrivalLoc" name="arrivalLoc"> 
 								<input type="hidden" id="departDate" name="departDate"> 
-								<input type="hidden" id="arrivalDate" name="arrivalDate"> 
+								<input type="hidden" id="arrivalDate" name="arrivalDate" > 
 								<input type="hidden" id="airlineCode" name="airlineCode">
 								<input type="hidden" id="flightNo" name="flightNo">
 								

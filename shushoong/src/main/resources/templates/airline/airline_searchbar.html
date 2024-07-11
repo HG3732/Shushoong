@@ -18,17 +18,27 @@ xmlns:th="http://www.thymeleaf.org"
 					
 					<div id="one_way" class="tabcontent">
 						<div class="depart_arrival_flex">
+						<!-- 
+						<div th:if="${returnPage}" > 
+							<button id="depart" class="according_btn pointer" th:if="${arrivalLoc} != null" th:text="${arrivalLoc}" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
+						</div> 
+						 -->		
 							<button id="depart" class="according_btn pointer" th:if="${departLoc} != null" th:text="${departLoc}" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
 							<button id="depart" class="according_btn pointer" th:if="${departLoc} == null" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
 							<img class="type" alt="one_way" th:src="@{/images/one_way.png}">
+							<!-- 
+						<div th:if="${returnPage}" >
+							<button id="arrival" class="according_btn pointer" th:if="${arrivalLoc} != null" th:text="${departLoc}" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
+						</div>
+						 -->
 							<button id="arrival" class="according_btn pointer" th:if="${departLoc} != null" th:text="${arrivalLoc}" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
 							<button id="arrival" class="according_btn pointer" th:if="${departLoc} == null" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
 						</div>
 						<div>
 							<button id="one_way_date" class="according_btn pointer" onclick="accordingInfo(event,'date_accoding')">
-							    <div th:if="${departDate != null and arrivalDate != null}" th:text="${formattedDepartDate} + '/' + ${formattedArrivalDate}">날짜 선택</div>
-								<div th:if="${departDate != null and arrivalDate == null} " th:text="${departDate}">날짜 선택</div>
-								<div th:if="${departDate} == null ">날짜 선택</div>
+							    <div th:if="${departDate != null and arrivalDate != null}" th:text="${departDate2} + '/' + ${arrivalDate2}">날짜 선택</div>
+								<div th:if="${departDate != null and arrivalDate == null} " th:text="${departDate2}">날짜 선택</div>
+								<div th:if="${departDate == null}">날짜 선택</div>
 								<img alt="달력 사진" th:src="@{/images/calendar.png}">
 							</button>
 							

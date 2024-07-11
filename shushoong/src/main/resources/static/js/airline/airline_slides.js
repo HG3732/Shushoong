@@ -3,7 +3,7 @@
 										/* 저렴한 가격 캐러셀 */
 	var cheapIndex = 0;
 	var cheapSlideSize =document.getElementsByClassName("airline-recommend");
-	$(".left.btn2").on("click", function(){
+	$(".right.btn2").on("click", function(){
 		if(cheapIndex > cheapSlideSize.length-4){
 			
 		}else{
@@ -12,7 +12,7 @@
 		}
 	});
 	
-	$(".right.btn2").on("click", function(){
+	$(".left.btn2").on("click", function(){
 		if(cheapIndex <  1){
 			
 		}else{

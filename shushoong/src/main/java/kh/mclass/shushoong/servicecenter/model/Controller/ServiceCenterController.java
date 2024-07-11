@@ -259,7 +259,6 @@ public class ServiceCenterController {
 	public String noticeList (Model md, 
 			String pageNum) {
 			
-			SecurityContextHolder.getContext().getAuthentication();
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String userId =  authentication.getName();
 			String userGrade = authentication.getAuthorities().stream()
@@ -307,7 +306,6 @@ public class ServiceCenterController {
 	public String noticeListAjax (Model md, String noticeCategory,
 	String pageNum) {
 		
-		SecurityContextHolder.getContext().getAuthentication();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId =  authentication.getName();
 		String userGrade = authentication.getAuthorities().stream()
@@ -346,7 +344,6 @@ public class ServiceCenterController {
 	// 공지사항 작성
 	@GetMapping("/support/notice/write")
 	public String getNoticeWrite (Model md) {
-		SecurityContextHolder.getContext().getAuthentication();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId =  authentication.getName();
 		String userGrade = authentication.getAuthorities().stream()
@@ -461,7 +458,6 @@ public class ServiceCenterController {
 			String noticeTime,
 			int noticeId, Model md
 			) {
-		SecurityContextHolder.getContext().getAuthentication();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId =  authentication.getName();
 		String userGrade = authentication.getAuthorities().stream()
@@ -530,7 +526,6 @@ public class ServiceCenterController {
 	@GetMapping("/support/notice/view/{noticeId}")
 	public String viewNotice(Model md, @PathVariable("noticeId") String noticeId, String noticeCategory) {
 		
-		SecurityContextHolder.getContext().getAuthentication();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId =  authentication.getName();
 		String userGrade = authentication.getAuthorities().stream()

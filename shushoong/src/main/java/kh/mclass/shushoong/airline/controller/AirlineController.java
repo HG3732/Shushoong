@@ -6,6 +6,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -94,18 +97,43 @@ public class AirlineController {
 				}
 				}
 			}
+			
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MM-dd");
+
+            try {
+                LocalDate departDateParsed = LocalDate.parse(departDate, inputFormatter);
+                LocalDate arrivalDateParsed = LocalDate.parse(arrivalDate, inputFormatter);
+
+                String formattedDepartDate = departDateParsed.format(outputFormatter);
+                String formattedArrivalDate = arrivalDateParsed.format(outputFormatter);
+
+                md.addAttribute("formattedDepartDate", formattedDepartDate);
+                md.addAttribute("formattedArrivalDate", formattedArrivalDate);
+
+                System.out.println("서치바 출발 일자 : " + formattedDepartDate);
+                System.out.println("서치바 도착 일자 : " + formattedArrivalDate);
+
+            } catch (DateTimeParseException e) {
+                e.printStackTrace();
+            }
+            
 			System.out.println("컨트롤러 airline data: " + airlineData);
-			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
+			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType, seatGrade);
 
 			System.out.println("maxPrice : " + maxPrice);
 			System.out.println("adult : " + adult);
 			System.out.println("child : " + child);
 			System.out.println("baby : " + baby);
+			System.out.println("departDate : " + departDate);
+			System.out.println("arrivalDate : " + arrivalDate);
 			System.out.println("departLoc : " + departLoc);
 			System.out.println("arrivalLoc : " + arrivalLoc);
 			System.out.println("seatGrade : " + seatGrade);
 			System.out.println("ticketType: " + ticketType);
 
+			md.addAttribute("departDate", departDate);
+			md.addAttribute("arrivalDate", arrivalDate);
 			md.addAttribute("departLoc", departLoc);
 			md.addAttribute("arrivalLoc", arrivalLoc);
 			md.addAttribute("adult", adult);
@@ -204,7 +232,7 @@ public class AirlineController {
 				deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType,
 				seatGrade);
 		md.addAttribute("airlineData", SortData);
-		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
+		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc, ticketType, seatGrade);
 		md.addAttribute("maxPrice", maxPrice2);
 		log.debug("컨트롤러 디버깅 : " + SortData);
 

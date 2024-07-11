@@ -51,9 +51,9 @@ public class AirlineService {
 				departLoc, arrivalLoc, departTimeLeft, departTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, ticketType, seatGrade);
 	}
 	
-	public Integer getMaxPrice(String departLoc, String arrivalLoc, String ticketType){
+	public Integer getMaxPrice(String departLoc, String arrivalLoc, String ticketType, String seatGrade){
 		
-		return airlineRepository.getMaxPrice(departLoc, arrivalLoc, ticketType);
+		return airlineRepository.getMaxPrice(departLoc, arrivalLoc, ticketType, seatGrade);
 	}
 	
 //	// 항공 목록 셀렉트 바

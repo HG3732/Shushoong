@@ -31,7 +31,7 @@ public interface AirlineRepository {
 			String arrivalTimeLeft, String arrivalTimeRight, 
 			String selectType, String viaType, String ticketType, String seatGrade
 			);
-	Integer getMaxPrice(String departLoc, String arrivalLoc, String ticketType);
+	Integer getMaxPrice(String departLoc, String arrivalLoc, String ticketType, String seatGrade);
 	
 //	예약자 정보 추가
 	int insertReserverInfo(AirlineReserverInfoDto reserverInfo);

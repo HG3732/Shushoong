@@ -23,6 +23,7 @@
 				</div>
 			</header>
 		</div>
+		<div th:text="${message}"></div>
 		<div class="wrap-body">
 			<div class="wrap-section">
 				<section>
@@ -37,7 +38,7 @@
 						</div>
 						<div class="content">
 							<div class="customerlogin-section">
-								<form id="frm-post" th:action="@{/login/customer}" method="post">
+								<form id="frm-post" th:action="@{/login}" method="post">
 									<input type="hidden" name="userGrade" value="customer"/>
 									<div class="loginInfo">
 										<input type="text" name="userId" id="userId1"  placeholder="아이디" autofocus>
@@ -51,13 +52,12 @@
 									</div>
 							        <div th:if="${exception}">
 										<script th:inline="javascript">
-											var message = "[[${message}]]"
+											var message = "[(${message})]"
 											alert(message);
 							            </script>
 							        </div>
 									<div class="login-function">
 										<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a> 
-										<a th:href="@{/account/find}"><div class="findInfoBtn">아이디/비밀번호 찾기</div></a>
 									</div>
 								</form>
 								<div class="snsLogin">
@@ -86,7 +86,7 @@
 								</div>
 							</div>
 							<div class="businesslogin-section">
-								<form id="frm-post" th:action="@{/login/business}" method="post">
+								<form id="frm-post" th:action="@{/login}" method="post">
 									<input type="hidden" name="userGrade" value="business"/>
 									<div class="loginInfo">
 										<input type="text" name="userId" id="userId" placeholder="아이디" autofocus>
@@ -97,7 +97,7 @@
 									</div>
 									 <div th:if="${exception}">
 										<script th:inline="javascript">
-											var message = "[[${message}]]"
+											var message = "[(${message})]"
 											alert(message);
 							            </script>
 							        </div>

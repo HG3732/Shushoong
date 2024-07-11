@@ -27,7 +27,25 @@ public class AspectLogConfig {
 	
 	@Pointcut("execution(public * kh.mclass..*Controller.*(..))")
 	public void controllerPointcut() {}
+	@Pointcut("execution(public * kh.mclass..*Handler.*(..))")
+	public void handlerPointcut() {}
 
+	@Around("handlerPointcut()")
+	public Object aroundHandlerLog(ProceedingJoinPoint pjp) throws Throwable {
+		Object returnObj = null;
+		log.debug("***["+pjp.getThis()+":"+pjp.getSignature().getName()+"]");
+		Object[] args = pjp.getArgs();
+		for(int i=0; i<args.length; i++) {
+			log.debug("***-args["+i+"] "+args[i]+"");
+		}
+		StopWatch stopwatch = new StopWatch();
+		stopwatch.start();
+		returnObj = pjp.proceed();
+		stopwatch.stop();
+		log.debug("***R[Dao ▷ "+stopwatch.getTotalTimeMillis()+"ms]"+returnObj);
+		return returnObj;
+	}
+	
 	@Around("daoPointcut()")
 	public Object aroundDaoLog(ProceedingJoinPoint pjp) throws Throwable {
 		Object returnObj = null;

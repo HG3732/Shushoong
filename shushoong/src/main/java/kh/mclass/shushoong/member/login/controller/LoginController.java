@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LoginController {
 
-
 	// 관리자 로그인
 	@GetMapping("/login/admin")
 	public String managerLogin(@RequestParam(value = "error", required = false) String error, Model model,
@@ -86,5 +85,7 @@ public class LoginController {
 
 		return "member/login";
 	}
-
 }
+
+//$2a$10$xLB5O9SpSSGpXdTywkgRjuN0VBqv4lj1VYQz4GLJUeEPL0pxtujbK
+//$2a$10$LrRWiThN4q/hDrvKSoVkMORbxLpuLA.ELQRNmBjvcTbH7yLY2D.6S,r,userName=customer,userPwd=$2a$10$LrRWiThN4q/hDrvKSoVkMORbxLpuLA.ELQRNmBjvcTbH7yLY2D.6S

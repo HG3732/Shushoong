@@ -76,7 +76,7 @@ public class MypageCustomerService {
 		return mypageRepository.selectListHotelReview(userId);
 	}
 	
-	public int deleteOneHotelReview(String hotelResCode,String userId) {
-		return mypageRepository.deleteOneHotelReview(hotelResCode,userId);
+	public int deleteOneHotelReview(String userId,String hotelResCode) {
+		return mypageRepository.deleteOneHotelReview(userId,hotelResCode);
 	}
 }

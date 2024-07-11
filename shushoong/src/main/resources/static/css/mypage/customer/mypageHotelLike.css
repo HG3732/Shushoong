@@ -99,5 +99,12 @@ div.choose_btn > button {
 	height: 50px;
 	margin-left: 25px;
 }
-
+div#value_null{
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 20px;
+	color: var(--color_gray_4);
+	width : 920px;
+}
 

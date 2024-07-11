@@ -232,7 +232,13 @@
 		insert into pay values(
     		#{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{currency}, 'yet', null, null
 		)
-	</insert>    
+	</insert>
+
+	<update id="updatePayInfo" parameterType="hashmap">
+		Update pay
+		set pay_status = 'paid', airline_reserve_code = #{airlineReserveCode}
+		where approve_no = #{approveNo}
+	</update>  
     
 	<!-- 예약완료 페이지 출력할 값 -->	
 <!-- 	<select>

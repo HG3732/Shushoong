@@ -557,6 +557,8 @@ public class AirlineController {
 		
 		String approveNo = (String) responseBody.get("transactionId"); //승인번호
 		
+		session.setAttribute("approveNo", approveNo);
+		
 		String cardNumStr = (String) responseBody.get("pgResponse"); //카드번호
 		//결제사가 pgResponse 안에 있어서 json으로 바꾼 다음에 바로 꺼내기(string은 이렇게 꺼내기 못함)
 			try {
@@ -647,6 +649,11 @@ public class AirlineController {
 		
 		AirlineReserveCompleteDtoRes reserveCompletedto = (AirlineReserveCompleteDtoRes) session.getAttribute("reserveCompletedto");
 		System.out.println(reserveCompletedto);
+		
+		String airlineReserveCode = (String) session.getAttribute("airlineReserveCode");
+		String approveNo = (String)session.getAttribute("approveNo");
+		service.updatePayInfo(airlineReserveCode, approveNo);
+		
 //		if (airlineInfoReturn == null) {
 //			md.addAttribute("ticketType", 1);
 //			md.addAttribute("airlineName", "");

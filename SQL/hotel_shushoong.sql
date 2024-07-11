@@ -348,7 +348,7 @@ insert into pay values(
 desc pay;
 
 alter table pay
-modify APPROVE_NO varchar2(70);
+modify airline_reserve_code varchar2(20);
 
 ALTER TABLE PAY
 DROP COLUMN APPROVE_NO;
@@ -721,3 +721,19 @@ select *
         
 select * from passenger_info
     join direct_via using(AIRLINE_RESERVE_CODE);
+    
+
+
+---------------------------------------- 마이페이지 항공 예약 관련
+select airline_reserve_code, airline_name, depart_loc, depart_date, depart_time,  arrival_loc, arrival_time, arrival_date   from 
+(select * from
+(select * 
+from (
+select * from airline_reserve_info
+    join direct_via using(airline_reserve_code))
+    join seat_grade using(airline_code))
+    join airline_info using(airline_code))
+    join pay using (airline_reserve_code)
+where pay_status = 'paid';
+
+

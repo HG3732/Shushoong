@@ -45,6 +45,8 @@ public interface AirlineRepository {
 	
 //결제 정보 저장
 	int insertPayInfo(PayDto paydto);
+	
+	int updatePayInfo(String airlineReserveCode, String approveNo);
 	 
 	Character selectOneDomesticFunction(String airlineCode);
 	

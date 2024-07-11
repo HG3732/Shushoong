@@ -87,9 +87,14 @@ public class AirlineService {
 		return airlineRepository.insertDirectViaDto(directDto);
 	}
 	
-//	결제 정보
+//	결제 정보 추가
 	public int insertPayInfo(PayDto paydto) {
 		return airlineRepository.insertPayInfo(paydto);
+	}
+	
+//	결제 상태 update
+	public int updatePayInfo(String airlineReserveCode, String approveNo) {
+		return airlineRepository.updatePayInfo(airlineReserveCode, approveNo );
 	}
 	
 	public AirlineInfoDto selectOneAirlineInfo(String airlineCode) {

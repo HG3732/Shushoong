@@ -42,8 +42,12 @@ public class MemberService {
 	public String lockedCheck(String userId) {
 		return memberRepository.lockedCheck(userId);
 	}
-	
-	
+
+	// 권한명 확인
+	public String authCheck(String userId) {
+		return memberRepository.authCheck(userId);
+	}
+
 	public boolean checkLoginIdDuplicate(String loginId) {
 		return memberRepository.existsByLoginId(loginId);
 	}

@@ -1,20 +1,17 @@
 package kh.mclass.shushoong.member.controller;
 
-import java.security.Principal;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.member.model.service.MemberService;
 import lombok.RequiredArgsConstructor;
 
@@ -95,29 +92,31 @@ public class FindAccountController {
 	@ResponseBody
 	public int resetPasswordBusiness(@RequestParam("userId") String userId, @RequestParam("userEmail") String userEmail,
 			@RequestParam("userGrade") String userGrade) {
-		int cnt = 0;
+		int result = 0;
 
 		try {
-			cnt = memberservice.findPwd(userId, userEmail, userGrade);
+			result = memberservice.findPwd(userId, userEmail, userGrade);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return cnt;
+		return result;
 	}
 
 	@GetMapping("reset/password")
-	public String resetPassword(ModelAndView modelAndView, HttpSession httpSession, HttpServletRequest requese) {
+	public String resetPassword(Model model, @RequestParam("userId") String userId) {
+		model.addAttribute("userId", userId);
 		return "member/passwordReset";
 	}
 
 	// 비밀번호 변경(암호화)
 	@PostMapping("/changePwd.ajax")
-	public String changePwd(@RequestParam("userPwd") String userPwd, RedirectAttributes rttr,
-			@RequestParam Map<String, Object> paramMap) {
+	public String changePwd(@RequestParam("userPwd") String userPwd, 
+							@RequestParam("userId") String userId,
+							RedirectAttributes rttr,
+							@RequestParam Map<String, Object> paramMap) {
 		
-		String userId;
+		paramMap.put("userId",userId);
 		paramMap.put("userPwd", encoder.encode(userPwd));
-//		paramMap.put("userId", userId);
 		int result = memberservice.resetPwd(paramMap);
 
 		String message = null;

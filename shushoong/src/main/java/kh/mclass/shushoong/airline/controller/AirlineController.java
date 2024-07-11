@@ -1,7 +1,13 @@
 package kh.mclass.shushoong.airline.controller;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +15,9 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,9 +33,11 @@ import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
+import kh.mclass.shushoong.airline.model.domain.AirlineReserveCompleteDtoRes;
 import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
 import kh.mclass.shushoong.airline.model.domain.DirectViaDto;
 import kh.mclass.shushoong.airline.model.service.AirlineService;
+import kh.mclass.shushoong.payment.PayDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -35,6 +46,19 @@ public class AirlineController {
 
 	@Autowired
 	private AirlineService service;
+	
+	//PortOne
+	@Value("${portone.store.key}")
+	private String storeId;
+
+	@Value("${portone.channel.key}")
+	private String channelKey;
+	
+	@Value("${portone.secret.key}")
+	private String secretKey;
+	
+	@Autowired
+	private Gson gson;
 
 	// 항공 목록
 	@GetMapping("/airline/list")
@@ -347,6 +371,7 @@ public class AirlineController {
 		session.setAttribute("airlineCode", airlineCode);
 		session.setAttribute("airlineCodeReturn", airlineCodeReturn);
 		session.setAttribute("seatGradeReturn", seatGradeReturn);
+		session.setAttribute("airlineName", airlineInfo.getAirlineName());
 
 		if (principal != null) {
 			String userId = principal.getName();
@@ -367,6 +392,9 @@ public class AirlineController {
 		System.out.println("좌석 등급 : " + seatGrade);
 		System.out.println("리턴 좌석 등급 : " + seatGradeReturn);
 
+		md.addAttribute("storeId", storeId);
+		md.addAttribute("channelKey", channelKey);
+		
 		return "airline/airline_pay";
 
 	}
@@ -374,27 +402,101 @@ public class AirlineController {
 	// 예약자 정보 먼저 저장
 	@ResponseBody
 	@PostMapping("/airline/input/reserverInfo")
-	public int customerInfo(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session, Model model) {
+	public Map<String, Object> customerInfo(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session) {
+	    int result = service.insertReserverInfo(reserverInfo);
+	    Map<String, Object> resultDto = new HashMap<>();
+	    resultDto.put("result", resultDto);
 
-		int result = service.insertReserverInfo(reserverInfo);
+	    if(result > 0) {
+	        session.setAttribute("airlineReserveCode", reserverInfo.getAirlineReserveCode());
+	        resultDto.put("airlineReserveCode", reserverInfo.getAirlineReserveCode());
+	    }
 
-		session.setAttribute("airlineReserveCode", reserverInfo.getAirlineReserveCode());
-
-		return result;
+	    return resultDto;
 	}
 
 //  탑승객 정보 및 직항/경유 정보 추가
 	@ResponseBody
 	@PostMapping("/airline/input/passengerInfo")
-	public int passengerInfo(@RequestBody List<Map<String, Object>> passengerInfo, HttpSession session, Model model) {
+	public int passengerInfo(@RequestBody List<Map<String, Object>> passengerInfo, HttpSession session, Model model,
+			AirlineReserveCompleteDtoRes reserveCompletedto) 
+			throws IOException, InterruptedException{	
 
-		int result = 0;
-		
 		String airlineReserveCode = (String) session.getAttribute("airlineReserveCode");
 		String seatGrade = (String) session.getAttribute("seatGrade");
 		String seatGradeReturn = (String) session.getAttribute("seatGradeReturn");
 		String airlineCode = (String)session.getAttribute("airlineCode");
 		String airlineCodeReturn = (String)session.getAttribute("airlineCodeReturn");
+		
+		String paymentId = airlineReserveCode;
+		
+		reserveCompletedto.setAirlineReserveCode(airlineReserveCode);		
+		
+		//ajax로 보내지는 데이터 () 안에 작성
+		HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://api.portone.io/payments/" + paymentId + "?storeId=" + storeId))
+			    //payments/" + 결제번호 - PathVariable(경로) - 어디로가냐 - 경로에 따라 목적지 달라짐... , ?storeId=" + storeId = 결제API에 전달할 data - 뭘 가지고 가냐(바껴도 상관없음)
+			    .header("Content-Type", "application/json")
+			    .header("Authorization", "PortOne " + secretKey)
+			    .method("GET", HttpRequest.BodyPublishers.ofString("{}"))
+			    .build();
+		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+		System.out.println("결제 데이터 : " + response.body());
+		
+		// 결제 단건 조회 응답
+		Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
+		System.out.println("responseBody ==================  "+responseBody.toString());
+		
+		// 응답 중 결제 금액 세부 정보 항목 추출
+		Map<String, Object> amount = gson.fromJson(gson.toJson(responseBody.get("amount")), Map.class);
+		System.out.println("amount ======================  "+amount);
+		// 그 중 지불된 금액
+		double paid = (double) amount.get("paid");
+		
+		PayDto paydto = new PayDto();
+		
+		String approveNo = (String) responseBody.get("transactionId"); //승인번호
+		
+		String cardNumStr = (String) responseBody.get("pgResponse"); //카드번호
+		try {
+			JSONObject jsonObj = new JSONObject(cardNumStr);
+			String cardNum = jsonObj.getString("CardNo");
+			//json은 map형태라서 get으로 key이름으로 값 꺼내기 가능
+			paydto.setCardNum(cardNum);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		String reserveCorperStr = (String) responseBody.get("pgResponse"); //결제사
+		try {
+			JSONObject jsonObj = new JSONObject(reserveCorperStr);
+			String reserveCorper = jsonObj.getString("CardName");
+			paydto.setReserveCorper(reserveCorper);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String currency = (String) responseBody.get("currency");//화폐종류
+//		String payPrice = reserveCompletedto.getSeatPrice(); //가격
+		
+		paydto.setApproveNo(approveNo);
+		paydto.setCurrency(currency);
+//		paydto.setPayPrice(payPrice);
+		
+		int result = 0;
+		
+//		if(Double.parseDouble(airlinePrice) == paid) {
+//			
+//			int result = service.inserthotelReserveInfo(reservationData); 
+//				//int a = reservationData.setHotelReserveCode(result);
+//				paydto.setHotelReserveCode(reservationData.getHotelReserveCode());
+//				service.insertPayInfo(paydto);
+//				session.setAttribute("hotelReserveCode", paydto.getHotelReserveCode());
+//			return "1";
+//		} else {
+//		    return "0";
+//		}
+
 		
 		if (passengerInfo != null) {
 			for (Map<String, Object> passenger : passengerInfo) {
@@ -411,7 +513,6 @@ public class AirlineController {
 	        directDto.setAirlineCode(airlineCode);
 	        directDto.setSeatGrade(seatGrade);
 	        
-//	        directDtoList.add(directDto);
 	        service.insertDirectViaDto(directDto);
 	        
 	    }
@@ -425,7 +526,6 @@ public class AirlineController {
 	    	outboundDto.setAirlineCode(airlineCode);
 	    	outboundDto.setSeatGrade(seatGrade);
 	        
-//	    	directDtoList.add(outboundDto);
 	    	service.insertDirectViaDto(outboundDto);
 	        
 	        // 오는 항공편 정보 저장
@@ -434,7 +534,6 @@ public class AirlineController {
 	    	returnDto.setAirlineCode(airlineCodeReturn);
 	    	returnDto.setSeatGrade(seatGradeReturn);
 	        
-//	    	directDtoList.add(returnDto);
 	    	service.insertDirectViaDto(returnDto);
 	        
 	    }

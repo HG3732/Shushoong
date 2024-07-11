@@ -23,7 +23,6 @@
 				</div>
 			</header>
 		</div>
-		<div th:text="${message}"></div>
 		<div class="wrap-body">
 			<div class="wrap-section">
 				<section>
@@ -58,6 +57,7 @@
 							        </div>
 									<div class="login-function">
 										<a th:href="@{/join}"><div class="joinBtn">회원가입</div></a> 
+										<a th:href="@{/account/find}"><div class="findInfoBtn">아이디/비밀번호 찾기</div></a>
 									</div>
 								</form>
 								<div class="snsLogin">

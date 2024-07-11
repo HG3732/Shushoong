@@ -121,6 +121,7 @@
 			$("#hidden_arrival_value").val($(this).attr("id"));								/* value input */
 			document.getElementById("arrival_accoding").style.display="none";		/* 입국 according close */
 			document.getElementById("date_accoding").style.display="block";			/* 날짜 according open */
+			renderCalendar(); 
 		});
 				
 				

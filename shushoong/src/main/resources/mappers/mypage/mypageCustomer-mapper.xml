@@ -87,4 +87,9 @@
 			) using (hotel_reserve_code) 
 				where user_id = #{userId}
 	</select>
+	
+	<delete id="deleteOneHotelReview">
+		DELETE FROM hotel_review
+    		WHERE user_id = #{userId} AND  hotel_reserve_code = #{hotelResCode}
+	</delete>
 </mapper>

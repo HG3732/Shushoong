@@ -10,6 +10,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
 	<link th:href="@{/css/mypage/customer/mypageHotelLike.css}" rel="stylesheet" />
+	<link th:href="@{/css/modal/mypageModal.css}" rel="stylesheet" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	
 	
@@ -38,6 +39,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<section class="interested_section">
 					<div>좋아요 누른 호텔</div>
 					<div class="interested_list_wrap">
+						<div  id="value_null" th:if="${#lists.size(hotelList) == 0}">등록된 좋아요가 없습니다</div>
 						<a class="liked_hotel" th:each="hotelList : ${hotelList}" th:href="@{/hotel/view/{hotelCode}(hotelCode=${hotelList.hotelCode})}">
 							<div class="hot-hotel-pic"><img class="hotel_img" th:src="${hotelList.hotelPic}" alt="a" /><button th:value="${hotelList.hotelCode}" class="heart_check"  onclick="return false;"><img class="heart_img" alt="하트" th:src="@{/images/heart_color.png}"></button> </div>
 							<div id="${hotelList.hotelCode}" class="hot-hotel-name" th:text="${hotelList.hotelName}">호텔이름</div>
@@ -46,18 +48,43 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</section>
 				
 				<section class="commit_ask">
-					<div class="commit_ask_wrap">
-						<img class="warning_msg_img" alt="경고창" th:src="@{/images/warning.png}">
-						<div class="warning_msg">삭제 버튼을 누르시면 마이페이지에서 보실수 없게 됩니다</div>
-						<div class="choose_btn">
-							<button id="delete_value">삭제하기</button>
-							<button id="cancel_delete">취소</button>
+									<!-- 모달창 -->
+					<div class="popup-wrap" id="popup">
+						<div class="close_btn" id="close_btn">X</div>
+						<div class="popup">
+							<div class="popup-head">
+								
+							</div>
+							<div class="popup-body">
+								<div class="body-content">
+									<div class="body-titlebox">
+										<img th:src="@{/images/logo.png}" alt="로고">
+									</div>
+									<div class="body-contentbox">
+										<div class="warning title">
+											※ [주의] 이 버튼은 삭제 버튼입니다.</div>
+										<div class="warning title"> 삭제 버튼을 누르시면 마이페이지에서 보실수 없게 됩니다.</div>
+										<div class="warning content">
+											정말 삭제하시겠습니까? 
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="popup-footer">
+								<span class="pop-btn confirm" id="confirm">
+									확인
+								</span>
+								<span class="pop-btn cancle" id="cancle">
+									취소
+								</span>
+							</div>
 						</div>
 					</div>
+					
 				</section>
 				
 				<section class="hidden_class">
-					<input type="hidden" name="hidden_hotelcode_val">
+					<input type="text" name="hidden_hotelcode_val">
 				</section>	
 				
 			</div>
@@ -68,16 +95,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	</div>
 	
 	
+	
+	
 	<script>
 	 $("button.heart_check").on("click",function(){
 		 console.log($(this).val());
 		 $("[name=hidden_hotelcode_val]").val($(this).val());
 		 $(".commit_ask").css("display","block");
+		 $(".popup-wrap").css("display","block");
 	 });
-	 $("button#delete_value").on("click",function(){
+	 $("span#confirm").on("click",function(){
 		 deleteHotelLikedFunction();
 	 });
-	 $("button#cancel_delete").on("click",function(){
+	 $("span#cancle").on("click",function(){
 		 $(".commit_ask").css("display","none");
 		 $("[name=hidden_hotelcode_val]").val("");
 	 });
@@ -94,10 +124,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				success: function(result){
 					if(result == 1){
 						console.log("success");
+						$("[name=hidden_hotelcode_val]").val("");
+						$(".popup-wrap").css("display","none");
 						$(".commit_ask").css("display","none");
 						location.reload();
 					}else{
-						console.log("fail");
+						alert("삭제를 실패하였습니다");
+						$("[name=hidden_hotelcode_val]").val("");
+						$(".popup-wrap").css("display","none");
+						$(".commit_ask").css("display","none");
 					}
 				},
 				 error: function(errorThrown) {

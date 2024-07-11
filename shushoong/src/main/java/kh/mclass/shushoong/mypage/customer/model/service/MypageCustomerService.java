@@ -75,4 +75,8 @@ public class MypageCustomerService {
 	public List<Map<String, String>> selectListHotelReview(String userId) {
 		return mypageRepository.selectListHotelReview(userId);
 	}
+	
+	public int deleteOneHotelReview(String userId,String hotelResCode) {
+		return mypageRepository.deleteOneHotelReview(userId,hotelResCode);
+	}
 }

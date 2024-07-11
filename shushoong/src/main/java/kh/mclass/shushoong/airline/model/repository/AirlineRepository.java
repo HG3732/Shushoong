@@ -11,6 +11,7 @@ import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.domain.AirlinePassengerInfoDto;
 import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
 import kh.mclass.shushoong.airline.model.domain.DirectViaDto;
+import kh.mclass.shushoong.payment.PayDto;
 import lombok.extern.log4j.Log4j2;
 @Mapper
 public interface AirlineRepository {
@@ -42,6 +43,9 @@ public interface AirlineRepository {
 //	직항, 경유 추가
 	int insertDirectViaDto(DirectViaDto directDto);
 	
+//결제 정보 저장
+	int insertPayInfo(PayDto paydto);
+	 
 	Character selectOneDomesticFunction(String airlineCode);
 	
 	Character selectOneReturnDomesticFunction(String airlineCode);

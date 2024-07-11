@@ -32,6 +32,7 @@ function updateAnswer() {
 	$('.write-answer').css('display', 'block');
 	$('.btn-write-answer').css('display', 'none');
 	$('.btn-submit-answer').css('display', 'block');
+	$('#frm-delete').find('.ans-delete-btn').css('display',  'none');
 	
 	var content = $('.ask-content').text();
 	console.log('기존 내용', content)

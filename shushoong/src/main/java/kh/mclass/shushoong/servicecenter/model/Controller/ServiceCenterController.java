@@ -432,7 +432,6 @@ public class ServiceCenterController {
 	// 공지사항 수정
 	@GetMapping("/support/notice/update/{noticeId}")
 	public String getNoticeUpdate (Model md, @PathVariable("noticeId") String noticeId, String noticeCategory, String noticeTime) {
-		SecurityContextHolder.getContext().getAuthentication();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId =  authentication.getName();
 		String userGrade = authentication.getAuthorities().stream()
@@ -445,6 +444,7 @@ public class ServiceCenterController {
 		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
 		md.addAttribute("noticeFileDto", fileDtoList);
 		System.out.println("noticeCategory : " + noticeCategory);
+		System.out.println("파일 개수 : " + fileDtoList.size());
 		if (!userGrade.equals("ROLE_ANONYMOUS")) {
 			return "servicecenter/notice_update";
 	} else {
@@ -495,6 +495,7 @@ public class ServiceCenterController {
         System.out.println("파일 리스트 개수 : " + noticeFile.length);
         try {
 //	        List<NoticeFileDto> noticeFileDtos = new ArrayList<>();
+        	noticeService.deleteNoticeFile(String.valueOf(noticeId));
             for (MultipartFile noticeFile2 : noticeFile) {
                 if (noticeFile2 != null && !noticeFile2.isEmpty()) {
                     // 클라우드 서비스를 통해 파일 업로드 처리
@@ -517,7 +518,6 @@ public class ServiceCenterController {
                     System.out.println("파일 오리지널 명 : " + noticeFile2.getOriginalFilename());
                     System.out.println("파일 패스 명 : " + savedFilePathName);
                     
-                    noticeService.deleteNoticeFile(String.valueOf(noticeId));
                     noticeService.insertNoticeFile(noticeFileDto);
 	            }
 	        }

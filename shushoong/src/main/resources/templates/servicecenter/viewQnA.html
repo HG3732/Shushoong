@@ -60,8 +60,7 @@
 					<hr style="border: none; border-bottom: 1px solid var(--color_blue_1);">
 					<div class="qna-content" th:text="${result.askContent}"></div>
 				</div>
-				<hr
-					style="border: none; border-bottom: 3px solid var(--color_blue_1);">
+				<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
 				<th:block th:if="${result.ansTime == null or result.ansTime == ''}">
 					<form method='post' action='/shushoong/support/qna/write/answer'>
 						<input type="hidden" name="faqId" th:value="${result.faqId}">
@@ -84,8 +83,8 @@
 					</div>
 					<div class="wrap-writeAnswer" th:if="${userGrade} == 'admin'">
 					<button type="button" class="btn btn-write-answer">답변하기</button>
-					<button type="button" class="ans-delete-btn" th:data-faqid="${result.faqId}">삭제하기</button>
 						<button type="button" class="btn btn-submit-answer" th:data-faqid="${result.faqId}">작성완료</button>
+					<button type="button" class="ans-delete-btn" th:data-faqid="${result.faqId}">삭제하기</button>
 					</div>
 				</div>
 				<form action="" id="frm-delete">

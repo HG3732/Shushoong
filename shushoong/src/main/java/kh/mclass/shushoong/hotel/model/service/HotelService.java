@@ -104,9 +104,9 @@ public class HotelService {
 		return hotelRepository.hotelRequestAll();
 	}
 	
-	//호텔 예매 내역
-	public int inserthotelReserveInfo(HotelReserveDtoRes resDto){
-		return hotelRepository.inserthotelReserveInfo(resDto);
+	//호텔 예매 내역 먼저 저장
+	public int insertReserveInfo(HotelReserveDtoRes reserverInfo){
+		return hotelRepository.insertReserveInfo(reserverInfo);
 	}
 	
 //	결제 정보

@@ -11,6 +11,7 @@ import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
 import kh.mclass.shushoong.airline.model.domain.DirectViaDto;
 import kh.mclass.shushoong.airline.model.repository.AirlineRepository;
+import kh.mclass.shushoong.payment.PayDto;
 
 @Service
 public class AirlineService {
@@ -84,6 +85,11 @@ public class AirlineService {
 //	직항, 경유 추가
 	public int insertDirectViaDto(DirectViaDto directDto) {
 		return airlineRepository.insertDirectViaDto(directDto);
+	}
+	
+//	결제 정보
+	public int insertPayInfo(PayDto paydto) {
+		return airlineRepository.insertPayInfo(paydto);
 	}
 	
 	public AirlineInfoDto selectOneAirlineInfo(String airlineCode) {

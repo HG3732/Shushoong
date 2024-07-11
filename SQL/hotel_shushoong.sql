@@ -684,8 +684,12 @@ FROM (
 )
 WHERE ROWNUM = 1;
 
-alter table AIRLINE_RESERVE_INFO
-MODIFY RESERVE_TIME TIMESTAMP default(SYSDATE);
+alter table hotel_reserve
+ADD RESERVE_TIME TIMESTAMP default(SYSDATE);
+
+commit;
+
+select * from hotel_reserve;
 
 select * from AIRLINE_RESERVE_INFO;
 
@@ -717,4 +721,3 @@ select *
         
 select * from passenger_info
     join direct_via using(AIRLINE_RESERVE_CODE);
-    

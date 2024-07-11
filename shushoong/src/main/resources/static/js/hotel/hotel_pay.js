@@ -110,51 +110,81 @@ function checkAllEscHandler(){
 
 }
 
-async function payHandler(){
+/*==================결제 관련 ==================== */
 
-	const storeId = $('.store_id').val();
-	const channelKey = $('.channel_key').val();
+var residenceNameKo = ''; //투숙객명
+var residenceNameEn = '';
+var residenceGender = ''; 
+var residenceBirth = '';
+var residencePhone = '';
+var residenceEmail = '';
+
+
+let requestSum= 0;
+let reserveCheckIn = '';
+let reserveCheckOut = '';
+let userId = '';
+let roomCap = '';
+let hotelCode = '';
+let roomCat = '';
+let roomAtt = '';
+let roomAttDesc = '';
+
+let roomCatDesc = '';
+let hotelName = '';
+//var hotelPriceStr = $('.hotel_price').val();
+let hotelPriceStr = '100';
+let hotelPrice = parseInt(hotelPriceStr, 10);
+
+let hotelReserveCode = '';
+
+let orderName = '';
+let people = '';
+
 	
+function reserveInfoInsertHandler(){
+
 	const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
+	const year = now.getFullYear();
+	const month = String(now.getMonth() + 1).padStart(2, '0');
+	const day = String(now.getDate()).padStart(2, '0');
 	const time = now.getSeconds();
-
-    const currentTime = year + month + day + time;	
-	var residenceNameKo = $('#name').val(); //투숙객명
-	var residenceNameEn = $('#last_name').val() + $('#first_name').val();
-	var residenceGender = $('input[name=gender]:checked').val();
-	var residenceBirth = $('#birthday').val();
-	var residencePhone = $('#phone').val();
-	var residenceEmail = $('#email').val();
 	
-	var requestSum= 0;
+	const currentTime = year + month + day + time;	
+	 residenceNameKo = $('#name').val(); //투숙객명
+	 residenceNameEn = $('#last_name').val() + $('#first_name').val();
+	 residenceGender = $('input[name=gender]:checked').val();
+	 residenceBirth = $('#birthday').val();
+	 residencePhone = $('#phone').val();
+	 residenceEmail = $('#email').val();
+	
+	
+	 requestSum= 0;
 	$('.require_check').children().children('input[name="checkbox"]:checked').each(function() {
-        // val가 1,2,4,8, 비트 마스킹 값이므로 +더하기하면됨.
-        requestSum += ($(this).val() * 1);
-        //문자가 숫자로 인식
+	    // val가 1,2,4,8, 비트 마스킹 값이므로 +더하기하면됨.
+	    requestSum += ($(this).val() * 1);
+	    //문자가 숫자로 인식
 		});
-	var reserveCheckIn = $('#check_in').val();
-	var reserveCheckOut = $('#check_out').val();
-	var userId = $('.user_id').val();
-	var roomCap = $('.room_cap').val();
-	var hotelCode = $('.hotel_code').val();
-	var roomCat = $('.room_cat').val();
-	var roomAtt = $('.room_att').val();
-	var roomAttDesc = $('.room_att_desc').val();
-
-	var roomCatDesc = $('.room_cat_desc').val();
-	var hotelName = $('.hotel_name').text();
+	 reserveCheckIn = $('#check_in').val();
+	 reserveCheckOut = $('#check_out').val();
+	 userId = $('.user_id').val();
+	 roomCap = $('.room_cap').val();
+	 hotelCode = $('.hotel_code').val();
+	 roomCat = $('.room_cat').val();
+	 roomAtt = $('.room_att').val();
+	 roomAttDesc = $('.room_att_desc').val();
+	
+	 roomCatDesc = $('.room_cat_desc').val();
+	 hotelName = $('.hotel_name').text();
 	//var hotelPriceStr = $('.hotel_price').val();
-	var hotelPriceStr = '100';
-	var hotelPrice = parseInt(hotelPriceStr, 10);
+	 hotelPriceStr = '100';
+	 hotelPrice = parseInt(hotelPriceStr, 10);
 	
-	var hotelReserveCode = currentTime + hotelCode + roomCat + roomAtt; //sysdate + hotelCode + room_cat
-	console.log(hotelReserveCode + "=========================================");
+	 hotelReserveCode = currentTime + hotelCode + roomCat + roomAtt; //sysdate + hotelCode + room_cat
 	
-	var orderName = hotelName + ' ' + roomCatDesc;
-	var people = $('.people').val();
+	 orderName = hotelName + ' ' + roomCatDesc;
+	 people = $('.people').val();
+
 
 	let reservationData = {
 		residenceNameKo : residenceNameKo,
@@ -175,18 +205,48 @@ async function payHandler(){
 		people : people,
 		requestSum : requestSum		
 	}
-	
-	const receipt = {
-		roomAttDesc : roomAttDesc,
-		roomCatDesc : roomCatDesc,
-		hotelName : hotelName,
-		hotelPrice : hotelPrice	
-	};
-
+		
 	// reservationData 객체를 JSON 문자열로 변환
 	let reservationDataString = JSON.stringify(reservationData);
+
+
+		//예약자 정보 먼저 저장	    
+	    $.ajax({
+	        url: "/shushoong/hotel/input/reserveInfo",
+	        type: "POST",
+	        contentType: "application/json",
+	        data: reservationDataString,
+	        success: function(response) {
+	            console.log(response);
+	            if(response.result == "1") {
+	                console.log("성공성공성공");	                
+	                const hotelReserveCode = response.hotelReserveCode;
+	                payHandler(hotelReserveCode); // hotelReserveCode를 함수로 전달
+	            } else {
+	                alert("데이터 리스트 값 insert 실패");
+	            }
+	        },
+			error:function (request, status, error){
+				alert("code: "+request.status + "\n" + "message: " 
+						+ request.responseText + "\n"
+						+ "error: "+error);
+			}
+	    });
+}
+
+async function payHandler(hotelReserveCode){
+
+	const storeId = $('.store_id').val();
+	const channelKey = $('.channel_key').val();
 	
-	console.log(residenceBirth);
+	const reserveCompletedto = {
+			roomAttDesc : roomAttDesc,
+			roomCatDesc : roomCatDesc,
+			hotelName : hotelName,
+			hotelPrice : hotelPrice	
+		};
+
+	console.log(hotelReserveCode);
 	
 	const response = await PortOne.requestPayment({
 			storeId : storeId, 
@@ -211,10 +271,10 @@ async function payHandler(){
 			
 			// 결제 검증 - 위에서 선언한거를 데이터로 보냄(결제 정보 외 것들)
 			$.ajax({
-				url : `/shushoong/hotel/payment?roomAttDesc=${encodeURIComponent(receipt.roomAttDesc)}&roomCatDesc=${encodeURIComponent(receipt.roomCatDesc)}&hotelName=${encodeURIComponent(receipt.hotelName)}&hotelPrice=${encodeURIComponent(receipt.hotelPrice)}`,
+				url : "/shushoong/hotel/payment",
 				type : "post",
-				contentType: "application/json" ,
-			    data: reservationDataString, 
+				data: JSON.stringify(reserveCompletedto),
+				contentType: "application/json; charset=utf-8",
 				error:function (request, status, error){
 						alert("code: "+request.status + "\n" + "message: " 
 								+ request.responseText + "\n"

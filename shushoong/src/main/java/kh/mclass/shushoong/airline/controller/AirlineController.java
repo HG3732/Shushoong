@@ -40,6 +40,7 @@ import kh.mclass.shushoong.airline.model.domain.AirlineReserveCompleteDtoRes;
 import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
 import kh.mclass.shushoong.airline.model.domain.DirectViaDto;
 import kh.mclass.shushoong.airline.model.service.AirlineService;
+import kh.mclass.shushoong.hotel.model.domain.HotelReserveCompleteDtoRes;
 import kh.mclass.shushoong.payment.PayDto;
 import lombok.extern.slf4j.Slf4j;
 
@@ -445,6 +446,13 @@ public class AirlineController {
 		session.setAttribute("airlineCodeReturn", airlineCodeReturn);
 		session.setAttribute("seatGradeReturn", seatGradeReturn);
 		session.setAttribute("airlineName", airlineInfo.getAirlineName());
+		session.setAttribute("departLoc", airlineInfo.getDepartLoc());
+		session.setAttribute("departTime", airlineInfo.getDepartTime());
+		session.setAttribute("arrivalLoc", airlineInfo.getArrivalLoc());
+		session.setAttribute("arrivalTime", airlineInfo.getArrivalTime());
+		session.setAttribute("departDate", airlineInfo.getDepartDate());
+		session.setAttribute("arrivalDate", airlineInfo.getArrivalDate());
+
 
 		if (principal != null) {
 			String userId = principal.getName();
@@ -471,21 +479,21 @@ public class AirlineController {
 		return "airline/airline_pay";
 
 	}
-
-	// 예약자 정보 먼저 저장
+	
 	@ResponseBody
 	@PostMapping("/airline/input/reserverInfo")
 	public Map<String, Object> customerInfo(@RequestBody AirlineReserverInfoDto reserverInfo, HttpSession session) {
 	    int result = service.insertReserverInfo(reserverInfo);
-	    Map<String, Object> resultDto = new HashMap<>();
-	    resultDto.put("result", resultDto);
-
-	    if(result > 0) {
+	    Map<String, Object> resultMapInfo = new HashMap<>();
+	    
+	    if (result > 0) {
 	        session.setAttribute("airlineReserveCode", reserverInfo.getAirlineReserveCode());
-	        resultDto.put("airlineReserveCode", reserverInfo.getAirlineReserveCode());
+	        resultMapInfo.put("result", 1);  // 성공적으로 데이터 삽입됨을 나타내는 값
+	        resultMapInfo.put("airlineReserveCode", reserverInfo.getAirlineReserveCode());
+	    } else {
+	        resultMapInfo.put("result", 0);  // 데이터 삽입 실패를 나타내는 값
 	    }
-
-	    return resultDto;
+	    return resultMapInfo;
 	}
 
 //  탑승객 정보 및 직항/경유 정보 추가
@@ -494,16 +502,30 @@ public class AirlineController {
 	public int passengerInfo(@RequestBody List<Map<String, Object>> passengerInfo, HttpSession session, Model model,
 			AirlineReserveCompleteDtoRes reserveCompletedto) 
 			throws IOException, InterruptedException{	
-
+		
 		String airlineReserveCode = (String) session.getAttribute("airlineReserveCode");
 		String seatGrade = (String) session.getAttribute("seatGrade");
 		String seatGradeReturn = (String) session.getAttribute("seatGradeReturn");
 		String airlineCode = (String)session.getAttribute("airlineCode");
-		String airlineCodeReturn = (String)session.getAttribute("airlineCodeReturn");
+		String airlineName = (String)session.getAttribute("airlineName");
+		String departLoc = (String)session.getAttribute("departLoc");
+		String departTime = (String)session.getAttribute("departTime");
+		String arrivalLoc = (String)session.getAttribute("arrivalLoc");
+		String arrivalTime = (String)session.getAttribute("arrivalTime");
+		String departDate = (String)session.getAttribute("departDate");
+		String arrivalDate = (String)session.getAttribute("arrivalDate");
+    	String airlineCodeReturn = (String)session.getAttribute("airlineCodeReturn");
 		
 		String paymentId = airlineReserveCode;
 		
-		reserveCompletedto.setAirlineReserveCode(airlineReserveCode);		
+		reserveCompletedto.setAirlineReserveCode(airlineReserveCode);
+        reserveCompletedto.setAirlineName(airlineName);
+    	reserveCompletedto.setDepartLoc(departLoc);
+    	reserveCompletedto.setDepartTime(departTime);
+    	reserveCompletedto.setArrivalLoc(arrivalLoc);
+    	reserveCompletedto.setArrivalTime(arrivalTime);
+    	reserveCompletedto.setDepartDate(departDate);
+    	reserveCompletedto.setArrivalDate(arrivalDate);
 		
 		//ajax로 보내지는 데이터 () 안에 작성
 		HttpRequest request = HttpRequest.newBuilder()
@@ -525,20 +547,26 @@ public class AirlineController {
 		System.out.println("amount ======================  "+amount);
 		// 그 중 지불된 금액
 		double paid = (double) amount.get("paid");
+		String paidStr = Double.toString(paid);
+		reserveCompletedto.setTicketPrice(paidStr);
 		
 		PayDto paydto = new PayDto();
+		
+		
+		paydto.setAirlineReserveCode(airlineReserveCode);
 		
 		String approveNo = (String) responseBody.get("transactionId"); //승인번호
 		
 		String cardNumStr = (String) responseBody.get("pgResponse"); //카드번호
-		try {
-			JSONObject jsonObj = new JSONObject(cardNumStr);
-			String cardNum = jsonObj.getString("CardNo");
-			//json은 map형태라서 get으로 key이름으로 값 꺼내기 가능
-			paydto.setCardNum(cardNum);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		//결제사가 pgResponse 안에 있어서 json으로 바꾼 다음에 바로 꺼내기(string은 이렇게 꺼내기 못함)
+			try {
+				JSONObject jsonObj = new JSONObject(cardNumStr);
+				String cardNum = jsonObj.getString("CardNo");
+				//json은 map형태라서 get으로 key이름으로 값 꺼내기 가능
+				paydto.setCardNum(cardNum);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		
 		String reserveCorperStr = (String) responseBody.get("pgResponse"); //결제사
 		try {
@@ -550,74 +578,75 @@ public class AirlineController {
 		}
 		
 		String currency = (String) responseBody.get("currency");//화폐종류
-//		String payPrice = reserveCompletedto.getSeatPrice(); //가격
 		
 		paydto.setApproveNo(approveNo);
 		paydto.setCurrency(currency);
-//		paydto.setPayPrice(payPrice);
+		paydto.setPayPrice(paidStr);
+		
 		
 		int result = 0;
 		
-//		if(Double.parseDouble(airlinePrice) == paid) {
-//			
-//			int result = service.inserthotelReserveInfo(reservationData); 
-//				//int a = reservationData.setHotelReserveCode(result);
-//				paydto.setHotelReserveCode(reservationData.getHotelReserveCode());
-//				service.insertPayInfo(paydto);
-//				session.setAttribute("hotelReserveCode", paydto.getHotelReserveCode());
-//			return "1";
-//		} else {
-//		    return "0";
-//		}
-
-		
-		if (passengerInfo != null) {
-			for (Map<String, Object> passenger : passengerInfo) {
-				// 각 passenger 맵에서 값을 꺼내서 처리
-				passenger.put("airlineReserveCode", airlineReserveCode);
+		if(Double.parseDouble(reserveCompletedto.getTicketPrice()) == paid) {
+			if (passengerInfo != null) {
+				for (Map<String, Object> passenger : passengerInfo) {
+					// 각 passenger 맵에서 값을 꺼내서 처리
+					passenger.put("airlineReserveCode", airlineReserveCode);
+				}
+				result = service.insertPassengerInfo(passengerInfo);
 			}
-			result = service.insertPassengerInfo(passengerInfo);
+			
+		    // 편도 예약인 경우
+		    if (airlineCode != null && airlineCodeReturn == "") {
+
+		    	DirectViaDto directDto = new DirectViaDto();
+		        directDto.setAirlineReserveCode(airlineReserveCode);
+		        directDto.setAirlineCode(airlineCode);
+		        directDto.setSeatGrade(seatGrade);
+		        
+		        reserveCompletedto.setSeatGrade(seatGrade);
+		        
+		        service.insertDirectViaDto(directDto);
+		        service.insertPayInfo(paydto);
+				session.setAttribute("reserveCompletedto", reserveCompletedto);
+		    }
+		    
+		    // 왕복 예약인 경우
+		    else if (airlineCode != "" && airlineCodeReturn != "" && airlineCode != null && airlineCodeReturn != null) {
+		        
+		    	// 가는 항공편 정보 저장
+		    	DirectViaDto outboundDto = new DirectViaDto();
+		    	outboundDto.setAirlineReserveCode(airlineReserveCode);
+		    	outboundDto.setAirlineCode(airlineCode);
+		    	outboundDto.setSeatGrade(seatGrade);
+		        
+		    	reserveCompletedto.setSeatGrade(seatGrade);
+		    	
+		    	service.insertDirectViaDto(outboundDto);
+		    	service.insertPayInfo(paydto);
+				session.setAttribute("reserveCompletedto", reserveCompletedto);
+		    	
+		        
+		        // 오는 항공편 정보 저장
+		    	DirectViaDto returnDto = new DirectViaDto();
+		    	returnDto.setAirlineReserveCode(airlineReserveCode);
+		    	returnDto.setAirlineCode(airlineCodeReturn);
+		    	returnDto.setSeatGrade(seatGradeReturn);
+		        
+		    	reserveCompletedto.setSeatGrade(seatGradeReturn);
+		    	
+		    	service.insertDirectViaDto(returnDto);
+				session.setAttribute("reserveCompletedto", reserveCompletedto);
+		    }
 		}
-	
-	    // 편도 예약인 경우
-	    if (airlineCode != null && airlineCodeReturn == null) {
-	    	DirectViaDto directDto = new DirectViaDto();
-	        directDto.setAirlineReserveCode(airlineReserveCode);
-	        directDto.setAirlineCode(airlineCode);
-	        directDto.setSeatGrade(seatGrade);
-	        
-	        service.insertDirectViaDto(directDto);
-	        
-	    }
-	    
-	    // 왕복 예약인 경우
-	    else if (airlineCode != null && airlineCodeReturn != null) {
-	        
-	    	// 가는 항공편 정보 저장
-	    	DirectViaDto outboundDto = new DirectViaDto();
-	    	outboundDto.setAirlineReserveCode(airlineReserveCode);
-	    	outboundDto.setAirlineCode(airlineCode);
-	    	outboundDto.setSeatGrade(seatGrade);
-	        
-	    	service.insertDirectViaDto(outboundDto);
-	        
-	        // 오는 항공편 정보 저장
-	    	DirectViaDto returnDto = new DirectViaDto();
-	    	returnDto.setAirlineReserveCode(airlineReserveCode);
-	    	returnDto.setAirlineCode(airlineCodeReturn);
-	    	returnDto.setSeatGrade(seatGradeReturn);
-	        
-	    	service.insertDirectViaDto(returnDto);
-	        
-	    }
-		
-		
+				
 		return result;
 	}
 
 	@GetMapping("/airline/customer/reserve/pay/success")
-	public String paySuccess() {
+	public String paySuccess(HttpSession session, Model model) {
 		
+		AirlineReserveCompleteDtoRes reserveCompletedto = (AirlineReserveCompleteDtoRes) session.getAttribute("reserveCompletedto");
+		System.out.println(reserveCompletedto);
 //		if (airlineInfoReturn == null) {
 //			md.addAttribute("ticketType", 1);
 //			md.addAttribute("airlineName", "");

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
+import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes;
@@ -51,9 +52,9 @@ public interface HotelRepository {
 	//호텔 요청사항 조회
 	public List<Map<String, String>> hotelRequestAll();
 
-	// 호텔 예매 내역
-	public int inserthotelReserveInfo(HotelReserveDtoRes resDto);
-
+	// 호텔 예매 내역 먼저 저장
+	public int insertReserveInfo(HotelReserveDtoRes reserverInfo);
+	
 	//결제 정보 저장
 	public int insertPayInfo(PayDto paydto);
 	

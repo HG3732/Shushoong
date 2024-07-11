@@ -1,10 +1,22 @@
 function clickedWriteOkBtn(){
-	$('.notice-btn').on('click', function(){
+	$('.notice-ok').on('click', function(){
 		var askTitle = $('.titleVal').val();
 		var category = $('.catVal').val();
 		var qnaFile = $('.fileVal').val();
 		var askContent = $('.content-textarea').val();
 		var userGrade = $('#userGrade').text();
+		
+		if($("#title").val() == "") {
+			alert("제목을 입력해 주세요.");
+			return false;
+		}
+		
+		if($("#content").val() == "") {
+			alert("문의내용을 입력해 주세요.");
+			return false;
+		}
+		
+		
 		
 		console.log('userGrade : ', userGrade);
 		console.log('askTitle : ', askTitle);

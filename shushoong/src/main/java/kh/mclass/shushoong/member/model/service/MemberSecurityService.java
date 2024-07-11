@@ -21,27 +21,32 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class MemberSecurityService implements UserDetailsService {
-	
+
 	private final MemberRepository memberRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 		log.debug("membersecurityservice ========	======");
-		
-		
+
 		Optional<MemberDto> loginDtoOp = Optional.ofNullable(memberRepository.login(userId));
-		if(loginDtoOp.isEmpty()) {
+		if (loginDtoOp.isEmpty()) {
 			throw new UsernameNotFoundException("존재하지 않는 아이디입니다.");
 		}
-		
+
 		MemberDto loginDto = loginDtoOp.get();
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		switch(loginDto.getUserGrade()) {
-			case "admin" : authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue())); break;
-			case "customer": authorities.add(new SimpleGrantedAuthority(MemberRole.CUSTOMER.getValue())); break;
-			case "business":authorities.add(new SimpleGrantedAuthority(MemberRole.BUSINESS.getValue())); break;
+		switch (loginDto.getUserGrade()) {
+		case "admin":
+			authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
+			break;
+		case "customer":
+			authorities.add(new SimpleGrantedAuthority(MemberRole.CUSTOMER.getValue()));
+			break;
+		case "business":
+			authorities.add(new SimpleGrantedAuthority(MemberRole.BUSINESS.getValue()));
+			break;
 		}
+		
 		return new User(loginDto.getUserId(), loginDto.getUserPwd(), authorities);
 	}
 }
-

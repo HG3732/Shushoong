@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity.RequestMatcherConfigurer;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -20,6 +21,7 @@ import org.springframework.util.AntPathMatcher;
 import kh.mclass.shushoong.config.UserAuthenticationSuccessHandler;
 import kh.mclass.shushoong.config.AdminAuthenticationFailureHandler;
 import kh.mclass.shushoong.config.AdminAuthenticationSuccessHandler;
+import kh.mclass.shushoong.config.BusinessAuthenticationSuccessHandler;
 import kh.mclass.shushoong.config.UserAuthenticationFailureHandler;
 import kh.mclass.shushoong.member.model.service.CustomAuthenticationFilter;
 import kh.mclass.shushoong.member.model.service.MemberSecurityService;
@@ -30,6 +32,9 @@ public class WebSecurityConfig {
 	
 	@Autowired
 	UserAuthenticationSuccessHandler authSuccessHandler;
+	
+	@Autowired
+	BusinessAuthenticationSuccessHandler businessAuthSuccessHandler;
 	
 	@Autowired
 	UserAuthenticationFailureHandler authFailureHandler;
@@ -52,6 +57,7 @@ public class WebSecurityConfig {
 				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
 				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
 				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
+				.requestMatchers(new AntPathRequestMatcher("/login/**")).anonymous()
 				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 				)
 		.csrf((csrf) -> csrf
@@ -72,10 +78,16 @@ public class WebSecurityConfig {
 				.tokenValiditySeconds(3600)
 				.alwaysRemember(false)
 				.userDetailsService(securityService)))
+		.sessionManagement(
+				(auth) -> auth
+					.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation)->sessionFixation.newSession())
+					.maximumSessions(1)
+					.maxSessionsPreventsLogin(true))
 		.logout((logout) -> logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/home")
-				.invalidateHttpSession(true))
+				.invalidateHttpSession(true)
+				.deleteCookies("remember"))
 		.exceptionHandling((exceptionHandling -> exceptionHandling
 				.accessDeniedPage("/error/redirect")));
 		
@@ -91,6 +103,7 @@ public class WebSecurityConfig {
 				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
 				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
 				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
+				.requestMatchers(new AntPathRequestMatcher("/login/**")).anonymous()
 				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 				)
 		.csrf((csrf) -> csrf
@@ -100,8 +113,8 @@ public class WebSecurityConfig {
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
-				.loginProcessingUrl("/login/customer")
-				.successHandler(authSuccessHandler)
+				.loginProcessingUrl("/login/business")
+				.successHandler(businessAuthSuccessHandler)
 				.failureHandler(authFailureHandler)
 				.usernameParameter("userId")
 				.passwordParameter("userPwd"))
@@ -111,6 +124,11 @@ public class WebSecurityConfig {
 				.tokenValiditySeconds(3600)
 				.alwaysRemember(false)
 				.userDetailsService(securityService)))
+		.sessionManagement(
+				(auth) -> auth
+					.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation)->sessionFixation.newSession())
+					.maximumSessions(1)
+					.maxSessionsPreventsLogin(true))
 		.logout((logout) -> logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/home")
@@ -131,6 +149,7 @@ public class WebSecurityConfig {
 				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
 				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
 				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
+				.requestMatchers(new AntPathRequestMatcher("/login/**")).anonymous()
 				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 				)
 		.csrf((csrf) -> csrf
@@ -140,6 +159,7 @@ public class WebSecurityConfig {
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login/admin")
+				.loginProcessingUrl("/login/admin")
 				.successHandler(adminAuthSuccessHandler)
 				.failureHandler(adminAuthFailureHandler)
 				.usernameParameter("userId")

@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Component
 @Slf4j
-public class AdminAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class BusinessAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 	private RequestCache requestCache = new HttpSessionRequestCache();
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
@@ -40,12 +41,10 @@ public class AdminAuthenticationSuccessHandler extends SimpleUrlAuthenticationSu
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date now = new Date();
 		String loginDate = sdf2.format(now);
 
-		// 로그인 기록 남기기
 		Object principal = authentication.getPrincipal();
 		UserDetails userDetails = (UserDetails) principal;
 		String userId = userDetails.getUsername();
@@ -56,6 +55,7 @@ public class AdminAuthenticationSuccessHandler extends SimpleUrlAuthenticationSu
 		GrantedAuthority auth = iter.next();
 		String userGrade = auth.getAuthority();
 
+		// 로그인 기록
 		Map<String, Object> map = new HashMap<>();
 		map.put("userId", userId);
 		map.put("latestLogin", loginDate);
@@ -63,13 +63,21 @@ public class AdminAuthenticationSuccessHandler extends SimpleUrlAuthenticationSu
 		memberService.loginLog(map);
 
 		// 계정 권환 확인
-		if (userGrade == "customer" || userGrade == "business") {
+		if (userGrade == "admin" || userGrade == "customer") {
 			SecurityContextHolder.clearContext();
 			request.getSession().invalidate();
 			throw new BadCredentialsException("잘못된 로그인 위치입니다.");
 		}
 
-		setDefaultTargetUrl("/admin/manager/home");
+		// 계정잠금 확인
+		String userStatus = memberService.lockedCheck(userId);
+		if (userStatus == "0") {
+			SecurityContextHolder.clearContext();
+			request.getSession().invalidate();
+			throw new LockedException("정지된 계정입니다.");
+		}
+		
+		setDefaultTargetUrl("/home");
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 
 		// 사용자가 권한이 필요한 자원에 접근해 인증 예외가 발생해 인증을 처리하는 것이 아닌 경우

@@ -17,20 +17,19 @@ xmlns:th="http://www.thymeleaf.org"
 					</div>
 					
 					<div id="one_way" class="tabcontent">
-						<div class="depart_arrival_flex">
-						<!-- 
-						<div th:if="${returnPage}" > 
+					
+						<div class="depart_arrival_flex" th:if="${returnPage}">
 							<button id="depart" class="according_btn pointer" th:if="${arrivalLoc} != null" th:text="${arrivalLoc}" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
-						</div> 
-						 -->		
+							<button id="depart" class="according_btn pointer" th:if="${arrivalLoc} == null" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
+							<img class="type" alt="one_way" th:src="@{/images/one_way.png}">
+							<button id="arrival" class="according_btn pointer" th:if="${arrivalLoc} != null" th:text="${departLoc}" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
+							<button id="arrival" class="according_btn pointer" th:if="${arrivalLoc} == null" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
+						</div>
+						
+						<div class="depart_arrival_flex" th:if="@{!returnPage}">
 							<button id="depart" class="according_btn pointer" th:if="${departLoc} != null" th:text="${departLoc}" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
 							<button id="depart" class="according_btn pointer" th:if="${departLoc} == null" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
 							<img class="type" alt="one_way" th:src="@{/images/one_way.png}">
-							<!-- 
-						<div th:if="${returnPage}" >
-							<button id="arrival" class="according_btn pointer" th:if="${arrivalLoc} != null" th:text="${departLoc}" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
-						</div>
-						 -->
 							<button id="arrival" class="according_btn pointer" th:if="${departLoc} != null" th:text="${arrivalLoc}" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
 							<button id="arrival" class="according_btn pointer" th:if="${departLoc} == null" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
 						</div>

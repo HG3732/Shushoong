@@ -44,7 +44,7 @@
 				</div>
 				<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
 				<div class="qna-main">
-					<div class="qna-category" th:if="${noticeDto.noticeId} <= 1000">회원 공지사항</div> -->
+					<div class="qna-category" th:if="${noticeDto.noticeId} <= 1000">회원 공지사항</div>
 					<div class="qna-category" th:text="${noticeDto.noticeTitle}">공지 제목</div>
 					<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);"> 
 					<div class="ask-date" th:text="${noticeDto.noticeTime}"></div>
@@ -68,6 +68,7 @@
 					</div>
 					<div class="qna-content" th:text="${noticeDto.noticeContent}"></div>
 				</div>
+				<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
 			</div>
 			<div id="modal" class="modal_overlay">
 	            <div class="modal_window">

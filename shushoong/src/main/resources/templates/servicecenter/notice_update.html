@@ -49,17 +49,21 @@
 								<input class="catVal" type="text" th:value="${#strings.startsWith(noticeDto.noticeId, '1') ? '회원' : (#strings.startsWith(noticeDto.noticeId, '2') ? '사업자' : '')}" readonly>
 							</div>
 						</div>
-						<div class="write-file">
+						<div class="write-file" th:if="${noticeFileDto != null and #lists.size(noticeFileDto) > 0}">
 							<div class="th file">첨부파일</div>
-							<div th:if="${noticeFileDto != null and #lists.size(noticeFileDto) > 0" class="input file" th:each="fileDto : ${noticeFileDto}">
+							<div class="input file" >
 								<input type="file" class="fileVal" id="noticeFile" name="noticeFile" multiple="multiple">
-								<!-- <span th:text="${fileDto.originalFilename}" ></span> -->
-							</div>
-							<div class="input file">
-								<input type="file" class="fileVal" id="noticeFile" name="noticeFile" multiple="multiple">
+								<div th:each="fileDto : ${noticeFileDto}"><span th:text="${fileDto.originalFilename}" ></span></div>
 							</div>
 						</div>
-
+ 							
+						<div class="write-file" th:if="${noticeFileDto.size() < 1}">
+							<div class="th file">첨부파일</div>
+							<div class="input file" >
+								<input type="file" class="fileVal" id="noticeFile" name="noticeFile" multiple="multiple">
+								<span th:text="${fileDto.originalFilename}" ></span>
+							</div>
+						</div>
 					</div>
 					<div class="input-content">
 						<textarea class="content-textarea" rows="15 " cols="" th:text="${noticeDto.noticeContent}"></textarea>
@@ -138,7 +142,7 @@
 		        $('#frm-write').submit();
 			});
 		}
-		function selectFile() {
+function selectFile() {
 			var fileInput = document.getElementById('noticeFile');
 			var fileListContainer = document.createElement('ul');
 			fileListContainer.className = 'file-list';

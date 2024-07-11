@@ -392,3 +392,14 @@ END;
 
 --호텔 등록 시 호텔 코드 중 인덱스 번호 조회 + 생성
 select to_char(NVL(MAX(substr(hotel_code,4,3)), -1) + 1, '000') from hotel where hotel_code like '0JJ%';
+
+--호텔 삭제 시 hotel_Deleted 테이블로 이동
+insert into hotel_deleted 
+select hotel_code, hotel_name, HOTEL_ENG, HOTEL_ADDRESS, HOTEL_CALL, HOTEL_CHECK_IN, HOTEL_CHECK_OUT, HOTEL_POLICY,
+HOTEL_INTRO, HOTEL_SAFETY, HOTEL_PCOUNT, HOTEL_LOC_CAT, BUSINESS_CERTI
+from hotel where hotel_code='0SE001';
+
+--내 호텔 예약, 취소건 조회하기
+select * from hotel_Reserve 
+    join hotel using (hotel_code)
+    join pay using (hotel_reserve_code);

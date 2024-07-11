@@ -78,7 +78,7 @@
 		delete from HOTEL_LIKE where hotel_code = #{hotelCode}
 	</delete>
 	
-	<select id="selectListHotelReview" parameterType="String" resultType="list">
-		select * from hotel_review where not user_id = #{userId}
+	<select id="selectListHotelReview" parameterType="String" resultType="HotelReviewDto">
+		select * from hotel_review where user_id = #{userId}
 	</select>
 </mapper>

@@ -690,10 +690,31 @@ MODIFY RESERVE_TIME TIMESTAMP default(SYSDATE);
 select * from AIRLINE_RESERVE_INFO;
 
 
+ select * from airline_reserve_info
+ where airline_reserve_code = '2024071009351105';
+ 
  select * from passenger_info;
  
  desc AIRLINE_RESERVE_INFO;
  
-alter table passenger_info
+ select * from direct_via;
+ 
+alter table direct_via
 modify AIRLINE_RESERVE_CODE varchar2(20);
 commit;
+
+
+
+select * from seat_grade
+    join direct_via using(airline_code);
+
+select * 
+    from(
+        select * from airline_reserve_info
+        join direct_via using(AIRLINE_RESERVE_CODE)
+        )
+        join seat_grade using(airline_code);
+        
+select * from passenger_info
+    join direct_via using(AIRLINE_RESERVE_CODE);
+    

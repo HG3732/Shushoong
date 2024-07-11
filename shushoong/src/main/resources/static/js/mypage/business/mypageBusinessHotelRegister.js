@@ -108,3 +108,30 @@ function ajaxErrorHandler(request, status, error) {
 			i--;
 		}
 	}
+	
+	//양식 제출
+	function submitHandler() {
+		
+		var frmHotelData = new FormData(document.getElementById("frm_register") );
+		$(".select_wrap").each(function(idx){
+			frmHotelData.append("roomList[" + idx + "].roomCat", $(this).find("[name=roomCat").val());
+			frmHotelData.append("roomList[" + idx + "].roomPrice", $(this).find("[name=roomPrice").val());
+			frmHotelData.append("roomList[" + idx + "].roomCount", $(this).find("[name=roomCount").val());
+			frmHotelData.append("roomList[" + idx + "].roomCap", $(this).find("[name=roomCap").val());
+			frmHotelData.append("roomList[" + idx + "].roomAtt", $(this).find("[name=roomAtt").val());
+		});
+		
+		$.ajax({
+		    success: ajaxErrorHandler,
+			url: contextRoot+"business/my/hotel/register/submit",
+		    type: "POST",
+		    enctype: "multipart/form-data",
+	        cache: false,
+		    processData: false,
+			contentType: false,
+		    data: frmHotelData,
+		    success: function(){},
+		    error : ajaxErrorHandler
+	    });
+	}
+

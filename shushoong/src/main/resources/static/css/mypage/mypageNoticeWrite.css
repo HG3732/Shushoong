@@ -65,7 +65,7 @@
 	flex-direction: row;
 }
 .write-table .write-file input{
-	height: 65%;
+	height: 25px;
 }
 
 .wrap-write .input-content{

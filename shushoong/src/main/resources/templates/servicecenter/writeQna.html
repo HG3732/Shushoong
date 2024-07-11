@@ -32,6 +32,7 @@
 
 			<div class="wrap-write">
 				<h1>문의 작성</h1>
+				<form action="" id="frm-write" enctype="multipart/form-data">
 				<div id="userGrade" hidden="" th:text="${userGrade}"></div>
 				<hr>
 					<div class="write-table">
@@ -61,7 +62,7 @@
 						<div class="write-file">
 							<div class="th file">첨부파일</div>
 							<div class="input file">
-								<input type="file" class="fileVal">
+								<input type="file" class="fileVal" id="qnaFile" name="qnaFile" multiple>
 							</div>
 						</div>
 
@@ -71,7 +72,6 @@
 					</div>
 					<hr>
 					
-				<form action="" id="frm-write">
 					<input type="hidden" id="askTitle" name="askTitle">
 					<input type="hidden" id="askContent" name="askContent">
 					<input type="hidden" id="category" name="category">
@@ -92,6 +92,7 @@
 		$(loadeadHandler);
 		function loadeadHandler() {
 			clickedWriteOkBtn();
+			selectFile();
 		}
 
 	</script>

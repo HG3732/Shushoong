@@ -139,6 +139,7 @@
         </choose>
     </select>
 	
+	<!-- 예약자정보 입력 및 seq 붙은 예약코드 뽑아내기 -->
 	<insert id="insertReserverInfo" parameterType="AirlineReserverInfoDto" >
     	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL, RESERVE_TIME)
     		VALUES (#{airlineReserveCode}||SEQ_AIRC.nextval , #{userId} , #{reservePhone} , #{reserveEmail}, default )
@@ -158,21 +159,9 @@
 					WHERE ROWNUM = 1
 		</selectKey>
     </insert>
-	    
-<!--     <select id="selectResCode" parameterType="AirlineReserverInfoDto" resultType="String">
-	    SELECT AIRLINE_RESERVE_CODE
-		FROM (
-	    	SELECT AIRLINE_RESERVE_CODE 
-	    		FROM AIRLINE_RESERVE_INFO
-	    		WHERE USER_ID = #{resName}
-	    			AND RESERVE_PHONE= #{phoneNum}
-	    			AND RESERVE_EMAIL= #{email}
-	    		ORDER BY RESERVE_TIME DESC
-	    	)
-		WHERE ROWNUM = 1
-    </select> -->
     
-    <update id="insertPassengerInfo" parameterType="map" useGeneratedKeys="false" >
+    <!-- 탑승객 정보 추가 -->
+    <insert id="insertPassengerInfo" parameterType="map" useGeneratedKeys="false" >
    		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL" >
 		    INTO passenger_info (AIRLINE_RESERVE_CODE,LAST_NAME, FIRST_NAME, GENDER, BIRTH, NATION, BAGGAGE, PASSPORT_CODE, PASSPORT_DATE)
 	    		VALUES(
@@ -187,7 +176,25 @@
 	    			#{item.passportDate}  			
 	    		)
    		</foreach>
-    </update>
+    </insert>
+    
+<!--      직항/경유 정보 추가 -->
+	<insert id="insertDirectViaDto" parameterType="DirectViaDto">
+	    INSERT INTO DIRECT_VIA (
+	    	AIRLINE_RESERVE_CODE, 
+	    	SEAT_GRADE, 
+	    	AIRLINE_CODE
+	    )
+	    VALUES
+	     (#{airlineReserveCode}, #{seatGrade}, #{airlineCode})
+	</insert>
+		    
+    
+	<!-- 예약완료 페이지 출력할 값 -->	
+<!-- 	<select>
+		select * from passenger_info
+		    join direct_via using(#{airlineReserveCode})
+	</select> -->
     
     <select id="selectOneDomesticFunction" resultType="char">
     	SELECT DOMESTIC_FLIGHTS
@@ -205,6 +212,13 @@
 		SELECT * 
 			FROM AIRLINE_INFO
 				WHERE AIRLINE_CODE = #{airlineCode}
+	</select>
+	<select id="selectListRecommenedCheap" resultType="AirlineInfoDto">
+		SELECT ROWNUM ,seat_grade.*, airline_info.* 
+			FROM seat_grade,airline_info,
+				(SELECT*FROM seat_grade JOIN airline_info USING (airline_code) 
+					WHERE seat_grade = 3  ORDER BY seat_price ASC)
+						WHERE ROWNUM BETWEEN 0 AND 6
 	</select>
 	
 </mapper>

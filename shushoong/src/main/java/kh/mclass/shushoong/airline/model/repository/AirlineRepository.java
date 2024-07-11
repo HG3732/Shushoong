@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import kh.mclass.shushoong.airline.model.domain.AirlineInfoDto;
 import kh.mclass.shushoong.airline.model.domain.AirlinePassengerInfoDto;
 import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
+import kh.mclass.shushoong.airline.model.domain.DirectViaDto;
 import lombok.extern.log4j.Log4j2;
 @Mapper
 public interface AirlineRepository {
@@ -32,15 +33,20 @@ public interface AirlineRepository {
 			);
 	Integer getMaxPrice(String departLoc, String arrivalLoc, String ticketType);
 	
+//	예약자 정보 추가
 	int insertReserverInfo(AirlineReserverInfoDto reserverInfo);
 	
-	/* String selectResCode(AirlineReserverInfoDto reserverInfo); */
-	
-	int insertPassengerInfo(List<Map<String, Object>> passengerList);
+//	탑승객 정보 추가
+	int insertPassengerInfo(List<Map<String, Object>> reserveInfo);
+
+//	직항, 경유 추가
+	int insertDirectViaDto(DirectViaDto directDto);
 	
 	Character selectOneDomesticFunction(String airlineCode);
 	
 	Character selectOneReturnDomesticFunction(String airlineCode);
 	
 	public AirlineInfoDto selectOneAirlineInfo(String airlineCode);
+	
+	List<AirlineInfoDto> selectListRecommenedCheap();
 }

@@ -365,7 +365,7 @@ textarea:focus {
     border-bottom: 1px solid var(--color_blue_1);
 }
 
-.input_checkin{
+.checkin{
     position: absolute;
     transform: translate(20px, 10px);
     height: 30px;
@@ -392,7 +392,7 @@ textarea:focus {
     border-bottom: 1px solid var(--color_blue_1);
 }
 
-.input_checkout{
+.checkout{
     position: absolute;
     transform: translate(20px, 10px);
     height: 30px;
@@ -445,17 +445,17 @@ textarea:focus {
 	border-bottom: 1px solid var(--color_blue_1);
 }
 
-.add_btn{
+.add_btn, .delete_btn {
 	width: 80px;
 	border: none;
 	border-radius: 20px;
 	padding: 5px;
 	font-family: 'SOYOMapleRegularTTF';
 	background-color: var(--color_blue_2);
-	margin: 20px 400px 30px 10px;
+	margin: 20px;
 }
 
-.add_btn:hover{
+.add_btn:hover, .delete_btn:hover {
 	cursor: pointer;
 	font-family: 'SOYOMapleBoldTTF';
 	background-color: var(--color_blue_1);

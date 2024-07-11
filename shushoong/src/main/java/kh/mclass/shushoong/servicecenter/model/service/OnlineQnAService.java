@@ -7,7 +7,9 @@ import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
+import kh.mclass.shushoong.servicecenter.model.domain.NoticeFileDto;
 import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnADto;
+import kh.mclass.shushoong.servicecenter.model.domain.OnlineQnAFileDto;
 import kh.mclass.shushoong.servicecenter.model.repository.ServiceCenterRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -34,14 +36,23 @@ public class OnlineQnAService {
 		return serviceCenterRepository.selectOneQna(faqId);
 	}
 	
+	public List<OnlineQnAFileDto> selectOneQnaFile(String faqId) {
+		return serviceCenterRepository.selectOneQnaFile(faqId);
+	}
+	
 	public int updateAnswer(String faqId, String ansContent) {
 		return serviceCenterRepository.updateAnswer(faqId, ansContent);
 	}
 	
 	public int insertQna(OnlineQnADto onlineQnaDto) {
-		return serviceCenterRepository.insertQna(onlineQnaDto);
+		serviceCenterRepository.insertQna(onlineQnaDto);
+		onlineQnaDto.getFaqId();
+		return onlineQnaDto.getFaqId();
 	}
 	public int insertQnaCat(OnlineQnADto onlineQnaDto) {
 		return serviceCenterRepository.insertQnaCat(onlineQnaDto);
+	}
+	public int insertQnaFile(OnlineQnAFileDto fileDto) {
+		return serviceCenterRepository.insertQnaFile(fileDto);
 	}
 }

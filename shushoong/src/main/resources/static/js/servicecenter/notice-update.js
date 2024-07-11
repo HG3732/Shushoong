@@ -2,9 +2,11 @@ function clickedUpdateBtn(){
 	$('.update-btn').on('click', function(){
 		console.log('수정하기 버튼 클릭됨')
 		var noticeId = $('#noticeId').text().trim();
-		var noticeCategoey = $('noticeCategory').val();
+		var noticeCategoey = $('#noticeCategory').val();
+		var noticeTime = $('#noticeTime').val();
 		console.log('글번호', noticeId);
 		console.log('noticeCategoey', noticeCategoey);
+		console.log('글 작성 시간', noticeCategoey);
         $('#frm-notice-update').attr('method', 'GET');
         $('#frm-notice-update').attr('action', '/shushoong/support/notice/update/' + noticeId);
         $('#frm-notice-update').submit();

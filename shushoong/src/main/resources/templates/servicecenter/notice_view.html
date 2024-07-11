@@ -34,24 +34,20 @@
 			<form id="frm-notice-update" action="" hidden="">
 				<div th:text="${noticeDto.noticeId}" id="noticeId" name="noticeId"></div>
 				<div th:text="${noticeDto.noticeTitle}" id="noticeTitle" name="noticeTitle"></div>
+				<div th:text="${noticeDto.noticeTime}" id="noticeTime" name="noticeTime"></div>
 				<div th:value="${noticeDto.FileId}" id="fileId" name="fileId"></div>
 				<div th:text="${noticeDto.noticeContent}" id="noticeContent" name="noticeContent"></div>
 				<div th:value="${noticeDto.noticeCategory}" id="noticeCategory" name="noticeCategory"></div>
 			</form>
 			<div class="wrap-board">
 				<div class="qna-head">
-					<!-- <div class="qna-title" th:text="${noticeDto.noticeId + '.' + noticeDto.noticeTitle}"></div> -->
-					<!-- <div class="ask-date" th:text="${noticeDto.noticeTime}"></div> -->
 				</div>
 				<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
 				<div class="qna-main">
-					<!-- <div class="qna-"></div> -->
-					<!-- <div class="qna-category" th:if="${noticeDto.noticeId} > 1000">사업자 공지사항</div>
 					<div class="qna-category" th:if="${noticeDto.noticeId} <= 1000">회원 공지사항</div> -->
 					<div class="qna-category" th:text="${noticeDto.noticeTitle}">공지 제목</div>
 					<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);"> 
 					<div class="ask-date" th:text="${noticeDto.noticeTime}"></div>
-					<!-- <div class="qna-userId" th:text="${'작성자 : ' + noticeDto.userId}"></div> -->
 					<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
 						<th:block th:if="${noticeFileDto == null or #lists.size(noticeFileDto) == 0}">
 							<div class="qna-file">

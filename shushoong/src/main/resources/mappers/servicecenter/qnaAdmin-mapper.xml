@@ -68,7 +68,9 @@
 		join faq_cat_desc using(quest_cat)
 		where faq_id = #{faqId}
 	</select>
-	
+	<select id="selectOneQnaFile" parameterType="String" resultType="OnlineQnAFileDto">
+		select * from ask_file where faq_id = #{faqId}
+	</select>
 	<!-- 1:1 문의 답변 작성 -->
 	<update id="updateAnswer" parameterType="hashMap">
 		update service_center set ans_time = sysdate, ans_content = #{ansContent}
@@ -77,15 +79,29 @@
 	
 	<!-- 문의 작성 -->
 	<insert id="insertQna" parameterType="OnlineQnADto">
+		<selectKey keyProperty="faqId" resultType="int" order="BEFORE">
+			SELECT SEQ_ASK_ID.nextval from dual
+		</selectKey>
 		insert into service_center (
 		FAQ_ID, USER_ID, ASK_TITLE, ASK_CONTENT, ASK_DATE, ANS_CONTENT, ANS_TIME
 		) values(
-			SEQ_ASK_ID.nextval, #{userId}, #{askTitle}, #{askContent}, sysdate, null, null
+			#{faqId}, #{userId}, #{askTitle}, #{askContent}, sysdate, null, null
 		)
 	</insert>
 	<insert id="insertQnaCat" parameterType="OnlineQnADto">
 		insert into FAQ_CAT (FAQ_ID, QUEST_CAT)values(
 			SEQ_ASK_ID.nextval -1, #{questCat}
 		)
+	</insert>
+	
+	<insert id="insertQnaFile" parameterType="OnlineQnAFileDto">
+		insert into ask_file (
+			file_id, faq_id, original_filename, saved_file_path_name
+		) values (
+			SEQ_ASK_FILE_ID.nextval, #{faqId}, #{originalFilename}, #{savedFilePathName}
+		)
+		
+		
+	
 	</insert>
 </mapper>

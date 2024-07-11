@@ -17,10 +17,13 @@ import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
 import kh.mclass.shushoong.servicecenter.model.service.NoticeService;
 import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
+@Slf4j
 public class MypageAdminController {
 
 	@Autowired

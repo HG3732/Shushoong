@@ -10,7 +10,7 @@ public class HotelRoomDto {
 	private String hotelCode;
 	private String roomCat;
 	private String roomCatDesc;
-	private String roomPrice;
+	private String hotelPrice;
 	private String hotelDiscount;
 	private String roomCount;
 	private String roomCap;

@@ -389,3 +389,17 @@ BEGIN
     );
 END;
 /
+
+--호텔 등록 시 호텔 코드 중 인덱스 번호 조회 + 생성
+select to_char(NVL(MAX(substr(hotel_code,4,3)), -1) + 1, '000') from hotel where hotel_code like '0SE%';
+
+desc hotel_room;
+insert into hotel values ((select NVL(MAX(substr(hotel_code,4,3)), -1) + 1 from hotel where hotel_code like '0GA%'));
+
+select * from business_member;
+delete from business_member where business_certi = 'http://res.cloudinary.com/shushoong/image/upload/v1720666695/clidvhlb7vidsyw1egqb.jpg';
+select * from hotel where hotel_code like '0SE 006';
+delete from hotel where hotel_code ='0SE 006';
+select * from hotel_facility where hotel_code ='0SE 006';
+select * from hotel_pic where hotel_code ='0SE6 006';
+commit;

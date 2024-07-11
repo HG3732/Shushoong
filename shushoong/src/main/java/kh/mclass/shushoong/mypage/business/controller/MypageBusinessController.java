@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -119,35 +120,53 @@ public class MypageBusinessController {
 			 MultipartFile[] uploadpic,
 			HotelReqDto hotelReqDto
 			) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userId = auth.getName();
+		System.out.println("유저 아이디 : " + userId);
+		
 		Map<String, Object> uploadResult;
 		try {
+			uploadResult = cloudinary.uploader().upload(businessRegitFile.getBytes(), ObjectUtils.emptyMap());
+			String businessRegit = uploadResult.get("url").toString();
+			
 			uploadResult = cloudinary.uploader().upload(businessCertiFile.getBytes(), ObjectUtils.emptyMap());
 			String businessCerti = uploadResult.get("url").toString();
+			hotelReqDto.setBusinessCerti(businessCerti);
+			
+			service.insertCerti(businessCerti, businessRegit, userId);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		hotelReqDto.setHotelCode(hotelReqDto.getHotelNation() + hotelReqDto.getHotelLocCat());
 		//서비스 호출 + selectKey로 hotelCode update할 것
+		service.insertHotel(hotelReqDto);
 		
+		String hotelCode = hotelReqDto.getHotelCode();
+		System.out.println("update된 hotelCode : " + hotelCode);
 		
-		for (HotelRoomDto room : hotelReqDto.getRoomList()) {
-			room.setHotelCode(hotelReqDto.getHotelCode());
-		}
+		//foreach쓰고 hotelCode 따로보낸다면 이 과정 필요없을듯?
+//		for (HotelRoomDto room : hotelReqDto.getRoomList()) {
+//			room.setHotelCode(hotelReqDto.getHotelCode());
+//		}
 		
-		for (String hotelFacCat : hotelReqDto.getFacilityList()) {
-			//서비스 호출, hotel_code랑 facility 따로보내야함...
-		}
+		service.insertHotelRoom(hotelCode, hotelReqDto.getRoomList());
 		
+		service.insertHotelFac(hotelCode, hotelReqDto.getFacilityList());
+		
+		List<String> urls = new ArrayList<>();
 		try {
 			for(MultipartFile file : uploadpic) {
 				uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
 				String imageUrl = uploadResult.get("url").toString();
+				urls.add(imageUrl);
 				//서비스 호출, 이미지 url이랑 hotelcode 매칭할 것
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		service.insertHotelPic(hotelCode, urls);
 		
 		return "mypage/business/mypageBusinessHotel";
 	}

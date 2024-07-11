@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html 
-xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
-	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
-	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
- 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
-	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
-	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
-	<link th:href="@{/css/mypage/customer/mypageCustomerHome.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}"
+	rel="stylesheet" />
+<link th:href="@{/css/mypage/customer/mypageCustomerHome.css}"
+	rel="stylesheet" />
 <meta charset="UTF-8">
 <title>슈슝::마이페이지</title>
 </head>
@@ -16,7 +17,7 @@ xmlns:th="http://www.thymeleaf.org">
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
- 				<div th:replace="~{common/header :: Header}"></div>
+				<div th:replace="~{common/header :: Header}"></div>
 				<div class="hrline">
 					<hr>
 				</div>
@@ -30,22 +31,19 @@ xmlns:th="http://www.thymeleaf.org">
 			</div>
 			<div class="wrap-section">
 				<section>
-					<div class="section-header">
-						안녕하세요, 홍길동님!
-					</div>
-					<div class="header-content">
-						어떤 도움이 필요하신가요?
-					</div>
+					<div class="section-header">안녕하세요, 홍길동님!</div>
+					<div class="header-content">어떤 도움이 필요하신가요?</div>
 					<div class="section-image">
 						<a th:href="@{/customer/check/password}">
 							<div class="editInfo">
-								<img th:src="@{/images/정보수정.png}" alt="개인정보 수정" width="200px" height="200px">
+								<img th:src="@{/images/정보수정.png}" alt="개인정보 수정" width="200px"
+									height="200px">
 								<div class="tail">개인정보 수정</div>
 							</div>
-						</a>
-						<a href="#">
+						</a> <a href="#">
 							<div class="reservationHotel">
-								<img th:src="@{/images/비행기.png}" alt="호텔 확인하기" width="200px" height="200px">
+								<img th:src="@{/images/비행기.png}" alt="호텔 확인하기" width="200px"
+									height="200px">
 								<div class="tail">내가 찜한 숙소 보러가기</div>
 							</div>
 						</a>
@@ -66,7 +64,8 @@ xmlns:th="http://www.thymeleaf.org">
 							<div>20명</div>
 							<div>2020-02-18 / 2020-02-08</div>
 						</div>
-						<div class="warning">※[항공] 지마켓, 11번가, 티몬, 위메프, SSG등 제휴사에서 예약하신 예약내역은 제휴사 홈페이지에서 확인 바랍니다. </div>
+						<div class="warning">※[항공] 지마켓, 11번가, 티몬, 위메프, SSG등 제휴사에서
+							예약하신 예약내역은 제휴사 홈페이지에서 확인 바랍니다.</div>
 						<div class="viewAllList">
 							<button type="button" class="viewList">전체보기</button>
 						</div>
@@ -77,9 +76,22 @@ xmlns:th="http://www.thymeleaf.org">
 							<div>문의내용</div>
 							<div>문의날짜</div>
 						</div>
-						<div class="QnA-content">
-							<div>결제가 이상하게 되다못해 100만원 받았어요</div>
-							<div>2020-08-09</div>
+						<div th:fragment="QnAlist" id="wrap-QnAlist" class="QnA-content">
+							<th:block th:if="${result == null or result.size() == 0}">
+								<div class="no-QnA">문의한 내용이 없습니다.</div>
+							</th:block>
+							<th:block th:unless="${result == null or result.size() == 0}">
+								<a class="QnA-content" th:each="faqList : ${result}"
+									th:href="@{/support/qna/view/{faqId}(faqId=${faqList.faqId})}">
+									<th:block th:if="${faqList.ansTime == null}">
+										<div th:text="${faqList.faqId}"></div>
+									</th:block> <th:block th:unless="${faqList.ansTime == null}">
+										<div th:text="${faqList.faqId + '(답변완료)'}"></div>
+									</th:block>
+									<div th:text="${faqList.askTitle}"></div>
+									<div th:text="${faqList.askDate}"></div>
+								</a>
+							</th:block>
 						</div>
 					</div>
 				</section>
@@ -87,8 +99,8 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 	</div>
 	<div class="wrap-footer">
-  		<div th:replace="~{common/footer :: Footer}"></div> 
+		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
-	
+
 </body>
 </html>

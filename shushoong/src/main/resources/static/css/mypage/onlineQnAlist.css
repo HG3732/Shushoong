@@ -140,6 +140,8 @@ section .wrap-pageNum .current {
 }
 .qna-write{
 	width: 100%;
+	display: flex;
+	justify-content: right;
 	text-align: center;
 }
 .qna-write .qna-write-btn{
@@ -148,6 +150,8 @@ section .wrap-pageNum .current {
     background-color: #BCEFFF;
     border-radius: 10px;
     border: none;
+    font-family: SOYOMapleRegularTTF;
+    font-weight: bold;
 }
 .qna-write .qna-write-btn:hover{
 	cursor: pointer;

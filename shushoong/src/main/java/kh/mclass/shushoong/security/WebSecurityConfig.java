@@ -49,7 +49,6 @@ public class WebSecurityConfig {
 	MemberSecurityService securityService;
 		
 	@Bean
-	@Order(0)
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
 		http
@@ -57,6 +56,9 @@ public class WebSecurityConfig {
 				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
 				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
 				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
+				.requestMatchers(new AntPathRequestMatcher("/support/notice/write")).hasAuthority("admin")
+				.requestMatchers(new AntPathRequestMatcher("/support/qna/write")).hasAuthority("customer")
+				.requestMatchers(new AntPathRequestMatcher("/support/qna/write")).hasAuthority("business")
 				.requestMatchers(new AntPathRequestMatcher("/login/**")).anonymous()
 				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 				)
@@ -67,7 +69,7 @@ public class WebSecurityConfig {
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 		.formLogin((formLogin) -> formLogin
 				.loginPage("/login")
-				.loginProcessingUrl("/login/customer")
+				.loginProcessingUrl("/login")
 				.successHandler(authSuccessHandler)
 				.failureHandler(authFailureHandler)
 				.usernameParameter("userId")
@@ -78,101 +80,98 @@ public class WebSecurityConfig {
 				.tokenValiditySeconds(3600)
 				.alwaysRemember(false)
 				.userDetailsService(securityService)))
-		.sessionManagement(
-				(auth) -> auth
-					.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation)->sessionFixation.newSession())
-					.maximumSessions(1)
-					.maxSessionsPreventsLogin(true))
 		.logout((logout) -> logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/home")
 				.invalidateHttpSession(true)
-				.deleteCookies("remember"))
-		.exceptionHandling((exceptionHandling -> exceptionHandling
-				.accessDeniedPage("/error/redirect")));
-		
-		return http.build();
-	}
-	
-	@Bean
-	@Order(1)
-	SecurityFilterChain businessFilterChain(HttpSecurity http) throws Exception {
-		
-		http
-		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
-				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
-				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
-				.requestMatchers(new AntPathRequestMatcher("/login/**")).anonymous()
-				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+//				.deleteCookies("remember")
 				)
-		.csrf((csrf) -> csrf
-				.disable())
-		.headers((headers) -> headers
-				.addHeaderWriter(new XFrameOptionsHeaderWriter(
-						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-		.formLogin((formLogin) -> formLogin
-				.loginPage("/login")
-				.loginProcessingUrl("/login/business")
-				.successHandler(businessAuthSuccessHandler)
-				.failureHandler(authFailureHandler)
-				.usernameParameter("userId")
-				.passwordParameter("userPwd"))
-		.rememberMe((rememberMe -> rememberMe
-//				.key("uniqueAndSecret")
-				.rememberMeParameter("remember")
-				.tokenValiditySeconds(3600)
-				.alwaysRemember(false)
-				.userDetailsService(securityService)))
-		.sessionManagement(
-				(auth) -> auth
-					.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation)->sessionFixation.newSession())
-					.maximumSessions(1)
-					.maxSessionsPreventsLogin(true))
-		.logout((logout) -> logout
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/home")
-				.invalidateHttpSession(true))
 		.exceptionHandling((exceptionHandling -> exceptionHandling
-				.accessDeniedPage("/error/redirect")));
+				.accessDeniedPage("/error/redirect"))
+		);
 		
 		return http.build();
 	}
 	
-	
-	@Bean
-	@Order(2)
-	SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
-		
-		http
-		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
-				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
-				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
-				.requestMatchers(new AntPathRequestMatcher("/login/**")).anonymous()
-				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
-				)
-		.csrf((csrf) -> csrf
-				.disable())
-		.headers((headers) -> headers
-				.addHeaderWriter(new XFrameOptionsHeaderWriter(
-						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-		.formLogin((formLogin) -> formLogin
-				.loginPage("/login/admin")
-				.loginProcessingUrl("/login/admin")
-				.successHandler(adminAuthSuccessHandler)
-				.failureHandler(adminAuthFailureHandler)
-				.usernameParameter("userId")
-				.passwordParameter("userPwd"))
-		.logout((logout) -> logout
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/home")
-				.invalidateHttpSession(true))
-		.exceptionHandling((exceptionHandling -> exceptionHandling
-				.accessDeniedPage("/error/redirect")));
-		
-		return http.build();
-	}
+//	@Bean
+//	@Order(1)
+//	SecurityFilterChain businessFilterChain(HttpSecurity http) throws Exception {
+//		
+//		http
+//		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+//				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
+//				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
+//				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
+//				.requestMatchers(new AntPathRequestMatcher("/login/**")).anonymous()
+//				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+//				)
+//		.csrf((csrf) -> csrf
+//				.disable())
+//		.headers((headers) -> headers
+//				.addHeaderWriter(new XFrameOptionsHeaderWriter(
+//						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
+//		.formLogin((formLogin) -> formLogin
+//				.loginPage("/login")
+//				.loginProcessingUrl("/login/business")
+//				.successHandler(businessAuthSuccessHandler)
+//				.failureHandler(authFailureHandler)
+//				.usernameParameter("userId")
+//				.passwordParameter("userPwd"))
+//		.rememberMe((rememberMe -> rememberMe
+////				.key("uniqueAndSecret")
+//				.rememberMeParameter("remember")
+//				.tokenValiditySeconds(3600)
+//				.alwaysRemember(false)
+//				.userDetailsService(securityService)))
+//		.sessionManagement(
+//				(auth) -> auth
+//					.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation)->sessionFixation.newSession())
+//					.maximumSessions(1)
+//					.maxSessionsPreventsLogin(true))
+//		.logout((logout) -> logout
+//				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//				.logoutSuccessUrl("/home")
+//				.invalidateHttpSession(true))
+//		.exceptionHandling((exceptionHandling -> exceptionHandling
+//				.accessDeniedPage("/error/redirect")));
+//		
+//		return http.build();
+//	}
+////	
+////	
+////	@Bean
+////	@Order(2)
+////	SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
+////		
+////		http
+////		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+////				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("admin")
+////				.requestMatchers(new AntPathRequestMatcher("/customer/**")).hasAuthority("customer")
+////				.requestMatchers(new AntPathRequestMatcher("/business/**")).hasAuthority("business")
+////				.requestMatchers(new AntPathRequestMatcher("/login/**")).anonymous()
+////				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+////				)
+////		.csrf((csrf) -> csrf
+////				.disable())
+////		.headers((headers) -> headers
+////				.addHeaderWriter(new XFrameOptionsHeaderWriter(
+////						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
+////		.formLogin((formLogin) -> formLogin
+////				.loginPage("/login/admin")
+////				.loginProcessingUrl("/login/admin")
+////				.successHandler(adminAuthSuccessHandler)
+////				.failureHandler(adminAuthFailureHandler)
+////				.usernameParameter("userId")
+////				.passwordParameter("userPwd"))
+////		.logout((logout) -> logout
+////				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+////				.logoutSuccessUrl("/home")
+////				.invalidateHttpSession(true))
+////		.exceptionHandling((exceptionHandling -> exceptionHandling
+////				.accessDeniedPage("/error/redirect")));
+////		
+////		return http.build();
+////	}
 	
 	// 비밀번호 암호화
 	@Bean

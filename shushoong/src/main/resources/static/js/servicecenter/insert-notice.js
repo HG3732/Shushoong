@@ -1,5 +1,5 @@
 function clickedWriteOkBtn() {
-	$('.notice-btn').on('click', function() {
+	$('.notice-ok').on('click', function() {
 		var noticeTitle = $('.titleVal').val();
 		var noticeCategory = $('.catVal').val();
 		var noticeFile = $('.fileVal').val();

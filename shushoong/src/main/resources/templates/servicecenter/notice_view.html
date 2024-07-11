@@ -7,8 +7,9 @@
 <link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
-<link th:href="@{/css/mypage/admin/mypageAdminAside.css}"
-	rel="stylesheet" />
+<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/business/mypageBusinessAside.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/admin/mypageAdminAside.css}" rel="stylesheet" />
 <link th:href="@{/css/mypage/mypageNoticeView.css}" rel="stylesheet" />
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -27,7 +28,13 @@
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-aside">
-				<aside>
+				<aside th:if="${userGrade} == 'customer'">
+					<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+				</aside>
+				<aside th:if="${userGrade} == 'business'">
+					<div th:replace="~{mypage/business/mypageBusinessAside :: Aside}"></div>
+				</aside>
+				<aside th:if="${userGrade} == 'admin'">
 					<div th:replace="~{mypage/admin/mypageAdminAside :: Aside}"></div>
 				</aside>
 			</div>

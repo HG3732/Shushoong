@@ -3,6 +3,8 @@ function clickedShowReturnBtn() {
         console.log("오는편 항공 정보 눌림");
 
 		var seatPriceStr = $(this).closest('.airline-info').find('.seat-price').text().trim();
+		var departDate = $('#select-info-departDate').text().trim();
+		var arrivalDate = $('#select-info-arrivalDate').text().trim();
 		var departLoc = $('#select-info-departLoc').text().trim();
 		var arrivalLoc = $('#select-info-arrivalLoc').text().trim();
 		var airlineCode= $(this).closest('.airline-info').find('.select-info-airlineCode').text().trim();
@@ -14,6 +16,8 @@ function clickedShowReturnBtn() {
 		var seatPrice = seatPriceStr.replace(/,/g, '').replace('원', '');
 		
 		console.log('seatPrice:', seatPrice);
+		console.log('departDate', departDate);
+		console.log('arrivalDate:', arrivalDate);
 		console.log('Depart Loc:', departLoc);
 		console.log('Arrival Loc:', arrivalLoc);
 		console.log('airlineCode:', airlineCode);
@@ -23,6 +27,8 @@ function clickedShowReturnBtn() {
 		console.log('baby:', baby);
 		
 		$('#seatPrice').val(seatPrice);
+		$('#departDate').val(departDate);
+		$('#arrivalDate').val(arrivalDate);
 		$('#departLoc').val(arrivalLoc);
 		$('#arrivalLoc').val(departLoc);
 		$('#airlineCode').val(airlineCode);

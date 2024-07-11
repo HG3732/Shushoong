@@ -54,6 +54,12 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		Iterator<? extends GrantedAuthority> iter = authorities.iterator();
 		GrantedAuthority auth = iter.next();
 		String userGrade = auth.getAuthority();
+		
+		if (userGrade == "admin") {
+			setDefaultTargetUrl("/admin/manager/home");
+		} else {
+			setDefaultTargetUrl("/home");
+		}
 
 		// 로그인 기록
 		Map<String, Object> map = new HashMap<>();
@@ -62,22 +68,22 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 
 		memberService.loginLog(map);
 
-		// 계정 권환 확인
-		if (userGrade == "admin" || userGrade == "business") {
-			SecurityContextHolder.clearContext();
-			request.getSession().invalidate();
-			throw new BadCredentialsException("잘못된 로그인 위치입니다.");
-		}
-
-		// 계정잠금 확인
-		String userStatus = memberService.lockedCheck(userId);
-		if (userStatus == "0") {
-			SecurityContextHolder.clearContext();
-			request.getSession().invalidate();
-			throw new LockedException("정지된 계정입니다.");
-		}
+//		// 계정 권환 확인
+//		if (userGrade == "admin" || userGrade == "business") {
+//			SecurityContextHolder.clearContext();
+//			request.getSession().invalidate();
+//			throw new BadCredentialsException("잘못된 로그인 위치입니다.");
+//		}
+//
+//		// 계정잠금 확인
+//		String userStatus = memberService.lockedCheck(userId);
+//		if (userStatus == "0") {
+//			SecurityContextHolder.clearContext();
+//			request.getSession().invalidate();
+//			throw new LockedException("정지된 계정입니다.");
+//		}
 		
-		setDefaultTargetUrl("/home");
+//		setDefaultTargetUrl("/home");
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 
 		// 사용자가 권한이 필요한 자원에 접근해 인증 예외가 발생해 인증을 처리하는 것이 아닌 경우

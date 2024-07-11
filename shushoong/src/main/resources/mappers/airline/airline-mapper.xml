@@ -20,17 +20,55 @@
 	
 	<select id="getMaxPrice" parameterType="map" resultType="Integer">
 	    <choose>
-	        <when test="ticketType == 1">
+	        <when test="ticketType == 1 and seatGrade == 1">
 	            SELECT (MAX(s.SEAT_PRICE) / 2) AS maxPrice
+           	    FROM AIRLINE_INFO a
+			    JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
+			    WHERE a.DEPART_LOC = #{departLoc} 
+			    AND a.ARRIVAL_LOC = #{arrivalLoc}
+			    AND s.SEAT_GRADE = '1'
 	        </when>
-	        <otherwise>
+	        <when test="ticketType == 1 and seatGrade == 2">
+	            SELECT (MAX(s.SEAT_PRICE) / 2) AS maxPrice
+				FROM AIRLINE_INFO a
+			    JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
+			    WHERE a.DEPART_LOC = #{departLoc} 
+			    AND a.ARRIVAL_LOC = #{arrivalLoc}
+			    AND s.SEAT_GRADE = '2'
+	        </when>
+	        <when test="ticketType == 1 and seatGrade == 3">
+	            SELECT (MAX(s.SEAT_PRICE) / 2) AS maxPrice
+	            FROM AIRLINE_INFO a
+			    JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
+			    WHERE a.DEPART_LOC = #{departLoc} 
+			    AND a.ARRIVAL_LOC = #{arrivalLoc}
+			    AND s.SEAT_GRADE = '3'
+	        </when>
+	        <when test="ticketType == 2 and seatGrade == 1">
 	            SELECT MAX(s.SEAT_PRICE) AS maxPrice
-	        </otherwise>
+           	    FROM AIRLINE_INFO a
+			    JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
+			    WHERE a.DEPART_LOC = #{departLoc} 
+			    AND a.ARRIVAL_LOC = #{arrivalLoc}
+			    AND s.SEAT_GRADE = '1'
+	        </when>
+	        <when test="ticketType == 2 and seatGrade == 2">
+	            SELECT MAX(s.SEAT_PRICE) AS maxPrice
+				FROM AIRLINE_INFO a
+			    JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
+			    WHERE a.DEPART_LOC = #{departLoc} 
+			    AND a.ARRIVAL_LOC = #{arrivalLoc}
+			    AND s.SEAT_GRADE = '2'
+	        </when>
+	        <when test="ticketType == 2 and seatGrade == 3">
+	            SELECT MAX(s.SEAT_PRICE) AS maxPrice
+	            FROM AIRLINE_INFO a
+			    JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
+			    WHERE a.DEPART_LOC = #{departLoc} 
+			    AND a.ARRIVAL_LOC = #{arrivalLoc}
+			    AND s.SEAT_GRADE = '3'
+		    </when>
 	    </choose>
-	    FROM AIRLINE_INFO a
-	    JOIN SEAT_GRADE s ON a.AIRLINE_CODE = s.AIRLINE_CODE
-	    WHERE a.DEPART_LOC = #{departLoc} 
-	    AND a.ARRIVAL_LOC = #{arrivalLoc}
 	</select>
 
 	

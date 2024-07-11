@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.catalina.startup.ClassLoaderFactory.Repository;
+import org.apache.http.auth.AUTH;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.google.gson.Gson;
 
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
@@ -44,6 +46,7 @@ import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
 import kh.mclass.shushoong.mypage.customer.model.service.MypageCustomerService;
+import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -71,13 +74,32 @@ public class MyPageCustomerController {
 	@Autowired
 	private Gson gson;
 	
+	@Autowired
+	private OnlineQnAService QnAservice;
+	
 	private final MypageCustomerService service;
-	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();	
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	
+	int pageSize = 5;
+	int pageBlockSize = 3;
+	int currentPageNum = 1;
 	
 	// 마이페이지 메인 페이지로 이동
 	@GetMapping("/mypage/home")
-	public String mypageHome() {
-		return "mypage/customer/mypageCustomerHome";
+	public String mypageHome(Model model, String category, String keyword, 
+							String questCat, Authentication auth ) {
+		String userId = auth.getName();
+		int totalCount = QnAservice.selectTotalCount(userId, category, keyword, questCat);
+		model.addAttribute("result", QnAservice.selectAllList(pageSize, pageBlockSize, currentPageNum, userId, category, keyword, questCat));
+		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+		
+		model.addAttribute("currentPageNum", currentPageNum);
+		model.addAttribute("totalPageCount", totalPageCount);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+  		return "mypage/customer/mypageCustomerHome";
 	}
 	
 	// 비밀번호 확인 페이지로 이동 

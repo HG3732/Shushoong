@@ -110,6 +110,13 @@ section .QnA-grid {
     text-align: center;
 }
 
+section .no-QnA{
+	text-align: center;
+    padding: 50px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
 section .QnA-content {
 	height: 40px;
 	font-size: 11px;

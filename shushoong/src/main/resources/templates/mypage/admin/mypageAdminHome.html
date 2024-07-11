@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html 
-xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
-	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
-	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
- 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
-	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
-	<link th:href="@{/css/mypage/admin/mypageAdminAside.css}" rel="stylesheet" />
-	<link th:href="@{/css/mypage/admin/mypageAdminHome.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage/admin/mypageAdminAside.css}"
+	rel="stylesheet" />
+<link th:href="@{/css/mypage/admin/mypageAdminHome.css}"
+	rel="stylesheet" />
 <meta charset="UTF-8">
 <title>슈슝::관리자 모드</title>
 </head>
@@ -16,7 +17,7 @@ xmlns:th="http://www.thymeleaf.org">
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
- 				<div th:replace="~{common/header :: Header}"></div>
+				<div th:replace="~{common/header :: Header}"></div>
 				<div class="hrline">
 					<hr>
 				</div>
@@ -31,21 +32,21 @@ xmlns:th="http://www.thymeleaf.org">
 			<div class="wrap-section">
 				<section>
 					<div class="image-section">
-						<img th:src="@{/images/노트북.png}" alt="이미지" width="100px" height="100px">
+						<img th:src="@{/images/노트북.png}" alt="이미지" width="100px"
+							height="100px">
 					</div>
-					<div class="section-header">
-						안녕하세요, 관리자님! 이곳은 관리자 전용 공간이에요. 
-					</div>
+					<div class="section-header">안녕하세요, 관리자님! 이곳은 관리자 전용 공간이에요.</div>
 					<div class="section-image">
 						<a th:href="@{/admin/manager/customer}">
 							<div class="editInfo">
-								<img th:src="@{/images/일반사람.png}" alt="개인회원 관리" width="150px" height="150px">
+								<img th:src="@{/images/일반사람.png}" alt="개인회원 관리" width="150px"
+									height="150px">
 								<div class="tail">개인회원 관리</div>
 							</div>
-						</a>
-						<a th:href="@{/admin/manager/business}">
+						</a> <a th:href="@{/admin/manager/business}">
 							<div class="reservationHotel">
-								<img th:src="@{/images/회사원.png}" alt="사업자 회원 관리" width="150px" height="150px">
+								<img th:src="@{/images/회사원.png}" alt="사업자 회원 관리" width="150px"
+									height="150px">
 								<div class="tail">사업자 회원 관리</div>
 							</div>
 						</a>
@@ -57,13 +58,15 @@ xmlns:th="http://www.thymeleaf.org">
 							<div>제목</div>
 							<div>작성일</div>
 						</div>
-						<div th:each="notice : ${notice}" class="notice-content">
-							<div th:text="${notice.NOTICE_ID}"></div>
-							<div th:text="${notice.NOTICE_TITLE}"></div>
-							<div th:text="${notice.NOTICE_TIME}"></div>
+						<div th:each="notice : ${noticeDto}" >
+							<a th:href="@{/support/notice/view/{noticeId}(noticeId=${notice.noticeId})}" class="notice-content">
+								<div class="td-no" th:text="${notice.noticeId}"></div>
+								<div class="td-title" th:text="${notice.noticeTitle}"></div>
+								<div class="td-writedate" th:text="${notice.noticeTime}"></div>
+							</a>
 						</div>
-						<a class="viewAllList" th:href="@{/support/notice/list}">
-							<button type="button" class="viewNoticeList">전체보기</button>
+						<a class="viewAllList">
+							<button type="button" th:onclick="|location.href='@{/support/notice/list}'|" class="viewNoticeList">전체보기</button>
 						</a>
 					</div>
 					<div class="onlineQnAList">
@@ -74,14 +77,27 @@ xmlns:th="http://www.thymeleaf.org">
 							<div>카테고리</div>
 							<div>등록일자</div>
 						</div>
-						<div th:each="qna : ${qna}" class="QnA-content">
-							<div th:text="${qna.FAQ_ID}"></div>
-							<div th:text="${qna.ASK_TITLE}"></div>
-							<div th:text="${qna.QUEST_CAT_DESC}"></div>
-							<div th:text="${qna.ASK_DATE}"></div>
+						<div th:fragment="QnAlist" id="wrap-QnAlist" class="QnAContainer">
+							<th:block th:if="${result == null or result.size() == 0}">
+								<div class="no-QnA">조건에 맞는 문의가 없습니다.</div>
+							</th:block>
+							<th:block th:unless="${result == null or result.size() == 0}">
+								<a class="QnA-content" th:each="faqList : ${result}"
+									th:href="@{/support/qna/view/{faqId}(faqId=${faqList.faqId})}">
+									<th:block th:if="${faqList.ansTime == null}">
+										<div th:text="${faqList.faqId}"></div>
+									</th:block> 
+									<th:block th:unless="${faqList.ansTime == null}">
+										<div th:text="${faqList.faqId + '(답변완료)'}"></div>
+									</th:block>
+									<div th:text="${faqList.askTitle}"></div>
+									<div th:text="${faqList.questCatDesc}"></div>
+									<div th:text="${faqList.askDate}"></div>
+								</a>
+							</th:block>
 						</div>
-						<a class="viewAllList" th:href="@{/support/qna/list}">
-							<button type="button" class="viewQnAList">전체보기</button>
+						<a class="viewAllList">
+							<button type="button" th:onclick="|location.href='@{/support/qna/list}'|" class="viewQnAList">전체보기</button>
 						</a>
 					</div>
 				</section>
@@ -89,8 +105,8 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 	</div>
 	<div class="wrap-footer">
-  		<div th:replace="~{common/footer :: Footer}"></div> 
+		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
-	
+
 </body>
 </html>

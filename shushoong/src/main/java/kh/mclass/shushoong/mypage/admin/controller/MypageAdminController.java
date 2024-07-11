@@ -1,6 +1,11 @@
 package kh.mclass.shushoong.mypage.admin.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.mclass.shushoong.mypage.admin.model.service.MypageAdminService;
+import kh.mclass.shushoong.servicecenter.model.domain.NoticeDto;
+import kh.mclass.shushoong.servicecenter.model.service.NoticeService;
+import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -18,13 +26,55 @@ public class MypageAdminController {
 	@Autowired
 	MypageAdminService service;
 	
+	@Autowired
+	private OnlineQnAService qnAService;
+	
+	@Autowired
+	private NoticeService noticeService;
+	
 	int pageSize = 12;
 	int pageBlockSize = 5;
 	int currentPageNum = 1;
 	
+	int homePageSize = 5;
+	
 	// 마이페이지 메인 페이지로 이동
 	@GetMapping("/manager/home")
-	public String managerHome(Model model) {
+	public String managerHome(Model model, String category, String keyword, String questCat) {
+		// 공지 목록 출력 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userId =  authentication.getName();
+		String userGrade = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse("anonymousUser"); // 기본값 설정
+		
+		String noticeCategory = null;
+		int noticeTotalCount = noticeService.selectTotalCount(userGrade,noticeCategory);
+		int noticeTotalPageCount = (noticeTotalCount%homePageSize == 0) ? noticeTotalCount/homePageSize : noticeTotalCount/homePageSize + 1;
+		int noticeStartPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+		int noticeEndPageNum = (noticeStartPageNum+pageBlockSize > noticeTotalPageCount) ? noticeTotalPageCount : noticeStartPageNum + pageBlockSize - 1;
+		List<NoticeDto> noticeDto =  noticeService.selectNoticeAllList(homePageSize,pageBlockSize,currentPageNum,userGrade);
+		model.addAttribute("currentPageNum", currentPageNum);
+		model.addAttribute("totalPageCount", noticeTotalCount);
+		model.addAttribute("startPageNum", noticeStartPageNum);
+		model.addAttribute("endPageNum", noticeEndPageNum);
+		model.addAttribute("noticeDto", noticeDto);
+		model.addAttribute("userGrade", userGrade);
+		
+		// qna 목록 출력
+		int qnaTotalCount = qnAService.selectTotalCount(null, category, keyword, questCat);
+		model.addAttribute("result", qnAService.selectAllList(homePageSize, pageBlockSize, currentPageNum, null, category, keyword, questCat));
+		int qnaTotalPageCount = (qnaTotalCount%homePageSize == 0) ? qnaTotalCount/homePageSize : qnaTotalCount/homePageSize + 1;
+		int qnaStartPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+		int qnaEndPageNum = (qnaStartPageNum+pageBlockSize > qnaTotalPageCount) ? qnaTotalPageCount : qnaStartPageNum + pageBlockSize - 1;
+		
+		model.addAttribute("currentPageNum", currentPageNum);
+		model.addAttribute("totalPageCount", qnaTotalPageCount);
+		model.addAttribute("startPageNum", qnaStartPageNum);
+		model.addAttribute("endPageNum", qnaEndPageNum);
+		
+		
 		model.addAttribute("notice", service.selectLatestNotice());
 		model.addAttribute("qna", service.selectLatestFaq());
 		return "mypage/admin/mypageAdminHome";

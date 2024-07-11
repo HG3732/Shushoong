@@ -167,23 +167,28 @@
 	</select>
 	
 	<!-- 호텔예약 저장하기 -->
-	<insert id="inserthotelReserveInfo" parameterType="HotelReserveDtoRes">
+	<insert id="insertReserveInfo" parameterType="HotelReserveDtoRes">
 	    INSERT INTO hotel_reserve 
 	        (hotel_reserve_code, residence_name_ko, residence_name_en, residence_gender, residence_birth,
 	         residence_phone, residence_email, reserve_check_in, reserve_check_out, user_id, room_cap, 
-	         hotel_code, room_cat, room_att, residence_num, request_Sum, review_available)
+	         hotel_code, room_cat, room_att, residence_num, request_Sum, review_available, reserve_time)
 	    VALUES 
 	        (#{hotelReserveCode}||SEQ_HOTEL_RESERVE.nextVal, #{residenceNameKo}, #{residenceNameEn}, #{residenceGender}, #{residenceBirth}, 
 	        #{residencePhone}, #{residenceEmail}, #{reserveCheckIn}, #{reserveCheckOut}, #{userId}, #{roomCap}, 
-	        #{hotelCode}, #{roomCat}, #{roomAtt}, #{people}, #{requestSum}, '0')
+	        #{hotelCode}, #{roomCat}, #{roomAtt}, #{people}, #{requestSum}, '0', default)
 		<selectKey keyProperty="hotelReserveCode" resultType="String" order="AFTER">
 			<bind name="code" value="'%' + hotelReserveCode + '%'"/>
-			select hotel_reserve_code from hotel_reserve where hotel_reserve_code like #{code}
-		</selectKey>
-	
+				SELECT hotel_reserve_code
+					FROM (
+							select hotel_reserve_code 
+							from hotel_reserve 
+							where hotel_reserve_code like #{code}
+								and USER_ID = #{userId}
+							ORDER BY RESERVE_TIME DESC
+			    		)
+				WHERE ROWNUM = 1
+		</selectKey>	
 	</insert>
-	
-	<!--  -->
 
 	<!-- 결제 완료 직전  -->
 	<insert id="insertPayInfo" parameterType="PayDto"> 

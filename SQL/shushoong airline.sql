@@ -134,9 +134,14 @@ INSERT all
    commit;
    select * from hotel_review where user_id = 'customer' ;
    
-   select * from (select hotel_code from hotel_review join hotel_reserve using (hotel_reserve_code)) join hotel using (hotel_code);
+   select * from hotel_review join (select hotel_reserve_code,hotel_name from hotel_reserve join hotel using (hotel_code)) using (hotel_reserve_code) where user;
    
+   select * from (select hotel_code,approve_no from hotel_review join hotel_reserve using (hotel_reserve_code)) join hotel using (hotel_code) ;
    
+   SELECT
+       *
+   FROM
+    airline_info;
    
   select*from seat_grade ;  
 select*from seat_grade where seat_grade = 3  order by seat_price asc;

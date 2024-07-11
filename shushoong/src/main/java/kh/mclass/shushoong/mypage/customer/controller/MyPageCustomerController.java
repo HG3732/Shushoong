@@ -381,7 +381,7 @@ public class MyPageCustomerController {
 			Model md
 		) {
 		String userId = principal.getName();
-		List<HotelReviewDto> hotelReviewList = service.selectListHotelReview(userId);
+		List<Map<String, String>> hotelReviewList = service.selectListHotelReview(userId);
 		md.addAttribute("hotelReviewList",hotelReviewList);
 		
 		return "mypage/customer/mypageHotelReview";

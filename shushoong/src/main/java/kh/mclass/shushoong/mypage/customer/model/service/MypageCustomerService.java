@@ -72,7 +72,7 @@ public class MypageCustomerService {
 		return mypageRepository.deleteHotelLiked(hotelCode);
 	}
 	
-	public List<HotelReviewDto> selectListHotelReview(String userId) {
+	public List<Map<String, String>> selectListHotelReview(String userId) {
 		return mypageRepository.selectListHotelReview(userId);
 	}
 }

@@ -167,3 +167,5 @@ select * from hotel_review
             
 DELETE FROM hotel_review
     WHERE hotel_reserve_code = #{hotelResCode} AND user_id = #{userID};
+
+select* FROM hotel_review WHERE hotel_reserve_code = 'customer' AND user_id = '' 

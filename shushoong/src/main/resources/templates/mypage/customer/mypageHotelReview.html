@@ -10,6 +10,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
 	<link th:href="@{/css/mypage/customer/mypageHotelReview.css}" rel="stylesheet" />
+	<link th:href="@{/css/modal/mypageModal.css}" rel="stylesheet" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>슈슝</title>
@@ -55,6 +56,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</div>
 						</div>
 					</div>
+					<div class="hotel_review_idx" id="value_null" th:if="${#lists.size(hotelReviewList) == 0}">등록된 리뷰가 없습니다</div>
 					<div class="hotel_review_idx" th:each="list : ${hotelReviewList}">
 						<div class="hotel_review_wrap">
 							<div class="hotel_review_wrap_box">
@@ -285,7 +287,47 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					</div>
 				</div>
 			</section>
-		
+			
+			
+			<section class="commit_ask">
+									<!-- 모달창 -->
+					<div class="popup-wrap" id="popup">
+						<div class="close_btn" id="close_btn">X</div>
+						<div class="popup">
+							<div class="popup-head">
+								
+							</div>
+							<div class="popup-body">
+								<div class="body-content">
+									<div class="body-titlebox">
+										<img th:src="@{/images/logo.png}" alt="로고">
+									</div>
+									<div class="body-contentbox">
+										<div class="warning title">
+											※ [주의] 이 버튼은 삭제 버튼입니다.</div>
+										<div class="warning title"> 삭제 버튼을 누르시면 마이페이지에서 보실수 없게 됩니다.</div>
+										<div class="warning content">
+											정말 삭제하시겠습니까? 
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="popup-footer">
+								<span class="pop-btn confirm" id="confirm">
+									확인
+								</span>
+								<span class="pop-btn cancle" id="cancle">
+									취소
+								</span>
+							</div>
+						</div>
+					</div>
+					
+				</section>
+				
+				<section class="hidden_class">
+					<input type="hidden" name="hidden_hotelResCode_val">
+				</section>	
 			
 			
 			</div>
@@ -307,28 +349,49 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		});
 // 	호텔 리뷰 delete 기능
 		$("button#delete_review_btn").on("click",function(){
-			console.log(this);
+			console.log($(this).val());
+			 $("[name=hidden_hotelResCode_val]").val($(this).val());
+			 $(".commit_ask").css("display","block");
+			 $(".popup-wrap").css("display","block");
+		});
+		
+		$("span#cancle").on("click",function(){
+			 $(".commit_ask").css("display","none");
+			 $("[name=hidden_hotelResCode_val]").val("");
+		});
+		
+		$("span#confirm").on("click",function(){
+			 deleteOneHotelReview();
+		 });
+		
+		function deleteOneHotelReview(){
+			console.log($("[name=hidden_hotelResCode_val]").val());
 			$.ajax({
 				url:"/shushoong/customer/mypage/hotel/reivew/delete",
 				type : "POST",
 				data:{
-					hotelResCode :	$(this).val()
+					hotelResCode :	$("[name=hidden_hotelResCode_val]").val(),
 		    	 },
 				
 				success: function(result){
 					if(result == 1){
 						console.log("success");
+						$("[name=hidden_hotelResCode_val]").val("");
+						$(".popup-wrap").css("display","none");
+						$(".commit_ask").css("display","none");
 						location.reload();
 					}else{
-						console.log("fail");
+						alert("삭제를 실패하였습니다");
+						$("[name=hidden_hotelResCode_val]").val("");
+						$(".popup-wrap").css("display","none");
+						$(".commit_ask").css("display","none");
 					}
 				},
 				 error: function(errorThrown) {
 			            console.log("일단 여기 표기")
 			        }
-		       });
-			
-		});
+		       });			
+		}
 		
 		
 		

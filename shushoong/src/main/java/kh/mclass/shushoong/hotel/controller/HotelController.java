@@ -73,9 +73,9 @@ public class HotelController {
 		List<HotelDtoRes> hotHotelList = service.selectHotHotelList();
 		model.addAttribute("hotHotelList", hotHotelList);
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("유저 아이디 : " + authentication.getName());
-        System.out.println("유저 등급 : " + authentication.getAuthorities());
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        System.out.println("유저 아이디 : " + authentication.getName());
+//        System.out.println("유저 등급 : " + authentication.getAuthorities());
         
 		return "hotel/hotel_main";
 	}

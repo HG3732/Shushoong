@@ -27,7 +27,5 @@ public class HotelReqDto {
 	private String hotelPolicy;
 	private String hotelSafety;
 	private String hotelPcount;
-	
-	
-	
+	private String businessCerti;
 }

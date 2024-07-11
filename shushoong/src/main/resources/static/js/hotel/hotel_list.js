@@ -45,8 +45,10 @@ function likeHandler(thisElement){
 }
 
 function loginHandler() {
+	console.log("localhost:8081" + contextRoot + "login");
 	alert("로그인을 하셔야 좋아요할 수 있습니다.");
-	return location.href(`\${#httpServletRequest.getContextPath()}` + "/login");
+	location.href="http://localhost:8081" + contextRoot + "login.html";
+	return '';
 }
 
 /* const inputLeft = document.getElementById("input-left"); */

@@ -10,22 +10,24 @@ import lombok.Data;
 @Component
 public class HotelReqDto {
 	
+	private String hotelCode;
 	private String hotelName;
 	private String hotelEng;
-	private String hotelCall;
-	private String hotelNation;
-	private String hotelLoc;
 	private String hotelAddress;
-	private String intro;
+	private String hotelCall;
 	private String checkIn;
 	private String checkOut;
+	private String hotelNation;
+	private String hotelLocCat;
+	private String hotelIntro;
 	
 	private List<HotelRoomDto> roomList;
-	
 
 	private List<String> facilityList;
-	private String policy;
-	private String safety;
+	private String hotelPolicy;
+	private String hotelSafety;
+	private String hotelPcount;
+	
 	
 	
 }

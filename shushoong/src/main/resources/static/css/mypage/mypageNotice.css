@@ -113,3 +113,7 @@ section .wrap-pageNum .btn-page:hover {
 	color: white;
 	cursor: pointer;
 }
+section .wrap-pageNum .current {
+	background-color: var(--color_blue_1);
+	color: white;
+}

@@ -229,8 +229,17 @@ public class ServiceCenterController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	    
 	    return "redirect:/support/qna/list";
+	}
+	
+	@PostMapping("/support/qna/delete")
+	public String deleteQna (String faqId) {
+		System.out.println("삭제될 문의 글 번호 : " + faqId);
+		
+		service.deleteQnaFile(faqId);
+		service.deleteQnaCat(faqId);
+		service.deleteQna(faqId);
+		return "redirect:/support/qna/list";
 	}
 	
 	

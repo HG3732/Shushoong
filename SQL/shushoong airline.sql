@@ -114,21 +114,29 @@ SELECT * FROM hotel_review WHERE user_id = 'ex1';
 select * from HOTEL_REVIEW where USER_ID = 'ex1';
 select * from hotel_review where user_id = 'ex1'; 
 select * from hotel;
+select * from hotel_reserve;
 select* from hotel_like;
-
+select*from pay;
 select * from HOTEL_REVIEW;
+delete from HOTEL_REVIEW where user_id= 'customer';
 select * from hotel_reserve;
 select * from pay;
-INSERT 
-    INTO HOTEL_REVIEW VALUES ('019091c7-06d1-18cc-6841-26dc512c6824 ','2OS002', '좋아용 ㅎㅎ','굿굿 ㅎㅎ',   'ex1',   5, 3, 5, 5, 1);
-    INTO HOTEL_REVIEW VALUES ('019091c4-653d-d5fe-e1e7-4799f66b51b1','2OS001', '좋아용 ㅎㅎ', '굿~ ㅎㅎ',   'ex1',  4, 3, 4, 3, 2)
-    INTO HOTEL_REVIEW VALUES ('01908164-f722-f9f8-e395-4a4890e3f294', '2OS001','안좋아용 ㅎㅎ',  '안굿 ㅎㅎ',   'ex1',2, 1, 2, 0, 3)
-    INTO HOTEL_REVIEW VALUES ('01908166-bf19-25bd-54da-35c077f9832e', '2OS002','좋아용 ㅎㅎ', '굿 ㅎㅎㅎㅎ',  'ex1',   4, 3, 3, 3, 2)
-    INTO HOTEL_REVIEW VALUES ('01908169-b980-0792-11d7-cb4f6025d212','2OS002','덜좋아용 ㅎㅎ', '덜굿 ㅎㅎ',  'ex1',   2, 3, 4, 3, 2)
-    INTO HOTEL_REVIEW VALUES ('01907d46-d70f-e9b8-6729-86d02c13239c',  '2OS002','넘좋아용 ㅎㅎ', '굿이랑께', 'ex1',   5, 5, 5, 5, 3)
-    INTO HOTEL_REVIEW VALUES ('019080c8-b1fa-d8c3-d515-248c5bdbed8f','2OS003', '좋아유','아주 굿 ㅎㅎ',  'ex1',5, 3, 5, 5, 1)
-    INTO HOTEL_REVIEW VALUES ('019080d3-8669-88c9-9be0-8f560b5dd157','2OS003', '썩 좋지않소', '장사 이런식으로 계속하면 주인장 당신은 죽소', 'ex1',  2, 1, 0, 2, 2)
+INSERT all
+    INTO HOTEL_REVIEW (APPROVE_NO,HOTEL_RESERVE_CODE,REVIEW_TITLE,REVIEW_COMMENT,USER_ID,HOTEL_FACILITY,HOTEL_CLEAN,HOTEL_CONVEN,HOTEL_KIND,TRIPPER_CAT) VALUES ('01908192-51dc-4d5f-4244-2fed73da00cd','20240709262KT0040122', '좋아용 ㅎㅎ','굿굿 ㅎㅎ',   'customer',   5, 3, 5, 5, 1)
+    INTO HOTEL_REVIEW (APPROVE_NO,HOTEL_RESERVE_CODE,REVIEW_TITLE,REVIEW_COMMENT,USER_ID,HOTEL_FACILITY,HOTEL_CLEAN,HOTEL_CONVEN,HOTEL_KIND,TRIPPER_CAT)VALUES ('01908161-fed5-29c9-87f0-b8e76fa2444e','2024070962KT0021216', '좋아용 ㅎㅎ', '굿~ ㅎㅎ',   'customer',  4, 3, 4, 3, 2)
+    INTO HOTEL_REVIEW (APPROVE_NO,HOTEL_RESERVE_CODE,REVIEW_TITLE,REVIEW_COMMENT,USER_ID,HOTEL_FACILITY,HOTEL_CLEAN,HOTEL_CONVEN,HOTEL_KIND,TRIPPER_CAT)VALUES ('01908166-bf19-25bd-54da-35c077f9832e', '20240703392OS0010','안좋아용 ㅎㅎ',  '안굿 ㅎㅎ',   'customer',2, 1, 2, 0, 3)
+    INTO HOTEL_REVIEW (APPROVE_NO,HOTEL_RESERVE_CODE,REVIEW_TITLE,REVIEW_COMMENT,USER_ID,HOTEL_FACILITY,HOTEL_CLEAN,HOTEL_CONVEN,HOTEL_KIND,TRIPPER_CAT)VALUES ('01907d46-d70f-e9b8-6729-86d02c13239c', '2024070582OS0041','좋아용 ㅎㅎ', '굿 ㅎㅎㅎㅎ',  'customer',   4, 3, 3, 3, 2)
+    INTO HOTEL_REVIEW (APPROVE_NO,HOTEL_RESERVE_CODE,REVIEW_TITLE,REVIEW_COMMENT,USER_ID,HOTEL_FACILITY,HOTEL_CLEAN,HOTEL_CONVEN,HOTEL_KIND,TRIPPER_CAT)VALUES ('01909617-973e-b592-345b-dd72c3586c02','20240708572KT0032','덜좋아용 ㅎㅎ', '덜굿 ㅎㅎ',  'customer',   2, 3, 4, 3, 2)
+    INTO HOTEL_REVIEW (APPROVE_NO,HOTEL_RESERVE_CODE,REVIEW_TITLE,REVIEW_COMMENT,USER_ID,HOTEL_FACILITY,HOTEL_CLEAN,HOTEL_CONVEN,HOTEL_KIND,TRIPPER_CAT)VALUES ('019080d3-8669-88c9-9be0-8f560b5dd157',  '20240708432KT003221','넘좋아용 ㅎㅎ', '굿이랑께', 'customer',   5, 5, 5, 5, 3)
+    INTO HOTEL_REVIEW (APPROVE_NO,HOTEL_RESERVE_CODE,REVIEW_TITLE,REVIEW_COMMENT,USER_ID,HOTEL_FACILITY,HOTEL_CLEAN,HOTEL_CONVEN,HOTEL_KIND,TRIPPER_CAT)VALUES ('019080da-bf0f-15d9-4e86-cb2bbdc49223','20240708472OS00502', '좋아유','아주 굿 ㅎㅎ',  'customer',5, 3, 5, 5, 1)
+    INTO HOTEL_REVIEW (APPROVE_NO,HOTEL_RESERVE_CODE,REVIEW_TITLE,REVIEW_COMMENT,USER_ID,HOTEL_FACILITY,HOTEL_CLEAN,HOTEL_CONVEN,HOTEL_KIND,TRIPPER_CAT)VALUES ('0190917a-5dc8-df80-f355-7631670fc914','2024070802KT001003', '썩 좋지않소', '장사 이런식으로 계속하면 주인장 당신은 죽소', 'customer',  2, 1, 0, 2, 2)
     select * from dual;
+   commit;
+   select * from hotel_review where user_id = 'customer' ;
+   
+   select * from (select hotel_code from hotel_review join hotel_reserve using (hotel_reserve_code)) join hotel using (hotel_code);
+   
+   
    
   select*from seat_grade ;  
 select*from seat_grade where seat_grade = 3  order by seat_price asc;

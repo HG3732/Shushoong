@@ -69,6 +69,7 @@
 }
 
 .wrap-writeAnswer .btn {
+	margin-right: 10px;
 	background-color: var(--color_blue_2);
 	padding: 10px;
 	border: none;
@@ -78,4 +79,30 @@
 .wrap-writeAnswer .btn:hover {
 	background-color: var(--color_blue_1);
 	color: white;
+	cursor: pointer;		
+}
+.ans-update-btn{
+	margin-right: 10px;
+	background-color: var(--color_blue_2);
+	padding: 10px;
+	border: none;
+	border-radius: 10px;
+	float: right;
+}
+.ans-update-btn:hover{
+	background-color: var(--color_blue_1);
+	color: white;
+	cursor: pointer;
+}
+.ans-delete-btn{
+	background-color: var(--color_blue_2);
+	padding: 10px;
+	border: none;
+	border-radius: 10px;
+	float: right;
+}
+.ans-delete-btn:hover{
+	background-color: var(--color_blue_1);
+	color: white;
+	cursor: pointer;
 }

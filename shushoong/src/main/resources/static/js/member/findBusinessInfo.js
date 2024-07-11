@@ -22,6 +22,7 @@ function findIdCheckHandler() {
 		success: function(result) {
 			if (result == 0) {
 				alert("등록하신 정보와 일치하는지 다시 한 번 확인해 주세요.");
+				$("#code1").val('');
 			} else {
 				alert("설정하신 아이디는 " + result + " 입니다.");
 			}
@@ -79,8 +80,9 @@ function resetPwdCheckHandler() {
 		success: function(result) {
 			if (result == 0) {
 				alert("등록하신 정보와 일치하는지 다시 한 번 확인해 주세요.");
+				$("#code2").val('');
 			} else {
-				window.open('/shushoong/reset/password', '비밀번호 초기화','width=500px height=500px, loaction=no, status=no scrollbars=none');
+				window.open(`/shushoong/reset/password?userId=${userId}`, '비밀번호 초기화','width=500px height=500px, loaction=no, status=no scrollbars=none');
 			}
 		}
 	})
@@ -147,6 +149,7 @@ function PwdEmailSendHandler() {
 		error: function(request, status, error) {
 			alert("잘못된 이메일 형식입니다.");
 			return false;
+			$("#userEmail2").val('');
 		}
 	})
 }
@@ -169,6 +172,7 @@ function PwdEmailCheckHandler() {
 		error: function(request, status, error) {
 			alert("유효하지 않은 코드입니다.")
 			return false;
+			$("#code2").val('');
 			code_success = 0;
 		}
 	})

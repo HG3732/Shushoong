@@ -140,7 +140,7 @@
 		
 	}
 	
-	function submitBtnController(){
+	function submitBtnCheckFunction(){
 		var list = Number($("#adult_val").val())+Number($("#child_val").val())+Number($("#baby_val").val());
 		console.log(list);
 		var i,j;
@@ -153,12 +153,11 @@
 			console.log(i);
 			console.log($("input[name=passenger_firstName]").eq(i).val());
 			console.log(firstNameJ.test( $("input[name=passenger_firstName]").eq(i).val()));
+			if(firstNameJ.test( $("input[name=passenger_firstName]").eq(i).val())){
+				j++
+			}
+			console.log(j);
 		}
-				$("input[name=passenger_firstName]").each(function(){
-					console.log(this);
-//					(firstNameJ.test($("input[name=passenger_firstName]")))
-					
-				})
 	}
 				
 		

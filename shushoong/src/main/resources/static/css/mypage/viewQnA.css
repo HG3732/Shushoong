@@ -74,6 +74,8 @@
 	padding: 10px;
 	border: none;
 	border-radius: 10px;
+	font-family: SOYOMapleRegularTTF;
+    font-weight: bold;
 }
 
 .wrap-writeAnswer .btn:hover {
@@ -81,13 +83,15 @@
 	color: white;
 	cursor: pointer;		
 }
-.ans-update-btn{
+.ans-update-btn {
 	margin-right: 10px;
 	background-color: var(--color_blue_2);
 	padding: 10px;
 	border: none;
 	border-radius: 10px;
 	float: right;
+	font-family: SOYOMapleRegularTTF;
+    font-weight: bold;
 }
 .ans-update-btn:hover{
 	background-color: var(--color_blue_1);
@@ -100,6 +104,8 @@
 	border: none;
 	border-radius: 10px;
 	float: right;
+	font-family: SOYOMapleRegularTTF;
+    font-weight: bold;
 }
 .ans-delete-btn:hover{
 	background-color: var(--color_blue_1);

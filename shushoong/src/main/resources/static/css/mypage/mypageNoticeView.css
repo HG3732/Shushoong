@@ -4,6 +4,8 @@
     padding: 20px;
     display:inline-block;
     margin-top: 50px;
+    
+    min-height: 500px; 
 }
 
 .wrap-board .qna-head {
@@ -93,6 +95,8 @@
 	appearance: none;     
 	outline: none;
 	margin-right: 10px;
+	font-family: SOYOMapleRegularTTF;
+    font-weight: bold;
 }
 .update-box .update-btn button:hover{
 	cursor: pointer;
@@ -107,6 +111,8 @@
 	resize: none;
 	appearance: none;     
 	outline: none;
+	font-family: SOYOMapleRegularTTF;
+    font-weight: bold;
 }
 .update-box .delete-btn button:hover{
 	cursor: pointer;

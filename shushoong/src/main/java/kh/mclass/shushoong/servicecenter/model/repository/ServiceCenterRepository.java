@@ -28,6 +28,10 @@ public interface ServiceCenterRepository {
 	int insertQna(OnlineQnADto onlineQnaDto);
 	int insertQnaCat(OnlineQnADto onlineQnaDto);
 	int insertQnaFile(OnlineQnAFileDto qnaFiles);
+	// 문의 삭제
+	int deleteQna(String faqId);
+	int deleteQnaFile(String faqId);
+	int deleteQnaCat(String faqId);
 	
 	// 공지사항
 	List<NoticeDto> selectNoticeAllList(int pageSize, int pageBlockSize, int currentPageNum, RowBounds rb, String userGrade);
@@ -47,6 +51,5 @@ public interface ServiceCenterRepository {
     // 공지 삭제
     int deleteNotice(String noticeId);
     int deleteNoticeFile(String noticeId);
-		
 	
 }

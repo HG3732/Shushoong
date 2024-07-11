@@ -55,4 +55,15 @@ public class OnlineQnAService {
 	public int insertQnaFile(OnlineQnAFileDto fileDto) {
 		return serviceCenterRepository.insertQnaFile(fileDto);
 	}
+	
+	public int deleteQna(String faqId) {
+		return serviceCenterRepository.deleteQna(faqId);
+	}
+	public int deleteQnaFile(String faqId) {
+		return serviceCenterRepository.deleteQnaFile(faqId);
+	}
+	public int deleteQnaCat(String faqId) {
+		return serviceCenterRepository.deleteQnaCat(faqId);
+	}
+	
 }

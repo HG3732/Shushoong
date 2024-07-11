@@ -100,8 +100,16 @@
 		) values (
 			SEQ_ASK_FILE_ID.nextval, #{faqId}, #{originalFilename}, #{savedFilePathName}
 		)
-		
-		
-	
 	</insert>
+	<delete id="deleteQnaFile" parameterType="hashMap">
+		delete ask_file where faq_id = #{faqId}
+	</delete>
+	
+	<delete id="deleteQnaCat" parameterType="hashMap">
+		delete faq_cat where faq_id = #{faqId}
+	</delete>
+	
+	<delete id="deleteQna" parameterType="hashMap">
+		delete service_center where faq_id = #{faqId}
+	</delete>
 </mapper>

@@ -3,6 +3,8 @@ $(loadedHandler);
 function loadedHandler() {
 	$('.btn-write-answer').on('click', writeAnswer);
 	$('.btn-submit-answer').on('click', submitAnswer);
+	$('.ans-update-btn').on('click', updateAnswer);
+	$('.ans-delete-btn').on('click', deleteQna);
 }
 
 function writeAnswer(event) {
@@ -19,6 +21,31 @@ function writeAnswer(event) {
 		event.preventDefault();
 	}*/
 	event.preventDefault();
+}
+
+function updateAnswer() {
+	console.log('수정하기 버튼 눌림');
+	$('.wrap-comment.update').css('display', 'none');
+	$(this).css('display', 'none');
+	$('#update-box').css('display', 'block');
+	$('.no-content').css('display', 'none');
+	$('.write-answer').css('display', 'block');
+	$('.btn-write-answer').css('display', 'none');
+	$('.btn-submit-answer').css('display', 'block');
+	
+	var content = $('.ask-content').text();
+	console.log('기존 내용', content)
+	$('.write-answer').text(content);
+}
+
+function deleteQna() {
+	console.log('삭제하기 버튼 눌림');
+	
+	var id = $('#faqId');
+	console.log('문의 글 번호 : ', id);	
+	$('#frm-delete').attr('method', 'POST');
+	$('#frm-delete').attr('action', '/shushoong/support/qna/delete');
+	$('#frm-delete').submit();
 }
 
 function submitAnswer() {

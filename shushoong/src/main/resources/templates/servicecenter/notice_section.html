@@ -27,7 +27,7 @@
 		</th:block>
 		<div class="wrap-page" th:each="item : ${#numbers.sequence(startPageNum, endPageNum)}">
 			<th:block th:if="${currentPageNum == item}">
-				<button type="button" class="gopage" th:text="${item}" disabled></button>
+				<button type="button" class="gopage current" th:text="${item}" disabled></button>
 			</th:block>
 			<th:block th:unless="${currentPageNum == item}">
 				<button type="button" class="btn-page gopage" th:text="${item}" th:data-targetpage="${item}" onclick="goPage(this)"></button>

@@ -9,8 +9,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/door.css}" rel="stylesheet" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
 <meta charset="UTF-8">
 <title>슈슝</title>
+
 </head>
 <body>
 
@@ -25,19 +29,23 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		</div>
 		<div class="wrap-body">
 	   		<div class="pic-container">
-		        <div class="pic">
-		            <img th:src="@{/images/door1.png}" alt="첫번째사진" class="door_1">
-		            <div class="door1_text">슈슝과 함께 떠나는 여행</div>
+		        <div class="pic" th:style="'background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0, 0.3)), url(' + @{/images/door1.png} + ');'">
+		            <div class="text door1"
+		            	data-aos="fade-up">슈슝과 함께 떠나는 여행</div>
 		        </div>
-		        <div class="pic">
-		            <img th:src="@{/images/door2.jpg}" alt="두번째사진" class="door_2">
-		            <div class="door2_text">항공</div>
-		            <a th:href="@{/airline/main}" class="door2_button">예약하기</a>
+		        <div class="pic" th:style="'background-image: linear-gradient(rgba(0,0,0, 0.2), rgba(0,0,0, 0.2)), url(' + @{/images/door2.jpg} + ');'">
+		            <div class="text door2" 
+		            	data-aos="fade-left"
+		            	>
+		            	<p>항공</p>
+		            	<a th:href="@{/airline/main}" class="door2_button">예약하기</a>
+		            </div>
 		        </div>
-		        <div class="pic">
-		            <img th:src="@{/images/door3.png}" alt="첫번째사진" class="door_3">
-		            <div class="door3_text">숙소</div>
-		            <a th:href="@{/hotel/main}" class="door3_button">예약하기</a>
+		        <div class="pic" th:style="'background-image: linear-gradient(rgba(0,0,0, 0.2), rgba(0,0,0, 0.2)), url(' + @{/images/door3.png} + ');'">
+		            <div class="text door3">
+		            	<p>숙소</p>
+		            	<a th:href="@{/hotel/main}" class="door3_button">예약하기</a>
+		            </div>
 		        </div>
 	   		</div>
 		</div>
@@ -47,4 +55,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	</div>
 	
 </body>
+<script>
+  AOS.init();
+</script>
 </html>

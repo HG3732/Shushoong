@@ -6,11 +6,12 @@
 	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
  	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
-	<link th:href="@{/css/mypage/admin/mypageAdminAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/business/mypageBusinessAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/business/mypageBusinessHotel.css}" rel="stylesheet" />
 	<link th:href="@{/css/mypage/admin/manageProduct.css}" rel="stylesheet" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
-<title>[관리자모드] 슈슝::사업장 관리</title>
+<title>사업장 관리</title>
 </head>
 <body>
 	<div class="wrapper">
@@ -25,7 +26,7 @@
 		<div class="wrap-body">
 			<div class="wrap-aside">
 				<aside>
-					<div th:replace="~{mypage/admin/mypageAdminAside :: Aside}"></div>
+					<div th:replace="~{mypage/business/mypageBusinessAside :: Aside}"></div>
 				</aside>
 			</div>
 			<div class="wrap-section">
@@ -35,11 +36,6 @@
 							사업장 검색
 						</div>
 						<div class="wrap-productSearch">
-							<select class="category" name="category">
-								<option value="hotelCode">관리번호</option>
-								<option value="hotelName">상품명</option>
-								<option value="userId">사업자 아이디</option>
-							</select>
 							<div class="header-section">
 								<input type="text" id="productName" class="searchInput" placeholder="호텔 검색">
 								<img class="absolute" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" width="20px" height="20px">
@@ -51,6 +47,7 @@
 					</div>
 					<div th:replace="~{mypage/manageproduct/productList :: productList}"></div>
 				</section>
+				<button type="button" class="btn_register">등록하기</button>
 			</div>
 		</div>
 	</div>
@@ -58,5 +55,5 @@
 		<div th:replace="~{common/footer :: Footer}"></div>
 	</div>
 </body>
-<script th:src='@{/js/mypage/admin/manageProduct.js}'></script>
+<script th:src='@{/js/mypage/business/manageProduct.js}'></script>
 </html>

@@ -234,7 +234,7 @@ public class MypageAdminController {
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("endPageNum", endPageNum);
 		model.addAttribute("result", service.selectProduct(pageSize, pageBlockSize, currentPageNum, category, keyword));
-		return "mypage/admin/manageproduct/productList";
+		return "mypage/manageproduct/productList";
 	}
 	
 	@GetMapping ("/hotel/test")

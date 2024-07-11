@@ -4,20 +4,30 @@
 	<div class="content-section" id="productList" th:fragment="productList">
 		<div class="hotelList">
 			<div class="listHeader-grid">
-				<div>사업자 번호</div>
-				<div>상품명</div>
-				<div>사업자 아이디</div>
 				<div>관리 번호</div>
+				<div>상품명</div>
+				<th:block th:if="${#authorization.expression('hasAnyAuthority(''admin'')')}">
+					<div>사업자 아이디</div>
+				</th:block>
+				<th:block th:unless="${#authorization.expression('hasAnyAuthority(''admin'')')}">
+					<div></div>
+				</th:block>
+				<div>삭제</div>
 			</div>
 			<th:block th:if="${result == null or #lists.isEmpty(result)}">
 				<div class="noContent">조건에 맞는 사업장이 없습니다.</div>
 			</th:block>
 			<th:block th:unless="${result == null or #lists.isEmpty(result)}">
 					<a th:each="productlist : ${result}" class="productList-grid" th:href="@{/hotel/view/{hotelCode}(hotelCode=${productlist.hotelCode})}">
-						<div th:text="${productlist.businessNum}"></div>
-						<div th:text="${productlist.hotelName}"></div>
-						<div th:text="${productlist.userId}"></div>
 						<div th:text="${productlist.hotelCode}"></div>
+						<div th:text="${productlist.hotelName}"></div>
+						<th:block th:if="${#authorization.expression('hasAnyAuthority(''admin'')')}">
+							<div th:text="${productlist.userId}"></div>
+						</th:block>
+						<th:block th:unless="${#authorization.expression('hasAnyAuthority(''admin'')')}">
+							<div></div>
+						</th:block>
+						<div class="deleteProduct" th:data-hotelcode="${productlist.hotelCode}" onclick="checkDeleteHotelHandler(this)"><img th:src="@{/images/trash.png}" style="width:15px;" class="trash"></div>
 					</a>
 				<div class="wrap-pageNum">
 					<th:block th:if="${startPageNum > 1}">

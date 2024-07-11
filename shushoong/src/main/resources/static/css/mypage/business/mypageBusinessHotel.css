@@ -2,6 +2,7 @@
 
 .wrap-section{
 	min-height: 400px;
+	position: relative;
 }
 
 .register_hotel{
@@ -34,7 +35,6 @@
 }
 
 .btn{
-	margin-top: 20px;
 	text-align: center;
 }
 
@@ -53,3 +53,10 @@
 	color: white;
 	font-family: 'SOYOMapleBoldTTF';
 }
+
+.btn_register {
+	position: absolute;
+    right: 45px;
+    bottom: 45px;
+}
+

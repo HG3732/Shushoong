@@ -3,6 +3,9 @@
 .pointer {
   cursor: pointer;
 }
+section{
+	font-family: 'SOYOMapleNormarTTF';
+}
 section.search_section{
 	height: 350px;
     position: relative;

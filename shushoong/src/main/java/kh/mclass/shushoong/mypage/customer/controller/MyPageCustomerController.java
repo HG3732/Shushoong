@@ -387,5 +387,19 @@ public class MyPageCustomerController {
 		return "mypage/customer/mypageHotelReview";
 	}
 	
+	@ResponseBody
+	@PostMapping("/mypage/hotel/reivew/delete")
+	public int deleteOneHotelReview(
+			String hotelResCode,
+			Principal principal
+		) {
+		int result = 0;
+		String userId = principal.getName();
+		log.info("hotelResCode{"+hotelResCode+"}userId{"+userId+"}");
+		result = service.deleteOneHotelReview(userId,hotelResCode);
+		
+		return result;
+	}
+	
 	
 }

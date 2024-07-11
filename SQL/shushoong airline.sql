@@ -134,7 +134,7 @@ INSERT all
    commit;
    select * from hotel_review where user_id = 'customer' ;
    
-   select * from hotel_review join (select hotel_reserve_code,hotel_name from hotel_reserve join hotel using (hotel_code)) using (hotel_reserve_code) where user;
+   select * from hotel_review join (select hotel_reserve_code,hotel_name from hotel_reserve join hotel using (hotel_code)) using (hotel_reserve_code) where user_id = 'customer';
    
    select * from (select hotel_code,approve_no from hotel_review join hotel_reserve using (hotel_reserve_code)) join hotel using (hotel_code) ;
    
@@ -147,3 +147,23 @@ INSERT all
 select*from seat_grade where seat_grade = 3  order by seat_price asc;
 select * from;
 SELECT ROWNUM ,seat_grade.*, airline_info.* FROM seat_grade,airline_info,(SELECT*FROM seat_grade JOIN airline_info USING (airline_code) WHERE seat_grade = 3  ORDER BY seat_price ASC)WHERE ROWNUM BETWEEN 0 AND 6;
+
+select * from hotel_review 
+			join (
+				select hotel_reserve_code,hotel_name 
+					from hotel_reserve join hotel 
+						using (hotel_code)
+			) using (hotel_reserve_code) 
+				where user_id = :1 ;, OriginalSql = select * from hotel_review 
+			join (
+				select hotel_reserve_code,hotel_name 
+					from hotel_reserve join hotel 
+						using (hotel_code)
+			) using (hotel_reserve_code) ;
+            
+            
+            DELETE FROM airline_reserve_info
+    WHERE airline_reserve_code = 21213;
+            
+DELETE FROM hotel_review
+    WHERE hotel_reserve_code = #{hotelResCode} AND user_id = #{userID};

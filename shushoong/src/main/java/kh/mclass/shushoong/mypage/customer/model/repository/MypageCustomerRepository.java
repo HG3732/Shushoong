@@ -42,5 +42,7 @@ public interface MypageCustomerRepository {
 	public int deleteHotelLiked(String hotelCode);
 	
 	public List<Map<String, String>> selectListHotelReview(String userId);
+	
+	public int deleteOneHotelReview(String hotelResCode,String userId);
 
 }

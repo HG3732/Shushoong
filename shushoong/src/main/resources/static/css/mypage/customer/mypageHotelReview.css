@@ -317,12 +317,13 @@ input[type=text]:focus{
 	outline: none;
 }
 
-textarea {
+input.textarea {
   resize: none;
   border-radius: 10px;
+  height: 231px;
 }
 
-textarea:focus{
+input.textarea:focus{
 	outline: none;
 }
 
@@ -386,11 +387,12 @@ textarea:focus{
 
 						/* hotel_review_list 섹션 */
 section.hotel_review_list{
-	width : 920px; 
+	width : 820px; 
     float: left;
     box-sizing: border-box;
     padding: 20px;
     margin-top: 30px;
+    margin-left: 60px;
 
 }	
 section.hotel_review_list > div:first-child{
@@ -402,20 +404,53 @@ section.hotel_review_list > div:first-child{
 div.hotel_review{
 	margin-top: 50px;
 }
+div.hotel_review_idx{
+	border-bottom: 1px solid var(--color_blue_1);
+	height: 40px;
+}
+div.hotel_review_idx:first-child{
+	border-top: 3px solid var(--color_blue_1);
+}
+div.hotel_review_idx:first-child > div.hotel_review_wrap > div.hotel_review_wrap_box{
+	margin-top: -1px;
+}
+div.hotel_review_idx:last-child{
+	border-bottom: 3px solid var(--color_blue_1);
+}
+div.hotel_review_wrap_box{
+	display: flex;
+	height: 40px;
+	
+	
+}
 button.hotel_list_flex{
+	display: flex;  
+	height: 40px;
 	background: none;
 	border: none;
-	border-bottom: 1px solid var(--color_blue_1);
-	height: 30px;
 }
-button.delete_review_btn{
-	display: flex;  
-	width: 25px;
-	height: 25px;
+button.hotel_list_flex > div{
+	height : 40px;
+	line-height: 40px;
+}
+div.hotel_name{
+	width: 170px;
+}
+div.review_title{
+	width: 530px;
+}
+
+button#delete_review_btn{
+	margin-top : 5px;
+	width: 30px;
+	height: 30px;
 	background: none;
+	border-radius: 5px;
+	margin-left: 25px;
+	border: none;
 }
 img.delete_img{
-	margin-left :-5px;
-	width: 20px;
-	height: 20px;
+	margin-left :-3px;
+	width: 15px;
+	height: 15px;
 }

@@ -31,8 +31,10 @@
 			</div>
 
 			<div class="wrap-write">
-				<h1>공지사항 작성</h1>
+			<form action="" id="frm-write" enctype="multipart/form-data">
+				<h1>공지사항 수정</h1>
 				<div hidden="" class="rmfqjsgh" th:text="${noticeDto.noticeId}"></div>
+				<div hidden="" class="noticeTime" th:text="${noticeDto.noticeTime}"></div>
 				<hr>
 					<div class="write-table">
 						<div class="write-title">
@@ -44,19 +46,17 @@
 						<div class="write-cat">
 							<div class="th cat">카테고리</div>
 							<div class="input cat">
-								<input type="text" th:value="${#strings.startsWith(noticeDto.noticeId, '1') ? '회원' : (#strings.startsWith(noticeDto.noticeId, '2') ? '사업자' : '')}" readonly>
-							<!-- 
-								<select class="catVal">
-									<option value="1">회원</option>
-									<option value="2">사업자</option>
-								</select>
-								 -->
+								<input class="catVal" type="text" th:value="${#strings.startsWith(noticeDto.noticeId, '1') ? '회원' : (#strings.startsWith(noticeDto.noticeId, '2') ? '사업자' : '')}" readonly>
 							</div>
 						</div>
 						<div class="write-file">
 							<div class="th file">첨부파일</div>
-							<div class="input file" th:each="fileDto : ${noticeFileDto}">
-								<input type="file" class="fileVal" th:text="${fileDto.originalFilename}">
+							<div th:if="${noticeFileDto != null and #lists.size(noticeFileDto) > 0" class="input file" th:each="fileDto : ${noticeFileDto}">
+								<input type="file" class="fileVal" id="noticeFile" name="noticeFile" multiple="multiple">
+								<!-- <span th:text="${fileDto.originalFilename}" ></span> -->
+							</div>
+							<div class="input file">
+								<input type="file" class="fileVal" id="noticeFile" name="noticeFile" multiple="multiple">
 							</div>
 						</div>
 
@@ -66,8 +66,8 @@
 					</div>
 					<hr>
 					
-				<form action="" id="frm-write">
 					<input type="hidden" id="noticeTitle" name="noticeTitle">
+					<input type="hidden" id="noticeTime" name="noticeTime">
 					<input type="hidden" id="noticeContent" name="noticeContent">
 					<input type="hidden" id="noticeCategory" name="noticeCategory">
 					<input type="hidden" id="noticeFile" name="noticeFile">
@@ -88,6 +88,7 @@
 		$(loadeadHandler);
 		function loadeadHandler() {
 			clickedUpdateOkBtn();
+			selectFile();
 		}
 		function clickedUpdateOkBtn(){
 			$('.notice-btn').on('click', function(){
@@ -97,10 +98,22 @@
 				var noticeCategory = $('.catVal').val();
 				var noticeFile = $('.fileVal').val();
 				var noticeContent = $('.content-textarea').val();
+				var noticeTime = $('.noticeTime').text();
 				
 				if (noticeTitle.trim() === "" || noticeContent.trim() === "") {
 				    alert('제목과 내용을 입력해주세요.');
 				    return;
+				}
+				
+				switch (noticeCategory) {
+				case "회원":
+					noticeCategory = 1;
+					break;
+				case "사업자":
+					noticeCategory = 2;
+					break;
+				default:
+					break;
 				}
 				
 				console.log('noticeId : ', noticeId);
@@ -108,16 +121,45 @@
 				console.log('noticeCategory : ', noticeCategory);
 				console.log('noticeFile : ', noticeFile);
 				console.log('noticeContent : ', noticeContent);
+				console.log('noticeTime : ', noticeTime);
 				
 				$('#noticeId').val(noticeId);
 				$('#noticeTitle').val(noticeTitle);
 				$('#noticeCategory').val(noticeCategory);
-				$('#noticeFile').val(noticeFile);
+				//$('#noticeFile').val(noticeFile);
 				$('#noticeContent').val(noticeContent);
+				$('#noticeTime').val(noticeTime);
+				
+				console.log($('#noticeTime').val(noticeTime).val());
+				
 				
 				$('#frm-write').attr('method', 'POST');
 		        $('#frm-write').attr('action', '/shushoong/support/notice/update');
 		        $('#frm-write').submit();
+			});
+		}
+		function selectFile() {
+			var fileInput = document.getElementById('noticeFile');
+			var fileListContainer = document.createElement('ul');
+			fileListContainer.className = 'file-list';
+
+			fileInput.addEventListener('change', function() {
+				var fileList = fileInput.files;
+				console.log('Selected files:');
+				fileListContainer.innerHTML = ''; // 기존 목록 초기화
+
+				for (var i = 0; i < fileList.length; i++) {
+					console.log(fileList[i].name);
+
+					var fileItem = document.createElement('li');
+					fileItem.textContent = fileList[i].name;
+					fileListContainer.appendChild(fileItem);
+				}
+				// Display the file list
+				var existingFileList = document.querySelector('.file-list');
+				if (!existingFileList) {
+					fileInput.parentNode.appendChild(fileListContainer);
+				}
 			});
 		}
 	</script>

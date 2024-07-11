@@ -99,60 +99,20 @@
         </when>
     </choose>
 </insert>
-
- <!-- 파일 인서트 리스트형식 -->
-<!--  
-<insert id="insertNoticeFile" parameterType= "java.util.List">
-    <foreach collection="list" item="file" index="index">
-        <choose>
-            <when test="file.noticeCategory == 1">
-                insert into notice_file (
-                    FILE_ID, NOTICE_ID, ORIGINAL_FILENAME, SAVED_FILE_PATH_NAME
-                )
-                values (
-                    SEQ_NOTICE_FILE_ID.nextval, (1 || SEQ_NOTICE_ID.nextval) - 1, #{file.originalFilename}, #{file.savedFilePathName}
-                )
-            </when>
-            <when test="file.noticeCategory == 2">
-                insert into notice_file (
-                    FILE_ID, NOTICE_ID, ORIGINAL_FILENAME, SAVED_FILE_PATH_NAME
-                )
-                values (
-                    SEQ_NOTICE_FILE_ID.nextval, (2 || SEQ_NOTICE_ID.nextval) - 1, #{file.originalFilename}, #{file.savedFilePathName}
-                )
-            </when>
-        </choose>			
-    </foreach>
-</insert> 
- -->
 <select id="selectOneNotice" parameterType="String" resultType="noticeDto">
-<!-- 
-	SELECT * 
-	FROM notice_board b 
-	JOIN notice_file  f on b.notice_id = f.notice_id 
-	where b.notice_id = #{noticeId}
-	 -->
 	 select * from notice_board where notice_id = #{noticeId}
 </select>
 <select id="selectOneNoticeFile" parameterType="String" resultType="noticeFileDto">
 	 select * from notice_file where notice_id = #{noticeId}
 </select>
 <update id="updateNotice" parameterType="hashMap">
-			update notice_board set notice_time = sysdate, notice_title = #{noticeTitle}, 
+			update notice_board set notice_time = #{noticeTime}, notice_title = #{noticeTitle}, 
 			notice_content = #{noticeContent} where notice_id = #{noticeId}
-			<!-- 
-	<choose>
-		<when test="noticeCategory == 1">
-			update notice_board set notice_time = sysdate, notice_title = #{noticeTitle}, 
-			notice_content=#{noticeContent} where notice_id = #{noticeId}	
-		</when>
-		<when test="noticeCategory != 1">	
-			update notice_board set notice_time = sysdate, notice_title = #{noticeTitle}, 
-			notice_content=#{noticeContent} where notice_id = #{noticeId}
-		</when>
-	</choose>
-	 -->
 </update>
+<!-- <update id="updateNoticeFile" parameterType="hashMap">
+			update notice_file set ORIGINAL_FILENAME = #{originalFilename}, SAVED_FILE_PATH_NAME = #{savedFilePathName} 
+			where notice_id = #{noticeId}
+</update> -->
 <delete id="deleteNotice" parameterType="hashMap">
 	delete notice_board where notice_id = #{noticeId}
 </delete>

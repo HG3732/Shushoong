@@ -10,6 +10,7 @@ import lombok.Data;
 @Component
 public class HotelViewDtoRes {
 	private String hotelCode;
+	private String hotelLocCat;
 	private List<HotelPic> hotelPic;
 	private String hotelName;
 	private String hotelEng;

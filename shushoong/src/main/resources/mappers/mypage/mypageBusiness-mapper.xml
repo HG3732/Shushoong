@@ -17,6 +17,41 @@
 		UPDATE MEMBER SET USER_PWD=#{userPwd} WHERE USER_ID=#{userId}
 	</update>
 	
+	<!-- 사업장 리스트 -->
+	<select id="selectMyProduct" parameterType="hashmap" resultType="ProductDtoRes">
+		select hotel_code, h.hotel_name hotel_name, hotel_eng, hotel_address, hotel_call, hotel_check_in, hotel_check_out,
+			hotel_policy, hotel_intro, hotel_pcount, hotel_loc_cat, hotel_safety, user_id
+			from hotel h join business_member bm using (business_certi)
+			where user_id = #{id}
+		<if test="keyword != null and keyword !=''">
+			<bind name="keyword4" value="'%' + keyword + '%'" />
+			and h.hotel_name like #{keyword4}
+		</if>
+	</select>
+	
+	<!-- 사업장 갯수 조회(페이징용) -->
+	<select id="selectMyAllProductCount" parameterType="hashmap" resultType="int">
+		select count(*) count from hotel h join business_member bm using (business_certi)  
+		<if test="keyword != null and keyword !=''">
+			<bind name="keyword4" value="'%' + keyword + '%'" />
+			where h.hotel_name like #{keyword4}
+		</if>
+	</select>
+	
+	<!-- 호텔 삭제 테이블로 이동-->
+	<insert id="insertHotelDeleted" parameterType="String">
+		insert into hotel_deleted 
+			select hotel_code, hotel_name, HOTEL_ENG, HOTEL_ADDRESS, HOTEL_CALL, HOTEL_CHECK_IN, HOTEL_CHECK_OUT, HOTEL_POLICY,
+			HOTEL_INTRO, HOTEL_SAFETY, HOTEL_PCOUNT, HOTEL_LOC_CAT, BUSINESS_CERTI
+			from hotel where hotel_code = #{hotelCode}
+	</insert>
+	
+	<!-- 기존 호텔테이블에서 삭제 -->
+	<delete id="deleteHotel" parameterType="String">
+		delete from hotel where hotel_code = #{hotelCode}
+	</delete>
+	
+	
 	<!-- 호텔 사업자 등록 -->
 	<insert id="insertCerti" parameterType="hashmap">
 		insert into business_member values (#{businessCerti}, #{businessRegit}, #{userId})

@@ -68,16 +68,20 @@ section .header-section > img {
 }
 
 section .productSearch {
-	background-color: #006AFF;
+	background-color: var(--color_blue_2);
 	width: 130px;
 	height: 40px;
 	border: none;
 	border-radius: 20px;
-	color: white;
 	font-family: SOYOMapleRegularTTF;
 	font-size: 15px;
 	font-weight: bold;
 	cursor: pointer;
+}
+
+section .productSearch:hover {
+	background-color: var(--color_blue_1);
+	color: white;
 }
 
 section .content-section {
@@ -86,7 +90,7 @@ section .content-section {
 
 section .listHeader-grid {
 	display: grid;
-	grid-template-columns: 2fr 3fr 2fr 5fr;
+	grid-template-columns: 2fr 4fr 2fr 1fr;
 	align-items: center;
     text-align: center;
 	
@@ -99,7 +103,7 @@ section .listHeader-grid {
 
 section .productList-grid {
 	display: grid;
-	grid-template-columns: 2fr 3fr 2fr 5fr;
+	grid-template-columns: 2fr 4fr 2fr 1fr;
 	align-items: center;
     text-align: center;
     

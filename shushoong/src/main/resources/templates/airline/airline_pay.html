@@ -11,7 +11,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
 	<link th:href="@{/css/airline/airline_pay.css}" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-		<!-- 결제API -->
+<!-- 결제API -->
 	<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 <meta charset="UTF-8">
 <title>슈슝</title>
@@ -64,7 +64,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 							<div class="reserver_info_flex">
 								<div>
 									<div>이름</div>
-									<div><input type="text" name="reserver_name" readonly="readonly" placeholder="이름이 공백일 경우 F5버튼을 눌러주세요" th:value="${userId}"></div>
+									<div><input type="text" name="reserver_name" readonly="readonly" placeholder="이름이 공백일 경우 F5버튼을 눌러주세요" th:value="${userId}" class="user_id"></div>
 								</div>
 								<div>
 									<div>휴대전화번호</div>
@@ -353,137 +353,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		
 	$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
 	
-	function reserverInfoInsertFunction(){
-		
-		const now = new Date();
-		const year = now.getFullYear();
-		const month = String(now.getMonth() + 1).padStart(2, '0');
-		const day = String(now.getDate()).padStart(2, '0');
-		const currentTime = year + month + day;    
-
-		var airline_reserve_code_str = $('.flightNo').text();
-
-		// 문자열의 길이 구하기
-		var length = airline_reserve_code_str.length;
-
-		// 마지막 4자리를 추출
-		var airlineReserveCode = currentTime + airline_reserve_code_str.slice(length - 4);
-
-		var userId = $("[name=reserver_name]").val();
-		var reservePhone = $(".reserve_phone").val();
-		var reserveEmail = $(".reserve_email").val();
-		
-		console.log(reservePhone);
-		console.log(reserveEmail);
-		
-		var reserverInfo = {
-		    airlineReserveCode: airlineReserveCode,
-		    userId: userId,
-		    reservePhone: reservePhone,
-		    reserveEmail: reserveEmail
-		};
-
-		var reserverInfoString = JSON.stringify(reserverInfo);
-
-		//예약자 정보 먼저 저장	    
-	    $.ajax({
-	        url: "/shushoong/airline/input/reserverInfo",
-	        type: "POST",
-	        contentType: "application/json",
-	        data: reserverInfoString,
-	        success: function(response) {
-	            console.log(response);
-	            if(response.result === 1) {
-	                console.log("성공성공성공");
-	                // 서버 응답에서 airlineReserveCode를 추출하여 사용
-	                const airlineReserveCode = response.airlineReserveCode;
-	                passengerInfoInsertFunction(airlineReserveCode); // airlineReserveCode를 함수로 전달
-	            } else {
-	                alert("데이터 리스트 값 insert 실패");
-	            }
-	        },
-	        error: function(errorThrown) {
-	            console.log("일단 여기 표기");
-	            // alert("데이터 리스트 값 insert 실패");
-	        }
-	    })
-	}
-		
-	//승객 정보
-	async function passengerInfoInsertFunction(airlineReserveCode){
-
-		const storeId = $('.store_id').val();
-		const channelKey = $('.channel_key').val();
-		
-		var airlineName = $('#airline_name_val').val();
-		var departLoc = $('#depart_loc_val').val();
-		var arrivalLoc = $('#arrival_loc_val').val();
-		
-		var orderName = airlineName + departLoc + ", "+ arrivalLoc;
-		var airlinePrice = $('.total_value').val();
-		
-		var passengerInfo = [];
-		var i;
-		for(i = 0 ; i< $("[name=passenger_firstName]").length; i++){
-			var infoObj = new Object();
-				infoObj.airlineReserveCode = airlineReserveCode;
-			infoObj.gender = $("[name=passenger_gender]").eq(i).val();
-			infoObj.firstName = $("[name=passenger_firstName]").eq(i).val();
-			infoObj.lastName = $("[name=passenger_lastName]").eq(i).val();
-			infoObj.birth = $("[name=passenger_birth]").eq(i).val();
-			infoObj.nation = $("[name=passenger_nation]").eq(i).val();
-			infoObj.baggage = $("[name=baggage_size]").eq(i).val();
-			infoObj.passportCode = $("[name=passport_num]").eq(i).val();
-				infoObj.passportDate = $("[name=expiration_date]").eq(i).val();
-	
-			passengerInfo.push(infoObj);
-		}
-		
-		const response = await PortOne.requestPayment({
-			storeId : storeId, 
-			paymentId : airlineReserveCode,
-			orderName : orderName, // 항공사 + 출발지 + 목적지
-			totalAmount : airlinePrice,
-			currency : "CURRENCY_KRW",
-			channelKey : channelKey,
-			payMethod : "CARD",
-			customer : {
-				fullName : userId	
-			}
-		});
-			if (response.code) {
-			// 오류 발생
-				console.log('결제 오류');
-		} else {
-			if(response.paymentId != airlineReserveCode){
-				alert("예약번호 다름. 다시 해");
-				return;
-			}
-			
-			// 결제 검증 - 위에서 선언한거를 데이터로 보냄(결제 정보 외 것들)
-			$.ajax({
-				url:"/shushoong/airline/input/passengerInfo",
-				type : "POST",
-				data: JSON.stringify(passengerInfo),
-				contentType: "application/json; charset=utf-8",
-				success: function(result){
-					if(result == i){
-						location.href = "/shushoong/airline/customer/reserve/pay/success";
-						return;
-					}else{
-						alert("데이터 리스트 값 insert 실패");
-						return;
-					}
-				},
-				error:function (request, status, error){
-					alert("code: "+request.status + "\n" + "message: " 
-							+ request.responseText + "\n"
-							+ "error: "+error);
-				}
-		       });
-		}
-
-	}
 
 		$('#check1').on("click", allAgreeCheckHandler);
 		$('.arrow').on("click", arrowDownClickHandler);

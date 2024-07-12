@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,6 +39,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MypageBusinessController {
 
+	int pageSize = 12;
+	int pageBlockSize = 5;
+	int currentPageNum = 1;
+	String id = null;
+	
 	@Autowired
 	private MypageBusinessRepository repository;
 	
@@ -102,10 +108,72 @@ public class MypageBusinessController {
 
 	// 사업장 관리 페이지 이동
 	@GetMapping("/my/hotel")
-	public String myBusinessHotel() {
-		return "mypage/business/mypageBusinessHotel";
+	public String myBusinessHotel(Model model, String keyword, String currentPage) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		id = authentication.getName();
+		
+		currentPageNum = 1;
+		if(currentPage != null && !currentPage.equals("")) {
+			try {
+				currentPageNum = Integer.parseInt(currentPage);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		int totalCount = service.selectMyAllProductCount(id, keyword);
+		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+		
+		int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+		
+		
+		model.addAttribute("currentPageNum", currentPageNum);
+		model.addAttribute("totalPageCount", totalPageCount);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("result", service.selectMyProduct(pageSize, pageBlockSize, currentPageNum, id, keyword));
+		return "mypage/business/mypageBusinessManageProduct";
 	}
-
+	
+	//사업장 검색
+		@PostMapping("my/hotel/searchHotel.ajax")
+		public String searchProduct(Model model, String keyword, String currentPage) {
+			
+			currentPageNum = 1;
+			if(currentPage != null && !currentPage.equals("")) {
+				try {
+					currentPageNum = Integer.parseInt(currentPage);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			int totalCount = service.selectMyAllProductCount(id, keyword);
+			int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+			
+			int startPageNum = (currentPageNum%pageBlockSize == 0) ? ((currentPageNum/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPageNum/pageBlockSize))*pageBlockSize + 1;
+			int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+			
+			
+			model.addAttribute("currentPageNum", currentPageNum);
+			model.addAttribute("totalPageCount", totalPageCount);
+			model.addAttribute("startPageNum", startPageNum);
+			model.addAttribute("endPageNum", endPageNum);
+			model.addAttribute("result", service.selectMyProduct(pageSize, pageBlockSize, currentPageNum, id, keyword));
+			return "mypage/manageproduct/productList";
+		}
+		
+	//사업장 삭제
+	@PostMapping("/my/hotel/deleteHotel.ajax")
+	public String deleteHotel(Model model, String hotelCode) {
+		int result = service.insertHotelDeleted(hotelCode);
+		if(result > 0) {
+			service.deleteHotel(hotelCode);
+		};
+		return "mypage/manageproduct/productList";
+	}
+		
 	// 사업장 등록 페이지 이동
 	@GetMapping("/my/hotel/register")
 	public String myHotelRegister() {

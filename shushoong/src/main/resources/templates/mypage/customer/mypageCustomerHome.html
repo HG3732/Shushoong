@@ -76,18 +76,13 @@
 							<div>문의내용</div>
 							<div>문의날짜</div>
 						</div>
-						<div th:fragment="QnAlist" id="wrap-QnAlist" class="QnA-content">
+						<div th:fragment="QnAlist" id="wrap-QnAlist">
 							<th:block th:if="${result == null or result.size() == 0}">
 								<div class="no-QnA">문의한 내용이 없습니다.</div>
 							</th:block>
 							<th:block th:unless="${result == null or result.size() == 0}">
 								<a class="QnA-content" th:each="faqList : ${result}"
 									th:href="@{/support/qna/view/{faqId}(faqId=${faqList.faqId})}">
-									<th:block th:if="${faqList.ansTime == null}">
-										<div th:text="${faqList.faqId}"></div>
-									</th:block> <th:block th:unless="${faqList.ansTime == null}">
-										<div th:text="${faqList.faqId + '(답변완료)'}"></div>
-									</th:block>
 									<div th:text="${faqList.askTitle}"></div>
 									<div th:text="${faqList.askDate}"></div>
 								</a>

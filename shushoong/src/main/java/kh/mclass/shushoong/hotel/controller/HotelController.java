@@ -36,6 +36,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import jakarta.servlet.http.HttpSession;
+import kh.mclass.shushoong.airline.model.domain.AirlineReserverInfoDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelFacilityDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes;
@@ -362,28 +363,52 @@ public class HotelController {
 		
 		return "hotel/hotel_pay";
 	}
+	
+	//예약 정보 먼저 저장
+	@ResponseBody
+	@PostMapping("/hotel/input/reserveInfo")
+	public Map<String, Object> reserveInfo(
+			@RequestBody HotelReserveDtoRes reserverInfo, 
+			//requestbody 쓰면 json 형태로 보냈을 때 알아서 dto 에 있는 이름과 데이터 매칭해서 넣어줌 
+			HttpSession session
+			) {
 
+	        int result = service.insertReserveInfo(reserverInfo);
+
+		    Map<String, Object> resultMapInfo = new HashMap<>();
+		    if (result > 0) {
+		        session.setAttribute("hotelReserveCode", reserverInfo.getHotelReserveCode());
+		        session.setAttribute("residenceNameKo", reserverInfo.getResidenceNameKo());
+		        session.setAttribute("requestSum", reserverInfo.getRequestSum());
+		        resultMapInfo.put("result", 1);  // 성공적으로 데이터 삽입됨을 나타내는 값
+		        resultMapInfo.put("hotelReserveCode", reserverInfo.getHotelReserveCode());  // 성공적으로 데이터 삽입됨을 나타내는 값
+		    } else {
+		        resultMapInfo.put("result", 0);  // 데이터 삽입 실패를 나타내는 값
+		    }
+		    return resultMapInfo;
+	}
+
+//	결제 정보 저장
 	@PostMapping("/hotel/payment")
 	@ResponseBody
 	public String hotelPayment(
 			HttpSession session,
-			@RequestBody HotelReserveDtoRes reservationData
-			//requestbody 쓰면 json 형태로 보냈을 때 알아서 dto 에 있는 이름과 데이터 매칭해서 넣어줌 
-			, HotelReserveCompleteDtoRes reserveCompletedto
 			//이렇게 요청파라미터에 적으면 함수 내에서 새로 new해서 객체를 만들지 않아도 됨
+			@RequestBody HotelReserveCompleteDtoRes reserveCompletedto
 		) throws IOException, InterruptedException{
-
-		String paymentId = reservationData.getHotelReserveCode();
-		
-		System.out.println("========================" + reserveCompletedto);
 		
 		//HotelReserveCompleteDtoRes reserveCompletedto  = new HotelReserveCompleteDtoRes();
 		//위에 파라미터에 적어서 이거 할 필요 없음
 		
-		reserveCompletedto.setHotelReserveCode(reservationData.getHotelReserveCode());
-		reserveCompletedto.setResidenceNameKo(reservationData.getResidenceNameKo());
-		reserveCompletedto.setRequestSum(reservationData.getRequestSum());
-		int requestSum = reservationData.getRequestSum();
+		String hotelReserveCode = (String)session.getAttribute("hotelReserveCode");
+
+		Integer requestSum = (Integer) session.getAttribute("requestSum");
+		
+		reserveCompletedto.setHotelReserveCode(hotelReserveCode);
+		reserveCompletedto.setResidenceNameKo((String)session.getAttribute("residenceNameKo"));
+		reserveCompletedto.setRequestSum(requestSum);
+		reserveCompletedto.setReserveCheckIn((String)session.getAttribute("reserveCheckIn"));
+		reserveCompletedto.setReserveCheckOut((String)session.getAttribute("reserveCheckOut"));
 		
 		String requestDesc = "";
 		List<String> requestStrings = new ArrayList<String>();
@@ -413,17 +438,19 @@ public class HotelController {
 	        }
 	        //else if 하면 else로 인해서 하나 걸리면 참이 되는 조건인데 참이 되면 해당 조건에 맞는 코드 블록이 실행되고 나머지 조건들은 평가되지 않아서 더해야 할 값이 있음에도 불구하고 더하지 않음
 	        //ex. 싱글과 금연실 선택했는데 싱글에서 걸려버리면 금연실은 평가되지 않고 그냥 싱글만 출력됨
+
+	        if(!requestDesc.isEmpty()) {
+	        	//requestDesc 가 비어있지 않다면..
+	        	
+	        	requestDesc = requestDesc.substring(0, requestDesc.length() - 2);
+	        	//0 은 index를 나타냄
+	        	//-2 는 쉼표와 공백 제거하기 위해 빼기
+	        }
 	        
-        
-        if(!requestDesc.isEmpty()) {
-        	//requestDesc 가 비어있지 않다면..
-        	
-        	requestDesc = requestDesc.substring(0, requestDesc.length() - 2);
-        	reserveCompletedto.setRequestDesc(requestDesc);
-        	//0 은 index를 나타냄
-        	//-2 는 쉼표와 공백 제거하기 위해 빼기
-        }
-        
+	    reserveCompletedto.setRequestDesc(requestDesc);
+
+	    String paymentId = hotelReserveCode;      
+	        
 //		ajax로 보내지는 데이터 () 안에 작성
 		HttpRequest request = HttpRequest.newBuilder()
 			    .uri(URI.create("https://api.portone.io/payments/" + paymentId + "?storeId=" + storeId))
@@ -434,6 +461,7 @@ public class HotelController {
 			    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		System.out.println("결제 데이터 : " + response.body());
+		
 		
 		// 결제 단건 조회 응답
 		Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
@@ -472,25 +500,18 @@ public class HotelController {
 			
 		String currency = (String) responseBody.get("currency");//화폐종류
 		String payPrice = reserveCompletedto.getHotelPrice(); //가격
-//		String payStatus = (String) responseBody.get("status"); //결제 상태
-		String hotelReserveCode = reserveCompletedto.getHotelReserveCode();//예약코드	
 		
 		paydto.setApproveNo(approveNo);
 		paydto.setCurrency(currency);
-		paydto.setPayPrice(payPrice);
-//		paydto.setPayStatus(payStatus);
-		
+		paydto.setPayPrice(payPrice);	
 		
 		session.setAttribute("reserveCompletedto", reserveCompletedto);
 		session.setAttribute("approveNo", approveNo);
 		// 결제 금액과 지불된 금액이 같다면
 		if(Double.parseDouble(reserveCompletedto.getHotelPrice()) == paid) {
-			
-			int result = service.inserthotelReserveInfo(reservationData); 
 				//int a = reservationData.setHotelReserveCode(result);
-				paydto.setHotelReserveCode(reservationData.getHotelReserveCode());
+				paydto.setHotelReserveCode(hotelReserveCode);
 				service.insertPayInfo(paydto);
-				session.setAttribute("hotelReserveCode", paydto.getHotelReserveCode());
 			return "1";
 		} else {
 		    return "0";

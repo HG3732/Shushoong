@@ -226,7 +226,19 @@
 	    VALUES
 	     (#{airlineReserveCode}, #{seatGrade}, #{airlineCode})
 	</insert>
-		    
+	
+	<!-- 결제 완료 직전  -->
+	<insert id="insertPayInfo" parameterType="PayDto"> 
+		insert into pay values(
+    		#{approveNo}, #{reserveCorper}, #{cardNum}, #{payPrice}, #{currency}, 'yet', null, null
+		)
+	</insert>
+
+	<update id="updatePayInfo" parameterType="hashmap">
+		Update pay
+		set pay_status = 'paid', airline_reserve_code = #{airlineReserveCode}
+		where approve_no = #{approveNo}
+	</update>  
     
 	<!-- 예약완료 페이지 출력할 값 -->	
 <!-- 	<select>

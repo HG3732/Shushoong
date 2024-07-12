@@ -1,4 +1,3 @@
-let precategory = null;
 let prekeyword = null;
 
 $(loadedHandler);
@@ -8,14 +7,12 @@ function loadedHandler() {
 }
 
 function hotelSearchHandler() {
-	precategory = $('.category option:selected').val();
 	prekeyword = $('#productName').val();
 	
 	$.ajax({
-		url:"/shushoong/admin/manager/product/searchProduct.ajax",
+		url:"/shushoong/business/my/hotel/searchHotel.ajax",
 		method: "post",
-		data: { category : precategory,
-				keyword : prekeyword},
+		data: { keyword : prekeyword},
 		error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
 			}
@@ -29,10 +26,9 @@ function goPage(thisElement) {
 	var currentPageNum = $(thisElement).data('targetpage');
 	
 	$.ajax({
-		url:"/shushoong/admin/manager/product/searchProduct.ajax",
+		url:"/shushoong/business/my/hotel/searchHotel.ajax",
 		method: "post",
-		data: { category : precategory,
-				keyword : prekeyword,
+		data: { keyword : prekeyword,
 				currentPage : currentPageNum},
 		error: function(xhr, status, error) {
 				console.log('AJAX 실패:', error);
@@ -42,8 +38,27 @@ function goPage(thisElement) {
 	})
 }
 
-function deleteHotelHandler(thisElement){
+//호텔 삭제 확인
+function checkDeleteHotelHandler(thisElement){
 	event.preventDefault();
 	event.stopPropagation();
-	console.log($(thisElement).data("hotelcode"));
+	var hotelCode = $(thisElement).data("hotelcode");
+	if(confirm("정말 이 사업장을 삭제하시겠습니까?")) {
+		deleteHotelHandler(hotelCode);	
+	}
+	
+}
+
+//호텔 삭제
+function deleteHotelHandler(hotelCode) {
+	$.ajax({
+		url:"/shushoong/business/my/hotel/deleteHotel.ajax",
+		method: "post",
+		data: { hotelCode : hotelCode },
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	}).done(function(response) {
+		$('#productList').replaceWith(response);
+	})
 }

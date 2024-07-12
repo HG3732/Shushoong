@@ -47,8 +47,7 @@ section .QnA-grid {
 /*     margin-left: 50px; */
 /* } */
 .section-notice .QnA-grid .th-title{
-	text-align: left;
-    margin-left: 150px;
+	text-align: center;
 /* 	margin-left: 80px; */
 }
 
@@ -69,7 +68,7 @@ section .notice-list .td-no{
 
 section .notice-list .td-title{
 	text-align: left;
-	margin-left: 150px;
+	margin-left: 70px;
 }
 
 

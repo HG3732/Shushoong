@@ -136,8 +136,8 @@
 	<!-- 관리자의 사업장 검색 -->
 	<select id="selectProduct" parameterType="hashmap" resultType="ProductDtoRes">
 		select hotel_code, h.hotel_name hotel_name, hotel_eng, hotel_address, hotel_call, hotel_check_in, hotel_check_out,
-			hotel_policy, hotel_intro, hotel_pcount, hotel_loc_cat, business_num, hotel_safety, user_id
-			from hotel h join business_member bm using (business_num)
+			hotel_policy, hotel_intro, hotel_pcount, hotel_loc_cat, hotel_safety, user_id
+			from hotel h join business_member bm using (business_certi)
 		<if test="keyword != null and keyword !=''">
 			<bind name="keyword4" value="'%' + keyword + '%'" />
 			<choose>
@@ -149,9 +149,6 @@
 				</when>
 				<when test="category.equals('userId')">
 					where user_id like #{keyword4}
-				</when>
-				<when test="category.equals('businessNum')">
-					where business_num like #{keyword4}
 				</when>
 			</choose>
 		</if>
@@ -159,7 +156,7 @@
 	
 	<!-- 사업장 갯수 조회(페이징용) -->
 	<select id="selectAllProductCount" parameterType="hashmap" resultType="int">
-		select count(*) count from hotel h join business_member bm using (business_num)  
+		select count(*) count from hotel h join business_member bm using (business_certi)  
 		<if test="keyword != null and keyword !=''">
 			<bind name="keyword4" value="'%' + keyword + '%'" />
 			<choose>
@@ -171,9 +168,6 @@
 				</when>
 				<when test="category.equals('userId')">
 					where user_id like #{keyword4}
-				</when>
-				<when test="category.equals('businessNum')">
-					where business_num like #{keyword4}
 				</when>
 			</choose>
 		</if>

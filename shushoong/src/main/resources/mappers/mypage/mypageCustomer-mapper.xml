@@ -76,7 +76,7 @@
 
 	<!-- 항공 예약내역 리스트 -->
 	<select id="selectReservedAirlineList" parameterType="String" resultType="hashmap">
-		select airline_reserve_code, airline_name, depart_loc, depart_date, depart_time,  arrival_loc, arrival_time, arrival_date, airline_img  
+		select airline_reserve_code, airline_code, airline_name, depart_loc, depart_date, depart_time,  arrival_loc, arrival_time, arrival_date, airline_img  
 		from 
 			(select * from
 				(select * 
@@ -92,7 +92,7 @@
 	
 	<!-- 항공 취소내역 리스트  -->
  	<select id="selectCancelAirlineList" parameterType="String" resultType="hashmap">
-		select airline_reserve_code, airline_name, depart_loc, depart_date, depart_time,  arrival_loc, arrival_time, arrival_date, airline_img 
+		select airline_reserve_code, airline_code, airline_name, depart_loc, depart_date, depart_time,  arrival_loc, arrival_time, arrival_date, airline_img 
 		from 
 			(select * from
 				(select * 
@@ -105,6 +105,10 @@
 			    join pay using (airline_reserve_code)
 		where pay_status = 'cancel' and user_id = #{userId}
 	</select>
+	
+	<!-- 항공 예약 상세정보 -->
+	
+	<!-- 항공 취소 상세정보 -->
 	
 	
 	

@@ -725,16 +725,20 @@ select * from passenger_info
 
 
 ---------------------------------------- 마이페이지 항공 예약 관련
-select airline_reserve_code, airline_name, depart_loc, depart_date, depart_time,  arrival_loc, arrival_time, arrival_date, airline_img   from 
+
+-----총 예약리스트
+select airline_reserve_code, airline_code, airline_name, depart_loc, depart_date, depart_time,  arrival_loc, arrival_time, arrival_date, airline_img  
+from 
 (select * from
 (select * 
 from (
-select * from airline_reserve_info
+select * 
+from airline_reserve_info
     join direct_via using(airline_reserve_code))
     join seat_grade using(airline_code))
     join airline_info using(airline_code))
     join pay using (airline_reserve_code)
-where pay_status = 'paid';
+where pay_status = 'paid' and user_id = #{userId}
 
 
 select * from airline_info;

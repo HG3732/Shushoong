@@ -147,7 +147,7 @@ public class MyPageCustomerController {
 		}
 
 		rttr.addFlashAttribute("message", message);
-		return "redirect:/business/my/information";
+		return "redirect:/customer/my/information";
 	}
 	
 	// 회원 탈퇴

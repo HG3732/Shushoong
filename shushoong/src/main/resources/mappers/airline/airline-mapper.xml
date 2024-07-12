@@ -179,8 +179,8 @@
 	
 	<!-- 예약자정보 입력 및 seq 붙은 예약코드 뽑아내기 -->
 	<insert id="insertReserverInfo" parameterType="AirlineReserverInfoDto" >
-    	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL, RESERVE_TIME)
-    		VALUES (#{airlineReserveCode}||SEQ_AIRC.nextval , #{userId} , #{reservePhone} , #{reserveEmail}, default )
+    	INSERT INTO AIRLINE_RESERVE_INFO (AIRLINE_RESERVE_CODE, USER_ID , RESERVE_PHONE, RESERVE_EMAIL, RESERVE_TIME, DEPART_DATE, ARRIVAL_DATE)
+    		VALUES (#{airlineReserveCode}||SEQ_AIRC.nextval , #{userId} , #{reservePhone} , #{reserveEmail}, default, #{departDate}, #{arrivalDate} )
     	<selectKey keyProperty="airlineReserveCode" resultType="String" order="AFTER">
 			<bind name="code" value="'%' + airlineReserveCode + '%'"/>
 			    SELECT AIRLINE_RESERVE_CODE

@@ -1,5 +1,4 @@
-	
-	function adultNum(){
+function adultNum(){
 			var adult = $("#adult_val").val();
 			
 			var htmlVal = '';
@@ -479,15 +478,16 @@ function reserverInfoInsertFunction(){
 		var userId = $("[name=reserver_name]").val();
 		var reservePhone = $(".reserve_phone").val();
 		var reserveEmail = $(".reserve_email").val();
-		
-		console.log(reservePhone);
-		console.log(reserveEmail);
+		var departDate = $('#one_way_data').val();
+		var arrivalDate = $('#around_data').val();
 		
 		var reserverInfo = {
 		    airlineReserveCode: airlineReserveCode,
 		    userId: userId,
 		    reservePhone: reservePhone,
-		    reserveEmail: reserveEmail
+		    reserveEmail: reserveEmail,
+		    departDate : departDate,
+		    arrivalDate : arrivalDate
 		};
 
 		var reserverInfoString = JSON.stringify(reserverInfo);

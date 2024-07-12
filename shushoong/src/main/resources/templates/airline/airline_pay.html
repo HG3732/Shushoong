@@ -319,8 +319,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			<input type="hidden" th:value="${airlineInfo.airlineName}" id="airline_name_val">
 			<input type="hidden" readonly th:value="${storeId}" class="store_id">
 			<input type="hidden" readonly th:value="${channelKey}" class="channel_key">
-			<input type="text" th:value="${session.departDateArrivalDate}">
-			<input type="text" th:value="${session.departDateArrivalDateReturn}">
+			<input type="hidden" th:value="${session.departDateArrivalDate}" id="one_way_data">
+			<input type="hidden" th:value="${session.departDateArrivalDateReturn}" id="around_data">
 		</section>
 	</th:block>	
 	<div class="wrap-footer">

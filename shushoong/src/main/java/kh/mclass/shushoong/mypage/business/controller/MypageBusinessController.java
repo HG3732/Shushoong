@@ -66,10 +66,10 @@ public class MypageBusinessController {
 		String member = repository.pwdChecking(user.getUsername());
 		if (encoder.matches(userPwd, member)) {
 			log.info("password 확인 완료");
-			return "redirect:/customer/my/information";
+			return "redirect:/business/my/information";
 		} else {
 			rttr.addFlashAttribute("message", "오류");
-			return "redirect:/customer/check/password";
+			return "redirect:/business/check/password";
 		}
 	}
 

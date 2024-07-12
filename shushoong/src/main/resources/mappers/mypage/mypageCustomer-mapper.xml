@@ -13,6 +13,10 @@
 		UPDATE MEMBER SET USER_PWD=#{userPwd}, EMAIL_RECEIVE=#{emailReceive}, MSG_RECEIVE=#{msgReceive}  WHERE USER_ID=#{userId}
 	</update>
 	
+	<update id="secessionAccount">
+		UPDATE MEMBER SET USER_STATUS='1' WHERE USER_ID=#{userId}
+	</update>
+	
 	<!-- 호텔 예약내역 리스트 -->
 	<select id="selectReservedHotelList" parameterType="String" resultType="hashmap">
 	    select hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc 

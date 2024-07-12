@@ -775,3 +775,9 @@ select * from airline_reserve_info;
 		    join pay p on ari.airline_reserve_code = p.airline_reserve_code
 		    join passenger_info pi on ari.airline_reserve_code = pi.airline_reserve_code
 		where p.pay_status = 'paid' and ari.user_id = 'singasong';
+        
+alter table airline_reserve_info
+modify airline_reserve_code varchar2(50);
+commit;
+
+select * from airline_reserve_info;

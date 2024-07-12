@@ -1,9 +1,21 @@
 /* 할인 호텔 캐러셀*/
+.home-img {
+	height: 400px;
+	width: 100%;
+	padding-top : 40px;
+	background-image: url("../images/instancefolder/20230713_201311.jpg");
+	background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.wrap-body {
+	margin-top: 40px;
+}
 
 .wrap-discount-hotel-list {
 	width: 960px;
 	margin: 0 auto;
-	margin-top: 200px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -15,6 +27,11 @@
 .wrap-discount-hotel-list .discount-hotel-title {
 	font-size: 20px;
 	font-weight: 900;
+	color: white;
+    align-self: center;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
 .wrap-discount-hotel-list .discount-hotel-list {
@@ -40,6 +57,7 @@
 	display: flex;
 	flex-direction: row;
 	gap: 20px;
+	background-color: rgba(255, 255, 255, 0.8);
 }
 
 .list-wrapper .discount-hotel-info {
@@ -106,6 +124,7 @@
 .discount-hotel .wrap-price > div:last-child {
 	vertical-align: bottom;
 	line-height: 20px;
+    width: 40px;
 }
 
 .discount-hotel .discount-hotel-name {

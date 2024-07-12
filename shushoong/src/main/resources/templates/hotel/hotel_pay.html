@@ -55,7 +55,7 @@ xmlns:th="http://www.thymeleaf.org">
 							<tr class="tr_first" style="border-top: 3px solid #006AFF;">
 								<th >도시</th>
 								<td style="width: 760px;">
-									<input type="text" readonly th:value="${nation}" onfocus="this.blur()" style="width: 400px; border: none;">
+									<input type="text" readonly th:value="${nation ?: hotelLocCat}" onfocus="this.blur()" style="width: 400px; border: none;">
 								</td>
 							</tr>
 						</thead>

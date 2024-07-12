@@ -33,6 +33,11 @@ public class MypageBusinessService {
 	public int resetPwd(Map<String, Object> paraMap) {
 		return mypageRepository.resetPwd(paraMap);
 	}
+	
+	// 호텔 총 갯수 구하기
+	public int hotelCount(String userId) {
+		return mypageRepository.hotelCount(userId);
+	}
 
 	// 탈퇴
 	public int secessionAccount(String usedId) {

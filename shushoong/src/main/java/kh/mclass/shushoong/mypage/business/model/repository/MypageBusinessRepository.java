@@ -22,10 +22,13 @@ public interface MypageBusinessRepository {
 	// 비밀번호 재설정
 	public int resetPwd(Map<String, Object> paraMap);
 
+	// 호텔 총 갯수 구하기
+	public int hotelCount(String userId);
+
 	// 탈퇴
 	public int secessionAccount(String usedId);
 
-	//내 사업장 검색
+	// 내 사업장 검색
 	public List<ProductDtoRes> selectMyProduct(int pageSize, int pageBlockSize, int currentPageNum, String id,
 			String keyword, RowBounds rowbounds);
 

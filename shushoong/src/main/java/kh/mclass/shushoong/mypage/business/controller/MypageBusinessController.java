@@ -59,7 +59,7 @@ public class MypageBusinessController {
 		return "mypage/business/mypageCheckPwd";
 	}
 
-	@PostMapping(value = "/check/password")
+	@PostMapping(value = "/check/pwd")
 	public String PwdChecking(@RequestParam("userPwd") String userPwd, Authentication auth, RedirectAttributes rttr) {
 
 		User user = (User) auth.getPrincipal();
@@ -69,7 +69,7 @@ public class MypageBusinessController {
 			return "redirect:/business/my/information";
 		} else {
 			rttr.addFlashAttribute("message", "오류");
-			return "redirect:/business/check/password";
+			return "redirect:/business/check/pwd";
 		}
 	}
 
@@ -78,7 +78,9 @@ public class MypageBusinessController {
 	public String correctInfoBusiness(Principal principal, ModelMap modelMap) {
 		String userId = principal.getName();
 		MemberDto dto = repository.selectOne(userId);
+		int countHotel = repository.hotelCount(userId);
 		modelMap.addAttribute("dto", dto);
+		modelMap.addAttribute("allHotel",countHotel);
 		return "mypage/business/mypageBusinessCorrectInfo";
 	}
 

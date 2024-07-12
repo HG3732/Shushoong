@@ -144,6 +144,7 @@ button#people_lineup >img{
 section.according_section{
 	width: 960px;
 	margin: auto;
+	
 }
 
 
@@ -157,6 +158,7 @@ div.according{
 	padding : 40px;
 	background-color: white;
 	z-index: 999;
+	display: none;
 }
 					/* 이/착륙 국가 */
 div.accoding_title{
@@ -226,7 +228,7 @@ div#depart_accoding_wrap{
     border-radius: 20px;
     background-color: white;
     padding: 10px;
-    display: block;
+    display: none;
     
 }
 

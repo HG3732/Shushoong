@@ -239,7 +239,7 @@ button.depart_accoding_value:hover , button.arrival_accoding_value:hover{
     border-radius: 20px;
     background-color: white;
     padding: 40px;
-    display: block;
+    display: none;
     
 }
 

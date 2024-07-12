@@ -16,116 +16,116 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 </head>
 <body>
 
-	<div class="wrapper">
-		<div class="wrap-header">
-			<header>
- 				<div th:replace="~{common/header :: Header}"></div>
-				<div class="hrline">
-					<hr>
-				</div>
-			</header>
-		</div>
-		<div class="wrap-body">
-			<div class="wrap-">
-			<!-- 여기부터 작성 -->
-				<div class="wrap-aside">
-					<aside>
-						<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
-					</aside>
-				</div>
-				
-				<div class="main_section">
-					<section class="list_bar">
-						<div>
-							<button class="display_list_button" id="reserved_btn"> 완료된 예약</button>
-							<button class="display_list_button" id="canceled_btn"> 취소된 예약</button>
-						</div>
-					</section>		
-							
-					<section class="reserved_list">
-						<div class="list_wrap">
-							<div class="reserved_code">
-								<div>예약 코드</div>
-								<div>hijklimop</div>
-							</div>
-							<div class="reserved_airline_code">
-								<div>항공편</div>
-								<div>
-									<div>
-										<img alt="" th:src="@{/images/airline_logo.png}">
-										<div>hijklmnop</div>
-									</div>
-									<div>2024-15-45(월)</div>
-									<div>
-										<div>인천</div>
-										<div>32:61 . 38:99</div>
-										<div>중국</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</section>
-					
-					<section class="canceled_list">
-						<div class="list_wrap">
-						
-							<div class="canceled_code">
-								<div>예약 코드</div>
-								<div>abcdefg</div>
-							</div>
-							<div class="canceled_airline_code">
-								<div>항공편</div>
-								<div>
-									
-									<div>
-										<img alt="항공사 사진" th:src="@{/images/airline_logo.png}">
-										<div>abcdefg</div>
-									</div>
-									
-									<div>2024-07-22(월)</div>
-									<div>
-										<div>후쿠오카</div>
-										<div>14:40 . 16:00</div>
-										<div>인천</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-				</div>
-					
-			
+<div class="wrapper">
+	<div class="wrap-header">
+		<header>
+				<div th:replace="~{common/header :: Header}"></div>
+			<div class="hrline">
+				<hr>
 			</div>
+		</header>
+	</div>
+	
+	<div class="wrap-body">
+		<div class="wrap-aside">
+			<aside>
+				<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+			</aside>
+		</div>
+		
+		<div class="main_section">
+			<div class="list_bar">
+				<div class="btn_wrap">
+					<button class="display_list_button" id="reserved_btn"> 완료된 예약</button>
+					<button class="display_list_button" id="canceled_btn"> 취소된 예약</button>
+				</div>
+			</div>		
+			
+			<a th:each="reservelist : ${reserveList}" class="reserve_wrap" th:href="@{/customer/mypage/reserved/airline/{userId}/{airlineCode}(userId=${userId},airlineCode=${reservelist.AIRLINE_CODE})}">
+				<input type="hidden" name="userId" class="userId" th:value="${userId}"/>
+				<input type="hidden" th:value="${reservelist.AIRLINE_CODE}">
+				<div class="reserved_list">	
+					<div class="y reserve_code">
+						<div class="p">예약번호</div>
+						<div class="code_num"  th:text="${reservelist.AIRLINE_RESERVE_CODE}"></div>
+					</div>
+					<div class="y check_in_out">
+						<div class="p">항공편</div>
+						<div class="airline_info">
+							<div class="img_wrap">
+								<img th:src="@{${reservelist.AIRLINE_IMG}}" class="airline_img">
+								<div th:text="${reservelist.AIRLINE_NAME}"></div>
+							</div>
+							<div class="time" th:text="${reservelist.DEPART_DATE}"></div>
+							<div class="time" th:utext="${reservelist.DEPART_LOC} + ' ' + ${reservelist.DEPART_TIME} + ' ~ ' + ${reservelist.ARRIVAL_LOC} + ' ' + ${reservelist.ARRIVAL_TIME}" style="font-size: var(--font4);"></div>
+						</div>
+					</div>						
+				</div>
+			</a>
+			
+			<a class="cancel_wrap" th:each="cancellist : ${cancelList}" th:href="@{/customer/mypage/cancel/airline/{userId}/{airlineCode}(userId=${userId},airlineCode=${cancellist.AIRLINE_CODE})}">
+				<input type="hidden" name="userId" class="userId" th:value="${userId}"/>
+				<input type="hidden" th:value="${cancellist.AIRLINE_CODE}">
+				<div class="canceled_list">
+					<div class="y reserve_code">
+						<div class="p">예약번호</div>
+						<div class="code_num" th:text="${cancellist.AIRLINE_RESERVE_CODE}"></div>
+					</div>
+					<div class="y check_in_out">
+						<div class="p">항공편</div>
+						<div class="airline_info">
+							<div class="img_wrap">
+								<img th:src="@{${cancellist.AIRLINE_IMG}}" class="airline_img">
+								<div th:text="${cancellist.AIRLINE_NAME}"></div>
+							</div>
+							<div class="time" th:text="${cancellist.DEPART_DATE}"></div>
+							<div class="time" th:utext="${cancellist.DEPART_LOC} + ' ' + ${cancellist.DEPART_TIME} + ' ~ ' + ${cancellist.ARRIVAL_LOC} + ' ' + ${cancellist.ARRIVAL_TIME}" style="font-size: var(--font4);"></div>
+						</div>
+					</div>															
+				</div>
+			</a>
+
 		</div>
 	</div>
-	<div class="wrap-footer">
-  		<div th:replace="~{common/footer :: Footer}"></div> 
-	</div>
+</div>
 	
-	<script>
-		$("#reserved_btn").on("click",function(){
-			console.log("clicked");
-			$(".reserved_list").css("display","block");
-			$(".canceled_list").css("display","none");
-			
-			$("#reserved_btn").css("border-bottom","none");
-			$("#reserved_btn").css("border-top","3px solid var(--color_blue_1)");
-			$("#canceled_btn").css("border-top","none");
-			$("#canceled_btn").css("border-bottom","3px solid var(--color_blue_1)");
-			
-		});
-		$("#canceled_btn").on("click",function(){
-			console.log("clicked");
-			$(".reserved_list").css("display","none");
-			$(".canceled_list").css("display","block");
-			
-			$("#reserved_btn").css("border-top","none");
-			$("#reserved_btn").css("border-bottom","3px solid var(--color_blue_1)");
-			$("#canceled_btn").css("border-bottom","none");
-			$("#canceled_btn").css("border-top","3px solid var(--color_blue_1)");
-		});
-	</script>
+<div class="wrap-footer">
+ 		<div th:replace="~{common/footer :: Footer}"></div> 
+</div>
 	
+<script>
+
+$(loadedHandler)
+
+function loadedHandler(){
+    
+	$('.reserve_wrap').css('display', 'block');
+	$('.cancel_wrap').css('display', 'none');
+	
+	$("#reserved_btn").on("click",reserveHandler);
+	
+	$("#canceled_btn").on("click",cancelHandler);
+}
+
+function reserveHandler(){
+	
+	$('.reserve_wrap').css('display', 'block');
+	$('.cancel_wrap').css('display', 'none');
+	$("#canceled_btn").css("border-top","none").css("border-bottom","3px solid var(--color_blue_1)");
+	$("#reserved_btn").css("border-bottom","none").css("border-top","3px solid var(--color_blue_1)");
+}
+
+function cancelHandler(){
+	
+	$('.reserve_wrap').css('display', 'none');
+	$('.cancel_wrap').css('display', 'block');
+	
+	$("#reserved_btn").css("border-top","none").css("border-bottom","3px solid var(--color_blue_1)");
+	$("#canceled_btn").css("border-bottom","none").css("border-top","3px solid var(--color_blue_1)");
+}
+
+</script>
+<script th:src="@{/js/mypage/customer/mypageCustomerReservedAirlineList.js}" type="text/javascript"></script>
 	
 </body>
 </html>

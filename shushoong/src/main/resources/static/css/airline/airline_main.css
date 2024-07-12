@@ -3,13 +3,13 @@
 .pointer {
   cursor: pointer;
 }
-section{
-	font-family: 'SOYOMapleNormarTTF';
-}
+
 section.search_section{
 	height: 350px;
     position: relative;
-    background-color: green;
+    background-image: url(../../images/항공_리사이징.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 div.search{
 	width: 960px;
@@ -18,7 +18,7 @@ div.search{
 	border-radius : 20px;
 	margin: auto;
 	position : relative;
-	top: 135px;
+	top: 155px;
 	background-color: rgba(255, 255, 255, .7);
 }	
 
@@ -26,6 +26,9 @@ button.tablinks{
 	background: none;
     border: none;
     font-size: 17px;
+    font-family: SOYOMapleRegularTTF;
+    font-weight: bold;
+    margin-right: 20px;
 }
 
 button#one_way_btn{

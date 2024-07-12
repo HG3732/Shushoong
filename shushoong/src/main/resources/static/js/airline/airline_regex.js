@@ -142,23 +142,115 @@
 	}
 	
 	function submitBtnCheckFunction(){
+		var domestic = $("#domestic_val").val();
 		var list = Number($("#adult_val").val())+Number($("#child_val").val())+Number($("#baby_val").val());
 		console.log(list);
-		var i,j;
-		if(changedPhoneNumJ.test($('[name=reserver_phone_number]').val())){	//휴대전화번호
-			if(emailJ.test($("[name=reserver_email]").val())){//이메일 주소
-					
-			}
+		var i,firC , lasC , birC , natC , pasC , expC;
+		
+		$("input[type=text]").blur();
+		if(domestic == "O"){
+			
 		}
-		for(i=0,j=0;i<list;i++){
-			console.log(i);
+		
+		for(i=0,firC=0,lasC=0,birC=0,natC=0,pasC=0,expC=0 ;i<list;i++){
 			console.log($("input[name=passenger_firstName]").eq(i).val());
 			console.log(firstNameJ.test( $("input[name=passenger_firstName]").eq(i).val()));
 			if(firstNameJ.test( $("input[name=passenger_firstName]").eq(i).val())){
-				j++
+				firC++
+			}else{
+				$("input[name=passenger_firstName]")[i].scrollIntoView({
+					behavior : "smooth",
+					block : "center"
+				});
 			}
-			console.log(j);
+			
+			if(lastNameJ.test( $("input[name=passenger_lastName]").eq(i).val())){
+				lasC++
+			}else{
+				$("input[name=passenger_lastName]")[i].scrollIntoView({
+					behavior : "smooth",
+					block : "center"
+				});
+			}
+			
+			if(changedDateJ.test( $("input[name=passenger_birth]").eq(i).val())){
+				birC++
+			}else{
+				$("input[name=passenger_birth]")[i].scrollIntoView({
+					behavior : "smooth",
+					block : "center"
+				});
+			}
+			
+			if($("select[name=passenger_nation]").eq(i).val() != 0){
+				natC++
+			}else{
+				$("select[name=passenger_nation]")[i].scrollIntoView({
+					behavior : "smooth",
+					block : "center"
+				});
+			}
+			
+			if(passportJ.test( $("input[name=passport_num]").eq(i).val())){
+				pasC++
+			}else{
+				$("input[name=passport_num]")[i].scrollIntoView({
+					behavior : "smooth",
+					block : "center"
+				});
+			}
+			
+			if(changedDateJ.test( $("input[name=expiration_date]").eq(i).val())){
+				expC++
+			}else{
+				$("input[name=expiration_date]")[i].scrollIntoView({
+					behavior : "smooth",
+					block : "center"
+				});
+			}
+			
+			
 		}
+		
+		
+		
+		
+		
+			console.log("firC"+firC);
+			console.log("lasC"+lasC);
+			console.log("birC"+birC);
+			console.log("natC"+natC);
+			console.log("pasC"+pasC);
+			console.log("expC"+expC);
+			
+//			결제창으로 이동
+			if(changedPhoneNumJ.test($('[name=reserver_phone_number]').val())){	//휴대전화번호
+				if(emailJ.test($("[name=reserver_email]").val())){//이메일 주소
+						
+//			국제선
+					if(domestic == "I"){
+						if(firC == list && lasC == list && birC == list && natC == list && pasC == list &&  expC == list){
+//							reserverInfoInsertFunction();
+						}else{
+							alert("기입을 부탁드립니다.");
+						}
+//			국내선
+					}else if(domestic == "O"){
+						if(firC == list && lasC == list && birC == list && natC == list){
+							reserverInfoInsertFunction();
+						}else{
+							alert("기입을 부탁드립니다.");
+						}
+					}else{
+						alert("죄송합니다. 국내/국제 인식 기능이 오류났습니다.");
+					}
+					
+				}
+			}
+		
+		
+		
+		
 	}
 				
 		

@@ -27,7 +27,7 @@ function createCalendar(){
 			var month = info.dateStr.substr(5, 2);
 			var day = info.dateStr.substr(8, 2);
 			if(now > year+month+day) {	//현재 날짜 이전의 시간을 선택한다면
-				alert("현재 날짜 이전은 선택하실 수 없습니다.");
+				alert("익일 이전은 선택하실 수 없습니다.");
 			} else {
 				if(select_status == 0){	//체크인 날짜 선택
 					var startdate = $('.check-in-date').text(year + "년" + month + "월" + day + "일");

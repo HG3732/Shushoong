@@ -51,7 +51,8 @@ input, input:focus, textarea, textarea:focus {
 	flex-direction: row;
 	font-weight: bold;
 	border-bottom: 1px dashed #006AFF;
-	margin: 0 20px 0 20px;
+	border-top: 6px solid var(--color_blue_1);
+	/* margin: 0 20px 0 20px; */
 	
 }
 .write-table .write-title input{
@@ -71,7 +72,7 @@ input, input:focus, textarea, textarea:focus {
 	flex-direction: row;
 	font-weight: bold;
 	border-bottom: 1px dashed #006AFF;
-	margin: 0 20px 0 20px;
+	/* margin: 0 20px 0 20px; */
 }
 .write-table .write-cat select{
 	border-radius: 10px;
@@ -81,7 +82,7 @@ input, input:focus, textarea, textarea:focus {
 .write-table .write-file{
 	display: flex;
 	flex-direction: row;
-	margin: 0 20px 0 20px;
+	/* margin: 0 20px 0 20px; */
 }
 .write-table .write-file input{
 	height: 25px;

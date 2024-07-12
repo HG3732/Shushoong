@@ -11,5 +11,6 @@ public class AirlineReserverInfoDto {
 	private String userId;
 	private String reservePhone;
 	private String reserveEmail;
-
+	private String departDate;
+	private String arrivalDate;
 }

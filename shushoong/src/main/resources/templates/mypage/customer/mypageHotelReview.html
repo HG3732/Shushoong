@@ -37,7 +37,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 			
 				
-<label></label>
 
 			<section class="hotel_review_list">
 				<div>내가 쓴 리뷰들</div>
@@ -275,7 +274,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 											<legend style="font-size: var(--font2); padding: 0 5px;">제목</legend>
 											<input th:value="${list.REVIEW_TITLE}" readonly="readonly" type="text" style="border: none; width: 370px;" />
 										</fieldset>
-										<input class="textarea" rows="15" cols="50" th:value="${list.REVIEW_COMMENT}" readonly="readonly"></textarea>
+										<div class="textarea" rows="15" cols="50" th:text="${list.REVIEW_COMMENT}"></div>
 										<button type="button" class="btn_submit">리뷰 삭제</button>
 									</form>
 									<!-- 리뷰 form  -->

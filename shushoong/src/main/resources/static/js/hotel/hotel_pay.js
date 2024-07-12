@@ -49,12 +49,9 @@ function phoneHandler(){
 	var phone  = $(this).val().trim();
     var regPhone = /^[0-9]*$/;
     var regPhone2 = /^[0-9]{11}$/; 
-	    if (!regPhone.test(phone)) {
-			$('#phoneError').text('번호만 입력해주세요.');
-		}else if(){
-			
-		}	
-	     else {
+	    if (!regPhone.test(phone) ||regPhone2.test(phone)) {
+			$('#phoneError').text('"-"제외 11자, 번호만 입력.');
+	     } else {
 			reserveBtnStatus();
 			$('#phoneError').text('');
 	    }	

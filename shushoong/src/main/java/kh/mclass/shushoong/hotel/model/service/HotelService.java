@@ -26,12 +26,12 @@ public class HotelService {
 		return hotelRepository.selectHotHotelList();
 	}
 	
-	public List<HotelDtoRes> selectAllHotelList(String loc, String people, String keyword, String maxPrice, String sortBy, String sortTo) {
-		return hotelRepository.selectAllHotelList(loc, people, keyword, maxPrice, sortBy, sortTo);
+	public List<HotelDtoRes> selectAllHotelList(String loc, String roomCap, String keyword, String maxPrice, String sortBy, String sortTo) {
+		return hotelRepository.selectAllHotelList(loc, roomCap, keyword, maxPrice, sortBy, sortTo);
 	}
 	
-	public Integer selectMaxRoomlPrice(String loc, String people, String keyword) {
-		return hotelRepository.selectMaxRoomlPrice(loc, people, keyword);
+	public Integer selectMaxRoomlPrice(String loc, String roomCap, String keyword) {
+		return hotelRepository.selectMaxRoomlPrice(loc, roomCap, keyword);
 	}
 	
 	public List<String> selectLikeHotelList(String code, String userId){

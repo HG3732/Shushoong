@@ -22,7 +22,7 @@
 					<span th:text="${air.airlineName}"></span>
 				</div>
 				<div class="airinfo depart-info">
-					<div th:text="${air.departDate}" class="info date"></div>
+					<div th:text="${arrivalDate2}" class="info date"></div>
 					<div th:text="${air.departTime}" class="info time"></div>
 					<div th:text="${air.departLoc}" class="info loc"></div>
 				</div>
@@ -34,7 +34,8 @@
 					<div th:text="${air.flightTime}" class="flytime"></div>
 				</div>
 				<div class="airinfo arr-info">
-					<div th:text="${air.arrivalDate}" class="info date"></div>
+					<div th:if="${air.plusDate}" th:text="${arrivalDate2} + ' +1'" class="info date"></div>
+					<div th:if="!${air.plusDate}" th:text="${arrivalDate2}" class="info date"></div>
 					<div th:text="${air.arrivalTime}" class="info time"></div>
 					<div th:text="${air.arrivalLoc}" class="info loc"></div>
 				</div>

@@ -91,9 +91,11 @@ public class HotelController {
 	public String hotelList(Model model, HttpSession session, String loc, String room, String adult, String child, String nation, String checkIn, String checkOut) {
 		Integer child1 = Integer.parseInt(child)/2;
 		Integer adult1 = Integer.parseInt(adult);
-		String people = String.valueOf(child1+adult1);
-		List<HotelDtoRes> result = service.selectAllHotelList(loc, people, null, null, null, null);
-		Integer maxPrice = service.selectMaxRoomlPrice(loc, people, null);
+		Integer people = child1+adult1;
+		int roomCap = people/Integer.parseInt(room);
+		if(people%Integer.parseInt(room) > 0.5) roomCap++;
+		List<HotelDtoRes> result = service.selectAllHotelList(loc, String.valueOf(roomCap), null, null, null, null);
+		Integer maxPrice = service.selectMaxRoomlPrice(loc, String.valueOf(roomCap), null);
 		
 		//좋아요 여부 검색
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -105,6 +107,7 @@ public class HotelController {
 		model.addAttribute("hotelList", result);
 		model.addAttribute("maxPrice", maxPrice);
 		model.addAttribute("likeList", likeList);
+		model.addAttribute("loc", loc);
 		session.setAttribute("nation", nation);
 		session.setAttribute("checkIn", checkIn);
 		session.setAttribute("checkOut", checkOut);
@@ -120,14 +123,14 @@ public class HotelController {
 			Model model,
 			HttpSession session,
 			String loccode,
-			String people,
+			String roomCap,
 			String keyword,
 			String maxPrice,
 			String sortBy,
 			String sortTo
 			) {
-		List<HotelDtoRes> result = service.selectAllHotelList(loccode, people, keyword, maxPrice, sortBy, sortTo);
-		Integer maxPrice2 = service.selectMaxRoomlPrice(loccode, people, keyword);
+		List<HotelDtoRes> result = service.selectAllHotelList(loccode, roomCap, keyword, maxPrice, sortBy, sortTo);
+		Integer maxPrice2 = service.selectMaxRoomlPrice(loccode, roomCap, keyword);
 		//session의 이름이 43행에 있는 List와 같아야 덮어쓰기됨, 다를 경우 기존 List + 새 List 출력
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId = authentication.getName();

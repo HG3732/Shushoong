@@ -288,8 +288,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .isEmpty{
-	border: 2px solid var(--color_blue_1);
-    border-radius: 10px;
     padding: 40px;
     margin: 0 60px;
     text-align: center;

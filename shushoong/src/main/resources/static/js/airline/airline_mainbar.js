@@ -282,3 +282,31 @@
 		}
 		
 	
+		$("button#btn_for_hidden_submit").on("click",function(){
+			if(
+				$("#hidden_ticket_type").val()!="" &&
+				$("#hidden_depart_value").val()!="" &&
+				$("#hidden_arrival_value").val()!="" &&
+				$("#hidden_depart_date").val()!="" &&
+				$("#hidden_adult").val()!="" &&
+				$("#hidden_child").val()!="" &&
+				$("#hidden_baby").val()!="" &&
+				$("#hidden_seat_grade").val()!="" 
+			){
+				if($("#hidden_ticket_type").val()==1){
+					$("#hidden_submit").click()
+					
+				}else if($("#hidden_ticket_type").val()==2){
+					if($("#hidden_arrival_date").val()!=""){
+						$("#hidden_submit").click()
+					}else{
+						alert("값을 입력해 주세요.");
+					}
+				}else{
+					alert("값을 입력해 주세요.");
+				}
+			}else{
+				alert("값을 입력해 주세요.");
+			}
+			
+		})

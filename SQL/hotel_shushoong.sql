@@ -766,3 +766,12 @@ from airline_reserve_info ari
 where sg.airline_code = 'YP10107261250';
 
 select * from airline_reserve_info;
+
+		select distinct ari.airline_reserve_code, ai.airline_code, ai.airline_name, ari.depart_date, ai.depart_loc, ai.depart_time, ai.arrival_loc, ai.arrival_time, ari.arrival_date, ai.airline_img   
+		from airline_reserve_info ari
+		    join direct_via dv on ari.airline_reserve_code = dv.airline_reserve_code
+		    join seat_grade sg on dv.airline_code = sg.airline_code
+		    join airline_info ai on sg.airline_code = ai.airline_code
+		    join pay p on ari.airline_reserve_code = p.airline_reserve_code
+		    join passenger_info pi on ari.airline_reserve_code = pi.airline_reserve_code
+		where p.pay_status = 'paid' and ari.user_id = 'singasong';

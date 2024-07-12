@@ -421,7 +421,8 @@ public class AirlineController {
 			@RequestParam String airlineCodeReturn, @RequestParam String airlineCode,
 			@RequestParam String seatPriceReturn, @RequestParam String seatGradeReturn, String flightNoReturn,
 			Principal principal, HttpSession session) {
-
+			LocalDate currentYear = LocalDate.now();
+			int thisYear = currentYear.getYear();
 		// 왕복일 시
 		if (airlineCodeReturn != null && !airlineCodeReturn.equals("")) {
 			System.out.println("오는 비행기 항공코드 : " + airlineCodeReturn);
@@ -454,7 +455,7 @@ public class AirlineController {
 				md.addAttribute("arrivalDate", airlineInfoReturn.getArrivalDate());
 				md.addAttribute("arrivalLoc", airlineInfoReturn.getArrivalLoc());
 				md.addAttribute("arrivaldate", airlineInfoReturn.getArrivalDate());
-				session.setAttribute("departDateArrivalDateReturn", airlineInfoReturn.getDepartDate()+", "+airlineInfoReturn.getArrivalDate());
+				session.setAttribute("departDateArrivalDateReturn", thisYear+"년"+ airlineInfoReturn.getDepartDate()+", "+ thisYear+"년"+airlineInfoReturn.getArrivalDate());
 			}
 		}
 
@@ -485,7 +486,7 @@ public class AirlineController {
 		session.setAttribute("arrivalTime", airlineInfo.getArrivalTime());
 		session.setAttribute("departDate", airlineInfo.getDepartDate());
 		session.setAttribute("arrivalDate", airlineInfo.getArrivalDate());
-		session.setAttribute("departDateArrivalDate", airlineInfo.getDepartDate()+", "+airlineInfo.getArrivalDate());
+		session.setAttribute("departDateArrivalDate",  thisYear+"년"+airlineInfo.getDepartDate()+", "+ thisYear+"년"+airlineInfo.getArrivalDate());
 		
 
 
@@ -507,7 +508,7 @@ public class AirlineController {
 		System.out.println("오는 편 티켓 값: " + seatPriceReturn);
 		System.out.println("좌석 등급 : " + seatGrade);
 		System.out.println("리턴 좌석 등급 : " + seatGradeReturn);
-		System.out.println("departDate+arrivalDate :"+ airlineInfo.getDepartDate()+", "+airlineInfo.getArrivalDate() );
+		System.out.println("departDate+arrivalDate :"+ thisYear+"년"+airlineInfo.getDepartDate()+", "+ thisYear+"년"+airlineInfo.getArrivalDate() );
 
 		md.addAttribute("storeId", storeId);
 		md.addAttribute("channelKey", channelKey);

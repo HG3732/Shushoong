@@ -317,10 +317,13 @@ input[type=text]:focus{
 	outline: none;
 }
 
-input.textarea {
+div.textarea {
   resize: none;
   border-radius: 10px;
   height: 231px;
+  width: 404px;
+  border : 1px solid black;
+  padding : 10px;
 }
 
 input.textarea:focus{
@@ -462,4 +465,9 @@ div#value_null{
 	color: var(--color_gray_4);
 }
 
-
+button{
+	cursor: pointer;
+}
+input[type=text]{
+	cursor:default;
+}

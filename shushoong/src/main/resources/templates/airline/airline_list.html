@@ -10,7 +10,12 @@
 <link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+
 <link th:href="@{/css/airline/airline_searchbar.css}" rel="stylesheet" />
+
+
+
+
 <link th:href="@{/css/airline/core.css}" rel="stylesheet" />
 <link th:href="@{/css/airline/airline_list.css}" rel="stylesheet" />
 <link th:href="@{/css/basic/core.css}" rel="stylesheet" />
@@ -60,7 +65,7 @@ div#people_lineup_sit_accoding{
     border-radius: 20px;
     background-color: white;
     padding: 10px;
-    display: block;
+   /*  display: block; */
     
 }
 #depart_accoding{
@@ -285,7 +290,7 @@ div#people_lineup_sit_accoding{
 	<script type="text/javascript">
 		$(loadedHandler);
 		function loadedHandler() {
-			$(".according").css("display","none"); // 검색 바
+			/* $(".according").css("display","none"); // 검색 바 */
 			setDepartLeftValue();
 			setDepartRightValue();
 			setDepartInitialValues(); // 시간대 출발

@@ -10,27 +10,20 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.catalina.startup.ClassLoaderFactory.Repository;
-import org.apache.http.auth.AUTH;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,18 +31,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.google.gson.Gson;
 
+import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
-import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
 import kh.mclass.shushoong.mypage.customer.model.service.MypageCustomerService;
 import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/customer")
@@ -157,6 +148,23 @@ public class MyPageCustomerController {
 
 		rttr.addFlashAttribute("message", message);
 		return "redirect:/business/my/information";
+	}
+	
+	// 회원 탈퇴
+	@GetMapping("/secessionAccount.hidden")
+	public String secessionAccount(HttpSession session, Principal principal) {
+		String userId = principal.getName();
+		String message = null;
+		
+		int result = repository.secessionAccount(userId);
+		try {
+			if(result == 0) {
+				return "redirect:/logout";
+			}
+		} catch (Exception e) {
+			return "redirect:/mypage/customer/mypageCorrectInfoCustomer";
+		}
+		return "redirect:/home";
 	}
 
 	// 마이페이지 호텔 리스트 페이지로 이동

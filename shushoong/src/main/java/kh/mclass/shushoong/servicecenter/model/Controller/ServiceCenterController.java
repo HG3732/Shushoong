@@ -143,10 +143,15 @@ public class ServiceCenterController {
                 .map(GrantedAuthority::getAuthority)
                 .findFirst()
                 .orElse("anonymousUser"); // 기본값 설정
+		if (!userGrade.equals("ROLE_ANONYMOUS")) {
 		model.addAttribute("userGrade",userGrade);
 		model.addAttribute("result", service.selectOneQna(faqId));
 		model.addAttribute("qnaFileDto", service.selectOneQnaFile(faqId));
-		return "servicecenter/viewQnA";
+			return "servicecenter/viewQnA";
+		} else {
+			return "member/login";
+		}
+		
 	}
 	
 	@PostMapping("/support/qna/write/answer.ajax")
@@ -167,10 +172,15 @@ public class ServiceCenterController {
                 .findFirst()
                 .orElse("anonymousUser"); // 기본값 설정
 		
+		if (!userGrade.equals("ROLE_ANONYMOUS")) {
 		md.addAttribute("userGrade",userGrade);
 		System.out.println("유저 등급 : " + userGrade);
-		return "servicecenter/writeQna";
+			return "servicecenter/writeQna";
+		} else {
+			return "member/login";
+		}
 	}
+	
 	
 	@PostMapping("/support/qna/write")
 	public String PostQnaWrite (String askTitle, String category, @RequestParam("qnaFile") MultipartFile[] qnaFile,
@@ -224,6 +234,7 @@ public class ServiceCenterController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	    
 	    return "redirect:/support/qna/list";
 	}
 	
@@ -375,6 +386,7 @@ public class ServiceCenterController {
 		System.out.println("noticeFile : " + noticeFile);
 		System.out.println("noticeCategory : " + noticeCategory);
 		
+		
 	    NoticeDto dto = new NoticeDto();
 	    dto.setNoticeTitle(noticeTitle);
 	    dto.setNoticeContent(noticeContent);
@@ -417,8 +429,7 @@ public class ServiceCenterController {
 	        e.printStackTrace();
 	        System.out.println("파일 첨부 에러");
 	    }
-	    
-		return "redirect:/support/notice/list";
+			return "redirect:/support/notice/list";
 	}
 	
 	// 공지사항 수정
@@ -430,18 +441,20 @@ public class ServiceCenterController {
                 .map(GrantedAuthority::getAuthority)
                 .findFirst()
                 .orElse("anonymousUser"); // 기본값 설정
-		
 		System.out.println("유저 등급 : " + userGrade);
+		
+		if (!userGrade.equals("ROLE_ANONYMOUS")) {
+		
 		List<NoticeFileDto> fileDtoList = noticeService.selectOneNoticeFile(noticeId);
 		md.addAttribute("noticeDto", noticeService.selectOneNotice(noticeId));
 		md.addAttribute("noticeFileDto", fileDtoList);
 		System.out.println("noticeCategory : " + noticeCategory);
 		System.out.println("파일 개수 : " + fileDtoList.size());
-		if (!userGrade.equals("ROLE_ANONYMOUS")) {
-			return "servicecenter/notice_update";
-	} else {
-		return "member/login";
-	}
+			
+		return "servicecenter/notice_update";
+		} else {
+			return "member/login";
+		}
 	}
 	
 	@PostMapping("/support/notice/update")

@@ -276,8 +276,8 @@ where hotel_fac_cat='주차';
             	select hotel_code, avg(hotel_facility) f, avg(hotel_clean) c, avg(hotel_conven) co, avg(hotel_kind) k 
             	from hotel_review join hotel h using(hotel_code) where h.hotel_loc_cat= 'OS' group by hotel_code)) using(hotel_code);
                 
-                
-select * from hotel_like;
+select max(trunc(hotel_price * (100 - room_discount) / 100)) as hotel_price from V_hotel_list
+            	where SUBSTR(hotel_code, 1, 3) = '0SE' and room_cap = '2';
 
 insert all 
     into hotel_like values ('ex1', '2OS001', 1)

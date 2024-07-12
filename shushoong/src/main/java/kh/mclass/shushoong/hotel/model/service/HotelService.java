@@ -31,6 +31,8 @@ public class HotelService {
 	}
 	
 	public Integer selectMaxRoomlPrice(String loc, String roomCap, String keyword) {
+		System.out.println("service parameter : " + loc + roomCap + keyword);
+		System.out.println("=====================maxPrice at service : " + hotelRepository.selectMaxRoomlPrice(loc, roomCap, keyword));
 		return hotelRepository.selectMaxRoomlPrice(loc, roomCap, keyword);
 	}
 	

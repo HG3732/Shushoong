@@ -4,7 +4,7 @@
 
 	<!-- hotel_main에서 가장 많이 찾은 숙소 표시용 SQL문 -->
 	<select id="selectHotHotelList" resultType="HotelDtoRes">
-		select hotel_code, hotel_name, to_char(hotel_price, '999,999,999') as hotel_price, room_discount, hotel_pic
+		select hotel_code, hotel_name, hotel_price, room_discount, hotel_pic
 		from V_hotel_list
 		<!-- where SUBSTR(hotel_code, 1, 1) = #{countrycode} -->
 		order by hotel_pcount desc
@@ -14,7 +14,7 @@
 	<!-- 호텔 이름, 영어이름, 주소, 최저가(인원수 고려), 사진 1장 -->
 	<select id="selectAllHotelList" parameterType="hashmap" resultType="HotelDtoRes">
 		SELECT hotel_code, hotel_name, hotel_eng, hotel_address, 
-		       TO_CHAR(hotel_price, '999,999,999') AS hotel_price, 
+		       hotel_price, 
 		       room_discount, hotel_pic, hotel_score, hotel_review_num, rn
 		FROM (
 		    SELECT hotel_code, hotel_name, hotel_eng, hotel_address, 
@@ -22,7 +22,7 @@
 		           ROW_NUMBER() OVER (PARTITION BY hotel_code ORDER BY hotel_price) AS rn
 		    FROM V_hotel_list
 		    WHERE SUBSTR(hotel_code, 1, 3) = #{code} 
-		    AND room_cap &gt;= #{roomCap}
+		    AND room_cap = #{roomCap}
 		)
 		WHERE rn = 1
         <if test="keyword != null and keyword !='' ">
@@ -30,7 +30,7 @@
         	and hotel_name LIKE #{keyword2}
         </if>
         <if test="maxPrice != null and maxPrice !=''">
-        	and hotel_price &lt;= ${maxPrice}
+        	and TRUNC(hotel_price * (100 - room_discount) / 100) &lt;= ${maxPrice}
         </if>
         <if test="sortBy != null and sortBy !='' ">
 	       	<choose>
@@ -57,7 +57,7 @@
 	
 	<!-- 호텔 최고가(슬라이드바 표시용) -->
 	<select id="selectMaxRoomlPrice" parameterType="hashmap" resultType="Integer">
-            	select max(hotel_price) from V_hotel_list
+            	select MAX(TRUNC(hotel_price * (100 - room_discount) / 100)) from V_hotel_list
             	where SUBSTR(hotel_code, 1, 3) = #{code} and room_cap = #{roomCap}
             <if test="keyword != null and keyword !='' ">
 	        	<bind name="keyword2" value="'%' + keyword + '%'"/>

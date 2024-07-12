@@ -38,7 +38,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<span class="count_review" th:text="'(' + ${hotel.hotelReviewNum} + ')'"></span>
 					</div>
 				</div>
-				<div class="wrap-price"><div class="hotel_price" th:text="${hotel.hotelPrice}"></div><div> 원~</div></div>
+				<div class="wrap-price">
+					<th:block th:if="${hotel.roomDiscount > 0}">
+						<div class="price-origin" th:text="${#numbers.formatInteger(hotel.hotelPrice, 3, 'COMMA')}"></div>
+						<div class="sale-ratio" th:text="${hotel.roomDiscount + '% 할인 !'}"></div>
+					</th:block>
+					<div class="hotel_price" th:text="${#numbers.formatInteger(hotel.priceDiscounted, 3, 'COMMA')}"></div>
+					<div> 원~</div>
+				</div>
 			</a>
 		</th:block>
 	</div>

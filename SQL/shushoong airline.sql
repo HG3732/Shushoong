@@ -168,4 +168,12 @@ select * from hotel_review
 DELETE FROM hotel_review
     WHERE hotel_reserve_code = #{hotelResCode} AND user_id = #{userID};
 
-select* FROM hotel_review WHERE hotel_reserve_code = 'customer' AND user_id = '' 
+select* FROM hotel_review WHERE hotel_reserve_code = 'customer' AND user_id = '' ;
+
+select * from airline_info;
+
+ SELECT DBMS_RANDOM.NORMAL AS RANDOM_NUM FROM DUAL;
+ SELECT DBMS_RANDOM.STRING('X', 5) FROM DUAL;
+ SELECT DBMS_RANDOM.VALUE(12, 18) FROM DUAL;
+ SELECT FLOOR(5.1214) FROM DUAL;
+ commit;

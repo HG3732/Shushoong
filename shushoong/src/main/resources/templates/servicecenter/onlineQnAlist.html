@@ -74,9 +74,11 @@
 							<button type="button" class="searchQnAList">검색</button>
 						</div>
 						
-						<div class="qna-write" th:if="${userGrade} == 'customer' or ${userGrade} == 'business'">
-						<a th:href="@{/support/qna/write}"><button type="button" class="qna-write-btn">문의하기</button></a>
-						</div>
+						<th:block th:if="${#authorization.expression('hasAnyAuthority(''customer'')') || #authorization.expression('hasAnyAuthority(''business'')')}">
+							<div class="qna-write" th:if="${userGrade} == 'customer' or ${userGrade} == 'business'">
+								<button type="button" th:onclick="|location.href='@{/support/qna/write}'|" class="qna-write-btn">문의하기</button>
+							</div>
+						</th:block>
 					</div>
 				</section>
 			</div>

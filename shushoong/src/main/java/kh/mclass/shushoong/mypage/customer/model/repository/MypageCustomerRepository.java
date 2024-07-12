@@ -41,6 +41,9 @@ public interface MypageCustomerRepository {
 	
 	//항공 예약리스트
 	public List<Map<String, String>> selectCancelAirlineList(String userId);
+
+	//호텔 항공 상세정보
+	public List<Map<String, Object>> selectOneReservedAirline(String userId, String airlineCode);
 	
 	//숙소 좋아요
 	public List<HotelDtoRes> selectListInterestedHotel(String userId);

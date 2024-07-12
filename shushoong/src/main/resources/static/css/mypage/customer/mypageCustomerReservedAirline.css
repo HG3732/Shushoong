@@ -1,0 +1,293 @@
+@charset "UTF-8";
+
+.main_section{
+	width: 960px;
+    margin: 0 auto;
+    margin-top: 80px;
+}
+
+.hotel_name{
+	margin: 80px 0 20px 130px;
+	font-family: 'SOYOMapleBoldTTF';
+	font-size: var(--font1);
+}
+
+.reserved_list{
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-auto-rows: minmax(45px, auto);
+	align-items: center;
+	width: 700px;
+	border-top: 2px solid #006AFF;
+	border-bottom: 2px solid #006AFF;
+	margin: 0 auto;
+}
+
+.reserve_num{
+	grid-column: 1/ 2;
+	grid-row: 1/ 2;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.p{
+	position: absolute;
+	transform: translate(10px, 90%);
+	font-family: 'SOYOMapleBoldTTF';
+}
+
+.airline_reserve_code{
+	grid-column: 2 / 6;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);
+	vertical-align: middle;
+}
+
+.code_num {
+    position: absolute;
+    transform: translate(20px, 15px);
+}
+
+.airline{
+	grid-column: 1/ 2;
+	grid-row: 2/ 3;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.airline_name{
+	grid-column: 2 / 6;
+	grid-row: 2/ 3;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);		
+}
+
+.airline_name_ko{
+	position: absolute;
+    transform: translate(20px, 15px);
+}
+
+.passenger{
+	grid-column: 1/ 2;
+	grid-row: 3/ 4;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);
+}
+
+.passenger_name{
+	grid-column: 2 / 6;
+	grid-row: 3/ 4;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);	
+}
+
+.full_name{
+	position: absolute;
+    transform: translate(20px, 15px);	
+}
+
+.depart{
+	grid-column: 1/ 2;
+	grid-row: 4/ 5;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);	
+}
+
+.depart_date{
+	grid-column: 2 / 6;
+	grid-row: 4/ 5;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);		
+}
+
+.depart_date_detail{
+	position: absolute;
+    transform: translate(20px, 15px);		
+}
+
+.loc_time{
+	grid-column: 1/ 2;
+	grid-row: 5/ 6;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-bottom: 1px solid var(--color_blue_1);
+	border-right: 1px solid var(--color_blue_1);	
+}
+
+.loc_time_info{
+	grid-column: 2 / 6;
+	grid-row: 5/ 6;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid var(--color_blue_1);		
+}
+
+.loc_time_detail{
+	position: absolute;
+    transform: translate(20px, 15px);		
+}
+
+.pay{
+	grid-column: 1/ 2;
+	grid-row: 6/ 7;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: var(--color_blue_2);
+	border-right: 1px solid var(--color_blue_1);	
+}
+
+.payment{
+	grid-column: 2 / 6;
+	grid-row: 6/ 7;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.totalpay{
+	position: absolute;
+    transform: translate(20px, 15px);		
+}
+
+.btn{
+	margin-top: 20px;
+	text-align: end;
+	margin-right: 130px;
+}
+
+.reserve_btn{
+	padding: 10px 30px;
+	background-color: var(--color_blue_2);
+	border: none;
+	border-radius: 20px;
+	font-size: var(--font4);
+}
+
+.reserve_btn:hover{
+	cursor: pointer;
+	background-color: var(--color_blue_1);
+	color: white;
+}
+
+.review_btn{
+	padding: 10px 30px;
+	background-color: var(--color_blue_2);
+	border: none;
+	border-radius: 20px;
+	font-size: var(--font4);
+}
+
+.review_btn:hover{
+	cursor: pointer;
+	background-color: var(--color_blue_1);
+	color: white;
+}
+
+/* ==================== 결제 취소 모달 =================== */
+#modal_esc {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    
+    position: fixed;
+    top: 0;
+	left: 0; 
+	bottom: 0; 
+	right: 0;
+	background: rgba(0, 0, 0, 0.6);
+    z-index : 100;
+}
+
+.modal_window {      
+    width: 350px;
+    height: 200px;
+    border: 3px solid #006AFF;
+    border-radius: 20px;
+    padding: 20px;
+	background-color: white;
+	
+	margin-left: 40%;
+	margin-top: 300px;
+	
+}
+
+.esc {
+	width: 30px;
+	border: none;
+	padding: 5px 10px;
+	margin-bottom: 30px;
+	
+	border-radius: 50%;
+	background-color: var(--color_blue_2);
+	
+	margin-left: 276px;
+}
+
+.esc:hover {
+	cursor: pointer;
+	background-color: var(--color_blue_1);
+	color: white;
+}
+
+.btn_wrap{
+	text-align: center;
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.yes{
+	background-color: var(--color_blue_2);
+	border: none;
+	border-radius: 20px;
+	padding: 5px 30px;
+}
+
+.yes:hover{
+	cursor: pointer;
+	background-color: var(--color_blue_1);
+	color: white;
+}
+
+.no{
+	background-color: var(--color_blue_2);
+	border: none;
+	border-radius: 20px;
+	padding: 5px 30px;
+}
+
+.no:hover{
+	cursor: pointer;
+	background-color: var(--color_blue_1);
+	color: white;
+}
+

@@ -99,11 +99,20 @@ public class AirlineController {
 				}
 			}
 			
-//			String departDate2 = departDate.substring(5);
-//			String arrivalDate2 = arrivalDate.substring(5);
-//			
-//			System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
-//			System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
+			if (arrivalDate.equals("")) {
+				String arrivalDate2 = "";
+				md.addAttribute("arrivalDate2", arrivalDate2);
+				System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
+			}else {
+				String arrivalDate2 = arrivalDate.substring(5);
+				md.addAttribute("arrivalDate2", arrivalDate2);
+				System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
+			}
+			
+				String departDate2 = departDate.substring(5);
+				System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
+				md.addAttribute("departDate2", departDate2);
+			
 			
 			System.out.println("컨트롤러 airline data: " + airlineData);
 			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType, seatGrade);
@@ -119,8 +128,7 @@ public class AirlineController {
 			System.out.println("seatGrade : " + seatGrade);
 			System.out.println("ticketType: " + ticketType);
 
-//			md.addAttribute("departDate2", departDate2);
-//			md.addAttribute("arrivalDate2", arrivalDate2);
+
 			md.addAttribute("departDate", departDate);
 			md.addAttribute("arrivalDate", arrivalDate);
 			md.addAttribute("departLoc", departLoc);
@@ -169,16 +177,19 @@ public class AirlineController {
 			}
 			}
 		}
-//		String departDate2 = departDate.substring(5);
-//		String arrivalDate2 = arrivalDate.substring(5);
-//		
-//		System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
-//		System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
-
-//		Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
-		// 모델에 데이터를 추가하여 뷰로 전달
-//		md.addAttribute("departDate2", arrivalDate2);
-//		md.addAttribute("arrivalDate2", departDate2);
+		if (arrivalDate.equals("")) {
+			String arrivalDate2 = "";
+			md.addAttribute("arrivalDate2", arrivalDate2);
+			System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
+		}else {
+			String arrivalDate2 = arrivalDate.substring(5);
+			md.addAttribute("arrivalDate2", arrivalDate2);
+			System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
+		}
+		
+			String departDate2 = departDate.substring(5);
+			System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
+			md.addAttribute("departDate2", departDate2);
 		md.addAttribute("departDate", departDate);
 		md.addAttribute("arrivalDate", arrivalDate);
 		md.addAttribute("departLoc", departLoc);

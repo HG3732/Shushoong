@@ -18,26 +18,32 @@ xmlns:th="http://www.thymeleaf.org"
 					
 					<div id="one_way" class="tabcontent">
 						<div class="depart_arrival_flex">
-							<button id="depart" class="according_btn pointer"  onclick="accordingInfo(event,'depart_accoding')">출발지</button>
+							<!-- 기본 값 -->
+							<button id="depart" class="according_btn pointer" th:if="${departLoc} == null" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
+							<!-- 출발지 값이 있을 때 -->
+							<button id="depart" class="according_btn pointer" th:if="${departLoc} != null" th:text="${departLoc}" onclick="accordingInfo(event,'depart_accoding')">출발지</button>
 							<img class="type" alt="one_way" th:src="@{/images/one_way.png}">
-							<button id="arrival" class="according_btn pointer" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
+							<!-- 기본 값 -->
+							<button id="arrival" class="according_btn pointer" th:if="${arrivalLoc} == null" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
+							<!-- 도착지 값이 있을 때 -->
+							<button id="arrival" class="according_btn pointer" th:if="${arrivalLoc} != null" th:text="${arrivalLoc}" onclick="accordingInfo(event,'arrival_accoding')">도착지</button>
 						</div>
 						<div>
 							<button id="one_way_date" class="according_btn pointer" onclick="accordingInfo(event,'date_accoding')">
-							    <!-- <div th:if="${departDate != null and arrivalDate != null}" th:text="${departDate2} + '/' + ${arrivalDate2}">날짜 선택</div>
-								<div th:if="${departDate != null and arrivalDate == null} " th:text="${departDate2}">날짜 선택</div> -->
-								<div>날짜 선택</div>
+							    <div th:if="${departDate != null and arrivalDate != null}" th:text="${departDate2} + ' / ' + ${arrivalDate2}">날짜 선택</div>
+								<div th:if="${departDate != null and arrivalDate == null} " th:text="${departDate2}">날짜 선택</div>
+								<div th:if="${departLoc} == null and ${arrivalLoc}">날짜 선택</div>
 								<img alt="달력 사진" th:src="@{/images/calendar.png}">
 							</button>
 						</div>
 						
 						<div>
 							<button id=people_lineup class="according_btn pointer" onclick="accordingInfo(event,'people_lineup_sit_accoding')">
-								<!-- <div id="people_lineup_text" th:if="${child != null and baby != null and seatGrade == '1'}" th:text=" '일등석/성인' + ${adult} + '/소아' + ${child} + '/유아' + ${baby}">이코노미석/성인1/소아0/유아0</div>
+								<div id="people_lineup_text" th:if="${child != null and baby != null and seatGrade == '1'}" th:text=" '일등석/성인' + ${adult} + '/소아' + ${child} + '/유아' + ${baby}">이코노미석/성인1/소아0/유아0</div>
 								<div id="people_lineup_text" th:if="${child != null and baby != null and seatGrade == '2'}" th:text="'비지니스/성인' + ${adult} + '/소아' + ${child} + '/유아' + ${baby}">이코노미석/성인1/소아0/유아0</div>
-								<div id="people_lineup_text" th:if="${child != null and baby != null and seatGrade == '3'}" th:text=" '이코노미/성인' + ${adult} + '/소아' + ${child} + '/유아' + ${baby}">이코노미석/성인1/소아0/유아0</div> -->
-								<!-- <div id="people_lineup_text" th:unless="${child != null and baby != null}">이코노미석/성인1/소아0/유아0</div> -->
-								<div id="people_lineup_text" >이코노미석/성인1/소아0/유아0</div>
+								<div id="people_lineup_text" th:if="${child != null and baby != null and seatGrade == '3'}" th:text=" '이코노미/성인' + ${adult} + '/소아' + ${child} + '/유아' + ${baby}">이코노미석/성인1/소아0/유아0</div> 
+								<div id="people_lineup_text" th:unless="${child != null and baby != null}">이코노미석/성인1/소아0/유아0</div>
+								<!-- <div id="people_lineup_text" >이코노미석/성인1/소아0/유아0</div> -->
 								<img alt="사람" th:src="@{/images/person.png}">
 							</button>
 							

@@ -9,7 +9,9 @@ section{
 section.search_section{
 	height: 350px;
     position: relative;
-    background-color: green;
+    background-image: url(../../images/항공_리사이징.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 div.search{
 	width: 960px;

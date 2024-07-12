@@ -34,51 +34,62 @@ public class MypageBusinessService {
 		return mypageRepository.resetPwd(paraMap);
 	}
 	
+	// 호텔 총 갯수 구하기
+	public int hotelCount(String userId) {
+		return mypageRepository.hotelCount(userId);
+	}
+
+	// 탈퇴
+	public int secessionAccount(String usedId) {
+		return mypageRepository.secessionAccount(usedId);
+	}
+
 	public int selectMyAllProductCount(String id, String keyword) {
 		return mypageRepository.selectMyAllProductCount(id, keyword);
 	}
-	
-	//내 호텔 리스트
-	public List<ProductDtoRes> selectMyProduct(int pageSize, int pageBlockSize, int currentPageNum, String id, String keyword) {
-		
+
+	// 내 호텔 리스트
+	public List<ProductDtoRes> selectMyProduct(int pageSize, int pageBlockSize, int currentPageNum, String id,
+			String keyword) {
+
 		int offset = (currentPageNum - 1) * pageSize;
-		
+
 		RowBounds rowBounds = new RowBounds(offset, pageSize);
-		
+
 		return mypageRepository.selectMyProduct(pageSize, pageBlockSize, currentPageNum, id, keyword, rowBounds);
 	}
-	
-	//호텔 삭제로 이전
+
+	// 호텔 삭제로 이전
 	public int insertHotelDeleted(String hotelCode) {
 		return mypageRepository.insertHotelDeleted(hotelCode);
 	}
-	
-	//호텔 삭제
+
+	// 호텔 삭제
 	public int deleteHotel(String hotelCode) {
 		return mypageRepository.deleteHotel(hotelCode);
 	}
 
-	//사업자 등록
+	// 사업자 등록
 	public int insertCerti(String businessCerti, String businessRegit, String userId) {
 		return mypageRepository.insertCerti(businessCerti, businessRegit, userId);
 	}
-	
-	//호텔 등록
+
+	// 호텔 등록
 	public int insertHotel(HotelReqDto dto) {
 		return mypageRepository.insertHotel(dto);
 	}
-	
-	//호텔 사진 등록
+
+	// 호텔 사진 등록
 	public int insertHotelPic(String hotelCode, List<String> urls) {
 		return mypageRepository.insertHotelPic(hotelCode, urls);
 	}
-	
-	//호텔 편의 시설 등록
+
+	// 호텔 편의 시설 등록
 	public int insertHotelFac(String hotelCode, List<String> hotelFacs) {
 		return mypageRepository.insertHotelFac(hotelCode, hotelFacs);
 	}
-	
-	//호텔 방 등록
+
+	// 호텔 방 등록
 	public int insertHotelRoom(String hotelCode, List<HotelRoomDto> rooms) {
 		return mypageRepository.insertHotelRoom(hotelCode, rooms);
 	}

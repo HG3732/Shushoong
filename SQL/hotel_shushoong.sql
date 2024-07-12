@@ -740,12 +740,12 @@ from airline_reserve_info
     join pay using (airline_reserve_code)
 where pay_status = 'paid' and user_id = #{userId};
 
-select airline_reserve_code, airline_img, airline_name, first_name, last_name, depart_date, depart_loc, depart_time, arrival_loc, arrival_time from 
+select airline_reserve_code, airline_img, airline_name, first_name, last_name, ari.depart_date, depart_loc, depart_time, arrival_loc, arrival_time from 
 (select  *  from 
 (select * from
 (select * 
 from (
-select * from airline_reserve_info
+select * from airline_reserve_info ari
     join direct_via using(airline_reserve_code))
     join seat_grade using(airline_code))
     join airline_info using(airline_code))
@@ -753,4 +753,31 @@ select * from airline_reserve_info
     join passenger_info using(airline_reserve_code)
 where airline_code = 'YP10107261250';
 
-select * from airline_info;
+select * from airline_reserve_info;
+
+
+select ari.airline_reserve_code, ai.airline_code, ai.airline_name, ari.depart_date, ai.depart_loc, ai.depart_time, ai.arrival_loc, ai.arrival_time, ari.arrival_date, ai.airline_img   
+from airline_reserve_info ari
+    join direct_via dv on ari.airline_reserve_code = dv.airline_reserve_code
+    join seat_grade sg on dv.airline_code = sg.airline_code
+    join airline_info ai on sg.airline_code = ai.airline_code
+    join pay p on ari.airline_reserve_code = p.airline_reserve_code
+    join passenger_info pi on ari.airline_reserve_code = pi.airline_reserve_code
+where sg.airline_code = 'YP10107261250';
+
+select * from airline_reserve_info;
+
+		select distinct ari.airline_reserve_code, ai.airline_code, ai.airline_name, ari.depart_date, ai.depart_loc, ai.depart_time, ai.arrival_loc, ai.arrival_time, ari.arrival_date, ai.airline_img   
+		from airline_reserve_info ari
+		    join direct_via dv on ari.airline_reserve_code = dv.airline_reserve_code
+		    join seat_grade sg on dv.airline_code = sg.airline_code
+		    join airline_info ai on sg.airline_code = ai.airline_code
+		    join pay p on ari.airline_reserve_code = p.airline_reserve_code
+		    join passenger_info pi on ari.airline_reserve_code = pi.airline_reserve_code
+		where p.pay_status = 'paid' and ari.user_id = 'singasong';
+        
+alter table airline_reserve_info
+modify airline_reserve_code varchar2(50);
+commit;
+
+select * from airline_reserve_info;

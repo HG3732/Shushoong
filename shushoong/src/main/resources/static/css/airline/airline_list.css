@@ -619,4 +619,6 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
     font-size: 30px;
     font-weight: bold;
 }
-
+body > div.wrapper > div.wrap-main > div > div.searchbar > section.search_section > div{
+	margin-top: 50px;
+}

@@ -381,3 +381,14 @@ input[type="radio"]:checked + label{
 	font-family: 'SOYOMapleBoldTTF';
 	font-size: var(--font2);
 }
+.gender_man {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.gender_woman {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}

@@ -99,6 +99,7 @@ public class AirlineController {
 				}
 			}
 			
+			// 출발/도착일 앞에 년도 제거 
 			if (arrivalDate.equals("")) {
 				String arrivalDate2 = "";
 				md.addAttribute("arrivalDate2", arrivalDate2);
@@ -108,11 +109,27 @@ public class AirlineController {
 				md.addAttribute("arrivalDate2", arrivalDate2);
 				System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
 			}
-			
 				String departDate2 = departDate.substring(5);
 				System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
 				md.addAttribute("departDate2", departDate2);
-			
+				
+				// 출발/도착시간 비교
+			for(AirlineInfoDto airlineInfo : airlineData) {
+				String departTime = airlineInfo.getDepartTime().replace(":", "");
+				String arrivalTime = airlineInfo.getArrivalTime().replace(":", "");
+				
+				int departTimeCompare = Integer.parseInt(departTime);
+				int arrivalTimeCompare = Integer.parseInt(arrivalTime);
+				
+				System.out.println("departTime : " + departTimeCompare + "arrivalTime : " + arrivalTimeCompare);
+				if (departTimeCompare > arrivalTimeCompare) {
+					airlineInfo.setPlusDate(true);
+					System.out.println("여기 통과안함???===========");
+					System.out.println(departTimeCompare > arrivalTimeCompare);
+				}else {
+					airlineInfo.setPlusDate(false);
+				}
+			}
 			
 			System.out.println("컨트롤러 airline data: " + airlineData);
 			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType, seatGrade);
@@ -127,7 +144,6 @@ public class AirlineController {
 			System.out.println("arrivalLoc : " + arrivalLoc);
 			System.out.println("seatGrade : " + seatGrade);
 			System.out.println("ticketType: " + ticketType);
-
 
 			md.addAttribute("departDate", departDate);
 			md.addAttribute("arrivalDate", arrivalDate);
@@ -177,6 +193,8 @@ public class AirlineController {
 			}
 			}
 		}
+		
+		//출발/도착일 앞에 년도 제거
 		if (arrivalDate.equals("")) {
 			String arrivalDate2 = "";
 			md.addAttribute("arrivalDate2", arrivalDate2);
@@ -186,10 +204,45 @@ public class AirlineController {
 			md.addAttribute("arrivalDate2", arrivalDate2);
 			System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
 		}
-		
 			String departDate2 = departDate.substring(5);
 			System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
 			md.addAttribute("departDate2", departDate2);
+			
+		// 출발/도착시간 비교
+		
+		// 선택된 항공 출발/도착시간 비교
+		String departTimeSelectOne = selectOneAirline.getDepartTime().replace(":", "");
+		String arrivalTimeSelectOne = selectOneAirline.getArrivalTime().replace(":", "");
+		
+		int departTimeSelect = Integer.parseInt(departTimeSelectOne);
+		int arrivalTimeSelect = Integer.parseInt(arrivalTimeSelectOne);
+		
+		System.out.println("선택된 항공 출발 시간 : " + departTimeSelect);
+		System.out.println("선택된 항공 도착 시간 : " + arrivalTimeSelectOne);
+		if (departTimeSelect > arrivalTimeSelect) {
+			selectOneAirline.setPlusDate(true);
+		}else {
+			selectOneAirline.setPlusDate(false);
+		}
+		
+		// 돌아오는 항공
+		for(AirlineInfoDto airlineInfo : airlineReturnData) {
+			String departTime = airlineInfo.getDepartTime().replace(":", "");
+			String arrivalTime = airlineInfo.getArrivalTime().replace(":", "");
+			
+			int departTimeCompare = Integer.parseInt(departTime);
+			int arrivalTimeCompare = Integer.parseInt(arrivalTime);
+			
+			System.out.println("departTime : " + departTimeCompare + "arrivalTime : " + arrivalTimeCompare);
+			if (departTimeCompare > arrivalTimeCompare) {
+				System.out.println("여기 통과안함???===========");
+				airlineInfo.setPlusDate(true);
+				System.out.println(departTimeCompare > arrivalTimeCompare);
+			}else {
+				airlineInfo.setPlusDate(false);
+			}
+		}
+			
 		md.addAttribute("departDate", departDate);
 		md.addAttribute("arrivalDate", arrivalDate);
 		md.addAttribute("departLoc", departLoc);
@@ -368,7 +421,8 @@ public class AirlineController {
 			@RequestParam String airlineCodeReturn, @RequestParam String airlineCode,
 			@RequestParam String seatPriceReturn, @RequestParam String seatGradeReturn, String flightNoReturn,
 			Principal principal, HttpSession session) {
-
+			LocalDate currentYear = LocalDate.now();
+			int thisYear = currentYear.getYear();
 		// 왕복일 시
 		if (airlineCodeReturn != null && !airlineCodeReturn.equals("")) {
 			System.out.println("오는 비행기 항공코드 : " + airlineCodeReturn);
@@ -389,6 +443,8 @@ public class AirlineController {
 				md.addAttribute("arrivalDate", "");
 				md.addAttribute("arrivalLoc", "");
 				md.addAttribute("arrivaldate", "");
+				session.setAttribute("departDateArrivalDateReturn", "");
+
 			} else if (airlineInfoReturn != null) {
 				md.addAttribute("ticketType", 2);
 				md.addAttribute("airlineName", airlineInfoReturn.getAirlineName());
@@ -399,6 +455,7 @@ public class AirlineController {
 				md.addAttribute("arrivalDate", airlineInfoReturn.getArrivalDate());
 				md.addAttribute("arrivalLoc", airlineInfoReturn.getArrivalLoc());
 				md.addAttribute("arrivaldate", airlineInfoReturn.getArrivalDate());
+				session.setAttribute("departDateArrivalDateReturn", thisYear+"년"+ airlineInfoReturn.getDepartDate()+", "+ thisYear+"년"+airlineInfoReturn.getArrivalDate());
 			}
 		}
 
@@ -429,6 +486,8 @@ public class AirlineController {
 		session.setAttribute("arrivalTime", airlineInfo.getArrivalTime());
 		session.setAttribute("departDate", airlineInfo.getDepartDate());
 		session.setAttribute("arrivalDate", airlineInfo.getArrivalDate());
+		session.setAttribute("departDateArrivalDate",  thisYear+"년"+airlineInfo.getDepartDate()+", "+ thisYear+"년"+airlineInfo.getArrivalDate());
+		
 
 
 		if (principal != null) {
@@ -449,6 +508,7 @@ public class AirlineController {
 		System.out.println("오는 편 티켓 값: " + seatPriceReturn);
 		System.out.println("좌석 등급 : " + seatGrade);
 		System.out.println("리턴 좌석 등급 : " + seatGradeReturn);
+		System.out.println("departDate+arrivalDate :"+ thisYear+"년"+airlineInfo.getDepartDate()+", "+ thisYear+"년"+airlineInfo.getArrivalDate() );
 
 		md.addAttribute("storeId", storeId);
 		md.addAttribute("channelKey", channelKey);

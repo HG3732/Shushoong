@@ -67,15 +67,17 @@ div.tabcontent div:nth-child(3) {
 	width : 246px;
 }
 
-div.tabcontent > label{
-	
+div.tabcontent > button.btn_for_hidden_submit{
+	background : none;
 	border : none;
 	color : black;
 	background-color: #BCEFFF;
 	width: 60px;
 }
 
-div.tabcontent > label:hover{
+div.tabcontent > button.btn_for_hidden_submit:hover{
+	
+	background : none;
 	border : none;
 	color : white;
 	background-color: rgb(0,106,255);

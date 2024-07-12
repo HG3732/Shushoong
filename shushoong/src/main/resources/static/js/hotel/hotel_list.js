@@ -45,10 +45,11 @@ function likeHandler(thisElement){
 }
 
 function loginHandler() {
-	console.log("localhost:8081" + contextRoot + "login");
+	event.preventDefault();
+	event.stopPropagation();
 	alert("로그인을 하셔야 좋아요할 수 있습니다.");
-	location.href="http://localhost:8081" + contextRoot + "login.html";
-	return '';
+	location.href="../login";
+	return false;
 }
 
 /* const inputLeft = document.getElementById("input-left"); */

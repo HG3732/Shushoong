@@ -99,34 +99,12 @@ public class AirlineController {
 				}
 			}
 			
-			String departDate2 = departDate.substring(5);
-			String arrivalDate2 = arrivalDate.substring(5);
+//			String departDate2 = departDate.substring(5);
+//			String arrivalDate2 = arrivalDate.substring(5);
+//			
+//			System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
+//			System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
 			
-			System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
-			System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
-			
-//            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MM-dd");
-//
-//            try {
-//            	
-//                LocalDate departDateParsed = departDate != null && !departDate.isEmpty() ? LocalDate.parse(departDate, inputFormatter) : null;
-//                LocalDate arrivalDateParsed = arrivalDate != null && !arrivalDate.isEmpty() ? LocalDate.parse(arrivalDate, inputFormatter) : null;
-//
-//
-//                String formattedDepartDate = departDateParsed != null ? departDateParsed.format(outputFormatter) : "";
-//                String formattedArrivalDate = arrivalDateParsed != null ? arrivalDateParsed.format(outputFormatter) : "";
-//
-//                md.addAttribute("formattedDepartDate", formattedDepartDate);
-//                md.addAttribute("formattedArrivalDate", formattedArrivalDate);
-//
-//                System.out.println("서치바 출발 일자 : " + formattedDepartDate);
-//                System.out.println("서치바 도착 일자 : " + formattedArrivalDate);
-//
-//            } catch (DateTimeParseException e) {
-//                e.printStackTrace();
-//            }
-            
 			System.out.println("컨트롤러 airline data: " + airlineData);
 			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType, seatGrade);
 
@@ -141,8 +119,8 @@ public class AirlineController {
 			System.out.println("seatGrade : " + seatGrade);
 			System.out.println("ticketType: " + ticketType);
 
-			md.addAttribute("departDate2", departDate2);
-			md.addAttribute("arrivalDate2", arrivalDate2);
+//			md.addAttribute("departDate2", departDate2);
+//			md.addAttribute("arrivalDate2", arrivalDate2);
 			md.addAttribute("departDate", departDate);
 			md.addAttribute("arrivalDate", arrivalDate);
 			md.addAttribute("departLoc", departLoc);
@@ -191,16 +169,16 @@ public class AirlineController {
 			}
 			}
 		}
-		String departDate2 = departDate.substring(5);
-		String arrivalDate2 = arrivalDate.substring(5);
-		
-		System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
-		System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
+//		String departDate2 = departDate.substring(5);
+//		String arrivalDate2 = arrivalDate.substring(5);
+//		
+//		System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
+//		System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
 
 //		Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType);
 		// 모델에 데이터를 추가하여 뷰로 전달
-		md.addAttribute("departDate2", arrivalDate2);
-		md.addAttribute("arrivalDate2", departDate2);
+//		md.addAttribute("departDate2", arrivalDate2);
+//		md.addAttribute("arrivalDate2", departDate2);
 		md.addAttribute("departDate", departDate);
 		md.addAttribute("arrivalDate", arrivalDate);
 		md.addAttribute("departLoc", departLoc);

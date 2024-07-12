@@ -44,7 +44,7 @@ function saveInfoHandler() {
 	} else {
 		$.ajax({
 			type: "post",
-			url: "/shushoong/customer/changePwd.ajax",
+			url: "/shushoong/customer/changeInfo.ajax",
 			data: { userPwd: userPwd, emailReceive: emailReceive, msgReceive: msgReceive },
 			success: function() {
 				alert("정보 변경에 성공했습니다.");

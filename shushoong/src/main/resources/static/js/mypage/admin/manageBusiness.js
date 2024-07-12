@@ -12,7 +12,6 @@ function loadedHandler() {
 /* 회원 아이디 키워드로 검색 */
 function memberSearchHandler() {
 	keyword = $('#userId1').val();
-	console.log(keyword);
 	
 	$.ajax({
 		url:"/shushoong/admin/manager/business/searchMember.ajax",

@@ -83,9 +83,10 @@
 			$("input[name=passenger_birth]").blur(function(){ //생년월일
 				
 				if(dateJ.test($(this).val())){
-					var birth = $('[name=passenger_birth]').val();
+					console.log($(this).val());
+					var birth = $(this).val();
 					var birth2 = birth.substring(0,4)+"-"+birth.substring(4, 6)+ "-"+ birth.substring(6, 8);
-					$('[name=passenger_birth]').val(birth2);
+					$(this).val(birth2);
 					
 					$(this).parent().parent().css("height","60px")
 					$(this).parent().children(".errorJ").css("display","none")
@@ -116,9 +117,9 @@
 			$("input[name=expiration_date]").blur(function(){ //여권 만료일
 				
 				if(dateJ.test($(this).val())){
-					var expiredDate = $('[name=expiration_date]').val();
+					var expiredDate = $(this).val();
 					var expiredDate2 = expiredDate.substring(0,4)+"-"+expiredDate.substring(4, 6)+ "-"+ expiredDate.substring(6, 8);
-					$('[name=expiration_date]').val(expiredDate2);
+					$(this).val(expiredDate2);
 					if(passportJ.test($(this).parent().parent().children().children("input[name=passport_num]").val())){
 						$(this).parent().parent().css("height","60px")
 					}

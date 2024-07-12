@@ -73,7 +73,12 @@ public class HotelController {
 	public String hotelMain(Model model, HttpSession session) {
 		List<HotelDtoRes> hotHotelList = service.selectHotHotelList();
 		model.addAttribute("hotHotelList", hotHotelList);
-		
+		session.removeAttribute("nation");
+		session.removeAttribute("checkIn");
+		session.removeAttribute("checkOut");
+		session.removeAttribute("adult");
+		session.removeAttribute("child");
+		session.removeAttribute("room");
 //		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        System.out.println("유저 아이디 : " + authentication.getName());
 //        System.out.println("유저 등급 : " + authentication.getAuthorities());
@@ -104,13 +109,12 @@ public class HotelController {
 		session.setAttribute("checkIn", checkIn);
 		session.setAttribute("checkOut", checkOut);
 		session.setAttribute("adult", adult);
-		System.out.println("adult >>>>>>>>>>>>>>>>>>>>>>>>>> "+adult);
 		session.setAttribute("child", child);
 		session.setAttribute("room", room);
-		System.out.println("session.nation : "+(String)session.getAttribute("nation"));
 		return "hotel/hotel_list";
 	}
 
+	//리스트 정렬
 	@GetMapping("/hotel/list/sort.ajax")
 	public String hotelListSort(
 			Model model,
@@ -134,6 +138,7 @@ public class HotelController {
 		return "hotel/hotel_list_section";
 	}
 	
+	//가격 조건 추가
 	@GetMapping("/hotel/list/price.ajax")
 	public String hotelPriceSort(
 			Model model,

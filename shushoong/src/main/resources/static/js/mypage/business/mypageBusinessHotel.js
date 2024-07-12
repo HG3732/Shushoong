@@ -8,6 +8,5 @@ function loadedHandler() {
 
 function hotelRegisterHandler(){
 	window.location.href = 'hotel/register';
-	
 }
 

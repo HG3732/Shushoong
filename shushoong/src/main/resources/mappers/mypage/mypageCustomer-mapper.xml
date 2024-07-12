@@ -70,13 +70,6 @@
 		update pay set pay_status = 'cancel' where hotel_reserve_code = #{paymentId}
 	</update>
 	
-	<select id="selectListInterestedHotel" resultType="HotelDtoRes">
-		SELECT x.hotel_code,x.hotel_name , z.hotel_picture as hotel_pic
-			FROM hotel x
-			    join hotel_like y ON x.hotel_code=y.hotel_code 
-			    join (select * from (SELECT hotel_pic.*,ROW_NUMBER() OVER(PARTITION BY hotel_pic.hotel_code ORDER BY hotel_pic.hotel_picture DESC) rn from hotel_pic) where rn = 1) z on x.hotel_code = z.hotel_code 
-			        WHERE y.user_id = #{userId}
-	</select>
 
 	<!-- 항공 예약내역 리스트 -->
 	<select id="selectReservedAirlineList" parameterType="String" resultType="hashmap">
@@ -115,7 +108,15 @@
 	</select>	
 	
 	<!-- 항공 취소 상세정보 -->
+
 	
+	<select id="selectListInterestedHotel" resultType="HotelDtoRes">
+		SELECT x.hotel_code,x.hotel_name , z.hotel_picture as hotel_pic
+			FROM hotel x
+			    join hotel_like y ON x.hotel_code=y.hotel_code 
+			    join (select * from (SELECT hotel_pic.*,ROW_NUMBER() OVER(PARTITION BY hotel_pic.hotel_code ORDER BY hotel_pic.hotel_picture DESC) rn from hotel_pic) where rn = 1) z on x.hotel_code = z.hotel_code 
+			        WHERE y.user_id = #{userId}
+	</select>
 	
 	<delete id="deleteHotelLiked">
 		delete from HOTEL_LIKE where hotel_code = #{hotelCode}

@@ -20,9 +20,9 @@ public interface HotelRepository {
 	//Hot 호텔 리스트
 	public List<HotelDtoRes> selectHotHotelList();
 	//호텔 리스트
-	public List<HotelDtoRes> selectAllHotelList(String code, String people, String keyword, String maxPrice, String sortBy, String sortTo);
+	public List<HotelDtoRes> selectAllHotelList(String code, String roomCap, String keyword, String maxPrice, String sortBy, String sortTo);
 	//호텔 리스트중 최고가(슬라이드 바 표시용)
-	public Integer selectMaxRoomlPrice(String code, String people, String keyword);
+	public Integer selectMaxRoomlPrice(String code, String roomCap, String keyword);
 	//호텔 리스트에 좋아요 표시용 리스트 검색
 	public List<String> selectLikeHotelList(String code, String userId);
 	//좋아요 추가

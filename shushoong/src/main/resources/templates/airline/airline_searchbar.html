@@ -32,7 +32,7 @@ xmlns:th="http://www.thymeleaf.org"
 							<button id="one_way_date" class="according_btn pointer" onclick="accordingInfo(event,'date_accoding')">
 							    <div th:if="${departDate != null and arrivalDate != null}" th:text="${departDate2} + ' / ' + ${arrivalDate2}">날짜 선택</div>
 								<div th:if="${departDate != null and arrivalDate == null} " th:text="${departDate2}">날짜 선택</div>
-								<div th:if="${departLoc} == null and ${arrivalLoc}">날짜 선택</div>
+								<div th:if="${departLoc} == null and ${arrivalLoc} == null">날짜 선택</div>
 								<img alt="달력 사진" th:src="@{/images/calendar.png}">
 							</button>
 						</div>

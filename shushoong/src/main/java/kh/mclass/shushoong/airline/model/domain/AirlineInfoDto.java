@@ -35,6 +35,7 @@ public class AirlineInfoDto {
 	private String arrivalTimeRight;
 	private String viaType;
 	private String selectType;
+	private boolean plusDate; // 항공 날짜 계산 (하루 넘어가는것)
 	
 	private String reserveCode;//예약코드 (PK 탑승자 정보와 연결 경로)
 	

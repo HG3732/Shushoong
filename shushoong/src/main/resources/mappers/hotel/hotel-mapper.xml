@@ -126,6 +126,7 @@
 		우리가 하나하나 알려주는게 resultMap -->
 		<id column="HOTEL_CODE" property="hotelCode"/>
 		<!-- PK 나 unique 한 값 쓰기 - dto들을 구분하기 위해 필요(호텔마다 정보가 다 다르기 때문에..) -->
+		<result column="HOTEL_LOC_CAT" property="hotelLocCat"/>
 		<result column="HOTEL_NAME" property="hotelName"/>
 		<result column="HOTEL_ENG" property="hotelEng"/>
 		<result column="HOTEL_ADDRESS" property="hotelAddress"/>

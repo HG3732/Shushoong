@@ -161,12 +161,6 @@ public class MyPageCustomerController {
 		return "redirect:/business/my/information";
 	}
 	
-	// 마이페이지 항공 리스트 페이지로 이동
-	@GetMapping("/mypage/reserved/airline/list")
-	public String getMethodName() {
-		return "mypage/customer/mypageCustomerReservedAlirlineList";
-	}
-	
 	// 마이페이지 호텔 리스트 페이지로 이동
 	@GetMapping("/mypage/reserved/hotel/list")
 	public String hotelReserve(Model model) {
@@ -335,7 +329,7 @@ public class MyPageCustomerController {
 			}
 	}
 	
-	
+	//호텔 예약취소하기
 	@PostMapping("/mypage/reserved/hotel/cancel")
 	@ResponseBody
 	public int cancelHotel(String paymentId) throws IOException, InterruptedException {
@@ -371,8 +365,21 @@ public class MyPageCustomerController {
 			return 0;
 		}
 	}
-
 	
+	
+	// 마이페이지 항공 리스트 페이지로 이동
+	@GetMapping("/mypage/reserved/airline/list")
+	public String selectReservedAirlineList(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//security로 userId 불러오기
+		String userId = authentication.getName();
+		model.addAttribute("userId", userId);
+		model.addAttribute("reserveList", service.selectReservedAirlineList(userId));
+		//service에서 불러온 값 변수 선언 따로 안하고 바로 model 에 넣기
+		model.addAttribute("cancelList", service.selectCancelAirlineList(userId));
+
+		return "mypage/customer/mypageCustomerReservedAlirlineList";
+	}
 	
 	@GetMapping("/mypage/hotel/interested")
 	public String interestedPage(

@@ -725,7 +725,7 @@ select * from passenger_info
 
 
 ---------------------------------------- 마이페이지 항공 예약 관련
-select airline_reserve_code, airline_name, depart_loc, depart_date, depart_time,  arrival_loc, arrival_time, arrival_date   from 
+select airline_reserve_code, airline_name, depart_loc, depart_date, depart_time,  arrival_loc, arrival_time, arrival_date, airline_img   from 
 (select * from
 (select * 
 from (
@@ -737,3 +737,4 @@ select * from airline_reserve_info
 where pay_status = 'paid';
 
 
+select * from airline_info;

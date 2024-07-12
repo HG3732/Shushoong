@@ -36,6 +36,12 @@ public interface MypageCustomerRepository {
 	//호텔 예약 취소
 	public int cancelHotelReserve(String paymentId);
 	
+	//항공 예약리스트
+	public List<Map<String, String>> selectReservedAirlineList(String userId);
+	
+	//항공 예약리스트
+	public List<Map<String, String>> selectCancelAirlineList(String userId);
+	
 	//숙소 좋아요
 	public List<HotelDtoRes> selectListInterestedHotel(String userId);
 	

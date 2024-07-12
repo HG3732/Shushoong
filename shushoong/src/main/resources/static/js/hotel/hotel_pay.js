@@ -48,9 +48,13 @@ function firstNameHandler(){
 function phoneHandler(){
 	var phone  = $(this).val().trim();
     var regPhone = /^[0-9]*$/;
+    var regPhone2 = /^[0-9]{11}$/; 
 	    if (!regPhone.test(phone)) {
 			$('#phoneError').text('번호만 입력해주세요.');
-	    } else {
+		}else if(){
+			
+		}	
+	     else {
 			reserveBtnStatus();
 			$('#phoneError').text('');
 	    }	

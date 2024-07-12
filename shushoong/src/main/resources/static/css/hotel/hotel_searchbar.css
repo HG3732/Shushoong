@@ -20,9 +20,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("../../images/hotel_mainSection.jpg");
-    background-size: cover;
-    background-size: 2000px;
+    background-image: url("../../images/slide02_1920x1080 2.jpg");
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     filter: blur(1px); /* 블러 효과 */

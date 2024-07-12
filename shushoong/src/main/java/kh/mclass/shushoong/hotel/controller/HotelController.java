@@ -340,16 +340,17 @@ public class HotelController {
 	}
 	
 	@PostMapping("/hotel/customer/reserve/pay")
-	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String roomCat, String roomCatDesc, String roomAtt, String roomAttDesc, String hotelPrice, String roomCap) {
+	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String hotelLocCat, String roomCat, String roomCatDesc, String roomAtt, String roomAttDesc, String hotelPrice, String roomCap) {
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelCode", hotelCode);
+		model.addAttribute("hotelLocCat", hotelLocCat);
 		model.addAttribute("roomCat", roomCat);
 		model.addAttribute("roomCatDesc", roomCatDesc);
 		model.addAttribute("roomAtt", roomAtt);
 		model.addAttribute("roomAttDesc", roomAttDesc);
 		model.addAttribute("hotelPrice", hotelPrice);
 		model.addAttribute("roomCap", roomCap);
-		
+		System.out.println("hotelLocCat : " + hotelLocCat);
 		model.addAttribute("storeId", storeId);
 		model.addAttribute("channelKey", channelKey);
 		
@@ -363,7 +364,7 @@ public class HotelController {
 		
 		model.addAttribute("adult", session.getAttribute("adult"));
 		model.addAttribute("child", session.getAttribute("child"));
-		model.addAttribute("nation", session.getAttribute("nation"));
+		//model.addAttribute("nation", session.getAttribute("nation"));
 		model.addAttribute("room", session.getAttribute("room"));
 		
 		//호텔 요청사항 db에서 불러와서 model에 값 넣어주기
@@ -553,8 +554,8 @@ public class HotelController {
 	}
 
 	//지역, 인원수 선택 안한채로 hotel_list를 url에 직접 입력하여 진입할 경우 예외처리  
-//	@ExceptionHandler(Exception.class)
-//	public String ExceptionHandler() {
-//		return "hotel/hotel_main";
-//	}
+	@org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+	public String ExceptionHandler() {
+		return "hotel/hotel_main";
+	}
 }

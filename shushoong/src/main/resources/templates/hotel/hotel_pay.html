@@ -55,7 +55,7 @@ xmlns:th="http://www.thymeleaf.org">
 							<tr class="tr_first" style="border-top: 3px solid #006AFF;">
 								<th >도시</th>
 								<td style="width: 760px;">
-									<input type="text" readonly th:value="${nation}" onfocus="this.blur()" style="width: 400px; border: none;">
+									<input type="text" readonly th:value="${nation ?: hotelLocCat}" onfocus="this.blur()" style="width: 400px; border: none;">
 								</td>
 							</tr>
 						</thead>
@@ -266,7 +266,7 @@ xmlns:th="http://www.thymeleaf.org">
 							<p class="class_info">마케팅 수신동의</p>
 							<p class="option" style="color: blue;">(선택)</p>
 							<div class="radio_wrap">
-								<input type="radio" name="option_1" value="agree" id="radio_agree5" class="agree_radio">
+								<input type="radio" name="option_1" value="agree" id="radio_agree5" class="agree_radio-1">
 									<label for="radio_agree5" style="display: inline-block;"></label>
 									<div style="margin-right: 20px;">동의합니다</div>
 								<input type="radio" name="option_1" value="disagree" id="radio_disagree5"  class="disagree_radio">
@@ -341,21 +341,15 @@ function loadedHandler(){
 	$('.arrow').on("click", arrowDownClickHandler);
 	$('input[value=agree]').on("click", checkAllEscHandler);
 	$('.final_pay').on("click", reserveInfoInsertHandler);
-	$('#radio_man').on("click", reserveBtnStatus);
-	$('#radio_woman').on("click", reserveBtnStatus);
 	
-	// 버튼 활성화
-	/* 
-    $('#name').on("keyup", reserveBtnStatus);
-    $('#birthday').on("keyup", reserveBtnStatus);
-    $('#last_name').on("keyup", reserveBtnStatus);
-    $('#first_name').on("keyup", reserveBtnStatus);
-    $('#phone').on("keyup", reserveBtnStatus);
-    $('#email').on("keyup", reserveBtnStatus);
-	 */
+	
+	/* 버튼 활성화 */
 	$('#check1').on("click", reserveBtnStatus);
 	$('.arrow').on("click", reserveBtnStatus);
 	$('input[value=agree]').on("click", reserveBtnStatus);
+	$('input[value=disagree]').on("click", reserveBtnStatus);
+	$('#radio_man').on("click", reserveBtnStatus);
+	$('#radio_woman').on("click", reserveBtnStatus);
 	
 }
 

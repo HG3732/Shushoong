@@ -414,7 +414,7 @@ public class AirlineController {
 			} else if (airlineInfoReturn != null) {
 				md.addAttribute("ticketType", 2);
 				md.addAttribute("airlineName", airlineInfoReturn.getAirlineName());
-				md.addAttribute("airlineCode", airlineInfoReturn.getAirlineCode());
+				md.addAttribute("airlineCodeReturn", airlineInfoReturn.getAirlineCode());
 				md.addAttribute("departDate", airlineInfoReturn.getDepartDate());
 				md.addAttribute("departTime", airlineInfoReturn.getDepartTime());
 				md.addAttribute("departLoc", airlineInfoReturn.getDepartLoc());

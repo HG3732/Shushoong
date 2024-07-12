@@ -373,8 +373,7 @@ input[type="radio"]:checked + label{
 	border: 2px solid #006AFF;
 	font-size: var(--font2);
 }
-
-.final_pay:hover{
+.final_pay.active:hover{
 	cursor:pointer;
 	padding: 10px;
 	background-color: var(--color_blue_1);

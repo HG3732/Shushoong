@@ -311,7 +311,7 @@ xmlns:th="http://www.thymeleaf.org">
 					
 					<!-- 결제하기 버튼 -->
 					<div class="pay_button">
-						<button type="submit" class="final_pay" th:text="${#numbers.formatInteger(hotelPrice, 3, 'COMMA') + '원 결제하기'}"></button>
+						<button type="submit" class="final_pay" th:text="${#numbers.formatInteger(hotelPrice, 3, 'COMMA') + '원 결제하기'}" disabled="disabled"></button>
 					</div>
 			</div>
 		</div>
@@ -341,7 +341,21 @@ function loadedHandler(){
 	$('.arrow').on("click", arrowDownClickHandler);
 	$('input[value=agree]').on("click", checkAllEscHandler);
 	$('.final_pay').on("click", reserveInfoInsertHandler);
+	$('#radio_man').on("click", reserveBtnStatus);
+	$('#radio_woman').on("click", reserveBtnStatus);
 	
+	// 버튼 활성화
+	/* 
+    $('#name').on("keyup", reserveBtnStatus);
+    $('#birthday').on("keyup", reserveBtnStatus);
+    $('#last_name').on("keyup", reserveBtnStatus);
+    $('#first_name').on("keyup", reserveBtnStatus);
+    $('#phone').on("keyup", reserveBtnStatus);
+    $('#email').on("keyup", reserveBtnStatus);
+	 */
+	$('#check1').on("click", reserveBtnStatus);
+	$('.arrow').on("click", reserveBtnStatus);
+	$('input[value=agree]').on("click", reserveBtnStatus);
 	
 }
 

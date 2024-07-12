@@ -4,11 +4,11 @@ function nameHandler(){
 	var regName = /^[가-힣]+$/
 		if (!regName.test(name)) {
 			$('#nameError').text('한글 이름만 입력하세요.');
-		} else {
+		} else{
+			reserveBtnStatus();
 			$('#nameError').text('');
-		}
-
-}
+			}
+	}
 
 function birthdayHandler(){
 	var birthday = $(this).val().trim();
@@ -16,6 +16,7 @@ function birthdayHandler(){
 	    if (!regBirthday.test(birthday)) {
 			$('#birthdayError').text('6자리 숫자만 입력가능합니다.');
 	    } else {
+			reserveBtnStatus();
 			$('#birthdayError').text('');
 	    }
 	   
@@ -27,6 +28,7 @@ function lastNameHandler(){
 	    if (!regLastName.test(last_name)) {
 			$('#last_name_Error').text('알파벳만 입력하세요.');
 	    } else {
+			reserveBtnStatus();
 			$('#last_name_Error').text('');
 	    }
 }
@@ -37,6 +39,7 @@ function firstNameHandler(){
 	    if (!regFirstName.test(first_name)) {
 			$('#first_name_Error').text('알파벳만 입력하세요.');
 	    } else {
+			reserveBtnStatus();
 			$('#first_name_Error').text('');
 	    }
 
@@ -48,6 +51,7 @@ function phoneHandler(){
 	    if (!regPhone.test(phone)) {
 			$('#phoneError').text('번호만 입력해주세요.');
 	    } else {
+			reserveBtnStatus();
 			$('#phoneError').text('');
 	    }	
 }
@@ -58,6 +62,7 @@ function emailHandler(){
 	    if (!regEmail.test(email)) {
 	  		$('#emailError').text('이메일 형식에 맞춰주세요.');     
 	    } else {
+			reserveBtnStatus();
 			$('#emailError').text('');
 	    }		
 }
@@ -86,6 +91,7 @@ function allAgreeCheckHandler(){
 
 	if(this.checked) {
 			$('.agree_radio').prop('checked', true);
+			reserveBtnStatus();
 		} else {
 			$('.disagree_radio').prop('checked', true);
 		}
@@ -109,6 +115,37 @@ function checkAllEscHandler(){
 	}
 
 }
+
+
+// 결제 버튼 비활성화/활성화
+function reserveBtnStatus(){
+	console.log('버튼 함수 발도오옹');
+	var genderChecked = $('#radio_man').is(':checked') || $('#radio_woman').is(':checked');
+	var name = $('#name').val().trim();
+	var birthday = $('#birthday').val().trim();
+	var last_name  = $('#last_name').val().trim();
+	var first_name  = $('#first_name').val().trim();
+	var phone  = $('#phone').val();
+	var email  = $('#email').val();
+	
+	//var agreeRadios = document.querySelectorAll('.agree_radio');
+	var reserveBtn = $('.final_pay');
+	var allAgreed = $('.agree_radio').toArray().every(radio => radio.checked && radio.value === 'agree');
+	
+	console.log(
+		'name: ', name, ' birthday: ', birthday, ' last_name: ', last_name, ' first_name', first_name
+		,'phone: ', phone, 'email: ', email, ' allAgreed', allAgreed, 'gender', genderChecked);
+	
+	if(name != null && birthday != null && last_name != null && 
+	first_name != null && phone != null && email != null && allAgreed && genderChecked){
+		reserveBtn.prop('disabled', false).addClass('active');
+		console.log('이제 눌림 ㅋ')
+	}else{
+		reserveBtn.prop('disabled', true).removeClass('active');;
+		console.log('버튼 못누름 ㅋ');
+	}
+}
+
 
 /*==================결제 관련 ==================== */
 
@@ -141,7 +178,7 @@ let hotelReserveCode = '';
 let orderName = '';
 let people = '';
 
-	
+
 function reserveInfoInsertHandler(){
 
 	const now = new Date();

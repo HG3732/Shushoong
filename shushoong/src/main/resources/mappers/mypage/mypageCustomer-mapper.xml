@@ -52,6 +52,11 @@
 		where user_id = #{userId} and hr.hotel_reserve_code = #{hotelReserveCode} and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att
 	</select>
 	
+	<!-- 호텔 예약 취소 -->
+	<update id="cancelHotelReserve" parameterType="String" >
+		update pay set pay_status = 'cancel' where hotel_reserve_code = #{paymentId}
+	</update>
+	
 	<!-- 호텔 취소 상세정보 -->
 	<select id="selectOneCancelHotel" parameterType="hashmap" resultType="hashmap">
    		select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, 
@@ -65,12 +70,6 @@
 		where user_id = #{userId} and hr.hotel_reserve_code = #{hotelReserveCode} and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att
 	</select>
 	
-	<!-- 호텔 예약 취소 -->
-	<update id="cancelHotelReserve" parameterType="String" >
-		update pay set pay_status = 'cancel' where hotel_reserve_code = #{paymentId}
-	</update>
-	
-
 	<!-- 항공 예약내역 리스트 -->
 	<select id="selectReservedAirlineList" parameterType="String" resultType="hashmap">
 		select distinct ari.airline_reserve_code, ai.airline_code, ai.airline_name, ari.depart_date, ai.depart_loc, ai.depart_time, ai.arrival_loc, ai.arrival_time, ari.arrival_date, ai.airline_img   
@@ -97,18 +96,34 @@
 	
 	<!-- 항공 예약 상세정보 -->
  	<select id="selectOneReservedAirline" parameterType="hashmap" resultType="hashmap">
-		select ari.airline_reserve_code, ai.airline_code, ai.airline_name, ari.depart_date, ai.depart_loc, ai.depart_time, ai.arrival_loc, ai.arrival_time, ari.arrival_date, ai.airline_img   
-		from airline_reserve_info ari
+		SELECT ari.airline_reserve_code, ai.airline_code, ai.airline_name, pi.last_name, pi.first_name, ari.depart_date, ai.depart_loc, ai.depart_time, ai.arrival_loc, ai.arrival_time, 
+				ari.arrival_date, ai.airline_img, p.pay_price
+		FROM airline_reserve_info ari
 		    join direct_via dv on ari.airline_reserve_code = dv.airline_reserve_code
 		    join seat_grade sg on dv.airline_code = sg.airline_code
 		    join airline_info ai on sg.airline_code = ai.airline_code
 		    join pay p on ari.airline_reserve_code = p.airline_reserve_code
 		    join passenger_info pi on ari.airline_reserve_code = pi.airline_reserve_code
-		where sg.airline_code = #{airlineCode}
+		WHERE user_id = #{userId} and sg.airline_code = #{airlineCode} and ari.airline_reserve_code = #{airlineReserveCode}
 	</select>	
 	
+	<!-- 항공 예약 취소 -->
+	<update id="cancelAirlineReserve" parameterType="String" >
+		update pay set pay_status = 'cancel' where airline_reserve_code = #{paymentId}
+	</update>
+	
 	<!-- 항공 취소 상세정보 -->
-
+ 	<select id="selectOneCancelAirline" parameterType="hashmap" resultType="hashmap">
+		SELECT ari.airline_reserve_code, ai.airline_code, ai.airline_name, pi.last_name, pi.first_name, ari.depart_date, ai.depart_loc, ai.depart_time, ai.arrival_loc, ai.arrival_time, 
+				ari.arrival_date, ai.airline_img, p.pay_price
+		FROM airline_reserve_info ari
+		    join direct_via dv on ari.airline_reserve_code = dv.airline_reserve_code
+		    join seat_grade sg on dv.airline_code = sg.airline_code
+		    join airline_info ai on sg.airline_code = ai.airline_code
+		    join pay p on ari.airline_reserve_code = p.airline_reserve_code
+		    join passenger_info pi on ari.airline_reserve_code = pi.airline_reserve_code
+		WHERE user_id = #{userId} and sg.airline_code = #{airlineCode} and ari.airline_reserve_code = #{airlineReserveCode}
+	</select>
 	
 	<select id="selectListInterestedHotel" resultType="HotelDtoRes">
 		SELECT x.hotel_code,x.hotel_name , z.hotel_picture as hotel_pic

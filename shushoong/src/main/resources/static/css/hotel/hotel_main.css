@@ -60,16 +60,19 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+    align-items: end;
+	gap: 10px;
+	position: relative;
 }
 
-.hot-hotel .wrap-price > div {
-	padding-right: 10px;
+.hot-hotel .wrap-price .hot-hotel-price {
 	color: red;
 }
 
 .hot-hotel .wrap-price > div:last-child {
 	vertical-align: bottom;
 	line-height: 20px;
+	color: red;
 }
 
 .hot-hotel .hot-hotel-name {
@@ -77,6 +80,17 @@
 	padding-left : 10px;
 }
 
+.price-origin {
+	color: var(--color_gray_4);
+	text-decoration: line-through;
+}
+
+.sale-ratio {
+    position: absolute;
+    top: -20px;
+    right: 35px;
+    color: red;
+}
 
 .hot-hotel .hot-hotel-price {
 	text-align: right;

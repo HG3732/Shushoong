@@ -73,6 +73,9 @@ public class HotelController {
 	public String hotelMain(Model model, HttpSession session) {
 		List<HotelDtoRes> hotHotelList = service.selectHotHotelList();
 		model.addAttribute("hotHotelList", hotHotelList);
+		for(HotelDtoRes dto : hotHotelList) {
+			dto.setPriceDiscounted(Integer.parseInt(dto.getHotelPrice()) * (100 - dto.getRoomDiscount())/100);
+		}
 		session.removeAttribute("nation");
 		session.removeAttribute("checkIn");
 		session.removeAttribute("checkOut");
@@ -94,16 +97,17 @@ public class HotelController {
 		Integer people = child1+adult1;
 		int roomCap = people/Integer.parseInt(room);
 		if(people%Integer.parseInt(room) > 0.5) roomCap++;
+		if(roomCap < 2) roomCap = 2;
 		List<HotelDtoRes> result = service.selectAllHotelList(loc, String.valueOf(roomCap), null, null, null, null);
+		for(HotelDtoRes dto : result) {
+			dto.setPriceDiscounted(Integer.parseInt(dto.getHotelPrice()) * (100 - dto.getRoomDiscount())/100);
+		}
 		Integer maxPrice = service.selectMaxRoomlPrice(loc, String.valueOf(roomCap), null);
 		
 		//좋아요 여부 검색
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId = authentication.getName();
 		List<String> likeList = service.selectLikeHotelList(loc, userId);
-//		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
-//		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
-//		hotelDtoRes.setHotelPic(service.selectAllHotelList(loc));
 		model.addAttribute("hotelList", result);
 		model.addAttribute("maxPrice", maxPrice);
 		model.addAttribute("likeList", likeList);
@@ -121,7 +125,6 @@ public class HotelController {
 	@GetMapping("/hotel/list/sort.ajax")
 	public String hotelListSort(
 			Model model,
-			HttpSession session,
 			String loccode,
 			String roomCap,
 			String keyword,
@@ -130,11 +133,15 @@ public class HotelController {
 			String sortTo
 			) {
 		List<HotelDtoRes> result = service.selectAllHotelList(loccode, roomCap, keyword, maxPrice, sortBy, sortTo);
+		for(HotelDtoRes dto : result) {
+			dto.setPriceDiscounted(Integer.parseInt(dto.getHotelPrice()) * (100 - dto.getRoomDiscount())/100);
+		}
 		Integer maxPrice2 = service.selectMaxRoomlPrice(loccode, roomCap, keyword);
 		//session의 이름이 43행에 있는 List와 같아야 덮어쓰기됨, 다를 경우 기존 List + 새 List 출력
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId = authentication.getName();
 		List<String> likeList = service.selectLikeHotelList(loccode, userId);
+		
 		model.addAttribute("hotelList", result);
 		model.addAttribute("maxPrice", maxPrice2);
 		model.addAttribute("likeList", likeList);
@@ -147,14 +154,17 @@ public class HotelController {
 			Model model,
 			HttpSession session,
 			String loccode,
-			String people,
+			String roomCap,
 			String keyword,
 			String maxPrice,
 			String sortBy,
 			String sortTo
 			) {
-		List<HotelDtoRes> result = service.selectAllHotelList(loccode, people, keyword, maxPrice, sortBy, sortTo);
-		Integer maxPrice2 = service.selectMaxRoomlPrice(loccode, people, keyword);
+		List<HotelDtoRes> result = service.selectAllHotelList(loccode, roomCap, keyword, maxPrice, sortBy, sortTo);
+		for(HotelDtoRes dto : result) {
+			dto.setPriceDiscounted(Integer.parseInt(dto.getHotelPrice()) * (100 - dto.getRoomDiscount())/100);
+		}
+		Integer maxPrice2 = service.selectMaxRoomlPrice(loccode, roomCap, keyword);
 		//session의 이름이 43행에 있는 List와 같아야 덮어쓰기됨, 다를 경우 기존 List + 새 List 출력
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId = authentication.getName();

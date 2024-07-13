@@ -12,7 +12,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<link th:href="@{/css/mypage/customer/mypageCustomerReservedAlirlineList.css}" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
-<title>슈슝</title>
+<title>항공 예약 리스트</title>
 </head>
 <body>
 
@@ -41,7 +41,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 			</div>		
 			
-			<a th:each="reservelist : ${reserveList}" class="reserve_wrap" th:href="@{/customer/mypage/reserved/airline/{userId}/{airlineCode}(userId=${userId},airlineCode=${reservelist.AIRLINE_CODE})}">
+			<a th:each="reservelist : ${reserveList}" class="reserve_wrap" th:href="@{/customer/mypage/reserved/airline/{userId}/{airlineCode}/{airlineReserveCode}(userId=${userId},airlineCode=${reservelist.AIRLINE_CODE},airlineReserveCode=${reservelist.AIRLINE_RESERVE_CODE})}">
 				<input type="hidden" name="userId" class="userId" th:value="${userId}"/>
 				<input type="hidden" th:value="${reservelist.AIRLINE_CODE}">
 				<div class="reserved_list">	
@@ -63,7 +63,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 			</a>
 			
-			<a class="cancel_wrap" th:each="cancellist : ${cancelList}" th:href="@{/customer/mypage/cancel/airline/{userId}/{airlineCode}(userId=${userId},airlineCode=${cancellist.AIRLINE_CODE})}">
+			<a class="cancel_wrap" th:each="cancellist : ${cancelList}" th:href="@{/customer/mypage/cancel/airline/{userId}/{airlineCode}/{airlineReserveCode}(userId=${userId},airlineCode=${cancellist.AIRLINE_CODE},airlineReserveCode=${cancellist.AIRLINE_RESERVE_CODE})}">
 				<input type="hidden" name="userId" class="userId" th:value="${userId}"/>
 				<input type="hidden" th:value="${cancellist.AIRLINE_CODE}">
 				<div class="canceled_list">

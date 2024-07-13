@@ -28,7 +28,6 @@ WHERE rn = 1;
 
 select * from hotel_room where room_cap >= 3 order by hotel_code, hotel_price;
 
-
 ----------------------------------------객실 정보랑 호텔 상세정보랑 합친 table----------------------------------------
 select hotel_name, hotel_eng, hotel_address, hotel_call, hotel_check_in, hotel_check_out, hotel_policy, hotel_intro, room_cat, hotel_price, room_att 
 from hotel 
@@ -774,10 +773,37 @@ select * from airline_reserve_info;
 		    join airline_info ai on sg.airline_code = ai.airline_code
 		    join pay p on ari.airline_reserve_code = p.airline_reserve_code
 		    join passenger_info pi on ari.airline_reserve_code = pi.airline_reserve_code
-		where p.pay_status = 'paid' and ari.user_id = 'singasong';
+		where p.pay_status = 'paid' and ari.user_id = 'gyura34';
         
-alter table airline_reserve_info
-modify airline_reserve_code varchar2(50);
+        select distinct ari.airline_reserve_code, ai.airline_code, ai.airline_name, ari.depart_date, 
+ai.depart_loc, ai.depart_time, ai.arrival_loc, ai.arrival_time, ari.arrival_date, ai.airline_img 
+from airline_reserve_info ari join direct_via dv on ari.airline_reserve_code = dv.airline_reserve_code 
+join seat_grade sg on dv.airline_code = sg.airline_code join airline_info ai on sg.airline_code 
+= ai.airline_code join pay p on ari.airline_reserve_code = p.airline_reserve_code join passenger_info 
+pi on ari.airline_reserve_code = pi.airline_reserve_code where p.pay_status = 'cancel' and 
+ari.user_id = 'gyrua34' ;
+
+select * from airline_reserve_info
+    join passenger_info using(airline_reserve_code)
+    join pay using (airline_reserve_code)
+where user_id = 'gyrua34';
+        
+alter table hotel_review
+modify hotel_reserve_code varchar2(50);
 commit;
 
 select * from airline_reserve_info;
+
+select * from passenger_info;
+
+
+		SELECT ari.airline_reserve_code, ai.airline_code, ai.airline_name, pi.last_name, pi.first_name, ari.depart_date, ai.depart_loc, ai.depart_time, ai.arrival_loc, ai.arrival_time, 
+				ari.arrival_date, ai.airline_img, p.pay_price
+		FROM airline_reserve_info ari
+		    join direct_via dv on ari.airline_reserve_code = dv.airline_reserve_code
+		    join seat_grade sg on dv.airline_code = sg.airline_code
+		    join airline_info ai on sg.airline_code = ai.airline_code
+		    join pay p on ari.airline_reserve_code = p.airline_reserve_code
+		    join passenger_info pi on ari.airline_reserve_code = pi.airline_reserve_code
+		WHERE sg.airline_code = 
+		ORDER BY ari.airline_reserve_code DESC;

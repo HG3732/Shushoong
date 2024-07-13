@@ -137,7 +137,7 @@ function sortHandler() {
 		method: "get",
 		data: {
 			loccode : preloccode,
-			people : prepeople,
+			roomCap : roomCap,
 			keyword : prekeyword,
 			maxPrice : maxPrice,
 			sortBy : presortBy,
@@ -171,7 +171,7 @@ function searchHandler() {
 		method: "get",
 		data: {
 			loccode : preloccode,
-			people : prepeople,
+			roomCap : roomCap,
 			keyword : prekeyword,
 			maxPrice : maxPrice,
 			sortBy : presortBy,
@@ -190,7 +190,7 @@ function searchHandler() {
 		method: "get",
 		data: {
 			loccode : preloccode,
-			people : prepeople,
+			roomCap : roomCap,
 			keyword : prekeyword,
 			maxPrice : maxPrice,
 			sortBy : presortBy,
@@ -223,14 +223,16 @@ function enterkey() {
 
 // 호텔 가격(슬라이드바) 검색
 function priceHandler() {
+	console.log(roomCap);
 	start = 1;
 	maxPrice = $('#input-right').val();
+	
 	$.ajax({
 		url: "/shushoong/hotel/list/sort.ajax",
 		method: "get",
 		data: {
 			loccode : preloccode,
-			people : prepeople,
+			roomCap : roomCap,
 			keyword : prekeyword,
 			maxPrice : maxPrice,
 			sortBy : presortBy,

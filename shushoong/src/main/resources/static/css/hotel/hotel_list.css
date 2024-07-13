@@ -244,7 +244,6 @@ input[type="range"]::-webkit-slider-thumb {
 .hotel_location{
 	font-size: var(--font4);
 	color: var(--color_gray_4);
-	
 	margin-bottom: 15px;
 }
 
@@ -253,6 +252,7 @@ input[type="range"]::-webkit-slider-thumb {
 	margin-bottom: 10px;
 	display: flex;
 	align-items:center;
+	justify-content: bottom;
 	gap: 5px;
 }
 
@@ -265,6 +265,23 @@ input[type="range"]::-webkit-slider-thumb {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+	position: relative;
+	gap: 5px;
+	
+}
+
+.price-origin {
+	color: var(--color_gray_4) !important;
+	text-decoration: line-through;
+	align-content: end;
+    text-align: end;
+}
+
+.sale-ratio {
+    position: absolute;
+    bottom: 30px;
+    right: 50px;
+    color: red;
 }
 
 .wrap-price > div {
@@ -285,6 +302,7 @@ input[type="range"]::-webkit-slider-thumb {
 	text-align: end;
 	margin-bottom: 12px;
 	font-weight: 100;
+	width: 40px;
 }
 
 .isEmpty{

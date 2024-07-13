@@ -33,21 +33,27 @@ public interface MypageCustomerRepository {
 	// 호텔 예약 상세정보
 	public Map<String, Object> selectOneReservedHotel(String userId, String hotelReserveCode);
 
-	// 호텔 취소 상세정보
-	public Map<String, Object> selectOneCancelHotel(String userId, String hotelReserveCode);
-
 	// 호텔 예약 취소
 	public int cancelHotelReserve(String paymentId);
+
+	// 호텔 취소 상세정보
+	public Map<String, Object> selectOneCancelHotel(String userId, String hotelReserveCode);
 
 	// 항공 예약리스트
 	public List<Map<String, String>> selectReservedAirlineList(String userId);
 
-	// 항공 예약리스트
+	// 항공 취소 예약리스트
 	public List<Map<String, String>> selectCancelAirlineList(String userId);
 
-	// 호텔 항공 상세정보
-	public List<Map<String, Object>> selectOneReservedAirline(String userId, String airlineCode);
-
+	// 항공 상세정보
+	public List<Map<String, Object>> selectOneReservedAirline(String userId, String airlineCode, String airlineReserveCode);
+	
+	// 항공 예약 취소
+	public int cancelAirlineReserve(String paymentId);
+	
+	// 항공 취소 상세정보
+	public List<Map<String, Object>> selectOneCancelAirline(String userId, String airlineCode, String airlineReserveCode);
+	
 	// 숙소 좋아요
 	public List<HotelDtoRes> selectListInterestedHotel(String userId);
 

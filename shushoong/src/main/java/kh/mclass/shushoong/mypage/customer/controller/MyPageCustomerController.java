@@ -382,13 +382,13 @@ public class MyPageCustomerController {
 		// service에서 불러온 값 변수 선언 따로 안하고 바로 model 에 넣기
 		model.addAttribute("cancelList", service.selectCancelAirlineList(userId));
 
-		return "mypage/customer/mypageCustomerReservedAlirlineList";
+		return "mypage/customer/mypageCustomerReservedAirlineList";
 	}
 
 	// 마이페이지 항공 예약 상세페이지 이동
-	@GetMapping("/mypage/reserved/airline/{userId}/{airlineCode}")
+	@GetMapping("/mypage/reserved/airline/{userId}/{airlineCode}/{airlineReserveCode}")
 	public String selectOneAirline(Model model, @PathVariable("userId") String userId,
-			@PathVariable("airlineCode") String airlineCode) {
+			@PathVariable("airlineCode") String airlineCode, @PathVariable("airlineReserveCode") String airlineReserveCode) {
 		// input 태그에 있는 name 여기에 씀
 		// getParameter 역할
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -398,32 +398,35 @@ public class MyPageCustomerController {
 
 		} else {
 
-			List<Map<String, Object>> reservationDetailList = service.selectOneReservedAirline(userId, airlineCode);
+			List<Map<String, Object>> reservationDetailList = service.selectOneReservedAirline(userId, airlineCode, airlineReserveCode);
 
 			for (Map<String, Object> reservationDetail : reservationDetailList) {
 				if (reservationDetail.containsKey("DEPART_DATE")) {
 					Object depart = reservationDetail.get("DEPART_DATE");
-					System.out.println("DEPART_DATE: " + depart);
 					
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일");
 					try {
 						// 문자열을 LocalDate 객체로 변환
-						LocalDate departDate = LocalDate.parse((CharSequence) depart, formatter);
+						if (depart instanceof String) {
+				            String departString = (String) depart;
 
-						// 현재 날짜 가져오기
-						LocalDate currentDate = LocalDate.now();
+				            // 첫 번째 날짜만 추출
+				            String firstDateStr = departString.split(",")[0].trim();
 
-						// 두 날짜 비교
-						if (departDate.isEqual(currentDate)) {
-							System.out.println("오늘이랑 같은 날짜");
-						} else if (departDate.isBefore(currentDate)) {
-							System.out.println("과거 날짜");
-						} else {
-							System.out.println("미래 날짜");
-						}
+				            // 문자열을 LocalDate로 변환
+				            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일");
+				            LocalDate departDate = LocalDate.parse(firstDateStr, formatter);
 
-						model.addAttribute("departDate", departDate);
-						model.addAttribute("currentDate", currentDate);
+				            // 현재 날짜 가져오기
+				            LocalDate currentDate = LocalDate.now();
+				            // 결과 출력
+				            
+				            model.addAttribute("departDate", departDate);
+				            model.addAttribute("currentDate", currentDate);
+
+				        } else {
+				            System.out.println("DEPART_DATE 값이 문자열이 아닙니다.");
+				        }
+
 
 					} catch (DateTimeParseException e) {
 						e.printStackTrace();
@@ -436,13 +439,72 @@ public class MyPageCustomerController {
 
 				if (reservationDetailList != null && !reservationDetailList.isEmpty()) {
 
-					model.addAttribute("reservationDetailList", service.selectOneReservedAirline(userId, airlineCode));
+					model.addAttribute("reservationDetailList", service.selectOneReservedAirline(userId, airlineCode, airlineReserveCode));
 				}
 			}
 		}
 		return "mypage/customer/mypageCustomerReservedAirline";
 	}
 
+	//항공 예약취소하기
+	@PostMapping("/mypage/reserved/airline/cancel")
+	@ResponseBody
+	public int cancelAirline(String paymentId) throws IOException, InterruptedException {
+		Map<String, Object> requestBody = new HashMap<>();
+		requestBody.put("reason", "고객 요청으로 결제 취소");
+
+		// 결제 취소 API 호출
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create("https://api.portone.io/payments/" + paymentId + "/cancel"))
+				.header("Content-Type", "application/json").header("Authorization", "PortOne " + secretKey)
+				.method("POST", HttpRequest.BodyPublishers.ofString(gson.toJson(requestBody))).build();
+		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+		Map<String, Object> responseMap = gson.fromJson(response.body(), Map.class);
+
+		System.out.println(response.body() + "=================");
+
+		Map<String, Object> cancellation = gson.fromJson(gson.toJson(responseMap.get("cancellation")), Map.class);
+
+		String status = (String) cancellation.get("status");
+		int result;
+		// 결제 취소 완료 상태면 결제 내역 테이블에서 삭제
+		if (status != null) {
+			if (status.equals("SUCCEEDED")) {
+				result = service.cancelAirlineReserve(paymentId);
+				return result;
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+	}	
+	
+	// 마이페이지 항공 취소내역 하나 선택
+	@GetMapping("/mypage/cancel/airline/{userId}/{airlineCode}/{airlineReserveCode}")
+	public String selectOneCancelAirline(Model model, @PathVariable("userId") String userId,
+			@PathVariable("airlineReserveCode") String airlineReserveCode, String airlineCode) {
+		// input 태그에 있는 name 여기에 씀
+		// getParameter 역할
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String loginId = authentication.getName();
+		if (!userId.equals(loginId)) {
+			return "home";
+
+		} else {
+
+			List<Map<String, Object>> reservationDetails = service.selectOneCancelAirline(userId, airlineCode, airlineReserveCode);
+
+			model.addAttribute("cancelList", service.selectOneCancelAirline(userId, airlineCode, airlineReserveCode));
+
+			return "mypage/customer/mypageCustomerCancelAirline";
+
+		}
+	}
+
+	
+	
 	@GetMapping("/mypage/hotel/interested")
 	public String interestedPage(Principal principal, Model md) {
 		String userId = principal.getName();

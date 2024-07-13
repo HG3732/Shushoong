@@ -65,12 +65,15 @@ xmlns:th="http://www.thymeleaf.org">
 //URL로부터 파라미터 읽어오기 위해 search객체 생성
 var urlParams = new URLSearchParams(window.location.search);
 var preloccode = urlParams.get('loc');
-var prepeople = Number(urlParams.get('adult')) + parseInt(urlParams.get('child')/2, 10);
+let prepeople = Number(urlParams.get('adult')) + parseInt(urlParams.get('child')/2, 10);
+let room = $('input[name=room]').val();
+let roomCap = prepeople / room;
+if(roomCap < 2) roomCap = 2;
 
-var prekeyword = null;
-var maxPrice = null;
-var presortBy = null;
-var presortTo = null;
+let prekeyword = null;
+let maxPrice = null;
+let presortBy = null;
+let presortTo = null;
 
 var lastScroll = 0;
 
@@ -81,6 +84,8 @@ let currentIndex = 0;	//캐러셀 index
 $(loadedHandler);
 
 function loadedHandler(){
+	
+	
 	//좋아요 버튼 -- inline html onclick 
 	//$(".hotel_like").on("click", likeHandler);
 	

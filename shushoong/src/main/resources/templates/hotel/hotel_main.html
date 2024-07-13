@@ -175,7 +175,14 @@ function loadedHandler() {
 							<div class="hot-hotel-pic"><img th:src="${hothotel.hotelPic}" alt="a" style="display: block;"/></div>
 							<div class="hot-hotel-info">
 								<div class="hot-hotel-name" th:text="${hothotel.hotelName}">호텔이름</div>
-								<div class="wrap-price"><div class="hot-hotel-price" th:text="${hothotel.hotelPrice}">호텔 가격</div><div>원~</div></div>
+								<div class="wrap-price">
+									<th:block th:if="${hothotel.roomDiscount > 0}">
+										<div class="price-origin" th:text="${#numbers.formatInteger(hothotel.hotelPrice, 3, 'COMMA')}"></div>
+										<div class="sale-ratio" th:text="${hothotel.roomDiscount + '% 할인 !'}"></div>
+									</th:block>
+									<div class="hot-hotel-price" th:text="${#numbers.formatInteger(hothotel.priceDiscounted, 3, 'COMMA')}"></div>
+									<div>원~</div>
+								</div>
 							</div>
 						</a>
 					</div>

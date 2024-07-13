@@ -294,20 +294,7 @@ input[type="range"]::-webkit-slider-thumb {
 #blue-layover:hover{
 	content: url("../../images/bluecheck.png");
 }	
-/* 
-.layover-list .layover-select #direct-btn #blue-direct:hover{
-	content: url("../../images/bluecheck.png");
-}
-.layover-list .layover-select #direct-btn #sky-direct:hover{
-	content: url("../../images/bluecheck.png");
-}
-.layover-list .layover-select #layover-btn #sky-layover:hover{
-	content: url("../../images/bluecheck.png");
-}
-.layover-list .layover-select #layover-btn #blue-layover:hover{
-	content: url("../../images/bluecheck.png");
-}
- */
+
 body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.layover-list > form > div.layover-select > label:nth-child(2){
 	margin-right: 20px;
 }
@@ -374,15 +361,15 @@ body > div.wrapper > div.wrap-main > div.container > div > div.sidebar > div.lay
     border-radius: 10px;
     margin-top: 10px;
     background-color: #006AFF;
-    width: 60px;
-    height: 22px;
+    width: 66px;
+    height: 27px;
     text-align: center;
     align-content: center;
     
 }
 .airline-info .seat-count .span-seat{
     font-size: 12px;
-    padding: 5px;
+    /* padding: 5px; */
     color: white;
 }
 

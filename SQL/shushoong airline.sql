@@ -176,8 +176,25 @@ select * from airline_info;
  SELECT DBMS_RANDOM.STRING('X', 5) FROM DUAL;
  SELECT DBMS_RANDOM.VALUE(12, 18) FROM DUAL;
  SELECT FLOOR(DBMS_RANDOM.VALUE(12, 18))||':'||FLOOR(DBMS_RANDOM.VALUE(00, 60)) FROM DUAL;
-
+set define off;
  commit;
  select * from COUNTRY_LOC_PIC;
  insert ALL 
-    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE);
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('KOREA','ICN','https://lh3.googleusercontent.com/proxy/m6tMTeP9Yc8e3LFjetj5khVq6UGIq5hwBL64oB4TB95FOlKgdk3fUrJf-6e3azWCO-rucr5XBmnFxkzPYQw3jEKV--mz9Chr2dypmjXxRtqkTfP8ed6WTqxKtZm7fdu3lxZSEiY6Ur8ErDSQ1ZMihWD9tQ1-O_I=s680-w680-h510')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('KOREA','GMP','https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg?size=626&ext=jpg&ga=GA1.1.1359838702.1718694112&semt=ais_user')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('KOREA','CJU','https://api.cdn.visitjeju.net/photomng/imgpath/202206/03/ee8dcfae-9eb3-4c53-a70d-e21a023d83be.jpg')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('KOREA','PUS','https://www.visitbusan.net/uploadImgs/files/hqimgfiles/20200327141200390_thumbL')
+    
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('JAPAN','NRT','https://media.istockphoto.com/id/1390815938/ko/%EC%82%AC%EC%A7%84/%EC%9D%BC%EB%B3%B8%EC%9D%98-%EB%8F%84%EC%BF%84%EC%8B%9C.jpg?s=612x612&w=0&k=20&c=M3ABDYoJPya2r3A-TsfPfsYCmb6Y-qm17TK8L3Mj-gs=')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('JAPAN','FUK','https://d2mgzmtdeipcjp.cloudfront.net/files/good/2020/04/25/15878000229322.jpg')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('JAPAN','OKA','https://rimage.gnst.jp/livejapan.com/public/article/detail/a/20/00/a2000366/img/basic/a2000366_main.jpg')
+    
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('CHINA','PEK','https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/gjn7mejkbvlf4nlthgeg/%EB%B2%A0%EC%9D%B4%EC%A7%95%EC%9D%BC%EC%9D%BC%EC%B0%A8%EB%9F%89%ED%88%AC%EC%96%B4.jpg')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('CHINA','CAN','https://i.namu.wiki/i/wz1RIp1hXC9ymSpQefKWMaIDJtlysM6dymRri1Rb2Ql5DhUutdoV16j_snMwJ1sRipVE0r4awXHIZzSFe0J35A.jpg')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('CHINA','SHA','https://lh6.googleusercontent.com/proxy/W-gD7FZcSLlMMMYqludJgS330vc6F_MioKYVX1kc5Rm1HWLQMv-B4wmmbeucsleTgK2YCVo-H5UYnDjnl8QKI7oocgjH0-yZsHM')
+    
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('USA','SEA','https://wimg.mk.co.kr/meet/neds/2018/10/image_readtop_2018_649598_15398256933498171.jpg')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('USA','SFO','https://mediaim.expedia.com/destination/9/374fff8a75e97e4d955bb3b02d9a2caf.jpg')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('USA','MIA','https://wimg.mk.co.kr/news/cms/202308/21/20230821_01110207000004_L00.jpg')
+        SELECT * FROM DUAL
+;

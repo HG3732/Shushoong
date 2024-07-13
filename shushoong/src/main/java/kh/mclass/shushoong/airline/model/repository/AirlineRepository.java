@@ -54,5 +54,5 @@ public interface AirlineRepository {
 	
 	public AirlineInfoDto selectOneAirlineInfo(String airlineCode);
 	
-	List<AirlineInfoDto> selectListRecommenedCheap();
+	List<Map<String, String>> selectListRecommenedCheap();
 }

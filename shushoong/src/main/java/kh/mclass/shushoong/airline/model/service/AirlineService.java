@@ -101,7 +101,7 @@ public class AirlineService {
 		return airlineRepository.selectOneAirlineInfo(airlineCode);
 	}
 	
-	public List<AirlineInfoDto> selectListRecommenedCheap(){
+	public List<Map<String, String>> selectListRecommenedCheap(){
 		return airlineRepository.selectListRecommenedCheap();
 	}
 }

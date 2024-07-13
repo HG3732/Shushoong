@@ -8,7 +8,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 <body>
 <div class="tn" th:fragment="Header">
 <script th:inline="javascript"> 
-	const contextRoot = /*[[@{/}]]*/ ''; 
+	const contextRoot = /*[[@{/}]]*/ '';
+	function ajaxErrorHandler(request, status, error) {
+		alert("code: " + request.status + "\n" + "message: "
+			+ request.responseText + "\n"
+			+ "error: " + error);
+	}
+
 </script>
 	<!-- 최상단 네비(로고 및 회원가입, 로그인) -->
 	<div class="nav1-wrap">

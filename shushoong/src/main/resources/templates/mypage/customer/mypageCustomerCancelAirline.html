@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<link th:href="@{/css/basic/reset.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/core.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/layout.css}" rel="stylesheet" />
+ 	<link th:href="@{/css/basic/footer.css}" rel="stylesheet" />
+	<link th:href="@{/css/basic/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerAside.css}" rel="stylesheet" />
+	<link th:href="@{/css/mypage/customer/mypageCustomerCancelAirline.css}" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<meta charset="UTF-8">
+<title>항공 취소 상세정보</title>
+</head>
+<body>
+
+<div class="wrapper">
+	<div class="wrap-header">
+		<header>
+				<div th:replace="~{common/header :: Header}"></div>
+			<div class="hrline">
+				<hr>
+			</div>
+		</header>
+	</div>
+	
+	<div class="wrap-body">
+		<div class="wrap-aside">
+			<aside>
+				<div th:replace="~{mypage/customer/mypageCustomerAside :: Aside}"></div>
+			</aside>
+		</div>
+		
+		<div class="main_section" th:each="details : ${reservationDetailList}">				
+			<div class="reserved_list">
+				<div class="reserve_num">
+					<p class="p">예약번호</p>
+				</div>
+				<div class="airline_reserve_code">
+					<div class="code_num" th:text="${details.AIRLINE_RESERVE_CODE}"></div>
+				</div>
+				<div class="airline">
+					<p class="p">항공편</p>
+				</div>						
+				<div class="airline_name">
+					<div class="airline_name_ko" th:text="${details.AIRLINE_NAME}"></div>
+				</div>
+				<div class="passenger">
+					<p class="p">탑승자명</p>
+				</div>
+				<div class="passenger_name">
+					<div class="full_name" th:utext="${details.LAST_NAME} + ', ' + ${details.FIRST_NAME}"></div>
+				</div>								
+				<div class="depart">
+					<p class="p">출국 일자</p>
+				</div>
+				<div class="depart_date">
+					<div class="depart_date_detail" th:text="${details.DEPART_DATE}"></div>
+				</div>						
+				<div class="loc_time">
+					<p class="p">이륙/도착</p>
+				</div>
+				<div class="loc_time_info">
+					<div class="loc_time_detail" th:utext="${details.DEPART_LOC} + ' ' + ${details.DEPART_TIME} + ' ⦁ ' + ${details.ARRIVAL_LOC} + ' ' + ${details.ARRIVAL_TIME} "></div>
+				</div>							
+				<div class="pay">
+					<P class="p">결제 금액</P>
+				</div>
+				<div class="payment">
+					<div class="totalpay" th:text="${#numbers.formatInteger(details.PAY_PRICE, 3, 'COMMA')} + '원'"></div>
+					
+				</div>						
+			</div>
+		</div>
+	</div>
+</div>
+	
+<div class="wrap-footer">
+ 		<div th:replace="~{common/footer :: Footer}"></div> 
+</div>
+
+	
+</body>
+</html>

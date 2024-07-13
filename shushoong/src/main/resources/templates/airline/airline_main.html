@@ -76,10 +76,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				<div class="airline-recommend-list">
 					<div class="list-wrapper" >
 						<a class="airline-recommend" th:each="recommendList : ${recommendList}">
-							<div class="airline-recommend-pic"><img th:src="${recommendList.airlineImg}" alt="a" style="display: block;"/></div>
+							<div class="airline-recommend-pic"><img th:src="${recommendList.PICTURE}" alt="a" style="display: block;"/></div>
 							<div class="airline-recommend-info">
-								<div class="airline-recommend-name" th:text="${recommendList.airlineCode}">호텔이름</div>
-								<div class="wrap-price"><div class="airline-recommend-price" th:text="${#numbers.formatInteger(recommendList.seatPrice, 3, 'COMMA') + '원'}">호텔 가격</div></div>
+								<div class="airline-recommend-name" th:text="${recommendList.COUNTRY}+' => '+${recommendList.ARRIVAL_LOC}">가는 국가</div>
+								<div class="wrap-price"><div class="airline-recommend-price" th:text="${#numbers.formatInteger(recommendList.SEAT_PRICE, 3, 'COMMA') + '원'}">호텔 가격</div></div>
 							</div>
 						</a>
 					</div>

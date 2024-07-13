@@ -350,7 +350,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			
 			regexTestFunction();//정규 표현식 관련
 			
+// 			$("button#reserver_info_insert").attr("disabled",true);
+			$("input[type=radio]").change(checkAgreeFunction);
+			
+			
+			
+			
+			
 // 			$("button#reserver_info_insert").on("click",submitBtnCheckFunction());
+			
 		}
 		
 	$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
@@ -359,7 +367,30 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		$('#check1').on("click", allAgreeCheckHandler);
 		$('.arrow').on("click", arrowDownClickHandler);
 		
-		
+		function checkAgreeFunction(){
+			
+			console.log("changed");
+			console.log($("[name=policy_1]").val());
+			console.log($("[name=policy_2]").val());
+			console.log($("[name=policy_3]").val());
+			console.log($("[name=policy_4]").val());
+			
+			if(
+				$("[name=policy_1]").val()=='agree' &&
+				$("[name=policy_2]").val()=='agree' &&
+				$("[name=policy_3]").val()=='agree' &&
+				$("[name=policy_4]").val()=='agree' 
+			){
+				console.log("yes click");
+
+				$("button#reserver_info_insert").attr("disabled",false);
+			}else{
+				console.log("mo click");
+
+				$("button#reserver_info_insert").attr("disabled",true);
+			}
+			
+		};
 
 	</script>
 	

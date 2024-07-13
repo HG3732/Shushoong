@@ -389,7 +389,7 @@ public class AirlineController {
 	// 항공 메인 페이지
 	@GetMapping("/airline/main")
 	public String airlineMain(Model md) {
-		List<AirlineInfoDto> recommendList = service.selectListRecommenedCheap();
+		List<Map<String, String>> recommendList = service.selectListRecommenedCheap();
 		md.addAttribute("recommendList",recommendList);
 		return "airline/airline_main"; // 폼이 있는 페이지로 이동
 	}

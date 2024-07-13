@@ -263,12 +263,28 @@
 			FROM AIRLINE_INFO
 				WHERE AIRLINE_CODE = #{airlineCode}
 	</select>
-	<select id="selectListRecommenedCheap" resultType="AirlineInfoDto">
-		SELECT ROWNUM ,seat_grade.*, airline_info.* 
-			FROM seat_grade,airline_info,
-				(SELECT*FROM seat_grade JOIN airline_info USING (airline_code) 
-					WHERE seat_grade = 3  ORDER BY seat_price ASC)
-						WHERE ROWNUM BETWEEN 0 AND 6
+	<select id="selectListRecommenedCheap" resultType="map">
+		SELECT addresult.* , country_loc_pic.country,country_loc_pic.picture
+			FROM
+			    (SELECT *
+			    FROM
+			        (SELECT *
+			        FROM
+			            (SELECT result.* ,ROW_NUMBER() OVER(PARTITION BY result.arrival_loc ORDER BY result.seat_price asc) as rn
+			            FROM (
+			                SELECT ai.* , sg.seat_grade , sg.seat_total , sg.seat_reserved , sg.seat_price
+			                FROM airline_info ai
+			                LEFT JOIN seat_grade sg
+			                ON (ai.airline_code = sg.airline_code)
+			            ) result
+			        ) 
+			        WHERE rn = 1  and domestic_flights = 'I' AND arrival_loc NOT LIKE 'ICN'
+			        ORDER BY seat_price asc)
+			    WHERE rownum BETWEEN 0 AND 6
+			    ) addresult
+			LEFT JOIN COUNTRY_LOC_PIC
+			ON (addresult.arrival_loc = COUNTRY_LOC_PIC.local)
+			
 	</select>
 	
 </mapper>

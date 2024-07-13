@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
+import kh.mclass.shushoong.mypage.customer.model.domain.ReviewDto;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
 
 @Service
@@ -55,6 +56,16 @@ public class MypageCustomerService {
 	public Map<String, Object> selectOneReservedHotel(String userId, String hotelReserveCode) {
 		//예매내역 상세는 예매 한개에 대한 내용이므로 map 하나만 있어도 뭐..
 		return mypageRepository.selectOneReservedHotel(userId, hotelReserveCode);
+	}
+	
+	//리뷰 등록
+	public int insertReview(ReviewDto dto) {
+		return mypageRepository.insertReview(dto);
+	}
+	
+	//리뷰 가능 상태 업데이트
+	public int updateReviewAvailable(String hotelReserveCode) {
+		return mypageRepository.updateReviewAvailable(hotelReserveCode);
 	}
 	
 	//호첼 예약 취소하기

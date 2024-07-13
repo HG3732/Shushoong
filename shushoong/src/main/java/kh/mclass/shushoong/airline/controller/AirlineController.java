@@ -129,7 +129,18 @@ public class AirlineController {
 				}else {
 					airlineInfo.setPlusDate(false);
 				}
+				
+				// 잔여 좌석
+				int seatTotal = airlineInfo.getSeatTotal();
+				int seatReserved = airlineInfo.getSeatReserved();
+				
+				int spareSeat = seatTotal - seatReserved;
+				airlineInfo.setSeatSpare(spareSeat);
+				
+				md.addAttribute("spareSeat", spareSeat);
 			}
+			
+			
 			
 			System.out.println("컨트롤러 airline data: " + airlineData);
 			Integer maxPrice = service.getMaxPrice(departLoc, arrivalLoc, ticketType, seatGrade);
@@ -241,6 +252,15 @@ public class AirlineController {
 			}else {
 				airlineInfo.setPlusDate(false);
 			}
+			
+			// 잔여 좌석
+			int seatTotal = airlineInfo.getSeatTotal();
+			int seatReserved = airlineInfo.getSeatReserved();
+			
+			int spareSeat = seatTotal - seatReserved;
+			airlineInfo.setSeatSpare(spareSeat);
+			
+			md.addAttribute("spareSeat", spareSeat);
 		}
 			
 		md.addAttribute("departDate", departDate);

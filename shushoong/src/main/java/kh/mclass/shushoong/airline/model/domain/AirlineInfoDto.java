@@ -12,6 +12,8 @@ public class AirlineInfoDto {
 	private int child;//소아 인수
 	private int baby;//유아 인수
 	private String seatGrade;//좌석 등급 1=일등급 2=비즈니스 3=이코노미
+	private int seatTotal;
+	private int seatReserved; // 
 	
 	private String airlineCode; // 운항 코드
 	private String flightNo; // 항공편명
@@ -25,7 +27,7 @@ public class AirlineInfoDto {
 	private String airlineImg; // 항공사 로고
 	private String domesticFlights; // 국내선 = D /국제선 = I
 	private Integer viaCount; // 경로 횟수
-	private String spareSeat; // 잔여 좌석
+	private int seatSpare; // 잔여 좌석
 	private String seatPrice; // 티켓 값
 	private String flightTime; // 비행 시간
 	// 항공 목록 정렬

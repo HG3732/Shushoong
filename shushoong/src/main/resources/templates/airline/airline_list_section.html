@@ -15,7 +15,7 @@
 			<div class="airline-flex">
 				<div class="airline-logo">
 					<div class="span-seat-div">
-						<span class="span-seat">잔여 9석</span>
+						<span class="span-seat" th:text="'잔여' + ${air.seatSpare} + '석'">잔여 9석</span>
 					</div>
 					<img th:src="${air.airlineImg}" alt="">
 

@@ -12,7 +12,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<link th:href="@{/css/mypage/customer/mypageCustomerReservedAirline.css}" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
-<title>호텔 예약 상세정보</title>
+<title>항공 예약 상세정보</title>
 </head>
 <body>
 
@@ -73,13 +73,24 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					
 				</div>						
 			</div>
-
-			
- 			<div class="btn">
-				<input type="hidden" th:value="${departDate}" class="depart_">	
-				<input type="hidden" th:value="${currentDate}" class="current_date">		
-			</div>
 		</div>
+		
+		<div class="btn">
+			<input type="hidden" th:value="${departDate}" class="depart_">	
+			<input type="hidden" th:value="${currentDate}" class="current_date">		
+		</div>
+			
+		<div id="modal_esc" class="modal_overlay">
+            <div class="modal_window">
+            	<button type="button" class="esc">X</button>
+            	<p style="text-align: center">정말 취소하시겠습니까?</p>
+            	
+            	<div class="btn_wrap">
+            		<button type="button" class="yes">네</button>
+            		<button type="button" class="no">아니오</button>
+            	</div>
+            </div>
+          	</div>
 	</div>
 </div>
 	
@@ -96,7 +107,10 @@ function loadedHandler(){
 	var currentDate = $(".current_date").val();
 	var departDate = $(".depart_").val();
 	
-	if(currentDate < dpartDate){
+	console.log(currentDate);
+	console.log(departDate);
+	
+ 	if(currentDate < departDate){
 		$('.btn').append(`<button type="button" class="reserve_btn">취소하기</button>`);
 	}
 	

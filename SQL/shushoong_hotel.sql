@@ -403,3 +403,41 @@ from hotel where hotel_code='0SE001';
 select * from hotel_Reserve 
     join hotel using (hotel_code)
     join pay using (hotel_reserve_code);
+    
+    select * from hotel_review;
+    delete from hotel_review where review_title = '123';
+    commit;
+    select * from hotel_reserve where user_id = 'gyrua34';
+    update hotel_reserve
+    set review_available = '1' where user_id = 'gyrua34';
+    commit;
+update (
+select * from hotel_room
+    join hotel_room_cat using (room_cat)
+    join hotel_room_att using (room_att)
+    where hotel_code = '2OS001' and room_cat_desc = '스탠다드룸'
+        and room_att_desc = '없음' and room_cap = '2');
+        
+        
+        select room_count, room_cat_desc from hotel_room join hotel_room_cat using (room_cat) where hotel_code = '0JJ003';
+        
+        desc hotel_reserve;
+        
+        select * from hotel where hotel_name like '%롯데시티%';
+    
+select * from hotel
+		    join hotel_pic using(hotel_code)
+		    join v_room_list using(hotel_code);
+            
+select user_name, hotel_name, hotel_reserve_code, reserve_time, residence_phone from member 
+		join HOTEL_RESERVE using(user_id) 
+        join hotel using(hotel_code)
+        where user_id = 'ex1';
+
+--항공 예약 내역 조회        
+select user_name, airline_reserve_code, sg.airline_code as airline_code, depart_loc, ai.depart_date as depart_date, depart_time, arrival_loc, ai.arrival_date as arrival_date, arrival_time, seat_grade, reserve_time, reserve_phone from member 
+		join AIRLINE_RESERVE_INFO using(user_id)
+        join direct_via using (airline_reserve_code)
+        join seat_grade sg using (seat_grade)
+        join airline_info ai on sg.airline_code = ai.airline_code
+        where ai.airline_code = 'LJ20307190725';

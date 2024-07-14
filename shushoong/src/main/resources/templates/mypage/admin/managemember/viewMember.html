@@ -29,7 +29,7 @@
 					<div class="purchaseProduct-content">
 						<label for="purchaseProduct">결제 건수</label>
 						<div class="purchaseProduct">
-							<div class="productName" id="productName" th:text="${userHotelPayInfo + userFlyPayInfo}"></div><button type="button" class="payList">조회</button>
+							<div class="productName" id="productName" th:text="${userHotelPayCount + userFlyPayCount}"></div><button type="button" class="payList" th:data-id="${userInfo.userId}" onclick="payList(this)">조회</button>
 						</div>
 					</div>
 				</th:block>
@@ -54,6 +54,10 @@
 				<th:block th:if="${userInfo.userStatus == 0}">
 					<button type="button" class="stopCancleBtn" onclick="unlockAccountHandler(this)">이용정지 해제</button>
 				</th:block>
+			</div>
+			<div class="modal-background">
+				<input type="hidden" class="user-id" th:value="${userInfo.userId}">
+				<div th:replace="~{mypage/admin/managemember/userInfoModal :: userinfo}"></div>
 			</div>
 		</th:block>
 		<th:block th:if="${userInfo == null or userInfo == ''}">

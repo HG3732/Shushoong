@@ -29,10 +29,14 @@ public interface MypageAdminRepository {
 	
 	//회원 결제 내역 조회
 	//1. 호텔
-	public List<Map<String, String>> selectHotelPayCount(String id);
+	public List<Map<String, String>> selectHotelPayList(String id, RowBounds rowBounds);
+
+	public int selectHotelPayCount(String id);
 	
 	//2. 항공
-	public List<Map<String, String>> selectFlyPayCount(String id);
+	public List<Map<String, String>> selectFlyPayList(String id, RowBounds rowBounds);
+
+	public int selectFlyPayCount(String id);
 
 	//1:1문의내역 갯수 조회
 	public String selectFAQCount(String id);

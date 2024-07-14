@@ -56,6 +56,38 @@ function memberViewHandler(thisElement) {
 	});
 }
 
+//결제내역 조회 클릭 시 모달
+function payList(thisElement) {
+	var id = $(thisElement).data("id");
+	
+	$('#modal').css('display', 'flex');
+	/*$.ajax({
+		url: "/shushoong/admin/manager/business/viewMember.ajax",
+		method: "get",
+		data: { id : id },
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	})
+	//success함수 대체
+	.done(function(response){
+		$("#viewmember").replaceWith(response);
+	});
+	
+	$.ajax({
+		url: "/shushoong/admin/manager/customer/viewQna.ajax",
+		method: "get",
+		data: { id : id },
+		error: function(xhr, status, error) {
+				console.log('AJAX 실패:', error);
+			}
+	})
+	//success함수 대체
+	.done(function(response){
+		$("#userqna").replaceWith(response);
+	});*/
+}
+
 //회원 정지
 function lockAccountHandler(thisElement) {
 	var id = $(thisElement).parent('.btn.container').data("targetid");

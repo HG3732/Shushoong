@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+	<div class="wrap-modal" id="modal" th:fragment="userinfo">
+		<div class="wrap-exit">
+			<div class="radio-tab">
+				<input type="radio" name="list" id="hotelList" checked/>
+				<input type="radio" name="list" id="flyList"/>
+				<div class="list-tab">
+					<label for="hotelList" onclick="tabToHotel()">호텔</label>
+					<label for="flyList" onclick="tabToFly()">항공</label>
+				</div>
+			</div>
+			<img class="btn-exit" th:src="@{/images/exit_button.svg}" onclick="closeModal()">
+		</div>
+		<th:block th:if="${userInfo.userGrade.equals('customer')}">
+			<div class="modal-box">
+				<div class="wrap-head paylist hotellist">
+					<div>호텔명</div>
+					<div>예약 번호</div>
+					<div>예약 시각</div>
+					<div>예약자 번호</div>
+				</div>
+				<div class="paylist hotellist" th:each="hotellist : ${userHotelPayInfo.hotelPayList}">
+					<div th:text="${hotellist.HOTEL_NAME}">호텔명</div>
+					<div th:text="${hotellist.HOTEL_RESERVE_CODE}">예약 번호</div>
+					<div th:text="${hotellist.RESERVE_TIME}">예약 시각</div>
+					<div th:text="${hotellist.RESIDENCE_PHONE}">예약자 번호</div>
+				</div>
+				<div class="wrap-pageNum">
+					<th:block th:if="${userHotelPayInfo.startPageNum > 1}">
+						<button type="button" class="btn-page gopage" th:data-targetpage="${userHotelPayInfo.startPageNum - 1}" onclick="goPage(this)">&lt;</button>
+					</th:block>
+					<div class="wrap-page" th:each="item : ${#numbers.sequence(userHotelPayInfo.startPageNum, userHotelPayInfo.endPageNum)}">
+						<th:block th:if="${userHotelPayInfo.currentPageNum == item}">
+							<button type="button" class="gopage current" th:text="${item}" th:href="@{/support/qna/list/{page}(page=${item})}" disabled></button>
+						</th:block>
+						<th:block th:unless="${userHotelPayInfo.currentPageNum == item}">
+							<button type="button" class="btn-page gopage" th:text="${item}" th:data-targetpage="${item}" onclick="goPage(this)"></button>
+						</th:block>
+					</div>
+					<th:block th:if="${userHotelPayInfo.endPageNum < userHotelPayInfo.totalPageCount}">
+						<button type="button" class="btn-page gopage" th:data-targetpage="${userHotelPayInfo.endPageNum + 1}" onclick="goPage(this)">&gt;</button>
+					</th:block>
+				</div>
+			</div>
+			<div class="modal-box">
+				<div class="wrap-head paylist flylist">
+					<div>예약 번호</div>
+					<div>항공 번호</div>
+					<div>출발지</div>
+					<div>출발 날짜</div>
+					<div>도착지</div>
+					<div>도착 날짜</div>
+					<div>등급</div>
+					<div>예약 시각</div>
+					<div>예약자 번호</div>
+				</div>
+				<div class="paylist flylist" th:each="flylist : ${userFlyPayInfo.flyPayList}">
+					<div th:text="${flylist.AIRLINE_RESERVE_CODE}">예약 번호</div>
+					<div th:text="${flylist.AIRLINE_CODE}">항공 번호</div>
+					<div th:text="${flylist.DEPART_LOC}">출발지</div>
+					<div th:text="${flylist.DEPART_DATE + ' ' + flylist.DEPART_TIME}">출발 날짜</div>
+					<div th:text="${flylist.ARRIVAL_LOC}">도착지</div>
+					<div th:text="${flylist.ARRIVAL_DATE + ' ' + flylist.ARRIVAL_TIME}">도착 날짜</div>
+					<div th:text="${flylist.SEAT_GRADE}">좌석 종류</div>
+					<div th:text="${flylist.RESERVE_TIME}">예약 시각</div>
+					<div th:text="${flylist.RESERVE_PHONE}">예약자 번호</div>
+				</div>
+				<div class="wrap-pageNum">
+					<th:block th:if="${userFlyPayInfo.startPageNum > 1}">
+						<button type="button" class="btn-page gopage" th:data-targetpage="${userFlyPayInfo.startPageNum - 1}" onclick="goPage(this)">&lt;</button>
+					</th:block>
+					<div class="wrap-page" th:each="item : ${#numbers.sequence(userFlyPayInfo.startPageNum, userFlyPayInfo.endPageNum)}">
+						<th:block th:if="${userFlyPayInfo.currentPageNum == item}">
+							<button type="button" class="gopage current" th:text="${item}" th:href="@{/support/qna/list/{page}(page=${item})}" disabled></button>
+						</th:block>
+						<th:block th:unless="${userFlyPayInfo.currentPageNum == item}">
+							<button type="button" class="btn-page gopage" th:text="${item}" th:data-targetpage="${item}" onclick="goPage(this)"></button>
+						</th:block>
+					</div>
+					<th:block th:if="${userFlyPayInfo.endPageNum < userFlyPayInfo.totalPageCount}">
+						<button type="button" class="btn-page gopage" th:data-targetpage="${userFlyPayInfo.endPageNum + 1}" onclick="goPage(this)">&gt;</button>
+					</th:block>
+				</div>
+			</div>
+		</th:block>
+	</div>
+</html>

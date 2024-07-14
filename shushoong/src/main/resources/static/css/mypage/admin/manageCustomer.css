@@ -455,3 +455,135 @@ section .allstopBtn {
 	cursor: pointer;
 	margin: 40px 0;
 }
+
+/* 모달 */
+.modal-background {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 1890px;
+	background-color: rgba(0, 0, 0, .8);
+	top: -15px;
+    left: 0px;
+    z-index: 3;
+    justify-content: center;
+}
+
+.wrap-modal {
+    width: 1200px;
+    height: 600px;
+    background-color: white;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 3px solid var(--color_blue_1);
+    padding: 15px;
+    overflow-y: overlay;
+}
+
+.wrap-exit {
+	display: flex;
+	justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.btn-exit {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.list-tab {
+	display: flex;
+}
+
+.wrap-exit label {
+	border-bottom: 3px solid #006AFF;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+}
+
+#hotelList, #flyList {
+	display: none;
+}
+
+#hotelList:checked ~ .list-tab label:nth-child(1), #flyList:checked ~ .list-tab label:nth-child(2) {
+	border: 3px solid #006AFF;
+	border-bottom: none;
+	background-color: #BCEFFF;
+	box-shadow: none;
+}
+
+.modal-box .wrap-head {
+	font-weight: 900;
+	font-size: 12px;
+}
+
+.modal-box {
+	display: flex;
+	flex-direction: column;
+	border-top: 3px solid #006AFF;
+}
+
+.modal-box:last-child {
+	display: none;
+}
+
+.modal-box .paylist {
+	display: grid;
+	justify-content: center;
+	font-size: 12px;
+}
+
+.hotellist {
+	grid-template-columns : repeat(4, 1fr);
+}
+
+.paylist > div {
+	padding: 10px;
+    text-align: center;
+}
+
+.flylist {
+	grid-template-columns: 3fr 3fr 1fr 3fr 1fr 3fr 1fr 3fr 3fr;
+}
+
+.paylist:not(:last-child) {
+	border-bottom: 1px solid var(--color_blue_1);
+}
+
+.paylist:last-child {
+	border-bottom: 3px solid var(--color_blue_1);
+}
+
+.modal-box .wrap-head {
+	background-color : var(--color_blue_2);
+}
+
+.wrap-pageNum {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 15px;
+	align-items: center;
+	margin: 25px;
+	font-family: SOYOMapleRegularTTF;
+}
+
+.wrap-pageNum .gopage {
+	border:none;
+	border-radius: 20px;
+	padding: 5px 9px;
+	background-color: var(--color_blue_2);
+	color: black;
+	cursor: pointer;
+}
+
+.wrap-pageNum .current {
+	background-color: var(--color_blue_1);
+	color: white;
+}

@@ -61,4 +61,6 @@ public interface HotelRepository {
 	//결제 정보 수정
 	public int updatePayInfo(String hotelReserveCode, String approveNo);
 	
+	//방 갯수 차감
+	public int decreaseRoomCount(String hotelCode, String room, String roomCat, String roomCap, String roomAtt);
 }

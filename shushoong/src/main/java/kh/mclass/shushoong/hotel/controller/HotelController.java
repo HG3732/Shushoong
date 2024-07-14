@@ -338,7 +338,7 @@ public class HotelController {
 
 	@PostMapping("/hotel/customer/reserve/pay")
 	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String hotelLocCat,
-			String roomCat, String roomCatDesc, String roomAtt, String roomAttDesc, String hotelPrice, String roomCap) {
+			String roomCat, String roomCatDesc, String roomAtt, String roomAttDesc, String hotelPrice, String roomCap, String room) {
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelCode", hotelCode);
 		model.addAttribute("hotelLocCat", hotelLocCat);
@@ -364,7 +364,17 @@ public class HotelController {
 		model.addAttribute("adult", session.getAttribute("adult"));
 		model.addAttribute("child", session.getAttribute("child"));
 		// model.addAttribute("nation", session.getAttribute("nation"));
-		model.addAttribute("room", session.getAttribute("room"));
+		model.addAttribute("room", room);
+		
+		//방 정보 묶어서 결제 완료페이지로
+		Map<String, String> roomInfo = new HashMap<>();
+		roomInfo.put("room", room);
+		roomInfo.put("hotelCode", hotelCode);
+		roomInfo.put("roomCat", roomCat);
+		roomInfo.put("roomCap", roomCap);
+		roomInfo.put("roomAtt", roomAtt);
+		session.setAttribute("roomInfo", roomInfo);
+		
 
 		// 호텔 요청사항 db에서 불러와서 model에 값 넣어주기
 		model.addAttribute("hotelRequestList", service.hotelRequestAll());
@@ -545,6 +555,14 @@ public class HotelController {
 		model.addAttribute("requestSum", reserveCompletedto.getRequestSum());
 		model.addAttribute("requestDesc", reserveCompletedto.getRequestDesc());
 
+		Map<String, String> roomInfo = (Map<String, String>) session.getAttribute("roomInfo");
+		String hotelCode = roomInfo.get("hotelCode");
+		String room = roomInfo.get("room");
+		String roomCat = roomInfo.get("roomCat");
+		String roomCap = roomInfo.get("roomCap");
+		String roomAtt = roomInfo.get("roomAtt");
+		service.decreaseRoomCount(hotelCode, room, roomCat, roomCap, roomAtt);
+		
 		return "hotel/hotel_pay_success";
 	}
 

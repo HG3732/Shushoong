@@ -172,11 +172,11 @@
 	    INSERT INTO hotel_reserve 
 	        (hotel_reserve_code, residence_name_ko, residence_name_en, residence_gender, residence_birth,
 	         residence_phone, residence_email, reserve_check_in, reserve_check_out, user_id, room_cap, 
-	         hotel_code, room_cat, room_att, residence_num, request_Sum, review_available, reserve_time)
+	         hotel_code, room_cat, room_att, residence_num, request_Sum, review_available, reserve_time, room)
 	    VALUES 
 	        (#{hotelReserveCode}||SEQ_HOTEL_RESERVE.nextVal, #{residenceNameKo}, #{residenceNameEn}, #{residenceGender}, #{residenceBirth}, 
 	        #{residencePhone}, #{residenceEmail}, #{reserveCheckIn}, #{reserveCheckOut}, #{userId}, #{roomCap}, 
-	        #{hotelCode}, #{roomCat}, #{roomAtt}, #{people}, #{requestSum}, '0', default)
+	        #{hotelCode}, #{roomCat}, #{roomAtt}, #{people}, #{requestSum}, '0', default, #{room})
 		<selectKey keyProperty="hotelReserveCode" resultType="String" order="AFTER">
 			<bind name="code" value="'%' + hotelReserveCode + '%'"/>
 				SELECT hotel_reserve_code
@@ -204,4 +204,11 @@
 		where approve_no = #{approveNo}
 	</update>
 	
+	<!-- 결제 완료 시 방 갯수 차감 -->
+	<update id="decreaseRoomCount" parameterType="hashmap">
+		update hotel_room
+			set room_count = room_count - #{room}
+			where hotel_code = #{hotelCode} and room_cat = #{roomCat}
+				and room_cap = #{roomCap} and room_att = #{roomAtt}
+	</update>
 </mapper>

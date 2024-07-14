@@ -121,4 +121,8 @@ public class HotelService {
 		return hotelRepository.updatePayInfo(hotelReserveCode, approveNo);
 	}
 	
+	//방 갯수 차감
+	public int decreaseRoomCount(String hotelCode, String room, String roomCat, String roomCap, String roomAtt) {
+		return hotelRepository.decreaseRoomCount(hotelCode, room, roomCat, roomCap, roomAtt);
+	}
 }

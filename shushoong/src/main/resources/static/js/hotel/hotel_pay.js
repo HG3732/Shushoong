@@ -167,6 +167,7 @@ let hotelCode = '';
 let roomCat = '';
 let roomAtt = '';
 let roomAttDesc = '';
+let room = '';
 
 let roomCatDesc = '';
 let hotelName = '';
@@ -211,6 +212,7 @@ function reserveInfoInsertHandler(){
 	 roomCat = $('.room_cat').val();
 	 roomAtt = $('.room_att').val();
 	 roomAttDesc = $('.room_att_desc').val();
+	 room= $('.room_count').val();
 	
 	 roomCatDesc = $('.room_cat_desc').val();
 	 hotelName = $('.hotel_name').text();
@@ -241,7 +243,8 @@ function reserveInfoInsertHandler(){
 		hotelReserveCode : hotelReserveCode,
 		/*위에는 예약으로, 아래는 예약완료됐을때 띄워주기*/
 		people : people,
-		requestSum : requestSum		
+		requestSum : requestSum,
+		room : room	
 	}
 		
 	// reservationData 객체를 JSON 문자열로 변환

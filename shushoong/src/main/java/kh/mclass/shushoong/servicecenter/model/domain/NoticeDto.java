@@ -17,4 +17,13 @@ public class NoticeDto {
 	private String noticeCategory;
 	private String userGrade;
 	List<NoticeFileDto> fileId;
+	
+//	public NoticeDto() {
+//		super();
+//	}
+//	public NoticeDto(int noticeId, String noticeTitle,String noticeContent, String noticeTime, String userId, String noticeCategory, String userGrade) {
+//		super();
+//		noticeContent = noticeContent.replace("\\r?\\n", "<br>");
+//	}
 }
+	

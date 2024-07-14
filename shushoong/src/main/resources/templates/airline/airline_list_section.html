@@ -83,7 +83,7 @@
 								<span th:if="${air.plusDate}" class="detail-date arrival" th:text="${departDate +' +1'}">07월18일</span>
 							</div>
 							<div>
-								<span th:unless="${air.plusDate}" class="detail-date arrival" th:text="${departDate +' +1'}">07월18일</span>
+								<span th:unless="${air.plusDate}" class="detail-date arrival" th:text="${departDate}">07월18일</span>
 							</div>
 							<div>
 								<span th:text="${air.arrivalTime}">10:20</span>

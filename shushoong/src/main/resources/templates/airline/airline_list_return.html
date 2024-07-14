@@ -82,6 +82,13 @@ div#people_lineup_sit_accoding{
 #fc-dom-1{
 	font-size: 13px;
 }
+
+.detail-date{
+	font-weight: bold;
+}
+.detail-flightTime{
+	font-size: 15px;
+	}
 </style>
 <body>
 	<div class="wrapper">
@@ -211,6 +218,8 @@ div#people_lineup_sit_accoding{
 								<span th:text="${air.arrivalLoc}" id="select-info-arrivalLoc-out" name="arrivalLoc-out"></span> 
 								<span th:text="${air.airlineCode}" id="select-info-airlineCode-out" name="airlineCode-out"></span>
 								<span th:text="${air.flightNo}" id="select-info-flightNo-out" name="flightNo-out"></span>
+								<span th:text="${arrivalDate}" id="select-info-arrivalDate-out" name = "arrivalDate"></span>
+								
 							</div>
 						</div>
 
@@ -221,7 +230,7 @@ div#people_lineup_sit_accoding{
 										<div class="airline-flex">
 											<div class="airline-logo">
 												<div class="span-seat-div">
-													<span class="span-seat">잔여 9석</span>
+													<span class="span-seat" th:text="${'잔여' + seatSpareSelect+'석'}">잔여 9석</span>
 												</div>
 												<img th:src="${air.airlineImg}" alt="">
 
@@ -230,7 +239,7 @@ div#people_lineup_sit_accoding{
 												<span th:text="${air.airlineName}"></span>
 											</div>
 											<div class="airinfo depart-info">
-												<div th:text="${arrivalDate2}" class="info date"></div>
+												<div th:text="${departDate2}" class="info date"></div>
 												<div th:text="${air.departTime}" class="info time">이륙
 													시간</div>
 												<div th:text="${air.departLoc}" class="info loc"
@@ -245,8 +254,8 @@ div#people_lineup_sit_accoding{
 												<div hidden th:text="${air.airlineCode}"></div>
 											</div>
 											<div class="airinfo arr-info">
-												<div th:if="${air.plusDate}" th:text="${arrivalDate2} + ' +1'" class="info date">도착 일자</div>
-												<div th:unless="${air.plusDate}" th:text="${arrivalDate2}" class="info date">도착 일자</div> 
+												<div th:if="${air.plusDate}" th:text="${departDate2} + ' +1'" class="info date">도착 일자</div>
+												<div th:unless="${air.plusDate}" th:text="${departDate2}" class="info date">도착 일자</div> 
 												<div th:text="${air.arrivalTime}" class="info time">착륙
 													시간</div>
 												<div th:text="${air.arrivalLoc}" class="info loc"
@@ -272,7 +281,7 @@ div#people_lineup_sit_accoding{
 												<div class="date-select-info">
 													<div>
 														<div>
-															<span th:text="${arrivalDate}">07월18일</span>
+															<span class="detail-date depart" th:text="${departDate}">07월18일</span>
 														</div>
 														<div>
 															<span th:text="${air.departTime}">14:40</span>
@@ -283,10 +292,10 @@ div#people_lineup_sit_accoding{
 													</div>
 													<div>
 														<div>
-															<span th:if="${air.plusDate}" th:text="${arrivalDate} + ' +1'">07월18일</span>
+															<span class="detail-date arrival" th:if="${air.plusDate}" th:text="${departDate} + ' +1'">07월18일</span>
 														</div>
 														<div>
-															<span th:unless="${air.plusDate}" th:text="${arrivalDate}">07월18일</span>
+															<span class="detail-date arrival" th:unless="${air.plusDate}" th:text="${departDate}">07월18일</span>
 														</div>
 														<div>
 															<span th:text="${air.departTime}">10:20</span>
@@ -294,14 +303,14 @@ div#people_lineup_sit_accoding{
 													</div>
 												</div>
 												<div class="loc-select-info">
-													<span th:text="${air.departLoc}">출발지</span>
+													<span class="detail-loc depart" th:text="${air.departLoc}">출발지</span>
 													<div>
 														<span th:text="${air.airlineName}">항공사 명</span>
 													</div>
 													<div>
-														<span>좌석등급 항공편명</span>
+														<span id="select-seatGrade" th:text="${seatGradeSelect}"></span> &nbsp <span th:text="${air.flightNo}" ></span>
 													</div>
-													<span th:text="${air.arrivalLoc}">도착지</span>
+													<span class="detail-loc arrival" th:text="${air.arrivalLoc}">도착지</span>
 												</div>
 											</div>
 										</div>

@@ -35,7 +35,6 @@
 				<h1>공지사항 수정</h1>
 				<div hidden="" class="rmfqjsgh" th:text="${noticeDto.noticeId}"></div>
 				<div hidden="" class="noticeTime" th:text="${noticeDto.noticeTime}"></div>
-				<hr>
 					<div class="write-table">
 						<div class="write-title">
 							<div class="th title">제목</div>
@@ -46,7 +45,7 @@
 						<div class="write-cat">
 							<div class="th cat">카테고리</div>
 							<div class="input cat">
-								<input class="catVal" type="text" th:value="${#strings.startsWith(noticeDto.noticeId, '1') ? '회원' : (#strings.startsWith(noticeDto.noticeId, '2') ? '사업자' : '')}" readonly>
+								<span class="catVal" th:text="${#strings.startsWith(noticeDto.noticeId, '1') ? '회원' : (#strings.startsWith(noticeDto.noticeId, '2') ? '사업자' : '')}" ></span>
 							</div>
 						</div>
 						<div class="write-file" th:if="${noticeFileDto != null and #lists.size(noticeFileDto) > 0}">

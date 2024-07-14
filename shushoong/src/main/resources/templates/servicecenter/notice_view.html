@@ -69,13 +69,19 @@
 							</div>
 						</th:block>
 					<hr style="border: none; border-bottom: 1px solid var(--color_blue_1);"/>
-					<div class="update-box" th:if="${userGrade} == 'admin'">
+					
+					<!-- <div class="update-box" th:if="${userGrade} == 'admin'">
 						<div class="update-btn"><button type="button">수정하기</button></div>
 						<div class="delete-btn"><button type="button">삭제하기</button></div>
-					</div>
+					</div> -->
+					
 					<div class="qna-content" th:text="${noticeDto.noticeContent}"></div>
 				</div>
 				<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
+				<div class="update-box" th:if="${userGrade} == 'admin'">
+					<div class="update-btn"><button type="button">수정하기</button></div>
+					<div class="delete-btn"><button type="button">삭제하기</button></div>
+				</div>
 			</div>
 			<div id="modal" class="modal_overlay">
 	            <div class="modal_window">

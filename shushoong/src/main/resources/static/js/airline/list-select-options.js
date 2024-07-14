@@ -1,5 +1,7 @@
 function getSelectOptions() {
 	// var viaType = "direct";
+	var departDate = $('#select-info-departDate').text().trim();
+	var arrivalDate = $('#select-info-arrivalDate').text().trim();
 	var departLoc = $('#select-info-departLoc').text();
 	var arrivalLoc = $('#select-info-arrivalLoc').text();
 	var ticketType = $('#select-info-ticketType').text();
@@ -52,6 +54,9 @@ function getSelectOptions() {
         var viaType = $('#viaType').val();
 	
 		
+		$('#departDate').val(departDate);
+		$('#arrivalDate').val(arrivalDate);
+		
 		console.log('출발지 : ', departLoc);
 		console.log('도착지 : ', arrivalLoc);
 		console.log('정렬 순서', selectType);
@@ -80,7 +85,8 @@ function getSelectOptions() {
 				viaType: viaType,
 				maxPrice: maxPrice,
 				ticketType : ticketType,
-				seatGrade: seatGrade
+				seatGrade: seatGrade,
+				departDate: departDate
 			},
 
 			error: function(xhr, status, error) {

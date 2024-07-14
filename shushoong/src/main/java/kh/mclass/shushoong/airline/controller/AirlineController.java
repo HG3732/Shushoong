@@ -187,7 +187,36 @@ public class AirlineController {
 		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate,
 				ticketType, seatGrade);
 		AirlineInfoDto selectOneAirline = service.getSelectOne(airlineCode);
-
+		
+		// 선택된 항공
+		
+		if(selectOneAirline.getSeatGrade() != null) {
+			String seatGradeSelect = selectOneAirline.getSeatGrade();
+			switch (seatGradeSelect) {
+			case "1": {
+				seatGradeSelect = "First class";
+				break;
+			}
+			case "2": {
+				seatGradeSelect = "Business class";
+				break;
+			}
+			case "3": {
+				seatGradeSelect =  "Economy class";
+				break;
+			}
+			}
+			md.addAttribute("seatGradeSelect", seatGradeSelect);
+			System.out.println("선택된 항공 등급 : " + seatGradeSelect);
+			int seatTotal = selectOneAirline.getSeatTotal();
+			int seatReserved = selectOneAirline.getSeatReserved();
+			
+			int spareSeat = seatTotal - seatReserved;
+			selectOneAirline.setSeatSpare(spareSeat);
+			
+			md.addAttribute("seatSpareSelect", spareSeat);
+		}
+		
 		for (AirlineInfoDto airlineInfo : airlineReturnData) {
 			switch (seatGrade) {
 			case "1": {
@@ -302,7 +331,7 @@ public class AirlineController {
 	// 항공 목록 정렬 옵션
 	@GetMapping("airline/list_select_options/ajax")
 	// @ResponseBody
-	public String airlineSelectOptions(String seatGrade, String departLoc, String arrivalLoc, String departTimeLeft,
+	public String airlineSelectOptions(String departDate, String seatGrade, String departLoc, String arrivalLoc, String departTimeLeft,
 			String deaprtTimeRight, String arrivalTimeLeft, String arrivalTimeRight, String selectType, String viaType,
 			String maxPrice, String ticketType, String adult, String child, String baby, Model md) {
 
@@ -318,7 +347,9 @@ public class AirlineController {
 		System.out.println("child: " + child);
 		System.out.println("baby: " + baby);
 		System.out.println("ticketType: " + ticketType);
-
+		
+		md.addAttribute("departDate", departDate);
+//		md.addAttribute("arrivalDate", arrivalDate);
 		md.addAttribute("adult", adult);
 		md.addAttribute("child", child);
 		md.addAttribute("baby", baby);
@@ -348,6 +379,46 @@ public class AirlineController {
 			}
 			}
 		}
+		//출발/도착일 앞에 년도 제거
+//		if (arrivalDate.equals("")) {
+//			String arrivalDate2 = "";
+//			md.addAttribute("arrivalDate2", arrivalDate2);
+//			System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
+//		}else {
+//			String arrivalDate2 = arrivalDate.substring(5);
+//			md.addAttribute("arrivalDate2", arrivalDate2);
+//			System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
+//		}
+			String departDate2 = departDate.substring(5);
+			System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
+			md.addAttribute("departDate2", departDate2);
+			
+			// 출발/도착시간 비교
+		for(AirlineInfoDto airlineInfo : SortData) {
+			String departTime = airlineInfo.getDepartTime().replace(":", "");
+			String arrivalTime = airlineInfo.getArrivalTime().replace(":", "");
+			
+			int departTimeCompare = Integer.parseInt(departTime);
+			int arrivalTimeCompare = Integer.parseInt(arrivalTime);
+			
+			System.out.println("departTime : " + departTimeCompare + "arrivalTime : " + arrivalTimeCompare);
+			if (departTimeCompare > arrivalTimeCompare) {
+				airlineInfo.setPlusDate(true);
+				System.out.println("여기 통과안함???===========");
+				System.out.println(departTimeCompare > arrivalTimeCompare);
+			}else {
+				airlineInfo.setPlusDate(false);
+			}
+			
+			// 잔여 좌석
+			int seatTotal = airlineInfo.getSeatTotal();
+			int seatReserved = airlineInfo.getSeatReserved();
+			
+			int spareSeat = seatTotal - seatReserved;
+			airlineInfo.setSeatSpare(spareSeat);
+			
+			md.addAttribute("spareSeat", spareSeat);
+		}
 
 		return "airline/airline_list_section";
 	}
@@ -355,7 +426,7 @@ public class AirlineController {
 	// 항공 돌아오는 목록 정렬 옵션
 	@GetMapping("airline/list_select_options_return/ajax")
 	// @ResponseBody
-	public String airlineReturnSelectOptions(String seatGrade, String airlineCode, String departLoc, String arrivalLoc,
+	public String airlineReturnSelectOptions(String arrivalDate, String seatGrade, String airlineCode, String departLoc, String arrivalLoc,
 			String departTimeLeft, String deaprtTimeRight, String arrivalTimeLeft, String arrivalTimeRight,
 			String selectType, String viaType, String maxPrice, String ticketType, Model md) {
 
@@ -372,6 +443,7 @@ public class AirlineController {
 		List<AirlineInfoDto> SortData = service.getAirlineSideTimeReturn(departLoc, arrivalLoc, departTimeLeft,
 				deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, ticketType, seatGrade);
 		System.out.println("항공사 이름: " + selectOneAirline.getAirlineName());
+		md.addAttribute("arrivalDate", arrivalDate);
 		md.addAttribute("selectOneAirline", selectOneAirline);
 		md.addAttribute("airlineReturnData", SortData);
 		md.addAttribute("seatGrade", seatGrade);
@@ -395,6 +467,29 @@ public class AirlineController {
 				break;
 			}
 			}
+			
+			//출발/도착일 앞에 년도 제거
+			if (arrivalDate.equals("")) {
+				String arrivalDate2 = "";
+				md.addAttribute("arrivalDate2", arrivalDate2);
+				System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
+			}else {
+				String arrivalDate2 = arrivalDate.substring(5);
+				md.addAttribute("arrivalDate2", arrivalDate2);
+				System.out.println("앞자리 떼버리기 도착 일 : " + arrivalDate2);
+			}
+//				String departDate2 = departDate.substring(5);
+//				System.out.println("앞자리 떼버리기 출발 일 : " + departDate2);
+//				md.addAttribute("departDate2", departDate2);
+			
+			// 잔여 좌석
+			int seatTotal = airlineInfo.getSeatTotal();
+			int seatReserved = airlineInfo.getSeatReserved();
+			
+			int spareSeat = seatTotal - seatReserved;
+			airlineInfo.setSeatSpare(spareSeat);
+			
+			md.addAttribute("spareSeat", spareSeat);
 		}
 
 		Random random = new Random();

@@ -159,43 +159,13 @@ input[type=tel]{
 
 .img_next_word{
 	font-size: var(--font3);
+	margin-left: 5px;
 }
 
 .hotel_request {
 	display: flex;
 	align-items: center; 
 }
-/* .single{
-	display: flex;
-	align-items: center; 
-}
-
-.twin{
-	display: flex;
-	align-items: center; 
-}
-
-.double{
-	display: flex;
-	align-items: center; 
-}
-
-
-.non_smoking{
-	display: flex;
-	align-items: center; 
-}
-
-.smoking{
-	display: flex;
-	align-items: center; 
-}
-
-
-.skyview{
-	display: flex;
-	align-items: center; 
-} */
 
 input[type=checkbox]{ 
 	display:none; 
@@ -342,21 +312,6 @@ input[type="radio"]:checked + label{
 	justify-content: space-between;
 	font-size: var(--font4);
 	margin-top: 10px;
-}
-
-.exchange_info{
-	margin-top: 30px;
-	text-align: end;
-	font-size: var(--font4);
-	color: #7C7C7C;
-}
-
-.apply_exchange{
-	margin-bottom: 5px;
-}
-
-.mileage_save{
-	margin-bottom: 5px;
 }
 
 .pay_button{

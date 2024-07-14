@@ -1,5 +1,7 @@
 function getSelectOptionsReturn() {
 	// var viaType = "direct";
+	var departDate = $('#select-info-departDate-out').text().trim();
+	var arrivalDate = $('#select-info-arrivalDate-out').text().trim();
 	var departLoc = $('#select-info-departLoc-out').text();
 	var arrivalLoc = $('#select-info-arrivalLoc-out').text();
 	var airlineCode = $('#select-info-airlineCode-out').text();
@@ -49,6 +51,9 @@ function getSelectOptionsReturn() {
 		
 		// 직항/경유
         var viaType = $('#viaType').val();
+        
+		$('#departDate').val(departDate);
+		$('#arrivalDate').val(arrivalDate);
 		
 		console.log('비행기 편명 : ', airlineCode);
 		console.log('출발지 : ', departLoc);
@@ -76,7 +81,8 @@ function getSelectOptionsReturn() {
 				arrivalTimeRight: arrivalTimeRightVal,
 				selectType: selectType,
 				viaType: viaType,
-				seatGrade: seatGrade
+				seatGrade: seatGrade,
+				arrivalDate: arrivalDate
 			},
 
 			error: function(xhr, status, error) {

@@ -140,10 +140,8 @@ function reserveBtnStatus(){
 	if(name != null && birthday != null && last_name != null && 
 	first_name != null && phone != null && email != null && allAgreed && genderChecked){
 		reserveBtn.prop('disabled', false).addClass('active');
-		console.log('이제 눌림 ㅋ')
 	}else{
 		reserveBtn.prop('disabled', true).removeClass('active');;
-		console.log('버튼 못누름 ㅋ');
 	}
 }
 

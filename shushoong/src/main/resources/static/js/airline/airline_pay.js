@@ -344,8 +344,7 @@ function adultNum(){
 		
 	
 		
-		
-		/*약관 상세보기*/
+/*약관 상세보기*/
 function arrowDownClickHandler(){
 	console.log($(this).parents().eq(1).next());
 	
@@ -363,20 +362,19 @@ function arrowDownClickHandler(){
 
 }
 
-		
-	/*전체동의*/
+/*전체동의*/
 function allAgreeCheckHandler(){
 	console.log($(this).parent().siblings().eq(12).children('div:even').children());
 
 	if(this.checked) {
 			$('.agree_radio').prop('checked', true);
-			reserveBtnStatus();
+			checkAgreeFunction();
 		} else {
 			$('.disagree_radio').prop('checked', true);
+			checkAgreeFunction();
 		}
 }
 
-		
 /*동의합니다 개별 체크 다 누를 시 전체동의 선택되게 하기*/
 function checkAllEscHandler(){
 	console.log(this);
@@ -445,7 +443,7 @@ function checkAllEscHandler(){
 		
 //		국내선일경우 passport 관련 정보 display 시키는 옵션
 		function passportDisplayFunction(){
-			if($("#domestic_val").val()=='O'){
+			if($("#domestic_val").val()=='D'){
 				$(".passport_info_wrap").each(function (){
 					$(this).css("display","none");
 				});
@@ -600,6 +598,22 @@ async function passengerInfoInsertFunction(airlineReserveCode){
 				}
 		       });
 		}
+	
+		
+
 
 }
 		
+function checkAgreeFunction(){
+		var allAgreed = $('.agree_radio').toArray().every(radio => radio.checked && radio.value === 'agree');
+
+		if(allAgreed){
+			$("button#reserver_info_insert").attr("disabled",false);
+			console.log('이제 눌림 ㅋ')
+		}
+		else{
+			$("button#reserver_info_insert").attr("disabled",true);
+			console.log('버튼 못누름 ㅋ');
+		}
+		
+	}

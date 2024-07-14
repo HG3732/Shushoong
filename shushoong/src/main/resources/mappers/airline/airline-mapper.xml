@@ -223,8 +223,15 @@
 	    			#{item.birth},
 	    			#{item.nation},
 	    			#{item.baggage},
-	    			#{item.passportCode},
-	    			#{item.passportDate}  			
+	    			<choose>
+	    				<when test="item.passportCode != null and item.passportCode != ''">
+	    					#{item.passportCode},
+	    					#{item.passportDate} 
+	    				</when>
+	    				<otherwise>
+	    					Null, Null
+	    				</otherwise>
+	    			</choose>
 	    		)
    		</foreach>
     </insert>

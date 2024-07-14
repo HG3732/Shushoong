@@ -42,6 +42,7 @@ import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReserveCompleteDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
 import kh.mclass.shushoong.payment.PayDto;
@@ -97,9 +98,9 @@ public class HotelController {
 		Integer people = child1 + adult1;
 		int roomCap = people / Integer.parseInt(room);
 		if (people % Integer.parseInt(room) > 0.5)
-			roomCap++;
+			{roomCap++;}
 		if (roomCap < 2)
-			roomCap = 2;
+			{roomCap = 2;}
 		List<HotelDtoRes> result = service.selectAllHotelList(loc, String.valueOf(roomCap), null, null, null, null);
 		for (HotelDtoRes dto : result) {
 			dto.setPriceDiscounted(Integer.parseInt(dto.getHotelPrice()) * (100 - dto.getRoomDiscount()) / 100);
@@ -231,6 +232,13 @@ public class HotelController {
 		System.out.println(people + "=======================");
 
 		HotelViewDtoRes result = service.selectOneHotel(hotelCode, people);
+		
+		for (HotelRoomDto room : result.getHotelRooms()) {
+			int roomPrice = Integer.parseInt(room.getHotelPrice());
+			int roomDiscount = Integer.parseInt(room.getHotelDiscount());
+			int roomDiscounted = roomPrice * (100-roomDiscount) / 100 ;
+			room.setRoomDiscounted(String.valueOf(roomDiscounted));
+		}
 		// ajax와는 다르게 이 문장으로 인해서 service 가서 쭉쭉가서 db에서 정보 조회해서 dto에 넣고 다시 돌아옴
 		// 돌아온 데이터 밑에 넣음
 
@@ -338,7 +346,7 @@ public class HotelController {
 
 	@PostMapping("/hotel/customer/reserve/pay")
 	public String hotelPay(HttpSession session, Model model, String hotel, String hotelCode, String hotelLocCat,
-			String roomCat, String roomCatDesc, String roomAtt, String roomAttDesc, String hotelPrice, String roomCap) {
+			String roomCat, String roomCatDesc, String roomAtt, String roomAttDesc, String hotelPrice, String roomCap, String room) {
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelCode", hotelCode);
 		model.addAttribute("hotelLocCat", hotelLocCat);
@@ -364,7 +372,17 @@ public class HotelController {
 		model.addAttribute("adult", session.getAttribute("adult"));
 		model.addAttribute("child", session.getAttribute("child"));
 		// model.addAttribute("nation", session.getAttribute("nation"));
-		model.addAttribute("room", session.getAttribute("room"));
+		model.addAttribute("room", room);
+		
+		//방 정보 묶어서 결제 완료페이지로
+		Map<String, String> roomInfo = new HashMap<>();
+		roomInfo.put("room", room);
+		roomInfo.put("hotelCode", hotelCode);
+		roomInfo.put("roomCat", roomCat);
+		roomInfo.put("roomCap", roomCap);
+		roomInfo.put("roomAtt", roomAtt);
+		session.setAttribute("roomInfo", roomInfo);
+		
 
 		// 호텔 요청사항 db에서 불러와서 model에 값 넣어주기
 		model.addAttribute("hotelRequestList", service.hotelRequestAll());
@@ -545,6 +563,14 @@ public class HotelController {
 		model.addAttribute("requestSum", reserveCompletedto.getRequestSum());
 		model.addAttribute("requestDesc", reserveCompletedto.getRequestDesc());
 
+		Map<String, String> roomInfo = (Map<String, String>) session.getAttribute("roomInfo");
+		String hotelCode = roomInfo.get("hotelCode");
+		String room = roomInfo.get("room");
+		String roomCat = roomInfo.get("roomCat");
+		String roomCap = roomInfo.get("roomCap");
+		String roomAtt = roomInfo.get("roomAtt");
+		service.decreaseRoomCount(hotelCode, room, roomCat, roomCap, roomAtt);
+		
 		return "hotel/hotel_pay_success";
 	}
 

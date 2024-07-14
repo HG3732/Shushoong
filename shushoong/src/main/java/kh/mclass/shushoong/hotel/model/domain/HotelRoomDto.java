@@ -16,4 +16,5 @@ public class HotelRoomDto {
 	private String roomCap;
 	private String roomAtt;
 	private String roomAttDesc;
+	private String roomDiscounted;
 }

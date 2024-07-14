@@ -178,7 +178,9 @@ select * from airline_info;
  SELECT FLOOR(DBMS_RANDOM.VALUE(12, 18))||':'||FLOOR(DBMS_RANDOM.VALUE(00, 60)) FROM DUAL;
 set define off;
  commit;
+ select * from AIRLINE_INFO;
  select * from COUNTRY_LOC_PIC;
+ insert INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('CHINA','PVG','https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQV51pF9uKWKZOKR3v5RBWoLU0xpmt6Q_zkimpI2LqF7IXn5ExM8lVuSw4ycWAzaI-TY9sxpjP-ZMhOBPN-XHB0GOFAX9pcJoVHVPha-Q');
  insert ALL 
     INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('KOREA','ICN','https://lh3.googleusercontent.com/proxy/m6tMTeP9Yc8e3LFjetj5khVq6UGIq5hwBL64oB4TB95FOlKgdk3fUrJf-6e3azWCO-rucr5XBmnFxkzPYQw3jEKV--mz9Chr2dypmjXxRtqkTfP8ed6WTqxKtZm7fdu3lxZSEiY6Ur8ErDSQ1ZMihWD9tQ1-O_I=s680-w680-h510')
     INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('KOREA','GMP','https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg?size=626&ext=jpg&ga=GA1.1.1359838702.1718694112&semt=ais_user')
@@ -192,9 +194,51 @@ set define off;
     INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('CHINA','PEK','https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/gjn7mejkbvlf4nlthgeg/%EB%B2%A0%EC%9D%B4%EC%A7%95%EC%9D%BC%EC%9D%BC%EC%B0%A8%EB%9F%89%ED%88%AC%EC%96%B4.jpg')
     INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('CHINA','CAN','https://i.namu.wiki/i/wz1RIp1hXC9ymSpQefKWMaIDJtlysM6dymRri1Rb2Ql5DhUutdoV16j_snMwJ1sRipVE0r4awXHIZzSFe0J35A.jpg')
     INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('CHINA','SHA','https://lh6.googleusercontent.com/proxy/W-gD7FZcSLlMMMYqludJgS330vc6F_MioKYVX1kc5Rm1HWLQMv-B4wmmbeucsleTgK2YCVo-H5UYnDjnl8QKI7oocgjH0-yZsHM')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('CHINA','PKX','https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcRLWZR26T8cd_vNNYVUglqPhEf-Oksn0kh-8XYKpTQM8WQijOvsy4qxEvCFWtJFGdcYdREeqV3sJipluSQTIXCVK9HUexJlNaqwevqwFw')
+    INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('CHINA','PVG','https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQV51pF9uKWKZOKR3v5RBWoLU0xpmt6Q_zkimpI2LqF7IXn5ExM8lVuSw4ycWAzaI-TY9sxpjP-ZMhOBPN-XHB0GOFAX9pcJoVHVPha-Q')
     
     INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('USA','SEA','https://wimg.mk.co.kr/meet/neds/2018/10/image_readtop_2018_649598_15398256933498171.jpg')
     INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('USA','SFO','https://mediaim.expedia.com/destination/9/374fff8a75e97e4d955bb3b02d9a2caf.jpg')
     INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('USA','MIA','https://wimg.mk.co.kr/news/cms/202308/21/20230821_01110207000004_L00.jpg')
         SELECT * FROM DUAL
 ;
+ 
+ SELECT * FROM airline_info JOIN seat_grade USING (airline_code) ORDER BY seat_price asc;
+ SELECT ai,sg FROM (SELECT ai,sg FROM ai,sg, ROW_NUMBER() OVER(PARTITION BY (SELECT * FROM airline_info as ai JOIN seat_grade as sg USING (airline_code)) as info_warp ORDER BY sg.seat_price) as rnk) WHERE rnk = 1;
+SELECT * FROM airline_info JOIN seat_grade USING (airline_code);
+SELECT info_warp , ROW_NUMBER() OVER(PARTITION BY info_wrap.arrival_loc ORDER BY info_wrap.price asc) FROM (airline_info JOIN seat_grade USING (airline_code)) info_warp ;
+SELECT result.* ,ROW_NUMBER() OVER(PARTITION BY airline_info.arrival_loc ORDER BY seat_grade.seat_price asc) FROM (airline_info JOIN seat_grade USING (airline_code)) result ;
+
+SELECT addresult.* , country_loc_pic.country,country_loc_pic.picture
+FROM
+    (SELECT *
+    FROM
+        (SELECT *
+        FROM
+            (SELECT result.* ,ROW_NUMBER() OVER(PARTITION BY result.arrival_loc ORDER BY result.seat_price asc) as rn
+            FROM (
+                SELECT ai.* , sg.seat_grade , sg.seat_total , sg.seat_reserved , sg.seat_price
+                FROM airline_info ai
+                LEFT JOIN seat_grade sg
+                ON (ai.airline_code = sg.airline_code)
+            ) result
+        ) 
+        WHERE rn = 1  and domestic_flights = 'I' AND arrival_loc NOT LIKE 'ICN'
+        ORDER BY seat_price asc)
+    WHERE rownum BETWEEN 0 AND 6
+    ) addresult
+LEFT JOIN COUNTRY_LOC_PIC
+ON (addresult.arrival_loc = COUNTRY_LOC_PIC.local)
+;
+
+SELECT ai.* , sg.*
+    FROM airline_info ai
+    JOIN seat_grade sg
+    ON (ai.airline_code = sg.airline_code)
+;
+    
+    
+ select * from seat_grade;
+ select * from airline_info;
+  select * from COUNTRY_LOC_PIC;
+ (select * from (SELECT hotel_pic.*,ROW_NUMBER() OVER(PARTITION BY hotel_pic.hotel_code ORDER BY hotel_pic.hotel_picture DESC) rn from hotel_pic) where rn = 1);

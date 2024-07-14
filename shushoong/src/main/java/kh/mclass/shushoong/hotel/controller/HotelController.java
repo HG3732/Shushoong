@@ -93,6 +93,17 @@ public class HotelController {
 	@GetMapping("/hotel/list")
 	public String hotelList(Model model, HttpSession session, String loc, String room, String adult, String child,
 			String nation, String checkIn, String checkOut) {
+		if(checkIn == null || checkIn.equals("") || checkOut == null || checkOut.equals("")) {
+			return "common/error_page";
+		}
+		
+		int checkInDate = Integer.parseInt(checkIn.replace("년", "").replace("월", "").replace("일", ""));
+		int checkOutDate = Integer.parseInt(checkOut.replace("년", "").replace("월", "").replace("일", ""));
+		
+		if(checkInDate > checkOutDate) {
+			return "common/error_page";
+		}
+		
 		Integer child1 = Integer.parseInt(child) / 2;
 		Integer adult1 = Integer.parseInt(adult);
 		Integer people = child1 + adult1;

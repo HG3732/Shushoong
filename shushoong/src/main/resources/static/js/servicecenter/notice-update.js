@@ -6,7 +6,7 @@ function clickedUpdateBtn(){
 		var noticeTime = $('#noticeTime').val();
 		console.log('글번호', noticeId);
 		console.log('noticeCategoey', noticeCategoey);
-		console.log('글 작성 시간', noticeCategoey);
+		console.log('글 작성 시간', noticeTime);
         $('#frm-notice-update').attr('method', 'GET');
         $('#frm-notice-update').attr('action', '/shushoong/support/notice/update/' + noticeId);
         $('#frm-notice-update').submit();

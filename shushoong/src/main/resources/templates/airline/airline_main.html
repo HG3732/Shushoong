@@ -75,10 +75,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				<div class="airline-recommend-title">저렴한 항공기</div>
 				<div class="airline-recommend-list">
 					<div class="list-wrapper" >
-						<a class="airline-recommend" th:each="recommendList : ${recommendList}">
+						<a class="airline-recommend" th:each="recommendList : ${recommendList}" >
+							<input type="hidden" id="slide_dpart_loc" th:value="${recommendList.DEPART_LOC}">
+							<input type="hidden" id="arrival_dpart_loc" th:value="${recommendList.ARRIVAL_LOC}">
 							<div class="airline-recommend-pic"><img th:src="${recommendList.PICTURE}" alt="a" style="display: block;"/></div>
 							<div class="airline-recommend-info">
-								<div class="airline-recommend-name" th:text="${recommendList.COUNTRY}+' => '+${recommendList.ARRIVAL_LOC}">가는 국가</div>
+								<div class="airline-recommend-name" th:text="${recommendList.DEPART_LOC}+' => '+${recommendList.ARRIVAL_LOC}+'( '+${recommendList.COUNTRY}+' )'">가는 국가</div>
 								<div class="wrap-price"><div class="airline-recommend-price" th:text="${#numbers.formatInteger(recommendList.SEAT_PRICE, 3, 'COMMA') + '원'}">호텔 가격</div></div>
 							</div>
 						</a>
@@ -119,9 +121,32 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		cheapSlide();
 	}
 	
+// 	function insertSlideFunction(){
+// 		console.log("clickckckc")
+// 		console.log($(this).children("#slide_dpart_loc").val());
+// 	}
+	$(".airline-recommend").on("click",function(){
+		var tommorrow = new Date(today.setDate(today.getDate() + 1));
+		console.log("clickckckc")
+		console.log($(this).children("#slide_dpart_loc").val());
+		console.log($(this).children("#slide_arrival_loc").val());
+		$("#hidden_ticket_type").val("1");
+		$("#hidden_depart_value").val($(this).children("#slide_dpart_loc").val());
+		$("#hidden_arrival_value").val($(this).children("#slide_arrival_loc").val());
 		
-	
-	
+	})
+// 	<form action="/shushoong/airline/main" method="post">
+// 						<input type="hidden" name="ticketType" id="hidden_ticket_type" 	value="1" 	readonly="readonly" required="required">
+// 						<input type="hidden" name="departLoc" id="hidden_depart_value" 				readonly="readonly" required="required">
+// 						<input type="hidden" name="arrivalLoc" id="hidden_arrival_value"		 		readonly="readonly" required="required">
+// 						<input type="hidden" name="departDate" id="hidden_depart_date" 				readonly="readonly" required="required">
+// 						<input type="hidden" name="arrivalDate" id="hidden_arrival_date" 				readonly="readonly" required="required">
+// 						<input type="hidden" name="adult" id="hidden_adult" 				value="1" 	readonly="readonly" required="required">
+// 						<input type="hidden" name="child" id="hidden_child" 				value="0"	readonly="readonly" required="required">
+// 						<input type="hidden" name="baby" id="hidden_baby" 				value="0"	readonly="readonly" required="required">
+// 						<input type="hidden" name="seatGrade" id="hidden_seat_grade" 		value="3"	readonly="readonly" required="required">
+// 						<input type="submit" id="hidden_submit">
+// 						<!-- checkpoint -->
 	
 	</script>
 	

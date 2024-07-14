@@ -42,7 +42,8 @@
 	<!-- 호텔 예약 상세정보 -->
 	<select id="selectOneReservedHotel" parameterType="hashmap" resultType="hashmap">
    		select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, 
-   				residence_num, p.pay_price as hotel_price, residence_name_ko, request_sum, p.approve_no, review_available
+   				residence_num, p.pay_price as hotel_price, residence_name_ko, request_sum, p.approve_no, review_available, 
+   				hm.room_cat, hm.hotel_code, hm.room_att, hm.room_cap, hr.room
 		from hotel_reserve hr
 		    join hotel h on hr.hotel_code = h.hotel_code 
 		    join hotel_room_att hra on hr.room_att = hra.room_att
@@ -163,4 +164,12 @@
 		DELETE FROM hotel_review
     		WHERE user_id = #{userId} AND  hotel_reserve_code = #{hotelResCode}
 	</delete>
+	
+	<!-- 결제 취소 시 방 갯수 증가 -->
+	<update id="increaseRoom" parameterType="hashmap">
+		update hotel_room
+			set room_count = room_count + TO_NUMBER(#{room})
+			where hotel_code = #{hotelCode} and room_cat = #{roomCat}
+				and room_cap = #{roomCap} and room_att = #{roomAtt}
+	</update>
 </mapper>

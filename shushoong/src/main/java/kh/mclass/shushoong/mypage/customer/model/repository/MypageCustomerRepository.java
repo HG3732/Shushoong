@@ -43,6 +43,9 @@ public interface MypageCustomerRepository {
 	// 호텔 예약 취소
 	public int cancelHotelReserve(String paymentId);
 
+	//취소 시 방 갯수 증가
+	public int increaseRoom(String hotelCode, String room, String roomCat, String roomCap, String roomAtt);
+	
 	// 호텔 취소 상세정보
 	public Map<String, Object> selectOneCancelHotel(String userId, String hotelReserveCode);
 
@@ -69,5 +72,7 @@ public interface MypageCustomerRepository {
 	public List<Map<String, String>> selectListHotelReview(String userId);
 
 	public int deleteOneHotelReview(String userId, String hotelResCode);
+	
+
 
 }

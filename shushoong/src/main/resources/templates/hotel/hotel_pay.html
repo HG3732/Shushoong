@@ -43,6 +43,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<!-- 결제 정보 -->
 				<!-- <form id="frm-reserve" method="post" action="/shushoong/hotel/customer/reserve/pay"> -->
 					<input type="hidden" th:value="${userId}" class="user_id">
+					<input type="hidden" th:value="${room}" class="room_count">
 					<input type="hidden" th:value="${roomCap}" class="room_cap">
 					<input type="hidden" th:value="${hotelCode}" class="hotel_code">
 					<input type="hidden" th:value="${roomCat}" class="room_cat">
@@ -81,7 +82,7 @@ xmlns:th="http://www.thymeleaf.org">
 					<p style="margin-top: 50px; font-size: var(--font1); font-family: 'SOYOMapleBoldTTF';">투숙객 정보</p>
 					<div class="party">
 						<input type="hidden" name="people" th:value="${'성인 ' + adult + ', 아동 ' + child}" class="people">
-						<span>객실 </span><span th:text="${room}"></span>개, 
+						<span>객실 </span><span th:text="${room}"></span>개,
 						<span>성인 </span><span th:text="${adult}"></span>명, 
 						<span>아동 </span><span th:text="${child}"></span>명
 					</div>

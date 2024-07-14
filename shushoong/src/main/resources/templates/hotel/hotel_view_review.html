@@ -6,7 +6,7 @@ xmlns:th="http://www.thymeleaf.org">
 
 <div th:if="${reviewDetailDto}">
     <th:block th:if="${#lists.isEmpty(reviewDetailDto.reviewDtoList)}">
-        <div style="text-align: center; margin-top: 30px; font-family: 'SOYOMapleBoldTTF';">작성된 리뷰가 없습니다.</div>
+        <div style="text-align: center; margin: 30px; font-family: 'SOYOMapleBoldTTF';">작성된 리뷰가 없습니다.</div>
     </th:block>
      <th:block th:if="${not #lists.isEmpty(reviewDetailDto.reviewDtoList)}">
 		<div th:each="reviewDetail:${reviewDetailDto.reviewDtoList}">
@@ -38,9 +38,6 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
 	</th:block>
 </div>
-	<div class="review_btn">
-		<button type="button" class="review_write_btn">리뷰 작성</button>
-	</div>
 
 <div th:if="${reviewDetailDto}">
 	<div th:if="${reviewDetailDto.totalReviewCount > 0}">

@@ -569,7 +569,16 @@ public class AirlineController {
 				md.addAttribute("departLoc", airlineInfoReturn.getDepartLoc());
 				md.addAttribute("arrivalDate", airlineInfoReturn.getArrivalDate());
 				md.addAttribute("arrivalLoc", airlineInfoReturn.getArrivalLoc());
+				md.addAttribute("arrivalTime", airlineInfoReturn.getArrivalTime());
 				md.addAttribute("arrivaldate", airlineInfoReturn.getArrivalDate());
+				session.setAttribute("airlineCodeSR", airlineInfoReturn.getAirlineCode() );
+				session.setAttribute("departDateSR", airlineInfoReturn.getDepartDate() );
+				session.setAttribute("departTimeSR", airlineInfoReturn.getDepartTime() );
+				session.setAttribute("arrivalTimeSR", airlineInfoReturn.getArrivalTime() );
+				session.setAttribute("departLocSR", airlineInfoReturn.getDepartLoc() );
+				session.setAttribute("arrivalDateSR", airlineInfoReturn.getArrivalDate() );
+				session.setAttribute("arrivalLocSR", airlineInfoReturn.getArrivalLoc() );
+				session.setAttribute("seatPriceSR", airlineInfoReturn.getSeatPrice() );
 				session.setAttribute("departDateArrivalDateReturn", thisYear+"년"+ airlineInfoReturn.getDepartDate()+", "+ thisYear+"년"+airlineInfoReturn.getArrivalDate());
 			}
 		}
@@ -590,6 +599,12 @@ public class AirlineController {
 		md.addAttribute("seatGrade", seatGrade);
 		md.addAttribute("seatGradeReturn", seatGradeReturn);
 		
+		session.setAttribute("adultS", adult);
+		session.setAttribute("childS", child);
+		session.setAttribute("babyS", baby);
+		session.setAttribute("ticketTypeS", ticketType);
+		
+		
 		session.setAttribute("seatGrade", seatGrade);
 		session.setAttribute("airlineCode", airlineCode);
 		session.setAttribute("airlineCodeReturn", airlineCodeReturn);
@@ -601,6 +616,7 @@ public class AirlineController {
 		session.setAttribute("arrivalTime", airlineInfo.getArrivalTime());
 		session.setAttribute("departDate", airlineInfo.getDepartDate());
 		session.setAttribute("arrivalDate", airlineInfo.getArrivalDate());
+		session.setAttribute("seatPrice", airlineInfo.getSeatPrice() );
 		session.setAttribute("departDateArrivalDate",  thisYear+"년"+airlineInfo.getDepartDate()+", "+ thisYear+"년"+airlineInfo.getArrivalDate());
 		
 

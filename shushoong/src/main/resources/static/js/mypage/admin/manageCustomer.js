@@ -121,12 +121,13 @@ function lockAccountHandler(thisElement) {
 		$.ajax({
 			url: "/shushoong/admin/manager/customer/viewMember.ajax",
 			method: "get",
-			data: { id : id },
+			data: { id : id,
+				currentPageNum : currentPageNum },
 			error: ajaxErrorHandler
 			})
 		//success함수 대체
 			.done(function(response){
-				$(".modal-box").replaceWith(response);
+				$("#viewmember").replaceWith(response);
 			});
 	});
 }
@@ -145,7 +146,8 @@ function unlockAccountHandler(thisElement) {
 		$.ajax({
 			url: "/shushoong/admin/manager/customer/viewMember.ajax",
 			method: "get",
-			data: { id : id },
+			data: { id : id,
+				currentPageNum : currentPageNum },
 			error: ajaxErrorHandler
 			})
 		//success함수 대체

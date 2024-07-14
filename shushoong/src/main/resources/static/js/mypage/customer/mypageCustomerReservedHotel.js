@@ -11,19 +11,33 @@ function escHandler(){
 function cancelHandler(){
 
 	var paymentId = $('.code_num').text();
+	var room = $('.room_count').val();
+	var roomAtt = $('.room_att').val();
+	var roomCap = $('.room_cap').val();
+	var roomCat = $('.room_cat').val();
+	var hotelCode = $('.hotel_c').val();
+	
 	console.log(paymentId);
 	
 	$.ajax({
 		url : "/shushoong/customer/mypage/reserved/hotel/cancel",
 		type : "post",
-	    data: {paymentId : paymentId}, 
+		data: {
+			paymentId : paymentId,
+			room : room,
+			roomAtt : roomAtt,
+			roomCap : roomCap,
+			roomCat : roomCat,
+			hotelCode : hotelCode
+		},
+		/*contentType: "application/json; charset=utf-8",*/
 		error:function(request, status, error){
 				alert("취소 실패!!!!!!!!!!!!!!!!!!!!");
 			},
-		dataType: "json",
+		/*dataType: "json",*/
 		success : function(data) {
 			if (data == 1) {
-				/*location.href = "/shushoong/customer/mypage/reserved/hotel/list/${userId}";*/
+				location.href = "/shushoong/customer/mypage/reserved/hotel/list/${userId}";
 				location.href = `/shushoong/customer/mypage/reserved/hotel/list`;
 				return;
 			} else {
@@ -91,7 +105,11 @@ function checkScoreHandler() {
 		    data: JSON.stringify(dto),
 		    contentType: "application/json; charset=utf-8",
 		    success: function(response){
-				location.href="/shushoong/customer/mypage/reserved/hotel/" + id + "/" + hotelReserveCode;
+				if (response > 0) {
+					location.href="/shushoong/customer/mypage/reserved/hotel/list";
+				} else{
+					alert("리뷰 작성에 실패하였습니다. 다시 시도해주세요.");
+				}
 			},
 		    error : ajaxErrorHandler
 	    });

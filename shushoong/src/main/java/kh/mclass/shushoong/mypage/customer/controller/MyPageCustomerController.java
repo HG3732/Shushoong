@@ -268,8 +268,9 @@ public class MyPageCustomerController {
 	}
 	
 	//리뷰 작성 ajax
+	@ResponseBody
 	@PostMapping("/mypage/submit/review.ajax")
-	public String submitReview(Model model, @RequestBody ReviewDto dto, Authentication auth) {
+	public int submitReview(Model model, @RequestBody ReviewDto dto, Authentication auth) {
 		System.out.println("==================" + dto.toString());
 		dto.setUserId(auth.getName());
 		int result = service.insertReview(dto);
@@ -277,7 +278,7 @@ public class MyPageCustomerController {
 			service.updateReviewAvailable(dto.getHotelReserveCode());
 		}
 		
-		return "mypage/customer/mypageCustomerReservedHotel";
+		return result;
 	}
 
 	// 마이페이지 호텔 취소내역 하나 선택
@@ -346,7 +347,7 @@ public class MyPageCustomerController {
 	// 호텔 예약취소하기
 	@PostMapping("/mypage/reserved/hotel/cancel")
 	@ResponseBody
-	public int cancelHotel(String paymentId) throws IOException, InterruptedException {
+	public int cancelHotel(String paymentId, String hotelCode, String roomAtt, String roomCap, String roomCat, String room) throws IOException, InterruptedException {
 		Map<String, Object> requestBody = new HashMap<>();
 		requestBody.put("reason", "고객 요청으로 결제 취소");
 
@@ -369,6 +370,7 @@ public class MyPageCustomerController {
 		if (status != null) {
 			if (status.equals("SUCCEEDED")) {
 				result = service.cancelHotelReserve(paymentId);
+				service.increaseRoom(hotelCode, room, roomCat, roomCap, roomAtt);
 				return result;
 			} else {
 				return 0;

@@ -75,6 +75,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div class="payment">
 					<div class="totalpay" th:text="${#numbers.formatInteger(reserveList.HOTEL_PRICE, 3, 'COMMA')} + '원'"></div>
 					
+					<input type="hidden" th:value="${reserveList.ROOM}" class="room_count">
+					<input type="hidden" th:value="${reserveList.ROOM_ATT}" class="room_att">
+					<input type="hidden" th:value="${reserveList.ROOM_CAP}" class="room_cap">
+					<input type="hidden" th:value="${reserveList.ROOM_CAT}" class="room_cat">
+					<input type="hidden" th:value="${reserveList.HOTEL_CODE}" class="hotel_c">
 				</div>						
 			</div>
 
@@ -85,7 +90,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<input type="hidden" th:value="${reserveList.REVIEW_AVAILABLE}" class="review_available">	
 				<input type="hidden" th:value="${reserveList.APPROVE_NO}" class="approve_no">	
 				<input type="hidden" th:value="${userId}" class="user_id">
-				<div class="a"></div>
 			</div>
 
 
@@ -249,9 +253,9 @@ function loadedHandler(){
 	var review = $(".review_available").val();
 	
 	if(checkOutDate < currentDate && review === "0"){
-		$('.a').append(`<button type="button" class="reserve_btn">취소하기</button>`);
+		if(currentDate - checkOutDate < 20000) $('.btn').append(`<button type="button" class="review_btn">리뷰 작성</button>`);
 	} else {
-		if(currentDate - checkOutDate < 20000) $('.a').append(`<button type="button" class="review_btn">리뷰 작성</button>`);
+		$('.btn').append(`<button type="button" class="reserve_btn">취소하기</button>`);
 	}
 	
 	/* 예약 취소 */

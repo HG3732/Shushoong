@@ -20,5 +20,6 @@ public class HotelReserveCompleteDtoRes {
 	private String hotelPrice;
 	private Integer requestSum;
 	private String requestDesc;
+	private String rooms;
 	
 }

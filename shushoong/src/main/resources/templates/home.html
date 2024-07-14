@@ -67,10 +67,10 @@ $(loadedHandler)
 			<div class="wrap-recommend">
 				<div class="recommend-title">지금 추천하는 여행지</div>
 				<div class="recommended-loc">
-					<a class="korea" th:style="'background-image: url(' + @{/images/instancefolder/20230713_201311.jpg} + ');'" th:href="@{/hotel/list?loc=2OS&room=1&adult=2&child=0}"><div>제주</div></a>
-					<a class="china" th:style="'background-image: url(' + @{/images/instancefolder/1696570529586.jpg} + ');'" th:href="@{/hotel/list?loc=2OS&room=1&adult=2&child=0}"><div>북경</div></a>
-					<a class="japan" th:style="'background-image: url(' + @{/images/instancefolder/20231010_171349.jpg} + ');'" th:href="@{/hotel/list?loc=2OS&room=1&adult=2&child=0}"><div>오사카</div></a>
-					<a class="usa" th:style="'background-image: url(' + @{/images/instancefolder/hu_1431618317_6832524860.jpg} + ');'" th:href="@{/hotel/list?loc=2OS&room=1&adult=2&child=0}"><div>하와이</div></a>
+					<a class="korea" th:style="'background-image: url(' + @{/images/instancefolder/20230713_201311.jpg} + ');'" th:href="@{/hotel/list(nation='제주', loc='0JJ', checkIn=${checkIn}, checkOut=${checkOut}, room=1, adult=2, child=0)}"><div>제주</div></a>
+					<a class="china" th:style="'background-image: url(' + @{/images/instancefolder/1696570529586.jpg} + ');'" th:href="@{/hotel/list(nation='북경', loc='1BJ', checkIn=${checkIn}, checkOut=${checkOut}, room=1, adult=2, child=0)}"><div>북경</div></a>
+					<a class="japan" th:style="'background-image: url(' + @{/images/instancefolder/20231010_171349.jpg} + ');'" th:href="@{/hotel/list(nation='오사카', loc='2OS', checkIn=${checkIn}, checkOut=${checkOut}, room=1, adult=2, child=0)}"><div>오사카</div></a>
+					<a class="usa" th:style="'background-image: url(' + @{/images/instancefolder/hu_1431618317_6832524860.jpg} + ');'" th:href="@{/hotel/list(nation='호놀룰루(하와이)', loc='3HN', checkIn=${checkIn}, checkOut=${checkOut}, room=1, adult=2, child=0)}"><div>하와이</div></a>
 				</div>
 			</div>
 			<div class="wrap-review">

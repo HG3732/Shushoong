@@ -2,10 +2,10 @@ $(loadedHandler);
 
 function loadedHandler() {
     $(".hotel_pic").on("change", previewImage);
+    $(".select-nation").on("change", selectLocHandler);
     $(".add_btn").on("click", addRoomInfo);
     $(".delete_btn").on("click", deleteRoomInfo);
     $(".submit_btn").on("click", submitHandler);
-    
 }
 function ajaxErrorHandler(request, status, error) {
 	alert("code: " + request.status + "\n" + "message: "
@@ -66,6 +66,13 @@ function ajaxErrorHandler(request, status, error) {
 				reader.readAsDataURL(file);
 			});
 		}
+		
+	//국가 선택에 따라 지역 변경
+	function selectLocHandler() {
+		var nation = Number($(this).val());
+		$(".loc").css('display', 'none').prop('disabled', true);
+		$(".loc").eq(nation).css('display', 'block').prop('disabled', false);
+	}
 	
 	//방 추가
 	function addRoomInfo() {

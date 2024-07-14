@@ -74,7 +74,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<div class="hotel_loc_div">
 							<div>
 								<div>국가</div>
-								<select name="hotelNation" style="width:100px; height:30px; border-radius:10px;">
+								<select class="select-nation" name="hotelNation" style="width:100px; height:30px; border-radius:10px;">
 									<option value="0" selected>한국</option>
 									<option value="1">중국</option>
 									<option value="2">일본</option>
@@ -83,7 +83,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</div>
 							<div>
 								<div>지역</div>
-								<select name="hotelLocCat" class="korea" style="width:100px; height:30px; border-radius:10px;">
+								<select name="hotelLocCat" class="loc korea" style="width:100px; height:30px; border-radius:10px;">
 									<option value="JJ" selected>제주</option>
 									<option value="GN">강릉</option>
 									<option value="SE">서울</option>
@@ -93,7 +93,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<option value="SC">속초</option>
 									<option value="BS">부산</option>
 								</select>
-								<select name="hotelLocCat" class="china" style="width:100px; height:30px; border-radius:10px;" disabled>
+								<select name="hotelLocCat" class="loc china" style="width:100px; height:30px; border-radius:10px;" disabled>
 									<option value="SH" selected>상해</option>
 									<option value="BJ">북경</option>
 									<option value="CD">청도</option>
@@ -109,7 +109,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<option value="GM">곤명</option>
 									<option value="NK">남경</option>
 								</select>
-								<select name="hotelLocCat" class="japan" style="width:100px; height:30px; border-radius:10px;" disabled>
+								<select name="hotelLocCat" class="loc japan" style="width:100px; height:30px; border-radius:10px;" disabled>
 									<option value="TK" selected>도쿄</option>
 									<option value="OS">오사카</option>
 									<option value="KT">교토</option>
@@ -119,7 +119,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<option value="SP">삿포로</option>
 									<option value="NG">나고야</option>
 								</select>
-								<select name="hotelLocCat" class="america" style="width:100px; height:30px; border-radius:10px;" disabled>
+								<select name="hotelLocCat" class="loc america" style="width:100px; height:30px; border-radius:10px;" disabled>
 									<option value="HN" selected>호놀룰루(하와이)</option>
 									<option value="LA">LA</option>
 									<option value="NY">뉴욕</option>

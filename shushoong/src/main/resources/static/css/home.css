@@ -254,6 +254,14 @@
     gap: 30px;
 }
 
+.detail-title {
+	font-weight: 900;
+}
+
+.detail-content {
+	font-size: 14px;
+}
+
 .pic {
 	flex-basis: 250px;
 	border-radius: 50%;

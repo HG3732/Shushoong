@@ -230,12 +230,12 @@
 //			국제선
 					if(domestic == "I"){
 						if(firC == list && lasC == list && birC == list && natC == list && pasC == list &&  expC == list){
-//							reserverInfoInsertFunction();
+							reserverInfoInsertFunction();
 						}else{
 							alert("기입을 부탁드립니다.");
 						}
 //			국내선
-					}else if(domestic == "O"){
+					}else if(domestic == "D"){
 						if(firC == list && lasC == list && birC == list && natC == list){
 							reserverInfoInsertFunction();
 						}else{

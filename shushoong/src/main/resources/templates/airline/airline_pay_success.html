@@ -42,28 +42,29 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<div style="font-family: 'SOYOMapleBoldTTF';">예약완료</div>
 						</div>
 				</section>
-				
 				<section class="depart_info">
 					<div class="reserve_info">
 						<div class="reserve_head">가는 편</div>
 						<div class="reserve_wrap">
-							<div class="reserve_lineup">예약번호 성인 : \${adult}, 소아 : \${child}, 유아 : "\${baby}</div>
-							<div class="reserve_code">예약번호 (\${reserveCode})</div>
+							<div class="reserve_lineup" th:text="' 성인 : '+${session.adultS}+' 소아 : '+${session.childS}+' 유아 : '+${session.babyS}">예약번호 성인 : \${adult}, 소아 : \${child}, 유아 : "\${baby}</div>
+							<div class="reserve_code" th:text="'예약번호 : ('+${airlineReserveCode}+')'" >예약번호 (\${reserveCode})</div>
 							<div class="reserve_info_wrap">
 								<div>
 									<img alt="이미지" th:src="@{/images/airline_logo.png}">
-									<div class="airline_name">${airlineName}</div>
-									<div class="airline_date">\${departDate(weekdays)}출발</div>
+									<div class="airline_name" th:text="${session.airlineName}">${airlineName}</div>
+									<div class="airline_date" th:text="${session.departDate}+' 출발'">\${departDate(weekdays)}출발</div>
 								</div>
 								<div>
-									<div class="departLoc">\${departLoc}</div>
-									<div class="departTime">\${departTime}</div>
+									<div class="departLoc" th:text="${session.departLoc}">\${departLoc}</div>
+									<div class="departTime" th:text="${session.departTime}">\${departTime}</div>
 									<img alt="비행기" th:src="@{/images/airline_via.png}">
-									<div class="arrivalTime">\${arrivalTime}</div>
-									<div class="arrivalLoc">\${arrivalLoc}</div>
+									<div class="arrivalTime" th:text="${session.arrivalTime}">\${arrivalTime}</div>
+									<div class="arrivalLoc" th:text="${session.arrivalLoc}">\${arrivalLoc}</div>
 								</div>
 								<div>
-									<div class="sitType">${sitType}</div>
+									<div class="sitType" th:if="${session.seatGrade}==3" th:text="이코노미석">${sitType}</div>
+									<div class="sitType" th:if="${session.seatGrade}==2" th:text="비즈니스석">${sitType}</div>
+									<div class="sitType" th:if="${session.seatGrade}==1" th:text="일등석">${sitType}</div>
 								</div>
 							</div>
 							
@@ -71,27 +72,29 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					</div>
 				</section>
 				<!-- th:if="${ticketType} == 2" -->
-				<section class="arrival_info">
+				<section class="arrival_info" th:if="${session.ticketTypeS}==2">
 					<div class="reserve_info">
 						<div class="reserve_head">오는 편</div>
 						<div class="reserve_wrap">
-							<div class="reserve_lineup">예약번호 성인 : \${adult}, 소아 : \${child}, 유아 : "\${baby}</div>
-							<div class="reserve_code">예약번호 (\${reserveCode})</div>
+							<div class="reserve_lineup" th:text="' 성인 : '+${session.adultS}+' 소아 : '+${session.childS}+' 유아 : '+${session.babyS}">예약번호 성인 : \${adult}, 소아 : \${child}, 유아 : "\${baby}</div>
+							<div class="reserve_code" th:text="'예약번호 : ('+${airlineReserveCode}+')'" >예약번호 (\${reserveCode})</div>
 							<div class="reserve_info_wrap">
 								<div>
 									<img alt="이미지" th:src="@{/images/airline_logo.png}">
-									<div class="airline_name">${airlineName}</div>
-									<div class="airline_date">\${departDate(weekdays)}출발</div>
+									<div class="airline_name" th:text="${session.airlineName}">${airlineName}</div>
+									<div class="airline_date" th:text="${session.departDateSR}+' 출발'">\${departDate(weekdays)}출발</div>
 								</div>
 								<div>
-									<div class="departLoc">\${departLoc}</div>
-									<div class="departTime">\${departTime}</div>
+									<div class="departLoc" th:text="${session.departLocSR}">\${departLoc}</div>
+									<div class="departTime"th:text="${session.departTimeSR}">\${departTime}</div>
 									<img alt="비행기" th:src="@{/images/airline_via.png}">
-									<div class="arrivalTime">\${arrivalTime}</div>
-									<div class="arrivalLoc">\${arrivalLoc}</div>
+									<div class="arrivalTime" th:text="${session.arrivalTimeSR}">\${arrivalTime}</div>
+									<div class="arrivalLoc" th:text="${session.arrivalLocSR}">\${arrivalLoc}</div>
 								</div>
 								<div>
-									<div class="sitType">${sitType}</div>
+									<div class="sitType" th:if="${session.seatGrade}==3" th:text="이코노미석">${sitType}</div>
+									<div class="sitType" th:if="${session.seatGrade}==2" th:text="비즈니스석">${sitType}</div>
+									<div class="sitType" th:if="${session.seatGrade}==1" th:text="일등석">${sitType}</div>
 								</div>
 							</div>
 							
@@ -103,7 +106,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<section class="allPrice">
 					<div>총 요금</div>
 					<div>\${price}+\${price}</div>
-					<div class="total_KRW">KRW</div>
 				</section>
 			
 			

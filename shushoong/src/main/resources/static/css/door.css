@@ -37,6 +37,10 @@
     font-size: 60px;
     font-family: 'SOYOMapleBoldTTF';
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 90px;
 /*     animation: fadeInUp 1s; */
 }
 
@@ -49,6 +53,22 @@
         transform: translateZ(0);
     }
 } */
+
+.door1_button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 20px;
+    background-color: var(--color_gray_3);
+    border: none;
+	cursor: pointer;
+	width: fit-content;
+	align-self: center;
+}
+
+.door1_button:hover{
+	background-color: var(--color_gray_2);
+	font-family: 'SOYOMapleBoldTTF';
+}  
 
 .door2 {
     width: 75%;
@@ -81,10 +101,10 @@
     font-size: 16px;
     background-color: var(--color_gray_3);
     border: none;
+	cursor: pointer;
 }
 
 .door2_button:hover{
-	 cursor: pointer;
 	 background-color: var(--color_gray_2);
 	 font-family: 'SOYOMapleBoldTTF';
 }  
@@ -95,10 +115,10 @@
     font-size: 16px;
     background-color: var(--color_gray_1);
     border: none;
+	cursor: pointer;
 }
 
 .door3_button:hover{
-	 cursor: pointer;
 	 background-color: var(--color_gray_2);
 	 font-family: 'SOYOMapleBoldTTF';
 }

@@ -31,7 +31,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	   		<div class="pic-container">
 		        <div class="pic" th:style="'background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0, 0.3)), url(' + @{/images/door1.png} + ');'">
 		            <div class="text door1"
-		            	data-aos="fade-up">슈슝과 함께 떠나는 여행</div>
+		            	data-aos="fade-up"><p>슈슝과 함께 떠나는 여행</p>
+			            <a th:href="@{/home}" class="door1_button">홈으로</a>
+	            	</div>
 		        </div>
 		        <div class="pic" th:style="'background-image: linear-gradient(rgba(0,0,0, 0.2), rgba(0,0,0, 0.2)), url(' + @{/images/door2.jpg} + ');'">
 		            <div class="text door2" 
@@ -42,7 +44,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		            </div>
 		        </div>
 		        <div class="pic" th:style="'background-image: linear-gradient(rgba(0,0,0, 0.2), rgba(0,0,0, 0.2)), url(' + @{/images/door3.png} + ');'">
-		            <div class="text door3">
+		            <div class="text door3"
+		            	data-aos="fade-right">
 		            	<p>숙소</p>
 		            	<a th:href="@{/hotel/main}" class="door3_button">예약하기</a>
 		            </div>

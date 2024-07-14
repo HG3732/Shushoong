@@ -196,7 +196,6 @@
 			document.getElementById("depart_date").style.display="block";
 		});		
 				
-				/* 인원 설정하는 펑션 - plus */
 		$("button#plus").on("click",function(){
 			if(Number($("div#adult").children("div").text()) == Number($("div#baby").children("div").text())){
 				if($(this).parent().attr("id")=="adult"||$(this).parent().attr("id")=="child"){
@@ -212,7 +211,6 @@
 			
 		});
 			
-			/* 인원 설정하는 펑션 - minus */
 		$("button#minus").on("click",function(){
 			console.log(Number($("#hidden_adult").val())+Number($("#hidden_child").val()));
 			

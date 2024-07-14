@@ -6,6 +6,7 @@ section.interested_section{
     box-sizing: border-box;
     padding: 20px;
     margin-top: 30px;
+    margin-bottom: 200px;
 }	
 section.interested_section > div:first-child{
 	text-align: center;
@@ -100,11 +101,11 @@ div.choose_btn > button {
 	margin-left: 25px;
 }
 div#value_null{
+	margin-top:50px;
 	height: 50px;
 	text-align: center;
 	line-height: 50px;
-	font-size: 20px;
-	color: var(--color_gray_4);
-	width : 920px;
+	font-size: 17px;
+	width : 880px;
 }
 

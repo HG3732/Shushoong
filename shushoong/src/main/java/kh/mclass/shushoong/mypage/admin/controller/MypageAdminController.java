@@ -125,9 +125,9 @@ public class MypageAdminController {
 		return "mypage/admin/managemember/viewMember";
 	}	
 	
-	//결제 내역 페이징
-	@PostMapping("/manager/customer/viewpay.ajax")
-	public String viewPay(Model model, String id, String currentPageNum) {
+	//호텔 결제 내역 페이징
+	@PostMapping("/manager/customer/hotelviewpay.ajax")
+	public String viewHotelPay(Model model, String id, String currentPageNum) {
 		int currentPage = 1;
 		if(currentPageNum != null || !currentPageNum.equals("")) {
 			currentPage = Integer.parseInt(currentPageNum);
@@ -135,10 +135,20 @@ public class MypageAdminController {
 		model.addAttribute("userInfo", service.selectOne(id));
 		model.addAttribute("userHotelPayInfo", service.selectHotelPayList(id, currentPage));
 		model.addAttribute("userHotelPayCount", service.selectHotelPayCount(id));
+		return "mypage/admin/managemember/hotelPayList";
+	}
+	
+	//항공 결제 내역 페이징
+	@PostMapping("/manager/customer/flyviewpay.ajax")
+	public String viewFlyPay(Model model, String id, String currentPageNum) {
+		int currentPage = 1;
+		if(currentPageNum != null || !currentPageNum.equals("")) {
+			currentPage = Integer.parseInt(currentPageNum);
+		}
+		model.addAttribute("userInfo", service.selectOne(id));
 		model.addAttribute("userFlyPayInfo", service.selectFlyPayList(id, currentPage));
 		model.addAttribute("userFlyPayCount", service.selectFlyPayCount(id));
-		model.addAttribute("faqCount", service.selectFAQCount(id));
-		return "mypage/admin/managemember/userInfoModal";
+		return "mypage/admin/managemember/flyPayList";
 	}
 	
 	//회원 계정 정지

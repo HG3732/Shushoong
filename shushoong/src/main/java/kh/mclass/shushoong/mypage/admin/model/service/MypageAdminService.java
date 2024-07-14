@@ -45,7 +45,9 @@ public class MypageAdminService {
 		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
 		int startPageNum = (currentPage%pageBlockSize == 0) ? ((currentPage/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPage/pageBlockSize))*pageBlockSize + 1;
 		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
-		
+		System.out.println("================================================");
+		System.out.println(endPageNum);
+		System.out.println("================================================");
 		int offset = (currentPage - 1) * pageSize;
 		RowBounds rowBounds = new RowBounds(offset, pageSize);
 		result.put("currentPageNum", currentPage);

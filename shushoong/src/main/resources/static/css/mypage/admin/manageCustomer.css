@@ -529,7 +529,7 @@ section .allstopBtn {
 	border-top: 3px solid #006AFF;
 }
 
-.modal-box:last-child {
+.tab2 {
 	display: none;
 }
 

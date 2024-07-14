@@ -63,21 +63,21 @@ function closeModal() {
 
 //모달 탭 전환
 function tabToHotel() {
-	$('.modal-box').eq(1).css('display','none');
-	$('.modal-box').eq(0).css('display','flex');
+	$('.tab2').css('display','none');
+	$('.tab1').css('display','block');
 }
 function tabToFly() {
-	$('.modal-box').eq(0).css('display','none');
-	$('.modal-box').eq(1).css('display','flex');
+	$('.tab1').css('display','none');
+	$('.tab2').css('display','block');
 }
 
-//결제내역 페이징
-function goPage(thisElement) {
+//호텔 결제내역 페이징
+function goHPage(thisElement) {
 	currentPageNum = $(thisElement).data('targetpage');
 	var id = $('.user-id').val();
 	
 	$.ajax({
-		url: "/shushoong/admin/manager/customer/viewpay.ajax",
+		url: "/shushoong/admin/manager/customer/hotelviewpay.ajax",
 		method: "post",
 		data: { id : id,
 			currentPageNum : currentPageNum },
@@ -85,7 +85,25 @@ function goPage(thisElement) {
 	})
 	//success함수 대체
 	.done(function(response){
-		$("#modal").replaceWith(response);
+		$("#hotel-pay-box").replaceWith(response);
+	});
+}
+
+//항공 결제내역 페이징
+function goFPage(thisElement) {
+	currentPageNum = $(thisElement).data('targetpage');
+	var id = $('.user-id').val();
+	
+	$.ajax({
+		url: "/shushoong/admin/manager/customer/flyviewpay.ajax",
+		method: "post",
+		data: { id : id,
+			currentPageNum : currentPageNum },
+		error: ajaxErrorHandler
+	})
+	//success함수 대체
+	.done(function(response){
+		$("#fly-pay-box").replaceWith(response);
 	});
 }
 

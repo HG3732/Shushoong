@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-</head>
 	<div class="article-body" id="viewmember" th:fragment="viewMember">
 		<th:block th:if="${userInfo != null}">
 			<div class="userInformation">
@@ -55,10 +54,30 @@
 					<button type="button" class="stopCancleBtn" onclick="unlockAccountHandler(this)">이용정지 해제</button>
 				</th:block>
 			</div>
-			<div class="modal-background">
-				<input type="hidden" class="user-id" th:value="${userInfo.userId}">
-				<div th:replace="~{mypage/admin/managemember/userInfoModal :: userinfo}"></div>
-			</div>
+			<th:block th:if="${userInfo.userGrade.equals('customer')}">
+				<div class="modal-background">
+					<input type="hidden" class="user-id" th:value="${userInfo.userId}">
+					<div class="wrap-modal" id="modal" th:fragment="userinfo">
+						<div class="wrap-exit">
+							<div class="radio-tab">
+								<input type="radio" name="list" id="hotelList" checked/>
+								<input type="radio" name="list" id="flyList"/>
+								<div class="list-tab">
+									<label for="hotelList" onclick="tabToHotel()">호텔</label>
+									<label for="flyList" onclick="tabToFly()">항공</label>
+								</div>
+							</div>
+							<img class="btn-exit" th:src="@{/images/exit_button.svg}" onclick="closeModal()">
+						</div>
+						<div class="tab1">
+							<div th:replace="~{mypage/admin/managemember/hotelPayList :: hotelPayinfo}"></div>
+						</div>
+						<div class="tab2">
+							<div th:replace="~{mypage/admin/managemember/flyPayList :: flyPayInfo}"></div>
+						</div>
+					</div>
+				</div>
+			</th:block>
 		</th:block>
 		<th:block th:if="${userInfo == null or userInfo == ''}">
 			<div class="no-user"> 조회할 회원을 선택해주세요.</div>		

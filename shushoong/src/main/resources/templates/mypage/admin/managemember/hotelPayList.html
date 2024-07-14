@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="modal-box" id="hotel-pay-box" th:fragment="hotelPayinfo">
+		<div class="wrap-head paylist hotellist">
+			<div>호텔명</div>
+			<div>예약 번호</div>
+			<div>예약 시각</div>
+			<div>예약자 번호</div>
+		</div>
+		<div class="paylist hotellist" th:each="hotellist : ${userHotelPayInfo.hotelPayList}">
+			<div th:text="${hotellist.HOTEL_NAME}">호텔명</div>
+			<div th:text="${hotellist.HOTEL_RESERVE_CODE}">예약 번호</div>
+			<div th:text="${hotellist.RESERVE_TIME}">예약 시각</div>
+			<div th:text="${hotellist.RESIDENCE_PHONE}">예약자 번호</div>
+		</div>
+		<div class="wrap-pageNum">
+			<th:block th:if="${userHotelPayInfo.endPageNum == 0}">
+				<button type="button" class="gopage current" disabled>1</button>
+			</th:block>
+			<th:block th:unless="${userHotelPayInfo.endPageNum == 0}">
+				<th:block th:if="${userHotelPayInfo.startPageNum > 1}">
+					<button type="button" class="btn-page gopage" th:data-targetpage="${userHotelPayInfo.startPageNum - 1}" onclick="goHPage(this)">&lt;</button>
+				</th:block>
+				<div class="wrap-page" th:each="item : ${#numbers.sequence(userHotelPayInfo.startPageNum, userHotelPayInfo.endPageNum)}">
+					<th:block th:if="${userHotelPayInfo.currentPageNum == item}">
+						<button type="button" class="gopage current" th:text="${item}" th:href="@{/support/qna/list/{page}(page=${item})}" disabled></button>
+					</th:block>
+					<th:block th:unless="${userHotelPayInfo.currentPageNum == item}">
+						<button type="button" class="btn-page gopage" th:text="${item}" th:data-targetpage="${item}" onclick="goHPage(this)"></button>
+					</th:block>
+				</div>
+				<th:block th:if="${userHotelPayInfo.endPageNum < userHotelPayInfo.totalPageCount}">
+					<button type="button" class="btn-page gopage" th:data-targetpage="${userHotelPayInfo.endPageNum + 1}" onclick="goHPage(this)">&gt;</button>
+				</th:block>
+			</th:block>
+		</div>
+	</div>
+</html>

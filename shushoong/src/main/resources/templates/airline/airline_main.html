@@ -81,7 +81,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							<div class="airline-recommend-pic"><img th:src="${recommendList.PICTURE}" alt="a" style="display: block;"/></div>
 							<div class="airline-recommend-info">
 								<div class="airline-recommend-name" th:text="${recommendList.DEPART_LOC}+' => '+${recommendList.ARRIVAL_LOC}+'( '+${recommendList.COUNTRY}+' )'">가는 국가</div>
-								<div class="wrap-price"><div class="airline-recommend-price" th:text="${#numbers.formatInteger(recommendList.SEAT_PRICE, 3, 'COMMA') + '원'}">호텔 가격</div></div>
+								<div class="wrap-price"><div class="airline-recommend-price" th:text="${#numbers.formatInteger(recommendList.SEAT_PRICE/2, 3, 'COMMA') + '원'}">호텔 가격</div></div>
 							</div>
 						</a>
 					</div>

@@ -178,9 +178,12 @@ select * from airline_info;
  SELECT FLOOR(DBMS_RANDOM.VALUE(12, 18))||':'||FLOOR(DBMS_RANDOM.VALUE(00, 60)) FROM DUAL;
 set define off;
  commit;
+ select * from SEAT_GRADE;
  select * from AIRLINE_INFO;
+  select * from AIRLINE_INFO WHERE AIRLINE_CODE = 'CZ685207191945';
+
  select * from COUNTRY_LOC_PIC;
- insert INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('CHINA','PVG','https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQV51pF9uKWKZOKR3v5RBWoLU0xpmt6Q_zkimpI2LqF7IXn5ExM8lVuSw4ycWAzaI-TY9sxpjP-ZMhOBPN-XHB0GOFAX9pcJoVHVPha-Q');
+ insert INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('JAPAN','KIX','https://www.ana.co.jp/japan-travel-planner/kinki/img/hero.jpg');
  insert ALL 
     INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('KOREA','ICN','https://lh3.googleusercontent.com/proxy/m6tMTeP9Yc8e3LFjetj5khVq6UGIq5hwBL64oB4TB95FOlKgdk3fUrJf-6e3azWCO-rucr5XBmnFxkzPYQw3jEKV--mz9Chr2dypmjXxRtqkTfP8ed6WTqxKtZm7fdu3lxZSEiY6Ur8ErDSQ1ZMihWD9tQ1-O_I=s680-w680-h510')
     INTO COUNTRY_LOC_PIC (COUNTRY , LOCAL , PICTURE) VALUES ('KOREA','GMP','https://img.freepik.com/free-photo/downtown-cityscape-at-night-in-seoul-south-korea_335224-272.jpg?size=626&ext=jpg&ga=GA1.1.1359838702.1718694112&semt=ais_user')
@@ -221,6 +224,7 @@ FROM
                 FROM airline_info ai
                 LEFT JOIN seat_grade sg
                 ON (ai.airline_code = sg.airline_code)
+                ORDER BY seat_price asc
             ) result
         ) 
         WHERE rn = 1  and domestic_flights = 'I' AND arrival_loc NOT LIKE 'ICN'
@@ -229,6 +233,7 @@ FROM
     ) addresult
 LEFT JOIN COUNTRY_LOC_PIC
 ON (addresult.arrival_loc = COUNTRY_LOC_PIC.local)
+ORDER BY addresult.seat_price
 ;
 
 SELECT ai.* , sg.*
@@ -236,7 +241,14 @@ SELECT ai.* , sg.*
     JOIN seat_grade sg
     ON (ai.airline_code = sg.airline_code)
 ;
-    
+    SELECT result.* ,ROW_NUMBER() OVER(PARTITION BY result.arrival_loc ORDER BY result.seat_price asc) as rn
+            FROM (
+                SELECT ai.* , sg.seat_grade , sg.seat_total , sg.seat_reserved , sg.seat_price
+                FROM airline_info ai
+                LEFT JOIN seat_grade sg
+                ON (ai.airline_code = sg.airline_code)
+                ORDER BY seat_price asc
+            ) result;
     
  select * from seat_grade;
  select * from airline_info;

@@ -1,6 +1,7 @@
 package kh.mclass.shushoong.mypage.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -110,20 +111,34 @@ public class MypageAdminController {
 	
 	//회원 세부 정보 조회 ajax
 	@GetMapping("/manager/customer/viewMember.ajax")
-	public String viewMember(Model model, String id) {
+	public String viewMember(Model model, String id, String currentPageNum) {
+		int currentPage = 1;
+		if(currentPageNum != null || !currentPageNum.equals("")) {
+			currentPage = Integer.parseInt(currentPageNum);
+		}
 		model.addAttribute("userInfo", service.selectOne(id));
-		if(service.selectHotelPayCount(id) != null) {
-			model.addAttribute("userHotelPayInfo", service.selectHotelPayCount(id).size());
-		} else {
-			model.addAttribute("userHotelPayInfo", 0);
-		}
-		if(service.selectFlyPayCount(id) != null) {
-			model.addAttribute("userFlyPayInfo", service.selectFlyPayCount(id).size());
-		} else {
-			model.addAttribute("userFlyPayInfo", 0);
-		}
+		model.addAttribute("userHotelPayInfo", service.selectHotelPayList(id, currentPage));
+		model.addAttribute("userHotelPayCount", service.selectHotelPayCount(id));
+		model.addAttribute("userFlyPayInfo", service.selectFlyPayList(id, currentPage));
+		model.addAttribute("userFlyPayCount", service.selectFlyPayCount(id));
 		model.addAttribute("faqCount", service.selectFAQCount(id));
 		return "mypage/admin/managemember/viewMember";
+	}	
+	
+	//결제 내역 페이징
+	@PostMapping("/manager/customer/viewpay.ajax")
+	public String viewPay(Model model, String id, String currentPageNum) {
+		int currentPage = 1;
+		if(currentPageNum != null || !currentPageNum.equals("")) {
+			currentPage = Integer.parseInt(currentPageNum);
+		}
+		model.addAttribute("userInfo", service.selectOne(id));
+		model.addAttribute("userHotelPayInfo", service.selectHotelPayList(id, currentPage));
+		model.addAttribute("userHotelPayCount", service.selectHotelPayCount(id));
+		model.addAttribute("userFlyPayInfo", service.selectFlyPayList(id, currentPage));
+		model.addAttribute("userFlyPayCount", service.selectFlyPayCount(id));
+		model.addAttribute("faqCount", service.selectFAQCount(id));
+		return "mypage/admin/managemember/userInfoModal";
 	}
 	
 	//회원 계정 정지

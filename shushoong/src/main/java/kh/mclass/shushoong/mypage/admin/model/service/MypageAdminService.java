@@ -1,5 +1,6 @@
 package kh.mclass.shushoong.mypage.admin.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,11 +35,56 @@ public class MypageAdminService {
 		return mypageAdminRepository.selectOne(id);
 	}
 	
-	public List<Map<String, String>> selectHotelPayCount(String id) {
+	public Map<String, Object> selectHotelPayList(String id, int currentPage) {
+		Map<String, Object> result = new HashMap<>();
+		
+		int pageSize = 12;
+		int pageBlockSize = 5;
+		
+		int totalCount = selectHotelPayCount(id);
+		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+		int startPageNum = (currentPage%pageBlockSize == 0) ? ((currentPage/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPage/pageBlockSize))*pageBlockSize + 1;
+		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+		
+		int offset = (currentPage - 1) * pageSize;
+		RowBounds rowBounds = new RowBounds(offset, pageSize);
+		result.put("currentPageNum", currentPage);
+		result.put("totalPageCount", totalPageCount);
+		result.put("startPageNum", startPageNum);
+		result.put("endPageNum", endPageNum);
+		result.put("totalCount", totalCount);
+		result.put("hotelPayList", mypageAdminRepository.selectHotelPayList(id, rowBounds));
+		
+		return result;
+	}
+	
+	public int selectHotelPayCount(String id) {
 		return mypageAdminRepository.selectHotelPayCount(id);
 	}
 	
-	public List<Map<String, String>> selectFlyPayCount(String id) {
+	public Map<String, Object> selectFlyPayList(String id, int currentPage) {
+		Map<String, Object> result = new HashMap<>();
+		
+		int pageSize = 10;
+		int pageBlockSize = 5;
+		
+		int totalCount = selectFlyPayCount(id);
+		int totalPageCount = (totalCount%pageSize == 0) ? totalCount/pageSize : totalCount/pageSize + 1;
+		int startPageNum = (currentPage%pageBlockSize == 0) ? ((currentPage/pageBlockSize)-1)*pageBlockSize + 1 : ((currentPage/pageBlockSize))*pageBlockSize + 1;
+		int endPageNum = (startPageNum+pageBlockSize > totalPageCount) ? totalPageCount : startPageNum + pageBlockSize - 1;
+		
+		int offset = (currentPage - 1) * pageSize;
+		RowBounds rowBounds = new RowBounds(offset, pageSize);
+		result.put("currentPageNum", currentPage);
+		result.put("totalPageCount", totalPageCount);
+		result.put("startPageNum", startPageNum);
+		result.put("endPageNum", endPageNum);
+		result.put("totalCount", totalCount);
+		result.put("flyPayList", mypageAdminRepository.selectFlyPayList(id, rowBounds));
+		return result;
+	}
+
+	public int selectFlyPayCount(String id) {
 		return mypageAdminRepository.selectFlyPayCount(id);
 	}
 	

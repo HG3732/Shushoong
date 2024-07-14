@@ -48,16 +48,41 @@
 	
 	<!-- 회원의 결제 내역 조회 -->
 	<!-- 1. 호텔 -->
-	<select id="selectHotelPayCount" parameterType="string" resultType="hashmap">
-		select user_name, hotel_reserve_code, residence_phone from member 
-		join HOTEL_RESERVE using(user_id) where user_id = #{id}
+	<select id="selectHotelPayList" parameterType="string" resultType="hashmap">
+		select hotel_name, hotel_reserve_code, reserve_time, residence_phone from member 
+			join HOTEL_RESERVE using(user_id)
+			join hotel using(hotel_code)
+			where user_id = #{id}
+			order by reserve_time desc
+	</select>
+	<!-- 호텔 예약 갯수 -->
+	<select id="selectHotelPayCount" parameterType="string">
+	select count(*) from member 
+			join HOTEL_RESERVE using(user_id)
+			join hotel using(hotel_code)
+			where user_id = #{id}
 	</select>
 	
 	<!-- 2. 항공 -->
-	<select id="selectFlyPayCount" parameterType="string" resultType="hashmap">
-		select user_name, airline_reserve_code, reserve_phone from member 
-		join AIRLINE_RESERVE_INFO using(user_id) where user_id = #{id}
+	<select id="selectFlyPayList" parameterType="string" resultType="hashmap">
+		select airline_reserve_code, sg.airline_code as airline_code, depart_loc, ai.depart_date as depart_date, depart_time, arrival_loc, ai.arrival_date as arrival_date, arrival_time, seat_grade, reserve_time, reserve_phone from member 
+			join AIRLINE_RESERVE_INFO using(user_id)
+	        join direct_via using (airline_reserve_code)
+	        join seat_grade sg using (seat_grade)
+	        join airline_info ai on sg.airline_code = ai.airline_code
+	        where user_id = #{id}
+	        order by reserve_time desc
 	</select>
+	<!-- 항공 예약 갯수 -->
+	<select id="selectFlyPayCount" parameterType="string">
+		select count(*) from member 
+			join AIRLINE_RESERVE_INFO using(user_id)
+	        join direct_via using (airline_reserve_code)
+	        join seat_grade sg using (seat_grade)
+	        join airline_info ai on sg.airline_code = ai.airline_code
+	        where user_id = #{id}
+	</select>
+	
 	
 	<!-- 회원의 문의 건수 조회 -->
 	<select id="selectFAQCount" parameterType="string" resultType="String">

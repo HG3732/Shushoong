@@ -1,4 +1,5 @@
 var keyword = null;
+let currentPageNum = 1;
 
 $(loadedHandler);
 
@@ -16,9 +17,7 @@ function memberSearchHandler() {
 		url:"/shushoong/admin/manager/customer/searchMember.ajax",
 		method: "get",
 		data: {keyword : keyword},
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
+		error: ajaxErrorHandler
 	}).done(function(response) {
 		$('#memberlist').replaceWith(response);
 	});
@@ -27,14 +26,13 @@ function memberSearchHandler() {
 /* 회원 아이디 클릭 시 세부 정보 확인 + 문의내역 3개 조회 */
 function memberViewHandler(thisElement) {
 	var id = $(thisElement).data("userid");
-	
+	currentPageNum = 1;
 	$.ajax({
 		url: "/shushoong/admin/manager/customer/viewMember.ajax",
 		method: "get",
-		data: { id : id },
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
+		data: { id : id,
+			currentPageNum : currentPageNum },
+		error: ajaxErrorHandler
 	})
 	//success함수 대체
 	.done(function(response){
@@ -45,13 +43,49 @@ function memberViewHandler(thisElement) {
 		url: "/shushoong/admin/manager/customer/viewQna.ajax",
 		method: "get",
 		data: { id : id },
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
+		error: ajaxErrorHandler
 	})
 	//success함수 대체
 	.done(function(response){
 		$("#userqna").replaceWith(response);
+	});
+}
+
+//결제내역 조회 클릭 시 모달
+function payList(thisElement) {
+	$('.modal-background').css('display', 'flex');
+}
+
+//모달 닫기
+function closeModal() {
+	$('.modal-background').css('display', 'none');
+}
+
+//모달 탭 전환
+function tabToHotel() {
+	$('.modal-box').eq(1).css('display','none');
+	$('.modal-box').eq(0).css('display','flex');
+}
+function tabToFly() {
+	$('.modal-box').eq(0).css('display','none');
+	$('.modal-box').eq(1).css('display','flex');
+}
+
+//결제내역 페이징
+function goPage(thisElement) {
+	currentPageNum = $(thisElement).data('targetpage');
+	var id = $('.user-id').val();
+	
+	$.ajax({
+		url: "/shushoong/admin/manager/customer/viewpay.ajax",
+		method: "post",
+		data: { id : id,
+			currentPageNum : currentPageNum },
+		error: ajaxErrorHandler
+	})
+	//success함수 대체
+	.done(function(response){
+		$("#modal").replaceWith(response);
 	});
 }
 
@@ -62,9 +96,7 @@ function lockAccountHandler(thisElement) {
 		url: "/shushoong/admin/manager/customer/lockAccount.ajax",
 		method: "get",
 		data: { id : id },
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
+		error: ajaxErrorHandler
 	})
 	//success함수 대체
 	.done(function(response1){
@@ -72,13 +104,11 @@ function lockAccountHandler(thisElement) {
 			url: "/shushoong/admin/manager/customer/viewMember.ajax",
 			method: "get",
 			data: { id : id },
-			error: function(xhr, status, error) {
-					console.log('AJAX 실패:', error);
-				}
+			error: ajaxErrorHandler
 			})
 		//success함수 대체
 			.done(function(response){
-				$("#viewmember").replaceWith(response);
+				$(".modal-box").replaceWith(response);
 			});
 	});
 }
@@ -90,9 +120,7 @@ function unlockAccountHandler(thisElement) {
 		url: "/shushoong/admin/manager/customer/unlockAccount.ajax",
 		method: "get",
 		data: { id : id },
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
+		error: ajaxErrorHandler
 	})
 	//success함수 대체
 	.done(function(response1){
@@ -100,9 +128,7 @@ function unlockAccountHandler(thisElement) {
 			url: "/shushoong/admin/manager/customer/viewMember.ajax",
 			method: "get",
 			data: { id : id },
-			error: function(xhr, status, error) {
-					console.log('AJAX 실패:', error);
-				}
+			error: ajaxErrorHandler
 			})
 		//success함수 대체
 			.done(function(response){
@@ -119,9 +145,7 @@ function sleeperSearchHandler() {
 		url:"/shushoong/admin/manager/customer/searchSleeper.ajax",
 		method: "post",
 		data: {keyword : keyword},
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
+		error: ajaxErrorHandler
 	}).done(function(response) {
 		$('.secessionUserList').replaceWith(response);
 	});
@@ -135,9 +159,7 @@ function sleeperViewHandler(thisElement) {
 		url: "/shushoong/admin/manager/customer/viewSleeper.ajax",
 		method: "get",
 		data: { id : id },
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
+		error: ajaxErrorHandler
 	})
 	//success함수 대체
 	.done(function(response){
@@ -152,9 +174,7 @@ function lockAccountHandler2(thisElement) {
 		url: "/shushoong/admin/manager/customer/lockAccount.ajax",
 		method: "get",
 		data: { id : id },
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
+		error: ajaxErrorHandler
 	})
 	//success함수 대체
 	.done(function(response1){
@@ -162,9 +182,7 @@ function lockAccountHandler2(thisElement) {
 			url: "/shushoong/admin/manager/customer/viewSleeper.ajax",
 			method: "get",
 			data: { id : id },
-			error: function(xhr, status, error) {
-					console.log('AJAX 실패:', error);
-				}
+			error: ajaxErrorHandler
 			})
 		//success함수 대체
 			.done(function(response){
@@ -180,9 +198,7 @@ function unlockAccountHandler2(thisElement) {
 		url: "/shushoong/admin/manager/customer/unlockAccount.ajax",
 		method: "get",
 		data: { id : id },
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
+		error: ajaxErrorHandler
 	})
 	//success함수 대체
 	.done(function(response1){
@@ -190,9 +206,7 @@ function unlockAccountHandler2(thisElement) {
 			url: "/shushoong/admin/manager/customer/viewSleeper.ajax",
 			method: "get",
 			data: { id : id },
-			error: function(xhr, status, error) {
-					console.log('AJAX 실패:', error);
-				}
+			error: ajaxErrorHandler
 			})
 		//success함수 대체
 			.done(function(response){
@@ -216,8 +230,6 @@ function allLockHandler() {
 		success: function(response) {
 			alert("정지에 성공하였습니다.");
 		},
-		error: function(xhr, status, error) {
-				console.log('AJAX 실패:', error);
-			}
+		error: ajaxErrorHandler
 	})
 }

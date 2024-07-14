@@ -62,23 +62,25 @@
 		</when>
 	</choose>
 </select>
-<insert id="insertNotice" parameterType="NoticeDto">
-    <selectKey keyProperty="noticeId" resultType="int" order="BEFORE">
-        SELECT SEQ_NOTICE_ID.nextval FROM DUAL
-    </selectKey>
-	<choose>
-		<when test="noticeCategory == 1">
-			insert into notice_board values(
-		 		1||#{noticeId}, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
-			)
-		</when>
-		<when test="noticeCategory != 1">
-			insert into notice_board values(
-			2||#{noticeId}, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
-			)
-		</when>
-	</choose>
-</insert>
+
+	<insert id="insertNotice" parameterType="NoticeDto">
+	    <selectKey keyProperty="noticeId" resultType="int" order="BEFORE">
+	        SELECT SEQ_NOTICE_ID.nextval FROM DUAL
+	    </selectKey>
+		<choose>
+			<when test="noticeCategory == 1">
+				insert into notice_board values(
+			 		1||#{noticeId}, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
+				)
+			</when>
+			<when test="noticeCategory != 1">
+				insert into notice_board values(
+				2||#{noticeId}, #{noticeTitle}, #{noticeContent}, SYSDATE, #{userId}
+				)
+			</when>
+		</choose>
+	</insert>
+
 <insert id="insertNoticeFile" parameterType="NoticeFileDto" >
     <choose>
         <when test="noticeCategory == 1">

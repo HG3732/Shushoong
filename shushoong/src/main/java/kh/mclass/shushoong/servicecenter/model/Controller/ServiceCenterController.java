@@ -379,14 +379,6 @@ public class ServiceCenterController {
                 .findFirst()
                 .orElse("anonymousUser"); // 기본값 설정
 		
-		System.out.println("유저 등급 : " + userGrade);
-		System.out.println("공지 작성 포스트 컨트롤러");
-		System.out.println("noticeTitle : " + noticeTitle);
-		System.out.println("noticeContent : " + noticeContent);
-		System.out.println("noticeFile : " + noticeFile);
-		System.out.println("noticeCategory : " + noticeCategory);
-		
-		
 	    NoticeDto dto = new NoticeDto();
 	    dto.setNoticeTitle(noticeTitle);
 	    dto.setNoticeContent(noticeContent);
@@ -394,22 +386,18 @@ public class ServiceCenterController {
 	    dto.setUserId(userId); 
 	    md.addAttribute("userGrade", userGrade);
 	    
-//	    int insertNotice = noticeService.insertNotice(dto);
+	    if (userGrade.equals("admin")) {
 	    int noticeId = noticeService.insertNotice(dto);
 	    String noticeIdStr = String.valueOf(noticeId);
 	    System.out.println("공지사항 글번호 : " + noticeId);
-//	    NoticeFileDto noticeFileDto = new NoticeFileDto();
 	    
 	    try {
-//	        List<NoticeFileDto> noticeFileDtos = new ArrayList<>();
 	        for (MultipartFile noticeFile2 : noticeFile) {
 	            if (noticeFile2 != null && !noticeFile2.isEmpty()) {
-	                // 클라우드 서비스를 통해 파일 업로드 처리
 	                Map<String, Object> uploadResult = cloudinary.uploader().upload(noticeFile2.getBytes(), ObjectUtils.emptyMap());
 	                String savedFilePathName = uploadResult.get("url").toString();
 
 	                NoticeFileDto noticeFileDto = new NoticeFileDto();
-//	                noticeFileDto.setNoticeId(noticeCategory)
 	                noticeFileDto.setNoticeId(noticeIdStr);
 	                noticeFileDto.setNoticeCategory(noticeCategory);
 	                noticeFileDto.setOriginalFilename(noticeFile2.getOriginalFilename());
@@ -419,17 +407,18 @@ public class ServiceCenterController {
 	                System.out.println("파일 오리지널 명 : " + noticeFile2.getOriginalFilename());
 	                System.out.println("파일 패스 명 : " + savedFilePathName);
 
-//	                noticeFileDtos.add(noticeFileDto);
 	                noticeService.insertNoticeFile(noticeFileDto);
 	            }
 	        }
-
 
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	        System.out.println("파일 첨부 에러");
 	    }
 			return "redirect:/support/notice/list";
+	    }else {
+	    	return "memeber/login";
+	    }
 	}
 	
 	// 공지사항 수정

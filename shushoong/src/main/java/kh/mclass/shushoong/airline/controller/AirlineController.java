@@ -322,7 +322,7 @@ public class AirlineController {
 		// 각 항공편에 대해 30000에서 60000 사이의 랜덤 가격을 설정
 		Random random = new Random();
 		for (AirlineInfoDto air : airlineReturnData) {
-			int randomPrice = 30000 + random.nextInt(30001); // 30000에서 60000 사이의 랜덤 값
+			int randomPrice = 30000 + random.nextInt(90001); // 30000에서 60000 사이의 랜덤 값
 			air.setSeatRandomPrice(randomPrice);
 		}
 		return "airline/airline_list_return";
@@ -355,9 +355,7 @@ public class AirlineController {
 		md.addAttribute("baby", baby);
 		md.addAttribute("ticketType", ticketType);
 
-		List<AirlineInfoDto> SortData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft,
-				deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType,
-				seatGrade);
+		List<AirlineInfoDto> SortData = service.getAirlineSideTime(departLoc, arrivalLoc, departTimeLeft, deaprtTimeRight, arrivalTimeLeft, arrivalTimeRight, selectType, viaType, maxPrice, ticketType, seatGrade);
 		md.addAttribute("airlineData", SortData);
 		Integer maxPrice2 = service.getMaxPrice(departLoc, arrivalLoc, ticketType, seatGrade);
 		md.addAttribute("maxPrice", maxPrice2);

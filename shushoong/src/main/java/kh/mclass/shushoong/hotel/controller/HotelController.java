@@ -42,6 +42,7 @@ import kh.mclass.shushoong.hotel.model.domain.HotelReserveDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReserveCompleteDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewOverallDtoRes;
+import kh.mclass.shushoong.hotel.model.domain.HotelRoomDto;
 import kh.mclass.shushoong.hotel.model.domain.HotelViewDtoRes;
 import kh.mclass.shushoong.hotel.model.service.HotelService;
 import kh.mclass.shushoong.payment.PayDto;
@@ -97,9 +98,9 @@ public class HotelController {
 		Integer people = child1 + adult1;
 		int roomCap = people / Integer.parseInt(room);
 		if (people % Integer.parseInt(room) > 0.5)
-			roomCap++;
+			{roomCap++;}
 		if (roomCap < 2)
-			roomCap = 2;
+			{roomCap = 2;}
 		List<HotelDtoRes> result = service.selectAllHotelList(loc, String.valueOf(roomCap), null, null, null, null);
 		for (HotelDtoRes dto : result) {
 			dto.setPriceDiscounted(Integer.parseInt(dto.getHotelPrice()) * (100 - dto.getRoomDiscount()) / 100);
@@ -231,6 +232,13 @@ public class HotelController {
 		System.out.println(people + "=======================");
 
 		HotelViewDtoRes result = service.selectOneHotel(hotelCode, people);
+		
+		for (HotelRoomDto room : result.getHotelRooms()) {
+			int roomPrice = Integer.parseInt(room.getHotelPrice());
+			int roomDiscount = Integer.parseInt(room.getHotelDiscount());
+			int roomDiscounted = roomPrice * (100-roomDiscount) / 100 ;
+			room.setRoomDiscounted(String.valueOf(roomDiscounted));
+		}
 		// ajax와는 다르게 이 문장으로 인해서 service 가서 쭉쭉가서 db에서 정보 조회해서 dto에 넣고 다시 돌아옴
 		// 돌아온 데이터 밑에 넣음
 

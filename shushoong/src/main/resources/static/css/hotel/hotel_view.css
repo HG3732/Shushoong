@@ -133,10 +133,19 @@ p{
 
 .amount_num{
 	grid-column: 6/ 8;
-	
 	font-size: var(--font4);
 	color: var(--color_red_1); 
 	text-align: center;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    justify-content: end;
+    margin-right: 30px;
+}
+
+.origin-price {
+	color: var(--color_gray_4);
+	text-decoration: line-through;
 }
 
 .a_btn{

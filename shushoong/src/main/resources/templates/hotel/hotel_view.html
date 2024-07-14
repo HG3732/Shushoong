@@ -92,7 +92,10 @@ xmlns:th="http://www.thymeleaf.org">
 											<input type="hidden" th:value="${checkOut}" name="checkOut">
 											<div th:utext="${rooms.roomCatDesc} + ', ' + ${rooms.roomAttDesc}" class="room_cat"></div>
 											<div class="amount_num">
-												<strong th:text="${#numbers.formatInteger(rooms.hotelPrice, 3, 'COMMA')}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong>원
+												<th:block th:if="${T(java.lang.Integer).parseInt(rooms.hotelDiscount) > 0}">
+													<div class="origin-price" th:text="${#numbers.formatInteger(rooms.hotelPrice, 3, 'COMMA')}"></div>
+												</th:block>
+												<strong th:text="${#numbers.formatInteger(rooms.roomDiscounted, 3, 'COMMA')}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong>원
 											</div>
 											<th:block th:if="${#authorization.expr('isAnonymous()')}">
 												<a th:href="@{/login}" class="a_btn">예약하기</a>

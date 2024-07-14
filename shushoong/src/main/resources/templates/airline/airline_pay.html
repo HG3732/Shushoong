@@ -113,13 +113,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 									</div>
 								</div>
 								<div class="policy_detail" hidden>
-									Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-									Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-									when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-									It has survived not only five centuries, but also the leap into electronic typesetting, 
-									remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-									sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-									Aldus PageMaker including versions of Lorem Ipsum.
+									좌석 상황에 따라 예상 운임과 실제 결제 운임이 다를 수 있습니다.
+									<br><br>
+									탑승자 정보는 여권과 동일하게 보내주시고, 결제 후 양도 및 명의변경 불가합니다.
+									<br><br>
+									결제 후 탑승자 명 변경은 동일 발음에 한하여 절차 변경이 가능하며 수수료가 부과됩니다.
+									<br><br>
+									단체항공권은 회원 전용입니다. 로그인 후 예약 신청을 진행하여 주시기 바랍니다.
+									<br><br>
+									마이페이지>개인정보 관리에서 탑승자를 미리 등록해 두시면 탑승자 정보 입력 시 시간을 단축할 수 있습니다.
+									<br><br>
+									좌석 승인 후 다음날 23:59까지 결제하지 않으면 자동으로 취소됩니다.
+									<br><br>
+									환율 및 유류세 변동에 따라 결제 금액이 변경 될 수 있습니다.
 								</div>
 								<div class="caution">
 									<p class="class_info">항공 예약 주의 사항</p>
@@ -196,10 +202,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 									<p class="class_info">마케팅 수신동의</p>
 									<p class="option" style="color: blue;">(선택)</p>
 									<div class="radio_wrap">
-										<input type="radio" name="policy_5" value="agree" id="radio_agree5" class="agree_radio">
+										<input type="radio" name="option_1" value="agree" id="radio_agree5" class="agree_radio-1">
 											<label for="radio_agree5" style="display: inline-block;"></label>
 											<div style="margin-right: 20px;">동의합니다</div>
-										<input type="radio" name="policy_5" value="disagree" id="radio_disagree5"  class="disagree_radio">
+										<input type="radio" name="option_1" value="disagree" id="radio_disagree5"  class="disagree_radio">
 											<label for="radio_disagree5"></label>
 											<div>동의하지 않습니다</div>
 										<img th:src="@{/images/down_arrow.png}" alt="펼쳐보기" style="width:15px; height: 15px; margin-left: 20px;" class="arrow">	
@@ -345,53 +351,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 			$("input[type='radio'].baggage").change(raidoBaggageInputValueFunction);
 			$("input[type='radio'].baggage").change(totalValueFunction);
 			passportDisplayFunction();
-					
 			refreshNumberCommaHandler();
-			
+			$('#check1').on("click", allAgreeCheckHandler);
+			$('.arrow').on("click", arrowDownClickHandler);
+			$('input[value=agree]').on("click", checkAllEscHandler);
 			regexTestFunction();//정규 표현식 관련
 			
-// 			$("button#reserver_info_insert").attr("disabled",true);
+			$("button#reserver_info_insert").attr("disabled",true);
 			$("input[type=radio]").change(checkAgreeFunction);
 			
-			
-			
-			
-			
-// 			$("button#reserver_info_insert").on("click",submitBtnCheckFunction());
-			
+			$("button#reserver_info_insert").on("click",submitBtnCheckFunction);
 		}
 		
-	$("button#reserver_info_insert").on("click",reserverInfoInsertFunction);
-	
-
-		$('#check1').on("click", allAgreeCheckHandler);
-		$('.arrow').on("click", arrowDownClickHandler);
 		
-		function checkAgreeFunction(){
-			
-			console.log("changed");
-			console.log($("[name=policy_1]").val());
-			console.log($("[name=policy_2]").val());
-			console.log($("[name=policy_3]").val());
-			console.log($("[name=policy_4]").val());
-			
-			if(
-				$("[name=policy_1]").val()=='agree' &&
-				$("[name=policy_2]").val()=='agree' &&
-				$("[name=policy_3]").val()=='agree' &&
-				$("[name=policy_4]").val()=='agree' 
-			){
-				console.log("yes click");
-
-				$("button#reserver_info_insert").attr("disabled",false);
-			}else{
-				console.log("mo click");
-
-				$("button#reserver_info_insert").attr("disabled",true);
-			}
-			
-		};
-
 	</script>
 	
 </body>

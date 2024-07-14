@@ -67,21 +67,24 @@
 					<div class="date-select-info">
 						<div>
 							<div>
-								<span th:text="${air.departDate}"></span>
+								<span class="detail-date depart" th:text="${arrivalDate}"></span>
 							</div>
 							<div>
 								<span th:text="${air.departTime}"></span>
 							</div>
 						</div>
 						<div>
-							<span th:text="${air.flightTime}"></span>
+							<span class="detail-flightTime" th:text="${air.flightTime}"></span>
 						</div>
 						<div>
 							<div>
-								<span th:text="${air.arrivalDate}"></span>
+								<span class="detail-date arrival" th:if="${air.plusDate}" th:text="${arrivalDate +' +1'}"></span>
 							</div>
 							<div>
-								<span th:text="${air.departTime}"></span>
+								<span class="detail-date arrival" th:unless="${air.plusDate}" th:text="${arrivalDate}"></span>
+							</div>
+							<div>
+								<span th:text="${air.arrivalTime}"></span>
 							</div>
 						</div>
 					</div>

@@ -239,7 +239,7 @@ div#people_lineup_sit_accoding{
 												<span th:text="${air.airlineName}"></span>
 											</div>
 											<div class="airinfo depart-info">
-												<div th:text="${arrivalDate2}" class="info date"></div>
+												<div th:text="${departDate2}" class="info date"></div>
 												<div th:text="${air.departTime}" class="info time">이륙
 													시간</div>
 												<div th:text="${air.departLoc}" class="info loc"
@@ -254,8 +254,8 @@ div#people_lineup_sit_accoding{
 												<div hidden th:text="${air.airlineCode}"></div>
 											</div>
 											<div class="airinfo arr-info">
-												<div th:if="${air.plusDate}" th:text="${arrivalDate2} + ' +1'" class="info date">도착 일자</div>
-												<div th:unless="${air.plusDate}" th:text="${arrivalDate2}" class="info date">도착 일자</div> 
+												<div th:if="${air.plusDate}" th:text="${departDate2} + ' +1'" class="info date">도착 일자</div>
+												<div th:unless="${air.plusDate}" th:text="${departDate2}" class="info date">도착 일자</div> 
 												<div th:text="${air.arrivalTime}" class="info time">착륙
 													시간</div>
 												<div th:text="${air.arrivalLoc}" class="info loc"
@@ -281,7 +281,7 @@ div#people_lineup_sit_accoding{
 												<div class="date-select-info">
 													<div>
 														<div>
-															<span class="detail-date depart" th:text="${arrivalDate}">07월18일</span>
+															<span class="detail-date depart" th:text="${departDate}">07월18일</span>
 														</div>
 														<div>
 															<span th:text="${air.departTime}">14:40</span>
@@ -292,10 +292,10 @@ div#people_lineup_sit_accoding{
 													</div>
 													<div>
 														<div>
-															<span class="detail-date arrival" th:if="${air.plusDate}" th:text="${arrivalDate} + ' +1'">07월18일</span>
+															<span class="detail-date arrival" th:if="${air.plusDate}" th:text="${departDate} + ' +1'">07월18일</span>
 														</div>
 														<div>
-															<span th:unless="${air.plusDate}" th:text="${arrivalDate}">07월18일</span>
+															<span class="detail-date arrival" th:unless="${air.plusDate}" th:text="${departDate}">07월18일</span>
 														</div>
 														<div>
 															<span th:text="${air.departTime}">10:20</span>

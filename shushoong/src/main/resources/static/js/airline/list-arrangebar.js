@@ -19,7 +19,6 @@ function setDepartLeftValue() {
 
 	// 왼쪽 thumb의 위치를 계산하여 슬라이더의 왼쪽 값을 표시
 	const leftValue = parseInt(_this.value);
-	// console.log("출발 시간 left.val : " + _this.value);
 
 	const leftVal = document.querySelector(".middle-range.depart .div1");
 	leftVal.innerHTML = `${leftValue}:00`;

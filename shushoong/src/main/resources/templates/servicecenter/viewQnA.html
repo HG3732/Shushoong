@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title>1:1문의 자세히 보기</title>
 </head>
-<body>
+<body class="body">
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
@@ -38,7 +38,7 @@
 					<div th:replace="~{mypage/admin/mypageAdminAside :: Aside}"></div>
 				</aside>
 			</div>
-			<div class="wrap-board">
+			<div class="wrap-board" id="wrap-board">
 				<div class="qna-head">
 					<div class="qna-title"
 						th:text="${result.faqId + '.' + result.askTitle}"></div>

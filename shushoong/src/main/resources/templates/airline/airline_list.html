@@ -129,12 +129,11 @@ div#people_lineup_sit_accoding{
 								<!-- 출발 -->
 								<div class="middle-range depart">
 									<div>출발</div>
+									
 									<div class="multi-range-slider">
 										<!-- 진짜 슬라이더 -->
-										<input type="range" id="depart-input-left" min="0" max="22"
-											value="0" /> <input type="range" id="depart-input-right"
-											min="2" max="23" value="23" />
-
+										<input type="range" id="depart-input-left" min="0" max="22" value="0" /> 
+										<input type="range" id="depart-input-right" min="2" max="23" value="23" />
 										<!-- 커스텀 슬라이더 -->
 										<div class="slider depart">
 											<div class="track"></div>
@@ -147,6 +146,7 @@ div#people_lineup_sit_accoding{
 											<div class="div2 depart" id="depart-right-timeval"></div>
 										</div>
 									</div>
+									
 								</div>
 								<!-- 도착 -->
 								<div class="middle-range arr">
@@ -180,7 +180,7 @@ div#people_lineup_sit_accoding{
 								<div class="middle-range price">
 									<div class="multi-range-slider">
 										<!-- 진짜 슬라이더 -->
-										<!-- <input type="range" id="price-input-left" min="0" max="22" value="0" /> -->
+										<!-- <input type="range" id="price-input-left" min="0" max="22" value="0" /> -->==
 										<input type="range" id="price-input-right" min="0"
 											th:max="${maxPrice}" th:value="${maxPrice}" />
 

@@ -41,248 +41,251 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<section class="hotel_review_list">
 				<div>내가 쓴 리뷰들</div>
 				<div class="hotel_review">
+					<div  id="value_null" th:if="${#lists.size(hotelReviewList) == 0}">등록된 리뷰가 없습니다</div>
+					<div th:if="${#lists.size(hotelReviewList) != 0}">
 					
-					<div class="hotel_review_idx" style="background-color: var(--color_blue_2); ">
-						<div class="hotel_review_wrap">
-							<div class="hotel_review_wrap_box">
-								<button class="hotel_list_flex">
-									<div class="hotel_name" th:text="상품명" style="font-weight: bold;" />
-									<div class="review_title" th:text="리뷰" style="font-weight: bold;"></div>
-								</button>
-								<button id="delete_review_btn" th:text="삭제" style="border: none; width: 50px; margin-left: 15px; font-weight: bold; color: black;" disabled="disabled">
-									<img alt="trashcan" class="delete_img" th:src="@{/images/trash.png}">
-								</button>
-							</div>
-						</div>
-					</div>
-					<div class="hotel_review_idx" id="value_null" th:if="${#lists.size(hotelReviewList) == 0}">등록된 리뷰가 없습니다</div>
-					<div class="hotel_review_idx" th:each="list : ${hotelReviewList}">
-						<div class="hotel_review_wrap">
-							<div class="hotel_review_wrap_box">
-								<button class="hotel_list_flex">
-									<div class="hotel_name" th:text="${list.HOTEL_NAME}" />
-									<div class="review_title" th:text="${list.REVIEW_TITLE}"></div>
-								</button>
-								<button id="delete_review_btn" th:value="${list.HOTEL_RESERVE_CODE}">
-									<img alt="trashcan" class="delete_img" th:src="@{/images/trash.png}">
-								</button>
-							</div>
-	
-							<!-- 모달창 구현 -->
-							<div id="modal" class="modal_overlay">
-								<div class="modal_window">
-									<form id="frm_review" th:action="@{/hotel/review/write.ajax}"
-										method="post">
-										<button type="button" class="review_esc">X</button>
-										<div class="facility">
-											<p style="font-size: var(--font2);">숙박시설 상태 및 시설</p>
-											<div class="facility_stars">
-												
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_1" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 1">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_FACILITY} < 1">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_2" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 2">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_FACILITY} < 2">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_3" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 3">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_FACILITY} < 3">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_4" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 4">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_FACILITY} < 4">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_5" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 5">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_FACILITY} < 5">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-											
-											</div>
-										</div>
-										
-										<div class="sanity">
-											<p style="font-size: var(--font2);">청결 상태</p>
-											<div class="sanity_stars">
-											
-												<input type="radio" class="score" name="sanity_score" id="sanity_1" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_CLEAN} >= 1">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_CLEAN} < 1">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_2" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_CLEAN} >= 2">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_CLEAN} < 2">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_3" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_CLEAN} >= 3">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_CLEAN} < 3">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_4" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_CLEAN} >= 4">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_CLEAN} < 4">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_5" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_CLEAN} >= 5">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_CLEAN} < 5">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-											</div>
-										</div>
-										<div class="conven">
-											<p style="font-size: var(--font2);">편의 시설/서비스</p>
-											<div class="conven_stars">
-											
-												<input type="radio" class="score" name="sanity_score" id="sanity_1" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_CONVEN} >= 1">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_CONVEN} < 1">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_2" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_CONVEN} >= 2">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_CONVEN} < 2">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_3" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_CONVEN} >= 3">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_CONVEN} < 3">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_4" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_CONVEN} >= 4">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_CONVEN} < 4">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_5" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_CONVEN} >= 5">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_CONVEN} < 5">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-											</div>
-										</div>
-										<div class="service">
-											<p style="font-size: var(--font2);">직원 및 서비스</p>
-											<div class="service_stars">
-											
-												<input type="radio" class="score" name="sanity_score" id="sanity_1" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_KIND} >= 1">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_KIND} < 1">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_2" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_KIND} >= 2">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_KIND} < 2">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_3" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_KIND} >= 3">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_KIND} < 3">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_4" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_KIND} >= 4">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_KIND} < 4">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-												<input type="radio" class="score" name="sanity_score" id="sanity_5" checked> 
-												<label for="sanity_1" th:if="${list.HOTEL_KIND} >= 5">
-													<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												<label for="sanity_1" th:if="${list.HOTEL_KIND} < 5">
-													<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
-												</label> 
-												
-											</div>
-										</div>
-	
-										<fieldset style="border: 1px solid black; padding: 15px 15px;">
-											<legend style="font-size: var(--font2); padding: 0 5px;">여행객
-												유형</legend>
-											<div th:if="${list.TRIPPER_CAT} == 1"> 혼자 </div>
-											<div th:if="${list.TRIPPER_CAT} == 2"> 커플/부부 </div>
-											<div th:if="${list.TRIPPER_CAT} == 3"> 가족 </div>
-											<div th:if="${list.TRIPPER_CAT} == 4"> 단체 </div>
-											<div th:if="${list.TRIPPER_CAT} == 5"> 출장 </div>
-										</fieldset>
-										<fieldset style="border: 1px solid black; padding: 20px 15px;">
-											<legend style="font-size: var(--font2); padding: 0 5px;">제목</legend>
-											<input th:value="${list.REVIEW_TITLE}" readonly="readonly" type="text" style="border: none; width: 370px;" />
-										</fieldset>
-										<div class="textarea" rows="15" cols="50" th:text="${list.REVIEW_COMMENT}"></div>
-										<button type="button" class="btn_submit">리뷰 삭제</button>
-									</form>
-									<!-- 리뷰 form  -->
+						<div class="hotel_review_idx" style="background-color: var(--color_blue_2); ">
+							<div class="hotel_review_wrap">
+								<div class="hotel_review_wrap_box">
+									<button class="hotel_list_flex">
+										<div class="hotel_name" th:text="상품명" style="font-weight: bold;" />
+										<div class="review_title" th:text="리뷰" style="font-weight: bold;"></div>
+									</button>
+									<button id="delete_review_btn" th:text="삭제" style="border: none; width: 50px; margin-left: 15px; font-weight: bold; color: black;" disabled="disabled">
+										<img alt="trashcan" class="delete_img" th:src="@{/images/trash.png}">
+									</button>
 								</div>
 							</div>
-							<!-- 모달창 끝 -->
-	
 						</div>
+				
+							<div class="hotel_review_idx" th:each="list : ${hotelReviewList}">
+								<div class="hotel_review_wrap">
+									<div class="hotel_review_wrap_box">
+										<button class="hotel_list_flex">
+											<div class="hotel_name" th:text="${list.HOTEL_NAME}" />
+											<div class="review_title" th:text="${list.REVIEW_TITLE}"></div>
+										</button>
+										<button id="delete_review_btn" th:value="${list.HOTEL_RESERVE_CODE}">
+											<img alt="trashcan" class="delete_img" th:src="@{/images/trash.png}">
+										</button>
+									</div>
+			
+									<!-- 모달창 구현 -->
+									<div id="modal" class="modal_overlay">
+										<div class="modal_window">
+											<form id="frm_review" th:action="@{/hotel/review/write.ajax}"
+												method="post">
+												<button type="button" class="review_esc">X</button>
+												<div class="facility">
+													<p style="font-size: var(--font2);">숙박시설 상태 및 시설</p>
+													<div class="facility_stars">
+														
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_1" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 1">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} < 1">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_2" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 2">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} < 2">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_3" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 3">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} < 3">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_4" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 4">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} < 4">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_5" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 5">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} < 5">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+													
+													</div>
+												</div>
+												
+												<div class="sanity">
+													<p style="font-size: var(--font2);">청결 상태</p>
+													<div class="sanity_stars">
+													
+														<input type="radio" class="score" name="sanity_score" id="sanity_1" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_CLEAN} >= 1">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_CLEAN} < 1">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_2" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_CLEAN} >= 2">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_CLEAN} < 2">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_3" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_CLEAN} >= 3">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_CLEAN} < 3">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_4" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_CLEAN} >= 4">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_CLEAN} < 4">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_5" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_CLEAN} >= 5">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_CLEAN} < 5">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+													</div>
+												</div>
+												<div class="conven">
+													<p style="font-size: var(--font2);">편의 시설/서비스</p>
+													<div class="conven_stars">
+													
+														<input type="radio" class="score" name="sanity_score" id="sanity_1" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_CONVEN} >= 1">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_CONVEN} < 1">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_2" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_CONVEN} >= 2">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_CONVEN} < 2">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_3" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_CONVEN} >= 3">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_CONVEN} < 3">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_4" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_CONVEN} >= 4">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_CONVEN} < 4">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_5" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_CONVEN} >= 5">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_CONVEN} < 5">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+													</div>
+												</div>
+												<div class="service">
+													<p style="font-size: var(--font2);">직원 및 서비스</p>
+													<div class="service_stars">
+													
+														<input type="radio" class="score" name="sanity_score" id="sanity_1" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_KIND} >= 1">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_KIND} < 1">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_2" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_KIND} >= 2">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_KIND} < 2">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_3" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_KIND} >= 3">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_KIND} < 3">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_4" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_KIND} >= 4">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_KIND} < 4">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+														<input type="radio" class="score" name="sanity_score" id="sanity_5" checked> 
+														<label for="sanity_1" th:if="${list.HOTEL_KIND} >= 5">
+															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														<label for="sanity_1" th:if="${list.HOTEL_KIND} < 5">
+															<img th:src="@{/images/star.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
+														</label> 
+														
+													</div>
+												</div>
+			
+												<fieldset style="border: 1px solid black; padding: 15px 15px;">
+													<legend style="font-size: var(--font2); padding: 0 5px;">여행객
+														유형</legend>
+													<div th:if="${list.TRIPPER_CAT} == 1"> 혼자 </div>
+													<div th:if="${list.TRIPPER_CAT} == 2"> 커플/부부 </div>
+													<div th:if="${list.TRIPPER_CAT} == 3"> 가족 </div>
+													<div th:if="${list.TRIPPER_CAT} == 4"> 단체 </div>
+													<div th:if="${list.TRIPPER_CAT} == 5"> 출장 </div>
+												</fieldset>
+												<fieldset style="border: 1px solid black; padding: 20px 15px;">
+													<legend style="font-size: var(--font2); padding: 0 5px;">제목</legend>
+													<input th:value="${list.REVIEW_TITLE}" readonly="readonly" type="text" style="border: none; width: 370px;" />
+												</fieldset>
+												<div class="textarea" rows="15" cols="50" th:text="${list.REVIEW_COMMENT}"></div>
+												<button type="button" class="btn_submit">리뷰 삭제</button>
+											</form>
+											<!-- 리뷰 form  -->
+										</div>
+									</div>
+									<!-- 모달창 끝 -->
+			
+								</div>
+							</div>
 					</div>
 				</div>
 			</section>

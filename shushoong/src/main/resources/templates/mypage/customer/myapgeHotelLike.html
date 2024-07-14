@@ -38,8 +38,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 				<section class="interested_section">
 					<div>좋아요 누른 호텔</div>
-					<div class="interested_list_wrap">
-						<div  id="value_null" th:if="${#lists.size(hotelList) == 0}">등록된 좋아요가 없습니다</div>
+					<div  id="value_null" th:if="${#lists.size(hotelList) == 0}">등록된 좋아요가 없습니다</div>
+					<div class="interested_list_wrap" th:if="${#lists.size(hotelList) != 0}">
 						<a class="liked_hotel" th:each="hotelList : ${hotelList}" th:href="@{/hotel/view/{hotelCode}(hotelCode=${hotelList.hotelCode})}">
 							<div class="hot-hotel-pic"><img class="hotel_img" th:src="${hotelList.hotelPic}" alt="a" /><button th:value="${hotelList.hotelCode}" class="heart_check"  onclick="return false;"><img class="heart_img" alt="하트" th:src="@{/images/heart_color.png}"></button> </div>
 							<div id="${hotelList.hotelCode}" class="hot-hotel-name" th:text="${hotelList.hotelName}">호텔이름</div>

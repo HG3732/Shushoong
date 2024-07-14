@@ -77,22 +77,25 @@ xmlns:th="http://www.thymeleaf.org">
 								    </th:block>
 									<th:block th:if="${not #lists.isEmpty(hotelViewList)}">
 										<input type="hidden" th:value="${hotelViewList.hotelCode}" name="hotelCode" class="hotel_code">
-										<form th:each="room : ${hotelViewList.hotelRooms}" class="roomlist" id="frm-reserve" method="post" action="/shushoong/hotel/customer/reserve/pay">
+										<form th:each="rooms : ${hotelViewList.hotelRooms}" class="roomlist" id="frm-reserve" method="post" action="/shushoong/hotel/customer/reserve/pay">
 											<input type="hidden" th:value="${hotelViewList.hotelName}" name="hotel">
 											<input type="hidden" th:value="${hotelCode}"  name="hotelCode">
 											<input type="hidden" th:value="${hotelViewList.hotelLocCat}"  name="hotelLocCat">
 											<input type="hidden" th:value="${room}"  name="room">
-											<input type="hidden" th:value="${room.roomAtt}" name="roomAtt">
-											<input type="hidden" th:value="${room.roomAttDesc}" name="roomAttDesc">
-											<input type="hidden" th:value="${room.roomCatDesc}" name="roomCatDesc">
-											<input type="hidden" th:value="${room.roomCat}" name="roomCat">
-											<input type="hidden" th:value="${room.hotelPrice}" name="hotelPrice">
-											<input type="hidden" th:value="${room.roomCap}" name="roomCap">
+											<input type="hidden" th:value="${rooms.roomAtt}" name="roomAtt">
+											<input type="hidden" th:value="${rooms.roomAttDesc}" name="roomAttDesc">
+											<input type="hidden" th:value="${rooms.roomCatDesc}" name="roomCatDesc">
+											<input type="hidden" th:value="${rooms.roomCat}" name="roomCat">
+											<input type="hidden" th:value="${rooms.hotelPrice}" name="hotelPrice">
+											<input type="hidden" th:value="${rooms.roomCap}" name="roomCap">
 											<input type="hidden" th:value="${checkIn}" name="checkIn">
 											<input type="hidden" th:value="${checkOut}" name="checkOut">
-											<div th:utext="${room.roomCatDesc} + ', ' + ${room.roomAttDesc}" class="room_cat"></div>
+											<div th:utext="${rooms.roomCatDesc} + ', ' + ${rooms.roomAttDesc}" class="room_cat"></div>
 											<div class="amount_num">
-												<strong th:text="${#numbers.formatInteger(room.hotelPrice, 3, 'COMMA')}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong>원
+												<th:block th:if="${T(java.lang.Integer).parseInt(rooms.hotelDiscount) > 0}">
+													<div class="origin-price" th:text="${#numbers.formatInteger(rooms.hotelPrice, 3, 'COMMA')}"></div>
+												</th:block>
+												<strong th:text="${#numbers.formatInteger(rooms.roomDiscounted, 3, 'COMMA')}" style="font-family: 'SOYOMapleBoldTTF'; font-size: var(--font1);"></strong>원
 											</div>
 											<th:block th:if="${#authorization.expr('isAnonymous()')}">
 												<a th:href="@{/login}" class="a_btn">예약하기</a>

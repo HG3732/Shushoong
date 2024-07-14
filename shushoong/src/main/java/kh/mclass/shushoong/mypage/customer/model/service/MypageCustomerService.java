@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
+import kh.mclass.shushoong.mypage.customer.model.domain.ReviewDto;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
 
 @Service
@@ -57,10 +58,24 @@ public class MypageCustomerService {
 		return mypageRepository.selectOneReservedHotel(userId, hotelReserveCode);
 	}
 	
+	//리뷰 등록
+	public int insertReview(ReviewDto dto) {
+		return mypageRepository.insertReview(dto);
+	}
+	
+	//리뷰 가능 상태 업데이트
+	public int updateReviewAvailable(String hotelReserveCode) {
+		return mypageRepository.updateReviewAvailable(hotelReserveCode);
+	}
+	
 	//호첼 예약 취소하기
 	public int cancelHotelReserve(String paymentId) {
 		return mypageRepository.cancelHotelReserve(paymentId);
 	}
+	
+	public int increaseRoom(String hotelCode, String room, String roomCat, String roomCap, String roomAtt) {
+		return mypageRepository.increaseRoom(hotelCode, room, roomCat, roomCap, roomAtt);
+	};
 	
 	//호텔 취소 상세정보
 	public Map<String, Object> selectOneCancelHotel(String userId, String hotelReserveCode) {

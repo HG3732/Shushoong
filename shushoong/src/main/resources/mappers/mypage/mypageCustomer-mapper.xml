@@ -42,7 +42,8 @@
 	<!-- 호텔 예약 상세정보 -->
 	<select id="selectOneReservedHotel" parameterType="hashmap" resultType="hashmap">
    		select hr.hotel_reserve_code, hotel_name, reserve_check_in, reserve_check_out, room_att_desc, room_cat_desc, 
-   				residence_num, p.pay_price as hotel_price, residence_name_ko, request_sum, approve_no, review_available
+   				residence_num, p.pay_price as hotel_price, residence_name_ko, request_sum, p.approve_no, review_available, 
+   				hm.room_cat, hm.hotel_code, hm.room_att, hm.room_cap, hr.room
 		from hotel_reserve hr
 		    join hotel h on hr.hotel_code = h.hotel_code 
 		    join hotel_room_att hra on hr.room_att = hra.room_att
@@ -51,6 +52,18 @@
     		join pay p on hr.hotel_reserve_code = p.hotel_reserve_code
 		where user_id = #{userId} and hr.hotel_reserve_code = #{hotelReserveCode} and hm.room_cat = hr.room_cat and hm.hotel_code = hr.hotel_code and hm.room_att = hr.room_att
 	</select>
+	
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview" parameterType="reviewDto">
+		insert into hotel_review values (#{approveNo}, #{hotelReserveCode}, #{reviewTitle}, #{reviewComment}, #{userId}, #{hotelFacility}, #{hotelClean}
+			, #{hotelConven}, #{hotelKind}, #{tripperCat})
+	</insert>
+	
+	<!-- 리뷰 작성 시 리뷰 등록 가능 여부 수정 -->
+	<update id="updateReviewAvailable" parameterType="String">
+		update hotel_reserve
+			set review_available = '0' where hotel_reserve_code = #{hotelReserveCode}
+	</update>
 	
 	<!-- 호텔 예약 취소 -->
 	<update id="cancelHotelReserve" parameterType="String" >
@@ -151,4 +164,12 @@
 		DELETE FROM hotel_review
     		WHERE user_id = #{userId} AND  hotel_reserve_code = #{hotelResCode}
 	</delete>
+	
+	<!-- 결제 취소 시 방 갯수 증가 -->
+	<update id="increaseRoom" parameterType="hashmap">
+		update hotel_room
+			set room_count = room_count + TO_NUMBER(#{room})
+			where hotel_code = #{hotelCode} and room_cat = #{roomCat}
+				and room_cap = #{roomCap} and room_att = #{roomAtt}
+	</update>
 </mapper>

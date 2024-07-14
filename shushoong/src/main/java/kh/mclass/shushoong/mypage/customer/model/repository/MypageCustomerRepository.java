@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.hotel.model.domain.HotelReviewDto;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
+import kh.mclass.shushoong.mypage.customer.model.domain.ReviewDto;
 
 @Mapper
 public interface MypageCustomerRepository {
@@ -33,9 +34,18 @@ public interface MypageCustomerRepository {
 	// 호텔 예약 상세정보
 	public Map<String, Object> selectOneReservedHotel(String userId, String hotelReserveCode);
 
+	//리뷰 등록
+	public int insertReview(ReviewDto dto);
+	
+	//리뷰 등록 상태 업데이트
+	public int updateReviewAvailable(String hotelReserveCode);
+	
 	// 호텔 예약 취소
 	public int cancelHotelReserve(String paymentId);
 
+	//취소 시 방 갯수 증가
+	public int increaseRoom(String hotelCode, String room, String roomCat, String roomCap, String roomAtt);
+	
 	// 호텔 취소 상세정보
 	public Map<String, Object> selectOneCancelHotel(String userId, String hotelReserveCode);
 
@@ -62,5 +72,7 @@ public interface MypageCustomerRepository {
 	public List<Map<String, String>> selectListHotelReview(String userId);
 
 	public int deleteOneHotelReview(String userId, String hotelResCode);
+	
+
 
 }

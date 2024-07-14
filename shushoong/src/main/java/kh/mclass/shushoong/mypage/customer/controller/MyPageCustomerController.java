@@ -26,6 +26,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +37,7 @@ import com.google.gson.Gson;
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.shushoong.hotel.model.domain.HotelDtoRes;
 import kh.mclass.shushoong.member.model.domain.MemberDto;
+import kh.mclass.shushoong.mypage.customer.model.domain.ReviewDto;
 import kh.mclass.shushoong.mypage.customer.model.repository.MypageCustomerRepository;
 import kh.mclass.shushoong.mypage.customer.model.service.MypageCustomerService;
 import kh.mclass.shushoong.servicecenter.model.service.OnlineQnAService;
@@ -236,24 +238,15 @@ public class MyPageCustomerController {
 
 				// 예약 날짜 문자열
 				String checkOut = (String) reservationDetails.get("RESERVE_CHECK_OUT");
-
+				String checkOutDate = checkOut.replace("년", "").replace("월", "").replace("일", "");
+				
 				// 날짜 형식 정의
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 				try {
-					// 문자열을 LocalDate 객체로 변환
-					LocalDate checkOutDate = LocalDate.parse(checkOut, formatter);
-
+				
 					// 현재 날짜 가져오기
-					LocalDate currentDate = LocalDate.now();
-
-					// 두 날짜 비교
-					if (checkOutDate.isEqual(currentDate)) {
-						System.out.println("오늘이랑 같은 날짜");
-					} else if (checkOutDate.isBefore(currentDate)) {
-						System.out.println("과거 날짜");
-					} else {
-						System.out.println("미래 날짜");
-					}
+					LocalDate currentDate1 = LocalDate.now();
+					String currentDate = currentDate1.format(formatter);
 
 					model.addAttribute("checkOutDate", checkOutDate);
 					model.addAttribute("currentDate", currentDate);
@@ -266,11 +259,26 @@ public class MyPageCustomerController {
 			} else {
 
 			}
-			model.addAttribute("reserveList", service.selectOneReservedHotel(userId, hotelReserveCode));
+			model.addAttribute("reserveList", reservationDetails);
+			model.addAttribute("userId", loginId);
 
 			return "mypage/customer/mypageCustomerReservedHotel";
 
 		}
+	}
+	
+	//리뷰 작성 ajax
+	@ResponseBody
+	@PostMapping("/mypage/submit/review.ajax")
+	public int submitReview(Model model, @RequestBody ReviewDto dto, Authentication auth) {
+		System.out.println("==================" + dto.toString());
+		dto.setUserId(auth.getName());
+		int result = service.insertReview(dto);
+		if(result > 0) {
+			service.updateReviewAvailable(dto.getHotelReserveCode());
+		}
+		
+		return result;
 	}
 
 	// 마이페이지 호텔 취소내역 하나 선택
@@ -339,7 +347,7 @@ public class MyPageCustomerController {
 	// 호텔 예약취소하기
 	@PostMapping("/mypage/reserved/hotel/cancel")
 	@ResponseBody
-	public int cancelHotel(String paymentId) throws IOException, InterruptedException {
+	public int cancelHotel(String paymentId, String hotelCode, String roomAtt, String roomCap, String roomCat, String room) throws IOException, InterruptedException {
 		Map<String, Object> requestBody = new HashMap<>();
 		requestBody.put("reason", "고객 요청으로 결제 취소");
 
@@ -362,6 +370,7 @@ public class MyPageCustomerController {
 		if (status != null) {
 			if (status.equals("SUCCEEDED")) {
 				result = service.cancelHotelReserve(paymentId);
+				service.increaseRoom(hotelCode, room, roomCat, roomCap, roomAtt);
 				return result;
 			} else {
 				return 0;

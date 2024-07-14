@@ -75,6 +75,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div class="payment">
 					<div class="totalpay" th:text="${#numbers.formatInteger(reserveList.HOTEL_PRICE, 3, 'COMMA')} + '원'"></div>
 					
+					<input type="hidden" th:value="${reserveList.ROOM}" class="room_count">
+					<input type="hidden" th:value="${reserveList.ROOM_ATT}" class="room_att">
+					<input type="hidden" th:value="${reserveList.ROOM_CAP}" class="room_cap">
+					<input type="hidden" th:value="${reserveList.ROOM_CAT}" class="room_cat">
+					<input type="hidden" th:value="${reserveList.HOTEL_CODE}" class="hotel_c">
 				</div>						
 			</div>
 
@@ -83,6 +88,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<input type="hidden" th:value="${checkOutDate}" class="check_out_date">	
 				<input type="hidden" th:value="${currentDate}" class="current_date">	
 				<input type="hidden" th:value="${reserveList.REVIEW_AVAILABLE}" class="review_available">	
+				<input type="hidden" th:value="${reserveList.APPROVE_NO}" class="approve_no">	
+				<input type="hidden" th:value="${userId}" class="user_id">
 			</div>
 
 
@@ -208,19 +215,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				        <fieldset style="border: 1px solid black; padding: 15px 15px;" >
 				            <legend style="font-size: var(--font2); padding: 0 5px;">여행객 유형</legend>
 				                <select name="tourist_cat" style="padding: 5px; border: none; width: 370px;">
-				                    <option value="alone">혼자</option>
-				                    <option value="couple">커플/부부</option>
-				                    <option value="family">가족</option>
-				                    <option value="group">단체</option>
-				                    <option value="business_trip">출장</option>
+				                    <option value="0">혼자</option>
+				                    <option value="1">커플/부부</option>
+				                    <option value="2">가족</option>
+				                    <option value="3">단체</option>
+				                    <option value="4">출장</option>
 				                </select>
 				        </fieldset>   
 				        <fieldset style="border: 1px solid black; padding: 20px 15px; " >
 				            <legend style="font-size: var(--font2); padding: 0 5px;">제목</legend>
-							<input type="text" style="border: none; width: 370px;"/>
+							<input type="text" style="border: none; width: 370px;" class="review_title"/>
 				        </fieldset>
-				        <textarea rows="15" cols="50"></textarea>
-				        <button type="button" class="btn_submit">리뷰 작성</button>
+				        <textarea class="review_content" rows="15" cols="50"></textarea>
+					        <button type="button" class="btn_submit">리뷰 작성</button>
 				    </form> <!-- 리뷰 form  -->
 	             </div>
 	        </div> <!-- 모달창 끝 -->
@@ -245,8 +252,8 @@ function loadedHandler(){
 	var checkOutDate = $(".check_out_date").val();
 	var review = $(".review_available").val();
 	
-	if(checkOutDate < currentDate && review === "1"){
-		$('.btn').append(`<button type="button" class="review_btn">리뷰 작성</button>`);
+	if(checkOutDate < currentDate && review === "0"){
+		if(currentDate - checkOutDate < 20000) $('.btn').append(`<button type="button" class="review_btn">리뷰 작성</button>`);
 	} else {
 		$('.btn').append(`<button type="button" class="reserve_btn">취소하기</button>`);
 	}
@@ -258,6 +265,12 @@ function loadedHandler(){
 	
 	/* 리뷰 작성 */
 	$('.review_btn').on('click', reviewWriteHandler);
+	
+	/* 별점 이미지 변경*/
+	$('.score').on('click',checkScoreHandler);
+	
+	/* 리뷰 제출 */
+	$('.btn_submit').on('click', reviewSubmitHandler);
 	
 	/* 리뷰 작성 모달 취소 */
 	$('.review_esc').on('click', reviewEscHandler);

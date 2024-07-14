@@ -44,12 +44,21 @@ function updateAnswer() {
 function deleteQna() {
 	console.log('삭제하기 버튼 눌림');
 	
+	$('#modal').css('display', 'block');
+		$('.delete-no').on('click', function(){
+			$('#modal').css('display', 'none');	
+		});
+		
+		$('.delete-ok').on('click', function(){
+			//alert('삭제해줄겡');
+	
 	var id = $('#faqId');
 	console.log('문의 글 번호 : ', id);	
 	$('#frm-delete').attr('method', 'POST');
 	$('#frm-delete').attr('action', '/shushoong/support/qna/delete');
 	$('#frm-delete').submit();
-}
+	}
+)};
 
 function submitAnswer() {
 	var id = $(this).data("faqid");

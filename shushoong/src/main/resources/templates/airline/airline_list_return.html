@@ -230,7 +230,7 @@ div#people_lineup_sit_accoding{
 										<div class="airline-flex">
 											<div class="airline-logo">
 												<div class="span-seat-div">
-													<span class="span-seat">잔여 9석</span>
+													<span class="span-seat" th:text="${'잔여' + seatSpareSelect+'석'}">잔여 9석</span>
 												</div>
 												<img th:src="${air.airlineImg}" alt="">
 
@@ -308,7 +308,7 @@ div#people_lineup_sit_accoding{
 														<span th:text="${air.airlineName}">항공사 명</span>
 													</div>
 													<div>
-														<span>좌석등급 항공편명</span>
+														<span id="select-seatGrade" th:text="${seatGradeSelect}"></span> &nbsp <span th:text="${air.flightNo}" ></span>
 													</div>
 													<span class="detail-loc arrival" th:text="${air.arrivalLoc}">도착지</span>
 												</div>

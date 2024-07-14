@@ -187,7 +187,36 @@ public class AirlineController {
 		List<AirlineInfoDto> airlineReturnData = service.getAirlineInfo(departLoc, arrivalLoc, departDate, arrivalDate,
 				ticketType, seatGrade);
 		AirlineInfoDto selectOneAirline = service.getSelectOne(airlineCode);
-
+		
+		// 선택된 항공
+		
+		if(selectOneAirline.getSeatGrade() != null) {
+			String seatGradeSelect = selectOneAirline.getSeatGrade();
+			switch (seatGradeSelect) {
+			case "1": {
+				seatGradeSelect = "First class";
+				break;
+			}
+			case "2": {
+				seatGradeSelect = "Business class";
+				break;
+			}
+			case "3": {
+				seatGradeSelect =  "Economy class";
+				break;
+			}
+			}
+			md.addAttribute("seatGradeSelect", seatGradeSelect);
+			System.out.println("선택된 항공 등급 : " + seatGradeSelect);
+			int seatTotal = selectOneAirline.getSeatTotal();
+			int seatReserved = selectOneAirline.getSeatReserved();
+			
+			int spareSeat = seatTotal - seatReserved;
+			selectOneAirline.setSeatSpare(spareSeat);
+			
+			md.addAttribute("seatSpareSelect", spareSeat);
+		}
+		
 		for (AirlineInfoDto airlineInfo : airlineReturnData) {
 			switch (seatGrade) {
 			case "1": {

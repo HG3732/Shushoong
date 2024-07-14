@@ -10,7 +10,7 @@ function escHandler(){
 /* 결제 취소하기 */
 function cancelHandler(){
 
-	var paymentId = $('.code_num').text();
+	var paymentId = $('.code_num').first().text();
 	console.log(paymentId);
 	
 	$.ajax({

@@ -297,7 +297,7 @@
 			    ) addresult
 			LEFT JOIN COUNTRY_LOC_PIC
 			ON (addresult.arrival_loc = COUNTRY_LOC_PIC.local)
-			
+			ORDER BY addresult.seat_price
 	</select>
 	
 </mapper>

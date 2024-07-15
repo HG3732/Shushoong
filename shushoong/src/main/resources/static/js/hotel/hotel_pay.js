@@ -313,13 +313,13 @@ async function payHandler(hotelReserveCode){
 				url : "/shushoong/hotel/payment",
 				type : "post",
 				data: JSON.stringify(reserveCompletedto),
-				contentType: "application/json; charset=utf-8",
+				dataType: "json",  //보낼때 자료형
+				contentType: "application/json; charset=utf-8",  //받아올 때 자료형
 				error:function (request, status, error){
 						alert("code: "+request.status + "\n" + "message: " 
 								+ request.responseText + "\n"
 								+ "error: "+error);
 					},
-				dataType: "json",
 				success : function(data) {
 					if (Number(data) === 0) {
 						alert("결제 금액과 지불 금액이 일치하지 않거나 알 수 없는 오류가 발생했습니다.");

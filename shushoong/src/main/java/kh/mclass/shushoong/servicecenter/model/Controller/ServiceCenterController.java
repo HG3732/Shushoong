@@ -158,7 +158,7 @@ public class ServiceCenterController {
 	public String writeQnAanswer(Model model, String faqId, String ansContent) {
 		service.updateAnswer(faqId, ansContent);
 		model.addAttribute("result", service.selectOneQna(faqId));
-		return "servicecenter/viewQnA";
+		return "servicecenter/qnaContent";
 	}
 	
 	// 공지사항 작성

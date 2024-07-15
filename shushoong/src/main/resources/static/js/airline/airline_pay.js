@@ -123,9 +123,6 @@ function adultNum(){
 		}
 		
 		
-		
-		
-		
 		function childNum(){
 			var child = $("#child_val").val();
 			

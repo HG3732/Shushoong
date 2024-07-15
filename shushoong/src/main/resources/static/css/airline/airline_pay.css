@@ -334,10 +334,11 @@ input[type=checkbox]{
 input[type=checkbox] + label { 
     cursor: pointer;
     width: 20px;
-	height: 20px;
+    height: 20px;
     background-repeat: no-repeat;
-    background-image: url("../../images/skybluecheck.png");
-	background-size: 100%;
+    background-color: var(--color_blue_2);
+    background-size: 100%;
+    border-radius: 50px;
 }
 	
 input[type=checkbox]:checked + label { 
@@ -526,13 +527,12 @@ div.departTime{
 
 input[type=radio]{
 	-webkit-appearance: none; 
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	outline: none; 
-	background-image: url("../../images/skybluecheck.png");
-	background-size : cover;
-	cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-color: var(--color_blue_2);
+    background-size: 100%;
+    border-radius: 50px;
 
 }
 input[type="radio"]:checked{

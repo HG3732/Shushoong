@@ -80,7 +80,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 													<p style="font-size: var(--font2);">숙박시설 상태 및 시설</p>
 													<div class="facility_stars">
 														
-														
 														<input type="radio" class="score" name="sanity_score" id="sanity_1" checked> 
 														<label for="sanity_1" th:if="${list.HOTEL_FACILITY} >= 1">
 															<img th:src="@{/images/star_yellow.png}" class="id_img" alt="오른쪽 화살표" style="width: 15px;">
@@ -277,7 +276,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 													<input th:value="${list.REVIEW_TITLE}" readonly="readonly" type="text" style="border: none; width: 370px;" />
 												</fieldset>
 												<div class="textarea" rows="15" cols="50" th:text="${list.REVIEW_COMMENT}"></div>
-												<button type="button" class="btn_submit">리뷰 삭제</button>
 											</form>
 											<!-- 리뷰 form  -->
 										</div>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="wrap-board" id="wrap-board" th:fragment="content">
+		<div class="qna-head">
+			<div class="qna-title"
+				th:text="${result.faqId + '.' + result.askTitle}"></div>
+			<div class="ask-date" th:text="${result.askDate}"></div>
+		</div>
+		<hr
+			style="border: none; border-bottom: 3px solid var(--color_blue_1);">
+		<div class="qna-main">
+			<div class="qna-"></div>
+			<div class="qna-category" th:text="${result.questCatDesc}"></div>
+			<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
+			<div class="qna-userId" th:text="${'작성자 : ' + result.userId}"></div>
+			<hr style="border: none; border-bottom: 2px dotted var(--color_blue_2);">
+			<th:block th:if="${qnaFileDto == null or #lists.size(qnaFileDto) == 0}">
+				<div class="qna-file">
+					<div>첨부파일이 없습니다.</div>
+				</div>
+			</th:block>
+			<th:block th:if="${qnaFileDto != null and #lists.size(qnaFileDto) > 0}">
+				<div class="qna-file" th:each="fileDto : ${qnaFileDto}">
+					<div>첨부파일</div>
+				<a th:href="${fileDto.savedFilePathName}" target="_blank">
+				<div th:text="${fileDto.originalFilename}">첨부파일</div></a>
+				</div>
+			</th:block>
+			<hr style="border: none; border-bottom: 1px solid var(--color_blue_1);">
+			<div class="qna-content" th:text="${result.askContent}"></div>
+		</div>
+		<hr style="border: none; border-bottom: 3px solid var(--color_blue_1);">
+		<th:block th:if="${result.ansTime == null or result.ansTime == ''}">
+			<form method='post' action='/shushoong/support/qna/write/answer'>
+				<input type="hidden" name="faqId" th:value="${result.faqId}">
+				<div class="wrap-comment">
+					<div class="no-content">문의 확인 중 입니다. 빠른 시일 내로 답변 드리겠습니다.</div>
+					<textarea name="ansContent" cols="110" rows="30"
+						class="write-answer" required></textarea>
+				</div>
+				<div class="wrap-writeAnswer" th:if="${userGrade} == 'admin'">
+					<button type="button" class="btn btn-write-answer">답변하기</button>
+					<button type="button" class="ans-delete-btn" th:data-faqid="${result.faqId}">삭제하기</button>
+					<button type="button" class="btn btn-submit-answer" style="display: none;" th:data-faqid="${result.faqId}">작성완료</button>
+				</div>
+			</form>
+		</th:block>
+		<div id="update-box" hidden="">
+			<div class="wrap-comment">
+			<div class="no-content">문의 확인 중 입니다. 빠른 시일 내로 답변 드리겠습니다.</div>
+				<textarea name="ansContent" cols="110" rows="30" class="write-answer" required></textarea>
+			</div>
+			<div class="wrap-writeAnswer" th:if="${userGrade} == 'admin'">
+			<!-- <button type="button" class="btn btn-write-answer">답변하기</button> -->
+				<button type="button" class="btn btn-submit-answer" th:data-faqid="${result.faqId}">작성완료</button>
+			<!-- <button type="button" class="ans-delete-btn" th:data-faqid="${result.faqId}">삭제하기</button> -->
+			</div>
+		</div>
+		<form action="" id="frm-delete">
+		<input id="delete-id" name="faqId" hidden="" th:value="${result.faqId}">
+		<th:block th:unless="${result.ansTime == null or result.ansTime == ''}">
+			<div class="wrap-comment update">
+				<div class="ask-date" th:text="${result.ansTime}"></div>
+				<div class="ask-content" th:text="${result.ansContent}"></div>
+			</div>
+			<div th:if="${userGrade} == 'admin'">
+			<button  type="button" class="ans-delete-btn" th:data-faqid="${result.faqId}" id="this-delete-btn">삭제하기</button>
+			<button type="button" class="ans-update-btn">수정하기</button>
+			</div>
+		</th:block>
+		</form>
+		<div id="modal" class="modal_overlay">
+            <div class="modal_window">
+            	<p style="text-align: center; margin-top:40px;">정말 삭제하시겠습니까?</p>
+            	<div class="btn_wrap">
+            		<button type="button" class="delete-ok">네</button>
+            		<button type="button" class="delete-no">아니오</button>
+            	</div>
+            </div>
+      		</div>
+	</div>
+</html>

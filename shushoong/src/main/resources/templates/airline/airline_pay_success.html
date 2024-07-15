@@ -47,7 +47,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<div class="reserve_head">가는 편</div>
 						<div class="reserve_wrap">
 							<div class="reserve_lineup" th:text="' 성인 : '+${session.adultS}+' 소아 : '+${session.childS}+' 유아 : '+${session.babyS}">예약번호 성인 : \${adult}, 소아 : \${child}, 유아 : "\${baby}</div>
-							<div class="reserve_code" th:text="'예약번호 : ('+${airlineReserveCode}+')'" >예약번호 (\${reserveCode})</div>
+							<div class="reserve_code" th:text="'예약번호 : ('+${session.airlineReserveCode}+')'" >예약번호 (\${reserveCode})</div>
 							<div class="reserve_info_wrap">
 								<div>
 									<img alt="이미지" th:src="@{/images/airline_logo.png}">
@@ -77,7 +77,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<div class="reserve_head">오는 편</div>
 						<div class="reserve_wrap">
 							<div class="reserve_lineup" th:text="' 성인 : '+${session.adultS}+' 소아 : '+${session.childS}+' 유아 : '+${session.babyS}">예약번호 성인 : \${adult}, 소아 : \${child}, 유아 : "\${baby}</div>
-							<div class="reserve_code" th:text="'예약번호 : ('+${airlineReserveCode}+')'" >예약번호 (\${reserveCode})</div>
+							<div class="reserve_code" th:text="'예약번호 : ('+${session.airlineReserveCode}+')'" >예약번호 (\${reserveCode})</div>
 							<div class="reserve_info_wrap">
 								<div>
 									<img alt="이미지" th:src="@{/images/airline_logo.png}">
@@ -103,10 +103,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</section>
 				
 				
-				<section class="allPrice">
-					<div>총 요금</div>
-					<div>\${price}+\${price}</div>
-				</section>
+<!-- 				<section class="allPrice"> -->
+<!-- 					<div>총 요금</div> -->
+<!-- 					<div>\${price}+\${price}</div> -->
+<!-- 				</section> -->
 			
 			
 			

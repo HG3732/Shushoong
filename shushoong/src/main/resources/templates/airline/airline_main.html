@@ -62,7 +62,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<input type="hidden" name="baby" id="hidden_baby" 				value="0"	readonly="readonly" required="required">
 						<input type="hidden" name="seatGrade" id="hidden_seat_grade" 		value="3"	readonly="readonly" required="required">
 						<input type="submit" id="hidden_submit">
-						<!-- checkpoint -->
 					</form>					
 				</div>
 			</section>
@@ -126,23 +125,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 // 		console.log($(this).children("#slide_dpart_loc").val());
 // 	}
 	$(".airline-recommend").on("click",function(){
-		console.log($("#hidden_depart_date").val());
 		const tommorrow = new Date();
 		tommorrow.setDate(tommorrow.getDate() +1);
-		
 		var date = tommorrow.getDate();
 		var month = tommorrow.getMonth()+1;
 		var year = tommorrow.getFullYear();
 		
-		console.log(tommorrow);
-		console.log(date);
-		console.log(month);
-		console.log(year);
-		
-		console.log(tommorrow.toLocaleDateString());
-		console.log("clickckckc")
-		console.log($(this).children("#slide_dpart_loc").val());
-		console.log($(this).children("#slide_arrival_loc").val());
 		$("#hidden_ticket_type").val("1");
 		$("#hidden_depart_value").val($(this).children("#slide_dpart_loc").val());
 		$("#hidden_arrival_value").val($(this).children("#slide_arrival_loc").val());
@@ -151,22 +139,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		$("#hidden_child").val(0);
 		$("#hidden_baby").val(0);
 		$("#hidden_seat_grade").val(3);
-		
 		$("#hidden_submit").click();
 		
 	})
-// 	<form action="/shushoong/airline/main" method="post">
-// 						<input type="hidden" name="ticketType" id="hidden_ticket_type" 	value="1" 	readonly="readonly" required="required">
-// 						<input type="hidden" name="departLoc" id="hidden_depart_value" 				readonly="readonly" required="required">
-// 						<input type="hidden" name="arrivalLoc" id="hidden_arrival_value"		 		readonly="readonly" required="required">
-// 						<input type="hidden" name="departDate" id="hidden_depart_date" 				readonly="readonly" required="required">
-// 						<input type="hidden" name="arrivalDate" id="hidden_arrival_date" 				readonly="readonly" required="required">
-// 						<input type="hidden" name="adult" id="hidden_adult" 				value="1" 	readonly="readonly" required="required">
-// 						<input type="hidden" name="child" id="hidden_child" 				value="0"	readonly="readonly" required="required">
-// 						<input type="hidden" name="baby" id="hidden_baby" 				value="0"	readonly="readonly" required="required">
-// 						<input type="hidden" name="seatGrade" id="hidden_seat_grade" 		value="3"	readonly="readonly" required="required">
-// 						<input type="submit" id="hidden_submit">
-// 						<!-- checkpoint -->
 	
 	</script>
 	

@@ -1,4 +1,4 @@
-	//정규 표현식
+	
 	var firstNameJ = /^[A-Z]{1,15}$/;
 	var lastNameJ = /^[a-zA-Z]{1,20}$/;
 	var phoneNumJ = /^\d{10,11}$/;
@@ -47,10 +47,6 @@
 					$(this).parent().children(".errorJ").css("display","block")
 				}
 			});
-			
-	
-//			 checkpoint : 정규표현식 - 탑승자 정보
-			
 			
 			$("input[name=passenger_firstName]").blur(function(){ //영문 이름
 				$(this).val($(this).val().toUpperCase());

@@ -14,7 +14,7 @@
 	</update>
 	
 	<update id="secessionAccount">
-		UPDATE MEMBER SET USER_STATUS='1' WHERE USER_ID=#{userId}
+		UPDATE MEMBER SET USER_STATUS='0' WHERE USER_ID=#{userId}
 	</update>
 	
 	<!-- 호텔 예약내역 리스트 -->

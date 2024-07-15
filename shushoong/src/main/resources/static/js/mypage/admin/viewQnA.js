@@ -78,7 +78,7 @@ function submitAnswer() {
 		})
 		//success함수 대체
 		.done(function(response){
-			$('.wrapper').replaceWith(response);
+			$('.wrap-board').replaceWith(response);
 		});
 	}
 }

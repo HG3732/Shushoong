@@ -171,6 +171,7 @@ DELETE FROM hotel_review
 select* FROM hotel_review WHERE hotel_reserve_code = 'customer' AND user_id = '' ;
 
 select * from airline_info;
+select * from airline_reserve_info;
 
  SELECT DBMS_RANDOM.NORMAL AS RANDOM_NUM FROM DUAL;
  SELECT DBMS_RANDOM.STRING('X', 5) FROM DUAL;

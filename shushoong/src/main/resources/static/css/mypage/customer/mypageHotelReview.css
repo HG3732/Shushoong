@@ -439,9 +439,11 @@ button.hotel_list_flex > div{
 }
 div.hotel_name{
 	width: 170px;
+	overflow: hidden;
 }
 div.review_title{
 	width: 530px;
+	overflow: hidden;
 }
 
 button#delete_review_btn{

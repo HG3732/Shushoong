@@ -84,7 +84,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</section>
 				
 				<section class="hidden_class">
-					<input type="text" name="hidden_hotelcode_val">
+					<input type="hidden" name="hidden_hotelcode_val">
 				</section>	
 				
 			</div>
@@ -123,7 +123,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				
 				success: function(result){
 					if(result == 1){
-						console.log("success");
 						$("[name=hidden_hotelcode_val]").val("");
 						$(".popup-wrap").css("display","none");
 						$(".commit_ask").css("display","none");

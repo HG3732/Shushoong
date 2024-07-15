@@ -1,4 +1,5 @@
-function adultNum(){
+
+		function adultNum(){
 			var adult = $("#adult_val").val();
 			
 			var htmlVal = '';
@@ -121,9 +122,6 @@ function adultNum(){
 
 			}
 		}
-		
-		
-		
 		
 		
 		function childNum(){
@@ -434,6 +432,7 @@ function checkAllEscHandler(){
 				$(this).parent().children("[name='passenger_gender']").val($(this).val());
 			});
 		}
+		
 		function raidoBaggageInputValueFunction(){
 			$(".baggage:checked").each(function(){
 				$(this).parent().parent().children("[name='baggage_size']").val($(this).val());
@@ -543,13 +542,13 @@ async function passengerInfoInsertFunction(airlineReserveCode){
 		for(i = 0 ; i< $("[name=passenger_firstName]").length; i++){
 			var infoObj = new Object();
 				infoObj.airlineReserveCode = airlineReserveCode;
-			infoObj.gender = $("[name=passenger_gender]").eq(i).val();
-			infoObj.firstName = $("[name=passenger_firstName]").eq(i).val();
-			infoObj.lastName = $("[name=passenger_lastName]").eq(i).val();
-			infoObj.birth = $("[name=passenger_birth]").eq(i).val();
-			infoObj.nation = $("[name=passenger_nation]").eq(i).val();
-			infoObj.baggage = $("[name=baggage_size]").eq(i).val();
-			infoObj.passportCode = $("[name=passport_num]").eq(i).val();
+				infoObj.gender = $("[name=passenger_gender]").eq(i).val();
+				infoObj.firstName = $("[name=passenger_firstName]").eq(i).val();
+				infoObj.lastName = $("[name=passenger_lastName]").eq(i).val();
+				infoObj.birth = $("[name=passenger_birth]").eq(i).val();
+				infoObj.nation = $("[name=passenger_nation]").eq(i).val();
+				infoObj.baggage = $("[name=baggage_size]").eq(i).val();
+				infoObj.passportCode = $("[name=passport_num]").eq(i).val();
 				infoObj.passportDate = $("[name=expiration_date]").eq(i).val();
 	
 			passengerInfo.push(infoObj);

@@ -151,9 +151,10 @@ function submitJoinHandler() {
 
 function joinCustomer() {
 	$.ajax({
-		success: function() {
+		success: function(request, status, error) {
 			alert("회원가입에 성공했습니다.");
-		}, error: function() {
+			location.href="/shushoong/login"
+		}, error: function(request, status, error) {
 			alert("오류로 회원가입에 실패했습니다. 다시 시도해 주세요.");
 			return false;
 		}

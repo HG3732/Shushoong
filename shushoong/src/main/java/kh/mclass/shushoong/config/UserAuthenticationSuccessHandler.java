@@ -32,6 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Component
 @Slf4j
+
 public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 	private RequestCache requestCache = new HttpSessionRequestCache();
@@ -49,7 +50,6 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		UserDetails userDetails = (UserDetails) principal;
 		String userId = userDetails.getUsername();
 
-		// 권한정보 받아오기
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		Iterator<? extends GrantedAuthority> iter = authorities.iterator();
 		GrantedAuthority auth = iter.next();
@@ -62,13 +62,20 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		}
 
 		// 로그인 기록
+		
+		
+		
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("userId", userId);
 		map.put("latestLogin", loginDate);
 
 		memberService.loginLog(map);
 
-//		// 계정 권환 확인
+//		
+		
+		
+		// 계정 권환 확인
 //		if (userGrade == "admin" || userGrade == "business") {
 //			SecurityContextHolder.clearContext();
 //			request.getSession().invalidate();

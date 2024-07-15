@@ -160,7 +160,7 @@ public class MyPageCustomerController {
 		
 		int result = repository.secessionAccount(userId);
 		try {
-			if(result == 0) {
+			if(result > 0) {
 				return "redirect:/logout";
 			}
 		} catch (Exception e) {
@@ -493,7 +493,7 @@ public class MyPageCustomerController {
 	// 마이페이지 항공 취소내역 하나 선택
 	@GetMapping("/mypage/cancel/airline/{userId}/{airlineCode}/{airlineReserveCode}")
 	public String selectOneCancelAirline(Model model, @PathVariable("userId") String userId,
-			@PathVariable("airlineReserveCode") String airlineReserveCode, String airlineCode) {
+			@PathVariable("airlineReserveCode") String airlineReserveCode,  @PathVariable("airlineCode") String airlineCode) {
 		// input 태그에 있는 name 여기에 씀
 		// getParameter 역할
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -923,7 +923,7 @@ insert all into HOTEL_REQUEST values (1, '싱글')
             into HOTEL_REQUEST values (32, '고층')
             select * from dual;
 
---예약한 호텔의 체크아웃 날짜가 지나면 리뷰 작성 가능하게 만드는 트리거
+--정상 결제 상태로 예약한 호텔의 체크아웃 날짜가 지나면 리뷰 작성 가능
 CREATE OR REPLACE PROCEDURE update_review_available_procedure IS
 BEGIN
     UPDATE hotel_reserve hr

@@ -35,19 +35,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			            <a th:href="@{/home}" class="door1_button">홈으로</a>
 	            	</div>
 		        </div>
-		        <div class="pic" th:style="'background-image: linear-gradient(rgba(0,0,0, 0.2), rgba(0,0,0, 0.2)), url(' + @{/images/door2.jpg} + ');'">
+		        <div data-aos="fade-left" class="pic" th:style="'background-image: linear-gradient(rgba(0,0,0, 0.2), rgba(0,0,0, 0.2)), url(' + @{/images/door2.jpg} + ');'">
 		            <div class="text door2" 
 		            	data-aos="fade-left"
 		            	>
-		            	<p>항공</p>
-		            	<a th:href="@{/airline/main}" class="door2_button">예약하기</a>
+		            	<p>마음 가는곳은 어디든</p>
+		            	<a th:href="@{/airline/main}" class="door2_button">항공 예약</a>
 		            </div>
 		        </div>
-		        <div class="pic" th:style="'background-image: linear-gradient(rgba(0,0,0, 0.2), rgba(0,0,0, 0.2)), url(' + @{/images/door3.png} + ');'">
+		        <div data-aos="fade-right" class="pic" th:style="'background-image: linear-gradient(rgba(0,0,0, 0.2), rgba(0,0,0, 0.2)), url(' + @{/images/door3.png} + ');'">
 		            <div class="text door3"
 		            	data-aos="fade-right">
-		            	<p>숙소</p>
-		            	<a th:href="@{/hotel/main}" class="door3_button">예약하기</a>
+		            	<p>특별한 곳에서 특별한 시간을 보내세요</p>
+		            	<a th:href="@{/hotel/main}" class="door3_button">호텔 예약</a>
 		            </div>
 		        </div>
 	   		</div>

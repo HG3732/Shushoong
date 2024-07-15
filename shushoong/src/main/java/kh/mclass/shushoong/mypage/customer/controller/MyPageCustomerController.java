@@ -160,7 +160,7 @@ public class MyPageCustomerController {
 		
 		int result = repository.secessionAccount(userId);
 		try {
-			if(result == 0) {
+			if(result > 0) {
 				return "redirect:/logout";
 			}
 		} catch (Exception e) {

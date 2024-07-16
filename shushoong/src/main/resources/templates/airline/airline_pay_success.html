@@ -52,7 +52,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								<div>
 									<img alt="이미지" th:src="@{/images/airline_logo.png}">
 									<div class="airline_name" th:text="${session.airlineName}">${airlineName}</div>
-									<div class="airline_date" th:text="${session.departDate}+' 출발'">\${departDate(weekdays)}출발</div>
+									<div class="airline_date" th:text="${#strings.substring(session.departDate,0,3)}+' '+${#strings.substring(session.departDate,3,6)}+'  출발'">\${departDate(weekdays)}출발</div>
 								</div>
 								<div>
 									<div class="departLoc" th:text="${session.departLoc}">\${departLoc}</div>
@@ -77,12 +77,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<div class="reserve_head">오는 편</div>
 						<div class="reserve_wrap">
 							<div class="reserve_lineup" th:text="' 성인 : '+${session.adultS}+' 소아 : '+${session.childS}+' 유아 : '+${session.babyS}">예약번호 성인 : \${adult}, 소아 : \${child}, 유아 : "\${baby}</div>
-							<div class="reserve_code" th:text="'예약번호 : ('+${session.airlineReserveCode}+')'" >예약번호 (\${reserveCode})</div>
+							<div class="reserve_code" th:text="${session.airlineReserveCode}" >예약번호 (\${reserveCode})</div>
 							<div class="reserve_info_wrap">
 								<div>
 									<img alt="이미지" th:src="@{/images/airline_logo.png}">
 									<div class="airline_name" th:text="${session.airlineName}">${airlineName}</div>
-									<div class="airline_date" th:text="${session.departDateSR}+' 출발'">\${departDate(weekdays)}출발</div>
+									<div class="airline_date" th:text="${#strings.substring(session.departDateSR,0,3)}+' '+${#strings.substring(session.departDateSR,3,6)}+' 출발'">\${departDate(weekdays)}출발</div>
 								</div>
 								<div>
 									<div class="departLoc" th:text="${session.departLocSR}">\${departLoc}</div>

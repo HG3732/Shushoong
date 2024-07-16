@@ -224,6 +224,7 @@
     </insert>
     
     <!-- 탑승객 정보 추가 -->
+    
     <insert id="insertPassengerInfo" parameterType="map" useGeneratedKeys="false" >
    		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL" >
 		    INTO passenger_info (AIRLINE_RESERVE_CODE,LAST_NAME, FIRST_NAME, GENDER, BIRTH, NATION, BAGGAGE, PASSPORT_CODE, PASSPORT_DATE)

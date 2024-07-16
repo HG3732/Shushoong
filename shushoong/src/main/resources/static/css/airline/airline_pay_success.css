@@ -35,12 +35,19 @@ section.reserve_process{
 
 									/* depart info/ arrival info */
 section.depart_info,section.arrival_info{
-	width:960px;
-	margin:  70px auto;
+	width:750px;
+	margin:  0 auto;
+	margin-top: 70px;
+}
+section.arrival_info{
+	margin-top: 35px;
+	margin-bottom: 20px;
 }
 div.reserve_head{
+	font-weight:bolder;
+	margin-bottom : 10px;
 	margin-left: 5px;
-	font-size: 17px;
+	font-size: 20px;
 }
 div.reserve_wrap{
 	border : 3px solid var(--color_blue_1);
@@ -48,73 +55,70 @@ div.reserve_wrap{
 }
 
 div.reserve_code{
-	margin : 3px 0 0 3px;
-	border: 3px solid var(--color_gray_2);
+	margin : 0 0 10px 20px;
 	width: 300px;
 	height: 50px;
 	line-height: 50px;
-	text-align: center;
 	border-radius: 15px;
+	font-weight: bolder;
 	
 }
 div.reserve_lineup{
 	float : right;
-	margin:  10px 10px 0 0;
+	margin:  18px 30px 0 0;
 	font-size: 13px;
 
 }
 div.reserve_info_wrap > div{
 	display: flex;
-	height: 70px;
-	line-height: 70px;
-	margin-left: 20px;
+	height: 35px;
+	line-height: 35px;
+	margin-left: 40px;
+	margin-top:  10px;
+	margin-right: 40px;
 }
 div.reserve_info_wrap > div:first-child{
-	margin-top: 40px;
 }
 
 div.reserve_info_wrap > div > img{
-	width: 30px;
-	height: 30px;
-	margin: 20px;
-	
+	margin-left: -2px;
+	width: 35px;
+	height: 35px;
 }
 div.airline_name{
 	width : 200px;
 	margin-left: 10px;
 }
 div.airline_date {
-	margin-left: 280px;
+	margin-left: 110px;
 	width : 350px;
 	text-align : right;
 	
 }
 
 div.departLoc{
+	font-weight : bold;
 	width : 150px;
+	text-align: right;
 	
 }								
 
 div.departTime{
 	width : 100px;
-	margin-left: 20px;
-	margin-right:150px;
-	color : var(--color_gray_4);
-	
+	color : #3f3f3f;
+	margin-right: 65px;
+	text-align: right;
 }
 
 div.arrivalTime{
 	width : 100px;
-	margin-left: 150px;
-	margin-right:20px;
-	text-align : right;
-	color : var(--color_gray_4);
-	
+	color : #3f3f3f;
+	margin-left: 65px;
 }
 
 div.arrivalLoc{
+	font-weight : bold;
 	width : 150px;
-	text-align : right;
 					
 }				
 div.sitType{
@@ -173,3 +177,7 @@ section.allPrice > div:nth-child(2) {
 	text-align : right;
 	
 }	
+
+footer{
+	margin-top:60px;
+}

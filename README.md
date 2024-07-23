@@ -48,16 +48,32 @@
 
   <details>
    <summary><h3>김효겸</h3></summary>
-   <div>
-    <h3>1. 주요 기능 시현</h3>
-    <p>기능이름 (ex. 로그인)</p>
-    //TODO - 해당 사진 (선택)
-    <strong>주요기능 설명</strong>
-   </div>
    
+   <h3>1. 주요 기능 시현</h3>
+   <p>기능이름 (ex. 로그인)</p>
+   //TODO - 해당 사진 (선택)
+   <strong>주요기능 설명</strong>
+   <a>URL</a>
+
+   <h3>2. ERD</h3>
+   //TODO - 개인 ERD 사진
+   
+   <h3>3. 플로우 차트</h3>
+   //TODO - 개인 플로우 차트 사진
+   
+   <h3>3. 화면설계서</h3>
+   //TODO - 화면설계서 사진
   </details>
+
+  
  </article>
 </div>
+
+
+
+
+
+
 
 
 

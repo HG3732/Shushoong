@@ -28,27 +28,29 @@
    //TODO - 피그마 팀원 소개 이미지
   </p>
   <ul>
-   <li>김효겸 : 팀장,(한것)</li>
-   <li>송채원 : 팀원,(한것)</li>
-   <li>김유림 : 팀원,(한것)</li>
-   <li>박세혁 : 팀원,(한것)</li>
-   <li>백승범 : 팀원,(한것)</li>
+   <li>김효겸(팀장) : 호텔 검색, 호텔 목록, 마이페이지(관리자), 사업자 회원의 사업장 등록</li>
+   <li>송채원(팀원) : (한것)</li>
+   <li>김유림(팀원) : (한것)</li>
+   <li>박세혁(팀원) : (한것)</li>
+   <li>백승범(팀원) : (한것)</li>
   </ul>
 
   <div>
    <h2>2. 개발환경</h2>
+   <ul>
+    <li>운영 체제 : Window 10</li>
+    <li>언어 : JAVA, HTML5, CSS3, JavaScript, SQL, XML</li>
+    <li>웹 서버 : Apache Tomcat 9.0</li>
+    <li>DB tool : ORACLE, PL/SQL</li>
+    <li>Framework/Library : Spring Boot(4.22.1), Mybatis, Thymeleaf, jQuery, log4jdbc, FullCalender, Selenium, AOS    Library</li>
+    <li>Tool : SpringToolSuite4(4.22.1), SQL Developer, VS Code, Chrome Developer Tool, UML(ERD Cloud), Figma</li>
+    <li>API : Spring Security(6.3.1), Cloudinary, Port One API, Google Maps Api, KAKAO Login API, FullCalendar</li>
+    <li>Collaboration : GitHub, Git DeskTop,notion, Google Drive/Docs</li>
+   </ul>
   </div>
   <p>
    //TODO - 피그마 개발 환경 이미지
   </p>
-  <ul>
-   <li>사용언어 : JAVA ...</li>
-   <li>DB : JAVA ...</li>
-   <li>WAS : JAVA ...</li>
-   <li>Collaboration : JAVA ...</li>
-   <li>FrameWork/Library : JAVA ...</li>
-   <li>API : JAVA ...</li>
-  </ul>
 
   <div>
    <h2>기능 구현 / 화면</h2>

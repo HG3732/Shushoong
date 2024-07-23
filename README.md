@@ -78,6 +78,7 @@
    //TODO - 클래스 다이어그램 사진
 
    <h3>6. 개발 이슈</h3>
+   <img src="https://github.com/user-attachments/assets/163b6f0e-58b4-4edd-8af2-52fed34e861d"/>
    <img src="https://github.com/user-attachments/assets/e7703ac6-bc5a-4b02-936e-c1d69c48e180"/>
   </details>
 

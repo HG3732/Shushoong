@@ -1,5 +1,10 @@
 # Shushoong
-KH_Final Project
+<div>
+ <h1>SHUSHOONG</h1>
+ <hr>
+ 
+ 
+</div>
 
 
  //TODO - 피그마 첫화면 이미지

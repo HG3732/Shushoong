@@ -138,8 +138,8 @@
    <summary><h3>박세혁</h3></summary>
    
    <h3>1. 주요 기능 시현</h3>
-   <p>기능이름 (ex. 로그인)</p>
-   //TODO - 해당 사진 (선택)
+   <p>항공 목록</p>
+   <img src="https://github.com/user-attachments/assets/a46b81dd-8397-4911-9bdc-8e6d87dd72fa">
    <strong>주요기능 설명</strong>
    <a>URL</a>
 

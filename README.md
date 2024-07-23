@@ -61,25 +61,24 @@
    <summary><h3>김효겸</h3></summary>
    
    <h3>1. 주요 기능 시현</h3>
-   <p>기능이름 (ex. 로그인)</p>
-   //TODO - 해당 사진 (선택)
-   <strong>주요기능 설명</strong>
-   <a>URL</a>
+   <p>호텔 검색</p>
+   <img src="https://github.com/user-attachments/assets/5210041f-c436-4817-afd5-40671a96151a"/>
+   <strong>지역, 날짜, 인원 선택 시 해당 조건에 맞는 호텔 목록 표시</strong>
 
    <h3>2. ERD</h3>
-   //TODO - 개인 ERD 사진
+   <img src="https://github.com/user-attachments/assets/35e3d148-c51f-4a7f-85a5-1945b4e9f878"/>
    
    <h3>3. 플로우 차트</h3>
-   //TODO - 개인 플로우 차트 사진
-   
+   <img src="https://github.com/user-attachments/assets/fb5c36d1-2ccc-4fa4-b516-8d089d51af50"/>
+
    <h3>4. 화면설계서</h3>
-   //TODO - 화면설계서 사진
+   <img src="https://github.com/user-attachments/assets/13f1f129-98fa-4833-93a2-44669520a6ff"/>
 
    <h3>5. ClassDiagram</h3>
    //TODO - 클래스 다이어그램 사진
 
    <h3>6. 개발 이슈</h3>
-   //TODO - 피그마 개발이슈 사진
+   <img src="https://github.com/user-attachments/assets/e7703ac6-bc5a-4b02-936e-c1d69c48e180"/>
   </details>
 
   

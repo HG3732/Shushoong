@@ -139,24 +139,25 @@
    
    <h3>1. 주요 기능 시현</h3>
    <p>항공 목록</p>
-   <img src="https://github.com/user-attachments/assets/a46b81dd-8397-4911-9bdc-8e6d87dd72fa">
+   <img src="https://github.com/user-attachments/assets/1220d2f3-b01b-4fc2-87b4-2fd15980d438">
    <strong>주요기능 설명</strong>
    <a>URL</a>
 
    <h3>2. ERD</h3>
-   //TODO - 개인 ERD 사진
+   <img src="https://github.com/user-attachments/assets/7dfd663f-279b-4b97-a362-fbc85d8d33d6">
    
    <h3>3. 플로우 차트</h3>
-   //TODO - 개인 플로우 차트 사진
+   <img src="https://github.com/user-attachments/assets/6c541ed3-1c64-4e22-9938-35a50d8bb00d">
    
    <h3>4. 화면설계서</h3>
-   //TODO - 화면설계서 사진
+   <img src="https://github.com/user-attachments/assets/a46b81dd-8397-4911-9bdc-8e6d87dd72fa">
 
    <h3>5. ClassDiagram</h3>
    //TODO - 클래스 다이어그램 사진
 
    <h3>6. 개발 이슈</h3>
-   //TODO - 피그마 개발이슈 사진
+   <img src="https://github.com/user-attachments/assets/cdb8d19f-a133-472e-be8c-7df5ae18b120">
+   <img src="https://github.com/user-attachments/assets/23822224-dfa9-4d3b-b9b7-5ff61ce3f2e1">
   </details>
 
   

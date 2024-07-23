@@ -1,10 +1,12 @@
 # Shushoong
 KH_Final Project
 
-//TODO - 헤드 사진 넣기 
+
 
 <ul>
-  <li>
-    항목1
+  //TODO - 헤드 사진 넣기 
+  <li> 
+    <h2>항목1</h2>
+  
   </li>
 </ul>

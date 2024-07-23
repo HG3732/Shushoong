@@ -77,6 +77,8 @@
    <h3>6. 개발 이슈</h3>
    <img src="https://github.com/user-attachments/assets/163b6f0e-58b4-4edd-8af2-52fed34e861d"/>
    
+   <img src="https://github.com/user-attachments/assets/125630b6-1ee3-4b2f-bcd3-25bd7e93c1cd"/>
+   
   </details>
 
   

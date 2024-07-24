@@ -183,7 +183,8 @@
    <img src="https://github.com/user-attachments/assets/4246e711-5b2e-4691-9c8a-3128f8b114fa">
 
    <h3>3. 플로우 차트</h3>
-   //TODO - 개인 플로우 차트 사진
+    <img src="https://github.com/user-attachments/assets/1064a42f-3cd6-4849-b023-093a0b824b00">
+   
    
    <h3>4. 화면설계서</h3>
    <div><h3><li>항공</li></h3></div>
@@ -205,11 +206,8 @@
      <img src="https://github.com/user-attachments/assets/0dc3210f-aa06-4ef4-bb65-53d6da7abf05"> 
    </ol>
   
-   
-
-
    <h3>5. ClassDiagram</h3>
-   <img src="https://github.com/user-attachments/assets/1064a42f-3cd6-4849-b023-093a0b824b00">
+   //TODO - 개인 플로우 차트 사진
    
    <h3>6. 개발 이슈</h3>
    //TODO - 피그마 개발이슈 사진

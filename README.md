@@ -201,7 +201,9 @@
     <li><strong>내가 누른 호텔 페이지( 좋아요 누른 호텔 관리, 삭제 )</strong></li>
      <img src="https://github.com/user-attachments/assets/a6abb6a7-cdba-4980-ac2e-70c97985c941">
     <li><strong>내가 적은 리뷰 페이지( 적은 호텔 리뷰 관리 , 삭제 )</strong></li>
-     <img src="github.com/user-attachments/assets/62b0b436-fa9e-4105-9775-d48d0f8babfc">
+    ![image](https://github.com/user-attachments/assets/df5b5156-e64f-4422-bbe7-9e8a2f1ea6f0)
+
+     <img src="https://github.com/user-attachments/assets/62b0b436-fa9e-4105-9775-d48d0f8babfc">
      <img src="https://github.com/user-attachments/assets/0dc3210f-aa06-4ef4-bb65-53d6da7abf05"> 
    </ol>
   

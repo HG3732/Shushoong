@@ -188,10 +188,10 @@
    <h3>4. 화면설계서</h3>
    <div><h3><li>항공</li></h3></div>
    <ol type="1">
-    <li><strong>항공 메인 페이지</strong>
+    <li><strong>항공 메인 페이지</strong></li>
      
      <img src="https://github.com/user-attachments/assets/515555ee-d9ba-4c92-836d-a48424377678">
-    </li>
+    
    </ol>
   
    

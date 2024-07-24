@@ -168,14 +168,16 @@
    <h3>1. 주요 기능 시현</h3>
    <p>기능이름 (ex. 로그인)</p>
    //TODO - 해당 사진 (선택)
-   <img src="https://github.com/user-attachments/assets/3939de73-bbc9-4823-a55b-00878298b9b5"/>
-   ![image](https://github.com/user-attachments/assets/3939de73-bbc9-4823-a55b-00878298b9b5)
+  
    <strong>주요기능 설명</strong>
-   <a>URL</a>
-
+   <img src="https://github.com/user-attachments/assets/661109ec-d27e-4b56-bcd3-06966bb1a06f">
+  
    <h3>2. ERD</h3>
-   //TODO - 개인 ERD 사진
-   
+   <div><h3>항공</h3></div>
+   <img src="https://github.com/user-attachments/assets/1076e9ad-d523-4a07-a507-df42eb33f5ae">
+   <div><h3>마이페이지</h3></div>
+   <img src="https://github.com/user-attachments/assets/4246e711-5b2e-4691-9c8a-3128f8b114fa">
+
    <h3>3. 플로우 차트</h3>
    //TODO - 개인 플로우 차트 사진
    
@@ -183,8 +185,8 @@
    //TODO - 화면설계서 사진
 
    <h3>5. ClassDiagram</h3>
-   //TODO - 클래스 다이어그램 사진
-
+   <img src="https://github.com/user-attachments/assets/1064a42f-3cd6-4849-b023-093a0b824b00">
+   
    <h3>6. 개발 이슈</h3>
    //TODO - 피그마 개발이슈 사진
   </details>

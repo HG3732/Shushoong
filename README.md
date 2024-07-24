@@ -168,6 +168,7 @@
    <h3>1. 주요 기능 시현</h3>
    <p>기능이름 (ex. 로그인)</p>
    //TODO - 해당 사진 (선택)
+   <img src="https://github.com/user-attachments/assets/163b6f0e-58b4-4edd-8af2-52fed34e861d"/>
    ![image](https://github.com/user-attachments/assets/3939de73-bbc9-4823-a55b-00878298b9b5)
    <strong>주요기능 설명</strong>
    <a>URL</a>

@@ -161,6 +161,10 @@
    <img src="https://github.com/user-attachments/assets/23822224-dfa9-4d3b-b9b7-5ff61ce3f2e1">
   </details>
 
+
+
+
+
   
   <details>
    <summary><h3>백승범</h3></summary>
@@ -173,16 +177,19 @@
    <img src="https://github.com/user-attachments/assets/661109ec-d27e-4b56-bcd3-06966bb1a06f">
   
    <h3>2. ERD</h3>
-   <div><h3>항공</h3></div>
+   <div><h3><li>항공</li></h3></div>
    <img src="https://github.com/user-attachments/assets/1076e9ad-d523-4a07-a507-df42eb33f5ae">
-   <div><h3>마이페이지</h3></div>
+   <div><h3><li>마이페이지</li></h3></div>
    <img src="https://github.com/user-attachments/assets/4246e711-5b2e-4691-9c8a-3128f8b114fa">
 
    <h3>3. 플로우 차트</h3>
    //TODO - 개인 플로우 차트 사진
    
    <h3>4. 화면설계서</h3>
-   //TODO - 화면설계서 사진
+   
+   <img src="https://github.com/user-attachments/assets/515555ee-d9ba-4c92-836d-a48424377678">
+   
+
 
    <h3>5. ClassDiagram</h3>
    <img src="https://github.com/user-attachments/assets/1064a42f-3cd6-4849-b023-093a0b824b00">

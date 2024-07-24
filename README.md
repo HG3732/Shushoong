@@ -204,7 +204,7 @@
    </ol>
   
    <h3>5. ClassDiagram</h3>
-   //TODO - 개인 플로우 차트 사진
+   <img src="https://github.com/user-attachments/assets/4c28e6a8-51c8-46f1-be9b-40fb70482be0"> 
    
    <h3>6. 개발 이슈</h3>
    //TODO - 피그마 개발이슈 사진

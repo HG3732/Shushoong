@@ -188,10 +188,13 @@
    <h3>4. 화면설계서</h3>
    <div><h3><li>항공</li></h3></div>
    <ol type="1">
-    <li><strong>항공 메인 페이지</strong></li>
-     <img src="https://github.com/user-attachments/assets/4246e711-5b2e-4691-9c8a-3128f8b114fa">
+    <li><strong>항공 메인 페이지(항공 검색 + 항공 추천)</strong></li>
+     <img src="https://github.com/user-attachments/assets/7785daba-0f89-45b0-8cf9-6c9b587ff650">
      <img src="https://github.com/user-attachments/assets/515555ee-d9ba-4c92-836d-a48424377678">
-    
+    <li><strong>항공 결제 페이지(예약자,탑승자 정보 입력)</strong></li>
+     <img src="https://github.com/user-attachments/assets/a9593173-8e57-4bef-9b39-38eb47b229ba">
+     <img src="https://github.com/user-attachments/assets/1a553bd5-103c-4094-a72d-0f8527c9f2d1">
+     <img src="https://github.com/user-attachments/assets/e72dd1ba-acdb-45bd-a46f-9a50bc28f180">
    </ol>
   
    

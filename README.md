@@ -173,9 +173,6 @@
    <p>기능이름 (ex. 로그인)</p>
    //TODO - 해당 사진 (선택)
   
-   <strong>주요기능 설명</strong>
-   <img src="https://github.com/user-attachments/assets/661109ec-d27e-4b56-bcd3-06966bb1a06f">
-  
    <h3>2. ERD</h3>
    <div><h3><li>항공</li></h3></div>
    <img src="https://github.com/user-attachments/assets/1076e9ad-d523-4a07-a507-df42eb33f5ae">

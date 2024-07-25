@@ -172,40 +172,50 @@
    <h3>1. 주요 기능 시현</h3>
    <p>기능이름 (ex. 로그인)</p>
    //TODO - 해당 사진 (선택)
-  
+   <br><br>
+   
    <h3>2. ERD</h3>
    <div><h3><li>항공</li></h3></div>
    <img src="https://github.com/user-attachments/assets/1076e9ad-d523-4a07-a507-df42eb33f5ae">
+   <br><br>
+   
    <div><h3><li>마이페이지</li></h3></div>
    <img src="https://github.com/user-attachments/assets/4246e711-5b2e-4691-9c8a-3128f8b114fa">
-
-   <h3>3. 플로우 차트</h3>
-    <img src="https://github.com/user-attachments/assets/1064a42f-3cd6-4849-b023-093a0b824b00">
+   <br><br>
    
+   <h3>3. 플로우 차트</h3>
+   <img src="https://github.com/user-attachments/assets/1064a42f-3cd6-4849-b023-093a0b824b00">
+   <br><br>
    
    <h3>4. 화면설계서</h3>
    <h3><li><strong>항공</strong></li></h3>
    <ol type="1">
     <li><strong>항공 메인 페이지( 항공 검색 + 항공 추천 )</strong></li>
-     <img src="https://github.com/user-attachments/assets/7785daba-0f89-45b0-8cf9-6c9b587ff650">
-     <img src="https://github.com/user-attachments/assets/515555ee-d9ba-4c92-836d-a48424377678">
+    <img src="https://github.com/user-attachments/assets/7785daba-0f89-45b0-8cf9-6c9b587ff650">
+    <img src="https://github.com/user-attachments/assets/515555ee-d9ba-4c92-836d-a48424377678">
+    <br><br>
     <li><strong>항공 결제 페이지( 예약자,탑승자 정보 입력 )</strong></li>
-     <img src="https://github.com/user-attachments/assets/a9593173-8e57-4bef-9b39-38eb47b229ba">
-     <img src="https://github.com/user-attachments/assets/1a553bd5-103c-4094-a72d-0f8527c9f2d1">
-     <img src="https://github.com/user-attachments/assets/e72dd1ba-acdb-45bd-a46f-9a50bc28f180">
+    <img src="https://github.com/user-attachments/assets/a9593173-8e57-4bef-9b39-38eb47b229ba">
+    <img src="https://github.com/user-attachments/assets/1a553bd5-103c-4094-a72d-0f8527c9f2d1">
+    <img src="https://github.com/user-attachments/assets/e72dd1ba-acdb-45bd-a46f-9a50bc28f180">
    </ol>
+   <br><br>
+   
    <h3><li><strong>마이페이지</strong></li></h3>
    <ol type="1">
     <li><strong>내가 누른 호텔 페이지( 좋아요 누른 호텔 관리, 삭제 )</strong></li>
-     <img src="https://github.com/user-attachments/assets/a6abb6a7-cdba-4980-ac2e-70c97985c941">
+    <img src="https://github.com/user-attachments/assets/a6abb6a7-cdba-4980-ac2e-70c97985c941">
+    <br><br>
     <li><strong>내가 적은 리뷰 페이지( 적은 호텔 리뷰 관리 , 삭제 )</strong></li>
-     <img src="https://github.com/user-attachments/assets/df5b5156-e64f-4422-bbe7-9e8a2f1ea6f0">
-     <img src="https://github.com/user-attachments/assets/0dc3210f-aa06-4ef4-bb65-53d6da7abf05"> 
+    <img src="https://github.com/user-attachments/assets/df5b5156-e64f-4422-bbe7-9e8a2f1ea6f0">
+    <img src="https://github.com/user-attachments/assets/0dc3210f-aa06-4ef4-bb65-53d6da7abf05"> 
    </ol>
+   <br><br>
   
    <h3>5. ClassDiagram</h3>
    <img src="https://github.com/user-attachments/assets/4c28e6a8-51c8-46f1-be9b-40fb70482be0"> 
-   
+   <br><br>
+
    <h3>6. 개발 이슈</h3>
   <h3><li><strong>항공</strong></li></h3>
    <ol type="1">
@@ -214,9 +224,11 @@
     <img src="https://github.com/user-attachments/assets/1aab29f7-af2c-463f-986e-06ec096d0dc3">
     <img src="https://github.com/user-attachments/assets/adf2d4ef-b25e-4d1a-a35d-259eaf509e71">
     <img src="https://github.com/user-attachments/assets/a84afc82-909d-4a93-881b-563a5762bbbe">
+    <br><br>
     <li><strong>항공 - 항공기 검색</strong></li>
     <img src="https://github.com/user-attachments/assets/5323339e-0ca6-4f26-8c64-68fda245d4f7">
     <img src="https://github.com/user-attachments/assets/8fe9f6ba-ce77-4277-bad2-1b3f423eaa6e">
+    <br><br>
     <li><strong>항공 - 탑승객 정보</strong></li>
     <img src="https://github.com/user-attachments/assets/4e4035d0-a96d-43dc-894f-3eb1c988efb7">
     <img src="https://github.com/user-attachments/assets/8be2ba95-4432-472f-90b0-dfac56fcb086">
@@ -228,6 +240,7 @@
     <li><strong>마이페이지 - 내가 적은 리뷰</strong></li>
     <img src="https://github.com/user-attachments/assets/55076d68-5571-45b6-83d0-219a66049790">
     <img src="https://github.com/user-attachments/assets/f7b707d5-6496-437a-91f5-537a194b9b82">
+    <br><br>
     <li><strong>마이페이지 - 나의 좋아요 페이지</strong></li>
     <img src="https://github.com/user-attachments/assets/39e50223-4ff2-4c1a-b7b2-9d3807daaabd">
    </ol>

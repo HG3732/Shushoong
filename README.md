@@ -184,7 +184,7 @@
    
    
    <h3>4. 화면설계서</h3>
-   <div><h3><li>항공</li></h3></div>
+   <h3><li><strong>항공</strong></li></h3>
    <ol type="1">
     <li><strong>항공 메인 페이지( 항공 검색 + 항공 추천 )</strong></li>
      <img src="https://github.com/user-attachments/assets/7785daba-0f89-45b0-8cf9-6c9b587ff650">
@@ -194,7 +194,7 @@
      <img src="https://github.com/user-attachments/assets/1a553bd5-103c-4094-a72d-0f8527c9f2d1">
      <img src="https://github.com/user-attachments/assets/e72dd1ba-acdb-45bd-a46f-9a50bc28f180">
    </ol>
-   <div><h3><li>마이페이지</li></h3></div>
+   <h3><li><strong>마이페이지</strong>strong></li></h3>
    <ol type="1">
     <li><strong>내가 누른 호텔 페이지( 좋아요 누른 호텔 관리, 삭제 )</strong></li>
      <img src="https://github.com/user-attachments/assets/a6abb6a7-cdba-4980-ac2e-70c97985c941">

@@ -207,7 +207,7 @@
    <img src="https://github.com/user-attachments/assets/4c28e6a8-51c8-46f1-be9b-40fb70482be0"> 
    
    <h3>6. 개발 이슈</h3>
-  <h4> <li><strong>항공</strong></li></h3>
+  <h4> <li><strong>항공</strong></li></h4>
    <ol type="1">
     <li><strong>항공 - 저렴한 항공기 추천</strong></li>
     <img src="https://github.com/user-attachments/assets/a0cb8df0-1001-4411-ad3f-b63942776fd2">

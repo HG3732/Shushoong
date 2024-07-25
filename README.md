@@ -214,11 +214,9 @@
     <img src="https://github.com/user-attachments/assets/1aab29f7-af2c-463f-986e-06ec096d0dc3">
     <img src="https://github.com/user-attachments/assets/adf2d4ef-b25e-4d1a-a35d-259eaf509e71">
     <img src="https://github.com/user-attachments/assets/a84afc82-909d-4a93-881b-563a5762bbbe">
-    
     <li><strong>항공 - 항공기 검색</strong></li>
     <img src="https://github.com/user-attachments/assets/5323339e-0ca6-4f26-8c64-68fda245d4f7">
     <img src="https://github.com/user-attachments/assets/8fe9f6ba-ce77-4277-bad2-1b3f423eaa6e">
- 
     <li><strong>항공 - 탑승객 정보</strong></li>
     <img src="https://github.com/user-attachments/assets/4e4035d0-a96d-43dc-894f-3eb1c988efb7">
     <img src="https://github.com/user-attachments/assets/8be2ba95-4432-472f-90b0-dfac56fcb086">
@@ -230,12 +228,8 @@
     <li><strong>마이페이지 - 내가 적은 리뷰</strong></li>
     <img src="https://github.com/user-attachments/assets/55076d68-5571-45b6-83d0-219a66049790">
     <img src="https://github.com/user-attachments/assets/f7b707d5-6496-437a-91f5-537a194b9b82">
-
-    
     <li><strong>마이페이지 - 나의 좋아요 페이지</strong></li>
     <img src="https://github.com/user-attachments/assets/39e50223-4ff2-4c1a-b7b2-9d3807daaabd">
-
-    
    </ol>
     
 

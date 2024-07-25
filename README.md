@@ -207,7 +207,7 @@
    <img src="https://github.com/user-attachments/assets/4c28e6a8-51c8-46f1-be9b-40fb70482be0"> 
    
    <h3>6. 개발 이슈</h3>
-  <h4> <li><strong>항공</strong></li></h4>
+  <h3><li><strong>항공</strong></li></h3>
    <ol type="1">
     <li><strong>항공 - 저렴한 항공기 추천</strong></li>
     <img src="https://github.com/user-attachments/assets/a0cb8df0-1001-4411-ad3f-b63942776fd2">
@@ -224,15 +224,18 @@
     <img src="https://github.com/user-attachments/assets/8be2ba95-4432-472f-90b0-dfac56fcb086">
     <img src="https://github.com/user-attachments/assets/6c873916-1f6e-49b7-94bc-0d2c609f88fd">
    </ol>
-   <li><strong>마이페이지 - 탑승객 정보</strong></li>
-
    
+   <h3><li><strong>마이페이지</strong></li></h3>
+   <ol type="1">
+    <li><strong>마이페이지 - 내가 적은 리뷰</strong></li>
+    <img src="https://github.com/user-attachments/assets/55076d68-5571-45b6-83d0-219a66049790">
+    <img src="https://github.com/user-attachments/assets/f7b707d5-6496-437a-91f5-537a194b9b82">
 
-
+    <li><strong>마이페이지 - 나의 좋아요 여행지</strong></li>
+    <img src="https://github.com/user-attachments/assets/39e50223-4ff2-4c1a-b7b2-9d3807daaabd">
+   </ol>
    
    
-   <img src="https://github.com/user-attachments/assets/b33e754e-75e3-4cca-95b8-9194dcb13957">
-
 
    
   </details>

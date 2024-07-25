@@ -226,7 +226,7 @@
    </ol>
    
    <h3><li><strong>마이페이지</strong></li></h3>
-   <ol type="1">
+   <ol>
     <li><strong>마이페이지 - 내가 적은 리뷰</strong></li>
     <img src="https://github.com/user-attachments/assets/55076d68-5571-45b6-83d0-219a66049790">
     <img src="https://github.com/user-attachments/assets/f7b707d5-6496-437a-91f5-537a194b9b82">

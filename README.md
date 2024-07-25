@@ -210,10 +210,10 @@
   <h3><li><strong>항공</strong></li></h3>
    <ol type="1">
     <li><strong>항공 - 저렴한 항공기 추천</strong></li>
-   // <img src="https://github.com/user-attachments/assets/a0cb8df0-1001-4411-ad3f-b63942776fd2">
-   // <img src="https://github.com/user-attachments/assets/1aab29f7-af2c-463f-986e-06ec096d0dc3">
-   // <img src="https://github.com/user-attachments/assets/adf2d4ef-b25e-4d1a-a35d-259eaf509e71">
-   // <img src="https://github.com/user-attachments/assets/a84afc82-909d-4a93-881b-563a5762bbbe">
+    <img src="https://github.com/user-attachments/assets/a0cb8df0-1001-4411-ad3f-b63942776fd2">
+    <img src="https://github.com/user-attachments/assets/1aab29f7-af2c-463f-986e-06ec096d0dc3">
+    <img src="https://github.com/user-attachments/assets/adf2d4ef-b25e-4d1a-a35d-259eaf509e71">
+    <img src="https://github.com/user-attachments/assets/a84afc82-909d-4a93-881b-563a5762bbbe">
     
     <li><strong>항공 - 항공기 검색</strong></li>
     <img src="https://github.com/user-attachments/assets/5323339e-0ca6-4f26-8c64-68fda245d4f7">

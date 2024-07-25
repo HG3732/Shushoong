@@ -217,6 +217,10 @@
    <img src="https://github.com/user-attachments/assets/5323339e-0ca6-4f26-8c64-68fda245d4f7">
    <img src="https://github.com/user-attachments/assets/8fe9f6ba-ce77-4277-bad2-1b3f423eaa6e">
 
+   <li><strong>항공 - 탑승객 정보</strong></li>
+   <img src="https://github.com/user-attachments/assets/4e4035d0-a96d-43dc-894f-3eb1c988efb7">
+   <img src="https://github.com/user-attachments/assets/8be2ba95-4432-472f-90b0-dfac56fcb086">
+   <img src="https://github.com/user-attachments/assets/6c873916-1f6e-49b7-94bc-0d2c609f88fd">
 
    
 

@@ -207,12 +207,12 @@
    <img src="https://github.com/user-attachments/assets/4c28e6a8-51c8-46f1-be9b-40fb70482be0"> 
    
    <h3>6. 개발 이슈</h3>
-   <li>항공 - 저렴한 항공기 추천</li>
+   <li><strong>항공 - 저렴한 항공기 추천</strong></li>
    <img src="https://github.com/user-attachments/assets/a0cb8df0-1001-4411-ad3f-b63942776fd2">
    <img src="https://github.com/user-attachments/assets/1aab29f7-af2c-463f-986e-06ec096d0dc3">
    <img src="https://github.com/user-attachments/assets/adf2d4ef-b25e-4d1a-a35d-259eaf509e71">
    <img src="https://github.com/user-attachments/assets/a84afc82-909d-4a93-881b-563a5762bbbe">
-
+   
 
 
    

@@ -223,7 +223,8 @@
     <img src="https://github.com/user-attachments/assets/6c873916-1f6e-49b7-94bc-0d2c609f88fd">
    </ol>
    
-   <h3><li><strong>마이페이지</strong></li></h3><br/>
+   <h3><li><strong>마이페이지</strong></li></h3>
+   <br/>
    <ol>
     <li><strong>마이페이지 - 내가 적은 리뷰</strong></li>
     <img src="https://github.com/user-attachments/assets/55076d68-5571-45b6-83d0-219a66049790">

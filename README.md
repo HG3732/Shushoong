@@ -207,20 +207,24 @@
    <img src="https://github.com/user-attachments/assets/4c28e6a8-51c8-46f1-be9b-40fb70482be0"> 
    
    <h3>6. 개발 이슈</h3>
-   <li><strong>항공 - 저렴한 항공기 추천</strong></li>
-   <img src="https://github.com/user-attachments/assets/a0cb8df0-1001-4411-ad3f-b63942776fd2">
-   <img src="https://github.com/user-attachments/assets/1aab29f7-af2c-463f-986e-06ec096d0dc3">
-   <img src="https://github.com/user-attachments/assets/adf2d4ef-b25e-4d1a-a35d-259eaf509e71">
-   <img src="https://github.com/user-attachments/assets/a84afc82-909d-4a93-881b-563a5762bbbe">
-   
-   <li><strong>항공 - 항공기 검색</strong></li>
-   <img src="https://github.com/user-attachments/assets/5323339e-0ca6-4f26-8c64-68fda245d4f7">
-   <img src="https://github.com/user-attachments/assets/8fe9f6ba-ce77-4277-bad2-1b3f423eaa6e">
-
-   <li><strong>항공 - 탑승객 정보</strong></li>
-   <img src="https://github.com/user-attachments/assets/4e4035d0-a96d-43dc-894f-3eb1c988efb7">
-   <img src="https://github.com/user-attachments/assets/8be2ba95-4432-472f-90b0-dfac56fcb086">
-   <img src="https://github.com/user-attachments/assets/6c873916-1f6e-49b7-94bc-0d2c609f88fd">
+   <li><h3><strong>항공</strong></h3></li>
+   <ol type="1">
+    <li><strong>항공 - 저렴한 항공기 추천</strong></li>
+    <img src="https://github.com/user-attachments/assets/a0cb8df0-1001-4411-ad3f-b63942776fd2">
+    <img src="https://github.com/user-attachments/assets/1aab29f7-af2c-463f-986e-06ec096d0dc3">
+    <img src="https://github.com/user-attachments/assets/adf2d4ef-b25e-4d1a-a35d-259eaf509e71">
+    <img src="https://github.com/user-attachments/assets/a84afc82-909d-4a93-881b-563a5762bbbe">
+    
+    <li><strong>항공 - 항공기 검색</strong></li>
+    <img src="https://github.com/user-attachments/assets/5323339e-0ca6-4f26-8c64-68fda245d4f7">
+    <img src="https://github.com/user-attachments/assets/8fe9f6ba-ce77-4277-bad2-1b3f423eaa6e">
+ 
+    <li><strong>항공 - 탑승객 정보</strong></li>
+    <img src="https://github.com/user-attachments/assets/4e4035d0-a96d-43dc-894f-3eb1c988efb7">
+    <img src="https://github.com/user-attachments/assets/8be2ba95-4432-472f-90b0-dfac56fcb086">
+    <img src="https://github.com/user-attachments/assets/6c873916-1f6e-49b7-94bc-0d2c609f88fd">
+   </ol>
+   <li><strong>마이페이지 - 탑승객 정보</strong></li>
 
    
 

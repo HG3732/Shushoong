@@ -3,8 +3,7 @@
  <article>
   <img src="https://github.com/user-attachments/assets/16d00583-9ed4-4fdf-8d21-e3e55d71c01a"/>
   <p>
-   //TODO - 프로젝트 한줄(KH정보 교육원 FINAL PROJECT)
-   //TODO - 피그마 첫 화면
+   슈슝 KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   </p>
   
   <div>

@@ -1,10 +1,11 @@
 # SHUSHOONG
 <div>
  <article>
-  <img src="https://github.com/user-attachments/assets/16d00583-9ed4-4fdf-8d21-e3e55d71c01a"/>
-  <p>
+   <p>
    슈슝 KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   </p>
+  <img src="https://github.com/user-attachments/assets/16d00583-9ed4-4fdf-8d21-e3e55d71c01a"/>
+
   
   <div>
    <h2>1. 프로젝트 소개</h2>

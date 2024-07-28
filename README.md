@@ -87,25 +87,29 @@
    <summary><h3>송채원</h3></summary>
    
    <h3>1. 주요 기능 시현</h3>
-   <p>기능이름 (ex. 로그인)</p>
+    <strong>주요기능 설명</strong>
     <img src="https://github.com/user-attachments/assets/8c060522-ab09-4a12-b8c2-bd9dc367a6fe">
-   <strong>주요기능 설명</strong>
    <a>URL</a>
 
+   <h3>2. 요구사항 정의서</h3>
+   <img src="https://github.com/user-attachments/assets/47471ae1-e2f4-4cdf-8fee-749d742d168b">
+
+
    <h3>2. ERD</h3>
-   //TODO - 개인 ERD 사진
-   
+   <img src="https://github.com/user-attachments/assets/3c116118-79d4-4b3c-97af-8c61b6d59c0e">
+   <img src="https://github.com/user-attachments/assets/3ea259dd-786b-403d-a327-cccccf8657bf">
+
    <h3>3. 플로우 차트</h3>
-   //TODO - 개인 플로우 차트 사진
-   
+   <img src="https://github.com/user-attachments/assets/3d2cc3b5-efcb-4a51-8d76-a888f0e2ea5e">
+
    <h3>4. 화면설계서</h3>
-   //TODO - 화면설계서 사진
+   <img src="https://github.com/user-attachments/assets/8c060522-ab09-4a12-b8c2-bd9dc367a6fe">
 
    <h3>5. ClassDiagram</h3>
-   //TODO - 클래스 다이어그램 사진
+   
 
    <h3>6. 개발 이슈</h3>
-   //TODO - 피그마 개발이슈 사진
+   
   </details>
 
   

@@ -26,7 +26,7 @@
    <h2>2. 개발자 소개</h2>
   </div>
   <p>
-   //TODO - 피그마 팀원 소개 이미지
+   <img src="https://github.com/user-attachments/assets/5236a53c-0880-46d1-b0c3-77731dd1c651">
   </p>
   <ul>
    <li>김효겸(팀장) : 호텔 검색, 호텔 목록, 마이페이지(관리자), 사업자 회원의 사업장 등록</li>
@@ -38,6 +38,9 @@
 
   <div>
    <h2>2. 개발환경</h2>
+     <p>
+      <img scr="https://github.com/user-attachments/assets/bdd7f202-47dc-4f73-83c9-212bbf5f185b">
+    </p>
    <ul>
     <li>운영 체제 : Window 10</li>
     <li>언어 : JAVA, HTML5, CSS3, JavaScript, SQL, XML</li>
@@ -49,9 +52,7 @@
     <li>Collaboration : GitHub, Git DeskTop,notion, Google Drive/Docs</li>
    </ul>
   </div>
-  <p>
-   //TODO - 피그마 개발 환경 이미지
-  </p>
+
 
   <div>
    <h2>기능 구현 / 화면</h2>
@@ -88,8 +89,7 @@
    
    <h3>1. 주요 기능 시현</h3>
     <strong>주요기능 설명</strong>
-    <img src="https://github.com/user-attachments/assets/8c060522-ab09-4a12-b8c2-bd9dc367a6fe">
-   <a>URL</a>
+    <img src="https://github.com/user-attachments/assets/2a67c1d9-8932-4308-81f3-c5b618dc0818">
 
    <h3>2. 요구사항 정의서</h3>
    <img src="https://github.com/user-attachments/assets/47471ae1-e2f4-4cdf-8fee-749d742d168b">

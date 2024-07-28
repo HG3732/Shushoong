@@ -88,7 +88,7 @@
    
    <h3>1. 주요 기능 시현</h3>
    <p>기능이름 (ex. 로그인)</p>
-   //TODO - 해당 사진 (선택)
+    <img src="![Group 1457](https://github.com/user-attachments/assets/8c060522-ab09-4a12-b8c2-bd9dc367a6fe)">
    <strong>주요기능 설명</strong>
    <a>URL</a>
 

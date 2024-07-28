@@ -103,15 +103,32 @@
    <img src="https://github.com/user-attachments/assets/3d2cc3b5-efcb-4a51-8d76-a888f0e2ea5e">
 
    <h3>4. 화면설계서</h3>
-   <img src="https://github.com/user-attachments/assets/8c060522-ab09-4a12-b8c2-bd9dc367a6fe">
-
+   <img src="https://github.com/user-attachments/assets/e49a3d5e-a90d-4f82-a22b-2a9f67d88010">
+   <img src="https://github.com/user-attachments/assets/edb7dadd-69a9-4f1d-85fc-472952366ba7">
+   <img src="https://github.com/user-attachments/assets/a628b697-f731-427c-8944-15fccec33a22">
+   <img src="https://github.com/user-attachments/assets/e0851b47-ae3d-4f8e-bbfd-1e4c59fd1415">
+   <img src="https://github.com/user-attachments/assets/90c749cb-27fb-4655-a2c5-db71d4b95b50">
+   <img src="https://github.com/user-attachments/assets/52072846-fdac-4450-a173-deeec518b3c6">
+   <img src="https://github.com/user-attachments/assets/a5e00cea-aec7-401a-b185-6be7d7762a3d">
+   <img src="https://github.com/user-attachments/assets/ee25c1d3-4fcb-4d9b-8534-caf1b956a702">
+   <img src="https://github.com/user-attachments/assets/ef50535b-009b-4d26-80ca-e2312f006e34">
+   <img src="https://github.com/user-attachments/assets/77677791-d859-44fe-b8cf-d3c732c81eee">
+   <img src="https://github.com/user-attachments/assets/587fee7f-1a66-45b8-ba41-b8ca378355d8">
+   <img src="https://github.com/user-attachments/assets/949d78a3-527d-48ba-8fc8-1cba0ee04199">
+   
    <h3>5. ClassDiagram</h3>
    
 
    <h3>6. 개발 이슈</h3>
-   
+     <img src="https://github.com/user-attachments/assets/f71c3216-f8fc-4854-9efb-d42e3fe3d33c">
+     <img src="https://github.com/user-attachments/assets/d1403792-f8fd-4608-a702-7da45a4570b7">
+     <img src="https://github.com/user-attachments/assets/b2d85bbe-bce6-4077-8dda-371e21967798">
+     <img src="https://github.com/user-attachments/assets/479a0b6d-a7e2-459b-b6f9-d100f2f2773f">
+     <img src="https://github.com/user-attachments/assets/cc8e21ce-34f1-427e-9de6-211e210dc3d0">
+     <img src="https://github.com/user-attachments/assets/0f677011-b109-4127-b043-d633a07010fd">
+     <img src="https://github.com/user-attachments/assets/127f01f1-79e7-4c31-88ad-1d34808a7ecf">
+     <img src="https://github.com/user-attachments/assets/e73bc49b-6a2d-46df-bb1e-c4727bafdd49">
   </details>
-
   
   <details>
    <summary><h3>김유림</h3></summary>

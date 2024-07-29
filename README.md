@@ -281,23 +281,26 @@
    <div>
     <h3>2. 정보구조</h3>
      <img src="https://github.com/user-attachments/assets/a014cefa-cf80-49b2-bc72-0d275091c5b3">
-     (https://www.figma.com/board/bcbWpaFvJjzqQ87t6E1SKS/%ED%99%94%EB%A9%B4-%EA%B8%B0%ED%9A%8D?node-id=0-1&t=ryOBum3grH6AJpLC-0)
+     https://www.figma.com/board/bcbWpaFvJjzqQ87t6E1SKS/%ED%99%94%EB%A9%B4-%EA%B8%B0%ED%9A%8D?node-id=0-1&t=ryOBum3grH6AJpLC-0
    </div>
 
  
    <div>
-   <h3>2. 정보구조</h3>
-    <img src="">
+   <h3>3. ERD</h3>
+    <img src="https://github.com/user-attachments/assets/545ba835-104e-451a-b7de-909b17563b31">
+   https://www.erdcloud.com/d/QZJRN4QkBGocqCGBG
   </div>
  
    <div>
-   <h3>2. 정보구조</h3>
-    <img src="">
+   <h3>4. 요구사항 정의서</h3>
+    <img src="https://github.com/user-attachments/assets/52cba17f-3b9e-4fb4-919b-53016559106b">
+    https://docs.google.com/spreadsheets/d/1ue_ZaQs7jARBcFudBb38Qp1vsAdNv1C5QgQa9d-VhbA/edit?gid=2037508640#gid=2037508640
   </div>
  
    <div>
-   <h3>2. 정보구조</h3>
-    <img src="">
+   <h3>5. 플로우차</h3>
+    <img src="https://github.com/user-attachments/assets/eeda136d-e5b7-4614-9ed9-e0fb9acf54a6">
+    https://www.figma.com/board/DDaYl7jWeDl8kwx2oJg2ww/%ED%94%8C%EB%A1%9C%EC%9A%B0%EC%B0%A8%ED%8A%B8?node-id=0-1&t=cTFMwVRsgUJRaJ5V-0
   </div>
 </div>
 

@@ -37,7 +37,7 @@
   </ul>
 
   <div>
-   <h2>2. 개발환경</h2>
+   <h2>3. 개발환경</h2>
      <p>
       <img scr="https://github.com/user-attachments/assets/bdd7f202-47dc-4f73-83c9-212bbf5f185b">
     </p>
@@ -55,7 +55,7 @@
 
 
   <div>
-   <h2>기능 구현 / 화면</h2>
+   <h2>4. 기능 구현 / 화면</h2>
   </div>
 
 
@@ -264,23 +264,16 @@
     <li><strong>마이페이지 - 나의 좋아요 페이지</strong></li>
     <img src="https://github.com/user-attachments/assets/39e50223-4ff2-4c1a-b7b2-9d3807daaabd">
    </ol>
-    
-
-   
-   
-
-   
   </details>
-
-  
  </article>
 </div>
 
-
 <div>
  //TODO - 지울것!!! aside 내용 오른쪽 또는 왼쪽으로 들어갈 aside
- 
- 
+</div>
+
+<div>
+   <h2>4. 기능 구현 / 화면</h2>
 </div>
 
 

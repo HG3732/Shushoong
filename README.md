@@ -38,6 +38,7 @@
 
   <div>
    <h2>3. 개발환경</h2>
+  </div>
      <p>
       <img scr="https://github.com/user-attachments/assets/d5ae3d8a-d728-4afb-9182-7c963e69c725">
     </p>
@@ -51,7 +52,7 @@
     <li>API : Spring Security(6.3.1), Cloudinary, Port One API, Google Maps Api, KAKAO Login API, FullCalendar</li>
     <li>Collaboration : GitHub, Git DeskTop,notion, Google Drive/Docs</li>
    </ul>
-  </div>
+
 
 
   <div>

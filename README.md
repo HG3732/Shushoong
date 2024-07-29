@@ -39,7 +39,7 @@
   <div>
    <h2>3. 개발환경</h2>
      <p>
-      <img scr="https://github.com/user-attachments/assets/bdd7f202-47dc-4f73-83c9-212bbf5f185b">
+      <img scr="https://github.com/user-attachments/assets/d5ae3d8a-d728-4afb-9182-7c963e69c725">
     </p>
    <ul>
     <li>운영 체제 : Window 10</li>

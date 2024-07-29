@@ -281,7 +281,7 @@
    <div>
     <h3>2. 정보구조</h3>
      <img src="https://github.com/user-attachments/assets/f8546290-27e1-4ca5-8e5b-6506bab04b57">
-     <a href="https://www.figma.com/board/bcbWpaFvJjzqQ87t6E1SKS/%ED%99%94%EB%A9%B4-%EA%B8%B0%ED%9A%8D?node-id=0-1&t=ryOBum3grH6AJpLC-0">
+     <a href="https://www.figma.com/board/bcbWpaFvJjzqQ87t6E1SKS/%ED%99%94%EB%A9%B4-%EA%B8%B0%ED%9A%8D?node-id=0-1&t=ryOBum3grH6AJpLC-0"></a>
    </div>
  
    <div>

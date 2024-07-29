@@ -26,7 +26,7 @@
    <h2>2. 개발자 소개</h2>
   </div>
   <p>
-   <img src="https://github.com/user-attachments/assets/5236a53c-0880-46d1-b0c3-77731dd1c651">
+   <img src="https://github.com/user-attachments/assets/5236a53c-0880-46d1-b0c3-77731dd1c651"/>
   </p>
   <ul>
    <li>김효겸(팀장) : 호텔 검색, 호텔 목록, 마이페이지(관리자), 사업자 회원의 사업장 등록</li>
@@ -40,7 +40,7 @@
    <h2>3. 개발환경</h2>
   </div>
      <p>
-      <img scr="https://github.com/user-attachments/assets/d5ae3d8a-d728-4afb-9182-7c963e69c725">
+      <img scr="https://github.com/user-attachments/assets/d5ae3d8a-d728-4afb-9182-7c963e69c725"/>
     </p>
    <ul>
     <li>운영 체제 : Window 10</li>

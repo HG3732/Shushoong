@@ -298,7 +298,7 @@
   </div>
  
    <div>
-   <h3>5. 플로우차</h3>
+   <h3>5. 플로우차트</h3>
     <img src="https://github.com/user-attachments/assets/eeda136d-e5b7-4614-9ed9-e0fb9acf54a6">
     https://www.figma.com/board/DDaYl7jWeDl8kwx2oJg2ww/%ED%94%8C%EB%A1%9C%EC%9A%B0%EC%B0%A8%ED%8A%B8?node-id=0-1&t=cTFMwVRsgUJRaJ5V-0
   </div>

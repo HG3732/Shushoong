@@ -298,11 +298,17 @@
     https://docs.google.com/spreadsheets/d/1ue_ZaQs7jARBcFudBb38Qp1vsAdNv1C5QgQa9d-VhbA/edit?gid=2037508640#gid=2037508640
   </div>
  
-   <div>
+  <div>
    <h3>5. 플로우차트</h3>
     <img src="https://github.com/user-attachments/assets/eeda136d-e5b7-4614-9ed9-e0fb9acf54a6">
     https://www.figma.com/board/DDaYl7jWeDl8kwx2oJg2ww/%ED%94%8C%EB%A1%9C%EC%9A%B0%EC%B0%A8%ED%8A%B8?node-id=0-1&t=cTFMwVRsgUJRaJ5V-0
   </div>
+  
+  <div>
+   <h3>6. 클래스 다이어그램</h3>
+    <img src="https://github.com/user-attachments/assets/311e0692-9257-464a-8117-f40d760149db">
+  </div>
+  
 </div>
 
 

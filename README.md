@@ -141,19 +141,29 @@
    <a>URL</a>
 
    <h3>2. ERD</h3>
-   //TODO - 개인 ERD 사진
-   
-   <h3>3. 플로우 차트</h3>
-   //TODO - 개인 플로우 차트 사진
-   
-   <h3>4. 화면설계서</h3>
-   //TODO - 화면설계서 사진
+    <img src = "https://github.com/user-attachments/assets/257db577-7fe6-4544-b37d-7c7d54994e45">
 
-   <h3>5. ClassDiagram</h3>
-   //TODO - 클래스 다이어그램 사진
+   <h3>2. 요구사항 정의서</h3>
+    <img src= "https://github.com/user-attachments/assets/9d1866ea-5670-40dc-a57d-3626245d5e16">
+   
+   <h3>4. 플로우 차트</h3>
+   <img src = "https://github.com/user-attachments/assets/38bdf5c4-752f-461b-895f-7d91d83e363d">
+   
+   <h3>5. 화면설계서</h3>
+   <img scr = "https://github.com/user-attachments/assets/e9721a0d-712b-4c22-bd2f-ba67665a14da">
+   <img scr = "https://github.com/user-attachments/assets/346adfc7-2b6d-4828-88a0-b41773dd1e7c">
+   <img scr = "https://github.com/user-attachments/assets/01731b54-cb3e-4604-9bda-8ad5bc5b38d1">
+   <img scr = "https://github.com/user-attachments/assets/2efc89a7-203b-4da4-80f6-d1665d8c12e6">
+   <img scr = "https://github.com/user-attachments/assets/7ff911cc-f27f-4c7f-b6f2-b31d7903b743">
 
-   <h3>6. 개발 이슈</h3>
-   //TODO - 피그마 개발이슈 사진
+   <h3>6. ClassDiagram</h3>
+   <img scr = "https://github.com/user-attachments/assets/4e51a697-f089-4031-ba6f-7b10a3c56a44">
+
+   <h3>7. 개발 이슈</h3>
+   <img scr = "https://github.com/user-attachments/assets/50326caf-053b-4008-bb1a-c719e8f7356a">
+   <img scr = "https://github.com/user-attachments/assets/554a5c9f-e702-4302-9e7e-2568448624ac">
+   <img scr = "https://github.com/user-attachments/assets/de8dfa09-cb3e-4769-8001-9084686cdb52">
+   <img scr = "https://github.com/user-attachments/assets/cfe2519c-df6a-49b8-8f6b-c1c3ec12739d">
   </details>
 
   
